@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./collections.css"; // Add your styles here
 import collectionImg1 from "../../../assets/homePage/collections/collectionsImg1.svg";
 import collectionImg2 from "../../../assets/homePage/collections/collectionsImg2.svg";
@@ -13,11 +13,28 @@ import Image from "next/image";
 
 const Collections = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
 
+  useEffect(() => {
+    async function fetchImageUrl() {
+      const response = await fetch("/api/s3Url", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      const data = await response.json();
+      setImageUrl(data.url);
+    }
+
+    fetchImageUrl();
+  }, []);
+
+  console.log("imageUrl", imageUrl);
   // Dummy data for images and descriptions
-  const carouselItems = [
+  const carouselItems = imageUrl && [
     {
-      image: collectionImg1,
+      image: imageUrl,
       title: "Electric Fireplaces",
       description: "Discover our range of luxury indoor electric fireplaces...",
     },
@@ -54,33 +71,38 @@ const Collections = () => {
   return (
     <div className="carousel-container">
       <h2>Collections</h2>
-      <Slider {...settings}>
-        {carouselItems.map((item, index) => (
-          <div
-            className="carousel-item"
-            key={index}
-            onMouseEnter={() => setHoverIndex(index)}
-            onMouseLeave={() => setHoverIndex(null)}
-          >
-            <div className="image-and-description">
-              <Image
-                src={item.image}
-                alt={item.title}
-                className="carousel-image"
-              />
-              <div
-                className={`description-container ${
-                  hoverIndex === index ? "visible" : ""
-                }`}
-              >
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <a href="#">View Collection</a>
+      {imageUrl && (
+        <Slider {...settings}>
+          {carouselItems.map((item, index) => (
+            <div
+              className="carousel-item"
+              key={index}
+              onMouseEnter={() => setHoverIndex(index)}
+              onMouseLeave={() => setHoverIndex(null)}
+            >
+              <div className="image-and-description">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  className="carousel-image"
+                  width={100} // specify your desired width
+                  height={600} // specify your desired height
+                  layout="responsive" // or any other layout you need
+                />
+                <div
+                  className={`description-container ${
+                    hoverIndex === index ? "visible" : ""
+                  }`}
+                >
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <a href="#">View Collection</a>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };

@@ -36,24 +36,7 @@ const Home = () => {
       setZoomImage(false);
     }
   }, [hover]);
-  const [imageUrl, setImageUrl] = useState("");
-
-  useEffect(() => {
-    async function fetchImageUrl() {
-      const response = await fetch("/api/s3Url", {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setImageUrl(data.url);
-    }
-
-    fetchImageUrl();
-  }, []);
-
-  console.log("imageUrl", imageUrl);
+  
   return (
     <>
       <div

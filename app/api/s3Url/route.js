@@ -6,8 +6,8 @@ export async function GET(req) {
   const s3Client = new S3Client({
     region: 'us-east-1',
     credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.AWS_lIVING_FIRE_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_lIVING_FIRE_SECRET_ACCESS_KEY,
     },
   });
 
