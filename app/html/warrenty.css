@@ -1,0 +1,57 @@
+.warrenty-form{
+    padding-top: 80px;
+    padding-bottom: 80px;
+    overflow-x: scroll;
+    display: flex;
+    align-items: start;
+}
+.column1, .column2{
+    width: 50%;
+}
+.column1{
+    padding-left: 56px;
+    padding-right: 56px;
+    gap: 22px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+.column2{
+    margin-bottom: 40px;
+    gap: 16px;
+    width: 670px;
+    display: flex;
+    flex-direction: column;
+}
+
+.columnsubmit {
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.columnform {
+    gap: 14px;
+    display: flex;
+    align-self: stretch;
+    flex-direction: column;
+}
+.columnstreetadd {
+    gap: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.rowform_three {
+    gap: 25px;
+    display: flex;
+}
+
+.columnfirstname {
+    gap: 16px;
+    display: flex;
+    align-self: stretch;
+    flex-direction: column;
+}
