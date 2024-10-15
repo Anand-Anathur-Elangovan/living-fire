@@ -46,9 +46,8 @@ const Home = () => {
           "content-type": "application/json",
         },
       });
-      const data = await response?.body;
-      console.log("Checking", data);
-      // setImageUrl(data.url);
+      const data = await response.json();
+      setImageUrl(data.url);
     }
 
     fetchImageUrl();
