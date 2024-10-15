@@ -1,0 +1,262 @@
+.hero {
+  height: 100vh;
+  /* background-image: url("/path-to-hero-image.jpg"); */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #f7f7f5; */
+  width: 1440px;
+  height: 832px;
+}
+
+.hero-content {
+  text-align: center;
+  color: #000;
+}
+
+.hero h1 {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+  font-family: Satoru;
+  font-weight: normal;
+  max-width: 1200px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Full page setup */
+.home-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  background-size: cover;
+  overflow: hidden;
+  background-position: center;
+}
+
+/* Base container which will fade out */
+.base-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #f7f7f5;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 3; /* Ensure it's on top initially */
+  background-size: cover;
+  overflow: hidden;
+  background-position: center;
+}
+
+.base-container.hidden {
+  opacity: 0;
+  pointer-events: none; /* Disable interaction once it's hidden */
+}
+
+/* Hero section with text */
+.hero {
+  text-align: center;
+}
+
+/* White panels that will slide out */
+.panel-left,
+.panel-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background-color: whitesmoke;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out, transform 1s ease-in-out;
+}
+
+.panel-left {
+  left: 0;
+  transform: translateX(-10%); /* Initial position */
+}
+
+.panel-right {
+  right: 0;
+  transform: translateX(10%); /* Initial position */
+}
+
+.show-panelsLeft {
+  opacity: 1; /* Fade panels in */
+}
+.show-panelsRight {
+  opacity: 1; /* Fade panels in */
+}
+
+.animateLeft {
+  transform: translateX(-100%); /* Slide left */
+}
+
+.animateRight {
+  transform: translateX(100%); /* Slide right */
+}
+
+/* Overlay image (behind the panels) */
+.overlay-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+  z-index: 1; /* Ensure it's behind the panels */
+  background-size: cover;
+  overflow: hidden;
+  background-position: center;
+}
+
+.animate .overlay-container {
+  opacity: 1;
+}
+
+.overlay-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1); /* Initial scale */
+  transition: transform 1s ease-in-out; /* Delayed zoom-in effect */
+  filter: brightness(95%);
+}
+
+.show-panels {
+  opacity: 1; /* Overlay fades in when panels fade in */
+}
+
+.zoom {
+  transform: scale(1.1); /* Slight zoom in */
+}
+
+/* Button styles */
+.button-group {
+  position: absolute;
+  bottom: 80px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 4;
+  border-radius: 20px;
+  /* background: blue; */
+  /* background: transparent; */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(10px);
+  gap: 40px;
+}
+
+.button-group.show {
+  opacity: 1; /* Fade in the buttons */
+}
+
+.button-group button {
+  background: transparent;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  position: relative;
+  margin: 0 20px;
+  transition: color 0.3s ease-in-out;
+}
+
+.button-group button::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #060606; /* Orange underline */
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.button-group button:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+.button-group button:hover {
+  color: white; /* Change text color when hovering */
+}
+
+.underline-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 5px;
+  font-family: Satoru;
+}
+
+.underline-button::after {
+  content: "";
+  position: absolute;
+  width: 5px; /* Start as a dot */
+  height: 2px;
+  background-color: white;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  transition: width 0.4s ease-in-out;
+}
+
+.underline-button:hover::after {
+  width: 100%; /* Expand to full line on hover */
+}
+
+.blur-text {
+  transition: filter 0.8s ease-in-out;
+}
+
+/* .blurred {
+  filter: blur(5px);
+} */
+
+.text-group {
+  position: absolute;
+  /* bottom: 20px; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 4; /* Ensure it's above the image */
+}
+
+.text-group h1 {
+  font-family: Satoru;
+  font-size: 7rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  max-width: 1200px;
+  color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+.show {
+  opacity: 1; /* Fade in the buttons */
+}
