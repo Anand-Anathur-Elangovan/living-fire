@@ -13,6 +13,7 @@
     "@aws-sdk/s3-request-presigner": "^3.670.0",
     "aws-sdk": "^2.1691.0",
     "next": "14.2.14",
+    "pg": "^8.13.0",
     "react": "^18",
     "react-dom": "^18",
     "react-slick": "^0.30.2",
