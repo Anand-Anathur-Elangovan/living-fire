@@ -55,3 +55,35 @@
     align-self: stretch;
     flex-direction: column;
 }
+.submitBtn{
+    background-color: #000000;
+    color: #ffffff;
+    height: 52px;
+    padding-left: 32px;
+    padding-right: 32px;
+    font-size: 14px;
+    border-radius: 0px;
+}
+.rowphonenumber{
+    gap: 17px;
+    display: flex;
+}
+.form_one {
+    color: #878e96;
+    border-color: #000000 !important;
+    width: 88%;
+    height: 120px;
+    border-bottom: 1px solid #000000
+}
+.form_three {
+    width: 44%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.streetaddress {
+    width: 88%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
