@@ -4,13 +4,13 @@
     overflow-x: scroll;
     display: flex;
     align-items: start;
+    flex-direction: column;
 }
 .column1, .column2{
-    width: 50%;
+    width: 100%;
 }
 .column1{
-    padding-left: 56px;
-    padding-right: 56px;
+    padding: 0 20px;
     gap: 22px;
     display: flex;
     flex: 1;
@@ -20,9 +20,10 @@
 .column2{
     margin-bottom: 40px;
     gap: 16px;
-    width: 670px;
+    width: auto%;
     display: flex;
     flex-direction: column;
+    padding: 0 20px;
 }
 
 .columnsubmit {
@@ -44,11 +45,6 @@
     align-items: start;
 }
 
-.rowform_three {
-    gap: 25px;
-    display: flex;
-}
-
 .columnfirstname {
     gap: 16px;
     display: flex;
@@ -64,10 +60,7 @@
     font-size: 14px;
     border-radius: 0px;
 }
-.rowphonenumber{
-    gap: 17px;
-    display: flex;
-}
+
 .form_one {
     color: #878e96;
     border-color: #000000 !important;
@@ -75,15 +68,59 @@
     height: 120px;
     border-bottom: 1px solid #000000
 }
-.form_three {
-    width: 44%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.warrenty-title-left{
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 140%;
+
 }
-.streetaddress {
-    width: 88%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.accc-web{
+    display: inline
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .streetaddress {
+        width: 88%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .rowform_three {
+        gap: 25px;
+        display: flex;
+    }
+    .rowphonenumber{
+        gap: 17px;
+        display: flex;
+    }
+    .form_three {
+        width: 44%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 1025px) {
+    .warrenty-form{
+        flex-direction: row;
+    }
+    .column1, .column2{
+        width: 50%;
+    }
+    .column2{
+        width: 670px;
+    }
+    .column1{
+        padding-left: 56px;
+        padding-right: 56px;}
+       
 }
