@@ -4,6 +4,8 @@ import homePageMainImg from "../assets/homePage/homePageMainImg.png";
 import "./home.css";
 import Image from "next/image";
 import Collections from "../components/custom/Collections";
+import BlogSection from "../components/custom/BlogSection";
+import OurBrands from "../components/custom/OurBrands";
 const Home = () => {
   const [hover, setHover] = useState(false);
   const [showPanels, setShowPanels] = useState(false);
@@ -36,7 +38,7 @@ const Home = () => {
       setZoomImage(false);
     }
   }, [hover]);
-  
+
   return (
     <>
       <div
@@ -92,6 +94,8 @@ const Home = () => {
         </div>
       </div>
       <Collections />
+      <OurBrands />
+      <BlogSection />
     </>
   );
 };
