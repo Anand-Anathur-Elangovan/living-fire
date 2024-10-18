@@ -1,0 +1,110 @@
+.menu .row {
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: center;
+}
+.menu .rowheading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.menu .column1 {
+    gap: 40px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.menu .column2 {
+    gap: 12px;
+    align-self: end;
+    display: flex;
+    width: 34%;
+    flex-direction: column;
+    align-items: end;
+}
+.menu .shop {
+    display: flex;
+}
+.menu .shop .shoptext {
+    color: #000000 !important;
+    font-family: Satoru !important;
+    font-size: 26px;
+    font-weight: 400;
+}
+.menu .productLinks{
+    display: flex;
+}
+.menu .productLinks .col1 {
+    gap: 16px;
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+}
+.productLinks .col1 .columnheading{
+    gap: 18px;
+    display: flex;
+    flex-direction: column;
+}
+.productLinks .col1 .columnbodymedium {
+    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.columnbodymedium .text{
+    font-size: 16px;
+    font-weight: 300;
+}
+.columnbodymedium .bodymedium {    color: #b75c27 !important;}
+.columnbodymedium .bodymedium_one {color: #f28a33 !important;}
+.columnbodymedium .bodymedium_two {color: #1741be !important;}
+.columnbodymedium .bodymedium-three {color: #94999f !important;}
+.menu .productLinks .col2 {
+    padding-left: 26px;
+    padding-right: 26px;
+    gap: 18px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.columnbodysmall {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.bodysmall {
+    color: #000000 !important;
+    font-size: 14px;
+    font-weight: 400;
+}
+.rowbody {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 100px;
+}
+.columnbodysmall.left {
+    gap: 8px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.columnbodysmall.right {
+    gap: 8px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+.productLinks .titleText {
+    color: #000000 !important;
+    font-size: 20px;
+    font-weight: 400;
+}
