@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import homePageMainImg from "../assets/homePage/homePageMainImg.png";
 import "./home.css";
 import Image from "next/image";
+<<<<<<< HEAD
 import Collections from "./components/collections";
 import OurBrands from "./components/ourBrands";
 import Featured from "./components/featured";
@@ -12,6 +13,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Blog from "./components/blog";
 // import Collections from "../components/custom/Collections";
+=======
+import Collections from "../components/custom/Collections";
+import BlogSection from "../components/custom/BlogSection";
+import OurBrands from "../components/custom/OurBrands";
+>>>>>>> ff1c555a3e2844ffbf18037cae3f76594692bc2c
 const Home = () => {
   const [hover, setHover] = useState(false);
   const [showPanels, setShowPanels] = useState(false);
@@ -110,10 +116,15 @@ const Home = () => {
       {/* <Collections /> */}
       <Collections />
       <OurBrands />
+<<<<<<< HEAD
       <Featured />
       <Testimonials />
       <Blog />
     </div>
+=======
+      <BlogSection />
+    </>
+>>>>>>> ff1c555a3e2844ffbf18037cae3f76594692bc2c
   );
 };
 

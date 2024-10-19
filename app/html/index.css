@@ -1,7 +1,7 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: Public Sans;
+    font-family: 'Public Sans', sans-serif;
 }
 
 *{
@@ -78,6 +78,7 @@ header{
 }
 p{
     color: #000000
+    margin: 0px;
 }
 label{
     color: #878e96;
@@ -114,32 +115,12 @@ label{
     align-items: center;
     gap: 20px;
 }
-.rowlogin {
-    gap: 20px;
-    align-self: end;
-    display: flex;
-    flex-wrap: nowrap;
-}
-.row {
-    padding-left: 56px;
-    padding-right: 56px;
+.titleWrapper{
+    padding-top: 28px;
+    padding-bottom: 28px;
     display: flex;
     justify-content: center;
 }
-.columnhome {
-    width: 100%;
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.rowhome {
-    gap: 36px;
-    display: flex;
-    width: 16%;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
 .bigTitle{
     color: #000000;
     letter-spacing: -1.80px;
@@ -147,112 +128,6 @@ label{
     text-transform: uppercase;
     font-size: 90px;
     font-weight: 400;
-}
-.titleWrapper{
-    padding-top: 28px;
-    padding-bottom: 28px;
-    display: flex;
-    justify-content: center;
-}
-.breadcrumb{
-    display: flex;
-    list-style: none;
-    align-items: center;
-    word-wrap: break-word;
-    gap: inherit;
-    margin: 0;
-}
-.bread-group-1 {
-    display: inline-flex;
-    gap: inherit;
-    align-items: center;
-}
-
-.our-brands {
-    margin-top: 120px;
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-}
-.our-brands .heading, .heading{
-    align-self: center;
-    display: flex;
-    color: #000000 !important;
-    font-family: Satoru !important;
-    font-size: 40px;
-    font-weight: 400;
-}
-.rowlogo {
-    overflow-x: scroll;
-    background-color: #ffffff;
-    width: 100%;
-    padding: 50px 40px;
-}
-.gridlogo {
-    width: 1200px;
-    display: grid;
-    gap: 48px;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-.our-brands .logo {
-    height: 92px;
-    width: 100%;
-    object-fit: cover;
-}
-
-.brands-col {
-    gap: 36px;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: start;
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.categories {
-    margin-top: 48px;
-    padding-top: 74px;
-    padding-bottom: 74px;
-    background-color: #f7f7f5;
-    /* width: 66%; */
-    display: flex;
-}
-
-.blog-column {
-    margin-bottom: 38px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.rowmaximising {
-    gap: 24px;
-    display: flex;
-    align-self: stretch;
-    max-width: 1280px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-.left-img {
-    height: 504px;
-    width: 52%;
-    object-fit: contain;
-}
-.right-img {
-    height: 294px;
-    width: 42%;
-    object-fit: contain;
-}
-.right-section {
-    gap: 38px;
-    display: flex;
-    width: 48%;
-    flex-direction: column;
 }
 
 .footer {
