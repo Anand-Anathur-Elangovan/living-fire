@@ -269,13 +269,17 @@
   display: flex;
   flex: 1 1;
   flex-basis: 25%;
+
+  /* display: grid;
+  grid-template-rows: 330px 0fr; */
+
   padding: 1rem;
   gap: 5px;
   position: relative;
   overflow: hidden;
 }
 
-.element > img {
+.element-image {
   inline-size: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
@@ -284,9 +288,10 @@
   position: relative;
 }
 
-.element:hover .element > img {
-  transform: scale(1.05); /* Slight zoom on hover */
-}
+/* Slight zoom on hover */
+/* .element:hover .element > img {
+  transform: scale(1.05); 
+} */
 
 .overlay {
   width: 100%;
@@ -297,7 +302,8 @@
   left: 0;
   transition: transform 0.5s ease;
   flex-direction: column;
-  padding: 40px 0;
+  padding: 40px 20%;
+  gap: 10px;
   transform: translateX(100%);
 }
 
@@ -305,8 +311,12 @@
   transform: translateX(-80%);
 }
 
+/* .element .element-image:hover {
+  transform: translateX(10%);
+} */
+
 .element:hover .overlay {
-  transform: translateX(30%);
+  transform: translateX(10%);
 }
 
 /* .overlay:hover {

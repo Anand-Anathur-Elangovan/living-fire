@@ -34,6 +34,7 @@ const Home = () => {
       setTimeout(() => {
         setZoomImage(true);
       }, 2500);
+
       setTimeout(() => {
         setShowButtons(true);
       }, 3000);
@@ -82,9 +83,7 @@ const Home = () => {
           className={`panel-left  ${showPanels ? "show-panelsLeft" : ""} ${
             showPanels ? "animateLeft" : ""
           }`}
-        >
-          test
-        </div>
+        ></div>
         <div
           className={`panel-right ${showPanels ? "show-panelsRight" : ""} ${
             showPanels ? "animateRight" : ""

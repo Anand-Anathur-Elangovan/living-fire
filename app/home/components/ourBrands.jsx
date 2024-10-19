@@ -72,12 +72,12 @@ const OurBrands = () => {
   ];
   return (
     <div className="flex relative justify-center flex-col">
-      <div className="flex flex-row items-center w-full">
+      <div className="flex flex-row items-center w-full mt-4">
         <div className="heading1 flex w-full justify-center uppercase">
           Our Brands
         </div>
       </div>
-      <div className="bg-white h-[470px] m-16 flex bg-red flex-wrap flex-row px-[40px] py-[50px] gap-[48px] ">
+      <div className="bg-white h-[470px] mx-16 my-8 flex justify-center bg-red flex-wrap flex-row px-[40px] py-[50px] gap-[48px] ">
         {brands.map((brand, index) => {
           return (
             <div className="w-[160px] h-[92px]">

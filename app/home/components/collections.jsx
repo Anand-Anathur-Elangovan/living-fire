@@ -38,24 +38,26 @@ const Collections = () => {
     {
       image: imageUrl,
       title: "Electric Fireplaces",
-      description: "Discover our range of luxury indoor electric fireplaces...",
+      description:
+        "Discover our range of luxury indoor electric fireplaces and transform your home into a cosy haven of warmth and style. Visit our Melbourne showroom.",
     },
     {
       image: collectionImg2,
       title: "Gas Fireplaces",
-      description: "Transform your home with modern gas fireplaces...",
+      description:
+        "Explore our indoor gas fireplaces and turn your home into a warm and inviting retreat. Whatever your interior style, we have the perfect gas fireplace to enhance your living space.",
     },
     {
       image: collectionImg3,
       title: "Wood Fireplaces",
       description:
-        "Enjoy the warmth and beauty of traditional wood fireplaces...",
+        "Experience warmth and elegance with our indoor luxury wood fireplaces, blending timeless craftsmanship with contemporary modern design.",
     },
     {
       image: collectionImg4,
-      title: "Wood Fireplaces",
+      title: "LPG Fireplaces",
       description:
-        "Enjoy the warmth and beauty of traditional wood fireplaces...",
+        "Explore our collection of LPG fireplaces, offering efficient and stylish heating solutions for your home. Enjoy the warmth and ambiance of a real flame, with the convenience and clean-burning performance of LPG. ",
     },
     {
       image: collectionImg2,
@@ -96,15 +98,24 @@ const Collections = () => {
               <Image
                 src={item.image}
                 alt={item.title}
-                className=""
+                className="element-image"
                 width={300} // specify your desired width
                 height={600} // specify your desired height
                 //   layout="fill" // or any other layout you need
               />
               <div className="overlay">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <a href="#">View Collection</a>
+                <h3 className="font-sans font-medium leading-6 text-base text-wrap">
+                  {item.title}
+                </h3>
+                <p className="font-sans font-normal leading-5 text-sm">
+                  {item.description}
+                </p>
+                <a
+                  className="uppercase font-medium font-sans text-base underline"
+                  href="#"
+                >
+                  View Collection
+                </a>
               </div>
             </div>
           ))}
