@@ -25,3 +25,12 @@ body {
     text-wrap: balance;
   }
 }
+
+.heading1 {
+  font-family: "Satoru";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 140%;
+  color: #000000;
+}

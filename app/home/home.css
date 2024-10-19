@@ -260,3 +260,73 @@
 .show {
   opacity: 1; /* Fade in the buttons */
 }
+
+.carousel {
+  display: flex;
+}
+
+.element {
+  display: flex;
+  flex: 1 1;
+  flex-basis: 25%;
+  padding: 1rem;
+  gap: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.element > img {
+  inline-size: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+  position: relative;
+}
+
+.element:hover .element > img {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  transition: transform 0.5s ease;
+  flex-direction: column;
+  padding: 40px 0;
+  transform: translateX(100%);
+}
+
+.element:hover img {
+  transform: translateX(-80%);
+}
+
+.element:hover .overlay {
+  transform: translateX(30%);
+}
+
+/* .overlay:hover {
+  transform: translateX(0); 
+  opacity: 1;
+} */
+
+.element-snaps {
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 1rem;
+}
+
+.element-snaps > * {
+  scroll-snap-align: start;
+}
+.feature-snaps {
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 5rem;
+}
+
+.feature-snaps > * {
+  scroll-snap-align: start;
+}

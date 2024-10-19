@@ -3,7 +3,15 @@ import React, { useState, useEffect } from "react";
 import homePageMainImg from "../assets/homePage/homePageMainImg.png";
 import "./home.css";
 import Image from "next/image";
-import Collections from "../components/custom/Collections";
+import Collections from "./components/collections";
+import OurBrands from "./components/ourBrands";
+import Featured from "./components/featured";
+import Testimonials from "./components/testimonials";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Blog from "./components/blog";
+// import Collections from "../components/custom/Collections";
 const Home = () => {
   const [hover, setHover] = useState(false);
   const [showPanels, setShowPanels] = useState(false);
@@ -36,9 +44,16 @@ const Home = () => {
       setZoomImage(false);
     }
   }, [hover]);
-  
+
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#F7F7F5",
+        gap: "10px",
+      }}
+    >
       <div
         className="home-page"
         onMouseEnter={() => setHover(true)}
@@ -67,7 +82,9 @@ const Home = () => {
           className={`panel-left  ${showPanels ? "show-panelsLeft" : ""} ${
             showPanels ? "animateLeft" : ""
           }`}
-        ></div>
+        >
+          test
+        </div>
         <div
           className={`panel-right ${showPanels ? "show-panelsRight" : ""} ${
             showPanels ? "animateRight" : ""
@@ -91,8 +108,13 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* <Collections /> */}
       <Collections />
-    </>
+      <OurBrands />
+      <Featured />
+      <Testimonials />
+      <Blog />
+    </div>
   );
 };
 
