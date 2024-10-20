@@ -102,7 +102,9 @@ const Home = () => {
           />
           <div className={`text-group show`}>
             <h1 className={`blur-text`}>LIVING FIRE</h1>
-            {/* <p className={`blur-text`}>Architectural Fireplace Design</p> */}
+            {/* <h1 className={`blur-text`}>Architectural</h1> */}
+            <h2 className={`blur-text`} >Architectural</h2>
+            <h2 className={`blur-text`}>Fireplace Design</h2>
           </div>
           <div className={`button-group ${showButtons ? "show" : ""}`}>
             <button>Wood</button>
