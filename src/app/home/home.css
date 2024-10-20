@@ -252,8 +252,20 @@
   opacity: 0; /* Initially hidden */
   transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
   z-index: 4; /* Ensure it's above the image */
+  flex-direction: column;
+  align-items: center;
 }
-
+.text-group h2 {
+  font-family: Satoru;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+  color: white;
+  /* -webkit-text-stroke-width: 1px; */
+  -webkit-text-stroke-color: black;
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); */
+  line-height: 1;
+}
 .text-group h1 {
   font-family: Satoru;
   font-size: 7rem;
