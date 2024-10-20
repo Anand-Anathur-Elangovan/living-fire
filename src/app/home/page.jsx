@@ -12,8 +12,6 @@ import Blog from "./components/blog";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import TopScreen from "./components/top-screen";
-import { getHomePageDataAction } from "@/src/server-actions/home/home.action";
 import useHomePage from "./hooks/useHomePage";
 // import Collections from "../components/custom/Collections";
 
@@ -23,7 +21,8 @@ const Home = () => {
   const [animatePanels, setAnimatePanels] = useState(false);
   const [zoomImage, setZoomImage] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
-  const dataProps = useHomePage();
+  const { data } = useHomePage();
+
   useEffect(() => {
     if (hover) {
       // Step 1: Show panels after base fades out
@@ -51,15 +50,6 @@ const Home = () => {
       setZoomImage(false);
     }
   }, [hover]);
-  // console.log(data, "Data");
-
-  // useEffect(() => {
-  //   const fetchdata = async () => {
-  //     const result = await getHomePageDataAction();
-  //     console.log(result);
-  //   };
-  //   fetchdata();
-  // }, []);
 
   return (
     <div
@@ -122,13 +112,11 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {/* <Collections /> */}
 
       <Collections />
       <OurBrands />
       <Featured />
       <Testimonials />
-
       <Blog />
     </div>
   );

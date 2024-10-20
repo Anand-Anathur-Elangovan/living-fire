@@ -1,17 +1,24 @@
 import { getHomePageDataAction } from "@/src/server-actions/home/home.action";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const useHomePage = () => {
-  const { data } = useQuery({
+  const initialHomePageData = {
+    collections: [],
+    features: [],
+    brands: [],
+    userFeedback: [],
+  };
+  const { data = initialHomePageData } = useQuery({
     queryKey: "HomePageAction",
-    queryFn: getHomePageDataAction(),
-    enabled: hover,
-    select: (data) => {
-      console.log(data, "SELECT");
-      if (data.success) return data.result;
+    queryFn: () => getHomePageDataAction(),
+    select: (res) => {
+      if (res.success) return data.result;
+      toast.error(res.message);
+      return initialHomePageData;
     },
   });
-  console.log(data, "HOOK");
+
   return { data };
 };
 
