@@ -13,7 +13,7 @@ const useHomePage = () => {
     queryKey: "HomePageAction",
     queryFn: () => getHomePageDataAction(),
     select: (res) => {
-      if (res.success) return data.result;
+      if (res.success) return res.result;
       toast.error(res.message);
       return initialHomePageData;
     },

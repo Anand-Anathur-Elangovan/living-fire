@@ -12,3 +12,45 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model TblProduct {
+  p_id            Int      @id @default(autoincrement())
+  brand_id        Int?
+  ptype_id        Int?
+  p_name          String?  @db.VarChar(100)
+  p_code          String?  @db.VarChar(30)
+  p_desc          Json?
+  p_sub_desc1     Json?
+  p_sub_desc2     Json?
+  p_sub_desc3     Json?
+  p_sub_desc4     Json?
+  p_sub_desc5     Json?
+  p_made_in_country String? @db.VarChar(100)
+  p_cost_desc1    Json?
+  p_cost_desc2    Json?
+  p_cost_desc3    Json?
+  p_cost_desc4    Json?
+  p_cost_desc5    Json?
+  p_add_costdesc1 Json?
+  p_add_costdesc2 Json?
+  p_add_costdesc3 Json?
+  p_add_costdesc4 Json?
+  p_add_costdesc5 Json?
+  p_cost          String?  @db.VarChar(50)
+  p_stock         Int?
+  p_spec_images   String[]
+  p_main_images   String[]
+  p_downloads     Json?
+  p_about         Json?
+  p_installation  Json?
+  p_faqs          Json?
+  p_suggestions   Int[]
+  is_active       Boolean? @default(true)
+  created_by      String?  @db.VarChar(25) @default("CURRENT_USER")
+  created_date    DateTime @default(now())
+  updated_by      String?  @db.VarChar(25)
+  updated_date    DateTime?
+
+  @@map("tbl_product")  // This tells Prisma to map the model to the "tbl_product" table
+}
+
