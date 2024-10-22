@@ -8,9 +8,9 @@ const pool = new Pool({
   password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT,
   ssl: {
-    rejectUnauthorized: true, // Use this for production if you have valid certificates
+    // rejectUnauthorized: true, // Use this for production if you have valid certificates
     // Use the following if you don't have a valid SSL certificate (development/testing)
-    // rejectUnauthorized: false 
+    rejectUnauthorized: false 
   }
 });
 

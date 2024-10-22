@@ -22,7 +22,7 @@ const Home = () => {
   const [zoomImage, setZoomImage] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
   const { data } = useHomePage();
-
+  console.log("data", data);
   useEffect(() => {
     if (hover) {
       // Step 1: Show panels after base fades out
@@ -103,7 +103,7 @@ const Home = () => {
           <div className={`text-group show`}>
             <h1 className={`blur-text`}>LIVING FIRE</h1>
             {/* <h1 className={`blur-text`}>Architectural</h1> */}
-            <h2 className={`blur-text`} >Architectural</h2>
+            <h2 className={`blur-text`}>Architectural</h2>
             <h2 className={`blur-text`}>Fireplace Design</h2>
           </div>
           <div className={`button-group ${showButtons ? "show" : ""}`}>
