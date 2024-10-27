@@ -7,7 +7,6 @@ import {
 
 export const getProductPageDataAction = async () => {
   const product = await getProductPage().catch((err) => []);
-  console.log("searchProductsList", searchProductsList);
   return {
     ...responsePayload,
     success: true,
