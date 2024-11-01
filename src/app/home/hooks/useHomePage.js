@@ -10,7 +10,7 @@ const useHomePage = () => {
     userFeedback: [],
   };
   const { data = initialHomePageData } = useQuery({
-    queryKey: "HomePageAction",
+    queryKey: ["HomePageAction"],
     queryFn: () => getHomePageDataAction(),
     select: (res) => {
       if (res.success) return res.result;
