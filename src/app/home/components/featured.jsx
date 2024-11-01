@@ -61,7 +61,7 @@ const Featured = (props) => {
             />
             <div className="font-sans  text-left uppercase">
               <h3 className="font-medium leading-6 text-base ">{item.title}</h3>
-              <p className=" font-small leading-5 text-sm text-gray-400">
+              <p className="font-small leading-5 text-sm text-gray-400">
                 {item.description}
               </p>
             </div>
