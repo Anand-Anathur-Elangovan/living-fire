@@ -11,14 +11,14 @@ export const getProductPage = async () => {
   } catch (err) {
     throw err;
   }
-  const query = "SELECT * FROM fn_get_fireplace_page(1)";
-  const result = await prisma
-    .$queryRaw(query)
-    .then((res) => res)
-    .catch((err) => {
-      throw err;
-    });
-  return result?.rows;
+  // const query = "SELECT * FROM fn_get_fireplace_page(1)";
+  // const result = await prisma
+  //   .$queryRaw(query)
+  //   .then((res) => res)
+  //   .catch((err) => {
+  //     throw err;
+  //   });
+  // return result?.rows;
 };
 
 export const insertProductEnquiry = async () => {
