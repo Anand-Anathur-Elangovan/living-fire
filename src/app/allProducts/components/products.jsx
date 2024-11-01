@@ -18,8 +18,8 @@ const Products = () => {
   const [filteredProducts, setFilteredProducts] = useState(
     allProducts.slice(0, 12)
   );
-  const { data } = useAllProducts();
-  console.log(data, "data");
+  const { allProductsData } = useAllProducts();
+  console.log(allProductsData, "data");
   const maxPageCount = Math.trunc(allProducts.length / 12) + 1;
 
   const onPageIndexClick = (index) => {
