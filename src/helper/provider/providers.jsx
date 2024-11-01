@@ -35,7 +35,9 @@ function getQueryClient() {
   }
 }
 const Providers = ({ children }) => {
-  const queryClient = getQueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { staleTime: 60 * 1000 } },
+  });
   return (
     <>
       <QueryClientProvider client={queryClient}>

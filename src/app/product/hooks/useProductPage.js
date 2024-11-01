@@ -1,8 +1,8 @@
-import { getHomePageDataAction } from "@/src/server-actions/home/home.action";
+import { getProductPageDataAction } from "@/src/server-actions/product/product.action";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-const useHomePage = () => {
+const useProductPage = () => {
   const initialHomePageData = {
     collections: [],
     features: [],
@@ -10,9 +10,10 @@ const useHomePage = () => {
     userFeedback: [],
   };
   const { data = initialHomePageData } = useQuery({
-    queryKey: ["HomePageAction"],
-    queryFn: () => getHomePageDataAction(),
+    queryKey: "HomePageAction",
+    queryFn: () => getProductPageDataAction(),
     select: (res) => {
+      console.log("res", res);
       if (res.success) return res.result;
       toast.error(res.message);
       return initialHomePageData;
@@ -22,4 +23,4 @@ const useHomePage = () => {
   return { data };
 };
 
-export default useHomePage;
+export default useProductPage;
