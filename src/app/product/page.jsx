@@ -12,61 +12,65 @@ import useProductPage from "./hooks/useProductPage";
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
-  const { data } = useProductPage();
-  console.log("Product data", data);
+  let { data } = useProductPage();
   useEffect(() => {
     // Fetch data from API
-    fetch("/api/check")
-      .then((res) => res.json())
-      .then((data) => setProductData(data))
-      .catch((error) => console.error("Error fetching product data:", error));
-  }, []);
+    // fetch("/api/check")
+    //   .then((res) => res.json())
+    //   .then((data) => setProductData(data))
+    //   .catch((error) => console.error("Error fetching product data:", error));
+    setProductData(data?.product?.[0]?.fn_get_fireplace_page);
+  }, [data]);
 
   if (!productData) return <p>Loading...</p>;
 
-  const { heroImage, descriptions, packages, materials, deliveries, pricing } =
-    productData;
-
+  const {
+    hero_image,
+    brand_name,
+    name,
+    //  descriptions, packages, materials, deliveries, pricing
+  } = productData;
+  console.log("productData", productData);
   return (
     <section>
       <div className="stackview">
-        <HeroImage src={heroImage.src} alt={heroImage.alt} />
+        <HeroImage src={hero_image?.[0].value} alt="Product Hero Image" />
 
         <div className="desc-column">
-          {descriptions.map((desc, index) => (
+          {/* {descriptions.map((desc, index) => (
             <DescriptionSection
               key={index}
               title={desc.title}
               text={desc.text}
             />
-          ))}
+          ))} */}
         </div>
 
         <div className="stack-section">
           <div className="column">
             <div className="columnregency">
-              <p className="regency ui text size-h6">Regency</p>
-              <p className="gfing ui text size-h1">GFi750 – NG</p>
+              <p className="regency ui text size-h6">{brand_name}</p>
+              <p className="gfing ui text size-h1">{name}</p>
             </div>
             <p className="buildyour ui text size-h5">Build your product</p>
 
-            {packages.map((pkg, index) => (
+            {/* {packages.map((pkg, index) => (
               <PackageOption
                 key={index}
                 label={pkg.label}
                 value={pkg.value}
                 description={pkg.description}
               />
-            ))}
+            ))} */}
 
-            <MaterialOption options={materials} />
+            {/* <MaterialOption options={materials} />
 
-            <DeliveryOption options={deliveries} />
+            <DeliveryOption options={deliveries} /> */}
 
-            <PricingInfo
+            {/* <PricingInfo
               price={pricing.price}
               stockStatus={pricing.stockStatus}
-            />
+            /> */}
 
             <ActionButtons />
           </div>
