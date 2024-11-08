@@ -3,10 +3,10 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const getProductPage = async () => {
-  const query = "SELECT * FROM fn_get_product_page(1)";
+  // const query = "SELECT * FROM fn_get_product_page(1)";
+  const query = "SELECT * FROM fn_get_fireplace_page(1)";
   try {
     const result = await prisma.$queryRawUnsafe(query);
-    console.log("res_Repo", result);
     return result;
   } catch (err) {
     throw err;

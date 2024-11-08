@@ -9,6 +9,8 @@ const HeroImage = ({ src, alt }) => (
       alt={alt}
       className="class-2022ausgfi750"
       layout="responsive"
+      width={700}
+      height={500}
     />
   </div>
 );
