@@ -5,6 +5,21 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-satoru: 'Satoru', sans-serif;
+  --font-public-sans: 'Public Sans', sans-serif;
+}
+
+h1,
+h2,
+.title {
+  font-family: 'Satoru', sans-serif;
+}
+
+body,
+p,
+.subtitle,
+.option {
+  font-family: 'Public Sans', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

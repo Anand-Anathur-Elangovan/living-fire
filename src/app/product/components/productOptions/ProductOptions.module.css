@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Satoru:wght@400&family=Public+Sans:wght@400&display=swap');
+
+.container {
+  padding: 20px;
+  max-width: 400px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-family: 'Public Sans', sans-serif;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.brand {
+  color: #B0B0B0;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 5px 0;
+  font-family: 'Satoru', sans-serif;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.section {
+  margin: 20px 0;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.option input {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.imageOptions {
+  display: flex;
+  gap: 15px;
+}
+
+.imageOption {
+  text-align: center;
+  font-size: 12px;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageOption input {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.imageOption img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.price span {
+  font-size: 12px;
+  color: #777;
+}
+
+.inStock {
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.addToCart {
+  flex: 1;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.enquiry {
+  flex: 1;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}

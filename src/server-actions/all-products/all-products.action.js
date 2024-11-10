@@ -8,7 +8,8 @@ import {
 
 export const getAllProductsPageDataAction = async () => {
   const allProducts = await getAllProducts().catch((err) => []);
-  const searchProductsList = await searchProducts("GF7814", [10], [3]).catch(
+  // const searchProductsList = await searchProducts("GF7814", [10], [3]).catch(
+    const searchProductsList = await searchProducts("GFi750").catch(
     (err) => []
   );
 //   console.log("searchProductsList", searchProductsList);
