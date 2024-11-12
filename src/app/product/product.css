@@ -261,7 +261,6 @@
 
 .stackview {
   height: auto;
-  margin-bottom: 24px;
   position: relative;
   margin-top: 80px;
   background-color: #f7f7f5;
@@ -500,22 +499,38 @@
 }
 
 .hero-slider {
-  width: 100%;
-  display: flex;
-  position: relative;
-  top: 0px;
-  /* right: 0px; */
-  /* left: 0px; */
-  /* max-width: 1280px; */
-  /* margin: 0px 50px; */
   padding: 0px 100px;
 }
 
-.hero-slider img {
-  /* width: 838px;
-    height: 600px; */
-  gap: 0px;
-  opacity: 0px;
+.slider-image {
+  position: relative;
+  width: 100%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: gray;
+}
+
+.slick-dots li.slick-active button:before {
+  color: black; /* Active dot color */
+}
+.slick-dots li button:before {
+  font-size: 12px;
+  color: gray; /* Inactive dot color */
+  opacity: 0.5; /* Make inactive dots slightly transparent */
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.slick-dots li.slick-active button:before {
+  color: black; /* Active dot color */
+  opacity: 1; /* Make active dot fully opaque */
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 @media only screen and (max-width: 1025px) {

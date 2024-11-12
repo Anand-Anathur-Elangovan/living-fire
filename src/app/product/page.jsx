@@ -60,7 +60,7 @@ const Product = () => {
     <section>
       <div className="stackview">
         <HeroImage
-          src={JSON.parse(hero_image?.replace(/'/g, '"'))?.[0]?.value}
+          src={JSON.parse(hero_image?.replace(/'/g, '"'))}
           alt="Product Hero Image"
         />
         <DescriptionColumn />
