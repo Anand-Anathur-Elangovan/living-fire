@@ -24,7 +24,6 @@ const ProductOptions = ({ short_desc, name, price }) => {
       const currentSelection =
         prevOptions[category] || (isCheckbox ? [] : null);
 
-      // For checkboxes: Toggle selection in an array
       if (isCheckbox) {
         const isSelected = currentSelection.includes(option);
         const newSelection = isSelected
@@ -33,14 +32,12 @@ const ProductOptions = ({ short_desc, name, price }) => {
         return { ...prevOptions, [category]: newSelection };
       }
 
-      // For radio buttons: Set the selected option directly
       return {
         ...prevOptions,
         [category]: currentSelection === option ? null : option,
       };
     });
 
-    // Update total price dynamically
     const optionPrice = option.price || 0;
     setTotalPrice((prevPrice) => {
       if (isCheckbox) {
@@ -63,16 +60,22 @@ const ProductOptions = ({ short_desc, name, price }) => {
         <div key={index} className={styles.section}>
           <h3 className={styles.sectionTitle}>{section.name}</h3>
 
-          {/* Render each option with conditional layout */}
           <div
             className={
               section.name === "MATERIAL & FINISH OPTIONS"
-                ? styles.horizontalOptions
+                ? styles.materialOptionsRow
                 : ""
             }
           >
             {section.value.map((option, optionIndex) => (
-              <label key={optionIndex} className={styles.option}>
+              <label
+                key={optionIndex}
+                className={`${styles.option} ${
+                  section.name === "MATERIAL & FINISH OPTIONS"
+                    ? styles.materialOptionLabel
+                    : ""
+                }`}
+              >
                 <input
                   type={
                     section.name === "ZERO CLEARANCE PACKAGE" ||
@@ -89,8 +92,7 @@ const ProductOptions = ({ short_desc, name, price }) => {
                   onChange={() => handleOptionChange(section.name, option)}
                 />
                 {section.name === "MATERIAL & FINISH OPTIONS" ? (
-                  <div className={styles.materialOption}>
-                    <span>{option.name}</span>
+                  <div>
                     <Image
                       src={
                         option.image_url === "url"
@@ -98,10 +100,19 @@ const ProductOptions = ({ short_desc, name, price }) => {
                           : option.image_url
                       }
                       alt={option.name}
-                      width={50}
-                      height={50}
+                      width={150}
+                      height={150}
                     />
-                    {option.price && <span> (+${option.price})</span>}
+                    <span
+                      style={{
+                        position: "relative",
+                        left: "10%",
+                      }}
+                    >
+                      {option.name}
+                    </span>
+
+                    {/* {option.price && <span> (+${option.price})</span>} */}
                   </div>
                 ) : (
                   <span>
