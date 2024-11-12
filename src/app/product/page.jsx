@@ -38,21 +38,10 @@ const Product = () => {
     short_desc,
     name,
     price,
-    //  descriptions, packages, materials, deliveries, pricing
+    brand_name,
+    product_details,
+    specifications,
   } = productData;
-  const materials = [
-    {
-      imgSrc: "",
-      value: "",
-      description: "Reflective Black Inner Panels",
-      imgSrc: "",
-      value: "",
-      description: "3-Sided Black Backing Plate",
-      imgSrc: "",
-      value: "",
-      description: "Metallic Black Inner Panels",
-    },
-  ];
   console.log("productData", productData);
   return (
     <section>
@@ -62,10 +51,15 @@ const Product = () => {
           alt="Product Hero Image"
         />
         <DescriptionColumn product_desc={product_desc} />
-        <ProductOptions short_desc={short_desc} name={name} price={price} />
+        <ProductOptions
+          short_desc={short_desc}
+          name={name}
+          price={price}
+          brand_name={brand_name}
+        />
         <MaterialFinishOptions product_desc={product_desc} />
-        <Specifications />
-        <DownloadSection />
+        <Specifications specifications={specifications} />
+        <DownloadSection product_details={product_details} />
         <OurDifference />
         <OurShowrooms />
       </div>
