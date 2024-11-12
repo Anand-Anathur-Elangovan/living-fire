@@ -16,6 +16,7 @@ import Specifications from "./components/specifications/Specifications";
 import DownloadSection from "./components/downloadSection/DownloadSection";
 import OurDifference from "../allProducts/components/ourDifference";
 import OurShowrooms from "../allProducts/components/ourShowrooms";
+import Breadcrumbs from "./components/Breadcrumbs";
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
@@ -38,6 +39,7 @@ const Product = () => {
     short_desc,
     name,
     price,
+    ptype_name,fueltype_name,brand_name
     //  descriptions, packages, materials, deliveries, pricing
   } = productData;
   const materials = [
@@ -57,6 +59,8 @@ const Product = () => {
   return (
     <section>
       <div className="stackview">
+      <Breadcrumbs productType={ptype_name} fuelType={fueltype_name} productName={name}  brandName={brand_name} />
+      {/* <br/> */}
         <HeroImage
           src={JSON.parse(hero_image?.replace(/'/g, '"'))}
           alt="Product Hero Image"

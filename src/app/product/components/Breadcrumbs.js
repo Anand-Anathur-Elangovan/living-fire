@@ -1,30 +1,22 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const Breadcrumbs = ({ productData }) => {
-  const { productType, fuelType, productName } = productData;
+const Breadcrumbs = ({ productType, fuelType, productName,brandName }) => {
 
-  // Constructing breadcrumb links based on product data
-  const breadcrumbs = [
-    { name: 'Home', href: '/' },
-    { name: productType.charAt(0).toUpperCase() + productType.slice(1), href: `/${productType}` },
-    { name: `${fuelType.charAt(0).toUpperCase() + fuelType.slice(1)} Fireplaces`, href: `/${productType}/${fuelType}` },
-    { name: productName, href: `/${productType}/${fuelType}/${productName.replace(/\s+/g, '-').toLowerCase()}` },
-  ];
+
 
   return (
+    <div style={{ display: 'flex', justifyContent: 'center',marginTop:'10px' }}>
     <nav>
-      <ul className="breadcrumbs">
-        {breadcrumbs.map((breadcrumb, index) => (
-          <li key={index}>
-            <Link href={breadcrumb.href}>
-              <a>{breadcrumb.name}</a>
-            </Link>
-            {index < breadcrumbs.length - 1 && ' / '}
-          </li>
-        ))}
-      </ul>
+      <Link href="/home">Home</Link> / 
+      <Link href={`/home/${productType}`}>
+        {`${fuelType} ${productType}    `}
+      </Link> / 
+      <Link href={`/home/${productType}/${brandName} ${productName}`}>
+        {`${brandName} ${productName}`}
+      </Link>
     </nav>
+    </div>
   );
 };
 
