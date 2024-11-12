@@ -135,3 +135,16 @@
   cursor: pointer;
   font-weight: bold;
 }
+.horizontalOptions {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.materialOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+

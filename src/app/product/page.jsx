@@ -34,8 +34,10 @@ const Product = () => {
 
   const {
     hero_image,
-    brand_name,
+    product_desc,
+    short_desc,
     name,
+    price,
     //  descriptions, packages, materials, deliveries, pricing
   } = productData;
   const materials = [
@@ -51,11 +53,7 @@ const Product = () => {
       description: "Metallic Black Inner Panels",
     },
   ];
-  console.log(
-    "productData",
-    productData,
-    JSON.parse(hero_image?.replace(/'/g, '"'))
-  );
+  console.log("productData", productData);
   return (
     <section>
       <div className="stackview">
@@ -63,9 +61,9 @@ const Product = () => {
           src={JSON.parse(hero_image?.replace(/'/g, '"'))}
           alt="Product Hero Image"
         />
-        <DescriptionColumn />
-        <ProductOptions />
-        <MaterialFinishOptions />
+        <DescriptionColumn product_desc={product_desc} />
+        <ProductOptions short_desc={short_desc} name={name} price={price} />
+        <MaterialFinishOptions product_desc={product_desc} />
         <Specifications />
         <DownloadSection />
         <OurDifference />
