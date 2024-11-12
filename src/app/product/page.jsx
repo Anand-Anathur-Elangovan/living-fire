@@ -11,6 +11,11 @@ import "./product.css";
 import useProductPage from "./hooks/useProductPage";
 import ProductOptions from "./components/productOptions/ProductOptions";
 import DescriptionColumn from "./components/descriptionColumn/DescriptionColumn";
+import MaterialFinishOptions from "./components/materialFinishOptions/MaterialFinishOptions";
+import Specifications from "./components/specifications/Specifications";
+import DownloadSection from "./components/downloadSection/DownloadSection";
+import OurDifference from "../allProducts/components/ourDifference";
+import OurShowrooms from "../allProducts/components/ourShowrooms";
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
@@ -21,9 +26,8 @@ const Product = () => {
     //   .then((res) => res.json())
     //   .then((data) => setProductData(data))
     //   .catch((error) => console.error("Error fetching product data:", error));
-    console.log("data Product page", data)
-    setProductData(data?.product?.[0]?.
-      fn_get_product_page);
+    console.log("data Product page", data);
+    setProductData(data?.product?.[0]?.fn_get_product_page);
   }, [data]);
 
   if (!productData) return <p>Loading...</p>;
@@ -34,54 +38,38 @@ const Product = () => {
     name,
     //  descriptions, packages, materials, deliveries, pricing
   } = productData;
-  console.log("productData", productData, JSON.parse(hero_image?.replace(/'/g, '"')));
+  const materials = [
+    {
+      imgSrc: "",
+      value: "",
+      description: "Reflective Black Inner Panels",
+      imgSrc: "",
+      value: "",
+      description: "3-Sided Black Backing Plate",
+      imgSrc: "",
+      value: "",
+      description: "Metallic Black Inner Panels",
+    },
+  ];
+  console.log(
+    "productData",
+    productData,
+    JSON.parse(hero_image?.replace(/'/g, '"'))
+  );
   return (
     <section>
       <div className="stackview">
-        <HeroImage src={JSON.parse(hero_image?.replace(/'/g, '"'))?.[0]?.value} alt="Product Hero Image" />
-
-        <div className="desc-column">
-          <DescriptionColumn />
-          {/* {descriptions.map((desc, index) => (
-            <DescriptionSection
-              key={index}
-              title={desc.title}
-              text={desc.text}
-            />
-          ))} */}
-        </div>
-
-        <div className="stack-section">
-          <ProductOptions />
-          {/* <div className="column">
-            <div className="columnregency">
-              <p className="regency ui text size-h6">{brand_name}</p>
-              <p className="gfing ui text size-h1">{name}</p>
-            </div>
-            <p className="buildyour ui text size-h5">Build your product</p>
-
-            {packages.map((pkg, index) => (
-              <PackageOption
-                key={index}
-                label={pkg.label}
-                value={pkg.value}
-                description={pkg.description}
-              />
-            ))}
-
-            <MaterialOption options={materials} />
-
-            <DeliveryOption options={deliveries} />
-
-            <PricingInfo
-              price={pricing.price}
-              stockStatus={pricing.stockStatus}
-            />
-
-            <ActionButtons />
-          </div> */}
-        </div>
-
+        <HeroImage
+          src={JSON.parse(hero_image?.replace(/'/g, '"'))?.[0]?.value}
+          alt="Product Hero Image"
+        />
+        <DescriptionColumn />
+        <ProductOptions />
+        <MaterialFinishOptions />
+        <Specifications />
+        <DownloadSection />
+        <OurDifference />
+        <OurShowrooms />
       </div>
     </section>
   );
