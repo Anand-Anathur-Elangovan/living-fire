@@ -4,11 +4,25 @@ import specImage from "@/public/assets/product/image.png";
 import Image from "next/image";
 
 const Specifications = ({ specifications }) => {
-  const parsedSpecifications = specifications.map((spec) => ({
-    spec_name: spec.spec_name,
-    spec_value: JSON.parse(JSON.parse(spec.spec_value)),
-  }));
-
+  // const parsedSpecifications = specifications.map((spec) => ({
+  //   spec_name: spec.spec_name,
+  //   spec_value: JSON.parse(spec.spec_value),
+  // }));
+  const parsedSpecifications = specifications.map((spec) => {
+    let parsedValue = spec.spec_value;
+    try {
+      parsedValue =
+        typeof spec.spec_value === "string"
+          ? JSON.parse(spec.spec_value)
+          : spec.spec_value;
+    } catch (e) {
+      console.error("Invalid JSON:", e);
+    }
+    return {
+      spec_name: spec.spec_name,
+      spec_value: parsedValue,
+    };
+  });
   return (
     <section className={styles.specifications}>
       <div className={styles.row}>

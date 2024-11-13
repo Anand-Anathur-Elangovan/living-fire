@@ -27,9 +27,9 @@ const DownloadSection = ({ product_details }) => {
       return (
         <div className={styles.brochureSection}>
           <div className={styles.listspecsheet}>
-            {tabContent.vale &&
-              Array.isArray(tabContent.vale) &&
-              tabContent.vale.map((downloadItem, index) => (
+            {tabContent.value &&
+              Array.isArray(tabContent.value) &&
+              tabContent.value.map((downloadItem, index) => (
                 <div key={index} className={styles.columnTwo}>
                   <p className={`${styles.materialfinish} ${styles.sizeH6}`}>
                     {downloadItem.name?.toUpperCase()}
