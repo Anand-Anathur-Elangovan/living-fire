@@ -67,7 +67,12 @@ const Product = () => {
         <DownloadSection product_details={product_details} />
         <OurDifference />
         <OurShowrooms />
-        <EnquiryFormModal isOpen={isModalOpen} onClose={closeModal} />
+        <EnquiryFormModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          name={name}
+          brand_name={brand_name}
+        />
       </div>
     </section>
   );
