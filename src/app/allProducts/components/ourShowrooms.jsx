@@ -16,9 +16,9 @@ const OurShowrooms = () => {
           At Living Fire, we believe our work is complete only when our clients
           are enjoying the warmth of their new fireplace with a glass of wine in
           hand. To ensure every customer across Melbourne and Australia finds
-          their perfect match, we've curated an exceptional selection of luxury
-          fireplace brands. Visit our showrooms in Richmond and Moorabbin to
-          experience our products firsthand.
+          their perfect match, we&apos;ve curated an exceptional selection of
+          luxury fireplace brands. Visit our showrooms in Richmond and Moorabbin
+          to experience our products firsthand.
         </p>
         <div className="flex flex-row gap-5 justify-between">
           <div className="flex flex-col gap-5">

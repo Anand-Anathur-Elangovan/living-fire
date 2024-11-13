@@ -1,0 +1,65 @@
+.element-image {
+  inline-size: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+  position: relative;
+}
+
+.product-element {
+  display: flex;
+  flex: 1 1;
+  flex-basis: 23%;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 40px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 3.5px;
+  content: "";
+  height: 17px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 17px;
+}
+
+input:checked + .slider {
+  background-color: black;
+}
+
+input:checked + .slider:before {
+  transform: translateX(17px);
+}
+
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
