@@ -11,9 +11,18 @@ import "./product.css";
 import useProductPage from "./hooks/useProductPage";
 import ProductOptions from "./components/productOptions/ProductOptions";
 import DescriptionColumn from "./components/descriptionColumn/DescriptionColumn";
+import MaterialFinishOptions from "./components/materialFinishOptions/MaterialFinishOptions";
+import Specifications from "./components/specifications/Specifications";
+import DownloadSection from "./components/downloadSection/DownloadSection";
+import OurDifference from "../allProducts/components/ourDifference";
+import OurShowrooms from "../allProducts/components/ourShowrooms";
+import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
   let { data } = useProductPage();
   useEffect(() => {
     // Fetch data from API
@@ -21,67 +30,49 @@ const Product = () => {
     //   .then((res) => res.json())
     //   .then((data) => setProductData(data))
     //   .catch((error) => console.error("Error fetching product data:", error));
-    console.log("data Product page", data)
-    setProductData(data?.product?.[0]?.
-      fn_get_product_page);
+    console.log("data Product page", data);
+    setProductData(data?.product?.[0]?.fn_get_product_page);
   }, [data]);
 
   if (!productData) return <p>Loading...</p>;
 
   const {
     hero_image,
-    brand_name,
+    product_desc,
+    short_desc,
     name,
-    //  descriptions, packages, materials, deliveries, pricing
+    price,
+    brand_name,
+    product_details,
+    specifications,
   } = productData;
-  console.log("productData", productData, JSON.parse(hero_image?.replace(/'/g, '"')));
+  console.log("productData", productData);
   return (
     <section>
       <div className="stackview">
-        <HeroImage src={JSON.parse(hero_image?.replace(/'/g, '"'))?.[0]?.value} alt="Product Hero Image" />
-
-        <div className="desc-column">
-          <DescriptionColumn />
-          {/* {descriptions.map((desc, index) => (
-            <DescriptionSection
-              key={index}
-              title={desc.title}
-              text={desc.text}
-            />
-          ))} */}
-        </div>
-
-        <div className="stack-section">
-          <ProductOptions />
-          {/* <div className="column">
-            <div className="columnregency">
-              <p className="regency ui text size-h6">{brand_name}</p>
-              <p className="gfing ui text size-h1">{name}</p>
-            </div>
-            <p className="buildyour ui text size-h5">Build your product</p>
-
-            {packages.map((pkg, index) => (
-              <PackageOption
-                key={index}
-                label={pkg.label}
-                value={pkg.value}
-                description={pkg.description}
-              />
-            ))}
-
-            <MaterialOption options={materials} />
-
-            <DeliveryOption options={deliveries} />
-
-            <PricingInfo
-              price={pricing.price}
-              stockStatus={pricing.stockStatus}
-            />
-
-            <ActionButtons />
-          </div> */}
-        </div>
-
+        <HeroImage
+          src={JSON.parse(hero_image?.replace(/'/g, '"'))}
+          alt="Product Hero Image"
+        />
+        <DescriptionColumn product_desc={product_desc} />
+        <ProductOptions
+          short_desc={short_desc}
+          name={name}
+          price={price}
+          brand_name={brand_name}
+          openModal={openModal}
+        />
+        <MaterialFinishOptions product_desc={product_desc} />
+        <Specifications specifications={specifications} />
+        <DownloadSection product_details={product_details} />
+        <OurDifference />
+        <OurShowrooms />
+        <EnquiryFormModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          name={name}
+          brand_name={brand_name}
+        />
       </div>
     </section>
   );

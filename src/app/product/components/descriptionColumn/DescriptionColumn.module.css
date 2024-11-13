@@ -9,18 +9,22 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 49px;
+  gap: 20px;
 
-  position: absolute;
-  width: 631px;
-  height: 608px;
-  left: 79px;
+  position: relative;
+  width: 55%;
+  height: auto;
+  left: 100px;
   /* Adjust if necessary */
-  bottom: 220px;
+  /* bottom: 220px; */
+  top: 40px;
 }
 
 .columndesc {
   margin-bottom: 1.5rem;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .materialfinish {
