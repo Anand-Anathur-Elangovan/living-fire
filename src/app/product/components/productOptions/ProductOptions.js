@@ -11,7 +11,7 @@ import styles from "./ProductOptions.module.css";
 import optionsImage from "@/public/assets/product/electriFireOptions.png";
 import Image from "next/image";
 
-const ProductOptions = ({ short_desc, name, price, brand_name }) => {
+const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
 
@@ -135,7 +135,7 @@ const ProductOptions = ({ short_desc, name, price, brand_name }) => {
 
       <div className={styles.buttonContainer}>
         <button className={styles.addToCart}>ADD TO CART</button>
-        <button className={styles.enquiry}>SEND AN ENQUIRY</button>
+        <button className={styles.enquiry} onClick={openModal}>SEND AN ENQUIRY</button>
       </div>
     </div>
   );
