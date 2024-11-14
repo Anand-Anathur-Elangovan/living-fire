@@ -6,6 +6,7 @@ import Products from "./components/products";
 import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import "./page.css";
 import Image from "next/image";
+import useHomePage from "../home/hooks/useHomePage";
 
 const Page = () => {
   const [productMenuIndex, setproductMenuIndex] = useState(null);
@@ -13,6 +14,7 @@ const Page = () => {
   const [fireplaceType, setFireplaceType] = useState(null);
   const [brandType, setBrandType] = useState(null);
   const [brandFireplace, setBrandFireplace] = useState(null);
+  const { brands } = useHomePage();
 
   const allProductMenu = [
     { ptype_id: 1, ptype_name: "Fireplaces" },
@@ -38,31 +40,7 @@ const Page = () => {
     { fueltype_id: 4, fueltype_name: "Mantels" },
   ];
 
-  const brands = [
-    { brand_id: 1, brand_name: "Paul Agnew Designs" },
-    { brand_id: 2, brand_name: "Esse" },
-    { brand_id: 3, brand_name: "Austroflamm" },
-    { brand_id: 4, brand_name: "Morso" },
-    { brand_id: 5, brand_name: "Stovax" },
-    { brand_id: 6, brand_name: "Heatmaster" },
-    { brand_id: 7, brand_name: "Hergom" },
-    { brand_id: 8, brand_name: "ADF" },
-    { brand_id: 9, brand_name: "Firefox" },
-    { brand_id: 10, brand_name: "Regency" },
-    { brand_id: 11, brand_name: "Kalora" },
-    { brand_id: 12, brand_name: "Pacific Energy" },
-    { brand_id: 13, brand_name: "Charnwood" },
-    { brand_id: 14, brand_name: "Bosq" },
-    { brand_id: 15, brand_name: "Cocoon" },
-    { brand_id: 16, brand_name: "Eurostove" },
-    { brand_id: 17, brand_name: "Gazco" },
-    { brand_id: 18, brand_name: "Icon Fires" },
-    { brand_id: 19, brand_name: "Living Fire" },
-    { brand_id: 20, brand_name: "Metters" },
-    { brand_id: 21, brand_name: "Fire Up" },
-  ];
-
-  console.log(fireplaceType);
+  // console.log(fireplaceType);
   return (
     <div className="flex flex-col px-16 gap-3 bg-[#F7F7F5]">
       <div className="flex flex-col items-center">
@@ -201,3 +179,27 @@ const Page = () => {
 };
 
 export default Page;
+
+// const brands = [
+//   { brand_id: 1, brand_name: "Paul Agnew Designs" },
+//   { brand_id: 2, brand_name: "Esse" },
+//   { brand_id: 3, brand_name: "Austroflamm" },
+//   { brand_id: 4, brand_name: "Morso" },
+//   { brand_id: 5, brand_name: "Stovax" },
+//   { brand_id: 6, brand_name: "Heatmaster" },
+//   { brand_id: 7, brand_name: "Hergom" },
+//   { brand_id: 8, brand_name: "ADF" },
+//   { brand_id: 9, brand_name: "Firefox" },
+//   { brand_id: 10, brand_name: "Regency" },
+//   { brand_id: 11, brand_name: "Kalora" },
+//   { brand_id: 12, brand_name: "Pacific Energy" },
+//   { brand_id: 13, brand_name: "Charnwood" },
+//   { brand_id: 14, brand_name: "Bosq" },
+//   { brand_id: 15, brand_name: "Cocoon" },
+//   { brand_id: 16, brand_name: "Eurostove" },
+//   { brand_id: 17, brand_name: "Gazco" },
+//   { brand_id: 18, brand_name: "Icon Fires" },
+//   { brand_id: 19, brand_name: "Living Fire" },
+//   { brand_id: 20, brand_name: "Metters" },
+//   { brand_id: 21, brand_name: "Fire Up" },
+// ];

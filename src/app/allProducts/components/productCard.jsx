@@ -7,18 +7,18 @@ import NoPriceIcon from "@/public/assets/allProducts/noprice.svg";
 import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 
 const ProductCard = ({ productDetails, addToCompare, isCompare }) => {
-  if (!productDetails.fn_get_products.hero_image.includes("http"))
-    console.log(productDetails.fn_get_products.hero_image);
-  // console.log(
-  //   JSON.parse(productDetails.fn_get_products.hero_image?.replace(/'/g, '"'))
-  // );
-
+  console.log(productDetails);
   const imageURL = useMemo(() => {
     if (productDetails.fn_get_products.hero_image) {
-      let heroimage = JSON.parse(
-        productDetails.fn_get_products.hero_image?.replace(/'/g, '"')
-      );
-      return heroimage.length > 0
+      let heroimage;
+      try {
+        heroimage = JSON.parse(
+          productDetails.fn_get_products.hero_image?.replace(/'/g, '"')
+        );
+      } catch {
+        heroimage = null;
+      }
+      return heroimage && heroimage.length > 0
         ? heroimage[0].value?.includes("http")
           ? heroimage[0]?.value
           : null
@@ -26,7 +26,7 @@ const ProductCard = ({ productDetails, addToCompare, isCompare }) => {
     }
     return null;
   });
-  console.log(imageURL, "imageURL");
+  // console.log(imageURL, "imageURL");
 
   return (
     <div className="product-element" key={"productCard"}>

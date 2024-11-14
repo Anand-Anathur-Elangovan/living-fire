@@ -179,10 +179,12 @@ const Products = ({
                 (x) => x.fn_get_products.p_id === id
               );
               let imageURL;
-              if (productDetails.fn_get_products.hero_image.includes("value")) {
+              if (
+                productDetails.fn_get_products?.hero_image?.includes("value")
+              ) {
                 let url =
                   productDetails.fn_get_products.hero_image.split("'")[7];
-                imageURL = url.includes("http") ? url : null;
+                imageURL = url?.includes("http") ? url : null;
               } else imageURL = null;
               return (
                 <Image

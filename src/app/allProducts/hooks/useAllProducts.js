@@ -2,6 +2,7 @@ import { getAllProductsPageDataAction } from "@/src/server-actions/all-products/
 import { useQuery } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
+import useHomePage from "../../home/hooks/useHomePage";
 
 const useAllProducts = (type_id) => {
   const initialData = [];

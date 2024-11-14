@@ -9,7 +9,9 @@ const useHomePage = () => {
     brands: [],
     userFeedback: [],
   };
-  const { data = initialHomePageData } = useQuery({
+  const {
+    data: { brands, collections, features, userFeedback } = initialHomePageData,
+  } = useQuery({
     queryKey: ["HomePageAction"],
     queryFn: () => getHomePageDataAction(),
     select: (res) => {
@@ -19,7 +21,7 @@ const useHomePage = () => {
     },
   });
 
-  return { data };
+  return { brands, collections, features, userFeedback };
 };
 
 export default useHomePage;
