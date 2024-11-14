@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "./DownloadSection.module.css";
 import brochureIcon from "@/public/assets/product/brochure.svg";
 
-const DownloadSection = ({ product_details }) => {
+const DownloadSection = ({ product_details, openDrawer }) => {
   const [activeTab, setActiveTab] = useState("Downloads");
   const [openFAQ, setOpenFAQ] = useState(null);
 
@@ -51,6 +51,7 @@ const DownloadSection = ({ product_details }) => {
               ))}
             <button
               className={`${styles.flexRowCenterCenter} ${styles.viewAllSpecs} ${styles.sizeLg} ${styles.outline} ${styles.square}`}
+              onClick={openDrawer}
             >
               View All Specs
             </button>

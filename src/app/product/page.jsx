@@ -17,12 +17,18 @@ import DownloadSection from "./components/downloadSection/DownloadSection";
 import OurDifference from "../allProducts/components/ourDifference";
 import OurShowrooms from "../allProducts/components/ourShowrooms";
 import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
+import ProductSpecsDrawer from "./components/productSpecsDrawer/ProductSpecsDrawer";
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+
+  const [isOpenSpecDrawer, setIsOpenSpecDrawer] = useState(false);
+
+  const openDrawer = () => setIsOpenSpecDrawer(true);
+  const closeDrawer = () => setIsOpenSpecDrawer(false);
   let { data } = useProductPage();
   useEffect(() => {
     // Fetch data from API
@@ -64,12 +70,22 @@ const Product = () => {
         />
         <MaterialFinishOptions product_desc={product_desc} />
         <Specifications specifications={specifications} />
-        <DownloadSection product_details={product_details} />
+        <DownloadSection
+          product_details={product_details}
+          openDrawer={openDrawer}
+        />
         <OurDifference />
         <OurShowrooms />
         <EnquiryFormModal
           isOpen={isModalOpen}
           onClose={closeModal}
+          name={name}
+          brand_name={brand_name}
+        />
+        <ProductSpecsDrawer
+          isOpen={isOpenSpecDrawer}
+          closeDrawer={closeDrawer}
+          openDrawer={openDrawer}
           name={name}
           brand_name={brand_name}
         />
