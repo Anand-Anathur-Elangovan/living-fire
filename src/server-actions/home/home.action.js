@@ -11,7 +11,9 @@ import {
 export const getHomePageDataAction = async () => {
   const collections = await getCollectionsRepo().catch((err) => []);
   const features = await getFeaturedRepo().catch((err) => []);
-  const brands = await getBrandsRepo().catch((err) => []);
+  const brands = await getBrandsRepo()
+    .then((res) => res)
+    .catch((err) => []);
   const userFeedback = await getUserFeedbackRepo().catch((err) => []);
   return {
     ...responsePayload,
