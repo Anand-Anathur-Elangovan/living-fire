@@ -29,7 +29,7 @@ export const getBrandsRepo = async () => {
   const result = await prisma
     .$queryRawUnsafe(query)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       return res[0].fn_get_brands;
     })
     .catch((err) => {

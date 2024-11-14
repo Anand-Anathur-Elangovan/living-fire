@@ -17,7 +17,7 @@ export const getAllProducts = async (type_id) => {
     //   ...fn_get_products,
     //   hero_image: JSON.parse(fn_get_products.hero_image),
     // }));
-    console.log(result.rows);
+    // console.log(result.rows);
     return result.rows;
   } catch (error) {
     console.error("Error fetching users:", error);

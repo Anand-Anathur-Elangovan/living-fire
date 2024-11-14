@@ -7,7 +7,7 @@ import NoPriceIcon from "@/public/assets/allProducts/noprice.svg";
 import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 
 const ProductCard = ({ productDetails, addToCompare, isCompare }) => {
-  console.log(productDetails);
+  // console.log(productDetails);
   const imageURL = useMemo(() => {
     if (productDetails.fn_get_products.hero_image) {
       let heroimage;

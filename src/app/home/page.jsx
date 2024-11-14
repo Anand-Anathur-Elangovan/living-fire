@@ -22,7 +22,7 @@ const Home = () => {
   const [zoomImage, setZoomImage] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
   const { brands, collections, features, userFeedback } = useHomePage();
-  console.log("home data", data);
+  // console.log("home data", data);
   useEffect(() => {
     if (hover) {
       // Step 1: Show panels after base fades out
