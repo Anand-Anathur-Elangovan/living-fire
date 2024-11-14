@@ -7,6 +7,7 @@ export const getProductPage = async () => {
   // const query = "SELECT * FROM fn_get_fireplace_page(1)";
   try {
     const result = await prisma.$queryRawUnsafe(query);
+    console.log("result", result);
     return result;
   } catch (err) {
     throw err;
