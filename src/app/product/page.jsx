@@ -18,6 +18,7 @@ import OurDifference from "../allProducts/components/ourDifference";
 import OurShowrooms from "../allProducts/components/ourShowrooms";
 import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
 import ProductSpecsDrawer from "./components/productSpecsDrawer/ProductSpecsDrawer";
+import Featured from "../home/components/featured";
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
@@ -73,6 +74,7 @@ const Product = () => {
           product_details={product_details}
           openDrawer={openDrawer}
         />
+        <Featured headingValue={"You May Also Like"}/>
         <OurDifference />
         <OurShowrooms />
         <EnquiryFormModal

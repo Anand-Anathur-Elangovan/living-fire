@@ -6,7 +6,7 @@ import collectionImg3 from "@/public/assets/homePage/collections/collectionsImg3
 import collectionImg4 from "@/public/assets/homePage/collections/collectionsImg4.svg";
 import Image from "next/image";
 
-const Featured = (props) => {
+const Featured = ({ headingValue }) => {
   const carouselItems = [
     {
       image: collectionImg1,
@@ -43,7 +43,7 @@ const Featured = (props) => {
     <div className="flex relative justify-center flex-col">
       <div className="flex flex-row items-center w-full mb-4">
         <div className="heading1 flex w-full justify-center uppercase">
-          Featured
+          {headingValue ? headingValue : "Featured"}
         </div>
       </div>
 

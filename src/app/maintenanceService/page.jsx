@@ -160,54 +160,7 @@ const MaintenanceService = () => {
           </div>
         </div>
         <hr class="custom-divider" id="service-form" />
-        {/* Book A Service Form */}
-        {/* <div className="book-service-section">
-          <h2>BOOK A SERVICE</h2>
-          <p>
-            For assistance or to schedule a service, contact us at 03 99 777 888
-            or fill out the form below.
-          </p>
-
-          <form className="service-form">
-            <div className="form-group">
-              <input type="text" placeholder="First Name" required />
-              <input type="text" placeholder="Last Name" required />
-            </div>
-
-            <div className="form-group">
-              <input type="text" placeholder="Phone Number" required />
-              <input type="email" placeholder="Email" required />
-            </div>
-
-            <div className="form-group">
-              <input type="text" placeholder="Street Address" required />
-              <input type="text" placeholder="Suburb" required />
-            </div>
-
-            <div className="form-group">
-              <input type="text" placeholder="State" required />
-              <input type="text" placeholder="Postcode" required />
-            </div>
-
-            <textarea placeholder="Description" required></textarea>
-
-            <div className="form-group">
-              <select required>
-                <option>Brand</option>
-              </select>
-              <input type="text" placeholder="Serial Number" required />
-            </div>
-
-            <div className="file-upload">
-              <label>Proof of Purchase</label>
-              <input type="file" />
-            </div>
-
-            <button type="submit" className="submit-btn">
-              SUBMIT
-            </button>
-          </form>
-        </div> */}
+        
         <div className="book-service-section">
           <h2>BOOK A SERVICE</h2>
           <form className="service-form" onSubmit={handleSubmit}>
