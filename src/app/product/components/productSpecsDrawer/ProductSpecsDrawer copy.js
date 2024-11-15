@@ -4,8 +4,6 @@ import Image from "next/image";
 import closeIcon from "@/public/assets/product/close-btn.svg";
 import prodSpecImage from "@/public/assets/product/prod-spec.png";
 import brochureIcon from "@/public/assets/product/brochure.svg";
-import JSZip from "jszip"; // JSZip import
-import { saveAs } from "file-saver"; // file-saver import
 
 const ProductSpecsDrawer = ({
   isOpen,
@@ -20,32 +18,7 @@ const ProductSpecsDrawer = ({
       closeDrawer();
     }
   };
-
-  const handleDownloadAll = async () => {
-    const zip = new JSZip();
-    const files =
-      product_details.find((item) => item.name === "Downloads")?.value || [];
-
-    // Loop through each file in the "Downloads" section
-    for (const file of files) {
-      try {
-        const response = await fetch(file.fileurl);
-        const fileBlob = await response.blob();
-
-        const pdfBlob = new Blob([fileBlob], { type: "application/pdf" });
-
-        zip.file(file.filename + ".pdf", pdfBlob);
-      } catch (error) {
-        console.error("Error downloading file", error);
-      }
-    }
-
-    // Generate the ZIP file and trigger download
-    zip.generateAsync({ type: "blob" }).then(function (content) {
-      saveAs(content, "product-downloads.zip");
-    });
-  };
-
+  console.log(JSON.stringify(product_details, null, 2));
   return (
     <>
       {isOpen && (
@@ -67,19 +40,39 @@ const ProductSpecsDrawer = ({
                     Top Downloads
                   </p>
                   <div className={styles.columnfileOne}>
-                    {/* Render file items dynamically from the JSON */}
-                    {product_details
-                      .find((item) => item.name === "Downloads")
-                      ?.value.map((file) => (
-                        <FileItem
-                          key={file.filename}
-                          text={file.filename}
-                          fileUrl={file.fileurl}
-                        />
-                      ))}
+                    <FileItem text="Builders & Architects Information Sheet" />
+                    <FileItem text="Flue Specification Guide" />
+                    <FileItem text="Installation Manual" />
+                    <FileItem text="Fireplace User Guide" />
+                    <FileItem text="Smart Heat User Guide" />
+                    <FileItem text="CAD/BIM" />
                   </div>
                 </div>
                 <div className={styles.line}></div>
+
+                <div className={styles.Installation}>
+                  <p className={`${styles.flue} ui text size-h4`}>
+                    Installation
+                  </p>
+                  <div className={styles.columnfileOne}>
+                    <FileItem text="Builders & Architects Information Sheet" />
+                    <FileItem text="Kitset Wall Unit" />
+                    <FileItem text="Heating Area Guide" />
+                    <FileItem text="Fireplace User Guide" />
+                    <FileItem text="Smart Heat User Guide" />
+                    <FileItem text="CAD/BIM" />
+                  </div>
+                </div>
+                <div className={styles.line}></div>
+
+                <div className={styles.flueSection}>
+                  <p className={`${styles.flue} ui text size-h4`}>Flue</p>
+                  <div className={styles.columnfileOne}>
+                    <FileItem text="Poly Pro Install Manual" />
+                    <FileItem text="EVP Standard Detail" />
+                    <FileItem text="EVP Flat Roof Detail" />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -92,7 +85,6 @@ const ProductSpecsDrawer = ({
               <div className={styles.buttonsOverlay}>
                 <button
                   className={`${styles.downloadButton} ${styles.hoverEffectDownloadButton}`}
-                  onClick={handleDownloadAll} // Attach the download handler
                 >
                   Download All
                 </button>
@@ -113,17 +105,10 @@ const ProductSpecsDrawer = ({
   );
 };
 
-const FileItem = ({ text, fileUrl }) => (
+const FileItem = ({ text }) => (
   <div className={styles.file}>
     <Image src={brochureIcon} alt="File" className={styles.fileOne} />
-    <a
-      href={fileUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`${styles.regencygfi750} ui text size-body_medium`}
-    >
-      {text}
-    </a>
+    <p className={`${styles.regencygfi750} ui text size-body_medium`}>{text}</p>
   </div>
 );
 

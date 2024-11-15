@@ -51,7 +51,7 @@ const Product = () => {
     product_details,
     specifications,
   } = productData;
-  console.log("productData", productData);
+  console.log("productData", productData, product_details);
   return (
     <section>
       <div className="stackview">
@@ -87,6 +87,7 @@ const Product = () => {
           openDrawer={openDrawer}
           name={name}
           brand_name={brand_name}
+          product_details={product_details}
         />
       </div>
     </section>
