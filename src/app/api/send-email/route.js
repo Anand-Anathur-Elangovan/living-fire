@@ -14,22 +14,36 @@ export async function POST(req) {
       },
     });
 
-    console.log("Received POST request body:", body);
+    // Email options for sending to the admin and the user
+    const serviceName = body?.serviceName;
 
-    // Email options for multiple recipients
-    const mailOptions = {
+    // Email to the admin
+    const adminMailOptions = {
       from: "anandanathurelangovan94@gmail.com", // From address
       to: ["systems@paulagnewdesigns.com", "anandanathurelangovan94@gmail.com"], // Add multiple recipient emails here
-      subject: `Service Booking from ${body.name || "Unknown"}`,
+      subject: `${serviceName} from ${body.name || "Unknown"}`,
       text: body?.first_name || "No message content", // Email content
     };
 
-    // Send the email
-    await transporter.sendMail(mailOptions);
+    // Email to the user (acknowledgement email)
+    const userMailOptions = {
+      from: "anandanathurelangovan94@gmail.com", // From address
+      to: body.email, // Send to the email from the body
+      subject: "Acknowledgement of Your Enquiry",
+      text: `Dear ${
+        body.name || "Customer"
+      },\n\nThank you for your enquiry. We have received your message and will get back to you shortly.\n\nBest regards,\nThe Team`,
+    };
+
+    // Send the admin email
+    await transporter.sendMail(adminMailOptions);
+
+    // Send the acknowledgement email to the user
+    await transporter.sendMail(userMailOptions);
 
     // Return response using NextResponse
     return NextResponse.json(
-      { message: "Email sent successfully" },
+      { message: "Emails sent successfully" },
       { status: 200 }
     );
   } catch (error) {

@@ -7,7 +7,9 @@ import electricFireplace from "@/public/assets/maintenanceServicePage/image3.png
 import Image from "next/image";
 
 const MaintenanceService = () => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    serviceName: "Maintenance Service",
+  });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,23 +17,39 @@ const MaintenanceService = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        alert('Your message has been sent!');
+        alert("Your message has been sent!");
+        // Clear all form data
+        setFormData({
+          serviceName: "Maintenance Service",
+          first_name: "",
+          last_name: "",
+          phone_number: "",
+          email: "",
+          street_address: "",
+          suburb: "",
+          state: "",
+          postcode: "",
+          description: "",
+          brand: "brand", // Adjust to the default value if needed
+          serial_number: "",
+        });
       } else {
-        alert('There was an issue sending your message.');
+        alert("There was an issue sending your message.");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred while sending your message.');
+      console.error("Error:", error);
+      alert("An error occurred while sending your message.");
     }
   };
-  console.log("formData", formData)
+
+  console.log("formData", formData);
   return (
     <div className="maintenance-service-container-body">
       <div className="maintenance-service-container">
@@ -51,7 +69,16 @@ const MaintenanceService = () => {
           some simple tips to help you maintain your fireplace in top condition.
         </p>
 
-        <button className="book-service-btn" onClick={() => document.getElementById("service-form").scrollIntoView({ behavior: 'smooth' })}>BOOK A SERVICE</button>
+        <button
+          className="book-service-btn"
+          onClick={() =>
+            document
+              .getElementById("service-form")
+              .scrollIntoView({ behavior: "smooth" })
+          }
+        >
+          BOOK A SERVICE
+        </button>
 
         {/* Fireplaces Sections */}
         <div className="fireplace-sections">
@@ -191,42 +218,104 @@ const MaintenanceService = () => {
             </p>
             <div className="form-group">
               <div className="input-wrapper">
-                <input name="first_name" type="text" placeholder="First Name*" required onChange={handleChange} />
+                <input
+                  name="first_name"
+                  type="text"
+                  placeholder="First Name*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.first_name}
+                />
               </div>
               <div className="input-wrapper">
-                <input name="last_name" type="text" placeholder="Last Name*" required onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <div className="input-wrapper">
-                <input name="phone_number" type="text" placeholder="Phone Number*" required onChange={handleChange} />
-              </div>
-              <div className="input-wrapper">
-                <input name="email" type="email" placeholder="Email*" required onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <div className="input-wrapper">
-                <input name="street_address" type="text" placeholder="Street Address*" required onChange={handleChange} />
-              </div>
-              <div className="input-wrapper">
-                <input name="suburb" type="text" placeholder="Suburb*" required onChange={handleChange} />
+                <input
+                  name="last_name"
+                  type="text"
+                  placeholder="Last Name*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.last_name}
+                />
               </div>
             </div>
 
             <div className="form-group">
               <div className="input-wrapper">
-                <input name="state" type="text" placeholder="State*" required onChange={handleChange} />
+                <input
+                  name="phone_number"
+                  type="text"
+                  placeholder="Phone Number*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.phone_number}
+                />
               </div>
               <div className="input-wrapper">
-                <input name="postcode" type="text" placeholder="Postcode*" required onChange={handleChange} />
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="Email*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.email}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <div className="input-wrapper">
+                <input
+                  name="street_address"
+                  type="text"
+                  placeholder="Street Address*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.street_address}
+                />
+              </div>
+              <div className="input-wrapper">
+                <input
+                  name="suburb"
+                  type="text"
+                  placeholder="Suburb*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.suburb}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <div className="input-wrapper">
+                <input
+                  name="state"
+                  type="text"
+                  placeholder="State*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.state}
+                />
+              </div>
+              <div className="input-wrapper">
+                <input
+                  name="postcode"
+                  type="text"
+                  placeholder="Postcode*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.postcode}
+                />
               </div>
             </div>
 
             <div className="input-wrapper-full">
-              <textarea name="description" placeholder="Description*" required onChange={handleChange}></textarea>
+              <textarea
+                name="description"
+                placeholder="Description*"
+                required
+                onChange={handleChange}
+                value={formData?.description}
+              ></textarea>
             </div>
 
             <div className="form-group">
@@ -237,7 +326,14 @@ const MaintenanceService = () => {
                 </select>
               </div>
               <div className="input-wrapper">
-                <input name='serial_number' type="text" placeholder="Serial Number" required onChange={handleChange} />
+                <input
+                  name="serial_number"
+                  type="text"
+                  placeholder="Serial Number"
+                  required
+                  onChange={handleChange}
+                  value={formData?.serial_number}
+                />
               </div>
             </div>
 
