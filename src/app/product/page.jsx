@@ -36,7 +36,6 @@ const Product = () => {
     //   .then((res) => res.json())
     //   .then((data) => setProductData(data))
     //   .catch((error) => console.error("Error fetching product data:", error));
-    console.log("data Product page", data);
     setProductData(data?.product?.[0]?.fn_get_product_page);
   }, [data]);
 

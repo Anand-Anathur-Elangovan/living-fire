@@ -40,7 +40,7 @@ const Page = () => {
     { fueltype_id: 4, fueltype_name: "Mantels" },
   ];
 
-  // console.log(fireplaceType);
+  console.log("brands", brands);
   return (
     <div className="flex flex-col px-16 gap-3 bg-[#F7F7F5]">
       <div className="flex flex-col items-center">
