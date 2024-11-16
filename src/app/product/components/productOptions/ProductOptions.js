@@ -56,7 +56,7 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
       <h1 className={styles.title}>{name?.toUpperCase()}</h1>
       <p className={styles.subtitle}>Build your product</p>
 
-      {short_desc.map((section, index) => (
+      {short_desc?.map((section, index) => (
         <div key={index} className={styles.section}>
           <h3 className={styles.sectionTitle}>{section.name}</h3>
 

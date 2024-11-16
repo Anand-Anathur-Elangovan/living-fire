@@ -1,10 +1,15 @@
 import { PrismaClient } from "@prisma/client";
+import { cookies } from "next/headers";
 
 const prisma = new PrismaClient();
 
-export const getProductPage = async () => {
-  const query = "select * from fn_get_product_page(62)";
-  // const query = "SELECT * FROM fn_get_fireplace_page(1)";
+export const getProductPage = async (productId) => {
+  const cookieStore = cookies();
+  const cookieProductId = cookieStore.get("selectedProductId")?.value;
+  // const query = `select * from fn_get_product_page(${
+  //   productId ? productId : cookieProductId ? cookieProductId : "424"
+  // })`;
+  const query = "select * FROM fn_get_product_page(424)";
   try {
     const result = await prisma.$queryRawUnsafe(query);
     return result;

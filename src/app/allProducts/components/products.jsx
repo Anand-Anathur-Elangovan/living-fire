@@ -165,6 +165,7 @@ const Products = ({
     { brand_id: 20, brand_name: "Metters" },
     { brand_id: 21, brand_name: "Fire Up" },
   ];
+  console.log("filteredProducts", filteredProducts);
   return (
     <>
       {/* Compare Products */}

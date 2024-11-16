@@ -20,8 +20,12 @@ import Breadcrumbs from "./components/Breadcrumbs";
 import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
 import ProductSpecsDrawer from "./components/productSpecsDrawer/ProductSpecsDrawer";
 import Featured from "../home/components/featured";
+import { useNavigationState } from "@/context/NavigationContext";
+import { getCookie } from "cookies-next";
 
 const Product = () => {
+  const productId = getCookie("selectedProductId");
+  const { getNavigationState } = useNavigationState();
   const [productData, setProductData] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const openModal = () => setModalOpen(true);
@@ -31,13 +35,26 @@ const Product = () => {
 
   const openDrawer = () => setIsOpenSpecDrawer(true);
   const closeDrawer = () => setIsOpenSpecDrawer(false);
-  let { data } = useProductPage();
+  const state = getNavigationState();
+  let { data } = useProductPage(
+    state?.productId ? state?.productId : productId
+  );
+
   useEffect(() => {
     // Fetch data from API
     // fetch("/api/check")
     //   .then((res) => res.json())
     //   .then((data) => setProductData(data))
     //   .catch((error) => console.error("Error fetching product data:", error));
+
+    if (state?.productId) {
+      // Make your API call here with state.productId
+      console.log("Fetched Product ID:", state.productId);
+    }
+    if (productId) {
+      // Make your API call here with state.productId
+      console.log("Cookie Product ID:", productId);
+    }
     setProductData(data?.product?.[0]?.fn_get_product_page);
   }, [data]);
 
@@ -61,7 +78,8 @@ const Product = () => {
       <Breadcrumbs productType={ptype_name} fuelType={fueltype_name} productName={name}  brandName={brand_name} />
       {/* <br/> */}
         <HeroImage
-          src={JSON.parse(hero_image?.replace(/'/g, '"'))}
+          // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
+          src={hero_image}
           alt="Product Hero Image"
         />
         <DescriptionColumn product_desc={product_desc} />
@@ -72,13 +90,13 @@ const Product = () => {
           brand_name={brand_name}
           openModal={openModal}
         />
-        <MaterialFinishOptions product_desc={product_desc} />
+        {short_desc && <MaterialFinishOptions short_desc={short_desc} />}
         <Specifications specifications={specifications} />
         <DownloadSection
           product_details={product_details}
           openDrawer={openDrawer}
         />
-        <Featured headingValue={"You May Also Like"}/>
+        <Featured headingValue={"You May Also Like"} />
         <OurDifference />
         <OurShowrooms />
         <EnquiryFormModal
