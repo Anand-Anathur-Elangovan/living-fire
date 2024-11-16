@@ -1,10 +1,28 @@
-// components/Specifications.jsx
 import React from "react";
 import styles from "./Specifications.module.css";
 import specImage from "@/public/assets/product/image.png";
 import Image from "next/image";
 
-const Specifications = () => {
+const Specifications = ({ specifications }) => {
+  // const parsedSpecifications = specifications.map((spec) => ({
+  //   spec_name: spec.spec_name,
+  //   spec_value: JSON.parse(spec.spec_value),
+  // }));
+  const parsedSpecifications = specifications.map((spec) => {
+    let parsedValue = spec.spec_value;
+    try {
+      parsedValue =
+        typeof spec.spec_value === "string"
+          ? JSON.parse(spec.spec_value)
+          : spec.spec_value;
+    } catch (e) {
+      console.error("Invalid JSON:", e);
+    }
+    return {
+      spec_name: spec.spec_name,
+      spec_value: parsedValue,
+    };
+  });
   return (
     <section className={styles.specifications}>
       <div className={styles.row}>
@@ -19,135 +37,58 @@ const Specifications = () => {
               </p>
             </div>
             <div className={styles.productspecs}>
-              {/* Energy Specifications */}
-              <div className={styles.specs}>
-                <p className={`${styles.materialfinish} ui text size-h6`}>
-                  Energy Specifications
-                </p>
-                <div className={styles.rowng}>
-                  <p className="headingfive_one ui text size-textmd">NG</p>
-                  <p className="lp ui text size-textmd">LP</p>
-                  <p className="ulpg ui text size-textmd">ULPG</p>
-                </div>
-              </div>
-              <div className={styles.specsOne}>
-                <p className="homeelectric ui text size-body_medium">
-                  Nominal Max. Gas Consumption (MJ)
-                </p>
-                <div className={styles.rowng}>
-                  <p className="homeelectric ui text size-body_medium">26</p>
-                  <p className="homeelectric ui text size-body_medium">26</p>
-                  <p className="homeelectric ui text size-body_medium">21.5</p>
-                </div>
-              </div>
-              <div className={styles.specsOne}>
-                <p className="homeelectric ui text size-body_medium">
-                  Output (KW)
-                </p>
-                <div className={styles.rowng}>
-                  <p className="homeelectric ui text size-body_medium">5.1</p>
-                  <p className="homeelectric ui text size-body_medium">5.1</p>
-                  <p className="homeelectric ui text size-body_medium">4.5</p>
-                </div>
-              </div>
-              <p className={`${styles.energynotes} ui text size-body_small`}>
-                Energy Notes: Output depends on gas type and flue configuration
-              </p>
-
-              {/* General Specifications */}
-              <div className={`${styles.dimensions} ${styles.generalSpecs}`}>
-                <p className={`${styles.materialfinish} ui text size-h6`}>
-                  General Specifications
-                </p>
-                <div className={styles.columnproducts}>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      Product Size
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">
-                      Medium
-                    </p>
-                  </div>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      View Area
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">
-                      2417sq.cm.
-                    </p>
-                  </div>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      Room Size
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">
-                      Medium
-                    </p>
-                  </div>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      Vent Type
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">
-                      Direct Vent
-                    </p>
-                  </div>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      Vent Size (Air Intake)
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">76mm</p>
-                  </div>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      Vent Size (Exhaust)
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">
-                      100mm
-                    </p>
+              {parsedSpecifications.map((spec, index) => (
+                <div key={index} className={styles.specificationSection}>
+                  <p className={`${styles.materialfinish} ui text size-h6`}>
+                    {spec.spec_name.toUpperCase()}
+                  </p>
+                  {spec.spec_name.toUpperCase() === "ENERGY SPECIFICATIONS" && (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        gap: "10px",
+                      }}
+                    >
+                      <p> NG</p>
+                      <p> LG</p>
+                      <p> ULPG</p>
+                    </div>
+                  )}
+                  <div className={styles.specItems}>
+                    {spec.spec_value.map((item, idx) => (
+                      <div key={idx} className={styles.specItem}>
+                        <p className="homeelectric ui text size-body_medium">
+                          {item.name}
+                        </p>
+                        {typeof item.value === "object" ? (
+                          <div className={styles.rowng}>
+                            <p className="homeelectric ui text size-body_medium">
+                              {item.value.NG || "-"}
+                            </p>
+                            <p className="homeelectric ui text size-body_medium">
+                              {item.value.LP || "-"}
+                            </p>
+                            <p className="homeelectric ui text size-body_medium">
+                              {item.value.ULPG || "-"}
+                            </p>
+                          </div>
+                        ) : (
+                          <p className="distanceTwo ui text size-body_medium">
+                            {item.value}
+                          </p>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
-
-              {/* Minimum Fireplace Opening */}
-              <div className={`${styles.dimensions} ${styles.generalSpecs}`}>
-                <p className={`${styles.materialfinish} ui text size-h6`}>
-                  Minimum Fireplace Opening
+              ))}
+              {/* Energy Notes Section */}
+              <div className={styles.energynotes}>
+                <p>
+                  Energy Notes: Output depends on gas type and flue
+                  configuration
                 </p>
-                <div className={styles.columnproducts}>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      Width (front)
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">
-                      685mm
-                    </p>
-                  </div>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      Width (back)
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">
-                      565mm
-                    </p>
-                  </div>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      Height
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">
-                      590mm
-                    </p>
-                  </div>
-                  <div className={styles.specsSix}>
-                    <p className="homeelectric ui text size-body_medium">
-                      Depth
-                    </p>
-                    <p className="distanceTwo ui text size-body_medium">
-                      400mm
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

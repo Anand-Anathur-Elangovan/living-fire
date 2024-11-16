@@ -11,7 +11,7 @@ import styles from "./ProductOptions.module.css";
 import optionsImage from "@/public/assets/product/electriFireOptions.png";
 import Image from "next/image";
 
-const ProductOptions = ({ short_desc, name, price }) => {
+const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
 
@@ -52,8 +52,8 @@ const ProductOptions = ({ short_desc, name, price }) => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.brand}>REGENCY</h2>
-      <h1 className={styles.title}>{name}</h1>
+      <h2 className={styles.brand}>{brand_name}</h2>
+      <h1 className={styles.title}>{name?.toUpperCase()}</h1>
       <p className={styles.subtitle}>Build your product</p>
 
       {short_desc.map((section, index) => (
@@ -135,7 +135,7 @@ const ProductOptions = ({ short_desc, name, price }) => {
 
       <div className={styles.buttonContainer}>
         <button className={styles.addToCart}>ADD TO CART</button>
-        <button className={styles.enquiry}>SEND AN ENQUIRY</button>
+        <button className={styles.enquiry} onClick={openModal}>SEND AN ENQUIRY</button>
       </div>
     </div>
   );

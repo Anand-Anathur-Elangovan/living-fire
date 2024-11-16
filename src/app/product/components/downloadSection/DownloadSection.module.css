@@ -84,9 +84,10 @@
 }
 
 .listspecsheet {
-  gap: 128px;
+  /* gap: 128px; */
   display: flex;
-  width: 74%;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .columnTwo {
@@ -98,13 +99,14 @@
 }
 
 .rowtext {
-  gap: 16px;
+  gap: 12px;
   display: flex;
   align-items: center;
 }
 
 .imageclass {
   height: 16px;
+  cursor: pointer;
 }
 
 .flexRowCenterCenter {

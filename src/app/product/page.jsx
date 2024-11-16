@@ -17,9 +17,20 @@ import DownloadSection from "./components/downloadSection/DownloadSection";
 import OurDifference from "../allProducts/components/ourDifference";
 import OurShowrooms from "../allProducts/components/ourShowrooms";
 import Breadcrumbs from "./components/Breadcrumbs";
+import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
+import ProductSpecsDrawer from "./components/productSpecsDrawer/ProductSpecsDrawer";
+import Featured from "../home/components/featured";
 
 const Product = () => {
   const [productData, setProductData] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  const [isOpenSpecDrawer, setIsOpenSpecDrawer] = useState(false);
+
+  const openDrawer = () => setIsOpenSpecDrawer(true);
+  const closeDrawer = () => setIsOpenSpecDrawer(false);
   let { data } = useProductPage();
   useEffect(() => {
     // Fetch data from API
@@ -27,7 +38,6 @@ const Product = () => {
     //   .then((res) => res.json())
     //   .then((data) => setProductData(data))
     //   .catch((error) => console.error("Error fetching product data:", error));
-    console.log("data Product page", data);
     setProductData(data?.product?.[0]?.fn_get_product_page);
   }, [data]);
 
@@ -39,23 +49,12 @@ const Product = () => {
     short_desc,
     name,
     price,
-    ptype_name,fueltype_name,brand_name
-    //  descriptions, packages, materials, deliveries, pricing
+    ptype_name,fueltype_name,
+    brand_name,
+    product_details,
+    specifications,
   } = productData;
-  const materials = [
-    {
-      imgSrc: "",
-      value: "",
-      description: "Reflective Black Inner Panels",
-      imgSrc: "",
-      value: "",
-      description: "3-Sided Black Backing Plate",
-      imgSrc: "",
-      value: "",
-      description: "Metallic Black Inner Panels",
-    },
-  ];
-  console.log("productData", productData);
+  console.log("productData", productData, product_details);
   return (
     <section>
       <div className="stackview">
@@ -66,12 +65,36 @@ const Product = () => {
           alt="Product Hero Image"
         />
         <DescriptionColumn product_desc={product_desc} />
-        <ProductOptions short_desc={short_desc} name={name} price={price} />
+        <ProductOptions
+          short_desc={short_desc}
+          name={name}
+          price={price}
+          brand_name={brand_name}
+          openModal={openModal}
+        />
         <MaterialFinishOptions product_desc={product_desc} />
-        <Specifications />
-        <DownloadSection />
+        <Specifications specifications={specifications} />
+        <DownloadSection
+          product_details={product_details}
+          openDrawer={openDrawer}
+        />
+        <Featured headingValue={"You May Also Like"}/>
         <OurDifference />
         <OurShowrooms />
+        <EnquiryFormModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          name={name}
+          brand_name={brand_name}
+        />
+        <ProductSpecsDrawer
+          isOpen={isOpenSpecDrawer}
+          closeDrawer={closeDrawer}
+          openDrawer={openDrawer}
+          name={name}
+          brand_name={brand_name}
+          product_details={product_details}
+        />
       </div>
     </section>
   );

@@ -1,9 +1,7 @@
 "use server";
 
 import { responsePayload } from "@/src/constants/reponse-payload";
-import {
-    getProductPage,
-} from "@/src/repo/product/product.repo";
+import { getProductPage } from "@/src/repo/product/product.repo";
 
 export const getProductPageDataAction = async () => {
   const product = await getProductPage().catch((err) => []);
@@ -12,7 +10,7 @@ export const getProductPageDataAction = async () => {
     success: true,
     message: "Fetched Product data",
     result: {
-        product,
+      product,
     },
   };
 };

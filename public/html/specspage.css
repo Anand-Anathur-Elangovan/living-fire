@@ -1,0 +1,188 @@
+.search-banner {
+    height: 818px;
+    background-image: url("./assets/specpageimg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-self: stretch;
+    padding: 56px;
+}
+.search-banner .column {
+    margin-top: 242px;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.search-by-product{
+    gap: 32px;
+    background-color: #00000019;
+    display: flex;
+    width: 28%;
+    flex-direction: column;
+    padding: 38px;
+}
+.search-text{
+    display: flex;
+    justify-content: center;
+}
+.search-text p{
+    color: #ffffff;
+    font-family: Satoru;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+
+.search-container {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    border: none;
+    border-bottom: 0.5px solid white;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .search-input::placeholder {
+    color: #ffffff !important;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 40px;
+    width: auto;
+    pointer-events: none;
+  }
+  
+.select-a-brand{
+    padding: 40px 0;
+    background-color: #f7f7f5;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.select-a-brand .brand-select{
+    padding: 0 34px;
+    gap: 36px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.select-a-brand .brand-select .filter {
+    color: #000000;
+    font-family: Satoru;
+    font-size: 26px;
+    font-weight: 400;
+}
+.select-a-brand .chipviewbrandse {
+    width: 96%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 4px;
+}
+.select-a-brand .brandselector {
+    color: #000000;
+    padding: 0 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    height: 38px;
+    border-radius: 18px;
+    border: 1px solid #000000;
+}
+.select-a-brand .flex-row-center-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.products-column{
+    padding-left: 56px;
+    padding-right: 56px;
+    align-self: stretch;
+}
+.products-column .column{
+    display: grid;
+    gap: 60px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-content: center;
+}
+.products-column .column .productspecs-1 {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 20px;
+    border-bottom: 1px solid #cfb59e;
+}
+.products-column .column .productspecs-1 .image {
+    height: 120px;
+    width: 38%;
+    object-fit: contain;
+}
+.products-column .column .productspecs-1 .productname {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 300;
+    padding-bottom: 15px;
+}
+.products-column .column .productspecs-1 .wood {
+    color: #94999f ;
+    font-size: 16px;
+    font-weight: 300;
+    padding-bottom: 15px;
+}
+.products-column .column .productspecs-1 .viewspecificati {
+    color: #1741be ;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 1025px) {
+    .search-banner{
+        padding: 20px;
+    }
+    .search-banner .column{
+        margin-top: 10px;
+        gap: 10px;
+    }
+    .search-by-product{
+        width: 100%;
+        
+    }
+    .products-column .column{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (max-width: 550px) {
+
+    .products-column .column{
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
