@@ -5,8 +5,13 @@ import collectionImg2 from "@/public/assets/homePage/collections/collectionsImg2
 import Image from "next/image";
 import NoPriceIcon from "@/public/assets/allProducts/noprice.svg";
 import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
+import { useRouter } from "next/navigation";
+import { useNavigationState } from "@/context/NavigationContext";
+import { setCookie } from "cookies-next";
 
 const ProductCard = ({ productDetails, addToCompare, isCompare }) => {
+  const router = useRouter();
+  const { setNavigationState } = useNavigationState();
   // console.log(productDetails);
   const imageURL = useMemo(() => {
     if (productDetails.fn_get_products.hero_image) {
@@ -27,6 +32,21 @@ const ProductCard = ({ productDetails, addToCompare, isCompare }) => {
     return null;
   });
   // console.log(imageURL, "imageURL");
+  const handleProductClick = (productId) => {
+    setNavigationState({ productId });
+    setCookie(
+      "selectedProductId",
+      productId
+      //   , {
+      //   path: "/", // Cookie available site-wide
+      //   secure: true, // Only sent over HTTPS
+      //   httpOnly: true, // Prevents client-side JS from accessing it
+      //   sameSite: "strict", // Only sent for same-site requests
+      //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
+      // }
+    );
+    router.push("/product");
+  };
 
   return (
     <div className="product-element" key={"productCard"}>
@@ -52,6 +72,9 @@ const ProductCard = ({ productDetails, addToCompare, isCompare }) => {
           className="element-image"
           width={300} // specify your desired width
           height={600} // specify your desired height
+          onClick={() =>
+            handleProductClick(productDetails?.fn_get_products?.p_id)
+          }
         />
       </div>
       <div className="py-2 gap-3 ">

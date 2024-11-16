@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "../components/custom/Header";
 import Footer from "../components/custom/Footer";
 import Providers from "../helper/provider/providers";
+import { NavigationProvider } from "@/context/NavigationContext";
 
 // Local fonts
 const geistSans = localFont({
@@ -35,13 +36,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          <div>
-            <Header />
-            {children}
-            <Footer />
-          </div>
-        </Providers>
+        <NavigationProvider>
+          <Providers>
+            <div>
+              <Header />
+              {children}
+              <Footer />
+            </div>
+          </Providers>
+        </NavigationProvider>
       </body>
     </html>
   );

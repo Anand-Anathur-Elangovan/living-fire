@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import Product from "../page";
 
-const useProductPage = () => {
+const useProductPage = (productId) => {
   const initialHomePageData = {
     Product: [],
   };
   const { data = initialHomePageData } = useQuery({
     queryKey: "HomePageAction",
-    queryFn: () => getProductPageDataAction(),
+    queryFn: () => getProductPageDataAction(productId),
     select: (res) => {
       if (res.success) return res?.result;
       toast.error(res.message);

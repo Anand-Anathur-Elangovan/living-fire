@@ -10,7 +10,7 @@ import prisma from "@/src/lib/prisma";
 // const prisma = new PrismaClient();
 export const getAllProducts = async (type_id) => {
   try {
-    const query = `SELECT * FROM fn_get_products(0,0,0,${type_id})`;
+    const query = `SELECT * FROM fn_get_products(0,0,0,${type_id},false,0,'')`;
     console.log(query);
     const result = await pool.query(query); // Await the pool query directly
     // const formatResults = result.rows.map(({ fn_get_products }) => ({

@@ -8,7 +8,7 @@ const Specifications = ({ specifications }) => {
   //   spec_name: spec.spec_name,
   //   spec_value: JSON.parse(spec.spec_value),
   // }));
-  const parsedSpecifications = specifications.map((spec) => {
+  const parsedSpecifications = specifications?.map((spec) => {
     let parsedValue = spec.spec_value;
     try {
       parsedValue =
@@ -37,7 +37,7 @@ const Specifications = ({ specifications }) => {
               </p>
             </div>
             <div className={styles.productspecs}>
-              {parsedSpecifications.map((spec, index) => (
+              {parsedSpecifications?.map((spec, index) => (
                 <div key={index} className={styles.specificationSection}>
                   <p className={`${styles.materialfinish} ui text size-h6`}>
                     {spec.spec_name.toUpperCase()}
