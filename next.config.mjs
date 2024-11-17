@@ -1,4 +1,3 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -7,6 +6,7 @@ const nextConfig = {
       "23909229.fs1.hubspotusercontent-na1.net",
     ],
   },
+
   async headers() {
     return [
       {
@@ -27,6 +27,11 @@ const nextConfig = {
         ],
       },
     ];
+  },
+
+  // Enabling experimental features for server actions
+  experimental: {
+    serverActions: true,
   },
 };
 
