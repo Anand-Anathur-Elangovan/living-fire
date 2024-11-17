@@ -175,7 +175,7 @@ const Products = ({
             Compare Products
           </button>
           <div className="flex flex-row">
-            {compareProducts.map((id) => {
+            {compareProducts.map((id, index) => {
               let productDetails = allProducts.find(
                 (x) => x.fn_get_products.p_id === id
               );
@@ -194,6 +194,7 @@ const Products = ({
                   className="element-image"
                   width={35} // specify your desired width
                   height={35} // specify your desired height
+                  key={index}
                 />
               );
             })}
