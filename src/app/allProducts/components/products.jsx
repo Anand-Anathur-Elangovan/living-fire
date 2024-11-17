@@ -180,6 +180,7 @@ const Products = ({
               } else imageURL = null;
               return (
                 <Image
+                  key={"image" + id}
                   src={imageURL ? imageURL : CheckerBoardImg}
                   alt={productDetails.fn_get_products.p_name} //productDetails.fn_get_products.p_name
                   className="element-image"
