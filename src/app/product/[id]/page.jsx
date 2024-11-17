@@ -87,14 +87,16 @@ const Product = ({ params }) => {
           src={hero_image}
           alt="Product Hero Image"
         />
-        <DescriptionColumn product_desc={product_desc} />
-        <ProductOptions
-          short_desc={short_desc}
-          name={name}
-          price={price}
-          brand_name={brand_name}
-          openModal={openModal}
-        />
+        {product_desc && <DescriptionColumn product_desc={product_desc} />}
+        {short_desc && (
+          <ProductOptions
+            short_desc={short_desc}
+            name={name}
+            price={price}
+            brand_name={brand_name}
+            openModal={openModal}
+          />
+        )}
         {short_desc && <MaterialFinishOptions short_desc={short_desc} />}
         <Specifications specifications={specifications} />
         <DownloadSection
