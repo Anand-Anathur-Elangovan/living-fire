@@ -15,7 +15,11 @@
     "@tanstack/react-query": "^5.59.15",
     "@tanstack/react-query-devtools": "^5.59.15",
     "aws-sdk": "^2.1691.0",
+    "cookies-next": "^5.0.2",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
     "next": "14.2.14",
+    "nodemailer": "^6.9.16",
     "pg": "^8.13.0",
     "react": "^18",
     "react-dom": "^18",
@@ -24,6 +28,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@types/nodemailer": "^6.4.16",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",
     "postcss": "^8",

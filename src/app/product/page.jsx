@@ -9,72 +9,110 @@ import ActionButtons from "./components/ActionButtons";
 import { useEffect, useState } from "react";
 import "./product.css";
 import useProductPage from "./hooks/useProductPage";
+import ProductOptions from "./components/productOptions/ProductOptions";
+import DescriptionColumn from "./components/descriptionColumn/DescriptionColumn";
+import MaterialFinishOptions from "./components/materialFinishOptions/MaterialFinishOptions";
+import Specifications from "./components/specifications/Specifications";
+import DownloadSection from "./components/downloadSection/DownloadSection";
+import OurDifference from "../allProducts/components/ourDifference";
+import OurShowrooms from "../allProducts/components/ourShowrooms";
+import Breadcrumbs from "./components/Breadcrumbs";
+import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
+import ProductSpecsDrawer from "./components/productSpecsDrawer/ProductSpecsDrawer";
+import Featured from "../home/components/featured";
+import { useNavigationState } from "@/context/NavigationContext";
+import { getCookie } from "cookies-next";
 
 const Product = () => {
+  const productId = getCookie("selectedProductId");
+  const { getNavigationState } = useNavigationState();
   const [productData, setProductData] = useState(null);
-  let { data } = useProductPage();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
+  const [isOpenSpecDrawer, setIsOpenSpecDrawer] = useState(false);
+
+  const openDrawer = () => setIsOpenSpecDrawer(true);
+  const closeDrawer = () => setIsOpenSpecDrawer(false);
+  const state = getNavigationState();
+  let { data } = useProductPage(
+    state?.productId ? state?.productId : productId
+  );
+
   useEffect(() => {
     // Fetch data from API
     // fetch("/api/check")
     //   .then((res) => res.json())
     //   .then((data) => setProductData(data))
     //   .catch((error) => console.error("Error fetching product data:", error));
-    setProductData(data?.product?.[0]?.fn_get_fireplace_page);
+
+    if (state?.productId) {
+      // Make your API call here with state.productId
+      console.log("Fetched Product ID:", state.productId);
+    }
+    if (productId) {
+      // Make your API call here with state.productId
+      console.log("Cookie Product ID:", productId);
+    }
+    setProductData(data?.product?.[0]?.fn_get_product_page);
   }, [data]);
 
   if (!productData) return <p>Loading...</p>;
 
   const {
     hero_image,
-    brand_name,
+    product_desc,
+    short_desc,
     name,
-    //  descriptions, packages, materials, deliveries, pricing
+    price,
+    ptype_name,fueltype_name,
+    brand_name,
+    product_details,
+    specifications,
   } = productData;
-  console.log("productData", productData);
+  console.log("productData", productData, product_details);
   return (
     <section>
       <div className="stackview">
-        <HeroImage src={hero_image?.[0].value} alt="Product Hero Image" />
-
-        <div className="desc-column">
-          {/* {descriptions.map((desc, index) => (
-            <DescriptionSection
-              key={index}
-              title={desc.title}
-              text={desc.text}
-            />
-          ))} */}
-        </div>
-
-        <div className="stack-section">
-          <div className="column">
-            <div className="columnregency">
-              <p className="regency ui text size-h6">{brand_name}</p>
-              <p className="gfing ui text size-h1">{name}</p>
-            </div>
-            <p className="buildyour ui text size-h5">Build your product</p>
-
-            {/* {packages.map((pkg, index) => (
-              <PackageOption
-                key={index}
-                label={pkg.label}
-                value={pkg.value}
-                description={pkg.description}
-              />
-            ))} */}
-
-            {/* <MaterialOption options={materials} />
-
-            <DeliveryOption options={deliveries} /> */}
-
-            {/* <PricingInfo
-              price={pricing.price}
-              stockStatus={pricing.stockStatus}
-            /> */}
-
-            <ActionButtons />
-          </div>
-        </div>
+      <Breadcrumbs productType={ptype_name} fuelType={fueltype_name} productName={name}  brandName={brand_name} />
+      {/* <br/> */}
+        <HeroImage
+          // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
+          src={hero_image}
+          alt="Product Hero Image"
+        />
+        <DescriptionColumn product_desc={product_desc} />
+        <ProductOptions
+          short_desc={short_desc}
+          name={name}
+          price={price}
+          brand_name={brand_name}
+          openModal={openModal}
+        />
+        {short_desc && <MaterialFinishOptions short_desc={short_desc} />}
+        <Specifications specifications={specifications} />
+        <DownloadSection
+          product_details={product_details}
+          openDrawer={openDrawer}
+        />
+        <Featured headingValue={"You May Also Like"} />
+        <OurDifference />
+        <OurShowrooms />
+        <EnquiryFormModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          name={name}
+          brand_name={brand_name}
+        />
+        <ProductSpecsDrawer
+          isOpen={isOpenSpecDrawer}
+          closeDrawer={closeDrawer}
+          openDrawer={openDrawer}
+          name={name}
+          brand_name={brand_name}
+          product_details={product_details}
+        />
       </div>
     </section>
   );

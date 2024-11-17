@@ -1,0 +1,62 @@
+/* Make sure the parent container has a positioning context */
+.parent-container {
+  position: relative;
+  /* Ensure this exists if it's a parent container */
+}
+
+.desc-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
+
+  position: relative;
+  width: 55%;
+  height: auto;
+  left: 100px;
+  /* Adjust if necessary */
+  /* bottom: 220px; */
+  top: 40px;
+}
+
+.columndesc {
+  margin-bottom: 1.5rem;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.materialfinish {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: #555;
+}
+
+.distance {
+  font-size: 1rem;
+  color: #333;
+}
+
+.size-h6 {
+  font-size: 1.2rem;
+}
+
+.size-body_medium {
+  font-size: 1rem;
+}
+
+/* Add a local class for the list */
+.distanceList {
+  font-size: 1rem;
+  color: #333;
+}
+
+.columndesc ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}

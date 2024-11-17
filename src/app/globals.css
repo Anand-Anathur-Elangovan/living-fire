@@ -5,14 +5,29 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-satoru: 'Satoru', sans-serif;
+  --font-public-sans: 'Public Sans', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
+h1,
+h2,
+.title {
+  font-family: 'Satoru', sans-serif;
+}
+
+body,
+p,
+.subtitle,
+.option {
+  font-family: 'Public Sans', sans-serif;
+}
+
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   color: var(--foreground);

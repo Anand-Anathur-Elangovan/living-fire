@@ -10,9 +10,9 @@ const OurDifference = () => {
         </div>
         <div className="font-sans font-normal leading-5 text-sm text-balance">
           At Living Fire, we offer an extensive selection of premium fireplaces,
-          heaters, and accessories. Whether you're looking for a gas, wood, or
-          electric fireplace, our range has been carefully curated to meet the
-          diverse needs of Australian homes. Our products are sourced from
+          heaters, and accessories. Whether you&apos;re looking for a gas, wood,
+          or electric fireplace, our range has been carefully curated to meet
+          the diverse needs of Australian homes. Our products are sourced from
           leading European and local brands, ensuring every fireplace not only
           provides warmth but enhances the style of your home.
         </div>
@@ -29,7 +29,8 @@ const OurDifference = () => {
           We also stock a range of fireplace accessories, from mantels to fire
           screens and tools, ensuring your fireplace is not only functional but
           a statement piece that reflects your personal style. Explore Living
-          Fire’s collection and find the perfect heating solution for your home.
+          Fire&apos;s collection and find the perfect heating solution for your
+          home.
         </div>
       </div>
     </div>

@@ -21,8 +21,8 @@ const Home = () => {
   const [animatePanels, setAnimatePanels] = useState(false);
   const [zoomImage, setZoomImage] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
-  const { data } = useHomePage();
-  console.log("home data", data);
+  const { brands, collections, features, userFeedback } = useHomePage();
+  // console.log("home data", data);
   useEffect(() => {
     if (hover) {
       // Step 1: Show panels after base fades out

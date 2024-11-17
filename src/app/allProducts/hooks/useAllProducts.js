@@ -2,24 +2,27 @@ import { getAllProductsPageDataAction } from "@/src/server-actions/all-products/
 import { useQuery } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
+import useHomePage from "../../home/hooks/useHomePage";
 
-const useAllProducts = () => {
-  const initialData = { allProducts: [], searchProductsList: [] };
-  const { data: allProductsData = initialData } = useQuery({
-    queryKey: ["getAllProductsAction"],
-    queryFn: () => getAllProductsPageDataAction(),
+const useAllProducts = (type_id) => {
+  const initialData = [];
+  const { data: allProducts = initialData, isFetched } = useQuery({
+    queryKey: ["getAllProductsAction" + type_id],
+    queryFn: () => getAllProductsPageDataAction(type_id),
     select: (res) => {
+      // console.log(res);
       if (res.success) return res.result;
       toast.error(res.message);
       return initialData;
     },
   });
 
-  return { allProductsData };
+  return { allProducts, isFetched };
 };
 
 export default useAllProducts;
 
+//, searchProductsList: []
 // {
 //     queryKey: ["getAllProductsAction"],
 //     queryFn: () => getAllProductsPageDataAction(),

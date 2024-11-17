@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import "./maintenanceService.css";
 import gasFireplace from "@/public/assets/maintenanceServicePage/image1.png";
 import woodFireplace from "@/public/assets/maintenanceServicePage/image2.png";
@@ -7,6 +7,49 @@ import electricFireplace from "@/public/assets/maintenanceServicePage/image3.png
 import Image from "next/image";
 
 const MaintenanceService = () => {
+  const [formData, setFormData] = useState({
+    serviceName: "Maintenance Service",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("Your message has been sent!");
+        // Clear all form data
+        setFormData({
+          serviceName: "Maintenance Service",
+          first_name: "",
+          last_name: "",
+          phone_number: "",
+          email: "",
+          street_address: "",
+          suburb: "",
+          state: "",
+          postcode: "",
+          description: "",
+          brand: "brand", // Adjust to the default value if needed
+          serial_number: "",
+        });
+      } else {
+        alert("There was an issue sending your message.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while sending your message.");
+    }
+  };
+
+  console.log("formData", formData);
   return (
     <div className="maintenance-service-container-body">
       <div className="maintenance-service-container">
@@ -26,7 +69,16 @@ const MaintenanceService = () => {
           some simple tips to help you maintain your fireplace in top condition.
         </p>
 
-        <button className="book-service-btn">BOOK A SERVICE</button>
+        <button
+          className="book-service-btn"
+          onClick={() =>
+            document
+              .getElementById("service-form")
+              .scrollIntoView({ behavior: "smooth" })
+          }
+        >
+          BOOK A SERVICE
+        </button>
 
         {/* Fireplaces Sections */}
         <div className="fireplace-sections">
@@ -107,58 +159,11 @@ const MaintenanceService = () => {
             </div>
           </div>
         </div>
-        <hr class="custom-divider" />
-        {/* Book A Service Form */}
-        {/* <div className="book-service-section">
-          <h2>BOOK A SERVICE</h2>
-          <p>
-            For assistance or to schedule a service, contact us at 03 99 777 888
-            or fill out the form below.
-          </p>
-
-          <form className="service-form">
-            <div className="form-group">
-              <input type="text" placeholder="First Name" required />
-              <input type="text" placeholder="Last Name" required />
-            </div>
-
-            <div className="form-group">
-              <input type="text" placeholder="Phone Number" required />
-              <input type="email" placeholder="Email" required />
-            </div>
-
-            <div className="form-group">
-              <input type="text" placeholder="Street Address" required />
-              <input type="text" placeholder="Suburb" required />
-            </div>
-
-            <div className="form-group">
-              <input type="text" placeholder="State" required />
-              <input type="text" placeholder="Postcode" required />
-            </div>
-
-            <textarea placeholder="Description" required></textarea>
-
-            <div className="form-group">
-              <select required>
-                <option>Brand</option>
-              </select>
-              <input type="text" placeholder="Serial Number" required />
-            </div>
-
-            <div className="file-upload">
-              <label>Proof of Purchase</label>
-              <input type="file" />
-            </div>
-
-            <button type="submit" className="submit-btn">
-              SUBMIT
-            </button>
-          </form>
-        </div> */}
+        <hr class="custom-divider" id="service-form" />
+        
         <div className="book-service-section">
           <h2>BOOK A SERVICE</h2>
-          <form className="service-form">
+          <form className="service-form" onSubmit={handleSubmit}>
             <p>
               For assistance or to schedule a service, contact us at 03 99 777
               888 or fill out the form below. We are here to help you enjoy your
@@ -166,53 +171,122 @@ const MaintenanceService = () => {
             </p>
             <div className="form-group">
               <div className="input-wrapper">
-                <input type="text" placeholder="First Name*" required />
+                <input
+                  name="first_name"
+                  type="text"
+                  placeholder="First Name*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.first_name}
+                />
               </div>
               <div className="input-wrapper">
-                <input type="text" placeholder="Last Name*" required />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <div className="input-wrapper">
-                <input type="text" placeholder="Phone Number*" required />
-              </div>
-              <div className="input-wrapper">
-                <input type="email" placeholder="Email*" required />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <div className="input-wrapper">
-                <input type="text" placeholder="Street Address*" required />
-              </div>
-              <div className="input-wrapper">
-                <input type="text" placeholder="Suburb*" required />
+                <input
+                  name="last_name"
+                  type="text"
+                  placeholder="Last Name*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.last_name}
+                />
               </div>
             </div>
 
             <div className="form-group">
               <div className="input-wrapper">
-                <input type="text" placeholder="State*" required />
+                <input
+                  name="phone_number"
+                  type="text"
+                  placeholder="Phone Number*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.phone_number}
+                />
               </div>
               <div className="input-wrapper">
-                <input type="text" placeholder="Postcode*" required />
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="Email*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.email}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <div className="input-wrapper">
+                <input
+                  name="street_address"
+                  type="text"
+                  placeholder="Street Address*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.street_address}
+                />
+              </div>
+              <div className="input-wrapper">
+                <input
+                  name="suburb"
+                  type="text"
+                  placeholder="Suburb*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.suburb}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <div className="input-wrapper">
+                <input
+                  name="state"
+                  type="text"
+                  placeholder="State*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.state}
+                />
+              </div>
+              <div className="input-wrapper">
+                <input
+                  name="postcode"
+                  type="text"
+                  placeholder="Postcode*"
+                  required
+                  onChange={handleChange}
+                  value={formData?.postcode}
+                />
               </div>
             </div>
 
             <div className="input-wrapper-full">
-              <textarea placeholder="Description*" required></textarea>
+              <textarea
+                name="description"
+                placeholder="Description*"
+                required
+                onChange={handleChange}
+                value={formData?.description}
+              ></textarea>
             </div>
 
             <div className="form-group">
               <div className="input-wrapper">
-                <select required>
-                  <option value="">Brand</option>
+                <select onChange={handleChange}>
+                  <option value="brand">Brand</option>
                   {/* Add more brand options here */}
                 </select>
               </div>
               <div className="input-wrapper">
-                <input type="text" placeholder="Serial Number" required />
+                <input
+                  name="serial_number"
+                  type="text"
+                  placeholder="Serial Number"
+                  required
+                  onChange={handleChange}
+                  value={formData?.serial_number}
+                />
               </div>
             </div>
 
