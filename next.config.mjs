@@ -28,7 +28,7 @@ const nextConfig = {
       },
     ];
   },
-
+  serverComponentsExternalPackages: ["prisma", "pg"],
   // Enabling experimental features for server actions
   experimental: {
     serverActions: true,
