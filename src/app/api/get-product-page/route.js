@@ -1,8 +1,9 @@
 // app/api/get-product-page/route.js
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 import { cookies } from "next/headers";
+import pool from "@/src/helper/db/db";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export async function POST(req) {
   try {
@@ -13,7 +14,8 @@ export async function POST(req) {
 
     // Ensure this is only done at runtime and not build time
     const query = `SELECT * FROM fn_get_product_page(${finalProductId})`;
-    const result = await prisma.$queryRawUnsafe(query);
+    const result =  await pool.query(query);
+
 
     return new Response(JSON.stringify(result), { status: 200 });
   } catch (err) {
