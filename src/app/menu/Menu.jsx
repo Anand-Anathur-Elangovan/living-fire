@@ -42,7 +42,7 @@ const Menu = () => {
         </div>
       </div>
       <div className="row">
-        <div className="flex w-full">
+        <div className="flex w-full flex-col">
           <div className="flex justify-center w-full">
             <input
               width={"70%"}
@@ -58,36 +58,38 @@ const Menu = () => {
               />
             </div>
           </div>
-          <div>
-            <div className="product-element" key={"productCard"}>
-              <div
-                className="relative"
-                style={{ width: "300px", height: "300px" }}
-              >
-                <Image
-                  src={
-                    isImageURL(allProducts[0]?.fn_get_products.hero_image)
-                      ? allProducts[0]?.fn_get_products.hero_image[0].value
-                      : CheckerBoardImg
-                  }
-                  alt={""} //productDetails.fn_get_products.p_name
-                  className="element-image"
-                  width={300} // specify your desired width
-                  height={600} // specify your desired height
-                  onClick={() => handleProductClick(fn_get_products?.p_id)}
-                />
-              </div>
-              <div className="py-2 gap-3 ">
-                <h3 className="font-sans font-medium leading-6 text-base text-wrap">
-                  {allProducts[0]?.fn_get_products.p_name}
-                </h3>
-                <div className="flex flex-row justify-between mr-5">
-                  <span className="font-sans font-normal leading-5 text-sm">
-                    {allProducts[0]?.fn_get_products?.brand_name}
-                  </span>
+          <div className="flex flex-row px-20">
+            {
+              <div className="product-element" key={"productCard"}>
+                <div
+                  className="relative"
+                  style={{ width: "100px", height: "100px" }}
+                >
+                  <Image
+                    src={
+                      isImageURL(allProducts[0]?.fn_get_products.hero_image)
+                        ? allProducts[0]?.fn_get_products.hero_image[0].value
+                        : CheckerBoardImg
+                    }
+                    alt={""} //productDetails.fn_get_products.p_name
+                    className="element-image"
+                    width={100} // specify your desired width
+                    height={200} // specify your desired height
+                    onClick={() => handleProductClick(fn_get_products?.p_id)}
+                  />
+                </div>
+                <div className="py-2 gap-3 ">
+                  <h3 className="font-sans font-medium leading-6 text-base text-wrap">
+                    {allProducts[0]?.fn_get_products.p_name}
+                  </h3>
+                  <div className="flex flex-row justify-between mr-5">
+                    <span className="font-sans font-normal leading-5 text-sm">
+                      {allProducts[0]?.fn_get_products?.brand_name}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            }
           </div>
         </div>
         <div className="rowheading">

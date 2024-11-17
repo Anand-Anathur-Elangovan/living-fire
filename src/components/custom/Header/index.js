@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <>
-      {false && (
+      {true && (
         <header className={headerClasses.join(" ")}>
           <Image src={logo} alt="Logo" className="custom-header-width" />
           <div className="custom-header-right-side-icons">
@@ -61,9 +61,9 @@ const Header = () => {
           </div>
         </header>
       )}
-      <div className="menu-header">
+      {/* <div className="menu-header">
         <Menu />
-      </div>
+      </div> */}
     </>
   );
 };

@@ -59,6 +59,7 @@ const Products = ({
 
   const onPageIndexClick = (index) => {
     if (index < 0) return;
+    if (index + 4 > maxPageCount) return;
     setPageIndex(index);
     if (index === maxPageCount)
       setFilteredProducts(() =>
@@ -186,7 +187,6 @@ const Products = ({
                   className="element-image"
                   width={35} // specify your desired width
                   height={35} // specify your desired height
-                  key={index}
                 />
               );
             })}
@@ -421,22 +421,34 @@ const Products = ({
         <Image
           src={LeftArrowIcon}
           alt="Left Arrow"
+          className="pt-1 cursor-pointer"
           onClick={() => onPageIndexClick(pageIndex - 1)}
         />
-        <span onClick={() => onPageIndexClick(pageIndex)}>{pageIndex + 1}</span>
-        <span onClick={() => onPageIndexClick(pageIndex + 2)}>
-          {pageIndex + 2}
-        </span>
-        <span onClick={() => onPageIndexClick(pageIndex + 3)}>
-          {pageIndex + 3}
-        </span>
+        {maxPageCount > 0 && (
+          <span onClick={() => onPageIndexClick(pageIndex)}>
+            {pageIndex + 1}
+          </span>
+        )}
+        {maxPageCount > 1 && (
+          <span onClick={() => onPageIndexClick(pageIndex + 2)}>
+            {pageIndex + 2}
+          </span>
+        )}
+        {maxPageCount > 2 && (
+          <span onClick={() => onPageIndexClick(pageIndex + 3)}>
+            {pageIndex + 3}
+          </span>
+        )}
         {maxPageCount - pageIndex - 3 > 1 && <span>...</span>}
-        <span onClick={() => onPageIndexClick(maxPageCount)}>
-          {maxPageCount}
-        </span>
+        {maxPageCount > 3 && (
+          <span onClick={() => onPageIndexClick(maxPageCount)}>
+            {maxPageCount}
+          </span>
+        )}
         <Image
           src={RightArrowIcon}
           alt="Right Arrow"
+          className="pt-1 cursor-pointer"
           onClick={() => onPageIndexClick(pageIndex + 1)}
         />
       </div>
