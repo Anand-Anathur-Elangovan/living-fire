@@ -1,11 +1,5 @@
 {
     "version": 2,
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/node"
-      }
-    ],
     "env": {
       "PG_USER": "living_fire_dev_owner",
       "PG_HOST": "ep-purple-wind-a4g9642l.us-east-1.aws.neon.tech",
