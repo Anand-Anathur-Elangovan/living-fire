@@ -1,98 +1,102 @@
-.privacy-policy-container-body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f7f5;
-  }
-  
-  .privacy-policy-container {
-    font-family: "Times New Roman", serif;
-    padding: 20px;
-    max-width: 1120px !important;
-    display: flex;
+.privacy-policy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.privacy-policy .privacy-col {
+  padding: 0 26px;
+  display: flex;
+  gap: 60px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.privacy-policy .privacy-text {
+  width: 100%;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #D3C6BB;
+}
+
+.privacy-policy .privacypolicy.text {
+  color: #000000;
+  font-family: Satoru;
+  font-size: 90px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.privacy-policy .rowdescription {
+  gap: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.privacy-policy .column-one,
+.privacy-policy .column-two {
+  display: flex;
+  flex-direction: column;
+  width: 48%; /* Ensure each column takes up approximately half of the row */
+}
+
+.privacy-policy .column-two {
+  margin-left: 4%; /* Small gap between columns */
+}
+
+.privacy-policy .howdoweuse {
+  color: #000000 !important;
+  font-size: 22px;
+  font-weight: 400;
+  padding-bottom: 20px;
+}
+
+.privacy-policy .description {
+  color: #000000 !important;
+  text-align: justify;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+.privacy-policy .description-2 {
+  color: #000000 !important;
+  text-align: justify;
+  font-size: 14px;
+  font-weight: 400;
+  width: 100%;
+  line-height: 140%;
+}
+
+.privacy-policy ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.privacy-policy ul li {
+  padding-bottom: 10px;
+}
+
+@media only screen and (max-width: 1050px) {
+  .privacy-policy .rowdescription {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .breadcrumb {
-    color: #888;
-    margin-bottom: 10px;
-  }
-  .title-group {
-    width: 1120px;
-    height: 150px;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Vertically center the content */
-    align-items: center; /* Horizontally center the content */
-    /* gap: 24px; */
-    margin: 0 auto;
-  }
-  .title {
-    font-size: 90px;
-    text-align: center;
-    margin: 15px 0;
-    letter-spacing: 1px;
-    line-height: 108px;
-    font-family: Satoru;
-    color: #000000;
-  }
-  
-  .title-category {
-    font-size: 40px;
-    text-align: center;
-    margin: 20px 0;
-    letter-spacing: 1px;
-    /* width: 215px; */
-    height: 40px;
-    font-family: Satoru;
-    color: #000000;
-  }
-  .custom-divider {
-    border: none; /* Remove default border */
-    border-top: 1px solid #d3c6bb; /* Apply your custom border */
-    width: 100%; /* Full width divider */
-    margin: 40px 0; /* Add some vertical spacing */
-  }
-  .privacy-container {
-    width: 80%;
-    margin: 0 auto;
-    font-family: Satoru;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  .privacy-content {
-    column-count: 2; /* Two columns */
-    column-gap: 40px; /* Space between columns */
-  }
-  
-  .privacy-content p {
-    margin-bottom: 16px;
+    gap: 20px; /* Reduce gap on smaller screens */
   }
 
-  .section {
-    break-inside: avoid; /* Prevents section from breaking across columns */
-    padding-bottom: 16px; /* Adds spacing between sections */
-  }
-  
-  .section h2 {
-    margin-top: 0;
+  .privacy-policy .column-one,
+  .privacy-policy .column-two {
+    width: 100%; /* Full width for columns on smaller screens */
+    margin-left: 0;
   }
 
-  .section-title{
-    font-size: large;
-    font-weight: bold;
+  .privacy-policy .column-two {
+    margin-left: 0;
   }
-  
-  @media (max-width: 768px) {
-    .privacy-content {
-      column-count: 1; /* Single column for smaller screens */
-    }
-  }
-  
+}
