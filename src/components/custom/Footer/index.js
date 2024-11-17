@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footerRow">
         {/* Column 1: Showrooms */}
-        <div className="footer-column1">
+        {/* <div className="footer-column1">
           <div className="foot-heading">
             <p>Our Showrooms</p>
           </div>
@@ -46,7 +46,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Column 2: Information */}
         <div className="footer-column2">
@@ -55,19 +55,19 @@ export default function Footer() {
           </p>
           <ul className="columnbodysmall-2">
             <li>
-              <a href="#">
+              <a href="/ourStory">
                 <p className="nofilechosen ui text size-body_small">
                   Our Story
                 </p>
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="#">
                 <p className="nofilechosen ui text size-body_small">
                   Our Services
                 </p>
               </a>
-            </li>
+            </li> */}
             <li>
               <a href="/contactUs">
                 <p className="nofilechosen ui text size-body_small">
@@ -75,7 +75,7 @@ export default function Footer() {
                 </p>
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="#">
                 <p className="nofilechosen ui text size-body_small">Gallery</p>
               </a>
@@ -84,7 +84,7 @@ export default function Footer() {
               <a href="#">
                 <p className="nofilechosen ui text size-body_small">Blog</p>
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
 
@@ -100,21 +100,21 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="#" className="bodysmall-link">
+              <a href="/maintenanceService" className="bodysmall-link">
                 <p className="nofilechosen ui text size-body_small">
                   Warranty &amp; Servicing
                 </p>
               </a>
             </li>
             <li>
-              <a href="#" className="bodysmall-link-1">
+              <a href="/terms" className="bodysmall-link-1">
                 <p className="nofilechosen ui text size-body_small">
                   Terms of Service
                 </p>
               </a>
             </li>
             <li>
-              <a href="#" className="bodysmall-link">
+              <a href="/privacyPolicy" className="bodysmall-link">
                 <p className="nofilechosen ui text size-body_small">
                   Privacy Policy
                 </p>
@@ -123,13 +123,13 @@ export default function Footer() {
           </ul>
           <p className="headingfive ui text size-h6">Specs &amp; Guides</p>
           <ul>
-            <li>
+            {/* <li>
               <a href="#" className="bodysmall-link-3">
                 <p className="nofilechosen ui text size-body_small">
                   Industry Hub
                 </p>
               </a>
-            </li>
+            </li> */}
             <li>
               <a href="#" className="bodysmall-link-1">
                 <p className="nofilechosen ui text size-body_small">
