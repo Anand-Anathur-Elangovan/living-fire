@@ -4,8 +4,7 @@ import close from "@/public/assets/product/close.svg";
 import Image from "next/image";
 
 const EnquiryFormModal = ({ isOpen, onClose, name, brand_name }) => {
-  if (!isOpen) return null;
-
+  // Hooks must be called at the top level of the component
   const [formData, setFormData] = useState({
     serviceName: "Enquiry Service",
     product: `${name} - ${brand_name}`, // Pre-filled product info
@@ -14,6 +13,9 @@ const EnquiryFormModal = ({ isOpen, onClose, name, brand_name }) => {
     email: "",
     message: "",
   });
+
+  // If the modal is not open, render nothing
+  if (!isOpen) return null;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +36,10 @@ const EnquiryFormModal = ({ isOpen, onClose, name, brand_name }) => {
         setFormData({
           serviceName: "Enquiry Service",
           product: `${name} - ${brand_name}`,
+          userName: "",
+          phone: "",
+          email: "",
+          message: "",
         });
         onClose();
       } else {

@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import RightArrowIcon from "@/public/assets/allProducts/rightArrow.svg";
 import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import LeftArrowDisabledIcon from "@/public/assets/allProducts/leftArrowDisabled.svg";
@@ -11,17 +11,31 @@ import useAllProducts from "../hooks/useAllProducts";
 import ProductCard from "./productCard";
 import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 import { SORTBY } from "@/src/constants/products";
+import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
+import useMasterValues from "../hooks/useMasterValues";
 
 const Products = ({
   type,
-  isCompare,
-  fireplaceType,
+  setproductMenuIndex,
   brandType,
-  setFireplaceType,
   setBrandType,
+  fireplaceType,
+  setFireplaceType,
+  isCompare,
+  allProducts,
+  isFetched,
+  setSearchText,
+  setBestSelling,
+  setSubType,
 }) => {
-  const { allProducts, isFetched } = useAllProducts(type ?? 0);
-  // console.log(allProducts, "data");
+  // const { allProducts, isFetched } = useAllProducts(type ?? 0);
+
+  const {
+    brands,
+    masterValues: { fuelTypes, ranges },
+  } = useMasterValues(type);
+
+  console.log(fuelTypes, "data");
 
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(false);
@@ -30,13 +44,14 @@ const Products = ({
   );
 
   const [compareProducts, setCompareProducts] = useState([]);
+  const searchRef = useRef(null);
 
   useEffect(() => {
     const updateFilteredProducts = () => {
       setFilteredProducts(allProducts?.slice(0, 12));
     };
     updateFilteredProducts();
-  }, [isFetched]);
+  }, [allProducts, isFetched]);
 
   // console.log(filteredProducts, "P");
 
@@ -44,6 +59,7 @@ const Products = ({
 
   const onPageIndexClick = (index) => {
     if (index < 0) return;
+    if (index + 4 > maxPageCount) return;
     setPageIndex(index);
     if (index === maxPageCount)
       setFilteredProducts(() =>
@@ -116,55 +132,31 @@ const Products = ({
       });
       setFilteredProducts(allProducts?.slice(0, 12));
     }
+    if (sortBy === SORTBY.bestSelling) {
+      setBestSelling(true);
+    }
   };
 
-  const fireplaceTypes = ["Wood", "Electric", "Gas", "LPG"];
-  const fuelTypes = [
-    { fueltype_id: 1, fueltype_name: "Hybrid - Wood/Electric" },
-    { fueltype_id: 2, fueltype_name: "Bio-Ethanol" },
-    { fueltype_id: 3, fueltype_name: "Gas" },
-    { fueltype_id: 4, fueltype_name: "Wood" },
-    { fueltype_id: 5, fueltype_name: "Electric" },
+  const clearFilters = () => {
+    setFireplaceType(null);
+    setBrandType(null);
+    setproductMenuIndex(0);
+    setSearchText("");
+    setSubType(null);
+    searchRef.current.value = "";
+  };
+  const subTypes = [
+    { subtype_id: 1, subtype_name: "Inbuilt", type_id: 1 },
+    { subtype_id: 2, subtype_name: "Fire Pit", type_id: 1 },
+    { subtype_id: 3, subtype_name: "Freestanding", type_id: 1 },
+    { subtype_id: 4, subtype_name: "Sets", type_id: 1 },
+    { subtype_id: 5, subtype_name: "Single Sided", type_id: 2 },
+    { subtype_id: 6, subtype_name: "Single Tools", type_id: 2 },
+    { subtype_id: 7, subtype_name: "Suspended", type_id: 2 },
+    { subtype_id: 8, subtype_name: "Wall Mount", type_id: 3 },
+    { subtype_id: 9, subtype_name: "Wood Storage", type_id: 3 },
   ];
-  const ranges = [
-    { range_id: 1, range_name: "Firepit" },
-    { range_id: 2, range_name: "Heatmaster Wood" },
-    { range_id: 3, range_name: "Studio 2" },
-    { range_id: 4, range_name: "Greenfire" },
-    { range_id: 5, range_name: "City Series" },
-    { range_id: 6, range_name: "Heatmaster Gas" },
-    { range_id: 7, range_name: "ilektro Freestanding" },
-    { range_id: 8, range_name: "Aerion" },
-    { range_id: 9, range_name: "ilektro insert" },
-    { range_id: 10, range_name: "Hestia" },
-    { range_id: 11, range_name: "Pyro" },
-    { range_id: 12, range_name: "ilektro" },
-    { range_id: 13, range_name: "ilektro Slimline" },
-    { range_id: 14, range_name: "Ironheart Range" },
-  ];
-  const brands = [
-    { brand_id: 1, brand_name: "Paul Agnew Designs" },
-    { brand_id: 2, brand_name: "Esse" },
-    { brand_id: 3, brand_name: "Austroflamm" },
-    { brand_id: 4, brand_name: "Morso" },
-    { brand_id: 5, brand_name: "Stovax" },
-    { brand_id: 6, brand_name: "Heatmaster" },
-    { brand_id: 7, brand_name: "Hergom" },
-    { brand_id: 8, brand_name: "ADF" },
-    { brand_id: 9, brand_name: "Firefox" },
-    { brand_id: 10, brand_name: "Regency" },
-    { brand_id: 11, brand_name: "Kalora" },
-    { brand_id: 12, brand_name: "Pacific Energy" },
-    { brand_id: 13, brand_name: "Charnwood" },
-    { brand_id: 14, brand_name: "Bosq" },
-    { brand_id: 15, brand_name: "Cocoon" },
-    { brand_id: 16, brand_name: "Eurostove" },
-    { brand_id: 17, brand_name: "Gazco" },
-    { brand_id: 18, brand_name: "Icon Fires" },
-    { brand_id: 19, brand_name: "Living Fire" },
-    { brand_id: 20, brand_name: "Metters" },
-    { brand_id: 21, brand_name: "Fire Up" },
-  ];
+
   console.log("filteredProducts", filteredProducts);
   return (
     <>
@@ -175,7 +167,7 @@ const Products = ({
             Compare Products
           </button>
           <div className="flex flex-row">
-            {compareProducts.map((id) => {
+            {compareProducts.map((id, index) => {
               let productDetails = allProducts.find(
                 (x) => x.fn_get_products.p_id === id
               );
@@ -189,6 +181,7 @@ const Products = ({
               } else imageURL = null;
               return (
                 <Image
+                  key={"image" + id}
                   src={imageURL ? imageURL : CheckerBoardImg}
                   alt={productDetails.fn_get_products.p_name} //productDetails.fn_get_products.p_name
                   className="element-image"
@@ -203,6 +196,7 @@ const Products = ({
           </div>
         </div>
       )}
+
       <div
         className={`flex ${
           isFilter ? "" : "flex-col"
@@ -223,7 +217,7 @@ const Products = ({
           </div>
         )}
         {isFilter && (
-          <div className="flex flex-col gap-4 w-10/12 max-w-10/12">
+          <div className="flex flex-col gap-4 w-3/12 max-w-10/12">
             <div className="flex flex-row py-3 justify-between border-b border-solid border-[#D3C6BB]">
               <span className="flex gap-4 uppercase font-sans font-normal text-base">
                 Filters{" "}
@@ -234,18 +228,32 @@ const Products = ({
                   onClick={() => setIsFilter(false)}
                 />
               </span>
-              <span className="flex items-center gap-4 font-sans font-normal text-base">
+              <span
+                className="flex items-center gap-4 font-sans font-normal text-base cursor-pointer"
+                onClick={clearFilters}
+              >
                 Clear{" "}
                 <Image
                   src={CrossIcon}
                   alt="clear"
                   className="pt-1 cursor-pointer"
-                  onClick={() => {
-                    setFireplaceType(null);
-                    setBrandType(null);
-                  }}
                 />
               </span>
+            </div>
+            <div className="flex flex-row gap-3 border-b border-solid border-[#D3C6BB] pb-3">
+              <input
+                className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
+                type="text"
+                ref={searchRef}
+                // onChange={(e) => setSearchText(e.target.value)}
+                // value={searchText}
+              />
+              <Image
+                src={SearchIcon}
+                alt="search"
+                className="pt-1 cursor-pointer"
+                onClick={() => setSearchText(searchRef.current.value)}
+              />
             </div>
             <div className="flex flex-col border-b boder-solid border-[#D3C6BB]">
               {/* FirePlace Types */}
@@ -263,17 +271,30 @@ const Products = ({
                       onClick={() => setFireplaceType(null)}
                     />
                   </span>
-                  {fuelTypes.map((val, index) => (
-                    <span
-                      key={"types" + val.fueltype_id}
-                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
-                      onClick={() => setFireplaceType(val.fueltype_id)}
-                    >
-                      {val.fueltype_name}
-                    </span>
-                  ))}
+                  {fireplaceType
+                    ? subTypes
+                        .filter((a) => a.type_id === fireplaceType)
+                        .map((val, index) => (
+                          <span
+                            key={"types" + val.subtype_id}
+                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                            onClick={() => setSubType(val.subtype_id)}
+                          >
+                            {val.subtype_name}
+                          </span>
+                        ))
+                    : fuelTypes.map((val, index) => (
+                        <span
+                          key={"types" + val.fueltype_id}
+                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                          onClick={() => setFireplaceType(val.fueltype_id)}
+                        >
+                          {val.fueltype_name}
+                        </span>
+                      ))}
                 </div>
               )}
+
               {/* Brands Types */}
               {!brandType && (
                 <div className="flex flex-col gap-3 py-3 mr-10 ">
@@ -377,7 +398,11 @@ const Products = ({
         )}
 
         {/* Products */}
-        <div className="flex flex-wrap gap-8 py-3">
+        <div
+          className={`flex flex-wrap gap-8 py-3 ${
+            isFilter ? "w-9/12" : "w-full"
+          }`}
+        >
           {filteredProducts?.map((product, index) => (
             <ProductCard
               key={index}
@@ -396,22 +421,34 @@ const Products = ({
         <Image
           src={LeftArrowIcon}
           alt="Left Arrow"
+          className="pt-1 cursor-pointer"
           onClick={() => onPageIndexClick(pageIndex - 1)}
         />
-        <span onClick={() => onPageIndexClick(pageIndex)}>{pageIndex + 1}</span>
-        <span onClick={() => onPageIndexClick(pageIndex + 2)}>
-          {pageIndex + 2}
-        </span>
-        <span onClick={() => onPageIndexClick(pageIndex + 3)}>
-          {pageIndex + 3}
-        </span>
+        {maxPageCount > 0 && (
+          <span onClick={() => onPageIndexClick(pageIndex)}>
+            {pageIndex + 1}
+          </span>
+        )}
+        {maxPageCount > 1 && (
+          <span onClick={() => onPageIndexClick(pageIndex + 2)}>
+            {pageIndex + 2}
+          </span>
+        )}
+        {maxPageCount > 2 && (
+          <span onClick={() => onPageIndexClick(pageIndex + 3)}>
+            {pageIndex + 3}
+          </span>
+        )}
         {maxPageCount - pageIndex - 3 > 1 && <span>...</span>}
-        <span onClick={() => onPageIndexClick(maxPageCount)}>
-          {maxPageCount}
-        </span>
+        {maxPageCount > 3 && (
+          <span onClick={() => onPageIndexClick(maxPageCount)}>
+            {maxPageCount}
+          </span>
+        )}
         <Image
           src={RightArrowIcon}
           alt="Right Arrow"
+          className="pt-1 cursor-pointer"
           onClick={() => onPageIndexClick(pageIndex + 1)}
         />
       </div>
@@ -430,3 +467,52 @@ export default Products;
 // const allProductsD = Array(70)
 //     .fill()
 //     .map((_, i) => i);
+
+// const brands = [
+//   { brand_id: 1, brand_name: "Paul Agnew Designs" },
+//   { brand_id: 2, brand_name: "Esse" },
+//   { brand_id: 3, brand_name: "Austroflamm" },
+//   { brand_id: 4, brand_name: "Morso" },
+//   { brand_id: 5, brand_name: "Stovax" },
+//   { brand_id: 6, brand_name: "Heatmaster" },
+//   { brand_id: 7, brand_name: "Hergom" },
+//   { brand_id: 8, brand_name: "ADF" },
+//   { brand_id: 9, brand_name: "Firefox" },
+//   { brand_id: 10, brand_name: "Regency" },
+//   { brand_id: 11, brand_name: "Kalora" },
+//   { brand_id: 12, brand_name: "Pacific Energy" },
+//   { brand_id: 13, brand_name: "Charnwood" },
+//   { brand_id: 14, brand_name: "Bosq" },
+//   { brand_id: 15, brand_name: "Cocoon" },
+//   { brand_id: 16, brand_name: "Eurostove" },
+//   { brand_id: 17, brand_name: "Gazco" },
+//   { brand_id: 18, brand_name: "Icon Fires" },
+//   { brand_id: 19, brand_name: "Living Fire" },
+//   { brand_id: 20, brand_name: "Metters" },
+//   { brand_id: 21, brand_name: "Fire Up" },
+// ];
+// const fuelTypes = [
+//   { fueltype_id: 1, fueltype_name: "Hybrid - Wood/Electric" },
+//   { fueltype_id: 2, fueltype_name: "Bio-Ethanol" },
+//   { fueltype_id: 3, fueltype_name: "Gas" },
+//   { fueltype_id: 4, fueltype_name: "Wood" },
+//   { fueltype_id: 5, fueltype_name: "Electric" },
+// ];
+// const ranges = [
+//   { range_id: 1, range_name: "Firepit" },
+//   { range_id: 2, range_name: "Heatmaster Wood" },
+//   { range_id: 3, range_name: "Studio 2" },
+//   { range_id: 4, range_name: "Greenfire" },
+//   { range_id: 5, range_name: "City Series" },
+//   { range_id: 6, range_name: "Heatmaster Gas" },
+//   { range_id: 7, range_name: "ilektro Freestanding" },
+//   { range_id: 8, range_name: "Aerion" },
+//   { range_id: 9, range_name: "ilektro insert" },
+//   { range_id: 10, range_name: "Hestia" },
+//   { range_id: 11, range_name: "Pyro" },
+//   { range_id: 12, range_name: "ilektro" },
+//   { range_id: 13, range_name: "ilektro Slimline" },
+//   { range_id: 14, range_name: "Ironheart Range" },
+// ];
+
+// const fireplaceTypes = ["Wood", "Electric", "Gas", "LPG"];

@@ -1,46 +1,39 @@
 "use client";
 import React, { useState } from "react";
-import OurDifference from "./components/OurDifference";
+import OurDifference from "./components/ourDifference";
 import OurShowrooms from "./components/ourShowrooms";
 import Products from "./components/products";
 import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import "./page.css";
 import Image from "next/image";
 import useHomePage from "../home/hooks/useHomePage";
+import useAllProducts from "./hooks/useAllProducts";
+import useMasterValues from "./hooks/useMasterValues";
 
 const Page = () => {
-  const [productMenuIndex, setproductMenuIndex] = useState(null);
+  const [productMenuIndex, setproductMenuIndex] = useState(0);
   const [isCompare, setIsCompare] = useState(false);
   const [fireplaceType, setFireplaceType] = useState(null);
   const [brandType, setBrandType] = useState(null);
   const [brandFireplace, setBrandFireplace] = useState(null);
-  const { brands } = useHomePage();
+  const [searchText, setSearchText] = useState("");
+  const [bestSelling, setBestSelling] = useState(false);
+  const [subType, setSubType] = useState(null);
 
-  const allProductMenu = [
-    { ptype_id: 1, ptype_name: "Fireplaces" },
-    { ptype_id: 2, ptype_name: "Firepits" },
-    { ptype_id: 3, ptype_name: "Fireplace Mantels" },
-    { ptype_id: 4, ptype_name: "Range Cookers" },
-    { ptype_id: 5, ptype_name: "Fireplace Accessories" },
-    { ptype_id: 6, ptype_name: "Warehouse Clearance" },
-  ];
+  const { allProducts, isFetched } = useAllProducts(
+    productMenuIndex,
+    fireplaceType ?? 0,
+    brandType ?? 0,
+    bestSelling,
+    searchText,
+    subType ?? 0
+  );
+  console.log(allProducts, "test");
+  const {
+    brands,
+    masterValues: { fuelTypes, productTypes: allProductMenu },
+  } = useMasterValues();
 
-  const fuelTypes = [
-    { fueltype_id: 1, fueltype_name: "Hybrid - Wood/Electric" },
-    { fueltype_id: 2, fueltype_name: "Bio-Ethanol" },
-    { fueltype_id: 3, fueltype_name: "Gas" },
-    { fueltype_id: 4, fueltype_name: "Wood" },
-    { fueltype_id: 5, fueltype_name: "Electric" },
-  ];
-
-  const brandFirePlaces = [
-    { fueltype_id: 1, fueltype_name: "Electric Fireplaces" },
-    { fueltype_id: 3, fueltype_name: "Gas Fireplaces" },
-    { fueltype_id: 2, fueltype_name: "Bioethanol Fireplaces" },
-    { fueltype_id: 4, fueltype_name: "Mantels" },
-  ];
-
-  console.log("brands", brands);
   return (
     <div className="flex flex-col px-16 gap-3 bg-[#F7F7F5]">
       <div className="flex flex-col items-center">
@@ -127,18 +120,18 @@ const Page = () => {
           )}
           {brandType && (
             <>
-              {brandFirePlaces.map((brandType, index) => (
+              {fuelTypes.map((fuelType, index) => (
                 <div
                   className={`flex flex-col gap-1 items-center text-center cursor-pointer`}
-                  key={"brandType" + brandType.fueltype_id}
-                  onClick={() => setBrandFireplace(brandType.fueltype_id)}
+                  key={"brandType" + fuelType.fueltype_id}
+                  onClick={() => setBrandFireplace(fuelType.fueltype_id)}
                 >
-                  {brandType.fueltype_name}
+                  {fuelType.fueltype_name}
                   <div
                     className={`justify-center block border-b-[3.5px] border-solid border-black rounded transistion ease-in-out duration-500`}
                     style={{
                       width: `${
-                        brandType.fueltype_id === brandFireplace ? "50%" : "4px"
+                        fuelType.fueltype_id === brandFireplace ? "50%" : "4px"
                       }`,
                     }}
                   />
@@ -147,7 +140,7 @@ const Page = () => {
             </>
           )}
         </div>
-        {productMenuIndex && (
+        {productMenuIndex !== 0 && (
           <div className="flex flex-row gap-1 items-center text-center">
             <span>Compare</span>
             <div className="container">
@@ -166,11 +159,17 @@ const Page = () => {
       </div>
       <Products
         type={productMenuIndex}
+        setproductMenuIndex={setproductMenuIndex}
         isCompare={isCompare}
         fireplaceType={fireplaceType}
         brandType={brandType}
         setFireplaceType={setFireplaceType}
         setBrandType={setBrandType}
+        allProducts={allProducts}
+        isFetched={isFetched}
+        setSearchText={setSearchText}
+        setBestSelling={setBestSelling}
+        setSubType={setSubType}
       />
       <OurDifference />
       <OurShowrooms />
@@ -202,4 +201,19 @@ export default Page;
 //   { brand_id: 19, brand_name: "Living Fire" },
 //   { brand_id: 20, brand_name: "Metters" },
 //   { brand_id: 21, brand_name: "Fire Up" },
+// ];
+// const allProductMenu = [
+//   { ptype_id: 1, ptype_name: "Fireplaces" },
+//   { ptype_id: 2, ptype_name: "Firepits" },
+//   { ptype_id: 3, ptype_name: "Fireplace Mantels" },
+//   { ptype_id: 4, ptype_name: "Range Cookers" },
+//   { ptype_id: 5, ptype_name: "Fireplace Accessories" },
+//   { ptype_id: 6, ptype_name: "Warehouse Clearance" },
+// ];
+
+// const brandFirePlaces = [
+//   { fueltype_id: 1, fueltype_name: "Electric Fireplaces" },
+//   { fueltype_id: 3, fueltype_name: "Gas Fireplaces" },
+//   { fueltype_id: 2, fueltype_name: "Bioethanol Fireplaces" },
+//   { fueltype_id: 4, fueltype_name: "Mantels" },
 // ];
