@@ -35,35 +35,26 @@
 //   }
 // }
 
-import pool from "@/src/helper/db/db"; // Your DB connection pool
+import pool from "@/src/helper/db/db";
 
-// This function handles the POST request to fetch all products based on type_id
 export async function POST(request) {
   try {
-    // Extract data from the request body (e.g., { type_id: 1 })
     const { type_id } = await request.json();
-
-    // Check if type_id is provided
     if (!type_id) {
       return new Response(JSON.stringify({ error: "type_id is required" }), {
         status: 400,
       });
     }
-
-    // Database query to get products based on type_id
     const query = `SELECT * FROM fn_get_products(0,0,0,${type_id},false,0,'')`;
     console.log(query);
 
-    const result = await pool.query(query); // Execute the query
+    const result = await pool.query(query);
 
-    // Return the result as JSON
     return new Response(JSON.stringify({ products: result.rows }), {
       status: 200,
     });
   } catch (error) {
     console.error("Error fetching products:", error);
-
-    // Return error response
     return new Response(JSON.stringify({ error: "Error fetching products" }), {
       status: 500,
     });
