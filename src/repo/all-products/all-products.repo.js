@@ -1,7 +1,7 @@
 "use server";
 
 import pool from "@/src/helper/db/db";
-import prisma from "@/src/lib/prisma";
+// import prisma from "@/src/lib/prisma";
 
 // import { prismaClient } from "@/src/helper/db/prismadb";
 
@@ -71,12 +71,12 @@ export const getAllProducts = async (type_id) => {
 //   }
 // };
 
-export const getProductTypesRepo = async () => {
-  try {
-    const productTypes = await prisma.tblProductType.findMany();
-    return productTypes;
-  } catch (error) {
-    console.error("Error getting Product Types", error);
-    throw error;
-  }
-};
+// export const getProductTypesRepo = async () => {
+//   try {
+//     const productTypes = await prisma.tblProductType.findMany();
+//     return productTypes;
+//   } catch (error) {
+//     console.error("Error getting Product Types", error);
+//     throw error;
+//   }
+// };
