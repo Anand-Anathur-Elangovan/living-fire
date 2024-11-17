@@ -14,16 +14,17 @@ import DescriptionColumn from "./components/descriptionColumn/DescriptionColumn"
 import MaterialFinishOptions from "./components/materialFinishOptions/MaterialFinishOptions";
 import Specifications from "./components/specifications/Specifications";
 import DownloadSection from "./components/downloadSection/DownloadSection";
-import OurDifference from "../allProducts/components/ourDifference";
-import OurShowrooms from "../allProducts/components/ourShowrooms";
+import OurDifference from "../../allProducts/components/ourDifference";
+import OurShowrooms from "../../allProducts/components/ourShowrooms";
 import Breadcrumbs from "./components/Breadcrumbs";
 import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
 import ProductSpecsDrawer from "./components/productSpecsDrawer/ProductSpecsDrawer";
-import Featured from "../home/components/featured";
+import Featured from "../../home/components/featured";
 import { useNavigationState } from "@/context/NavigationContext";
 import { getCookie } from "cookies-next";
 
-const Product = () => {
+const Product = ({ params }) => {
+  console.log("product id:", params?.id);
   const productId = getCookie("selectedProductId");
   const { getNavigationState } = useNavigationState();
   const [productData, setProductData] = useState(null);
@@ -36,9 +37,7 @@ const Product = () => {
   const openDrawer = () => setIsOpenSpecDrawer(true);
   const closeDrawer = () => setIsOpenSpecDrawer(false);
   const state = getNavigationState();
-  let { data } = useProductPage(
-    state?.productId ? state?.productId : productId
-  );
+  let { data } = useProductPage(params.id);
 
   useEffect(() => {
     // Fetch data from API
@@ -47,10 +46,10 @@ const Product = () => {
     //   .then((data) => setProductData(data))
     //   .catch((error) => console.error("Error fetching product data:", error));
 
-    if (state?.productId) {
-      // Make your API call here with state.productId
-      console.log("Fetched Product ID:", state.productId);
-    }
+    // if (state?.productId) {
+    //   // Make your API call here with state.productId
+    //   console.log("Fetched Product ID:", state.productId);
+    // }
     if (productId) {
       // Make your API call here with state.productId
       console.log("Cookie Product ID:", productId);
@@ -66,7 +65,8 @@ const Product = () => {
     short_desc,
     name,
     price,
-    ptype_name,fueltype_name,
+    ptype_name,
+    fueltype_name,
     brand_name,
     product_details,
     specifications,
@@ -75,8 +75,13 @@ const Product = () => {
   return (
     <section>
       <div className="stackview">
-      <Breadcrumbs productType={ptype_name} fuelType={fueltype_name} productName={name}  brandName={brand_name} />
-      {/* <br/> */}
+        <Breadcrumbs
+          productType={ptype_name}
+          fuelType={fueltype_name}
+          productName={name}
+          brandName={brand_name}
+        />
+        {/* <br/> */}
         <HeroImage
           // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
           src={hero_image}

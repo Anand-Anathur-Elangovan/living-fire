@@ -62,7 +62,7 @@ const ProductCard = ({
       //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
       // }
     );
-    router.push("/product");
+    router.push(`/product/${productId}`);
   };
 
   return (
