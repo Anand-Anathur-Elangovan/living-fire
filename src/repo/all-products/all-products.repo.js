@@ -1,7 +1,7 @@
 "use server";
 
 import pool from "@/src/helper/db/db";
-import prisma from "@/src/lib/prisma";
+// import prisma from "@/src/lib/prisma";
 
 // import { prismaClient } from "@/src/helper/db/prismadb";
 

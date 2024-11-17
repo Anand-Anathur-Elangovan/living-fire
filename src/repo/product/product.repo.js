@@ -1,8 +1,9 @@
 "use server";
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
+import pool from "@/src/helper/db/db";
 import { cookies } from "next/headers";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export const getProductPage = async (productId) => {
   const cookieStore = cookies();
@@ -12,7 +13,8 @@ export const getProductPage = async (productId) => {
   })`;
   // const query = "select * FROM fn_get_product_page(424)";
   try {
-    const result = await prisma.$queryRawUnsafe(query);
+    const result = await pool.query(query);
+    // prisma.$queryRawUnsafe(query);
     return result;
   } catch (err) {
     throw err;
@@ -27,13 +29,13 @@ export const getProductPage = async (productId) => {
   // return result?.rows;
 };
 
-export const insertProductEnquiry = async () => {
-  const query = `select * from fn_insert_product_enquiry('product enquiry example' ,'John Doe', '1234567890','user@example.com', 'product enquiry message')`;
-  const result = await prisma
-    .$queryRaw(query)
-    .then((res) => res)
-    .catch((err) => {
-      throw err;
-    });
-  return result?.rows;
-};
+// export const insertProductEnquiry = async () => {
+//   const query = `select * from fn_insert_product_enquiry('product enquiry example' ,'John Doe', '1234567890','user@example.com', 'product enquiry message')`;
+//   const result = await prisma
+//     .$queryRaw(query)
+//     .then((res) => res)
+//     .catch((err) => {
+//       throw err;
+//     });
+//   return result?.rows;
+// };
