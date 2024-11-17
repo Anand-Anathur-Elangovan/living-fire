@@ -8,10 +8,20 @@ import pool from "@/src/helper/db/db";
 // import { PrismaClient } from "@prisma/client";
 
 // const prisma = new PrismaClient();
-export const getAllProducts = async (type_id) => {
+export const getAllProducts = async ({
+  type_id,
+  fireplaceType,
+  brandType,
+  bestSelling,
+  searchText,
+  subType,
+}) => {
   try {
-    const query = `SELECT * FROM fn_get_products(0,0,0,${type_id},false,0,'')`;
-    console.log(query);
+    const query = `SELECT * FROM fn_get_products(0,${fireplaceType},${brandType},${type_id},${bestSelling},${subType},'${searchText}')`;
+    console.log(
+      query,
+      `SELECT * FROM fn_get_products(0,0,0,${type_id},false,0,'')`
+    );
     const result = await pool.query(query); // Await the pool query directly
     // const formatResults = result.rows.map(({ fn_get_products }) => ({
     //   ...fn_get_products,
@@ -31,6 +41,55 @@ export const getAllProducts = async (type_id) => {
   //   console.error("Error fetching all products:", error);
   //   throw error;
   // }
+};
+
+// export const getProductTypesRepo = async () => {
+//   try {
+//     const productTypes = await prisma.tblProductType.findMany();
+//     return productTypes;
+//   } catch (error) {
+//     console.error("Error getting Product Types", error);
+//     throw error;
+//   }
+// };
+
+export const getFuelTypesRepo = async () => {
+  try {
+    const query = `select * from public.tbl_fueltype WHERE is_active=true`;
+
+    const result = await pool.query(query); // Await the pool query directly
+    // console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching Firetypes:", error);
+    throw error;
+  }
+};
+
+export const getRangeRepo = async () => {
+  try {
+    const query = `select * from public.tbl_range WHERE is_active=true`;
+
+    const result = await pool.query(query); // Await the pool query directly
+    // console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching Range:", error);
+    throw error;
+  }
+};
+
+export const getProductTypesRepo = async () => {
+  try {
+    const query = `select * from public.tbl_product_type WHERE is_active=true order by 1`;
+
+    const result = await pool.query(query); // Await the pool query directly
+    // console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching Range:", error);
+    throw error;
+  }
 };
 
 // export const searchProducts = async (searchTerm, brandIds, ptypeIds) => {
@@ -67,16 +126,6 @@ export const getAllProducts = async (type_id) => {
 //     return products;
 //   } catch (error) {
 //     console.error("Error searching products:", error);
-//     throw error;
-//   }
-// };
-
-// export const getProductTypesRepo = async () => {
-//   try {
-//     const productTypes = await prisma.tblProductType.findMany();
-//     return productTypes;
-//   } catch (error) {
-//     console.error("Error getting Product Types", error);
 //     throw error;
 //   }
 // };

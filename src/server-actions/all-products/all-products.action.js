@@ -3,18 +3,37 @@
 import { responsePayload } from "@/src/constants/reponse-payload";
 import {
   getAllProducts,
+  getFuelTypesRepo,
+  getProductTypesRepo,
+  getRangeRepo,
   // searchProducts,
 } from "@/src/repo/all-products/all-products.repo";
 
-export const getAllProductsPageDataAction = async (type_id) => {
-  const allProducts = await getAllProducts(type_id)
+export const getAllProductsPageDataAction = async ({
+  type_id,
+  fireplaceType,
+  brandType,
+  bestSelling,
+  searchText,
+  subType,
+}) => {
+  console.log(type_id);
+  const allProducts = await getAllProducts({
+    type_id,
+    fireplaceType,
+    brandType,
+    bestSelling,
+    searchText,
+    subType,
+  })
     .then((res) =>
       res.map((val) => {
-        // if(val.fn_get_products.hero_image.includes)
         return val;
       })
     )
     .catch((err) => []);
+
+  // console.log(res);
   // const searchProductsList = await searchProducts("GF7814", [10], [3]).catch(
   //   const searchProductsList = await searchProducts("GFi750").catch(
   //   (err) => []
@@ -25,5 +44,24 @@ export const getAllProductsPageDataAction = async (type_id) => {
     success: true,
     message: "Fetched All Produucts data",
     result: allProducts,
+  };
+};
+
+export const getMasterValuesAction = async () => {
+  const ranges = await getRangeRepo()
+    .then((res) => res)
+    .catch((err) => []);
+  const fuelTypes = await getFuelTypesRepo()
+    .then((res) => res)
+    .catch((err) => []);
+  const productTypes = await getProductTypesRepo()
+    .then((res) => res)
+    .catch((err) => []);
+
+  return {
+    ...responsePayload,
+    success: true,
+    message: "Fetched All Firetypes data",
+    result: { ranges, fuelTypes, productTypes },
   };
 };
