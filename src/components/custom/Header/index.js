@@ -6,6 +6,7 @@ import logo from "@/public/assets/homePage/rightSideLogo.svg";
 import searchIcon from "@/public/assets/homePage/searchIcon.svg";
 import menu from "@/public/assets/homePage/burgerMenuIcon.svg";
 import Image from "next/image";
+import Menu from "@/src/app/menu/Menu";
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -42,17 +43,28 @@ const Header = () => {
   }
 
   return (
-    <header className={headerClasses.join(" ")}>
-      <Image src={logo} alt="Logo" className="custom-header-width" />
-      <div className="custom-header-right-side-icons">
-        <Image
-          src={searchIcon}
-          alt="searchIcon"
-          className="custom-header-width"
-        />
-        <Image src={menu} alt="searchIcon" className="custom-header-width" />
+    <>
+      {false && (
+        <header className={headerClasses.join(" ")}>
+          <Image src={logo} alt="Logo" className="custom-header-width" />
+          <div className="custom-header-right-side-icons">
+            <Image
+              src={searchIcon}
+              alt="searchIcon"
+              className="custom-header-width"
+            />
+            <Image
+              src={menu}
+              alt="searchIcon"
+              className="custom-header-width"
+            />
+          </div>
+        </header>
+      )}
+      <div className="menu-header">
+        <Menu />
       </div>
-    </header>
+    </>
   );
 };
 

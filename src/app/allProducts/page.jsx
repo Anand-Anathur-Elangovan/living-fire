@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import OurDifference from "./components/OurDifference";
+import OurDifference from "./components/ourDifference";
 import OurShowrooms from "./components/ourShowrooms";
 import Products from "./components/products";
 import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
