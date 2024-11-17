@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
+      }
+    ],
+    "env": {
+      "PG_USER": "living_fire_dev_owner",
+      "PG_HOST": "ep-purple-wind-a4g9642l.us-east-1.aws.neon.tech",
+      "PG_DATABASE": "living_fire_dev",
+      "PG_PASSWORD": "OGj3NAF2JkYI",
+      "PG_PORT": "5432",
+      "DATABASE_URL": "postgresql://living_fire_dev_owner:OGj3NAF2JkYI@ep-purple-wind-a4g9642l.us-east-1.aws.neon.tech/living_fire_dev?sslmode=require",
+      "AWS_lIVING_FIRE_ACCESS_KEY_ID": "AKIA3FRRIXSVNFDOPIOW",
+      "AWS_lIVING_FIRE_SECRET_ACCESS_KEY": "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",
+      "NODE_ENV": "development",
+      "EMAIL_USER": "systems@paulagnewdesigns.com",
+      "EMAIL_PASS": "K(417706486081oh"
+    }
+  }
+  
