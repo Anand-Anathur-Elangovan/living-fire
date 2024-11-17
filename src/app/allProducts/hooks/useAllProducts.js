@@ -19,13 +19,13 @@ const useAllProducts = (
   const initialData = [];
   const { data: allProducts = initialData, isFetched } = useQuery({
     queryKey: [
-      "getAllProductsAction",
-      type_id,
-      fireplaceType,
-      brandType,
-      bestSelling,
-      searchText,
-      subType,
+      "getAllProductsAction" +
+        type_id +
+        fireplaceType +
+        brandType +
+        bestSelling +
+        searchText +
+        subType,
     ],
     queryFn: () =>
       getAllProductsPageDataAction({
