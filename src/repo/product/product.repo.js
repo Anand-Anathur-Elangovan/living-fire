@@ -1,9 +1,9 @@
 "use server";
-// import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import pool from "@/src/helper/db/db";
 import { cookies } from "next/headers";
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 export const getProductPage = async (productId) => {
   const cookieStore = cookies();
@@ -13,8 +13,8 @@ export const getProductPage = async (productId) => {
   })`;
   // const query = "select * FROM fn_get_product_page(424)";
   try {
-    const result = await pool.query(query);
-    // prisma.$queryRawUnsafe(query);
+    const result = await // pool.query(query);
+    prisma.$queryRawUnsafe(query);
     return result;
   } catch (err) {
     throw err;
