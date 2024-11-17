@@ -16,6 +16,7 @@ import Specifications from "./components/specifications/Specifications";
 import DownloadSection from "./components/downloadSection/DownloadSection";
 import OurDifference from "../allProducts/components/ourDifference";
 import OurShowrooms from "../allProducts/components/ourShowrooms";
+import Breadcrumbs from "./components/Breadcrumbs";
 import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
 import ProductSpecsDrawer from "./components/productSpecsDrawer/ProductSpecsDrawer";
 import Featured from "../home/components/featured";
@@ -65,6 +66,7 @@ const Product = () => {
     short_desc,
     name,
     price,
+    ptype_name,fueltype_name,
     brand_name,
     product_details,
     specifications,
@@ -73,6 +75,8 @@ const Product = () => {
   return (
     <section>
       <div className="stackview">
+      <Breadcrumbs productType={ptype_name} fuelType={fueltype_name} productName={name}  brandName={brand_name} />
+      {/* <br/> */}
         <HeroImage
           // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
           src={hero_image}
