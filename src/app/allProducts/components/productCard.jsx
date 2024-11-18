@@ -83,18 +83,18 @@ const ProductCard = ({
         <Image
           src={imageURL ? imageURL : CheckerBoardImg}
           alt={fn_get_products.p_name ?? ""} //productDetails.fn_get_products.p_name
-          className="element-image"
+          className="element-image cursor-pointer"
           width={300} // specify your desired width
           height={600} // specify your desired height
           onClick={() => handleProductClick(fn_get_products?.p_id)}
         />
       </div>
-      <div className="py-2 gap-3 ">
-        <h3 className="font-sans font-medium leading-6 text-base text-wrap">
+      <div className="py-2 gap-3">
+        <h3 className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer">
           {fn_get_products.p_name || fn_get_products?.name || fn_get_products?.p_sku}
         </h3>
         <div className="flex flex-row justify-between mr-5">
-          <span className="font-sans font-normal leading-5 text-sm">
+          <span className="font-sans font-normal leading-5 text-sm cursor-pointer">
             {fn_get_products?.brand_name}
           </span>
           <div className="flex gap-1">
