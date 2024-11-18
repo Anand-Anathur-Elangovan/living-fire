@@ -10,7 +10,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/:path*", // Updated to match any path
+        source: "/:path*", // Match any path
         headers: [
           {
             key: "Access-Control-Allow-Origin",
@@ -28,7 +28,19 @@ const nextConfig = {
       },
     ];
   },
+
+  async redirects() {
+    return [
+      {
+        source: "/", // Redirect root path
+        destination: "/home", // Redirect to /home
+        permanent: true, // Use a 301 redirect for SEO
+      },
+    ];
+  },
+
   serverComponentsExternalPackages: ["prisma", "pg"],
+
   // Enabling experimental features for server actions
   experimental: {
     serverActions: true,
