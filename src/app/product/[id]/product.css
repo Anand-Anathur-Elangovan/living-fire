@@ -528,27 +528,40 @@
   color: black;
 }
 
-.slick-dots li button:before {
+/* .slick-dots li button:before {
   font-size: 12px;
   color: gray;
-}
+} */
 
 .slick-dots li.slick-active button:before {
-  color: black; /* Active dot color */
+  /* color: black; Active dot color */
 }
 .slick-dots li button:before {
-  font-size: 12px;
-  color: gray; /* Inactive dot color */
-  opacity: 0.5; /* Make inactive dots slightly transparent */
+  /* font-size: 12px; */
+  /* color: black; */
+  opacity: 1 !important;
   transition: color 0.3s ease, opacity 0.3s ease;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  content: "" !important;
 }
 
 .slick-dots li.slick-active button:before {
-  color: black; /* Active dot color */
-  opacity: 1; /* Make active dot fully opaque */
+  color: white;
+  opacity: 1;
   transition: color 0.3s ease, opacity 0.3s ease;
 }
-
+.slick-dots {
+  bottom: 15px !important;
+}
+.slick-dots li.slick-active button {
+  background: white; /* Black fill for active dot */
+  transform: scale(1); /* Slightly enlarge the active dot for emphasis */
+  border-radius: 50%;
+}
 @media only screen and (max-width: 1025px) {
   .material-finish-options .img-list {
     flex-direction: column;
