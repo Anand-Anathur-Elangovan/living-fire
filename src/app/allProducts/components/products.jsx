@@ -25,6 +25,7 @@ const Products = ({
   allProducts,
   isFetched,
   setSearchText,
+  searchText,
   setBestSelling,
   setSubType,
 }) => {
@@ -35,8 +36,6 @@ const Products = ({
     masterValues: { fuelTypes, ranges },
   } = useMasterValues(type);
 
-  console.log(fuelTypes, "data");
-
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(
@@ -45,7 +44,14 @@ const Products = ({
 
   const [compareProducts, setCompareProducts] = useState([]);
   const searchRef = useRef(null);
-
+  useEffect(() => {
+    const checkFitlers = () => {
+      if (searchText === "" && type === 0 && !brandType && !fireplaceType)
+        return;
+      setIsFilter(true);
+    };
+    checkFitlers();
+  }, [searchText, type, brandType, fireplaceType]);
   useEffect(() => {
     const updateFilteredProducts = () => {
       setFilteredProducts(allProducts?.slice(0, 12));
@@ -53,7 +59,10 @@ const Products = ({
     updateFilteredProducts();
   }, [allProducts, isFetched]);
 
-  console.log(allProducts, "allProducts");
+  useEffect(() => {
+    if (searchText !== "" && searchRef.current)
+      searchRef.current.value = searchText;
+  }, [searchRef, searchText]);
 
   const maxPageCount = Math.trunc(allProducts?.length / 12) + 1;
 
@@ -163,6 +172,8 @@ const Products = ({
     { subtype_id: 8, subtype_name: "Wall Mount", type_id: 3 },
     { subtype_id: 9, subtype_name: "Wood Storage", type_id: 3 },
   ];
+
+  // console.log("filteredProducts", filteredProducts);
   return (
     <>
       {/* Compare Products */}
@@ -188,7 +199,7 @@ const Products = ({
                 <Image
                   key={"image" + id}
                   src={imageURL ? imageURL : CheckerBoardImg}
-                  alt={productDetails.fn_get_products.p_name} //productDetails.fn_get_products.p_name
+                  alt={`Product${productDetails.fn_get_products.p_name}`} //productDetails.fn_get_products.p_name
                   className="element-image"
                   width={35} // specify your desired width
                   height={35} // specify your desired height
@@ -250,6 +261,7 @@ const Products = ({
                 className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
                 type="text"
                 ref={searchRef}
+                defaultValue={searchText}
                 // onChange={(e) => setSearchText(e.target.value)}
                 // value={searchText}
               />
@@ -327,7 +339,9 @@ const Products = ({
               {brandType && (
                 <div className="flex flex-col gap-3 py-3 mr-10 ">
                   <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
-                    Ranges{" "}
+                    {`${
+                      brands.find((b) => b.brand_id === brandType).brand_name
+                    } Ranges`}
                     <Image
                       src={CrossIcon}
                       alt="clear"

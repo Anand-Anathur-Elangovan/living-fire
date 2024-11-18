@@ -9,7 +9,7 @@
 
 .product-element {
   display: flex;
-  flex: 0 1;
+  flex: 1 1;
   flex-basis: 23%;
   gap: 5px;
   flex-direction: column;
