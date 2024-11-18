@@ -1,0 +1,312 @@
+.contactus-form {
+    margin-top: 128px;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+}
+
+.contactus-form .container {
+    padding-left: 56px;
+    padding-right: 56px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contactforms {
+    gap: 32px;
+    display: flex;
+    width: 92%;
+    flex-direction: column;
+}
+
+.contactforms .tab-list {
+    margin-left: 58px;
+    margin-right: 58px;
+    gap: 110px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.contactforms .tab-list .tablist-text {
+    color: #878e96;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    font-size: 22px;
+    font-weight: 400;
+}
+/* .contactforms .tab-list .tablist-text  */
+.active {
+    color: #000000 !important;
+    border-bottom: 3px solid #000000;
+}
+.contactforms .column_one {
+    margin-left: 92px;
+    margin-right: 92px;
+}
+
+.contactforms .columnsubmit {
+    /* gap: 26px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contactforms .columnfirstname {
+    margin-left: 106px;
+    margin-right: 106px;
+    gap: 14px;
+    display: flex;
+    align-self: stretch;
+    flex-direction: column;
+}
+.contactforms .form-description {
+    color: #000000 !important;
+    font-size: 16px;
+    font-weight: 300;
+}
+.contactforms .row-form {
+    gap: 24px;
+    display: flex;
+}
+.contactforms .form_textarea {
+    color: #878e96;
+    font-size: 15px;
+    height: 120px;
+    padding: 10px;
+    border-bottom: 1px solid #000000;
+}
+
+/* .contactforms .firstname {
+    color: #878e96;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-bottom: 1px solid #000000;
+} */
+.contactforms .dropdown_one {
+    color: #878e96;
+    font-size: 15px;
+    gap: 16px;
+    display: flex;
+    width: 100%;
+    /* background-image: url(img_arrowdown.svg); */
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: calc(100% - 10px);
+    padding: 10px;
+    border-bottom: 1px solid #000000;
+}
+.contactforms .submit {
+    color: #ffffff;
+    padding-left: 32px;
+    padding-right: 32px;
+    text-transform: uppercase;
+    font-size: 14px;
+    background-color: #000000;
+    text-align: center;
+    height: 52px;
+    min-width: 118px;
+}
+.address-details {
+    gap: 78px;
+    display: flex;
+    width: 92%;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.address-details .description {
+    color: #000000;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 140%;
+}
+.address-details .locationinfo {
+    margin-left: 64px;
+    margin-right: 60px;
+    gap: 122px;
+    display: flex;
+}
+.address-details .column-address {
+    margin-bottom: 22px;
+    gap: 24px;
+    display: flex;
+    width: 32%;
+    flex-direction: column;
+}
+
+.address-details .heading {
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+}
+.address-details .column-1 {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 140%;
+}
+.contact-us .contactus-text{ 
+    color: #000000 !important;
+    letter-spacing: -1.80px;
+    font-family: Satoru;
+    text-transform: uppercase;
+    font-size: 90px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 50px;
+}
+.frunishing {
+    margin-top: 186px;
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.frunishing .listfurnishing {
+    gap: 40px;
+    display: flex;
+}
+.frunishing .image{
+    height: 500px;
+    width: 32%;
+    object-fit: contain;
+}
+
+@media only screen and (max-width: 1050px) {
+    .address-details .locationinfo{
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin: 0 20px;
+    }
+    .address-details .column-address{
+        width: 100%;
+    }
+    .contactus-form{
+        margin: 0;
+    }
+    .contactus-form .container{
+        padding: 0 10px;
+    }
+    .contactforms .tab-list{
+        margin: 0 auto;
+        gap: 30px;
+    }
+    .contactforms .column_one{
+        margin: 0 auto;
+    }
+    .contactforms .columnfirstname{
+        margin: 0 auto;
+        width: 100%;
+    }
+    .contactforms .row-form{
+        flex-direction: column;
+    }
+    .contactforms .firstname{
+        width: 100%;
+    }
+    .frunishing .listfurnishing{
+        flex-direction: column;
+    }
+    .frunishing .image{
+        width: 100%;
+    }
+}
+
+
+.service-form {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .input-wrapper {
+    width: 48%;
+    position: relative;
+  }
+  
+  .input-wrapper input,
+  .input-wrapper select,
+  .input-wrapper textarea {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #000;
+    font-size: 16px;
+    outline: none;
+    background-color: transparent;
+  }
+  
+  .input-wrapper-full {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .input-wrapper-full textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #000;
+    background-color: transparent;
+    padding: 10px 0;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  textarea {
+    resize: none;
+    height: 100px;
+  }
+  
+  .file-upload {
+    margin-bottom: 20px;
+  }
+  
+  .file-upload label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .file-upload input {
+    font-size: 16px;
+  }
+  
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    border: none;
+    font-family: "Times New Roman", serif;
+    margin-top: 20px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #333;
+  }
+  
