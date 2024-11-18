@@ -4,6 +4,7 @@ import Header from "../components/custom/Header";
 import Footer from "../components/custom/Footer";
 import Providers from "../helper/provider/providers";
 import { NavigationProvider } from "@/context/NavigationContext";
+import { Suspense } from "react";
 
 // Local fonts
 const geistSans = localFont({
@@ -40,7 +41,7 @@ export default function RootLayout({ children }) {
           <Providers>
             <div>
               <Header />
-              {children}
+              <Suspense fallback={<div>LOADING....</div>}>{children}</Suspense>
               <Footer />
             </div>
           </Providers>

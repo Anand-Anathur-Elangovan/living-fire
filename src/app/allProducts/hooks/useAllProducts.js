@@ -17,7 +17,11 @@ const useAllProducts = (
   subType
 ) => {
   const initialData = [];
-  const { data: allProducts = initialData, isFetched } = useQuery({
+  const {
+    data: allProducts = initialData,
+    isFetched,
+    isFetchedAfterMount,
+  } = useQuery({
     queryKey: [
       "getAllProductsAction" +
         type_id +
@@ -39,7 +43,7 @@ const useAllProducts = (
     staleTime: 0,
     // enabled: productMenuIndex ? true : false,
     select: (res) => {
-      console.log(res.result, "HOOCK");
+      // console.log(res.result, "HOOCK");
       if (res.success) return res.result;
       toast.error(res.message);
       return initialData;
@@ -49,6 +53,7 @@ const useAllProducts = (
   return {
     allProducts,
     isFetched,
+    isFetchedAfterMount,
   };
 };
 
