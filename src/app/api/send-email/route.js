@@ -20,8 +20,8 @@ export async function POST(req) {
     // Email to the admin
     const adminMailOptions = {
       from: "anandanathurelangovan94@gmail.com", // From address
-      to: ["systems@paulagnewdesigns.com", "anandanathurelangovan94@gmail.com"], // Add multiple recipient emails here
-      subject: `${serviceName} from ${body.name || "Unknown"}`,
+      to: ["systems@paulagnewdesigns.com", "anandanathurelangovan94@gmail.com", "nma@livingfire.com.au"], // Add multiple recipient emails here
+      subject: `Development Test - ${serviceName} from ${body.name || "Unknown"}`,
       text: body?.first_name || "No message content", // Email content
     };
 
@@ -29,7 +29,7 @@ export async function POST(req) {
     const userMailOptions = {
       from: "anandanathurelangovan94@gmail.com", // From address
       to: body.email, // Send to the email from the body
-      subject: "Acknowledgement of Your Enquiry",
+      subject: "Development Test - Acknowledgement of Your Enquiry",
       text: `Dear ${
         body.name || "Customer"
       },\n\nThank you for your enquiry. We have received your message and will get back to you shortly.\n\nBest regards,\nThe Team`,
