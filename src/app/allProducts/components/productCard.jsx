@@ -90,13 +90,19 @@ const ProductCard = ({
         />
       </div>
       <div className="py-2 gap-3">
-        <h3 className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer">
+        <h3
+          className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer"
+          onClick={() => handleProductClick(fn_get_products?.p_id)}
+        >
           {fn_get_products.p_name ||
             fn_get_products?.name ||
             fn_get_products?.p_sku}
         </h3>
         <div className="flex flex-row justify-between mr-5">
-          <span className="font-sans font-normal leading-5 text-sm cursor-pointer">
+          <span
+            className="font-sans font-normal leading-5 text-sm cursor-pointer"
+            onClick={() => handleProductClick(fn_get_products?.p_id)}
+          >
             {fn_get_products?.brand_name}
           </span>
           <div className="flex gap-1">

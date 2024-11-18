@@ -7,7 +7,10 @@ import searchIcon from "@/public/assets/homePage/searchIcon.svg";
 import menu from "@/public/assets/homePage/burgerMenuIcon.svg";
 import Image from "next/image";
 import Menu from "@/src/app/menu/Menu";
+import { useRouter } from "next/navigation";
+
 const Header = () => {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   let lastScroll = 0;
@@ -41,12 +44,19 @@ const Header = () => {
   if (hidden) {
     headerClasses.push("hidden");
   }
-
+  const handleHomeIconClick = () => {
+    router.push(`/home`);
+  };
   return (
     <>
       {true && (
         <header className={headerClasses.join(" ")}>
-          <Image src={logo} alt="Logo" className="custom-header-width" />
+          <Image
+            src={logo}
+            alt="Logo"
+            className="custom-header-width"
+            onClick={handleHomeIconClick}
+          />
           <div className="custom-header-right-side-icons">
             <Image
               src={searchIcon}

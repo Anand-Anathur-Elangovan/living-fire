@@ -31,6 +31,7 @@
 
 .custom-header-width {
   height: 50px; /* Adjust to your logo size */
+  cursor: pointer;
 }
 .custom-header-right-side-icons {
   display: flex;
