@@ -34,12 +34,12 @@
 
 .description {
   font-size: 1rem;
-  color: #555;
+  color: black;
 }
 
 .distance {
   font-size: 1rem;
-  color: #333;
+  color: black;
 }
 
 .size-h6 {
@@ -53,7 +53,7 @@
 /* Add a local class for the list */
 .distanceList {
   font-size: 1rem;
-  color: #333;
+  color: black;
 }
 
 .columndesc ul {

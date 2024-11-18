@@ -31,7 +31,7 @@ const Menu = ({ setShowMenu, isFocus }) => {
     searchText,
     0
   );
-  // console.log(filteredProducts, "Filter");
+  console.log(filteredProducts, "Filter");
   // console.log(searchRef.current?.value);
   // console.log(searchText, searchText !== "", "MENU");
 
@@ -130,7 +130,7 @@ const Menu = ({ setShowMenu, isFocus }) => {
                       </div>
                       <div className="py-2 gap-3 ">
                         <h3 className="font-sans font-medium leading-6 text-base text-wrap">
-                          {fn_get_products.p_name}
+                          {fn_get_products.name}
                         </h3>
                         <div className="flex flex-row justify-between mr-5">
                           <span className="font-sans font-normal leading-5 text-sm">
@@ -226,19 +226,19 @@ const Menu = ({ setShowMenu, isFocus }) => {
               <p className="titleText ui text size-h3">Sale</p>
             </div>
             <div className="sale-row2">
-              <a href="#">
+              <a href="/ourStory">
                 <p className="headingthree ui text size-h3">our Story</p>
               </a>
-              <a href="#">
+              {/* <a href="#">
                 <p className="headingthree-3 ui text size-h3">Showrooms</p>
-              </a>
-              <a href="#">
+              </a> */}
+              {/* <a href="#">
                 <p className="headingthree-3 ui text size-h3">industry hub</p>
-              </a>
+              </a> */}
               <a href="#">
                 <p className="headingthree-3 ui text size-h3">Blog</p>
               </a>
-              <a href="#">
+              <a href="/contactUs">
                 <p className="headingthree-3 ui text size-h3">Contact Us</p>
               </a>
             </div>
