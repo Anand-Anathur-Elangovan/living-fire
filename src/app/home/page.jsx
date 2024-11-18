@@ -9,10 +9,13 @@ import OurBrands from "./components/ourBrands";
 import Featured from "./components/featured";
 import Testimonials from "./components/testimonials";
 import Blog from "./components/blog";
-
+import useMasterValues from "../allProducts/hooks/useMasterValues";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import useHomePage from "./hooks/useHomePage";
+import { useRouter } from "next/navigation";
+import { useNavigationState } from "@/context/NavigationContext";
+import { setCookie } from "cookies-next";
 // import Collections from "../components/custom/Collections";
 
 const Home = () => {
@@ -21,8 +24,9 @@ const Home = () => {
   const [animatePanels, setAnimatePanels] = useState(false);
   const [zoomImage, setZoomImage] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
-  const { brands, collections, features, userFeedback } = useHomePage();
-  // console.log("home data", data);
+  // const { brands, collections, features, userFeedback } = useHomePage();
+  const router = useRouter();
+  const { setNavigationState } = useNavigationState();
   useEffect(() => {
     if (hover) {
       // Step 1: Show panels after base fades out
@@ -50,7 +54,75 @@ const Home = () => {
       setZoomImage(false);
     }
   }, [hover]);
-
+  // const productTypeList = [
+  //   {
+  //     image: imageUrl,
+  //     title: "Electric Fireplaces",
+  //     description:
+  //       "Discover our range of luxury indoor electric fireplaces and transform your home into a cosy haven of warmth and style. Visit our Melbourne showroom.",
+  //   },
+  //   {
+  //     image: collectionImg2,
+  //     title: "Gas Fireplaces",
+  //     description:
+  //       "Explore our indoor gas fireplaces and turn your home into a warm and inviting retreat. Whatever your interior style, we have the perfect gas fireplace to enhance your living space.",
+  //   },
+  //   {
+  //     image: collectionImg3,
+  //     title: "Wood Fireplaces",
+  //     description:
+  //       "Experience warmth and elegance with our indoor luxury wood fireplaces, blending timeless craftsmanship with contemporary modern design.",
+  //   },
+  //   {
+  //     image: collectionImg4,
+  //     title: "LPG Fireplaces",
+  //     description:
+  //       "Explore our collection of LPG fireplaces, offering efficient and stylish heating solutions for your home. Enjoy the warmth and ambiance of a real flame, with the convenience and clean-burning performance of LPG. ",
+  //   },
+  //   {
+  //     image: collectionImg2,
+  //     title: "Gas Fireplaces",
+  //     description: "Transform your home with modern gas fireplaces...",
+  //   },
+  //   {
+  //     image: collectionImg3,
+  //     title: "Wood Fireplaces",
+  //     description:
+  //       "Enjoy the warmth and beauty of traditional wood fireplaces...",
+  //   },
+  //   {
+  //     image: collectionImg4,
+  //     title: "Wood Fireplaces",
+  //     description:
+  //       "Enjoy the warmth and beauty of traditional wood fireplaces...",
+  //   },
+  // ];
+  const {
+    brands,
+    masterValues: { fuelTypes, productTypes: allProductMenu },
+  } = useMasterValues();
+  const allProductsRouteHandler = (typeName, displayName, arguId) => {
+    setNavigationState({
+      typeName: typeName,
+      displayName: displayName,
+      id: arguId,
+    });
+    router.push(`/allProducts`);
+  };
+  const productRouteHandler = (productId) => {
+    setCookie(
+      "selectedProductId",
+      productId
+      //   , {
+      //   path: "/", // Cookie available site-wide
+      //   secure: true, // Only sent over HTTPS
+      //   httpOnly: true, // Prevents client-side JS from accessing it
+      //   sameSite: "strict", // Only sent for same-site requests
+      //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
+      // }
+    );
+    router.push(`/product/${productId}`);
+  };
   return (
     <div
       style={{
@@ -107,17 +179,40 @@ const Home = () => {
             <h2 className={`blur-text`}>Fireplace Design</h2>
           </div>
           <div className={`button-group ${showButtons ? "show" : ""}`}>
-            <button>Wood</button>
+            {fuelTypes?.map((fuelType, index) => (
+              <button
+                key={"fuelTypes" + fuelType.fueltype_id}
+                onClick={() =>
+                  allProductsRouteHandler(
+                    "fuelType",
+                    fuelType?.fueltype_name,
+                    fuelType.fueltype_id
+                  )
+                }
+              >
+                {fuelType?.fueltype_name}
+              </button>
+            ))}
+            {/* <button onClick={() => allProductsRouteHandler()}>Wood</button>
             <button>Electric</button>
             <button>Gas</button>
-            <button>LPG</button>
+            <button>LPG</button> */}
           </div>
         </div>
       </div>
 
-      <Collections />
-      <OurBrands />
-      <Featured />
+      <Collections
+        fuelTypes={fuelTypes}
+        allProductsRouteHandler={allProductsRouteHandler}
+      />
+      <OurBrands
+        brandList={brands}
+        allProductsRouteHandler={allProductsRouteHandler}
+      />
+      <Featured
+        headingValue="Featured"
+        productRouteHandler={productRouteHandler}
+      />
       <Testimonials />
       <Blog />
     </div>

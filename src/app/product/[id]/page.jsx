@@ -21,12 +21,14 @@ import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
 import ProductSpecsDrawer from "./components/productSpecsDrawer/ProductSpecsDrawer";
 import Featured from "../../home/components/featured";
 import { useNavigationState } from "@/context/NavigationContext";
+import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
+import { setCookie } from "cookies-next";
 
 const Product = ({ params }) => {
-  console.log("product id:", params?.id);
+  const router = useRouter();
   const productId = getCookie("selectedProductId");
-  const { getNavigationState } = useNavigationState();
+  // const { getNavigationState } = useNavigationState();
   const [productData, setProductData] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const openModal = () => setModalOpen(true);
@@ -36,7 +38,7 @@ const Product = ({ params }) => {
 
   const openDrawer = () => setIsOpenSpecDrawer(true);
   const closeDrawer = () => setIsOpenSpecDrawer(false);
-  const state = getNavigationState();
+  // const state = getNavigationState();
   let { data } = useProductPage(params.id);
 
   useEffect(() => {
@@ -71,7 +73,21 @@ const Product = ({ params }) => {
     product_details,
     specifications,
   } = productData;
-  console.log("productData", productData, product_details);
+  console.log("productData", productData);
+  const productRouteHandler = (productId) => {
+    setCookie(
+      "selectedProductId",
+      productId
+      //   , {
+      //   path: "/", // Cookie available site-wide
+      //   secure: true, // Only sent over HTTPS
+      //   httpOnly: true, // Prevents client-side JS from accessing it
+      //   sameSite: "strict", // Only sent for same-site requests
+      //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
+      // }
+    );
+    router.push(`/product/${productId}`);
+  };
   return (
     <section>
       <div className="stackview">
@@ -103,7 +119,10 @@ const Product = ({ params }) => {
           product_details={product_details}
           openDrawer={openDrawer}
         />
-        <Featured headingValue={"You May Also Like"} />
+        <Featured
+          headingValue={"You May Also Like"}
+          productRouteHandler={productRouteHandler}
+        />
         <OurDifference />
         <OurShowrooms />
         <EnquiryFormModal
