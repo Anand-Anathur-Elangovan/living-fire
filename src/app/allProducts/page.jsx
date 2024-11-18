@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OurDifference from "./components/ourDifference";
 import OurShowrooms from "./components/ourShowrooms";
 import Products from "./components/products";
@@ -9,8 +9,11 @@ import Image from "next/image";
 import useHomePage from "../home/hooks/useHomePage";
 import useAllProducts from "./hooks/useAllProducts";
 import useMasterValues from "./hooks/useMasterValues";
+import { useNavigationState } from "@/context/NavigationContext";
 
 const Page = () => {
+  const { getNavigationState } = useNavigationState();
+  const state = getNavigationState();
   const [productMenuIndex, setproductMenuIndex] = useState(0);
   const [isCompare, setIsCompare] = useState(false);
   const [fireplaceType, setFireplaceType] = useState(null);
@@ -20,6 +23,10 @@ const Page = () => {
   const [bestSelling, setBestSelling] = useState(false);
   const [subType, setSubType] = useState(null);
 
+  useEffect(() => {
+    state?.typeName === "fuelType" && setFireplaceType(state?.id);
+    state?.typeName === "brandType" && setBrandType(state?.id);
+  }, [state]);
   const { allProducts, isFetched } = useAllProducts(
     productMenuIndex,
     fireplaceType ?? 0,
@@ -28,7 +35,7 @@ const Page = () => {
     searchText,
     subType ?? 0
   );
-  console.log(allProducts, "test");
+
   const {
     brands,
     masterValues: { fuelTypes, productTypes: allProductMenu },
