@@ -172,8 +172,6 @@ const Products = ({
     { subtype_id: 8, subtype_name: "Wall Mount", type_id: 3 },
     { subtype_id: 9, subtype_name: "Wood Storage", type_id: 3 },
   ];
-
-  // console.log("filteredProducts", filteredProducts);
   return (
     <>
       {/* Compare Products */}
@@ -269,7 +267,9 @@ const Products = ({
                 src={SearchIcon}
                 alt="search"
                 className="pt-1 cursor-pointer"
-                onClick={() => setSearchText(searchRef.current.value)}
+                onClick={() =>
+                  setSearchText(searchRef.current.value?.toLowerCase())
+                }
               />
             </div>
             <div className="flex flex-col border-b boder-solid border-[#D3C6BB]">
