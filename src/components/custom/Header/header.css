@@ -47,4 +47,15 @@
 
 .menu-header {
   margin-top: 10px;
+  position: absolute;
+  width: 100%;
+  top: -10px;
+  z-index: 2;
+}
+
+.close-icon {
+  position: absolute;
+  z-index: 3;
+  top: 20px;
+  right: 5%;
 }
