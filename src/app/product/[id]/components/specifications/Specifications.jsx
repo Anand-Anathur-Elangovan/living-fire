@@ -56,30 +56,33 @@ const Specifications = ({ specifications }) => {
                     </div>
                   )}
                   <div className={styles.specItems}>
-                    {spec.spec_value.map((item, idx) => (
-                      <div key={idx} className={styles.specItem}>
-                        <p className="homeelectric ui text size-body_medium">
-                          {item.name}
-                        </p>
-                        {typeof item.value === "object" ? (
-                          <div className={styles.rowng}>
+                    {spec.spec_value.map((item, idx) => {
+                      if (item.value !== "NA")
+                        return (
+                          <div key={idx} className={styles.specItem}>
                             <p className="homeelectric ui text size-body_medium">
-                              {item.value.NG || "-"}
+                              {item.name}
                             </p>
-                            <p className="homeelectric ui text size-body_medium">
-                              {item.value.LP || "-"}
-                            </p>
-                            <p className="homeelectric ui text size-body_medium">
-                              {item.value.ULPG || "-"}
-                            </p>
+                            {typeof item.value === "object" ? (
+                              <div className={styles.rowng}>
+                                <p className="homeelectric ui text size-body_medium">
+                                  {item.value.NG || "-"}
+                                </p>
+                                <p className="homeelectric ui text size-body_medium">
+                                  {item.value.LP || "-"}
+                                </p>
+                                <p className="homeelectric ui text size-body_medium">
+                                  {item.value.ULPG || "-"}
+                                </p>
+                              </div>
+                            ) : (
+                              <p className="distanceTwo ui text size-body_medium">
+                                {item.value}
+                              </p>
+                            )}
                           </div>
-                        ) : (
-                          <p className="distanceTwo ui text size-body_medium">
-                            {item.value}
-                          </p>
-                        )}
-                      </div>
-                    ))}
+                        );
+                    })}
                   </div>
                 </div>
               ))}
