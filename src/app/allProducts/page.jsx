@@ -136,7 +136,7 @@ const Page = () => {
                     key={"fuelTypes" + fuelType?.fueltype_id}
                     onClick={() => setFireplaceType(fuelType?.fueltype_id)}
                   >
-                    {fuelType?.fueltype_name || "Unknown"}
+                    {fuelType?.fueltype_name ?? "Unknown"}
                     <div
                       className={`justify-center block border-b-[3.5px] border-solid border-black rounded transition ease-in-out duration-500`}
                       style={{
@@ -162,7 +162,7 @@ const Page = () => {
                     key={"fuelTypes" + fuelType?.fueltype_id}
                     onClick={() => setFireplaceType(fuelType?.fueltype_id)}
                   >
-                    {fuelType?.fueltype_name || "Unknown"}
+                    {fuelType?.fueltype_name ?? "Unknown"}
                     <div
                       className={`justify-center block border-b-[3.5px] border-solid border-black rounded transition ease-in-out duration-500`}
                       style={{
