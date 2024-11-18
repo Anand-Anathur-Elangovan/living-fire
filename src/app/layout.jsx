@@ -26,7 +26,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ backgroundColor: "#f7f7f5" }}>
       <head>
         {/* Load Google Fonts directly via <link> */}
         <link
