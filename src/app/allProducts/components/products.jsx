@@ -53,7 +53,7 @@ const Products = ({
     updateFilteredProducts();
   }, [allProducts, isFetched]);
 
-  // console.log(filteredProducts, "P");
+  console.log(allProducts, "allProducts");
 
   const maxPageCount = Math.trunc(allProducts?.length / 12) + 1;
 
@@ -100,9 +100,12 @@ const Products = ({
     }
     if (sortBy === SORTBY.A2Z) {
       allProducts?.sort(({ fn_get_products: A }, { fn_get_products: B }) => {
-        B.p_name - A.p_name;
-        const nameA = A.p_name.toUpperCase(); // ignore upper and lowercase
-        const nameB = B.p_name.toUpperCase(); // ignore upper and lowercase
+        // B.p_name - A.p_name;
+        (B.name || B.p_sku) - (A.name || A.p_sku);
+        // const nameA = A.p_name.toUpperCase(); // ignore upper and lowercase
+        // const nameB = B.p_name.toUpperCase(); // ignore upper and lowercase
+        const nameA = A.name?.toUpperCase() || A.p_sku.toUpperCase(); // ignore upper and lowercase
+        const nameB = B.name?.toUpperCase() || B.p_sku.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
@@ -117,9 +120,12 @@ const Products = ({
     }
     if (sortBy === SORTBY.Z2A) {
       allProducts?.sort(({ fn_get_products: A }, { fn_get_products: B }) => {
-        B.p_name - A.p_name;
-        const nameA = A.p_name.toUpperCase(); // ignore upper and lowercase
-        const nameB = B.p_name.toUpperCase(); // ignore upper and lowercase
+        // B.p_name - A.p_name;
+        (B.name || B.p_sku) - (A.name || A.p_sku);
+        // const nameA = A.p_name.toUpperCase(); // ignore upper and lowercase
+        // const nameB = B.p_name.toUpperCase(); // ignore upper and lowercase
+        const nameA = A.name?.toUpperCase() || A.p_sku.toUpperCase(); // ignore upper and lowercase
+        const nameB = B.name?.toUpperCase() || B.p_sku.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return 1;
         }
@@ -144,6 +150,7 @@ const Products = ({
     setSearchText("");
     setSubType(null);
     searchRef.current.value = "";
+    setBestSelling(false);
   };
   const subTypes = [
     { subtype_id: 1, subtype_name: "Inbuilt", type_id: 1 },
@@ -156,8 +163,6 @@ const Products = ({
     { subtype_id: 8, subtype_name: "Wall Mount", type_id: 3 },
     { subtype_id: 9, subtype_name: "Wood Storage", type_id: 3 },
   ];
-
-  console.log("filteredProducts", filteredProducts);
   return (
     <>
       {/* Compare Products */}
@@ -277,7 +282,7 @@ const Products = ({
                         .map((val, index) => (
                           <span
                             key={"types" + val.subtype_id}
-                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                             onClick={() => setSubType(val.subtype_id)}
                           >
                             {val.subtype_name}
@@ -286,7 +291,7 @@ const Products = ({
                     : fuelTypes?.map((val, index) => (
                         <span
                           key={"types" + val.fueltype_id}
-                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                           onClick={() => setFireplaceType(val.fueltype_id)}
                         >
                           {val.fueltype_name}
@@ -310,7 +315,7 @@ const Products = ({
                   {brands.map((val, index) => (
                     <span
                       key={"brands" + val.brand_id}
-                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                       onClick={() => setBrandType(val.brand_id)}
                     >
                       {val.brand_name}
@@ -321,7 +326,7 @@ const Products = ({
               {/* Ranges Types */}
               {brandType && (
                 <div className="flex flex-col gap-3 py-3 mr-10 ">
-                  <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
+                  <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
                     Ranges{" "}
                     <Image
                       src={CrossIcon}
@@ -333,7 +338,7 @@ const Products = ({
                   {ranges.map((val, index) => (
                     <span
                       key={"ranges" + val.range_id}
-                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                       // onClick={() => setBrandType(val.range_id)}
                     >
                       {val.range_name}
@@ -352,43 +357,43 @@ const Products = ({
                 />
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.priceLowToHigh)}
               >
                 Price: Low to High
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.priceHighToLow)}
               >
                 Price: High to Low
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.A2Z)}
               >
                 A-Z
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.Z2A)}
               >
                 Z-A
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.oldToNew)}
               >
                 Oldest to Newest
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.newToOld)}
               >
                 Newest to Oldest
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.bestSelling)}
               >
                 Best Selling
