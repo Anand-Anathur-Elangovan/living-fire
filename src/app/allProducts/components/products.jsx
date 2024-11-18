@@ -185,14 +185,14 @@ const Products = ({
           <div className="flex flex-row">
             {compareProducts.map((id, index) => {
               let productDetails = allProducts.find(
-                (x) => x.fn_get_products.p_id === id
+                (x) => x.fn_get_products?.p_id === id
               );
               let imageURL;
               if (
                 productDetails.fn_get_products?.hero_image?.includes("value")
               ) {
                 let url =
-                  productDetails.fn_get_products.hero_image.split("'")[7];
+                  productDetails.fn_get_products?.hero_image?.split("'")[7];
                 imageURL = url?.includes("http") ? url : null;
               } else imageURL = null;
               return (
@@ -278,8 +278,8 @@ const Products = ({
                 <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                   <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                     {fireplaceType
-                      ? fuelTypes?.find((x) => x.fueltype_id === fireplaceType)
-                          .fueltype_name + " Fireplaces"
+                      ? fuelTypes?.find((x) => x?.fueltype_id === fireplaceType)
+                          ?.fueltype_name + " Fireplaces"
                       : "Fireplace Type"}
                     <Image
                       src={CrossIcon}
@@ -290,23 +290,23 @@ const Products = ({
                   </span>
                   {fireplaceType
                     ? subTypes
-                        .filter((a) => a.type_id === fireplaceType)
+                        .filter((a) => a?.type_id === fireplaceType)
                         .map((val, index) => (
                           <span
-                            key={"types" + val.subtype_id}
+                            key={"types" + val?.subtype_id}
                             className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                            onClick={() => setSubType(val.subtype_id)}
+                            onClick={() => setSubType(val?.subtype_id)}
                           >
-                            {val.subtype_name}
+                            {val?.subtype_name}
                           </span>
                         ))
                     : fuelTypes?.map((val, index) => (
                         <span
                           key={"types" + val.fueltype_id}
                           className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                          onClick={() => setFireplaceType(val.fueltype_id)}
+                          onClick={() => setFireplaceType(val?.fueltype_id)}
                         >
-                          {val.fueltype_name}
+                          {val?.fueltype_name}
                         </span>
                       ))}
                 </div>
@@ -326,11 +326,11 @@ const Products = ({
                   </span>
                   {brands.map((val, index) => (
                     <span
-                      key={"brands" + val.brand_id}
+                      key={"brands" + val?.brand_id}
                       className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                      onClick={() => setBrandType(val.brand_id)}
+                      onClick={() => setBrandType(val?.brand_id)}
                     >
-                      {val.brand_name}
+                      {val?.brand_name}
                     </span>
                   ))}
                 </div>
@@ -340,7 +340,7 @@ const Products = ({
                 <div className="flex flex-col gap-3 py-3 mr-10 ">
                   <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
                     {`${
-                      brands.find((b) => b.brand_id === brandType).brand_name
+                      brands.find((b) => b.brand_id === brandType)?.brand_name
                     } Ranges`}
                     <Image
                       src={CrossIcon}
@@ -351,11 +351,11 @@ const Products = ({
                   </span>
                   {ranges.map((val, index) => (
                     <span
-                      key={"ranges" + val.range_id}
+                      key={"ranges" + val?.range_id}
                       className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                       // onClick={() => setBrandType(val.range_id)}
                     >
-                      {val.range_name}
+                      {val?.range_name}
                     </span>
                   ))}
                 </div>
