@@ -27,11 +27,12 @@
 .tab1 {
   cursor: pointer;
   padding: 22px 56px;
+  color: grey;
 }
 
 .activeTab {
-  border-bottom: 3px solid #1741be;
-  color: #1741be;
+  border-bottom: 3px solid black !important;
+  color: black;
 }
 
 .lineelevenOne {
