@@ -24,6 +24,7 @@ import { useNavigationState } from "@/context/NavigationContext";
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { setCookie } from "cookies-next";
+import Loader from "@/src/helper/loader/Loader";
 
 const Product = ({ params }) => {
   const router = useRouter();
@@ -59,7 +60,8 @@ const Product = ({ params }) => {
     setProductData(data?.product?.[0]?.fn_get_product_page);
   }, [data]);
 
-  if (!productData) return <p>Loading...</p>;
+  if (!productData) return <Loader />;
+  // <p>Loading...</p>;
 
   const {
     hero_image,
