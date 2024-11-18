@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OurDifference from "./components/ourDifference";
 import OurShowrooms from "./components/ourShowrooms";
 import Products from "./components/products";
@@ -9,6 +9,7 @@ import Image from "next/image";
 import useHomePage from "../home/hooks/useHomePage";
 import useAllProducts from "./hooks/useAllProducts";
 import useMasterValues from "./hooks/useMasterValues";
+import { useSearchParams } from "next/navigation";
 
 const Page = () => {
   const [productMenuIndex, setproductMenuIndex] = useState(0);
@@ -20,6 +21,7 @@ const Page = () => {
   const [bestSelling, setBestSelling] = useState(false);
   const [subType, setSubType] = useState(null);
 
+  const searchParams = useSearchParams();
   const { allProducts, isFetched } = useAllProducts(
     productMenuIndex,
     fireplaceType ?? 0,
@@ -28,11 +30,25 @@ const Page = () => {
     searchText,
     subType ?? 0
   );
-  console.log(allProducts, "test");
+
   const {
     brands,
     masterValues: { fuelTypes, productTypes: allProductMenu },
   } = useMasterValues();
+
+  useEffect(() => {
+    const setStates = () => {
+      let text = searchParams.get("searchText");
+      if (text) setSearchText(text);
+      let fireplaceType = searchParams.get("fireplaceType");
+      if (fireplaceType) setFireplaceType(parseInt(fireplaceType));
+      let productMenu = searchParams.get("productMenu");
+      if (productMenu) setproductMenuIndex(parseInt(productMenu));
+      let brand = searchParams.get("brand");
+      if (brand) setBrandType(parseInt(brand));
+    };
+    setStates();
+  }, [searchParams]);
 
   return (
     <div className="flex flex-col px-16 gap-3 bg-[#F7F7F5]">
@@ -42,15 +58,16 @@ const Page = () => {
             ? `${
                 fireplaceType
                   ? fuelTypes.find((x) => x.fueltype_id === fireplaceType)
-                      .fueltype_name
+                      ?.fueltype_name ?? "Fireplace"
                   : "All"
               } ${
                 productMenuIndex
                   ? allProductMenu.find((x) => x.ptype_id === productMenuIndex)
-                      .ptype_name
+                      ?.ptype_name ?? "Products"
                   : "Products"
               }`
-            : brands.find((x) => x.brand_id === brandType).brand_name}
+            : brands.find((x) => x.brand_id === brandType)?.brand_name ??
+              "Brand Details"}
         </div>
 
         {fireplaceType && (
@@ -168,6 +185,7 @@ const Page = () => {
         allProducts={allProducts}
         isFetched={isFetched}
         setSearchText={setSearchText}
+        searchText={searchText}
         setBestSelling={setBestSelling}
         setSubType={setSubType}
       />

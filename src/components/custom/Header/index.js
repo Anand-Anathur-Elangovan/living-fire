@@ -7,9 +7,11 @@ import searchIcon from "@/public/assets/homePage/searchIcon.svg";
 import menu from "@/public/assets/homePage/burgerMenuIcon.svg";
 import Image from "next/image";
 import Menu from "@/src/app/menu/Menu";
+import CloseIcon from "@/public/assets/menu/close.svg";
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   let lastScroll = 0;
   const handleScroll = () => {
     const currentScroll = window.pageYOffset;
@@ -44,7 +46,7 @@ const Header = () => {
 
   return (
     <>
-      {true && (
+      {!showMenu && (
         <header className={headerClasses.join(" ")}>
           <Image src={logo} alt="Logo" className="custom-header-width" />
           <div className="custom-header-right-side-icons">
@@ -56,14 +58,26 @@ const Header = () => {
             <Image
               src={menu}
               alt="searchIcon"
-              className="custom-header-width"
+              className="custom-header-width cursor-pointer"
+              onClick={() => setShowMenu(true)}
             />
           </div>
         </header>
       )}
-      {/* <div className="menu-header">
-        <Menu />
-      </div> */}
+      {showMenu && (
+        <>
+          <div className="close-icon cursor-pointer">
+            <Image
+              src={CloseIcon}
+              alt="Close"
+              onClick={() => setShowMenu(false)}
+            />
+          </div>
+          <div className="menu-header">
+            <Menu setShowMenu={setShowMenu} />
+          </div>
+        </>
+      )}
     </>
   );
 };

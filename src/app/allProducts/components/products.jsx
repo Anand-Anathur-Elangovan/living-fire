@@ -25,6 +25,7 @@ const Products = ({
   allProducts,
   isFetched,
   setSearchText,
+  searchText,
   setBestSelling,
   setSubType,
 }) => {
@@ -34,8 +35,6 @@ const Products = ({
     brands,
     masterValues: { fuelTypes, ranges },
   } = useMasterValues(type);
-
-  console.log(fuelTypes, "data");
 
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(false);
@@ -53,7 +52,10 @@ const Products = ({
     updateFilteredProducts();
   }, [allProducts, isFetched]);
 
-  // console.log(filteredProducts, "P");
+  useEffect(() => {
+    if (searchText !== "" && searchRef.current)
+      searchRef.current.value = searchText;
+  }, [searchRef, searchText]);
 
   const maxPageCount = Math.trunc(allProducts?.length / 12) + 1;
 
@@ -157,7 +159,7 @@ const Products = ({
     { subtype_id: 9, subtype_name: "Wood Storage", type_id: 3 },
   ];
 
-  console.log("filteredProducts", filteredProducts);
+  // console.log("filteredProducts", filteredProducts);
   return (
     <>
       {/* Compare Products */}
@@ -245,6 +247,7 @@ const Products = ({
                 className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
                 type="text"
                 ref={searchRef}
+                defaultValue={searchText}
                 // onChange={(e) => setSearchText(e.target.value)}
                 // value={searchText}
               />
