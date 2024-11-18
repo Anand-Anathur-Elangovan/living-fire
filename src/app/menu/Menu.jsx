@@ -12,7 +12,7 @@ import { useNavigationState } from "@/context/NavigationContext";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
-const Menu = ({ setShowMenu }) => {
+const Menu = ({ setShowMenu, isFocus }) => {
   const { setNavigationState } = useNavigationState();
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
@@ -42,6 +42,12 @@ const Menu = ({ setShowMenu }) => {
     };
     setProducts();
   }, [isFetched, isFetchedAfterMount]);
+
+  useEffect(() => {
+    if (isFocus && searchRef.current) {
+      searchRef.current.focus();
+    }
+  }, [isFocus, searchRef]);
 
   const isImageURL = (image) => {
     if (image) {

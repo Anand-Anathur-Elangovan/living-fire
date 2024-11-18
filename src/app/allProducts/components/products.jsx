@@ -44,7 +44,14 @@ const Products = ({
 
   const [compareProducts, setCompareProducts] = useState([]);
   const searchRef = useRef(null);
-
+  useEffect(() => {
+    const checkFitlers = () => {
+      if (searchText === "" && type === 0 && !brandType && !fireplaceType)
+        return;
+      setIsFilter(true);
+    };
+    checkFitlers();
+  }, [searchText, type, brandType, fireplaceType]);
   useEffect(() => {
     const updateFilteredProducts = () => {
       setFilteredProducts(allProducts?.slice(0, 12));
@@ -102,9 +109,12 @@ const Products = ({
     }
     if (sortBy === SORTBY.A2Z) {
       allProducts?.sort(({ fn_get_products: A }, { fn_get_products: B }) => {
-        B.p_name - A.p_name;
-        const nameA = A.p_name.toUpperCase(); // ignore upper and lowercase
-        const nameB = B.p_name.toUpperCase(); // ignore upper and lowercase
+        // B.p_name - A.p_name;
+        (B.name || B.p_sku) - (A.name || A.p_sku);
+        // const nameA = A.p_name.toUpperCase(); // ignore upper and lowercase
+        // const nameB = B.p_name.toUpperCase(); // ignore upper and lowercase
+        const nameA = A.name?.toUpperCase() || A.p_sku.toUpperCase(); // ignore upper and lowercase
+        const nameB = B.name?.toUpperCase() || B.p_sku.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return -1;
         }
@@ -119,9 +129,12 @@ const Products = ({
     }
     if (sortBy === SORTBY.Z2A) {
       allProducts?.sort(({ fn_get_products: A }, { fn_get_products: B }) => {
-        B.p_name - A.p_name;
-        const nameA = A.p_name.toUpperCase(); // ignore upper and lowercase
-        const nameB = B.p_name.toUpperCase(); // ignore upper and lowercase
+        // B.p_name - A.p_name;
+        (B.name || B.p_sku) - (A.name || A.p_sku);
+        // const nameA = A.p_name.toUpperCase(); // ignore upper and lowercase
+        // const nameB = B.p_name.toUpperCase(); // ignore upper and lowercase
+        const nameA = A.name?.toUpperCase() || A.p_sku.toUpperCase(); // ignore upper and lowercase
+        const nameB = B.name?.toUpperCase() || B.p_sku.toUpperCase(); // ignore upper and lowercase
         if (nameA < nameB) {
           return 1;
         }
@@ -146,6 +159,7 @@ const Products = ({
     setSearchText("");
     setSubType(null);
     searchRef.current.value = "";
+    setBestSelling(false);
   };
   const subTypes = [
     { subtype_id: 1, subtype_name: "Inbuilt", type_id: 1 },
@@ -185,7 +199,7 @@ const Products = ({
                 <Image
                   key={"image" + id}
                   src={imageURL ? imageURL : CheckerBoardImg}
-                  alt={productDetails.fn_get_products.p_name} //productDetails.fn_get_products.p_name
+                  alt={`Product${productDetails.fn_get_products.p_name}`} //productDetails.fn_get_products.p_name
                   className="element-image"
                   width={35} // specify your desired width
                   height={35} // specify your desired height
@@ -264,7 +278,7 @@ const Products = ({
                 <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                   <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                     {fireplaceType
-                      ? fuelTypes.find((x) => x.fueltype_id === fireplaceType)
+                      ? fuelTypes?.find((x) => x.fueltype_id === fireplaceType)
                           .fueltype_name + " Fireplaces"
                       : "Fireplace Type"}
                     <Image
@@ -280,16 +294,16 @@ const Products = ({
                         .map((val, index) => (
                           <span
                             key={"types" + val.subtype_id}
-                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                             onClick={() => setSubType(val.subtype_id)}
                           >
                             {val.subtype_name}
                           </span>
                         ))
-                    : fuelTypes.map((val, index) => (
+                    : fuelTypes?.map((val, index) => (
                         <span
                           key={"types" + val.fueltype_id}
-                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                           onClick={() => setFireplaceType(val.fueltype_id)}
                         >
                           {val.fueltype_name}
@@ -313,7 +327,7 @@ const Products = ({
                   {brands.map((val, index) => (
                     <span
                       key={"brands" + val.brand_id}
-                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                       onClick={() => setBrandType(val.brand_id)}
                     >
                       {val.brand_name}
@@ -324,8 +338,10 @@ const Products = ({
               {/* Ranges Types */}
               {brandType && (
                 <div className="flex flex-col gap-3 py-3 mr-10 ">
-                  <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
-                    Ranges{" "}
+                  <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
+                    {`${
+                      brands.find((b) => b.brand_id === brandType).brand_name
+                    } Ranges`}
                     <Image
                       src={CrossIcon}
                       alt="clear"
@@ -336,7 +352,7 @@ const Products = ({
                   {ranges.map((val, index) => (
                     <span
                       key={"ranges" + val.range_id}
-                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
+                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                       // onClick={() => setBrandType(val.range_id)}
                     >
                       {val.range_name}
@@ -355,43 +371,43 @@ const Products = ({
                 />
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.priceLowToHigh)}
               >
                 Price: Low to High
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.priceHighToLow)}
               >
                 Price: High to Low
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.A2Z)}
               >
                 A-Z
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.Z2A)}
               >
                 Z-A
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.oldToNew)}
               >
                 Oldest to Newest
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.newToOld)}
               >
                 Newest to Oldest
               </span>
               <span
-                className="font-sans font-small leading-5 text-normal"
+                className="font-sans font-small leading-5 text-normal cursor-pointer"
                 onClick={() => sortProducts(SORTBY.bestSelling)}
               >
                 Best Selling

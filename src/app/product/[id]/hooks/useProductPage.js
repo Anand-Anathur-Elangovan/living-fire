@@ -8,7 +8,7 @@ const useProductPage = (productId) => {
     Product: [],
   };
   const { data = initialHomePageData } = useQuery({
-    queryKey: ["HomePageAction"],
+    queryKey: ["getProductPageDataAction" + productId],
     queryFn: () => getProductPageDataAction(productId),
     select: (res) => {
       if (res.success) return res?.result;

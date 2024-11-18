@@ -28,11 +28,11 @@ export const getHomePageDataAction = async () => {
 export const getBrandsDataAction = async () => {
   // const collections = await getCollectionsRepo().catch((err) => []);
   // const features = await getFeaturedRepo().catch((err) => []);
-  console.log("BRANDS ACTION");
+
   const brands = await getBrandsRepo()
     .then((res) => res)
     .catch((err) => []);
-  console.log(brands);
+
   return {
     ...responsePayload,
     success: true,

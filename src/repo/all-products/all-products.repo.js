@@ -18,10 +18,6 @@ export const getAllProducts = async ({
 }) => {
   try {
     const query = `SELECT * FROM fn_get_products(0,${fireplaceType},${brandType},${type_id},${bestSelling},${subType},'${searchText}')`;
-    console.log(
-      query,
-      `SELECT * FROM fn_get_products(0,0,0,${type_id},false,0,'')`
-    );
     const result = await pool.query(query); // Await the pool query directly
     // const formatResults = result.rows.map(({ fn_get_products }) => ({
     //   ...fn_get_products,

@@ -27,7 +27,6 @@ const useHomePage = () => {
     queryKey: ["getBrandsDataAction"],
     queryFn: () => getBrandsDataAction(),
     select: (res) => {
-      console.log(brands);
       if (res.success) return res.result;
       toast.error(res.message);
       return [];

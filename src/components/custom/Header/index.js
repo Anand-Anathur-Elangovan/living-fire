@@ -8,10 +8,14 @@ import menu from "@/public/assets/homePage/burgerMenuIcon.svg";
 import Image from "next/image";
 import Menu from "@/src/app/menu/Menu";
 import CloseIcon from "@/public/assets/menu/close.svg";
+import { useRouter } from "next/navigation";
+
 const Header = () => {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   let lastScroll = 0;
   const handleScroll = () => {
     const currentScroll = window.pageYOffset;
@@ -43,23 +47,37 @@ const Header = () => {
   if (hidden) {
     headerClasses.push("hidden");
   }
-
+  const handleHomeIconClick = () => {
+    router.push(`/home`);
+  };
   return (
     <>
       {!showMenu && (
         <header className={headerClasses.join(" ")}>
-          <Image src={logo} alt="Logo" className="custom-header-width" />
+          <Image
+            src={logo}
+            alt="Logo"
+            className="custom-header-width"
+            onClick={handleHomeIconClick}
+          />
           <div className="custom-header-right-side-icons">
             <Image
               src={searchIcon}
               alt="searchIcon"
               className="custom-header-width"
+              onClick={() => {
+                setIsFocus(true);
+                setShowMenu(true);
+              }}
             />
             <Image
               src={menu}
               alt="searchIcon"
               className="custom-header-width cursor-pointer"
-              onClick={() => setShowMenu(true)}
+              onClick={() => {
+                setIsFocus(false);
+                setShowMenu(true);
+              }}
             />
           </div>
         </header>
@@ -70,11 +88,13 @@ const Header = () => {
             <Image
               src={CloseIcon}
               alt="Close"
-              onClick={() => setShowMenu(false)}
+              onClick={() => {
+                setShowMenu(false);
+              }}
             />
           </div>
           <div className="menu-header">
-            <Menu setShowMenu={setShowMenu} />
+            <Menu setShowMenu={setShowMenu} isFocus={isFocus} />
           </div>
         </>
       )}

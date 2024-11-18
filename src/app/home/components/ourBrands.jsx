@@ -9,67 +9,76 @@ import CharnwoodLogo from "@/public/assets/homePage/ourBrands/charnwood.svg";
 import EsseLogo from "@/public/assets/homePage/ourBrands/esse.svg";
 import HeatMasterLogo from "@/public/assets/homePage/ourBrands/heatmaster.svg";
 import HergomLogo from "@/public/assets/homePage/ourBrands/hergom.svg";
-import KaloraLogo from "@/public/assets/homePage/ourBrands/kalora.svg";
+import KaloraLogo from "@/public/assets/homePage/ourBrands/kaloraLogo.png";
 import MorsoLogo from "@/public/assets/homePage/ourBrands/morso.svg";
 import RegencyLogo from "@/public/assets/homePage/ourBrands/regency.svg";
 
 import Image from "next/image";
 
-const OurBrands = (props) => {
+const OurBrands = ({ brandList, allProductsRouteHandler }) => {
   const brands = [
     {
+      brand_id: 1,
       image: PaulAgnewLogo,
       title: "Paul Agnew",
     },
     {
+      brand_id: 15,
       image: CocoonLogo,
       title: "Cocoon",
     },
     {
+      brand_id: 5,
       image: StovaxLogo,
       title: "Stovax",
     },
+    // {
+
+    //   image: CharnwoodLogo,
+    //   title: "Cocoon",
+    // },
     {
-      image: CharnwoodLogo,
-      title: "Cocoon",
-    },
-    {
+      brand_id: 7,
       image: HergomLogo,
-      title: "Paul Agnew",
+      title: "HergomLogo",
     },
     {
+      brand_id: 10,
       image: RegencyLogo,
-      title: "Stovax",
+      title: "RegencyLogo",
     },
     {
+      brand_id: 11,
       image: KaloraLogo,
-      title: "Cocoon",
+      title: "KaloraLogo",
     },
     {
+      brand_id: 3,
       image: AustroLogo,
-      title: "Paul Agnew",
+      title: "AustroLogo",
     },
     {
+      brand_id: 2,
       image: EsseLogo,
-      title: "Stovax",
+      title: "EsseLogo",
     },
+    { brand_id: 4, image: MorsoLogo, title: "MorsoLogo" },
     {
-      image: MorsoLogo,
-      title: "Cocoon",
-    },
-    {
+      brand_id: 6,
       image: HeatMasterLogo,
-      title: "Paul Agnew",
+      title: " HeatMaster",
     },
     {
+      brand_id: 8,
       image: ADFLogo,
-      title: "Stovax",
+      title: "ADF",
     },
-    {
-      image: FireFoxLogo,
-      title: "Stovax",
-    },
+    // {
+    //   image: FireFoxLogo,
+    //   title: "Stovax",
+    // },
   ];
+  console.log("brandList", brandList);
   return (
     <div className="flex relative justify-center flex-col">
       <div className="flex flex-row items-center w-full mt-4">
@@ -80,7 +89,17 @@ const OurBrands = (props) => {
       <div className="bg-white h-[470px] mx-16 my-8 flex justify-center bg-red flex-wrap flex-row px-[40px] py-[50px] gap-[48px] ">
         {brands.map((brand, index) => {
           return (
-            <div key={"brands" + index} className="w-[160px] h-[92px]">
+            <div
+              key={"brands" + index}
+              className="w-[160px] h-[92px]"
+              onClick={() =>
+                allProductsRouteHandler(
+                  "brandType",
+                  brand?.title,
+                  brand.brand_id
+                )
+              }
+            >
               <Image
                 src={brand.image}
                 alt={brand.title}
