@@ -67,7 +67,7 @@ const MaterialFinishOptions = ({ short_desc }) => {
     <section className={styles.materialFinishOptions}>
       <div className={styles.column}>
         <p className={`${styles.title} ui text size-h6`}>
-          Material & Finish Options
+          MATERIAL & FINISH OPTIONS
         </p>
         <div className={styles.imgList}>
           {materialFinishOptions.value.map((option, index) => (

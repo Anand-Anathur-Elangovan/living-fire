@@ -16,16 +16,16 @@
 .rowspecs {
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 80px;
   justify-content: space-between;
   width: 100%;
 }
 
 .imgwrap {
-  flex: 0 0 55%;
+  flex: 0 0 52%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .gfi750One {
@@ -42,13 +42,13 @@
 .head {
   margin-bottom: 16px;
   /* background-color: #f0f0f0; */
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .title {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: black;
 }
 
 .productspecs {
@@ -65,7 +65,7 @@
 .materialfinish {
   font-size: 1.25rem;
   font-weight: bold;
-  color: #444;
+  color: black;
   margin-bottom: 10px;
 }
 
@@ -80,7 +80,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid black;
   padding: 8px 0;
 }
 
@@ -101,6 +101,6 @@
 
 .energynotes {
   font-size: 0.875rem;
-  color: #888;
+  color: black;
   margin-top: 16px;
 }

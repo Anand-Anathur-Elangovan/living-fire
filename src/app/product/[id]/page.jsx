@@ -93,18 +93,20 @@ const Product = ({ params }) => {
   return (
     <section>
       <div className="stackview">
-        <Breadcrumbs
-          productType={ptype_name}
-          fuelType={fueltype_name}
-          productName={name}
-          brandName={brand_name}
-        />
-        {/* <br/> */}
-        <HeroImage
-          // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
-          src={hero_image}
-          alt="Product Hero Image"
-        />
+        <div>
+          <Breadcrumbs
+            productType={ptype_name}
+            fuelType={fueltype_name}
+            productName={name}
+            brandName={brand_name}
+          />
+          {/* <br/> */}
+          <HeroImage
+            // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
+            src={hero_image}
+            alt="Product Hero Image"
+          />
+        </div>
         {product_desc && <DescriptionColumn product_desc={product_desc} />}
         {short_desc && (
           <ProductOptions
