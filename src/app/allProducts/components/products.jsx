@@ -261,7 +261,7 @@ const Products = ({
                 <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                   <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                     {fireplaceType
-                      ? fuelTypes.find((x) => x.fueltype_id === fireplaceType)
+                      ? fuelTypes?.find((x) => x.fueltype_id === fireplaceType)
                           .fueltype_name + " Fireplaces"
                       : "Fireplace Type"}
                     <Image
@@ -283,7 +283,7 @@ const Products = ({
                             {val.subtype_name}
                           </span>
                         ))
-                    : fuelTypes.map((val, index) => (
+                    : fuelTypes?.map((val, index) => (
                         <span
                           key={"types" + val.fueltype_id}
                           className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out"
