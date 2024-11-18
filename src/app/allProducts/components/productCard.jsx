@@ -18,32 +18,32 @@ const ProductCard = ({
   const { setNavigationState } = useNavigationState();
   // console.log(productDetails);
   const imageURL = useMemo(() => {
-    if (fn_get_products.hero_image) {
-      if (fn_get_products.hero_image[0].value.includes("http"))
+    if (fn_get_products?.hero_image) {
+      if (fn_get_products?.hero_image[0]?.value?.includes("http"))
         return fn_get_products.hero_image[0].value;
     }
     return null;
   });
 
   const brochureURL = useMemo(() => {
-    if (fn_get_products.brochure) {
-      if (fn_get_products.brochure[0].value.includes("http"))
+    if (fn_get_products?.brochure) {
+      if (fn_get_products?.brochure[0]?.value?.includes("http"))
         return fn_get_products.brochure[0].value;
     }
     return null;
   });
 
   const pricebookURL = useMemo(() => {
-    if (fn_get_products.pricebook) {
-      if (fn_get_products.pricebook[0].value.includes("http"))
+    if (fn_get_products?.pricebook) {
+      if (fn_get_products?.pricebook[0]?.value?.includes("http"))
         return fn_get_products.pricebook[0].value;
     }
     return null;
   });
 
   const specSheetURL = useMemo(() => {
-    if (fn_get_products.spec_sheet) {
-      if (fn_get_products.spec_sheet[0].value.includes("http"))
+    if (fn_get_products?.spec_sheet) {
+      if (fn_get_products?.spec_sheet[0]?.value?.includes("http"))
         return fn_get_products.spec_sheet[0].value;
     }
     return null;
@@ -91,7 +91,9 @@ const ProductCard = ({
       </div>
       <div className="py-2 gap-3">
         <h3 className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer">
-          {fn_get_products.p_name || fn_get_products?.name || fn_get_products?.p_sku}
+          {fn_get_products.p_name ||
+            fn_get_products?.name ||
+            fn_get_products?.p_sku}
         </h3>
         <div className="flex flex-row justify-between mr-5">
           <span className="font-sans font-normal leading-5 text-sm cursor-pointer">
