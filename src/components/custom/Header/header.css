@@ -36,7 +36,7 @@
 .custom-header-right-side-icons {
   display: flex;
   justify-content: space-between;
-  gap: 300px;
+  /* gap: 300px; */
 }
 .nav-links a {
   margin-left: 20px;
