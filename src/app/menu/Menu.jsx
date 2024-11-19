@@ -12,7 +12,7 @@ import { useNavigationState } from "@/context/NavigationContext";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
-const Menu = ({ setShowMenu, isFocus }) => {
+const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
   const { setNavigationState } = useNavigationState();
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
@@ -81,6 +81,12 @@ const Menu = ({ setShowMenu, isFocus }) => {
     router.push(`/home`);
   };
 
+  useEffect(() => {
+    if (searchTextHeader?.length > 1) {
+      searchRef.current.value = searchTextHeader;
+      setSearchText(searchTextHeader);
+    }
+  }, [searchTextHeader]);
   return (
     <div className="menu">
       <div className="columnclose_one">
@@ -113,7 +119,6 @@ const Menu = ({ setShowMenu, isFocus }) => {
             <div
               // className="flex px-3 bg-white border-b border-solid border-t border-r border-[#D3C6BB] rounded-r-lg"
               className="flex px-3 bg-transparent outline-none border-b-2 border-black rounded-none p-2"
-              // className="h-[40px] w-3/5 bg-transparent  outline-none border-b-2 border-black rounded-none p-4"
             >
               <Image
                 src={SearchIcon}
