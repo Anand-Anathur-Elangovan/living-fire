@@ -89,16 +89,22 @@ const Menu = ({ setShowMenu, isFocus }) => {
           <div className="flex justify-center w-full">
             <input
               width={"70%"}
-              className="h-[40px] w-3/5 border-b border-solid border-t border-l border-[#D3C6BB] rounded-l-lg p-4"
+              type="text"
+              // className="h-[40px] w-3/5 border-b border-solid border-t border-l border-[#D3C6BB] rounded-l-lg p-4"
+              className="h-[40px] w-3/5 bg-transparent  outline-none border-b-2 border-black rounded-none p-4"
               ref={searchRef}
-              placeholder="Search Products"
+              placeholder="Search Products...."
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   setSearchText(searchRef.current.value);
                 }
               }}
             />
-            <div className="flex px-3 bg-white border-b border-solid border-t border-r border-[#D3C6BB] rounded-r-lg">
+            <div
+              // className="flex px-3 bg-white border-b border-solid border-t border-r border-[#D3C6BB] rounded-r-lg"
+              className="flex px-3 bg-transparent outline-none border-b-2 border-black rounded-none p-2"
+              // className="h-[40px] w-3/5 bg-transparent  outline-none border-b-2 border-black rounded-none p-4"
+            >
               <Image
                 src={SearchIcon}
                 alt="search"
