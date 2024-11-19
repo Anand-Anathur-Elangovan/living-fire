@@ -83,7 +83,7 @@ const Header = () => {
         </header>
       )}
       {showMenu && (
-        <>
+        <div>
           <div className="close-icon cursor-pointer">
             <Image
               src={CloseIcon}
@@ -93,10 +93,10 @@ const Header = () => {
               }}
             />
           </div>
-          <div className="menu-header">
+          <div className={`menu-header ${showMenu ? "active" : ""}`}>
             <Menu setShowMenu={setShowMenu} isFocus={isFocus} />
           </div>
-        </>
+        </div>
       )}
     </>
   );

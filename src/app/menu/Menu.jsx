@@ -68,12 +68,17 @@ const Menu = ({ setShowMenu, isFocus }) => {
       //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
       // }
     );
-    router.push("/product");
+    router.push(`/product/${productId}`);
+    setShowMenu(false);
   };
 
   const handleViewAll = () => {
     setShowMenu(false);
     router.push(`/allProducts?searchText=${searchText}`);
+  };
+  const handleHeaderHomeClick = () => {
+    setShowMenu(false);
+    router.push(`/home`);
   };
 
   return (
@@ -81,7 +86,12 @@ const Menu = ({ setShowMenu, isFocus }) => {
       <div className="columnclose_one">
         <div className="rowclose_one"></div>
         <div className="logo">
-          <Image src={LogoIcon} alt="Logomarkblack" className="logomarkblack" />
+          <Image
+            src={LogoIcon}
+            alt="Logomarkblack"
+            className="logomarkblack"
+            onClick={() => handleHeaderHomeClick()}
+          />
         </div>
       </div>
       <div className="row">
@@ -123,7 +133,7 @@ const Menu = ({ setShowMenu, isFocus }) => {
                       className="flex flex-col gap-1.5 basis-1/5"
                       key={"productCard" + index}
                     >
-                      <div style={{ width: "100px" }}>
+                      <div style={{ width: "100px", cursor: "pointer" }}>
                         <Image
                           src={
                             isImageURL(fn_get_products.hero_image)
@@ -139,7 +149,12 @@ const Menu = ({ setShowMenu, isFocus }) => {
                           }
                         />
                       </div>
-                      <div className="py-2 gap-3 ">
+                      <div
+                        className="py-2 gap-3  cursor-pointer"
+                        onClick={() =>
+                          handleProductClick(fn_get_products?.p_id)
+                        }
+                      >
                         <h3 className="font-sans font-medium leading-6 text-base text-wrap">
                           {fn_get_products.name}
                         </h3>
