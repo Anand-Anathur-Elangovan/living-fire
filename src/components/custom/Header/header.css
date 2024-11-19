@@ -36,10 +36,10 @@
 .custom-header-width {
   height: auto; /* Adjust to your logo size */
   cursor: pointer;
-
   width: 100%;
   object-fit: cover;
-  animation: cutImage 2s ease-in-out forwards;
+  animation: cutImage 2s ease-in-out forwards, bounceIn 2s ease-in-out forwards;
+  /* animation: bounceIn 2s ease-in-out forwards; */
 }
 @keyframes cutImage {
   0% {
@@ -49,6 +49,30 @@
     clip-path: inset(0 75% 0 0); /* Reveal the full image */
   }
 }
+
+@keyframes bounceIn {
+  0% {
+    transform: translateX(70px); /* Start 50px from the left */
+  }
+  60% {
+    transform: translateX(
+      0px
+    ); /* Move past the final position (bounce effect) */
+  }
+  80% {
+    transform: translateX(15px);
+  }
+  85% {
+    transform: translateX(0px);
+  }
+  90% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0); /* Settle at the final position (0px from left) */
+  }
+}
+
 .custom-header-right-side-icons {
   display: flex;
   justify-content: space-between;
