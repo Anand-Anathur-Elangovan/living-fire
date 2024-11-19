@@ -57,12 +57,14 @@ const Header = () => {
     <>
       {!showMenu && (
         <header className={headerClasses.join(" ")}>
+          <div class="image-container">
           <Image
             src={logo}
             alt="Logo"
             className="custom-header-width"
             onClick={handleHomeIconClick}
           />
+          </div>
           <div className="custom-header-right-side-icons">
             {/* <Image
               src={searchIcon}
@@ -102,7 +104,7 @@ const Header = () => {
             <Image
               src={menu}
               alt="searchIcon"
-              className="custom-header-width cursor-pointer"
+              className="cursor-pointer"
               onClick={() => {
                 setIsFocus(false);
                 setShowMenu(true);
