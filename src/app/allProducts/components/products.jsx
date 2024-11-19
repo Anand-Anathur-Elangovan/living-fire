@@ -262,6 +262,11 @@ const Products = ({
                 defaultValue={searchText}
                 // onChange={(e) => setSearchText(e.target.value)}
                 // value={searchText}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    setSearchText(searchRef.current.value?.toLowerCase());
+                  }
+                }}
               />
               <Image
                 src={SearchIcon}

@@ -92,6 +92,11 @@ const Menu = ({ setShowMenu, isFocus }) => {
               className="h-[40px] w-3/5 border-b border-solid border-t border-l border-[#D3C6BB] rounded-l-lg p-4"
               ref={searchRef}
               placeholder="Search Products"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setSearchText(searchRef.current.value);
+                }
+              }}
             />
             <div className="flex px-3 bg-white border-b border-solid border-t border-r border-[#D3C6BB] rounded-r-lg">
               <Image
