@@ -28,10 +28,26 @@
   transform: translateY(-100%); /* Slide out of view */
   opacity: 0; /* Fade out */
 }
-
+.image-container {
+  width: 326px; /* Initial width */
+  height: auto;
+  overflow: hidden; /* Hide the part that gets cropped */
+}
 .custom-header-width {
-  height: 50px; /* Adjust to your logo size */
+  height: auto; /* Adjust to your logo size */
   cursor: pointer;
+
+  width: 100%;
+  object-fit: cover;
+  animation: cutImage 2s ease-in-out forwards;
+}
+@keyframes cutImage {
+  0% {
+    clip-path: inset(0 0 0 0); /* Initially, cut off the right half */
+  }
+  100% {
+    clip-path: inset(0 75% 0 0); /* Reveal the full image */
+  }
 }
 .custom-header-right-side-icons {
   display: flex;
