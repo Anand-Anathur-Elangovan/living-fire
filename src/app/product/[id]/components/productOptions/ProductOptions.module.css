@@ -49,11 +49,13 @@
   margin: 8px 0;
   line-height: 1.5;
   accent-color: black;
+  
 }
 
 .option input {
-  margin-right: 8px;
+  margin-right: 10px;
   cursor: pointer;
+  transform: scale(1.25);
 }
 
 .imageOptions {

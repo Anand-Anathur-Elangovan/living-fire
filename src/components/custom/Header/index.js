@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./header.css";
 import logo from "@/public/assets/homePage/rightSideLogo.svg";
 import searchIcon from "@/public/assets/homePage/searchIcon.svg";
@@ -9,13 +9,16 @@ import Image from "next/image";
 import Menu from "@/src/app/menu/Menu";
 import CloseIcon from "@/public/assets/menu/close.svg";
 import { useRouter } from "next/navigation";
+import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
 
 const Header = () => {
   const router = useRouter();
+  const searchRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
+  const [searchTextHeader, setSearchTextHeader] = useState("");
   let lastScroll = 0;
   const handleScroll = () => {
     const currentScroll = window.pageYOffset;
@@ -61,7 +64,7 @@ const Header = () => {
             onClick={handleHomeIconClick}
           />
           <div className="custom-header-right-side-icons">
-            <Image
+            {/* <Image
               src={searchIcon}
               alt="searchIcon"
               className="custom-header-width"
@@ -69,7 +72,33 @@ const Header = () => {
                 setIsFocus(true);
                 setShowMenu(true);
               }}
-            />
+            /> */}
+            <div className="min-w-[400px] flex justify-center w-full min-width-search-product">
+              <input
+                type="text"
+                className="h-[40px] min-w-[400px] w-3/5 bg-transparent outline-none border-b-2 border-black rounded-none p-4 placeholder-white "
+                placeholder="Search Products...."
+                ref={searchRef}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    setSearchTextHeader(searchRef.current.value);
+                    setShowMenu(true);
+                  }
+                }}
+              />
+              <div className="h-[40px] flex px-3 bg-transparent outline-none border-b-2 border-black rounded-none p-2">
+                <Image
+                  src={SearchIcon}
+                  alt="search"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    setSearchTextHeader(searchRef.current.value);
+                    setShowMenu(true);
+                  }}
+                />
+              </div>
+            </div>
+
             <Image
               src={menu}
               alt="searchIcon"
@@ -83,20 +112,26 @@ const Header = () => {
         </header>
       )}
       {showMenu && (
-        <>
+        <div>
           <div className="close-icon cursor-pointer">
             <Image
               src={CloseIcon}
               alt="Close"
               onClick={() => {
                 setShowMenu(false);
+                setSearchTextHeader("")
+                
               }}
             />
           </div>
-          <div className="menu-header">
-            <Menu setShowMenu={setShowMenu} isFocus={isFocus} />
+          <div className={`menu-header ${showMenu ? "active" : ""}`}>
+            <Menu
+              searchTextHeader={searchTextHeader}
+              setShowMenu={setShowMenu}
+              isFocus={isFocus}
+            />
           </div>
-        </>
+        </div>
       )}
     </>
   );

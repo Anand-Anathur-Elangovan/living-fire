@@ -12,7 +12,7 @@ import { useNavigationState } from "@/context/NavigationContext";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
-const Menu = ({ setShowMenu, isFocus }) => {
+const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
   const { setNavigationState } = useNavigationState();
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
@@ -68,20 +68,36 @@ const Menu = ({ setShowMenu, isFocus }) => {
       //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
       // }
     );
-    router.push("/product");
+    router.push(`/product/${productId}`);
+    setShowMenu(false);
   };
 
   const handleViewAll = () => {
     setShowMenu(false);
     router.push(`/allProducts?searchText=${searchText}`);
   };
+  const handleHeaderHomeClick = () => {
+    setShowMenu(false);
+    router.push(`/home`);
+  };
 
+  useEffect(() => {
+    if (searchTextHeader?.length > 1) {
+      searchRef.current.value = searchTextHeader;
+      setSearchText(searchTextHeader);
+    }
+  }, [searchTextHeader]);
   return (
     <div className="menu">
       <div className="columnclose_one">
         <div className="rowclose_one"></div>
         <div className="logo">
-          <Image src={LogoIcon} alt="Logomarkblack" className="logomarkblack" />
+          <Image
+            src={LogoIcon}
+            alt="Logomarkblack"
+            className="logomarkblack"
+            onClick={() => handleHeaderHomeClick()}
+          />
         </div>
       </div>
       <div className="row">
@@ -89,16 +105,21 @@ const Menu = ({ setShowMenu, isFocus }) => {
           <div className="flex justify-center w-full">
             <input
               width={"70%"}
-              className="h-[40px] w-3/5 border-b border-solid border-t border-l border-[#D3C6BB] rounded-l-lg p-4"
+              type="text"
+              // className="h-[40px] w-3/5 border-b border-solid border-t border-l border-[#D3C6BB] rounded-l-lg p-4"
+              className="h-[40px] w-3/5 bg-transparent  outline-none border-b-2 border-black rounded-none p-4"
               ref={searchRef}
-              placeholder="Search Products"
+              placeholder="Search Products...."
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   setSearchText(searchRef.current.value);
                 }
               }}
             />
-            <div className="flex px-3 bg-white border-b border-solid border-t border-r border-[#D3C6BB] rounded-r-lg">
+            <div
+              // className="flex px-3 bg-white border-b border-solid border-t border-r border-[#D3C6BB] rounded-r-lg"
+              className="flex px-3 bg-transparent outline-none border-b-2 border-black rounded-none p-2"
+            >
               <Image
                 src={SearchIcon}
                 alt="search"
@@ -117,7 +138,7 @@ const Menu = ({ setShowMenu, isFocus }) => {
                       className="flex flex-col gap-1.5 basis-1/5"
                       key={"productCard" + index}
                     >
-                      <div style={{ width: "100px" }}>
+                      <div style={{ width: "100px", cursor: "pointer" }}>
                         <Image
                           src={
                             isImageURL(fn_get_products.hero_image)
@@ -133,7 +154,12 @@ const Menu = ({ setShowMenu, isFocus }) => {
                           }
                         />
                       </div>
-                      <div className="py-2 gap-3 ">
+                      <div
+                        className="py-2 gap-3  cursor-pointer"
+                        onClick={() =>
+                          handleProductClick(fn_get_products?.p_id)
+                        }
+                      >
                         <h3 className="font-sans font-medium leading-6 text-base text-wrap">
                           {fn_get_products.name}
                         </h3>
