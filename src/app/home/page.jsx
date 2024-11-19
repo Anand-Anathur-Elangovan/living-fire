@@ -173,7 +173,13 @@ const Home = () => {
             className={`overlay-image ${zoomImage ? "zoom" : ""}`}
           />
           <div className={`text-group show`}>
-            <h1 className={`blur-text`}>LIVING FIRE</h1>
+            <h1
+              className={`blur-text`}
+              onClick={() => router.push(`/allProducts`)}
+              style={{ cursor: "pointer" }}
+            >
+              LIVING FIRE
+            </h1>
             {/* <h1 className={`blur-text`}>Architectural</h1> */}
             <h2 className={`blur-text`}>Architectural</h2>
             <h2 className={`blur-text`}>Fireplace Design</h2>
