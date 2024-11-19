@@ -55,26 +55,26 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
     }
     return false;
   };
-  const handleProductClick = (productId) => {
-    setNavigationState({ productId });
-    setCookie(
-      "selectedProductId",
-      productId
-      //   , {
-      //   path: "/", // Cookie available site-wide
-      //   secure: true, // Only sent over HTTPS
-      //   httpOnly: true, // Prevents client-side JS from accessing it
-      //   sameSite: "strict", // Only sent for same-site requests
-      //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
-      // }
-    );
+  const handleProductClick = async (productId) => {
+    // Set the navigation state and cookie
+    await setNavigationState({ productId });
+    await setCookie("selectedProductId", productId);
+
+    // Route to the product page
     router.push(`/product/${productId}`);
-    setShowMenu(false);
+
+    // Add a slight delay before closing the menu
+    setTimeout(() => {
+      setShowMenu(false);
+    }, 1000); // 100ms delay should be enough to ensure routing happens first
   };
 
   const handleViewAll = () => {
-    setShowMenu(false);
+    // setShowMenu(false);
     router.push(`/allProducts?searchText=${searchText}`);
+    setTimeout(() => {
+      setShowMenu(false);
+    }, 1000);
   };
   const handleHeaderHomeClick = () => {
     setShowMenu(false);
