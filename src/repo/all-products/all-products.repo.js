@@ -23,7 +23,6 @@ export const getAllProducts = async ({
     //   ...fn_get_products,
     //   hero_image: JSON.parse(fn_get_products.hero_image),
     // }));
-    // console.log(result.rows);
     return result.rows;
   } catch (error) {
     console.error("Error fetching users:", error);
@@ -31,7 +30,6 @@ export const getAllProducts = async ({
   }
   // try {
   //   const products = await prisma.tblProduct.findMany();
-  //   console.log(products);
   //   return products;
   // } catch (error) {
   //   console.error("Error fetching all products:", error);

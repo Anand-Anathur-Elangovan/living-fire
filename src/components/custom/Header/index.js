@@ -23,19 +23,10 @@ const Header = () => {
   const [searchTextHeader, setSearchTextHeader] = useState("");
   const [color, setColor] = useState("white");
 
-  // const isHomePage = window?.location?.href?.includes("home");
-  // const isHomePage = ["/home", "/"].includes(router.pathname);
   const isHomePage = pathname === "/home";
   let lastScroll = 0;
   const handleScroll = () => {
     const currentScroll = window.pageYOffset;
-    // if (currentScroll > lastScroll && currentScroll > 100) {
-    //   // Scroll down and past 100px, hide header
-    //   setHidden(true);
-    // } else {
-    //   // Scroll up, show header
-    //   setHidden(false);
-    // }
     lastScroll = currentScroll;
 
     if (currentScroll > 1) {
@@ -72,7 +63,6 @@ const Header = () => {
     router.push(`/home`);
   };
 
-  console.log("isHomePage", isHomePage, window?.location);
   return (
     <>
       {!showMenu && (

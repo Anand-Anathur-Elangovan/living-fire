@@ -18,7 +18,6 @@ const ProductSpecsDrawer = ({
       closeDrawer();
     }
   };
-  console.log(JSON.stringify(product_details, null, 2));
   return (
     <>
       {isOpen && (
