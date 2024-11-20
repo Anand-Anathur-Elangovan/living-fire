@@ -36,6 +36,7 @@ const Products = ({
     masterValues: { fuelTypes, ranges },
   } = useMasterValues(type);
 
+  const [refreshPage, setRefreshPage] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(
@@ -68,7 +69,7 @@ const Products = ({
 
   const onPageIndexClick = (index) => {
     if (index < 0) return;
-    if (index + 4 > maxPageCount) return;
+    // if (index + 4 > maxPageCount) return;
     setPageIndex(index);
     if (index === maxPageCount)
       setFilteredProducts(() =>
@@ -172,6 +173,7 @@ const Products = ({
     { subtype_id: 8, subtype_name: "Wall Mount", type_id: 3 },
     { subtype_id: 9, subtype_name: "Wood Storage", type_id: 3 },
   ];
+  console.log(pageIndex, "pageIndex");
   return (
     <>
       {/* Compare Products */}
@@ -219,13 +221,15 @@ const Products = ({
         {/* Filter */}
         {!isFilter && (
           <div className="flex flex-row pt-3">
-            <span className="flex gap-4 uppercase font-sans font-normal text-base">
+            <span
+              className="flex gap-4 uppercase font-sans font-normal text-base"
+              onClick={() => setIsFilter(true)}
+            >
               Filters{" "}
               <Image
                 src={PlusIcon}
                 alt="clear"
                 className="pt-1 cursor-pointer"
-                onClick={() => setIsFilter(true)}
               />
             </span>
           </div>
@@ -286,137 +290,266 @@ const Products = ({
                       ? fuelTypes?.find((x) => x?.fueltype_id === fireplaceType)
                           ?.fueltype_name + " Fireplaces"
                       : "Fireplace Type"}
-                    <Image
-                      src={CrossIcon}
-                      alt="clear"
-                      className="pt-1 cursor-pointer"
-                      onClick={() => setFireplaceType(null)}
-                    />
+                    {!document
+                      .getElementById("fireplaceFilterId")
+                      ?.classList?.contains("collapse") && (
+                      <Image
+                        src={MinusIcon}
+                        alt="clear"
+                        className="pt-1 cursor-pointer"
+                        onClick={() => {
+                          setRefreshPage((prev) => !prev);
+                          document
+                            .getElementById("fireplaceFilterId")
+                            .classList.add("collapse");
+                        }}
+                      />
+                    )}
+                    {document
+                      .getElementById("fireplaceFilterId")
+                      ?.classList?.contains("collapse") && (
+                      <Image
+                        src={PlusIcon}
+                        alt="clear"
+                        className="pt-1 cursor-pointer"
+                        onClick={() => {
+                          setRefreshPage((prev) => !prev);
+                          document
+                            .getElementById("fireplaceFilterId")
+                            .classList.remove("collapse");
+                        }}
+                      />
+                    )}
                   </span>
-                  {fireplaceType
-                    ? subTypes
-                        .filter((a) => a?.type_id === fireplaceType)
-                        .map((val, index) => (
+                  <div id="fireplaceFilterId" className="flex flex-col gap-3">
+                    {fireplaceType
+                      ? subTypes
+                          .filter((a) => a?.type_id === fireplaceType)
+                          .map((val, index) => (
+                            <span
+                              key={"types" + val?.subtype_id}
+                              className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                              onClick={() => setSubType(val?.subtype_id)}
+                            >
+                              {val?.subtype_name}
+                            </span>
+                          ))
+                      : fuelTypes?.map((val, index) => (
                           <span
-                            key={"types" + val?.subtype_id}
+                            key={"types" + val.fueltype_id}
                             className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                            onClick={() => setSubType(val?.subtype_id)}
+                            onClick={() => setFireplaceType(val?.fueltype_id)}
                           >
-                            {val?.subtype_name}
+                            {val?.fueltype_name}
                           </span>
-                        ))
-                    : fuelTypes?.map((val, index) => (
-                        <span
-                          key={"types" + val.fueltype_id}
-                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                          onClick={() => setFireplaceType(val?.fueltype_id)}
-                        >
-                          {val?.fueltype_name}
-                        </span>
-                      ))}
+                        ))}
+                  </div>
                 </div>
               )}
 
-              {/* Brands Types */}
-              {!brandType && (
-                <div className="flex flex-col gap-3 py-3 mr-10 ">
-                  <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
-                    Brands{" "}
-                    <Image
-                      src={CrossIcon}
-                      alt="clear"
-                      className="pt-1 cursor-pointer"
-                      onClick={() => setBrandType(null)}
-                    />
-                  </span>
-                  {brands.map((val, index) => (
-                    <span
-                      key={"brands" + val?.brand_id}
-                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                      onClick={() => setBrandType(val?.brand_id)}
-                    >
-                      {val?.brand_name}
-                    </span>
-                  ))}
-                </div>
-              )}
               {/* Ranges Types */}
               {brandType && (
                 <div className="flex flex-col gap-3 py-3 mr-10 ">
                   <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
-                    {`${
-                      brands.find((b) => b.brand_id === brandType)?.brand_name
-                    } Ranges`}
-                    <Image
-                      src={CrossIcon}
-                      alt="clear"
-                      className="pt-1 cursor-pointer"
-                      // onClick={() => setBrandType(null)}
-                    />
+                    {`Ranges`}
+                    {!document
+                      .getElementById("rangesFilterId")
+                      ?.classList?.contains("collapse") && (
+                      <Image
+                        src={MinusIcon}
+                        alt="clear"
+                        className="pt-1 cursor-pointer"
+                        onClick={() => {
+                          setRefreshPage((prev) => !prev);
+                          document
+                            .getElementById("rangesFilterId")
+                            .classList.add("collapse");
+                        }}
+                      />
+                    )}
+                    {document
+                      .getElementById("rangesFilterId")
+                      ?.classList?.contains("collapse") && (
+                      <Image
+                        src={PlusIcon}
+                        alt="clear"
+                        className="pt-1 cursor-pointer"
+                        onClick={() => {
+                          setRefreshPage((prev) => !prev);
+                          document
+                            .getElementById("rangesFilterId")
+                            .classList.remove("collapse");
+                        }}
+                      />
+                    )}
                   </span>
-                  {ranges.map((val, index) => (
-                    <span
-                      key={"ranges" + val?.range_id}
-                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                      // onClick={() => setBrandType(val.range_id)}
-                    >
-                      {val?.range_name}
-                    </span>
-                  ))}
+                  <div
+                    id="rangesFilterId"
+                    className="flex flex-col gap-3 mr-10"
+                  >
+                    {ranges.map((val, index) => (
+                      <span
+                        key={"ranges" + val?.range_id}
+                        className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                        // onClick={() => setBrandType(val.range_id)}
+                      >
+                        {val?.range_name}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               )}
+
+              {/* Brands Types */}
+              {
+                <div className="flex flex-col gap-3 py-3 mr-10 ">
+                  <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
+                    Brands{" "}
+                    {!document
+                      .getElementById("brandsFilterId")
+                      ?.classList?.contains("collapse") && (
+                      <Image
+                        src={MinusIcon}
+                        alt="clear"
+                        className="pt-1 cursor-pointer"
+                        onClick={() => {
+                          setRefreshPage((prev) => !prev);
+                          document
+                            .getElementById("brandsFilterId")
+                            .classList.add("collapse");
+                        }}
+                      />
+                    )}
+                    {document
+                      .getElementById("brandsFilterId")
+                      ?.classList?.contains("collapse") && (
+                      <Image
+                        src={PlusIcon}
+                        alt="clear"
+                        className="pt-1 cursor-pointer"
+                        onClick={() => {
+                          setRefreshPage((prev) => !prev);
+                          document
+                            .getElementById("brandsFilterId")
+                            .classList.remove("collapse");
+                        }}
+                      />
+                    )}
+                  </span>
+                  <div
+                    id="brandsFilterId"
+                    className="flex flex-col gap-3 mr-10 "
+                  >
+                    {brandType && (
+                      <span
+                        key={"brands_selected"}
+                        className="font-sans font-normal font-small leading-5 text-base text-black"
+                        // onClick={() => setBrandType(val?.brand_id)}
+                      >
+                        {
+                          brands?.find((b) => b?.brand_id === brandType)
+                            ?.brand_name
+                        }
+                      </span>
+                    )}
+
+                    {brands.map((val, index) => {
+                      if (val?.brand_id === brandType) return;
+                      return (
+                        <span
+                          key={"brands" + val?.brand_id}
+                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                          onClick={() => setBrandType(val?.brand_id)}
+                        >
+                          {val?.brand_name}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              }
             </div>
             <div className="flex flex-col gap-3 py-3">
               <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                 Sort By{" "}
-                <Image
-                  src={MinusIcon}
-                  alt="clear"
-                  className="pt-1 cursor-pointer"
-                />
+                {!document
+                  .getElementById("sortbyFilterId")
+                  ?.classList?.contains("collapse") && (
+                  <Image
+                    src={MinusIcon}
+                    alt="clear"
+                    className="pt-1 cursor-pointer"
+                    onClick={() => {
+                      setRefreshPage((prev) => !prev);
+                      document
+                        .getElementById("sortbyFilterId")
+                        .classList.add("collapse");
+                    }}
+                  />
+                )}
+                {document
+                  .getElementById("sortbyFilterId")
+                  ?.classList?.contains("collapse") && (
+                  <Image
+                    src={PlusIcon}
+                    alt="clear"
+                    className="pt-1 cursor-pointer"
+                    onClick={() => {
+                      setRefreshPage((prev) => !prev);
+                      document
+                        .getElementById("sortbyFilterId")
+                        .classList.remove("collapse");
+                    }}
+                  />
+                )}
               </span>
-              <span
-                className="font-sans font-small leading-5 text-normal cursor-pointer"
-                onClick={() => sortProducts(SORTBY.priceLowToHigh)}
+              <div
+                id="sortbyFilterId"
+                className="flex flex-col gap-3 transistion ease-in-out"
               >
-                Price: Low to High
-              </span>
-              <span
-                className="font-sans font-small leading-5 text-normal cursor-pointer"
-                onClick={() => sortProducts(SORTBY.priceHighToLow)}
-              >
-                Price: High to Low
-              </span>
-              <span
-                className="font-sans font-small leading-5 text-normal cursor-pointer"
-                onClick={() => sortProducts(SORTBY.A2Z)}
-              >
-                A-Z
-              </span>
-              <span
-                className="font-sans font-small leading-5 text-normal cursor-pointer"
-                onClick={() => sortProducts(SORTBY.Z2A)}
-              >
-                Z-A
-              </span>
-              <span
-                className="font-sans font-small leading-5 text-normal cursor-pointer"
-                onClick={() => sortProducts(SORTBY.oldToNew)}
-              >
-                Oldest to Newest
-              </span>
-              <span
-                className="font-sans font-small leading-5 text-normal cursor-pointer"
-                onClick={() => sortProducts(SORTBY.newToOld)}
-              >
-                Newest to Oldest
-              </span>
-              <span
-                className="font-sans font-small leading-5 text-normal cursor-pointer"
-                onClick={() => sortProducts(SORTBY.bestSelling)}
-              >
-                Best Selling
-              </span>
+                <div
+                  className="font-sans font-small leading-5 text-normal cursor-pointer"
+                  onClick={() => sortProducts(SORTBY.priceLowToHigh)}
+                >
+                  Price: Low to High
+                </div>
+                <span
+                  className="font-sans font-small leading-5 text-normal cursor-pointer"
+                  onClick={() => sortProducts(SORTBY.priceHighToLow)}
+                >
+                  Price: High to Low
+                </span>
+                <span
+                  className="font-sans font-small leading-5 text-normal cursor-pointer"
+                  onClick={() => sortProducts(SORTBY.A2Z)}
+                >
+                  A-Z
+                </span>
+                <span
+                  className="font-sans font-small leading-5 text-normal cursor-pointer"
+                  onClick={() => sortProducts(SORTBY.Z2A)}
+                >
+                  Z-A
+                </span>
+                <span
+                  className="font-sans font-small leading-5 text-normal cursor-pointer"
+                  onClick={() => sortProducts(SORTBY.oldToNew)}
+                >
+                  Oldest to Newest
+                </span>
+                <span
+                  className="font-sans font-small leading-5 text-normal cursor-pointer"
+                  onClick={() => sortProducts(SORTBY.newToOld)}
+                >
+                  Newest to Oldest
+                </span>
+                <span
+                  className="font-sans font-small leading-5 text-normal cursor-pointer"
+                  onClick={() => sortProducts(SORTBY.bestSelling)}
+                >
+                  Best Selling
+                </span>
+              </div>
             </div>
           </div>
         )}
@@ -442,23 +575,36 @@ const Products = ({
 
       {/* Pagination */}
       <div className="flex justify-center gap-2">
-        <Image
-          src={LeftArrowIcon}
-          alt="Left Arrow"
-          className="pt-1 cursor-pointer"
-          onClick={() => onPageIndexClick(pageIndex - 1)}
-        />
-        {maxPageCount > 0 && (
+        {!(pageIndex === 0) && (
+          <Image
+            src={LeftArrowIcon}
+            alt="Left Arrow"
+            className="pt-1 cursor-pointer"
+            onClick={() => onPageIndexClick(pageIndex - 1)}
+          />
+        )}
+        {pageIndex > 1 && maxPageCount > 4 && (
+          <span className="cursor-pointer" onClick={() => onPageIndexClick(1)}>
+            {1}
+          </span>
+        )}
+        {pageIndex > 2 && maxPageCount > 4 && (
+          <span className="cursor-pointer" onClick={() => onPageIndexClick(2)}>
+            {2}
+          </span>
+        )}
+        {pageIndex > 1 && <span>...</span>}
+        {maxPageCount - pageIndex > 1 && maxPageCount > 0 && (
           <span onClick={() => onPageIndexClick(pageIndex)}>
             {pageIndex + 1}
           </span>
         )}
-        {maxPageCount > 1 && (
+        {maxPageCount - pageIndex > 2 && maxPageCount > 1 && (
           <span onClick={() => onPageIndexClick(pageIndex + 2)}>
             {pageIndex + 2}
           </span>
         )}
-        {maxPageCount > 2 && (
+        {maxPageCount - pageIndex > 3 && maxPageCount > 2 && (
           <span onClick={() => onPageIndexClick(pageIndex + 3)}>
             {pageIndex + 3}
           </span>
@@ -469,12 +615,14 @@ const Products = ({
             {maxPageCount}
           </span>
         )}
-        <Image
-          src={RightArrowIcon}
-          alt="Right Arrow"
-          className="pt-1 cursor-pointer"
-          onClick={() => onPageIndexClick(pageIndex + 1)}
-        />
+        {pageIndex + 4 <= maxPageCount && (
+          <Image
+            src={RightArrowIcon}
+            alt="Right Arrow"
+            className="pt-1 cursor-pointer"
+            onClick={() => onPageIndexClick(pageIndex + 1)}
+          />
+        )}
       </div>
     </>
   );
