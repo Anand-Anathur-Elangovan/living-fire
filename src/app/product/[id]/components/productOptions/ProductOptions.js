@@ -149,6 +149,16 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "./ProductOptions.module.css";
 import optionsImage from "@/public/assets/product/electriFireOptions.png";
 
+const PriceFormatter = ({ price }) => {
+  // Format the price with commas
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(price);
+
+  return formattedPrice;
+};
+
 const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
@@ -284,7 +294,8 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
 
       <div className={styles.priceContainer}>
         <p className={styles.price}>
-          ${totalPrice.toFixed(2)} <span>(inc gst)</span>
+          {/* ${totalPrice.toFixed(2)} */}
+           <PriceFormatter price={totalPrice.toFixed(2)} /> <span>(inc gst)</span>
         </p>
         <span className={styles.inStock}>IN STOCK</span>
       </div>

@@ -8,9 +8,11 @@ import RightArrow from "@/public/assets/homePage/collections/arrow-right.svg";
 import LeftArrow from "@/public/assets/homePage/collections/arrow-left.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useNavigationState } from "@/context/NavigationContext";
 
 const Featured = ({ headingValue, productRouteHandler }) => {
   const router = useRouter();
+  const { setNavigationState } = useNavigationState();
   const carouselRef = useRef(null);
   const carouselItems = [
     {
@@ -122,7 +124,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
       </div>
       <div
         className="relative w-[524px] h-[22px] font-sans font-medium text-[16px] leading-[140%] underline uppercase text-black cursor-pointer"
-        onClick={() => router.push(`/allProducts`)}
+        onClick={() => {setNavigationState(null);router.push(`/allProducts`)}}
       >
         SHOP ALL
       </div>

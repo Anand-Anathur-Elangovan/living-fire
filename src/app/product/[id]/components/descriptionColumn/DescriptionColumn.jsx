@@ -1,6 +1,7 @@
 import styles from "./DescriptionColumn.module.css";
 
 export default function DescriptionColumn({ product_desc }) {
+  console.log(product_desc)
   return (
     <div className={styles["desc-column"]}>
       {product_desc
