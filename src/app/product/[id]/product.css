@@ -533,10 +533,10 @@
   color: gray;
 } */
 
-.slick-dots li.slick-active button:before {
+.product-hero-image.slick-dots li.slick-active button:before {
   /* color: black; Active dot color */
 }
-.slick-dots li button:before {
+.product-hero-image .slick-dots li button:before {
   /* font-size: 12px; */
   /* color: black; */
   opacity: 1 !important;
@@ -549,16 +549,16 @@
   content: "" !important;
 }
 
-.slick-dots li.slick-active button:before {
+.product-hero-image .slick-dots li.slick-active button:before {
   color: white;
   opacity: 1;
   transition: color 0.3s ease, opacity 0.3s ease;
 }
-.slick-dots {
-  bottom: 15px !important;
+.product-hero-image .slick-dots {
+  bottom: 40px !important;
 }
-.slick-dots li.slick-active button {
-  background: white; /* Black fill for active dot */
+.product-hero-image .slick-dots li.slick-active button {
+  background: white !important; /* Black fill for active dot */
   transform: scale(1); /* Slightly enlarge the active dot for emphasis */
   border-radius: 50%;
 }

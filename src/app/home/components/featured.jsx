@@ -91,7 +91,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
 
       <div
         ref={carouselRef}
-        className="grid grid-flow-col auto-cols-[20%] gap-1 overflow-x-auto overscroll-x-contain feature-snaps before:px-1 hide-scrollbar"
+        className="grid grid-flow-col auto-cols-[20%] gap-5 overflow-x-auto overscroll-x-contain feature-snaps before:px-1 hide-scrollbar"
       >
         {carouselItems.map((item, index) => (
           <div
