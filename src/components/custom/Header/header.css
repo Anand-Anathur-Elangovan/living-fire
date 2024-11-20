@@ -76,6 +76,7 @@
 .custom-header-right-side-icons {
   display: flex;
   justify-content: space-between;
+  transition: color 0.3s ease;
   /* gap: 300px; */
 }
 .nav-links a {
