@@ -24,6 +24,7 @@ import { useNavigationState } from "@/context/NavigationContext";
 import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { setCookie } from "cookies-next";
+import Loader from "@/src/helper/loader/Loader";
 
 const Product = ({ params }) => {
   const router = useRouter();
@@ -59,7 +60,8 @@ const Product = ({ params }) => {
     setProductData(data?.product?.[0]?.fn_get_product_page);
   }, [data]);
 
-  if (!productData) return <p>Loading...</p>;
+  if (!productData) return <Loader />;
+  // <p>Loading...</p>;
 
   const {
     hero_image,
@@ -93,20 +95,22 @@ const Product = ({ params }) => {
   return (
     <section>
       <div className="stackview">
-        <Breadcrumbs
-          productType={ptype_name}
-          fuelType={fueltype_name}
-          productName={name}
-          brandName={brand_name}
+        <div>
+          <Breadcrumbs
+            productType={ptype_name}
+            fuelType={fueltype_name}
+            productName={name}
+            brandName={brand_name}
           fuelTypeId={fueltype_id}
           brandId={brand_id}
-        />
-        {/* <br/> */}
-        <HeroImage
-          // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
-          src={hero_image}
-          alt="Product Hero Image"
-        />
+          />
+          {/* <br/> */}
+          <HeroImage
+            // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
+            src={hero_image}
+            alt="Product Hero Image"
+          />
+        </div>
         {product_desc && <DescriptionColumn product_desc={product_desc} />}
         {short_desc && (
           <ProductOptions

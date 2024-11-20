@@ -10,7 +10,7 @@ export default function DescriptionColumn({ product_desc }) {
             <p className={styles["materialfinish"]}>{section.name}</p>
 
             {/* Check if the section is "description" and render it as a paragraph */}
-            {section.name === "description" ? (
+            {section.name === "DESCRIPTION" ? (
               <p className={styles["description"]}>
                 {section.value.map((item, itemIndex) => (
                   <span key={itemIndex}>

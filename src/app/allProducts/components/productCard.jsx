@@ -89,7 +89,7 @@ const ProductCard = ({
           onClick={() => handleProductClick(fn_get_products?.p_id)}
         />
       </div>
-      <div className="py-2 gap-3">
+      <div className="py-2 gap-3" style={{ width: "300px" }}>
         <h3
           className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer"
           onClick={() => handleProductClick(fn_get_products?.p_id)}

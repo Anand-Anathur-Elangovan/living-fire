@@ -143,7 +143,7 @@
   object-fit: cover;
   transform: scale(1); /* Initial scale */
   transition: transform 1s ease-in-out; /* Delayed zoom-in effect */
-  filter: brightness(95%);
+  filter: brightness(80%);
 }
 
 .show-panels {
@@ -256,7 +256,7 @@
   align-items: center;
 }
 .text-group h2 {
-  font-family: Satoru;
+  /* font-family: Satoru; */
   font-size: 1.75rem;
   margin-bottom: 0.5rem;
   font-weight: normal;
@@ -268,7 +268,7 @@
 }
 .text-group h1 {
   font-family: Satoru;
-  font-size: 7rem;
+  font-size: 10rem;
   margin-bottom: 1rem;
   font-weight: normal;
   max-width: 1200px;

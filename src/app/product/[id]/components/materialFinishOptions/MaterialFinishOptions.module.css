@@ -39,7 +39,7 @@
   margin-bottom: 8px;
   width: 400px;
   gap: 0px;
-  opacity: 0px;
+  /* opacity: 0px; */
 }
 
 .pricingoptions {
@@ -48,5 +48,5 @@
 
 .desc {
   font-size: 1rem;
-  color: #666;
+  color: black;
 }

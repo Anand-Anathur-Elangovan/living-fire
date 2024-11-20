@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Breadcrumbs = ({ productType, fuelType, productName,brandName ,fuelTypeId,brandId}) => {
 
@@ -13,16 +13,24 @@ const Breadcrumbs = ({ productType, fuelType, productName,brandName ,fuelTypeId,
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center',marginTop:'10px' }}>
-    <nav>
-      <Link href="/home">Home</Link> / 
-      <Link onClick={()=>allProductsRouteHandler('fuelType',fuelType,fuelTypeId)}>
-        {`${fuelType} ${productType}`}
-      </Link> / 
-      <Link onClick={()=>allProductsRouteHandler('brandName',brandName,brandId)}>
-        {`${brandName} ${productName}`}
-      </Link>
-    </nav>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "10px",
+        marginBottom: "20px",
+      }}
+    >
+      <nav>
+        <Link href="/home">Home</Link> /
+        <Link onClick={()=>allProductsRouteHandler('fuelType',fuelType,fuelTypeId)}>
+          {`${fuelType} ${productType}`}
+        </Link>{" "}
+        /
+        <Link onClick={()=>allProductsRouteHandler('brandName',brandName,brandId)}>
+          {`${brandName} ${productName}`}
+        </Link>
+      </nav>
     </div>
   );
 };
