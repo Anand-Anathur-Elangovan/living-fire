@@ -77,9 +77,8 @@ const Page = () => {
                       )?.ptype_name ?? "Products"
                     : "Products"
                 }`
-              : `${
-                  brands.find((x) => x.brand_id === brandType)?.brand_name
-                } Brand` ?? "Unknown Brand"}
+              : `${brands.find((x) => x.brand_id === brandType)?.brand_name}` ??
+                "Unknown Brand"}
           </div>
 
           {fireplaceType && (
@@ -150,12 +149,12 @@ const Page = () => {
               </>
             ) : brandType ? (
               <>
-                <Image
+                {/* <Image
                   src={LeftArrowIcon}
                   alt="Left Arrow"
                   className="cursor-pointer"
                   onClick={() => setBrandType(null)}
-                />
+                /> */}
                 {fuelTypes.map((fuelType) => (
                   <div
                     className="flex flex-col gap-1 items-center text-center cursor-pointer"
