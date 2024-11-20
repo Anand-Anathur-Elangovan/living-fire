@@ -139,7 +139,7 @@ const Product = ({ params }) => {
           headingValue={"You May Also Like"}
           productRouteHandler={productRouteHandler}
         />
-        <OurDifference />
+        {/* <OurDifference /> */}
         <OurShowrooms />
         <EnquiryFormModal
           isOpen={isModalOpen}

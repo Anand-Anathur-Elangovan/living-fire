@@ -14,11 +14,11 @@ const Breadcrumbs = ({ productType, fuelType, productName, brandName }) => {
       <nav>
         <Link href="/home">Home</Link> /
         <Link href={`/home/${productType}`}>
-          {`${fuelType} ${productType}    `}
+          {` ${fuelType} ${productType}    `}
         </Link>{" "}
         /
         <Link href={`/home/${productType}/${brandName} ${productName}`}>
-          {`${brandName} ${productName}`}
+          {` ${brandName} ${productName}`}
         </Link>
       </nav>
     </div>
