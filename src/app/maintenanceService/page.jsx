@@ -49,7 +49,6 @@ const MaintenanceService = () => {
     }
   };
 
-  console.log("formData", formData);
   return (
     <div className="maintenance-service-container-body">
       <div className="maintenance-service-container">
