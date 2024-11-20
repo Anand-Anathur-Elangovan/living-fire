@@ -63,3 +63,8 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.collapse {
+  height: 0px;
+  overflow-y: hidden;
+}
