@@ -96,7 +96,7 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  max-width: 238px;
+  max-width: 300px;
 }
 
 .rowtext {
@@ -125,8 +125,8 @@
 }
 
 .sizeH4 {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: 400;
 }
 
 .sizeH6 {
@@ -147,5 +147,11 @@
 }
 
 .text7 {
-  color: black;
+  color: #1741be;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.DownloadSection_text7__rR7_c:hover {
+  color: darkblue;
 }

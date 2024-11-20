@@ -48,6 +48,8 @@ const Specifications = ({ specifications }) => {
                         display: "flex",
                         justifyContent: "flex-end",
                         gap: "10px",
+                        position: "relative",
+                        right: "40px",
                       }}
                     >
                       <p> NG</p>
@@ -76,7 +78,7 @@ const Specifications = ({ specifications }) => {
                                 </p>
                               </div>
                             ) : (
-                              <p className="distanceTwo ui text size-body_medium">
+                              <p className="distanceTwo ui text size-body_medium relative -left-10">
                                 {item.value}
                               </p>
                             )}
