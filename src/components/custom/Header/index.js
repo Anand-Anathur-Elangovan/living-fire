@@ -57,7 +57,7 @@ const Header = () => {
     <>
       {!showMenu && (
         <header className={headerClasses.join(" ")}>
-          <div class="image-container">
+          <div className="image-container">
           <Image
             src={logo}
             alt="Logo"
@@ -78,8 +78,8 @@ const Header = () => {
             <div className="min-w-[400px] flex justify-center w-full min-width-search-product">
               <input
                 type="text"
-                className="h-[40px] min-w-[400px] w-3/5 bg-transparent outline-none border-b-2 border-black rounded-none p-4 placeholder-white "
-                placeholder="Search Products...."
+                className="h-[50px] min-w-[400px] w-3/5 bg-transparent outline-none border-b-2 border-black rounded-none p-4 placeholder-white "
+                // placeholder="Search Products...."
                 ref={searchRef}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -88,7 +88,7 @@ const Header = () => {
                   }
                 }}
               />
-              <div className="h-[40px] flex px-3 bg-transparent outline-none border-b-2 border-black rounded-none p-2">
+              <div className="h-[50px] flex px-3 bg-transparent outline-none border-b-2 border-black rounded-none p-2">
                 <Image
                   src={SearchIcon}
                   alt="search"

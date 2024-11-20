@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import "../home.css"; 
 
 const Testimonials = (props) => {
   const content = [
@@ -49,7 +50,7 @@ const Testimonials = (props) => {
                   <p className="font-lignt leading-5 text-base text-justify">
                     {item.body}
                   </p>
-                  <h3 className="font-medium leading-5 text-base">
+                  <h3 className="font-medium leading-5 text-base mt-8">
                     {item.title}
                   </h3>
                 </div>

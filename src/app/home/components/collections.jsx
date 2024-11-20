@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
-// import "./collections.css"; // Add your styles here
+import React, { useState, useEffect, useRef } from "react";
+import "../home.css"; // Add your styles here
 import collectionImg1 from "@/public/assets/homePage/collections/collectionsImg1.svg";
 import collectionImg2 from "@/public/assets/homePage/collections/collectionsImg2.svg";
 import collectionImg3 from "@/public/assets/homePage/collections/collectionsImg3.svg";
@@ -16,6 +16,7 @@ import Image from "next/image";
 const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
   const [hoverIndex, setHoverIndex] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     async function fetchImageUrl() {
@@ -88,21 +89,47 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
     });
   };
 
+  const handleScroll = (direction) => {
+    if (carouselRef.current) {
+      const scrollAmount = 300; // Adjust the scroll amount as needed
+      if (direction === "left") {
+        carouselRef.current.scrollBy({
+          left: -scrollAmount,
+          behavior: "smooth",
+        });
+      } else if (direction === "right") {
+        carouselRef.current.scrollBy({
+          left: scrollAmount,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
   const mergedOutput = mergeInputs(carouselItems, fuelTypes);
-  console.log(mergedOutput);
   return (
-    <div className="flex relative justify-center flex-col">
-      <div className="flex flex-row items-center w-full">
+    <div className="ml-16 mr-16 flex relative justify-center flex-col">
+      <div className="flex flex-row items-center w-full mb-10">
         <div className="heading1 flex w-full justify-center uppercase">
           Collections
         </div>
-        <div className="flex flex-row items-center gap-2 absolute right-5">
-          <Image src={RightArrow} alt="Right Arrow" />
-          <Image src={LeftArrow} alt="Left Arrow" />
+        <div className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer">
+          <Image
+            src={RightArrow}
+            alt="Right Arrow"
+            onClick={() => handleScroll("left")}
+          />
+          <Image
+            src={LeftArrow}
+            alt="Left Arrow"
+            onClick={() => handleScroll("right")}
+          />
         </div>
       </div>
 
-      <div className="grid grid-flow-col auto-cols-[23%] gap-1 overflow-x-auto overscroll-x-contain element-snaps">
+      <div
+        ref={carouselRef}
+        className="grid grid-flow-col auto-cols-[25%] gap-1 overflow-x-auto overscroll-x-contain element-snaps hide-scrollbar"
+      >
         {/*carousel*/}
         {/*grid grid-flow-col auto-cols-[23%] gap-1 overflow-x-auto overscroll-x-contain element-snaps */}
         {imageUrl &&

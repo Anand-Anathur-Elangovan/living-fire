@@ -39,8 +39,20 @@ const Product = ({ params }) => {
 
   const openDrawer = () => setIsOpenSpecDrawer(true);
   const closeDrawer = () => setIsOpenSpecDrawer(false);
+  const [unwrappedParams, setUnwrappedParams] = useState(null);
+
+  // Unwrap params inside useEffect if needed
+  useEffect(() => {
+    async function fetchParams() {
+      if (params) {
+        const resolvedParams = await params;
+        setUnwrappedParams(resolvedParams);
+      }
+    }
+    fetchParams();
+  }, [params]);
   // const state = getNavigationState();
-  let { data } = useProductPage(params.id);
+  let { data } = useProductPage(unwrappedParams?.id);
 
   useEffect(() => {
     // Fetch data from API
