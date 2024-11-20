@@ -59,7 +59,6 @@ const ContactUs = () => {
       <section>
         <AddressDetails />
       </section>
-
       <section>
         <div className="contactus-form">
           <div className="container">
@@ -571,7 +570,10 @@ const ContactUs = () => {
                         </div>
                       </div>
 
-                      <div className="form-group" style={{'borderBottom':' 1px solid #000'}}>
+                      <div
+                        className="form-group"
+                        style={{ borderBottom: " 1px solid #000" }}
+                      >
                         <div className="input-wrapper-full">
                           <input
                             name="streetAddress"
@@ -580,7 +582,6 @@ const ContactUs = () => {
                             required
                             onChange={handleInputChange}
                             value={formData?.streetAddress}
-                            
                           />
                         </div>
                       </div>

@@ -216,7 +216,7 @@ const Products = ({
       <div
         className={`flex ${
           isFilter ? "" : "flex-col"
-        } px-1 border-t border-solid border-[#D3C6BB] w-full gap-5 transistion ease-in-out duration-300`}
+        } px-1 border-t border-solid border-[#D3C6BB] w-full gap-5 transistion ease-in-out duration-300 items-start`}
       >
         {/* Filter */}
         {!isFilter && (
@@ -469,7 +469,7 @@ const Products = ({
                 </div>
               }
             </div>
-            <div className="flex flex-col gap-3 py-3">
+            <div className="flex flex-col gap-3 py-3 mr-10">
               <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                 Sort By{" "}
                 {!document
