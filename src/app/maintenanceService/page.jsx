@@ -60,7 +60,7 @@ const MaintenanceService = () => {
           <h1 className="title-category">FIREPLACE</h1>
           <h1 className="title">MAINTENANCE & SERVICING</h1>
         </div>
-        <hr class="custom-divider" />
+        <hr className="custom-divider" />
         <p className="description">
           At Living Fire, our fireplaces are built to last, but a little care
           can go a long way in keeping them performing beautifully year after
@@ -159,7 +159,7 @@ const MaintenanceService = () => {
             </div>
           </div>
         </div>
-        <hr class="custom-divider" id="service-form" />
+        <hr className="custom-divider" id="service-form" />
         
         <div className="book-service-section">
           <h2>BOOK A SERVICE</h2>

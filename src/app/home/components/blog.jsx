@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Blog = () => {
   return (
-    <div className="flex relative justify-center flex-col">
+    <div className="flex relative justify-center flex-col gap-10">
       <div className="flex flex-row items-center w-full mb-4">
         <div className="heading1 flex w-full justify-center uppercase">
           Blog
@@ -24,7 +24,7 @@ const Blog = () => {
             <Image
               src={Picture2}
               alt="Picture2"
-              className="w-2/5 h-[294px] object-cover"
+              className="w-[242px] h-[294px] object-cover"
             />
             <div className="flex justify-end flex-col gap-2">
               <span className="font-sans font-medium leading-6 text-base uppercase text-wrap">
