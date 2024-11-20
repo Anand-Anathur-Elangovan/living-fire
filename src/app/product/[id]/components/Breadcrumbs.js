@@ -1,15 +1,33 @@
+"use client";
+import { useNavigationState } from "@/context/NavigationContext";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const Breadcrumbs = ({ productType, fuelType, productName,brandName ,fuelTypeId,brandId}) => {
+const Breadcrumbs = ({
+  productType,
+  fuelType,
+  productName,
+  brandName,
+  fuelTypeId,
+  brandId,
+}) => {
+  const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
 
+  useEffect(() => {
+    setIsClient(true); // Ensure this component is client-side
+  }, []);
+  const { setNavigationState } = useNavigationState();
   const allProductsRouteHandler = (typeName, displayName, arguId) => {
-    setNavigationState({
-      typeName: 'fuelType',
-      displayName: fuelType,
-      id: fuelTypeId,
-    });
-    router.push(`/allProducts`);
+    if (isClient) {
+      setNavigationState({
+        typeName: "fuelType",
+        displayName: fuelType,
+        id: fuelTypeId,
+      });
+      router.push(`/allProducts`);
+    }
   };
 
   return (
@@ -19,17 +37,28 @@ const Breadcrumbs = ({ productType, fuelType, productName,brandName ,fuelTypeId,
         justifyContent: "center",
         marginTop: "10px",
         marginBottom: "20px",
+        color: "black",
       }}
     >
       <nav>
         <Link href="/home">Home</Link> /
-        <Link onClick={()=>allProductsRouteHandler('fuelType',fuelType,fuelTypeId)}>
+        <span
+          style={{ cursor: "pointer", color: "black" }}
+          onClick={() =>
+            allProductsRouteHandler("fuelType", fuelType, fuelTypeId)
+          }
+        >
           {`${fuelType} ${productType}`}
-        </Link>{" "}
+        </span>{" "}
         /
-        <Link onClick={()=>allProductsRouteHandler('brandName',brandName,brandId)}>
+        <span
+          style={{ cursor: "pointer", color: "black" }}
+          onClick={() =>
+            allProductsRouteHandler("brandName", brandName, brandId)
+          }
+        >
           {`${brandName} ${productName}`}
-        </Link>
+        </span>
       </nav>
     </div>
   );

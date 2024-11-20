@@ -40,7 +40,7 @@ Certain brands supplied by Living Fire outline their own restrictions on servici
         <div className="title-group">
           <h1 className="title">GENERAL TERMS OF SERVICE</h1>
         </div>
-        <hr class="custom-divider" />
+        <hr className="custom-divider" />
         <div className="privacy-container">
           <div className="privacy-content">
             {content

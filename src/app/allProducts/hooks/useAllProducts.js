@@ -43,7 +43,6 @@ const useAllProducts = (
     staleTime: 0,
     // enabled: productMenuIndex ? true : false,
     select: (res) => {
-      // console.log(res.result, "HOOCK");
       if (res.success) return res.result;
       toast.error(res.message);
       return initialData;

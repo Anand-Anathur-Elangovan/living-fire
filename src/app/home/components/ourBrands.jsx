@@ -78,10 +78,9 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
     //   title: "Stovax",
     // },
   ];
-  console.log("brandList", brandList);
   return (
     <div className="flex relative justify-center flex-col">
-      <div className="flex flex-row items-center w-full mt-4">
+      <div className="flex flex-row items-center w-full mb-4">
         <div className="heading1 flex w-full justify-center uppercase">
           Our Brands
         </div>

@@ -61,9 +61,9 @@ const Page = () => {
 
   return (
     <>
-      <div className="flex flex-col px-16 gap-3 bg-[#F7F7F5]">
+      <div className="flex flex-col px-16 gap-3 bg-[#F7F7F5] ">
         <div className="flex flex-col items-center">
-          <div className="heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru]">
+          <div className="heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
             {!brandType
               ? `${
                   fireplaceType

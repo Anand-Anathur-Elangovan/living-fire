@@ -10,8 +10,10 @@ import Menu from "@/src/app/menu/Menu";
 import CloseIcon from "@/public/assets/menu/close.svg";
 import { useRouter } from "next/navigation";
 import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
+  const pathname = usePathname();
   const router = useRouter();
   const searchRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
@@ -19,29 +21,36 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const [searchTextHeader, setSearchTextHeader] = useState("");
+  const [color, setColor] = useState("white");
+
+  const isHomePage = pathname === "/home";
   let lastScroll = 0;
   const handleScroll = () => {
     const currentScroll = window.pageYOffset;
-    // if (currentScroll > lastScroll && currentScroll > 100) {
-    //   // Scroll down and past 100px, hide header
-    //   setHidden(true);
-    // } else {
-    //   // Scroll up, show header
-    //   setHidden(false);
-    // }
     lastScroll = currentScroll;
 
     if (currentScroll > 1) {
       setScrolled(true);
+      if (isHomePage && currentScroll > 0.6 * window.innerHeight) {
+        setColor("black");
+      }
     } else {
       setScrolled(false);
+      if (isHomePage) {
+        setColor("white");
+      }
     }
   };
 
   useEffect(() => {
+    if (!isHomePage) {
+      setColor("black");
+    } else {
+      setColor("white");
+    }
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   let headerClasses = ["header"];
   if (scrolled) {
@@ -53,19 +62,23 @@ const Header = () => {
   const handleHomeIconClick = () => {
     router.push(`/home`);
   };
+
   return (
     <>
       {!showMenu && (
         <header className={headerClasses.join(" ")}>
-          <div class="image-container">
-          <Image
-            src={logo}
-            alt="Logo"
-            className="custom-header-width"
-            onClick={handleHomeIconClick}
-          />
+          <div className="image-container">
+            <Image
+              src={logo}
+              alt="Logo"
+              className="custom-header-width"
+              onClick={handleHomeIconClick}
+            />
           </div>
-          <div className="custom-header-right-side-icons">
+          <div
+            className="custom-header-right-side-icons"
+            style={{ color: color }}
+          >
             {/* <Image
               src={searchIcon}
               alt="searchIcon"
@@ -78,8 +91,8 @@ const Header = () => {
             <div className="min-w-[400px] flex justify-center w-full min-width-search-product">
               <input
                 type="text"
-                className="h-[40px] min-w-[400px] w-3/5 bg-transparent outline-none border-b-2 border-black rounded-none p-4 placeholder-white "
-                placeholder="Search Products...."
+                className={`h-[50px] min-w-[400px] w-3/5 bg-transparent outline-none border-b-2 border-${color} rounded-none p-4 placeholder-white`}
+                // placeholder="Search Products...."
                 ref={searchRef}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -88,11 +101,14 @@ const Header = () => {
                   }
                 }}
               />
-              <div className="h-[40px] flex px-3 bg-transparent outline-none border-b-2 border-black rounded-none p-2">
+              <div
+                className={`h-[50px] flex px-3 bg-transparent outline-none border-b-2 border-${color} rounded-none p-2`}
+              >
                 <Image
                   src={SearchIcon}
                   alt="search"
                   className="cursor-pointer"
+                  style={{ filter: color === "white" ? "invert(1)" : "none" }}
                   onClick={() => {
                     setSearchTextHeader(searchRef.current.value);
                     setShowMenu(true);
@@ -105,6 +121,7 @@ const Header = () => {
               src={menu}
               alt="searchIcon"
               className="cursor-pointer"
+              style={{ filter: color === "white" ? "invert(1)" : "none" }}
               onClick={() => {
                 setIsFocus(false);
                 setShowMenu(true);
@@ -121,8 +138,7 @@ const Header = () => {
               alt="Close"
               onClick={() => {
                 setShowMenu(false);
-                setSearchTextHeader("")
-                
+                setSearchTextHeader("");
               }}
             />
           </div>

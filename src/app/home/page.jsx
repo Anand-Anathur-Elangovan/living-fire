@@ -129,7 +129,7 @@ const Home = () => {
         display: "flex",
         flexDirection: "column",
         backgroundColor: "#F7F7F5",
-        gap: "10px",
+        gap: "75px",
       }}
     >
       <div
@@ -141,15 +141,14 @@ const Home = () => {
         <div className={`base-container ${hover ? "hidden" : ""}`}>
           <section className="hero">
             <div className="hero-content">
-              <h1>STUNNING FIREPLACES FOR ANY HOME</h1>
+              <h1>STUNNING FIREPLACES FOR ANY HOME.</h1>
               <p>
                 At Living Fire, we believe our work is complete only when our
                 clients are enjoying the warmth of their new fireplace with a
-                glass of wine in hand. At Living Fire, we believe our work is
-                complete only when our clients are enjoying the warmth of their
-                new fireplace with a glass of wine in hand. At Living Fire, we
-                believe our work is complete only when our clients are enjoying
-                the warmth of.
+                glass of wine in hand. To ensure every customer across Melbourne
+                and Australia finds their match, we have curated an exceptional
+                selection of luxury fireplace brands. Visit our showrooms in
+                Richmond and Moorabbin to experience our products firsthand.
               </p>
             </div>
           </section>
@@ -185,20 +184,25 @@ const Home = () => {
             <h2 className={`blur-text`}>Fireplace Design</h2>
           </div>
           <div className={`button-group ${showButtons ? "show" : ""}`}>
-            {fuelTypes?.map((fuelType, index) => (
-              <button
-                key={"fuelTypes" + fuelType.fueltype_id}
-                onClick={() =>
-                  allProductsRouteHandler(
-                    "fuelType",
-                    fuelType?.fueltype_name,
-                    fuelType.fueltype_id
-                  )
-                }
-              >
-                {fuelType?.fueltype_name}
-              </button>
-            ))}
+            {fuelTypes?.map((fuelType, index) => {
+              if (fuelType?.fueltype_name !== "Hybrid - Wood/Electric")
+                return (
+                  <button
+                    key={"fuelTypes" + fuelType.fueltype_id}
+                    onClick={() =>
+                      allProductsRouteHandler(
+                        "fuelType",
+                        fuelType?.fueltype_name,
+                        fuelType.fueltype_id
+                      )
+                    }
+                  >
+                    {fuelType?.fueltype_name === "Bio-Ethanol"
+                      ? "LPG"
+                      : fuelType?.fueltype_name}
+                  </button>
+                );
+            })}
             {/* <button onClick={() => allProductsRouteHandler()}>Wood</button>
             <button>Electric</button>
             <button>Gas</button>

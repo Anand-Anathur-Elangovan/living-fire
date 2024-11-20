@@ -42,7 +42,7 @@ const HeroImage = ({ src, alt }) => {
   return (
     <>
       <div className="hero-slider">
-        <Slider {...settings}>
+        <Slider className="product-hero-image" {...settings}>
           {images?.map((imageSrc, index) => (
             <div
               key={index}

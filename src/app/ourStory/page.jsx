@@ -155,82 +155,82 @@ const OurStory = () => {
               recommendations.
               </p>
             </div>
-            <div class="showroominfo">
-            <div class="locationinfo">
-              <div class="heading1-1">
-                <p class="headingfive ui text size-h6">Richmond Showroom</p>
+            <div className="showroominfo">
+            <div className="locationinfo">
+              <div className="heading1-1">
+                <p className="headingfive ui text size-h6">Richmond Showroom</p>
               </div>
-              <div class="column-1">
-                <div class="columnheader">
-                  <p class="bodysmall-1 ui text size-body_small">
+              <div className="column-1">
+                <div className="columnheader">
+                  <p className="bodysmall-1 ui text size-body_small">
                     359-361 Swan Street, <br />Richmond, Victoria 3121
                   </p>
-                  <p class="openinghourstex ui text size-body_small">
+                  <p className="openinghourstex ui text size-body_small">
                     Monday – Friday: 9am – 5pm<br />Saturday: 10am – 4pm
                   </p>
                 </div>
                 <div>
-                  <div class="heading1-1">
-                    <p class="bodysmall_one ui text size-body_small">
+                  <div className="heading1-1">
+                    <p className="bodysmall_one ui text size-body_small">
                       info@livingfire.com.au
                     </p>
                   </div>
-                  <div class="heading1-1">
-                    <p class="bodysmall_one ui text size-body_small">
+                  <div className="heading1-1">
+                    <p className="bodysmall_one ui text size-body_small">
                       (03) 9977 7886
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="locationinfo">
-              <div class="heading1-1">
-                <p class="headingfive ui text size-h6">Moorabbin Showroom</p>
+            <div className="locationinfo">
+              <div className="heading1-1">
+                <p className="headingfive ui text size-h6">Moorabbin Showroom</p>
               </div>
-              <div class="column-1">
-                <div class="columnheader">
-                  <p class="bodysmall-1 ui text size-body_small">
+              <div className="column-1">
+                <div className="columnheader">
+                  <p className="bodysmall-1 ui text size-body_small">
                     148-150 Cochranes Road, <br />Moorabbin, Victoria 3189
                   </p>
-                  <p class="openinghourstex ui text size-body_small">
+                  <p className="openinghourstex ui text size-body_small">
                     Monday – Friday: 8:30am – 4:30pm<br />Saturday: 10am – 4pm
                   </p>
                 </div>
                 <div>
-                  <div class="heading1-1">
-                    <p class="bodysmall_one ui text size-body_small">
+                  <div className="heading1-1">
+                    <p className="bodysmall_one ui text size-body_small">
                       info@livingfire.com.au
                     </p>
                   </div>
-                  <div class="heading1-1">
-                    <p class="bodysmall_one ui text size-body_small">
+                  <div className="heading1-1">
+                    <p className="bodysmall_one ui text size-body_small">
                       (03) 9977 7887
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="locationinfo">
-              <div class="heading1-1">
-                <p class="headingfive ui text size-h6">Moorabbin Warehouse</p>
+            <div className="locationinfo">
+              <div className="heading1-1">
+                <p className="headingfive ui text size-h6">Moorabbin Warehouse</p>
               </div>
-              <div class="column-1">
-                <div class="columnheader">
-                  <p class="bodysmall-1 ui text size-body_small">
+              <div className="column-1">
+                <div className="columnheader">
+                  <p className="bodysmall-1 ui text size-body_small">
                     148-150 Cochranes Road, <br />Moorabbin, Victoria 3189
                   </p>
-                  <p class="openinghourstex ui text size-body_small">
+                  <p className="openinghourstex ui text size-body_small">
                     Monday – Friday: 9am – 5pm<br />Saturday: 10am – 4pm
                   </p>
                 </div>
                 <div>
-                  <div class="heading1-1">
-                    <p class="bodysmall_one ui text size-body_small">
+                  <div className="heading1-1">
+                    <p className="bodysmall_one ui text size-body_small">
                       Accounts: 03 9977 7880
                     </p>
                   </div>
-                  <div class="heading1-1">
-                    <p class="bodysmall_one ui text size-body_small">
+                  <div className="heading1-1">
+                    <p className="bodysmall_one ui text size-body_small">
                       Operations: 03 9977 7881
                     </p>
                   </div>

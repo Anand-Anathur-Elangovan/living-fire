@@ -12,9 +12,9 @@ const PrivacyPolicy = () => {
             <p className="privacypolicy ui text size-text2xl">Privacy Policy</p>
           </div>
           <div className="rowdescription">
-            <div class="column-one">
-              <div class="">
-                <p class="description ui text size-body_small">
+            <div className="column-one">
+              <div className="">
+                <p className="description ui text size-body_small">
                   At Living Fire, we understand that we have a responsibility to
                   protect and respect your privacy and look after your personal
                   data.
@@ -25,23 +25,23 @@ const PrivacyPolicy = () => {
                   into account the additional safeguards under General Data
                   Protection Regulations (GDPR) effective 1st July 2017.
                 </p>
-                <div class="columnwhois_one">
-                  <p class="whois_one ui text size-h4">
+                <div className="columnwhois_one">
+                  <p className="whois_one ui text size-h4">
                     Who is responsible for the personal data collected on this
                     site?
                   </p>
-                  <p class="description ui text size-body_small">
+                  <p className="description ui text size-body_small">
                     Your personal data is controlled ultimately by Living Fire
                     Pty Ltd a company registered in Australia with ABN number 92
                     620 098 535 whose registered office is at 361 Swan Street,
                     Richmond, Victoria 3121, Australia.
                   </p>
                 </div>
-                <div class="columnhowdoweus">
-                  <p class="howdoweuse ui text size-h4">
+                <div className="columnhowdoweus">
+                  <p className="howdoweuse ui text size-h4">
                     Paul Agnew Designs Warranty
                   </p>
-                  <p class="description-2 ui text size-body_small">
+                  <p className="description-2 ui text size-body_small">
                     Paul Agnew Designs, through its exclusive distribution
                     partner in Australia and New Zealand, offers a Limited
                     Warranty to the original purchaser, as long as the product
@@ -53,11 +53,11 @@ const PrivacyPolicy = () => {
                     any way.
                   </p>
                 </div>
-                <div class="columnhowdoweus">
-                  <p class="howdoweuse ui text size-h4">
+                <div className="columnhowdoweus">
+                  <p className="howdoweuse ui text size-h4">
                     What personal data do we collect and why?
                   </p>
-                  <p class="description-2 ui text size-body_small">
+                  <p className="description-2 ui text size-body_small">
                     One of the purposes of our website is to inform you of who
                     we are and what we do. We collect and use personal data
                     (including name, address, telephone number, email and IP
@@ -157,34 +157,34 @@ const PrivacyPolicy = () => {
                   </span>
                 </div>
               </div>
-              <div class="columnhowdoweus">
-                <p class="howdoweuse ui text size-h4">
+              <div className="columnhowdoweus">
+                <p className="howdoweuse ui text size-h4">
                   Keeping our records accurate
                 </p>
-                <p class="description-2 ui text size-body_small">
+                <p className="description-2 ui text size-body_small">
                   We aim to keep our information about you as accurate as
                   possible. If you would like to review, change or delete the
                   details you have supplied us with, please contact us at
                   info@livingfire.com.au.
                 </p>
               </div>
-              <div class="columnwhois_one">
-                <p class="whois_one ui text size-h4">
+              <div className="columnwhois_one">
+                <p className="whois_one ui text size-h4">
                   Who is responsible for the personal data collected on this
                   site?
                 </p>
-                <p class="description ui text size-body_small">
+                <p className="description ui text size-body_small">
                   Your personal data is controlled ultimately by Living Fire Pty
                   Ltd a company registered in Australia with ABN number 92 620
                   098 535 whose registered office is at 361 Swan Street,
                   Richmond, Victoria 3121, Australia.
                 </p>
               </div>
-              <div class="columnhowdoweus">
-                <p class="howdoweuse ui text size-h4">
+              <div className="columnhowdoweus">
+                <p className="howdoweuse ui text size-h4">
                   Security of your personal data
                 </p>
-                <p class="description-2 ui text size-body_small">
+                <p className="description-2 ui text size-body_small">
                   We have implemented technology and policies with the objective
                   of protecting your privacy from unauthorised access and
                   improper use and will update these measures as new technology
@@ -192,18 +192,18 @@ const PrivacyPolicy = () => {
                 </p>
               </div>
             </div>
-            <div class="column-two">
-              <div class="columncookiespo">
-                <p class="howdoweuse ui text size-h4">Cookies policy</p>
-                <p class="description-2 ui text size-body_small">
+            <div className="column-two">
+              <div className="columncookiespo">
+                <p className="howdoweuse ui text size-h4">Cookies policy</p>
+                <p className="description-2 ui text size-body_small">
                   We use the term “cookies” to refer to cookies and other
                   similar technologies covered by the EU Directive on privacy in
                   electronic communications.
                 </p>
               </div>
-              <div class="columncookiespo">
-                <p class="howdoweuse ui text size-h4">Third Parties</p>
-                <p class="description-2 ui text size-body_small">
+              <div className="columncookiespo">
+                <p className="howdoweuse ui text size-h4">Third Parties</p>
+                <p className="description-2 ui text size-body_small">
                   For the avoidance of doubt, we do not and never shall sell
                   your personal data to third parties for marketing or
                   advertising purposes. We may pass on your personal data to
@@ -228,9 +228,9 @@ const PrivacyPolicy = () => {
                   questions.
                 </p>
               </div>
-              <div class="columncookiespo">
-                <p class="howdoweuse ui text size-h4">What is a cookie?</p>
-                <p class="description-2 ui text size-body_small">
+              <div className="columncookiespo">
+                <p className="howdoweuse ui text size-h4">What is a cookie?</p>
+                <p className="description-2 ui text size-body_small">
                   Cookies are small data files that your browser places on your
                   computer or device. Cookies help your browser navigate a
                   website and the cookies themselves cannot collect any
@@ -241,9 +241,9 @@ const PrivacyPolicy = () => {
                   cookies it has already sent to you.
                 </p>
               </div>
-              <div class="columncookiespo">
-                <p class="howdoweuse ui text size-h4">Why do we use cookies?</p>
-                <p class="description-2 ui text size-body_small">
+              <div className="columncookiespo">
+                <p className="howdoweuse ui text size-h4">Why do we use cookies?</p>
+                <p className="description-2 ui text size-body_small">
                   We use cookies to learn more about the way you interact with
                   our content and help us to improve your experience when
                   visiting our website.
@@ -261,11 +261,11 @@ const PrivacyPolicy = () => {
                   which are stored on your computer for longer.
                 </p>
               </div>
-              <div class="columncookiespo">
-                <p class="howdoweuse ui text size-h4">
+              <div className="columncookiespo">
+                <p className="howdoweuse ui text size-h4">
                   How are third party cookies used?
                 </p>
-                <p class="description-2 ui text size-body_small">
+                <p className="description-2 ui text size-body_small">
                   For some of the functions within our websites we use third
                   party suppliers, for example, when you visit a page with
                   videos embedded from or, links to, YouTube. These videos or
@@ -275,11 +275,11 @@ const PrivacyPolicy = () => {
                   regarding their use of cookies.
                 </p>
               </div>
-              <div class="columncookiespo">
-                <p class="howdoweuse ui text size-h4">
+              <div className="columncookiespo">
+                <p className="howdoweuse ui text size-h4">
                   How do I reject and delete cookies?
                 </p>
-                <p class="description-2 ui text size-body_small">
+                <p className="description-2 ui text size-body_small">
                   You can choose to reject or block the cookies set by Living
                   Fire Pty Ltd or the websites of any third party suppliers by
                   changing your browser settings – see the Help function within
@@ -302,9 +302,9 @@ const PrivacyPolicy = () => {
                   may not work correctly.
                 </p>
               </div>
-              <div class="columncookiespo">
-                <p class="howdoweuse ui text size-h4">Your Rights</p>
-                <p class="description-2 ui text size-body_small">
+              <div className="columncookiespo">
+                <p className="howdoweuse ui text size-h4">Your Rights</p>
+                <p className="description-2 ui text size-body_small">
                   You have the right to object to our use of your personal data,
                   or ask us to delete, remove or stop using it if there is no
                   need for us to keep it. This is known as your right to be
@@ -331,9 +331,9 @@ const PrivacyPolicy = () => {
                   given us your prior consent.
                 </p>
               </div>
-              <div class="columncookiespo">
-                <p class="howdoweuse ui text size-h4">Changes to this policy</p>
-                <p class="description-2 ui text size-body_small">
+              <div className="columncookiespo">
+                <p className="howdoweuse ui text size-h4">Changes to this policy</p>
+                <p className="description-2 ui text size-body_small">
                   From time to time we may make changes to this privacy policy.
                   If we make any substantial changes to this privacy policy and
                   the way in which we use your personal data we will post these

@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 20px 40px;
   background: transparent; /* Initially transparent */
   z-index: 1000;
   transition: transform 0.3s ease, backdrop-filter 0.3s ease,
@@ -19,8 +19,8 @@
   top: 0;
   transform: translateY(0); /* Ensures it stays at the top smoothly */
   background: transparent; /* Transparent, you can add blur effect */
-  backdrop-filter: blur(10px); /* Optional blur effect */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  /* backdrop-filter: blur(10px); */
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
   opacity: 1; /* Keep opacity at 1 for smooth transition */
 }
 
@@ -76,6 +76,7 @@
 .custom-header-right-side-icons {
   display: flex;
   justify-content: space-between;
+  transition: color 0.3s ease;
   /* gap: 300px; */
 }
 .nav-links a {
