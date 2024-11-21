@@ -66,8 +66,8 @@ const ProductCard = ({
   };
 
   return (
-    <div className="product-element" key={"productCard"}>
-      <div className="relative" style={{ width: "300px", height: "300px" }}>
+    <div className="product-element-all-product" key={"productCard"}>
+      <div className="relative" style={{ width: "300px", height: "380px" }}>
         {isCompare && (
           <div className="absolute z-10 right-0 mr-3 mt-5">
             <input
@@ -85,7 +85,7 @@ const ProductCard = ({
           alt={fn_get_products.p_name ?? ""} //productDetails.fn_get_products.p_name
           className="element-image cursor-pointer"
           width={300} // specify your desired width
-          height={600} // specify your desired height
+          height={380} // specify your desired height
           onClick={() => handleProductClick(fn_get_products?.p_id)}
         />
       </div>
