@@ -31,7 +31,6 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
     searchText,
     0
   );
-  console.log(filteredProducts, "Filter");
   // console.log(searchRef.current?.value);
   // console.log(searchText, searchText !== "", "MENU");
 

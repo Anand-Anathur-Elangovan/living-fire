@@ -87,6 +87,19 @@ export const getProductTypesRepo = async () => {
   }
 };
 
+export const getSubTypesRepo = async () => {
+  try {
+    const query = `select * from public.tbl_subtype WHERE is_active=true order by 1`;
+
+    const result = await pool.query(query); // Await the pool query directly
+    // console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching Range:", error);
+    throw error;
+  }
+};
+
 // export const searchProducts = async (searchTerm, brandIds, ptypeIds) => {
 //   try {
 //     const products = await prismaClient.tblProduct.findMany({

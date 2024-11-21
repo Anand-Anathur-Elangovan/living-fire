@@ -36,7 +36,7 @@ const Products = ({
 
   const {
     brands,
-    masterValues: { fuelTypes, ranges },
+    masterValues: { fuelTypes, ranges, subTypes },
   } = useMasterValues(type);
 
   const [refreshPage, setRefreshPage] = useState(false);
@@ -48,6 +48,9 @@ const Products = ({
 
   const [compareProducts, setCompareProducts] = useState([]);
   const [allProductsTemp, setAllProductsTemp] = useState([]);
+  const [allProductsTempForSubType, setAllProductsTempForSubType] = useState(
+    []
+  );
   const searchRef = useRef(null);
   useEffect(() => {
     const checkFitlers = () => {
@@ -65,11 +68,13 @@ const Products = ({
   }, [allProducts, isFetched]);
 
   useEffect(() => {
-    console.log("COming", allProducts, "rangeType", rangeType);
     if (!rangeType && allProducts && allProducts?.length > 0) {
       setAllProductsTemp(allProducts);
     }
-  }, [brandType, allProducts]);
+    if (!subType && allProducts && allProducts?.length > 0) {
+      setAllProductsTempForSubType(allProducts);
+    }
+  }, [brandType, allProducts, fireplaceType]);
 
   useEffect(() => {
     if (searchText !== "" && searchRef.current)
@@ -174,21 +179,8 @@ const Products = ({
     searchRef.current.value = "";
     setBestSelling(false);
   };
-  const subTypes = [
-    { subtype_id: 1, subtype_name: "Inbuilt", type_id: 1 },
-    { subtype_id: 2, subtype_name: "Fire Pit", type_id: 1 },
-    { subtype_id: 3, subtype_name: "Freestanding", type_id: 1 },
-    { subtype_id: 4, subtype_name: "Sets", type_id: 1 },
-    { subtype_id: 5, subtype_name: "Single Sided", type_id: 2 },
-    { subtype_id: 6, subtype_name: "Single Tools", type_id: 2 },
-    { subtype_id: 7, subtype_name: "Suspended", type_id: 2 },
-    { subtype_id: 8, subtype_name: "Wall Mount", type_id: 3 },
-    { subtype_id: 9, subtype_name: "Wood Storage", type_id: 3 },
-  ];
-  // console.log(pageIndex, "pageIndex", "ranges", ranges, rangeType);
   console.log(allProducts, "allProducts");
-  console.log("allProductsTemp", allProductsTemp);
-  // console.log(JSON.stringify(ranges, null, 2));
+ 
   return (
     <>
       {/* Compare Products */}
@@ -337,23 +329,46 @@ const Products = ({
                     )}
                   </span>
                   <div id="fireplaceFilterId" className="flex flex-col gap-3">
+                    {fireplaceType && subType && (
+                      <span
+                        key={"subTypes_selected"}
+                        className="font-sans font-normal font-small leading-5 text-base text-black"
+                      >
+                        {
+                          subTypes?.find((b) => b?.subtype_id === subType)
+                            ?.subtype_name
+                        }
+                      </span>
+                    )}
+
                     {fireplaceType
                       ? subTypes
-                          .filter((a) => a?.type_id === fireplaceType)
-                          .map((val, index) => (
-                            <span
-                              key={"types" + val?.subtype_id}
-                              className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                              onClick={() => setSubType(val?.subtype_id)}
-                            >
-                              {val?.subtype_name}
-                            </span>
-                          ))
-                      : fuelTypes?.map((val, index) => (
+                          ?.filter((subType) =>
+                            allProductsTempForSubType?.some(
+                              (item) =>
+                                item.fn_get_products?.subtype_id ===
+                                subType.subtype_id
+                            )
+                          )
+                          .map((val) =>
+                            val?.subtype_id === subType ? null : (
+                              <span
+                                key={"types" + val?.subtype_id}
+                                className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                                onClick={() => setSubType(val?.subtype_id)}
+                              >
+                                {val?.subtype_name}
+                              </span>
+                            )
+                          )
+                      : fuelTypes?.map((val) => (
                           <span
                             key={"types" + val.fueltype_id}
-                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                            onClick={() => setFireplaceType(val?.fueltype_id)}
+                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                            onClick={() => {
+                              setSubType(null);
+                              setFireplaceType(val?.fueltype_id);
+                            }}
                           >
                             {val?.fueltype_name}
                           </span>

@@ -135,7 +135,10 @@ const Page = () => {
                   <div
                     className="flex flex-col gap-1 items-center text-center cursor-pointer"
                     key={"fuelTypes" + fuelType?.fueltype_id}
-                    onClick={() => setFireplaceType(fuelType?.fueltype_id)}
+                    onClick={() => {
+                      setSubType(null);
+                      setFireplaceType(fuelType?.fueltype_id);
+                    }}
                   >
                     {fuelType?.fueltype_name ?? "Unknown"}
                     <div
@@ -161,7 +164,10 @@ const Page = () => {
                   <div
                     className="flex flex-col gap-1 items-center text-center cursor-pointer"
                     key={"fuelTypes" + fuelType?.fueltype_id}
-                    onClick={() => setFireplaceType(fuelType?.fueltype_id)}
+                    onClick={() => {
+                      setSubType(null);
+                      setFireplaceType(fuelType?.fueltype_id);
+                    }}
                   >
                     {fuelType?.fueltype_name ?? "Unknown"}
                     <div
