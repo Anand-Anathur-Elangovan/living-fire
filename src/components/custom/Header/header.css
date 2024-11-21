@@ -62,12 +62,12 @@
   80% {
     transform: translateX(15px);
   }
-  85% {
+  /* 85% {
     transform: translateX(0px);
   }
   90% {
     transform: translateX(5px);
-  }
+  } */
   100% {
     transform: translateX(0); /* Settle at the final position (0px from left) */
   }
