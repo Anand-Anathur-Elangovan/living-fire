@@ -1,29 +1,37 @@
 "use client";
 import "./contactus.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import axios from "axios";
+import { useContactUs } from "./hooks/useContactUs";
 
 const ContactUs = () => {
   const [tab, setTab] = useState("sales"); // Manage active tab
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
+
+  const initialFormData = {
+    loggedEmail: "",
     firstName: "",
     lastName: "",
     phoneNumber: "",
     email: "",
     deliveryOption: "",
-    postcode: "",
-    brand: "",
-    product: "",
-    message: "",
-    industry: "",
-    serialNumber: "",
     streetAddress: "",
     suburb: "",
     state: "",
+    postcode: "",
+    message: "",
+    brand: "",
+    product: "",
+    industry: "",
+    serialNumber: "",
     tab: tab,
-  });
+  }
+  
+  const [formData, setFormData] = useState(initialFormData);
+
+  const { mutate, isLoading, isError, isSuccess, error, data } = useContactUs();
+// console.log(mutate, isLoading, isError, isSuccess, error, data)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -33,17 +41,15 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    try {
-      const response = await axios.post("/api/contact", formData); // Replace with your API endpoint
-      alert("Form submitted successfully!");
-      console.log(response.data);
-    } catch (error) {
-      console.error("Form submission error:", error);
-      alert("An error occurred. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    mutate(formData);
   };
+
+  useEffect(()=>{
+    if (isSuccess){
+      setIsSubmitting(false)
+      setFormData(initialFormData)
+    }
+  },[isLoading,isSuccess])
 
   return (
     <>
@@ -74,7 +80,7 @@ const ContactUs = () => {
                     className={`tablist-text ${
                       tab === "sales" ? "active" : ""
                     }`}
-                    onClick={() => setTab("sales")}
+                    onClick={() => {setTab("sales");setFormData(initialFormData)}}
                   >
                     Sales Enquiry
                   </span>
@@ -82,7 +88,7 @@ const ContactUs = () => {
                     className={`tablist-text ${
                       tab === "trade" ? "active" : ""
                     }`}
-                    onClick={() => setTab("trade")}
+                    onClick={() => {setTab("trade");setFormData(initialFormData)}}
                   >
                     Trade Enquiry
                   </span>
@@ -90,7 +96,7 @@ const ContactUs = () => {
                     className={`tablist-text ${
                       tab === "service" ? "active" : ""
                     }`}
-                    onClick={() => setTab("service")}
+                    onClick={() => {setTab("service");setFormData(initialFormData)}}
                   >
                     Service Enquiry
                   </span>
@@ -98,7 +104,7 @@ const ContactUs = () => {
                     className={`tablist-text ${
                       tab === "warranty" ? "active" : ""
                     }`}
-                    onClick={() => setTab("warranty")}
+                    onClick={() => {setTab("warranty");setFormData(initialFormData)}}
                   >
                     Warranty Claim
                   </span>
