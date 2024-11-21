@@ -9,6 +9,17 @@ import Image from "next/image";
 const MaintenanceService = () => {
   const [formData, setFormData] = useState({
     serviceName: "Maintenance Service",
+    first_name: "",
+    last_name: "",
+    phone_number: "",
+    email: "",
+    street_address: "",
+    suburb: "",
+    state: "",
+    postcode: "",
+    description: "",
+    brand: "brand",
+    serial_number: "",
   });
 
   const handleChange = (e) => {
@@ -159,15 +170,10 @@ const MaintenanceService = () => {
           </div>
         </div>
         <hr className="custom-divider" id="service-form" />
-        
+
         <div className="book-service-section">
           <h2>BOOK A SERVICE</h2>
           <form className="service-form" onSubmit={handleSubmit}>
-            <p>
-              For assistance or to schedule a service, contact us at 03 99 777
-              888 or fill out the form below. We are here to help you enjoy your
-              fireplace at its very best!
-            </p>
             <div className="form-group">
               <div className="input-wrapper">
                 <input
@@ -176,7 +182,7 @@ const MaintenanceService = () => {
                   placeholder="First Name*"
                   required
                   onChange={handleChange}
-                  value={formData?.first_name}
+                  value={formData.first_name}
                 />
               </div>
               <div className="input-wrapper">
@@ -186,7 +192,7 @@ const MaintenanceService = () => {
                   placeholder="Last Name*"
                   required
                   onChange={handleChange}
-                  value={formData?.last_name}
+                  value={formData.last_name}
                 />
               </div>
             </div>
@@ -199,7 +205,7 @@ const MaintenanceService = () => {
                   placeholder="Phone Number*"
                   required
                   onChange={handleChange}
-                  value={formData?.phone_number}
+                  value={formData.phone_number}
                 />
               </div>
               <div className="input-wrapper">
@@ -209,7 +215,7 @@ const MaintenanceService = () => {
                   placeholder="Email*"
                   required
                   onChange={handleChange}
-                  value={formData?.email}
+                  value={formData.email}
                 />
               </div>
             </div>
@@ -222,7 +228,7 @@ const MaintenanceService = () => {
                   placeholder="Street Address*"
                   required
                   onChange={handleChange}
-                  value={formData?.street_address}
+                  value={formData.street_address}
                 />
               </div>
               <div className="input-wrapper">
@@ -232,7 +238,7 @@ const MaintenanceService = () => {
                   placeholder="Suburb*"
                   required
                   onChange={handleChange}
-                  value={formData?.suburb}
+                  value={formData.suburb}
                 />
               </div>
             </div>
@@ -245,7 +251,7 @@ const MaintenanceService = () => {
                   placeholder="State*"
                   required
                   onChange={handleChange}
-                  value={formData?.state}
+                  value={formData.state}
                 />
               </div>
               <div className="input-wrapper">
@@ -255,7 +261,7 @@ const MaintenanceService = () => {
                   placeholder="Postcode*"
                   required
                   onChange={handleChange}
-                  value={formData?.postcode}
+                  value={formData.postcode}
                 />
               </div>
             </div>
@@ -266,13 +272,18 @@ const MaintenanceService = () => {
                 placeholder="Description*"
                 required
                 onChange={handleChange}
-                value={formData?.description}
+                value={formData.description}
               ></textarea>
             </div>
 
             <div className="form-group">
               <div className="input-wrapper">
-                <select onChange={handleChange}>
+                <select
+                  name="brand"
+                  onChange={handleChange}
+                  value={formData.brand}
+                  required
+                >
                   <option value="brand">Brand</option>
                   {/* Add more brand options here */}
                 </select>
@@ -282,16 +293,10 @@ const MaintenanceService = () => {
                   name="serial_number"
                   type="text"
                   placeholder="Serial Number"
-                  required
                   onChange={handleChange}
-                  value={formData?.serial_number}
+                  value={formData.serial_number}
                 />
               </div>
-            </div>
-
-            <div className="file-upload">
-              <label>Proof of Purchase</label>
-              <input type="file" />
             </div>
 
             <button type="submit" className="submit-btn">

@@ -9,6 +9,7 @@
   --font-satoru: "Satoru", sans-serif;
   --font-public-sans: "Public Sans", sans-serif;
   caret-color: transparent;
+  caret-color: auto;
 }
 
 h1,
@@ -89,10 +90,14 @@ body {
   border-color: #c7c7ad transparent transparent transparent;
 }
 
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }
 
-.cursor-default{
+.cursor-default {
   cursor: default;
 }
+/* .input,
+textarea {
+  caret-color: auto !important; 
+} */
