@@ -28,6 +28,9 @@ const Products = ({
   searchText,
   setBestSelling,
   setSubType,
+  subType,
+  setRangeType,
+  rangeType,
 }) => {
   // const { allProducts, isFetched } = useAllProducts(type ?? 0);
 
@@ -44,6 +47,7 @@ const Products = ({
   );
 
   const [compareProducts, setCompareProducts] = useState([]);
+  const [allProductsTemp, setAllProductsTemp] = useState([]);
   const searchRef = useRef(null);
   useEffect(() => {
     const checkFitlers = () => {
@@ -59,6 +63,13 @@ const Products = ({
     };
     updateFilteredProducts();
   }, [allProducts, isFetched]);
+
+  useEffect(() => {
+    console.log("COming", allProducts, "rangeType", rangeType);
+    if (!rangeType && allProducts && allProducts?.length > 0) {
+      setAllProductsTemp(allProducts);
+    }
+  }, [brandType, allProducts]);
 
   useEffect(() => {
     if (searchText !== "" && searchRef.current)
@@ -159,6 +170,7 @@ const Products = ({
     setproductMenuIndex(0);
     setSearchText("");
     setSubType(null);
+    setRangeType(null);
     searchRef.current.value = "";
     setBestSelling(false);
   };
@@ -173,7 +185,10 @@ const Products = ({
     { subtype_id: 8, subtype_name: "Wall Mount", type_id: 3 },
     { subtype_id: 9, subtype_name: "Wood Storage", type_id: 3 },
   ];
-  console.log(pageIndex, "pageIndex");
+  // console.log(pageIndex, "pageIndex", "ranges", ranges, rangeType);
+  console.log(allProducts, "allProducts");
+  console.log("allProductsTemp", allProductsTemp);
+  // console.log(JSON.stringify(ranges, null, 2));
   return (
     <>
       {/* Compare Products */}
@@ -355,18 +370,29 @@ const Products = ({
                     {!document
                       .getElementById("rangesFilterId")
                       ?.classList?.contains("collapse") && (
-                      <Image
-                        src={MinusIcon}
-                        alt="clear"
-                        className="pt-1 cursor-pointer"
-                        onClick={() => {
-                          setRefreshPage((prev) => !prev);
-                          document
-                            .getElementById("rangesFilterId")
-                            .classList.add("collapse");
-                        }}
-                      />
+                      <div style={{ display: "flex", gap: "30px" }}>
+                        <Image
+                          src={MinusIcon}
+                          alt="clear"
+                          className="pt-1 cursor-pointer"
+                          onClick={() => {
+                            setRefreshPage((prev) => !prev);
+                            document
+                              .getElementById("rangesFilterId")
+                              .classList.add("collapse");
+                          }}
+                        />
+                        <span className="flex items-center font-sans font-normal text-base cursor-pointer">
+                          <Image
+                            src={CrossIcon}
+                            alt="clear"
+                            className="pt-1 cursor-pointer"
+                            onClick={() => setRangeType(null)}
+                          />
+                        </span>
+                      </div>
                     )}
+
                     {document
                       .getElementById("rangesFilterId")
                       ?.classList?.contains("collapse") && (
@@ -387,15 +413,37 @@ const Products = ({
                     id="rangesFilterId"
                     className="flex flex-col gap-3 mr-10"
                   >
-                    {ranges.map((val, index) => (
+                    {rangeType && (
                       <span
-                        key={"ranges" + val?.range_id}
-                        className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                        // onClick={() => setBrandType(val.range_id)}
+                        key={"ranges_selected"}
+                        className="font-sans font-normal font-small leading-5 text-base text-black"
+                        // onClick={() => setBrandType(val?.brand_id)}
                       >
-                        {val?.range_name}
+                        {
+                          ranges?.find((b) => b?.range_id === rangeType)
+                            ?.range_name
+                        }
                       </span>
-                    ))}
+                    )}
+                    {ranges
+                      .filter((range) =>
+                        allProductsTemp.some(
+                          (item) =>
+                            item.fn_get_products?.range_id === range.range_id
+                        )
+                      )
+                      .map((val, index) => {
+                        if (val?.range_id === rangeType) return;
+                        return (
+                          <span
+                            key={"ranges" + val?.range_id}
+                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                            onClick={() => setRangeType(val?.range_id)}
+                          >
+                            {val?.range_name}
+                          </span>
+                        );
+                      })}
                   </div>
                 </div>
               )}
@@ -459,7 +507,10 @@ const Products = ({
                         <span
                           key={"brands" + val?.brand_id}
                           className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                          onClick={() => setBrandType(val?.brand_id)}
+                          onClick={() => {
+                            setRangeType(null);
+                            setBrandType(val?.brand_id);
+                          }}
                         >
                           {val?.brand_name}
                         </span>

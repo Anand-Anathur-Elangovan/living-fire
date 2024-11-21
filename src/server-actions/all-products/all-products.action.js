@@ -16,6 +16,7 @@ export const getAllProductsPageDataAction = async ({
   bestSelling,
   searchText,
   subType,
+  rangeType
 }) => {
   console.log(type_id);
   const allProducts = await getAllProducts({
@@ -25,6 +26,7 @@ export const getAllProductsPageDataAction = async ({
     bestSelling,
     searchText,
     subType,
+    rangeType
   })
     .then((res) =>
       res.map((val) => {

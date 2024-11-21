@@ -26,6 +26,7 @@ const Page = () => {
   const [searchText, setSearchText] = useState("");
   const [bestSelling, setBestSelling] = useState(false);
   const [subType, setSubType] = useState(null);
+  const [rangeType, setRangeType] = useState(null);
 
   const searchParams = useSearchParams();
   useEffect(() => {
@@ -42,7 +43,8 @@ const Page = () => {
     brandType ?? 0,
     bestSelling,
     searchText,
-    subType ?? 0
+    subType ?? 0,
+    rangeType ?? 0
   );
 
   useEffect(() => {
@@ -208,6 +210,9 @@ const Page = () => {
           searchText={searchText}
           setBestSelling={setBestSelling}
           setSubType={setSubType}
+          subType={subType}
+          setRangeType={setRangeType}
+          rangeType={rangeType}
         />
         <OurDifference />
         <OurShowrooms />

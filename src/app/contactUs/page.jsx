@@ -365,8 +365,8 @@ const ContactUs = () => {
                     <form className="service-form" onSubmit={handleSubmit}>
                       <p className="form-description ui text">
                         For assistance or to schedule a service, contact us at
-                        03 99 777 888 or fill out the form below. We're here to
-                        help you enjoy your fireplace at its very best!
+                        03 99 777 888 or fill out the form below. We are here to
+                        help you enjoy your fireplace at its very best!
                       </p>
                       <div className="form-group">
                         <div className="input-wrapper">
@@ -653,7 +653,7 @@ const AddressDetails = () => (
       At Living Fire, we believe our work is complete only when our clients are
       enjoying the warmth of their new fireplace with a glass of wine in hand.
       To ensure every customer across Melbourne and Australia finds their
-      perfect match, we've curated an exceptional selection of luxury fireplace
+      perfect match, we have curated an exceptional selection of luxury fireplace
       brands. Visit our showrooms in Richmond and Moorabbin to experience our
       products firsthand.
     </p>

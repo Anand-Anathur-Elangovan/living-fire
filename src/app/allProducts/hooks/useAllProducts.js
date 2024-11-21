@@ -14,7 +14,8 @@ const useAllProducts = (
   brandType,
   bestSelling,
   searchText,
-  subType
+  subType,
+  rangeType
 ) => {
   const initialData = [];
   const {
@@ -30,6 +31,7 @@ const useAllProducts = (
         bestSelling +
         searchText +
         subType,
+        rangeType
     ],
     queryFn: () =>
       getAllProductsPageDataAction({
@@ -39,6 +41,7 @@ const useAllProducts = (
         bestSelling,
         searchText,
         subType,
+        rangeType
       }),
     staleTime: 0,
     // enabled: productMenuIndex ? true : false,
