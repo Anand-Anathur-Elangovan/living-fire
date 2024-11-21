@@ -73,6 +73,10 @@ const Header = () => {
               alt="Logo"
               className="custom-header-width"
               onClick={handleHomeIconClick}
+              // style={{
+              //   filter:
+              //     color === "white" ? "invert(1) brightness(1.5)" : "none",
+              // }}
             />
           </div>
           <div
