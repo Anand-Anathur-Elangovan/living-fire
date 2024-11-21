@@ -382,14 +382,14 @@ const Products = ({
                               .classList.add("collapse");
                           }}
                         />
-                        <span className="flex items-center font-sans font-normal text-base cursor-pointer">
+                        {/* <span className="flex items-center font-sans font-normal text-base cursor-pointer">
                           <Image
                             src={CrossIcon}
                             alt="clear"
                             className="pt-1 cursor-pointer"
                             onClick={() => setRangeType(null)}
                           />
-                        </span>
+                        </span> */}
                       </div>
                     )}
 
