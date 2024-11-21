@@ -61,13 +61,13 @@ export default function Footer() {
                 </p>
               </a>
             </li>
-            {/* <li>
-              <a href="#">
+            <li>
+              <a href="/maintenanceService">
                 <p className="nofilechosen ui text size-body_small">
                   Our Services
                 </p>
               </a>
-            </li> */}
+            </li>
             <li>
               <a href="/contactUs">
                 <p className="nofilechosen ui text size-body_small">
@@ -98,14 +98,14 @@ export default function Footer() {
                   Trade Accounts
                 </p>
               </a>
-            </li>
+            </li> */}
             <li>
-              <a href="/maintenanceService" className="bodysmall-link">
+              <a href="/warranty" className="bodysmall-link">
                 <p className="nofilechosen ui text size-body_small">
                   Warranty &amp; Servicing
                 </p>
               </a>
-            </li> */}
+            </li>
             <li>
               <a href="/terms" className="bodysmall-link-1">
                 <p className="nofilechosen ui text size-body_small">
