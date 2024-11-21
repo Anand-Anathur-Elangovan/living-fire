@@ -6,6 +6,7 @@ import ourwood3 from "@/public/assets/ourStory/image3.png";
 import manimg from "@/public/assets/ourStory/image4.png";
 import "./ourstory.css";
 import Image from "next/image";
+import Testimonials from "../home/components/testimonials";
 
 const OurStory = () => {
   return (
@@ -265,6 +266,7 @@ const OurStory = () => {
             </div>
           </div>
         </section>
+        <Testimonials />
       </div>
     </>
   );
