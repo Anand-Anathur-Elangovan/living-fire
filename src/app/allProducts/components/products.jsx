@@ -180,7 +180,7 @@ const Products = ({
     setBestSelling(false);
   };
   console.log(allProducts, "allProducts");
- 
+
   return (
     <>
       {/* Compare Products */}
@@ -242,7 +242,8 @@ const Products = ({
           </div>
         )}
         {isFilter && (
-          <div className="flex flex-col gap-4 w-3/12 max-w-10/12">
+          // <div className="flex flex-col gap-4 w-3/12 max-w-10/12">
+          <div className="flex flex-col gap-4 w-[20%] max-w-10/12">
             <div className="flex flex-row py-3 justify-between border-b border-solid border-[#D3C6BB]">
               <span className="flex gap-4 uppercase font-sans font-normal text-base">
                 Filters{" "}
@@ -623,7 +624,7 @@ const Products = ({
         {/* Products */}
         <div
           className={`flex flex-wrap gap-8 py-3 ${
-            isFilter ? "w-9/12" : "w-full"
+            isFilter ? "w-[80%]" : "w-full"
           }`}
         >
           {filteredProducts?.map((product, index) => (
@@ -640,7 +641,7 @@ const Products = ({
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center gap-2 font-[Satoru] text-[26px] cursor-pointer">
         {!(pageIndex === 0) && (
           <Image
             src={LeftArrowIcon}
