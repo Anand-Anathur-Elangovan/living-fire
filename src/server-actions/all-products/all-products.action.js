@@ -6,6 +6,7 @@ import {
   getFuelTypesRepo,
   getProductTypesRepo,
   getRangeRepo,
+  getSubTypesRepo,
   // searchProducts,
 } from "@/src/repo/all-products/all-products.repo";
 
@@ -16,8 +17,8 @@ export const getAllProductsPageDataAction = async ({
   bestSelling,
   searchText,
   subType,
+  rangeType,
 }) => {
-  console.log(type_id);
   const allProducts = await getAllProducts({
     type_id,
     fireplaceType,
@@ -25,6 +26,7 @@ export const getAllProductsPageDataAction = async ({
     bestSelling,
     searchText,
     subType,
+    rangeType,
   })
     .then((res) =>
       res.map((val) => {
@@ -57,11 +59,14 @@ export const getMasterValuesAction = async () => {
   const productTypes = await getProductTypesRepo()
     .then((res) => res)
     .catch((err) => []);
+  const subTypes = await getSubTypesRepo()
+    .then((res) => res)
+    .catch((err) => []);
 
   return {
     ...responsePayload,
     success: true,
     message: "Fetched All Firetypes data",
-    result: { ranges, fuelTypes, productTypes },
+    result: { ranges, fuelTypes, productTypes, subTypes },
   };
 };

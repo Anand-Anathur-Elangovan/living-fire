@@ -28,12 +28,15 @@ const Products = ({
   searchText,
   setBestSelling,
   setSubType,
+  subType,
+  setRangeType,
+  rangeType,
 }) => {
   // const { allProducts, isFetched } = useAllProducts(type ?? 0);
 
   const {
     brands,
-    masterValues: { fuelTypes, ranges },
+    masterValues: { fuelTypes, ranges, subTypes },
   } = useMasterValues(type);
 
   const [refreshPage, setRefreshPage] = useState(false);
@@ -44,6 +47,10 @@ const Products = ({
   );
 
   const [compareProducts, setCompareProducts] = useState([]);
+  const [allProductsTemp, setAllProductsTemp] = useState([]);
+  const [allProductsTempForSubType, setAllProductsTempForSubType] = useState(
+    []
+  );
   const searchRef = useRef(null);
   useEffect(() => {
     const checkFitlers = () => {
@@ -59,6 +66,15 @@ const Products = ({
     };
     updateFilteredProducts();
   }, [allProducts, isFetched]);
+
+  useEffect(() => {
+    if (!rangeType && allProducts && allProducts?.length > 0) {
+      setAllProductsTemp(allProducts);
+    }
+    if (!subType && allProducts && allProducts?.length > 0) {
+      setAllProductsTempForSubType(allProducts);
+    }
+  }, [brandType, allProducts, fireplaceType]);
 
   useEffect(() => {
     if (searchText !== "" && searchRef.current)
@@ -159,21 +175,12 @@ const Products = ({
     setproductMenuIndex(0);
     setSearchText("");
     setSubType(null);
+    setRangeType(null);
     searchRef.current.value = "";
     setBestSelling(false);
   };
-  const subTypes = [
-    { subtype_id: 1, subtype_name: "Inbuilt", type_id: 1 },
-    { subtype_id: 2, subtype_name: "Fire Pit", type_id: 1 },
-    { subtype_id: 3, subtype_name: "Freestanding", type_id: 1 },
-    { subtype_id: 4, subtype_name: "Sets", type_id: 1 },
-    { subtype_id: 5, subtype_name: "Single Sided", type_id: 2 },
-    { subtype_id: 6, subtype_name: "Single Tools", type_id: 2 },
-    { subtype_id: 7, subtype_name: "Suspended", type_id: 2 },
-    { subtype_id: 8, subtype_name: "Wall Mount", type_id: 3 },
-    { subtype_id: 9, subtype_name: "Wood Storage", type_id: 3 },
-  ];
-  console.log(pageIndex, "pageIndex");
+  console.log(allProducts, "allProducts");
+ 
   return (
     <>
       {/* Compare Products */}
@@ -216,7 +223,7 @@ const Products = ({
       <div
         className={`flex ${
           isFilter ? "" : "flex-col"
-        } px-1 border-t border-solid border-[#D3C6BB] w-full gap-5 transistion ease-in-out duration-300`}
+        } px-1 border-t border-solid border-[#D3C6BB] w-full gap-5 transistion ease-in-out duration-300 items-start`}
       >
         {/* Filter */}
         {!isFilter && (
@@ -322,23 +329,46 @@ const Products = ({
                     )}
                   </span>
                   <div id="fireplaceFilterId" className="flex flex-col gap-3">
+                    {fireplaceType && subType && (
+                      <span
+                        key={"subTypes_selected"}
+                        className="font-sans font-normal font-small leading-5 text-base text-black"
+                      >
+                        {
+                          subTypes?.find((b) => b?.subtype_id === subType)
+                            ?.subtype_name
+                        }
+                      </span>
+                    )}
+
                     {fireplaceType
                       ? subTypes
-                          .filter((a) => a?.type_id === fireplaceType)
-                          .map((val, index) => (
-                            <span
-                              key={"types" + val?.subtype_id}
-                              className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                              onClick={() => setSubType(val?.subtype_id)}
-                            >
-                              {val?.subtype_name}
-                            </span>
-                          ))
-                      : fuelTypes?.map((val, index) => (
+                          ?.filter((subType) =>
+                            allProductsTempForSubType?.some(
+                              (item) =>
+                                item.fn_get_products?.subtype_id ===
+                                subType.subtype_id
+                            )
+                          )
+                          .map((val) =>
+                            val?.subtype_id === subType ? null : (
+                              <span
+                                key={"types" + val?.subtype_id}
+                                className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                                onClick={() => setSubType(val?.subtype_id)}
+                              >
+                                {val?.subtype_name}
+                              </span>
+                            )
+                          )
+                      : fuelTypes?.map((val) => (
                           <span
                             key={"types" + val.fueltype_id}
-                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                            onClick={() => setFireplaceType(val?.fueltype_id)}
+                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                            onClick={() => {
+                              setSubType(null);
+                              setFireplaceType(val?.fueltype_id);
+                            }}
                           >
                             {val?.fueltype_name}
                           </span>
@@ -355,18 +385,29 @@ const Products = ({
                     {!document
                       .getElementById("rangesFilterId")
                       ?.classList?.contains("collapse") && (
-                      <Image
-                        src={MinusIcon}
-                        alt="clear"
-                        className="pt-1 cursor-pointer"
-                        onClick={() => {
-                          setRefreshPage((prev) => !prev);
-                          document
-                            .getElementById("rangesFilterId")
-                            .classList.add("collapse");
-                        }}
-                      />
+                      <div style={{ display: "flex", gap: "30px" }}>
+                        <Image
+                          src={MinusIcon}
+                          alt="clear"
+                          className="pt-1 cursor-pointer"
+                          onClick={() => {
+                            setRefreshPage((prev) => !prev);
+                            document
+                              .getElementById("rangesFilterId")
+                              .classList.add("collapse");
+                          }}
+                        />
+                        {/* <span className="flex items-center font-sans font-normal text-base cursor-pointer">
+                          <Image
+                            src={CrossIcon}
+                            alt="clear"
+                            className="pt-1 cursor-pointer"
+                            onClick={() => setRangeType(null)}
+                          />
+                        </span> */}
+                      </div>
                     )}
+
                     {document
                       .getElementById("rangesFilterId")
                       ?.classList?.contains("collapse") && (
@@ -387,15 +428,37 @@ const Products = ({
                     id="rangesFilterId"
                     className="flex flex-col gap-3 mr-10"
                   >
-                    {ranges.map((val, index) => (
+                    {rangeType && (
                       <span
-                        key={"ranges" + val?.range_id}
-                        className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                        // onClick={() => setBrandType(val.range_id)}
+                        key={"ranges_selected"}
+                        className="font-sans font-normal font-small leading-5 text-base text-black"
+                        // onClick={() => setBrandType(val?.brand_id)}
                       >
-                        {val?.range_name}
+                        {
+                          ranges?.find((b) => b?.range_id === rangeType)
+                            ?.range_name
+                        }
                       </span>
-                    ))}
+                    )}
+                    {ranges
+                      .filter((range) =>
+                        allProductsTemp.some(
+                          (item) =>
+                            item.fn_get_products?.range_id === range.range_id
+                        )
+                      )
+                      .map((val, index) => {
+                        if (val?.range_id === rangeType) return;
+                        return (
+                          <span
+                            key={"ranges" + val?.range_id}
+                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                            onClick={() => setRangeType(val?.range_id)}
+                          >
+                            {val?.range_name}
+                          </span>
+                        );
+                      })}
                   </div>
                 </div>
               )}
@@ -459,7 +522,10 @@ const Products = ({
                         <span
                           key={"brands" + val?.brand_id}
                           className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                          onClick={() => setBrandType(val?.brand_id)}
+                          onClick={() => {
+                            setRangeType(null);
+                            setBrandType(val?.brand_id);
+                          }}
                         >
                           {val?.brand_name}
                         </span>
@@ -469,7 +535,7 @@ const Products = ({
                 </div>
               }
             </div>
-            <div className="flex flex-col gap-3 py-3">
+            <div className="flex flex-col gap-3 py-3 mr-10">
               <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                 Sort By{" "}
                 {!document

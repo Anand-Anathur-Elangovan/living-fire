@@ -92,7 +92,7 @@ export default function Footer() {
         <div className="footer-column3">
           <p className="headingfive ui text size-h6">Customer Care</p>
           <ul className="columnbodysmall-3">
-            <li>
+            {/* <li>
               <a href="#">
                 <p className="nofilechosen ui text size-body_small">
                   Trade Accounts
@@ -105,7 +105,7 @@ export default function Footer() {
                   Warranty &amp; Servicing
                 </p>
               </a>
-            </li>
+            </li> */}
             <li>
               <a href="/terms" className="bodysmall-link-1">
                 <p className="nofilechosen ui text size-body_small">
@@ -121,15 +121,15 @@ export default function Footer() {
               </a>
             </li>
           </ul>
-          <p className="headingfive ui text size-h6">Specs &amp; Guides</p>
+          {/* <p className="headingfive ui text size-h6">Specs &amp; Guides</p>
           <ul>
-            {/* <li>
+            <li>
               <a href="#" className="bodysmall-link-3">
                 <p className="nofilechosen ui text size-body_small">
                   Industry Hub
                 </p>
               </a>
-            </li> */}
+            </li>
             <li>
               <a href="#" className="bodysmall-link-1">
                 <p className="nofilechosen ui text size-body_small">
@@ -142,7 +142,7 @@ export default function Footer() {
                 <p className="nofilechosen ui text size-body_small">Glossary</p>
               </a>
             </li>
-          </ul>
+          </ul> */}
         </div>
 
         {/* Column 4: Stay in the Loop */}

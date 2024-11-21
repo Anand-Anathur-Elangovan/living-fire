@@ -26,6 +26,7 @@ const Page = () => {
   const [searchText, setSearchText] = useState("");
   const [bestSelling, setBestSelling] = useState(false);
   const [subType, setSubType] = useState(null);
+  const [rangeType, setRangeType] = useState(null);
 
   const searchParams = useSearchParams();
   useEffect(() => {
@@ -42,7 +43,8 @@ const Page = () => {
     brandType ?? 0,
     bestSelling,
     searchText,
-    subType ?? 0
+    subType ?? 0,
+    rangeType ?? 0
   );
 
   useEffect(() => {
@@ -61,9 +63,9 @@ const Page = () => {
 
   return (
     <>
-      <div className="flex flex-col px-16 gap-3 bg-[#F7F7F5]">
+      <div className="flex flex-col px-16 gap-3 bg-[#F7F7F5] ">
         <div className="flex flex-col items-center">
-          <div className="heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru]">
+          <div className="heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
             {!brandType
               ? `${
                   fireplaceType
@@ -133,7 +135,10 @@ const Page = () => {
                   <div
                     className="flex flex-col gap-1 items-center text-center cursor-pointer"
                     key={"fuelTypes" + fuelType?.fueltype_id}
-                    onClick={() => setFireplaceType(fuelType?.fueltype_id)}
+                    onClick={() => {
+                      setSubType(null);
+                      setFireplaceType(fuelType?.fueltype_id);
+                    }}
                   >
                     {fuelType?.fueltype_name ?? "Unknown"}
                     <div
@@ -159,7 +164,10 @@ const Page = () => {
                   <div
                     className="flex flex-col gap-1 items-center text-center cursor-pointer"
                     key={"fuelTypes" + fuelType?.fueltype_id}
-                    onClick={() => setFireplaceType(fuelType?.fueltype_id)}
+                    onClick={() => {
+                      setSubType(null);
+                      setFireplaceType(fuelType?.fueltype_id);
+                    }}
                   >
                     {fuelType?.fueltype_name ?? "Unknown"}
                     <div
@@ -208,6 +216,9 @@ const Page = () => {
           searchText={searchText}
           setBestSelling={setBestSelling}
           setSubType={setSubType}
+          subType={subType}
+          setRangeType={setRangeType}
+          rangeType={rangeType}
         />
         <OurDifference />
         <OurShowrooms />

@@ -31,7 +31,6 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
     searchText,
     0
   );
-  console.log(filteredProducts, "Filter");
   // console.log(searchRef.current?.value);
   // console.log(searchText, searchText !== "", "MENU");
 
@@ -258,7 +257,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
             </div>
             <div className="sale-row2">
               <a href="/ourStory">
-                <p className="headingthree ui text size-h3">our Story</p>
+                <p className="headingthree ui text size-h3">Our Story</p>
               </a>
               {/* <a href="#">
                 <p className="headingthree-3 ui text size-h3">Showrooms</p>

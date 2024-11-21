@@ -86,6 +86,8 @@ const Product = ({ params }) => {
     brand_name,
     product_details,
     specifications,
+    fueltype_id,
+    brand_id
   } = productData;
   console.log("productData", productData);
   const productRouteHandler = (productId) => {
@@ -111,6 +113,8 @@ const Product = ({ params }) => {
             fuelType={fueltype_name}
             productName={name}
             brandName={brand_name}
+          fuelTypeId={fueltype_id}
+          brandId={brand_id}
           />
           {/* <br/> */}
           <HeroImage

@@ -8,7 +8,12 @@ const useMasterValues = () => {
   const { brands } = useHomePage();
 
   const {
-    data: masterValues = { ranges: [], fuelTypes: [], productTypes: [] },
+    data: masterValues = {
+      ranges: [],
+      fuelTypes: [],
+      productTypes: [],
+      subTypes: [],
+    },
     isFetched: isFetchedValues,
   } = useQuery({
     queryKey: ["getMasterValuesAction"],
@@ -17,7 +22,7 @@ const useMasterValues = () => {
       // console.log(res);
       if (res.success) return res.result;
       toast.error(res.message);
-      return { ranges: [], fuelTypes: [], productTypes: [] };
+      return { ranges: [], fuelTypes: [], productTypes: [], subTypes: [] };
     },
   });
 

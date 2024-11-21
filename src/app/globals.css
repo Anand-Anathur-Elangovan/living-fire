@@ -8,6 +8,7 @@
   --foreground: #171717;
   --font-satoru: "Satoru", sans-serif;
   --font-public-sans: "Public Sans", sans-serif;
+  caret-color: transparent;
 }
 
 h1,
@@ -86,4 +87,12 @@ body {
   border-width: 5px;
   border-style: solid;
   border-color: #c7c7ad transparent transparent transparent;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.cursor-default{
+  cursor: default;
 }

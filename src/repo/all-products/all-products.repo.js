@@ -15,9 +15,10 @@ export const getAllProducts = async ({
   bestSelling,
   searchText,
   subType,
+  rangeType,
 }) => {
   try {
-    const query = `SELECT * FROM fn_get_products(0,${fireplaceType},${brandType},${type_id},${bestSelling},${subType},'${searchText?.toLowerCase()}')`;
+    const query = `SELECT * FROM fn_get_products(0,${fireplaceType},${brandType},${type_id},${rangeType},${bestSelling},${subType},'${searchText?.toLowerCase()}')`;
     const result = await pool.query(query); // Await the pool query directly
     // const formatResults = result.rows.map(({ fn_get_products }) => ({
     //   ...fn_get_products,
@@ -76,6 +77,19 @@ export const getRangeRepo = async () => {
 export const getProductTypesRepo = async () => {
   try {
     const query = `select * from public.tbl_product_type WHERE is_active=true order by 1`;
+
+    const result = await pool.query(query); // Await the pool query directly
+    // console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching Range:", error);
+    throw error;
+  }
+};
+
+export const getSubTypesRepo = async () => {
+  try {
+    const query = `select * from public.tbl_subtype WHERE is_active=true order by 1`;
 
     const result = await pool.query(query); // Await the pool query directly
     // console.log(result.rows);
