@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import "../home.css"; 
+import "../home.css";
 
 const Testimonials = (props) => {
   const content = [
@@ -21,12 +21,14 @@ const Testimonials = (props) => {
   // Slider settings
   const settings = {
     dots: true,
+    infinite: true,
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
     className: "flex gap-4",
-    // nextArrow: <></>,
-    // prevArrow: <></>,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    arrows: false,
   };
   return (
     <div className="flex relative justify-center flex-col p-2">

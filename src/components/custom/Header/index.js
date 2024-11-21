@@ -121,7 +121,10 @@ const Header = () => {
               src={menu}
               alt="searchIcon"
               className="cursor-pointer"
-              style={{ filter: color === "white" ? "invert(1)" : "none" }}
+              style={{
+                filter:
+                  color === "white" ? "invert(1) brightness(1.5)" : "none",
+              }}
               onClick={() => {
                 setIsFocus(false);
                 setShowMenu(true);

@@ -25,9 +25,9 @@ const HeroImage = ({ src, alt }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 3000,
-    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    arrows: false,
     afterChange: (index) => setCurrentImageIndex(index),
   };
 
