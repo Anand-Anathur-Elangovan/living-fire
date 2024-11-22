@@ -26,12 +26,12 @@ const ContactUs = () => {
     industry: "",
     serialNumber: "",
     tab: tab,
-  }
-  
+  };
+
   const [formData, setFormData] = useState(initialFormData);
 
   const { mutate, isLoading, isError, isSuccess, error, data } = useContactUs();
-// console.log(mutate, isLoading, isError, isSuccess, error, data)
+  // console.log(mutate, isLoading, isError, isSuccess, error, data)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -44,15 +44,15 @@ const ContactUs = () => {
     mutate(formData);
   };
 
-  useEffect(()=>{
-    if (isSuccess){
-      setIsSubmitting(false)
-      setFormData(initialFormData)
+  useEffect(() => {
+    if (isSuccess) {
+      setIsSubmitting(false);
+      setFormData(initialFormData);
     }
-  },[isLoading,isSuccess])
+  }, [isLoading, isSuccess]);
 
   return (
-    <>
+    <div style={{ backgroundColor: "#f7f7f5", margin: "100px 0px" }}>
       <Head>
         <title>Contact Us</title>
         <link rel="stylesheet" href="/index.css" />
@@ -80,7 +80,10 @@ const ContactUs = () => {
                     className={`tablist-text ${
                       tab === "sales" ? "active" : ""
                     }`}
-                    onClick={() => {setTab("sales");setFormData(initialFormData)}}
+                    onClick={() => {
+                      setTab("sales");
+                      setFormData(initialFormData);
+                    }}
                   >
                     Sales Enquiry
                   </span>
@@ -88,7 +91,10 @@ const ContactUs = () => {
                     className={`tablist-text ${
                       tab === "trade" ? "active" : ""
                     }`}
-                    onClick={() => {setTab("trade");setFormData(initialFormData)}}
+                    onClick={() => {
+                      setTab("trade");
+                      setFormData(initialFormData);
+                    }}
                   >
                     Trade Enquiry
                   </span>
@@ -96,7 +102,10 @@ const ContactUs = () => {
                     className={`tablist-text ${
                       tab === "service" ? "active" : ""
                     }`}
-                    onClick={() => {setTab("service");setFormData(initialFormData)}}
+                    onClick={() => {
+                      setTab("service");
+                      setFormData(initialFormData);
+                    }}
                   >
                     Service Enquiry
                   </span>
@@ -104,7 +113,10 @@ const ContactUs = () => {
                     className={`tablist-text ${
                       tab === "warranty" ? "active" : ""
                     }`}
-                    onClick={() => {setTab("warranty");setFormData(initialFormData)}}
+                    onClick={() => {
+                      setTab("warranty");
+                      setFormData(initialFormData);
+                    }}
                   >
                     Warranty Claim
                   </span>
@@ -649,7 +661,7 @@ const ContactUs = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
@@ -659,9 +671,9 @@ const AddressDetails = () => (
       At Living Fire, we believe our work is complete only when our clients are
       enjoying the warmth of their new fireplace with a glass of wine in hand.
       To ensure every customer across Melbourne and Australia finds their
-      perfect match, we have curated an exceptional selection of luxury fireplace
-      brands. Visit our showrooms in Richmond and Moorabbin to experience our
-      products firsthand.
+      perfect match, we have curated an exceptional selection of luxury
+      fireplace brands. Visit our showrooms in Richmond and Moorabbin to
+      experience our products firsthand.
     </p>
     <div className="locationinfo">
       <div className="column-address">
