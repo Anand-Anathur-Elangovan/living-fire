@@ -1,4 +1,4 @@
-/* .warrenty-page{    
+.warrenty-page{    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +27,7 @@ input:focus {
   }
   
 [type="text"],
-input:where(:not ([type])),
+input:not([type]),
 [type="email"], 
 [type="url"],
 [type="password"], 
@@ -52,11 +52,13 @@ font-size: unset;
 line-height: unset;
 color: inherit;
 }
-input: focus-visible, [multiple]: focus-visible, textarea: focus-visible,
-select: focus-visible {
-outline: none;
-}
 
+input:focus-visible, 
+textarea:focus-visible, 
+select:focus-visible, 
+select[multiple]:focus-visible { 
+  outline: none; 
+}
 
 .column1, .column2{
     width: 100%;
@@ -72,7 +74,7 @@ outline: none;
 .column2{
     margin-bottom: 40px;
     gap: 16px;
-    width: auto%;
+    width: auto;
     display: flex;
     flex-direction: column;
     padding: 0 20px;
@@ -256,4 +258,4 @@ form{
         padding-left: 56px;
         padding-right: 56px;}
        
-} */
+}
