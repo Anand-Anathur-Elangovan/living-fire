@@ -220,82 +220,84 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
       <h1 className={styles.title}>{name?.toUpperCase()}</h1>
       <p className={styles.subtitle}>Build your product</p>
 
-      {short_desc?.map((section, index) => (
-        <div key={index} className={styles.section}>
-          <h3 className={styles.sectionTitle}>{section.name}</h3>
+      {short_desc &&
+        short_desc?.map((section, index) => (
+          <div key={index} className={styles.section}>
+            <h3 className={styles.sectionTitle}>{section.name}</h3>
 
-          <div
-            className={
-              section.name === "MATERIAL & FINISH OPTIONS"
-                ? styles.materialOptionsRow
-                : ""
-            }
-          >
-            {section.value.map((option, optionIndex) => (
-              <label
-                key={optionIndex}
-                className={`${styles.option} ${
-                  section.name === "MATERIAL & FINISH OPTIONS"
-                    ? styles.materialOptionLabel
-                    : ""
-                }`}
-              >
-                <input
-                  type={
-                    section.name === "ZERO CLEARANCE PACKAGE" ||
-                    section.name === "CHIMNEY INSERT PACKAGE"
-                      ? "checkbox"
-                      : "radio"
-                  }
-                  name={section.name}
-                  checked={
-                    Array.isArray(selectedOptions[section.name])
-                      ? selectedOptions[section.name]?.includes(option)
-                      : selectedOptions[section.name] === option
-                  }
-                  onChange={() => handleOptionChange(section.name, option)}
-                />
-                {section.name === "MATERIAL & FINISH OPTIONS" ? (
-                  <div>
-                    <Image
-                      src={
-                        option.image_url === "url"
-                          ? optionsImage
-                          : option.image_url
-                      }
-                      alt={option.name}
-                      width={150}
-                      height={150}
-                      onClick={() =>
-                        togglePopup(section.value.map((opt) => opt.image_url))
-                      } // Open popup on image click
-                      style={{ cursor: "pointer" }} // Make image look clickable
-                    />
-                    <span
-                      style={{
-                        position: "relative",
-                        left: "10%",
-                      }}
-                    >
-                      {option.name}
+            <div
+              className={
+                section.name === "MATERIAL & FINISH OPTIONS"
+                  ? styles.materialOptionsRow
+                  : ""
+              }
+            >
+              {section.value.map((option, optionIndex) => (
+                <label
+                  key={optionIndex}
+                  className={`${styles.option} ${
+                    section.name === "MATERIAL & FINISH OPTIONS"
+                      ? styles.materialOptionLabel
+                      : ""
+                  }`}
+                >
+                  <input
+                    type={
+                      section.name === "ZERO CLEARANCE PACKAGE" ||
+                      section.name === "CHIMNEY INSERT PACKAGE"
+                        ? "checkbox"
+                        : "radio"
+                    }
+                    name={section.name}
+                    checked={
+                      Array.isArray(selectedOptions[section.name])
+                        ? selectedOptions[section.name]?.includes(option)
+                        : selectedOptions[section.name] === option
+                    }
+                    onChange={() => handleOptionChange(section.name, option)}
+                  />
+                  {section.name === "MATERIAL & FINISH OPTIONS" ? (
+                    <div>
+                      <Image
+                        src={
+                          option.image_url === "url"
+                            ? optionsImage
+                            : option.image_url
+                        }
+                        alt={option.name}
+                        width={150}
+                        height={150}
+                        onClick={() =>
+                          togglePopup(section.value.map((opt) => opt.image_url))
+                        } // Open popup on image click
+                        style={{ cursor: "pointer" }} // Make image look clickable
+                      />
+                      <span
+                        style={{
+                          position: "relative",
+                          left: "10%",
+                        }}
+                      >
+                        {option.name}
+                      </span>
+                    </div>
+                  ) : (
+                    <span>
+                      {option.value || option.name}{" "}
+                      {option.price ? `(+$${option.price.toFixed(2)})` : ""}
                     </span>
-                  </div>
-                ) : (
-                  <span>
-                    {option.value || option.name}{" "}
-                    {option.price ? `(+$${option.price.toFixed(2)})` : ""}
-                  </span>
-                )}
-              </label>
-            ))}
+                  )}
+                </label>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
 
       <div className={styles.priceContainer}>
         <p className={styles.price}>
           {/* ${totalPrice.toFixed(2)} */}
-           <PriceFormatter price={totalPrice.toFixed(2)} /> <span>(inc gst)</span>
+          <PriceFormatter price={totalPrice.toFixed(2)} />{" "}
+          <span>(inc gst)</span>
         </p>
         <span className={styles.inStock}>IN STOCK</span>
       </div>

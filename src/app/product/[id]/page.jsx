@@ -87,7 +87,7 @@ const Product = ({ params }) => {
     product_details,
     specifications,
     fueltype_id,
-    brand_id
+    brand_id,
   } = productData;
   console.log("productData", productData);
   const productRouteHandler = (productId) => {
@@ -113,8 +113,8 @@ const Product = ({ params }) => {
             fuelType={fueltype_name}
             productName={name}
             brandName={brand_name}
-          fuelTypeId={fueltype_id}
-          brandId={brand_id}
+            fuelTypeId={fueltype_id}
+            brandId={brand_id}
           />
           {/* <br/> */}
           <HeroImage
@@ -124,15 +124,15 @@ const Product = ({ params }) => {
           />
         </div>
         {product_desc && <DescriptionColumn product_desc={product_desc} />}
-        {short_desc && (
-          <ProductOptions
-            short_desc={short_desc}
-            name={name}
-            price={price}
-            brand_name={brand_name}
-            openModal={openModal}
-          />
-        )}
+
+        <ProductOptions
+          short_desc={short_desc}
+          name={name}
+          price={price}
+          brand_name={brand_name}
+          openModal={openModal}
+        />
+
         {short_desc && <MaterialFinishOptions short_desc={short_desc} />}
         <Specifications specifications={specifications} />
         <DownloadSection
