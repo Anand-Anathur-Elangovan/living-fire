@@ -8,12 +8,12 @@ export default function Footer() {
     <footer className="footer">
       <div className="footerRow">
         {/* Column 1: Showrooms */}
-        {/* <div className="footer-column1">
-          <div className="foot-heading">
+        <div className="footer-column1">
+          <div className="foot-heading uppercase">
             <p>Our Showrooms</p>
           </div>
           <div className="columnheadingfi-2">
-            <div className="foot-heading">
+            <div className="foot-heading ">
               <p>Richmond Showroom</p>
             </div>
             <div className="columnbodysmall">
@@ -28,7 +28,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="columnheadingfi-3">
-            <div className="heading7">
+            <div className="foot-heading heading7 font-bold">
               <p>Moorabbin Showroom</p>
             </div>
             <div className="columnbodysmall">
@@ -46,14 +46,14 @@ export default function Footer() {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
 
         {/* Column 2: Information */}
-        <div className="footer-column2">
-          <p className="foot-heading headingfive ui text size-h6">
-            Information
-          </p>
-          <ul className="columnbodysmall-2">
+        <div className="footer-column2 flex flex-col gap-2">
+          <div className="foot-heading headingfive ui text size-h6 uppercase text-base">
+            <p>Information</p>
+          </div>
+          <ul className="columnbodysmall-2 flex flex-col gap-2">
             <li>
               <a href="/ourStory">
                 <p className="nofilechosen ui text size-body_small">
@@ -90,8 +90,10 @@ export default function Footer() {
 
         {/* Column 3: Customer Care */}
         <div className="footer-column3">
-          <p className="headingfive ui text size-h6">Customer Care</p>
-          <ul className="columnbodysmall-3">
+          <div className="foot-heading headingfive ui text size-h6 uppercase">
+            <p>Customer Care</p>
+          </div>
+          <ul className="columnbodysmall-3 flex flex-col gap-2">
             {/* <li>
               <a href="#">
                 <p className="nofilechosen ui text size-body_small">

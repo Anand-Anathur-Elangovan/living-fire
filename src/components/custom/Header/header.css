@@ -77,7 +77,7 @@
   display: flex;
   justify-content: space-between;
   transition: color 0.3s ease;
-  /* gap: 300px; */
+  gap: 30px;
 }
 .nav-links a {
   margin-left: 20px;

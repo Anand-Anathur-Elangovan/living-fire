@@ -19,7 +19,7 @@
 .foot-heading p {
   color: #000000 !important;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700 !important;
 }
 .footer-column1 {
   gap: 22px;
@@ -29,7 +29,7 @@
 }
 .footer-column2,
 .footer-column3 {
-  gap: 24px;
+  gap: 24px !important;
   display: flex;
   flex-direction: column;
   align-items: start;

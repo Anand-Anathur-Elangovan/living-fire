@@ -29,6 +29,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
     0,
     false,
     searchText,
+    0,
     0
   );
   // console.log(searchRef.current?.value);
@@ -127,7 +128,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
               />
             </div>
           </div>
-          <div className="flex flex-row w-[80%] px-20 py-5 flex-wrap">
+          <div className="flex flex-row w-[80%] px-20 py-5 flex-wrap gap-5 justify-center">
             {searchText !== "" &&
               isFetched &&
               (filteredProducts.length > 0 ? (
@@ -137,7 +138,13 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                       className="flex flex-col gap-1.5 basis-1/5"
                       key={"productCard" + index}
                     >
-                      <div style={{ width: "100px", cursor: "pointer" }}>
+                      <div
+                        style={{
+                          width: "300px",
+                          height: "400px",
+                          cursor: "pointer",
+                        }}
+                      >
                         <Image
                           src={
                             isImageURL(fn_get_products.hero_image)
@@ -146,8 +153,8 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                           }
                           alt={""} //productDetails.fn_get_products.p_name
                           className="element-image"
-                          width={100} // specify your desired width
-                          height={200} // specify your desired height
+                          width={300} // specify your desired width
+                          height={400} // specify your desired height
                           onClick={() =>
                             handleProductClick(fn_get_products?.p_id)
                           }
