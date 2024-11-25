@@ -1,18 +1,18 @@
-'use client';  // This tells Next.js to treat this as a client-side component
+"use client"; // This tells Next.js to treat this as a client-side component
 
-import { useState } from 'react';
-import './warranty.css'; // Importing the CSS file
+import { useState } from "react";
+import "./warranty.css"; // Importing the CSS file
 
 const Warranty = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    email: '',
-    streetAddress: '',
-    description: '',
-    brand: '',
-    serialNumber: '',
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    streetAddress: "",
+    description: "",
+    brand: "",
+    serialNumber: "",
     file: null,
   });
 
@@ -39,7 +39,7 @@ const Warranty = () => {
 
   return (
     <>
-      <div className='warrenty-page'>
+      <div className="warrenty-page">
         <div className="titleWrapper">
           <div className="warrentyTitle">WARRANTY</div>
         </div>
@@ -50,7 +50,8 @@ const Warranty = () => {
                 <p className="headingone ui text size-h2">Make A Claim</p>
               </div>
               <p className="desc ui text size-body_small">
-                To make a warranty claim or to get more information, fill out the form and our care team will get in touch.
+                To make a warranty claim or to get more information, fill out
+                the form and our care team will get in touch.
               </p>
             </div>
             <form className="columnsubmit" onSubmit={handleSubmit}>
@@ -129,7 +130,9 @@ const Warranty = () => {
                     onChange={handleInputChange}
                     required
                   >
-                    <option value="" disabled selected>Brands</option>
+                    <option value="" disabled>
+                      Brands
+                    </option>
                     <option value="option1">Option1</option>
                     <option value="option2">Option2</option>
                     <option value="option3">Option3</option>
@@ -151,46 +154,72 @@ const Warranty = () => {
                   <div className="button">
                     <label className="desc">
                       CHOOSE FILE
-                      <input type="file" onChange={handleFileChange} style={{ display: 'none' }} />
+                      <input
+                        type="file"
+                        onChange={handleFileChange}
+                        style={{ display: "none" }}
+                      />
                     </label>
                   </div>
-                  <p className="">{formData.file ? formData.file.name : 'No file chosen'}</p>
+                  <p className="">
+                    {formData.file ? formData.file.name : "No file chosen"}
+                  </p>
                 </div>
               </div>
-              <button className="submitBtn" type="submit">Submit</button>
+              <button className="submitBtn" type="submit">
+                Submit
+              </button>
             </form>
           </div>
           <div className="column2">
             <p className="desc ui text size-body_small">
-              At Living Fire, we are committed to providing high-quality products backed by strong warranties. Here’s what you need to know:
+              At Living Fire, we are committed to providing high-quality
+              products backed by strong warranties. Here’s what you need to
+              know:
             </p>
             <div className="columnaustralia">
-              <p className="warrenty-title-left ui text size-h4">Australian Consumer Law</p>
+              <p className="warrenty-title-left ui text size-h4">
+                Australian Consumer Law
+              </p>
               <div className="column_two">
                 <p className="desc ui text size-body_small">
                   <span>
-                    Our appliances come with guarantees that cannot be excluded under the Australian Consumer Law. You are entitled to a
-                    replacement or refund for major failures, as well as compensation for any other foreseeable loss or damage.
+                    Our appliances come with guarantees that cannot be excluded
+                    under the Australian Consumer Law. You are entitled to a
+                    replacement or refund for major failures, as well as
+                    compensation for any other foreseeable loss or damage.
                     <br />
                     <br />
                     For more information on your consumer rights, visit the
-                    <a href="#" className="accc-web"> ACCC website.</a>
+                    <a href="#" className="accc-web">
+                      {" "}
+                      ACCC website.
+                    </a>
                   </span>
                 </p>
               </div>
             </div>
             <div className="columnpaulagnew">
-              <p className="warrenty-title-left ui text size-h4">Paul Agnew Designs Warranty</p>
+              <p className="warrenty-title-left ui text size-h4">
+                Paul Agnew Designs Warranty
+              </p>
               <p className="desc ui text size-body_small">
-                Paul Agnew Designs, through its exclusive distribution partner in Australia and New Zealand, offers a Limited Warranty to the original purchaser.
-                This warranty is in addition to the rights you have under Australian Consumer Law and does not limit those rights in any way.
+                Paul Agnew Designs, through its exclusive distribution partner
+                in Australia and New Zealand, offers a Limited Warranty to the
+                original purchaser. This warranty is in addition to the rights
+                you have under Australian Consumer Law and does not limit those
+                rights in any way.
               </p>
             </div>
             <div className="columnaustralia">
-              <p className="warrenty-title-left ui text size-h4">Warranties for Other Brands</p>
+              <p className="warrenty-title-left ui text size-h4">
+                Warranties for Other Brands
+              </p>
               <p className="desc ui text size-body_small">
-                All other brands sold by Living Fire come with their own specific warranties. If you need more information or want to make a warranty
-                claim, simply reach out to our care team, and we will assess your case based on the supplier’s warranty.
+                All other brands sold by Living Fire come with their own
+                specific warranties. If you need more information or want to
+                make a warranty claim, simply reach out to our care team, and we
+                will assess your case based on the supplier’s warranty.
               </p>
             </div>
           </div>

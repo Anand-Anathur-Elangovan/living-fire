@@ -83,20 +83,14 @@ const Header = () => {
             className="custom-header-right-side-icons"
             style={{ color: color }}
           >
-            {/* <Image
-              src={searchIcon}
-              alt="searchIcon"
-              className="custom-header-width"
-              onClick={() => {
-                setIsFocus(true);
-                setShowMenu(true);
-              }}
-            /> */}
-            <div className="min-w-[400px] flex justify-center w-full min-width-search-product">
-              <input
+            <div
+              className="min-w-[400px] flex justify-center w-full"
+              // min-width-search-product
+            >
+              {/* <input
                 type="text"
                 className={`h-[50px] min-w-[400px] w-3/5 bg-transparent outline-none border-b-2 border-${color} rounded-none p-4 placeholder-white`}
-                // placeholder="Search Products...."
+                placeholder="Search Products...."
                 ref={searchRef}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -104,11 +98,11 @@ const Header = () => {
                     setShowMenu(true);
                   }
                 }}
-              />
+              /> */}
               <div
-                className={`h-[50px] flex px-3 bg-transparent outline-none border-b-2 border-${color} rounded-none p-2`}
+                className={`h-[50px] flex px-3 bg-transparent outline-none border-b-0 border-${color} rounded-none p-2`}
               >
-                <Image
+                {/* <Image
                   src={SearchIcon}
                   alt="search"
                   className="cursor-pointer"
@@ -117,6 +111,17 @@ const Header = () => {
                     setSearchTextHeader(searchRef.current.value);
                     setShowMenu(true);
                   }}
+                /> */}
+                <Image
+                  src={SearchIcon}
+                  alt="searchIcon"
+                  style={{ filter: color === "white" ? "invert(1)" : "none" }}
+                  className="cursor-pointer"
+                  onClick={() => {
+                    setIsFocus(true);
+                    setShowMenu(true);
+                  }}
+                  width={30}
                 />
               </div>
             </div>
@@ -133,6 +138,7 @@ const Header = () => {
                 setIsFocus(false);
                 setShowMenu(true);
               }}
+              
             />
           </div>
         </header>
