@@ -120,3 +120,80 @@
 .min-width-search-product {
   min-width: 400px;
 }
+
+
+/* Media Queries */
+
+/* Extra large screens (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .header {
+    padding: 20px 50px; /* Larger padding for wide screens */
+  }
+
+  .image-container {
+    width: 326px; /* Default size */
+  }
+
+  .nav-links a {
+    margin-left: 30px; /* Increased spacing for larger screens */
+  }
+
+  .custom-header-right-side-icons {
+    gap: 30px; /* Larger gap for icons */
+  }
+
+  .min-width-search-product {
+    min-width: 400px; /* Restore original width */
+  }
+}
+/* Large screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .header {
+    padding: 20px 40px; /* Default padding */
+  }
+
+  .image-container {
+    width: 300px; /* Adjusted for larger screens */
+  }
+
+  .nav-links a {
+    margin-left: 20px; /* Maintain larger spacing */
+    font-size: 18px; /* Regular font size for desktop */
+  }
+}
+/* Medium screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 30px; /* Moderate padding */
+  }
+
+  .custom-header-right-side-icons {
+    gap: 20px; /* Slightly larger gap for medium screens */
+  }
+  .min-width-search-product{
+    min-width: 200px;
+  }
+
+  .nav-links a {
+    margin-left: 15px;
+    font-size: 16px; /* Slightly larger font size */
+  }
+}
+/* Small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .header {
+    align-items: center; /* Center items */
+    padding: 15px; /* Slightly increased padding for better spacing */
+  }
+
+  .min-width-search-product{
+    display:none
+  }
+
+  .image-container {
+    width: 200px; /* Smaller image size for very small screens */
+  }
+}
+
+
+

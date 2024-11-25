@@ -107,20 +107,27 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
   const mergedOutput = mergeInputs(carouselItems, fuelTypes);
   return (
     <div className="ml-16 mr-16 flex relative justify-center flex-col">
-      <div className="flex flex-row items-center w-full mb-10">
-        <div className="heading1 flex w-full justify-center uppercase">
-          Collections
+      <div className="ml-16 mr-16 flex flex-col relative">
+        {/* Heading Section */}
+        <div className="flex justify-center items-center mb-2 sm:mb-4">
+          <div className="heading1 uppercase text-center leading-tight">
+            Collections
+          </div>
         </div>
-        <div className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer">
+
+        {/* Arrows Section */}
+        <div className="flex flex-row gap-2 justify-end sm:justify-center sm:mt-3">
           <Image
             src={RightArrow}
             alt="Right Arrow"
             onClick={() => handleScroll("left")}
+            className="w-6 h-6 sm:w-5 sm:h-5"
           />
           <Image
             src={LeftArrow}
             alt="Left Arrow"
             onClick={() => handleScroll("right")}
+            className="w-6 h-6 sm:w-5 sm:h-5"
           />
         </div>
       </div>

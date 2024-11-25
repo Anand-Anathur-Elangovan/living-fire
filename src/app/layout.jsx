@@ -33,6 +33,7 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Satoru:wght@400&family=Public+Sans:wght@400&display=swap"
           rel="stylesheet"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
