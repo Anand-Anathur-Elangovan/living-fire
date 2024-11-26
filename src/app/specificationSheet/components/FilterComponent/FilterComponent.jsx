@@ -3,7 +3,7 @@
 import { useState } from "react";
 import "./FilterComponent.css";
 
-const FilterComponent = () => {
+const FilterComponent = ({ fuelTypes, fireplaceType, setFireplaceType }) => {
   const firePlaceType = [
     { fueltype_id: 1, fueltype_name: "Hybrid - Wood/Electric" },
     { fueltype_id: 2, fueltype_name: "Bio-Ethanol" },
@@ -25,6 +25,7 @@ const FilterComponent = () => {
 
   const handleFirePlaceClick = (id) => {
     setSelectedFirePlace((prev) => (prev === id ? null : id));
+    setFireplaceType((prev) => (prev === id ? null : id));
   };
 
   const handleDirectionClick = (id) => {
@@ -49,18 +50,20 @@ const FilterComponent = () => {
             FIREPLACE TYPE
           </div>
           <div className="flex gap-4 fireplace-type-heading-style fireplace-type-list-style">
-            {firePlaceType.map((type) => (
-              <button
-                key={type.fueltype_id}
-                className={`px-4 py-2 border-0 rounded-md ${
-                  selectedFirePlace === type.fueltype_id &&
-                  "button-active-style"
-                } fireplace-type-individual-style`}
-                onClick={() => handleFirePlaceClick(type.fueltype_id)}
-              >
-                {type.fueltype_name}
-              </button>
-            ))}
+            {fuelTypes &&
+              fuelTypes?.length > 0 &&
+              fuelTypes?.map((type) => (
+                <button
+                  key={type.fueltype_id}
+                  className={`px-4 py-2 border-0 rounded-md ${
+                    selectedFirePlace === type.fueltype_id &&
+                    "button-active-style"
+                  } fireplace-type-individual-style`}
+                  onClick={() => handleFirePlaceClick(type.fueltype_id)}
+                >
+                  {type.fueltype_name}
+                </button>
+              ))}
           </div>
         </div>
         <div className="divider"></div>
