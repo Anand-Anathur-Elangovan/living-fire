@@ -191,6 +191,7 @@ import clearIcon from "@/public/assets/specificationSheet/clear.png";
 import styles from "./SpecificationSheet.module.css";
 import useMasterValues from "../allProducts/hooks/useMasterValues";
 import useAllProducts from "../allProducts/hooks/useAllProducts";
+import ProductSpecsDrawer from "@/src/helper/utils/component/productSpecsDrawer/ProductSpecsDrawer";
 
 const FilterComponent = dynamic(
   () => import("./components/FilterComponent/FilterComponent"),
@@ -232,7 +233,11 @@ const SpecificationSheet = () => {
   const toggleBrandSelection = (brand) => {
     setBrandType((prev) => (prev === brand?.brand_id ? null : brand?.brand_id));
   };
+  const [isOpenSpecDrawer, setIsOpenSpecDrawer] = useState(false);
 
+  const openDrawer = () => setIsOpenSpecDrawer(true);
+  const closeDrawer = () => setIsOpenSpecDrawer(false);
+  console.log("allProducts", allProducts);
   return (
     <section>
       {/* Search Banner Section */}
@@ -349,14 +354,23 @@ const SpecificationSheet = () => {
                   </div>
                   <div className={styles.viewSpecification}>
                     <a
-                      href={`/products/${product?.fn_get_products?.id}`}
+                      // href={`/product/${product?.fn_get_products?.p_id}`}
                       className={styles.viewSpecificationText}
                       aria-label={`View specifications for ${product?.fn_get_products?.name}`}
+                      onClick={openDrawer}
                     >
                       View Specifications
                     </a>
                   </div>
                 </div>
+                <ProductSpecsDrawer
+                  isOpen={isOpenSpecDrawer}
+                  closeDrawer={closeDrawer}
+                  openDrawer={openDrawer}
+                  name={product?.fn_get_products?.name}
+                  brand_name={product?.fn_get_products?.brand_name}
+                  // product_details={product_details}
+                />
               </article>
             ))
           ) : (
