@@ -17,11 +17,15 @@
 
 .searchByProduct {
   gap: 32px;
-  background-color: #00000019;
+  /* background-color: #00000019; */
   display: flex;
   width: 28%;
   flex-direction: column;
   padding: 38px;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 1;
 }
 
 .searchText p {
@@ -29,6 +33,13 @@
   font-family: Satoru;
   font-size: 26px;
   font-weight: 400;
+}
+.searchText h3 {
+  color: #ffffff;
+  font-family: Satoru;
+  font-size: 26px;
+  font-weight: 400;
+  color: white;
 }
 
 .searchContainer {
