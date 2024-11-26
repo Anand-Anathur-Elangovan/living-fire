@@ -11,6 +11,9 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        satoru: ["Satoru", "sans-serif"], // Ensure you import the font in your project
+      },
     },
   },
   plugins: [],

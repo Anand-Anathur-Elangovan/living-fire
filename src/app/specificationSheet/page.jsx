@@ -1,63 +1,56 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import fire from "@/public/assets/specificationSheet/fire.png";
+import fire from "@/public/assets/specificationSheet/image.png";
 import searchIcon from "@/public/assets/specificationSheet/searchicon.svg";
+import clearIcon from "@/public/assets/specificationSheet/clear.png";
 import styles from "./SpecificationSheet.module.css";
 import useMasterValues from "../allProducts/hooks/useMasterValues";
+import FilterComponent from "./components/FilterComponent/FilterComponent";
+import useAllProducts from "../allProducts/hooks/useAllProducts";
 
 const SpecificationSheet = () => {
+  const searchRef = useRef(null);
   const {
     brands,
     masterValues: { fuelTypes = [], productTypes: allProductMenu = [] },
   } = useMasterValues();
-  const [selectedBrands, setSelectedBrands] = useState([]);
+  // const [selectedBrands, setSelectedBrands] = useState([]);
+  const [productMenuIndex, setproductMenuIndex] = useState(1);
+  const [fireplaceType, setFireplaceType] = useState(null);
+  const [brandType, setBrandType] = useState(null);
+  const [searchText, setSearchText] = useState("");
+  const [searchTextTemp, setSearchTextTemp] = useState("");
+  const [bestSelling, setBestSelling] = useState(false);
+  const [subType, setSubType] = useState(null);
+  const [rangeType, setRangeType] = useState(null);
 
+  const { allProducts, isFetched } = useAllProducts(
+    productMenuIndex,
+    fireplaceType ?? 0,
+    brandType ?? 0,
+    bestSelling === false ? null : bestSelling,
+    searchText,
+    subType ?? 0,
+    rangeType ?? 0
+  );
+  useEffect(() => {
+    if (searchText !== "" && searchRef.current)
+      searchRef.current.value = searchText;
+  }, [searchRef, searchText]);
   const toggleBrandSelection = (brand) => {
-    setSelectedBrands((prevSelected) =>
-      prevSelected.includes(brand)
-        ? prevSelected.filter((b) => b !== brand)
-        : [...prevSelected, brand]
-    );
+    setBrandType((prev) => (prev === brand?.brand_id ? null : brand?.brand_id));
+    // setBrandType(brand?.brand_id);
+    // setSelectedBrands(brand?.brand_id);
+    // setSelectedBrands((prevSelected) =>
+    //   prevSelected.includes(brand)
+    //     ? prevSelected.filter((b) => b !== brand)
+    //     : [...prevSelected, brand]
+    // );
   };
-
-  console.log("brands", brands);
-  const products = [
-    {
-      name: "Electric Tunnel Fireplace",
-      brand: "Paul Agnew Designs",
-      image: fire,
-    },
-    {
-      name: "ilektro 1250 Landscape",
-      brand: "Paul Agnew Designs",
-      image: fire,
-    },
-    {
-      name: "ilektro 1650 Landscape",
-      brand: "Paul Agnew Designs",
-      image: fire,
-    },
-    {
-      name: "ilektro 2000 Landscape",
-      brand: "Paul Agnew Designs",
-      image: fire,
-    },
-    {
-      name: "ilektro 950 Aspect",
-      brand: "Paul Agnew Designs",
-      image: fire,
-    },
-    {
-      name: "ilektro 950 Landscape",
-      brand: "Paul Agnew Designs",
-      image: fire,
-    },
-  ];
-
+  console.log("setSearchText", searchText, "allProducts", allProducts);
   return (
     <section>
-      {/* Search Banner */}
       <div className={styles.searchBanner}>
         <div className={styles.column}>
           <div className={styles.searchByProduct}>
@@ -69,13 +62,40 @@ const SpecificationSheet = () => {
                 type="text"
                 className={styles.searchInput}
                 placeholder="Search"
+                ref={searchRef}
+                defaultValue={searchText}
+                onChange={(e) =>
+                  setSearchTextTemp(searchRef.current.value?.toLowerCase())
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    setSearchText(searchRef.current.value?.toLowerCase());
+                  }
+                }}
               />
+              {searchTextTemp && (
+                <Image
+                  src={clearIcon}
+                  alt="Clear"
+                  width={20}
+                  height={20}
+                  className={styles.clearIcon}
+                  onClick={() => {
+                    setSearchTextTemp("");
+                    setSearchText("");
+                    searchRef.current.value = "";
+                  }}
+                />
+              )}
               <Image
                 src={searchIcon}
                 alt="Search"
                 width={40}
                 height={40}
                 className={styles.searchIcon}
+                onClick={() =>
+                  setSearchText(searchRef.current.value?.toLowerCase())
+                }
               />
             </div>
           </div>
@@ -90,7 +110,10 @@ const SpecificationSheet = () => {
                   <label
                     key={index}
                     tabIndex="0"
-                    className={styles.brandSelector}
+                    className={`${styles.brandSelector} ${
+                      // selectedBrands?.includes(brand)
+                      brandType === brand?.brand_id ? styles.selectedBrand : ""
+                    }`}
                   >
                     <input
                       type="checkbox"
@@ -98,41 +121,59 @@ const SpecificationSheet = () => {
                       value={index + 1}
                       hidden
                       className="dhi-group-1"
+                      onClick={() => toggleBrandSelection(brand)}
                     />
                     <span>{brand?.brand_name}</span>
                   </label>
                 ))}
               </form>
+              {/* <button
+                type="button"
+                className={styles.clearButton}
+                onClick={() => setSelectedBrands([])}
+              >
+                Clear
+              </button> */}
             </div>
           </div>
         </div>
       </div>
-
+      <FilterComponent
+        fuelTypes={fuelTypes}
+        fireplaceType={fireplaceType}
+        setFireplaceType={setFireplaceType}
+      />
       {/* Product List */}
       <div className={styles.productsColumn}>
         <div className={styles.column}>
-          {products.map((product, index) => (
-            <div key={index} className={styles.productSpecs}>
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={200}
-                height={200}
-                className={styles.image}
-              />
-              <div className={styles.columnProductName}>
-                <div className={styles.productDetails}>
-                  <p className={styles.productName}>{product.name}</p>
-                  <p className={styles.wood}>{product.brand}</p>
-                </div>
-                <div className={styles.viewSpecification}>
-                  <p className={styles.viewSpecificationText}>
-                    View Specifications
-                  </p>
+          {allProducts &&
+            allProducts?.length > 0 &&
+            allProducts?.map((product, index) => (
+              <div key={index} className={styles.productSpecs}>
+                <Image
+                  src={fire}
+                  alt={product?.fn_get_products?.name ?? "no image found"}
+                  width={156}
+                  height={120}
+                  className={styles.image}
+                />
+                <div className={styles.columnProductName}>
+                  <div className={styles.productDetails}>
+                    <p className={styles.productName}>
+                      {product?.fn_get_products?.name}
+                    </p>
+                    <p className={styles.wood}>
+                      {product?.fn_get_products?.brand_name}
+                    </p>
+                  </div>
+                  <div className={styles.viewSpecification}>
+                    <p className={styles.viewSpecificationText}>
+                      View Specifications
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </section>

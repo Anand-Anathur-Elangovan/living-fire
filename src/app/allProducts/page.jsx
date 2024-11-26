@@ -41,7 +41,7 @@ const Page = () => {
     productMenuIndex,
     fireplaceType ?? 0,
     brandType ?? 0,
-    bestSelling,
+    bestSelling === false ? null : bestSelling,
     searchText,
     subType ?? 0,
     rangeType ?? 0
