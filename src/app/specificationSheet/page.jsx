@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import fire from "@/public/assets/specificationSheet/fire.png";
+import fire from "@/public/assets/specificationSheet/image.png";
 import searchIcon from "@/public/assets/specificationSheet/searchicon.svg";
 import styles from "./SpecificationSheet.module.css";
 import useMasterValues from "../allProducts/hooks/useMasterValues";
+import FilterComponent from "./components/FilterComponent/FilterComponent";
 
 const SpecificationSheet = () => {
   const {
@@ -21,7 +22,7 @@ const SpecificationSheet = () => {
     );
   };
 
-  console.log("brands", brands);
+  console.log("fuelTypes", fuelTypes, "productTypes", allProductMenu);
   const products = [
     {
       name: "Electric Tunnel Fireplace",
@@ -55,6 +56,50 @@ const SpecificationSheet = () => {
     },
   ];
 
+  const firePlaceType = [
+    {
+      fueltype_id: 1,
+      fueltype_name: "Hybrid - Wood/Electric",
+    },
+    {
+      fueltype_id: 2,
+      fueltype_name: "Bio-Ethanol",
+    },
+    {
+      fueltype_id: 3,
+      fueltype_name: "Gas",
+    },
+    {
+      fueltype_id: 4,
+      fueltype_name: "Wood",
+    },
+    {
+      fueltype_id: 5,
+      fueltype_name: "Electric",
+    },
+  ];
+  const directionType = [
+    {
+      id: 1,
+      name: "Single Sided",
+    },
+    {
+      id: 2,
+      name: "Double Sided",
+    },
+    {
+      id: 3,
+      name: "Triple Sided",
+    },
+    {
+      id: 4,
+      name: "Corner",
+    },
+    {
+      id: 5,
+      name: "Freestanding",
+    },
+  ];
   return (
     <section>
       {/* Search Banner */}
@@ -107,7 +152,7 @@ const SpecificationSheet = () => {
           </div>
         </div>
       </div>
-
+      <FilterComponent />
       {/* Product List */}
       <div className={styles.productsColumn}>
         <div className={styles.column}>
@@ -116,8 +161,8 @@ const SpecificationSheet = () => {
               <Image
                 src={product.image}
                 alt={product.name}
-                width={200}
-                height={200}
+                width={156}
+                height={120}
                 className={styles.image}
               />
               <div className={styles.columnProductName}>

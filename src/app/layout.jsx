@@ -22,6 +22,9 @@ const geistMono = localFont({
 export const metadata = {
   title: "Living Fire -Dev",
   description: "Living Fire -Dev",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {

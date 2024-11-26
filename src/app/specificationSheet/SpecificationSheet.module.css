@@ -1,10 +1,10 @@
 .searchBanner {
-  height: 818px;
+  height: auto;
   background-image: url("/assets/specificationSheet/specpageimg.png");
   background-size: cover;
   background-repeat: no-repeat;
   align-self: stretch;
-  padding: 56px;
+  padding: 40px;
 }
 
 .searchBanner .column {
@@ -118,31 +118,51 @@
 
 .productsColumn {
   padding: 40px;
+  background-color: #f7f7f5;
 }
-
-.productSpecs {
+.productsColumn .column {
   display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  column-gap: 60px;
+  row-gap: 20px;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+.productSpecs {
+  width: 400px;
+  display: flex;
+  gap: 32px;
+  /* margin-bottom: 20px; */
+  padding-bottom: 24px;
+  padding-top: 24px;
+  border-bottom: 1px solid #CFB59E;
+  min-height: 168px;
 }
 
 .columnProductName {
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
+  gap: 16px;
 }
 
 .productDetails {
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .productName {
   font-size: 18px;
-  font-weight: 700;
+  /* font-weight: 700; */
 }
 
 .wood {
   font-size: 14px;
   color: #555;
+  opacity: 0.75;
 }
 
 .viewSpecification {
@@ -151,7 +171,7 @@
 }
 
 .viewSpecificationText {
-  font-size: 12px;
+  font-size: 14px;
   color: #007bff;
   cursor: pointer;
 }

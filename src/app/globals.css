@@ -3,10 +3,12 @@
 @tailwind utilities;
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+@import url("https://fonts.googleapis.com/css2?family=Satoru:wght@400;700&display=swap");
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-satoru: "Satoru", sans-serif;
+  /* --font-satoru: "Satoru", sans-serif; */
+  --font-satoru: "Satoru";
   --font-public-sans: "Public Sans", sans-serif;
   caret-color: transparent;
   caret-color: auto;
