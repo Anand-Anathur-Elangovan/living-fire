@@ -6,6 +6,7 @@ import prodSpecImage from "@/public/assets/product/prod-spec.png";
 import brochureIcon from "@/public/assets/product/brochure.svg";
 import JSZip from "jszip"; // JSZip import
 import { saveAs } from "file-saver"; // file-saver import
+import { useRouter } from "next/navigation";
 
 const ProductSpecsDrawer = ({
   isOpen,
@@ -14,7 +15,9 @@ const ProductSpecsDrawer = ({
   name,
   brand_name,
   product_details,
+  selectedProductId,
 }) => {
+  const router = useRouter();
   const handleClickOutside = (e) => {
     if (e.target.classList.contains(styles.drawerOverlay)) {
       closeDrawer();
@@ -54,10 +57,10 @@ const ProductSpecsDrawer = ({
             <div className={styles.leftColumn}>
               <div className={styles.columnpaulagnew}>
                 <p className={`${styles.paulagnew} ui text size-textxs`}>
-                  Paul Agnew Designs
+                  {brand_name}
                 </p>
                 <p className={`${styles.ilektro1250} ui text size-h2`}>
-                  {`${name?.toUpperCase()} ${brand_name}`}
+                  {`${name?.toUpperCase()}`}
                 </p>
               </div>
 
@@ -68,7 +71,7 @@ const ProductSpecsDrawer = ({
                   </p>
                   <div className={styles.columnfileOne}>
                     {/* Render file items dynamically from the JSON */}
-                    {/* {product_details
+                    {product_details
                       .find((item) => item.name === "Downloads")
                       ?.value.map((file) => (
                         <FileItem
@@ -76,7 +79,7 @@ const ProductSpecsDrawer = ({
                           text={file.filename}
                           fileUrl={file.fileurl}
                         />
-                      ))} */}
+                      ))}
                   </div>
                 </div>
                 <div className={styles.line}></div>
@@ -98,6 +101,7 @@ const ProductSpecsDrawer = ({
                 </button>
                 <button
                   className={`${styles.viewProductButton} ${styles.hoverEffect}`}
+                  onClick={() => router.push(`/product/${selectedProductId}`)}
                 >
                   View Product
                 </button>

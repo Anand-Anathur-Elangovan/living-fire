@@ -18,6 +18,8 @@ export const getAllProductsPageDataAction = async ({
   searchText,
   subType,
   rangeType,
+  installationType,
+  glassOrientationType,
 }) => {
   const allProducts = await getAllProducts({
     type_id,
@@ -27,6 +29,8 @@ export const getAllProductsPageDataAction = async ({
     searchText,
     subType,
     rangeType,
+    installationType,
+    glassOrientationType,
   })
     .then((res) =>
       res.map((val) => {

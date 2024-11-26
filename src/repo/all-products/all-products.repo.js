@@ -16,9 +16,11 @@ export const getAllProducts = async ({
   searchText,
   subType,
   rangeType,
+  installationType,
+  glassOrientationType,
 }) => {
   try {
-    const query = `SELECT * FROM fn_get_products(0,${fireplaceType},${brandType},${type_id},${rangeType},${bestSelling},${subType},'${searchText?.toLowerCase()}')`;
+    const query = `SELECT * FROM fn_get_products(0,${fireplaceType},${brandType},${type_id},${rangeType},${bestSelling},${subType},${installationType},${glassOrientationType},'${searchText?.toLowerCase()}')`;
     const result = await pool.query(query); // Await the pool query directly
     // const formatResults = result.rows.map(({ fn_get_products }) => ({
     //   ...fn_get_products,

@@ -182,7 +182,7 @@
 
 // export default SpecificationSheet;
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import fire from "@/public/assets/specificationSheet/image.png";
@@ -213,6 +213,14 @@ const SpecificationSheet = () => {
   const [bestSelling, setBestSelling] = useState(false);
   const [subType, setSubType] = useState(null);
   const [rangeType, setRangeType] = useState(null);
+  const [installationType, setInstallationType] = useState(null);
+  const [glassOrientationType, setglassOrientationType] = useState(null);
+  const [drawerData, setDrawerData] = useState({
+    name: "",
+    brand: "",
+    id: "",
+    details: [],
+  });
 
   const { allProducts, isFetched } = useAllProducts(
     productMenuIndex,
@@ -221,7 +229,9 @@ const SpecificationSheet = () => {
     bestSelling === false ? null : bestSelling,
     searchText,
     subType ?? 0,
-    rangeType ?? 0
+    rangeType ?? 0,
+    installationType ?? 0,
+    glassOrientationType ?? 0
   );
 
   useEffect(() => {
@@ -235,7 +245,15 @@ const SpecificationSheet = () => {
   };
   const [isOpenSpecDrawer, setIsOpenSpecDrawer] = useState(false);
 
-  const openDrawer = () => setIsOpenSpecDrawer(true);
+  const openDrawer = useCallback((name, brand, id, details) => {
+    setDrawerData({
+      name,
+      brand,
+      id,
+      details,
+    });
+    setIsOpenSpecDrawer(true);
+  }, []);
   const closeDrawer = () => setIsOpenSpecDrawer(false);
   console.log("allProducts", allProducts);
   return (
@@ -357,25 +375,33 @@ const SpecificationSheet = () => {
                       // href={`/product/${product?.fn_get_products?.p_id}`}
                       className={styles.viewSpecificationText}
                       aria-label={`View specifications for ${product?.fn_get_products?.name}`}
-                      onClick={openDrawer}
+                      onClick={() =>
+                        openDrawer(
+                          product?.fn_get_products?.name,
+                          product?.fn_get_products?.brand_name,
+                          product?.fn_get_products?.p_id,
+                          product?.fn_get_products?.product_details
+                        )
+                      }
                     >
                       View Specifications
                     </a>
                   </div>
                 </div>
-                <ProductSpecsDrawer
-                  isOpen={isOpenSpecDrawer}
-                  closeDrawer={closeDrawer}
-                  openDrawer={openDrawer}
-                  name={product?.fn_get_products?.name}
-                  brand_name={product?.fn_get_products?.brand_name}
-                  // product_details={product_details}
-                />
               </article>
             ))
           ) : (
             <p>No products found</p>
           )}
+          <ProductSpecsDrawer
+            isOpen={isOpenSpecDrawer}
+            closeDrawer={closeDrawer}
+            openDrawer={openDrawer}
+            name={drawerData?.name}
+            brand_name={drawerData?.brand}
+            selectedProductId={drawerData?.id}
+            product_details={drawerData?.details}
+          />
         </div>
       </div>
     </section>

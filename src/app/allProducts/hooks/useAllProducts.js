@@ -15,7 +15,9 @@ const useAllProducts = (
   bestSelling,
   searchText,
   subType,
-  rangeType
+  rangeType,
+  installationType,
+  glassOrientationType
 ) => {
   const initialData = [];
   const {
@@ -30,8 +32,10 @@ const useAllProducts = (
         brandType +
         bestSelling +
         searchText +
-        subType,
-        rangeType
+        subType +
+        rangeType +
+        installationType +
+        glassOrientationType,
     ],
     queryFn: () =>
       getAllProductsPageDataAction({
@@ -41,7 +45,9 @@ const useAllProducts = (
         bestSelling,
         searchText,
         subType,
-        rangeType
+        rangeType,
+        installationType,
+        glassOrientationType,
       }),
     staleTime: 0,
     // enabled: productMenuIndex ? true : false,
