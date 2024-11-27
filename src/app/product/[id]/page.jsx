@@ -6,7 +6,7 @@ import MaterialOption from "./components/MaterialOption";
 import DeliveryOption from "./components/DeliveryOption";
 import PricingInfo from "./components/PricingInfo";
 import ActionButtons from "./components/ActionButtons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./product.css";
 import useProductPage from "./hooks/useProductPage";
 import ProductOptions from "./components/productOptions/ProductOptions";
@@ -40,7 +40,8 @@ const Product = ({ params }) => {
   const openDrawer = () => setIsOpenSpecDrawer(true);
   const closeDrawer = () => setIsOpenSpecDrawer(false);
   const [unwrappedParams, setUnwrappedParams] = useState(null);
-
+  const [activeTab, setActiveTab] = useState("Downloads");
+  const downloadSectionRef = useRef(null);
   // Unwrap params inside useEffect if needed
   useEffect(() => {
     async function fetchParams() {
@@ -55,16 +56,6 @@ const Product = ({ params }) => {
   let { data } = useProductPage(unwrappedParams?.id);
 
   useEffect(() => {
-    // Fetch data from API
-    // fetch("/api/check")
-    //   .then((res) => res.json())
-    //   .then((data) => setProductData(data))
-    //   .catch((error) => console.error("Error fetching product data:", error));
-
-    // if (state?.productId) {
-    //   // Make your API call here with state.productId
-    //   console.log("Fetched Product ID:", state.productId);
-    // }
     if (productId) {
       // Make your API call here with state.productId
       console.log("Cookie Product ID:", productId);
@@ -104,6 +95,10 @@ const Product = ({ params }) => {
     );
     router.push(`/product/${productId}`);
   };
+  const handleViewAllAccessories = () => {
+    setActiveTab("Accessories");
+    downloadSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <section>
       <div className="stackview">
@@ -131,6 +126,7 @@ const Product = ({ params }) => {
           price={price}
           brand_name={brand_name}
           openModal={openModal}
+          onViewAllAccessories={handleViewAllAccessories}
         />
 
         {short_desc && <MaterialFinishOptions short_desc={short_desc} />}
@@ -138,6 +134,9 @@ const Product = ({ params }) => {
         <DownloadSection
           product_details={product_details}
           openDrawer={openDrawer}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          ref={downloadSectionRef}
         />
         <Featured
           headingValue={"You May Also Like"}

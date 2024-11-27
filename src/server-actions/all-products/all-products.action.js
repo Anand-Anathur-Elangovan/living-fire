@@ -4,6 +4,8 @@ import { responsePayload } from "@/src/constants/reponse-payload";
 import {
   getAllProducts,
   getFuelTypesRepo,
+  getGlassOrientationTypesRepo,
+  getInstallationTypesRepo,
   getProductTypesRepo,
   getRangeRepo,
   getSubTypesRepo,
@@ -18,6 +20,8 @@ export const getAllProductsPageDataAction = async ({
   searchText,
   subType,
   rangeType,
+  installationType,
+  glassOrientationType,
 }) => {
   const allProducts = await getAllProducts({
     type_id,
@@ -27,6 +31,8 @@ export const getAllProductsPageDataAction = async ({
     searchText,
     subType,
     rangeType,
+    installationType,
+    glassOrientationType,
   })
     .then((res) =>
       res.map((val) => {
@@ -35,12 +41,6 @@ export const getAllProductsPageDataAction = async ({
     )
     .catch((err) => []);
 
-  // console.log(res);
-  // const searchProductsList = await searchProducts("GF7814", [10], [3]).catch(
-  //   const searchProductsList = await searchProducts("GFi750").catch(
-  //   (err) => []
-  // );
-  //   console.log("searchProductsList", searchProductsList);
   return {
     ...responsePayload,
     success: true,
@@ -62,11 +62,24 @@ export const getMasterValuesAction = async () => {
   const subTypes = await getSubTypesRepo()
     .then((res) => res)
     .catch((err) => []);
+  const installationTypes = await getInstallationTypesRepo()
+    .then((res) => res)
+    .catch((err) => []);
+  const glassOrientationTypes = await getGlassOrientationTypesRepo()
+    .then((res) => res)
+    .catch((err) => []);
 
   return {
     ...responsePayload,
     success: true,
     message: "Fetched All Firetypes data",
-    result: { ranges, fuelTypes, productTypes, subTypes },
+    result: {
+      ranges,
+      fuelTypes,
+      productTypes,
+      subTypes,
+      installationTypes,
+      glassOrientationTypes,
+    },
   };
 };

@@ -3,7 +3,13 @@
 import { useState } from "react";
 import "./FilterComponent.css";
 
-const FilterComponent = ({ fuelTypes, fireplaceType, setFireplaceType }) => {
+const FilterComponent = ({
+  fuelTypes,
+  fireplaceType,
+  setFireplaceType,
+  glassOrientationTypes,
+  setglassOrientationType,
+}) => {
   const firePlaceType = [
     { fueltype_id: 1, fueltype_name: "Hybrid - Wood/Electric" },
     { fueltype_id: 2, fueltype_name: "Bio-Ethanol" },
@@ -30,6 +36,7 @@ const FilterComponent = ({ fuelTypes, fireplaceType, setFireplaceType }) => {
 
   const handleDirectionClick = (id) => {
     setSelectedDirection((prev) => (prev === id ? null : id));
+    setglassOrientationType((prev) => (prev === id ? null : id));
   };
 
   const clearFilters = () => {
@@ -70,18 +77,21 @@ const FilterComponent = ({ fuelTypes, fireplaceType, setFireplaceType }) => {
         {/* Direction Type */}
         <div className="mb-6 fireplace-type-style">
           <div className="text-sm font-semibold mb-2 fireplace-type-heading-style">
-            DIRECTION
+            GLASS ORIENTATION
           </div>
           <div className="flex gap-4 fireplace-type-heading-style fireplace-type-list-style">
-            {directionType.map((direction) => (
+            {glassOrientationTypes?.map((glassOrientation) => (
               <button
-                key={direction.id}
+                key={glassOrientation.glass_orientation_id}
                 className={`px-4 py-2 border-0 rounded-md ${
-                  selectedDirection === direction.id && "button-active-style"
+                  selectedDirection === glassOrientation.glass_orientation_id &&
+                  "button-active-style"
                 } fireplace-type-individual-style`}
-                onClick={() => handleDirectionClick(direction.id)}
+                onClick={() =>
+                  handleDirectionClick(glassOrientation.glass_orientation_id)
+                }
               >
-                {direction.name}
+                {glassOrientation.glass_orientation_name}
               </button>
             ))}
           </div>

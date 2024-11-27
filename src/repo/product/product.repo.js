@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 
 export const getProductPage = async (productId) => {
   const cookieStore = cookies();
-  const cookieProductId = await cookieStore?.get("selectedProductId")?.value;
+  const cookieProductId = await cookieStore.get("selectedProductId")?.value;
   const query = `SELECT * FROM fn_get_product_page(${
     productId ? productId : cookieProductId ? cookieProductId : "424"
   })`;

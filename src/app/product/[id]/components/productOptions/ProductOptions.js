@@ -1,153 +1,22 @@
-// import React, { useState } from "react";
-// import styles from "./ProductOptions.module.css";
-// import optionsImage from "@/public/assets/product/electriFireOptions.png";
-// import Image from "next/image";
-
-// const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
-//   const [selectedOptions, setSelectedOptions] = useState({});
-//   const [totalPrice, setTotalPrice] = useState(price);
-//   const [isPopupOpen, setIsPopupOpen] = useState(true);
-
-//   const handleOptionChange = (category, option) => {
-//     const isCheckbox =
-//       category === "ZERO CLEARANCE PACKAGE" ||
-//       category === "CHIMNEY INSERT PACKAGE";
-
-//     setSelectedOptions((prevOptions) => {
-//       const currentSelection =
-//         prevOptions[category] || (isCheckbox ? [] : null);
-
-//       if (isCheckbox) {
-//         const isSelected = currentSelection.includes(option);
-//         const newSelection = isSelected
-//           ? currentSelection.filter((o) => o !== option)
-//           : [...currentSelection, option];
-//         return { ...prevOptions, [category]: newSelection };
-//       }
-
-//       return {
-//         ...prevOptions,
-//         [category]: currentSelection === option ? null : option,
-//       };
-//     });
-
-//     const optionPrice = option.price || 0;
-//     setTotalPrice((prevPrice) => {
-//       if (isCheckbox) {
-//         const isSelected = selectedOptions[category]?.includes(option);
-//         return prevPrice + (isSelected ? -optionPrice : optionPrice);
-//       }
-//       const prevSelectedOptionPrice =
-//         selectedOptions[category]?.price || 0 || 0;
-//       return prevPrice - prevSelectedOptionPrice + optionPrice;
-//     });
-//   };
-//   const togglePopup = () => {
-//     setIsPopupOpen(!isPopupOpen);
-//   };
-//   return (
-//     <div className={styles.container}>
-//       <h2 className={styles.brand}>{brand_name}</h2>
-//       <h1 className={styles.title}>{name?.toUpperCase()}</h1>
-//       <p className={styles.subtitle}>Build your product</p>
-
-//       {short_desc?.map((section, index) => (
-//         <div key={index} className={styles.section}>
-//           <h3 className={styles.sectionTitle}>{section.name}</h3>
-
-//           <div
-//             className={
-//               section.name === "MATERIAL & FINISH OPTIONS"
-//                 ? styles.materialOptionsRow
-//                 : ""
-//             }
-//           >
-//             {section.value.map((option, optionIndex) => (
-//               <label
-//                 key={optionIndex}
-//                 className={`${styles.option} ${
-//                   section.name === "MATERIAL & FINISH OPTIONS"
-//                     ? styles.materialOptionLabel
-//                     : ""
-//                 }`}
-//               >
-//                 <input
-//                   type={
-//                     section.name === "ZERO CLEARANCE PACKAGE" ||
-//                     section.name === "CHIMNEY INSERT PACKAGE"
-//                       ? "checkbox"
-//                       : "radio"
-//                   }
-//                   name={section.name}
-//                   checked={
-//                     Array.isArray(selectedOptions[section.name])
-//                       ? selectedOptions[section.name]?.includes(option)
-//                       : selectedOptions[section.name] === option
-//                   }
-//                   onChange={() => handleOptionChange(section.name, option)}
-//                 />
-//                 {section.name === "MATERIAL & FINISH OPTIONS" ? (
-//                   <div>
-//                     <Image
-//                       src={
-//                         option.image_url === "url"
-//                           ? optionsImage
-//                           : option.image_url
-//                       }
-//                       alt={option.name}
-//                       width={150}
-//                       height={150}
-//                       onClick={togglePopup} // Open popup on image click
-//                       style={{ cursor: "pointer" }} // Make image look clickable
-//                     />
-//                     <span
-//                       style={{
-//                         position: "relative",
-//                         left: "10%",
-//                       }}
-//                     >
-//                       {option.name}
-//                     </span>
-
-//                     {/* {option.price && <span> (+${option.price})</span>} */}
-//                   </div>
-//                 ) : (
-//                   <span>
-//                     {option.value || option.name}{" "}
-//                     {option.price ? `(+$${option.price.toFixed(2)})` : ""}
-//                   </span>
-//                 )}
-//               </label>
-//             ))}
-//           </div>
-//         </div>
-//       ))}
-
-//       <div className={styles.priceContainer}>
-//         <p className={styles.price}>
-//           ${totalPrice.toFixed(2)} <span>(inc gst)</span>
-//         </p>
-//         <span className={styles.inStock}>IN STOCK</span>
-//       </div>
-
-//       <div className={styles.buttonContainer}>
-//         <button className={styles.addToCart}>ADD TO CART</button>
-//         <button className={styles.enquiry} onClick={openModal}>
-//           SEND AN ENQUIRY
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ProductOptions;
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Slider from "react-slick"; // Import Slick Carousel
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import styles from "./ProductOptions.module.css";
 import optionsImage from "@/public/assets/product/electriFireOptions.png";
+import dynamic from "next/dynamic";
+import "lightgallery/css/lightgallery.css"; // Base CSS
+import "lightgallery/css/lg-thumbnail.css"; // Thumbnail plugin
+import "lightgallery/css/lg-zoom.css"; // Zoom plugin
+import "lightgallery/css/lg-fullscreen.css"; // Fullscreen plugin
+
+const LightGallery = dynamic(() => import("lightgallery/react"), {
+  ssr: false,
+});
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+import lgFullscreen from "lightgallery/plugins/fullscreen";
 
 const PriceFormatter = ({ price }) => {
   // Format the price with commas
@@ -159,11 +28,12 @@ const PriceFormatter = ({ price }) => {
   return formattedPrice;
 };
 
-const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
+const ProductOptions = ({ short_desc, name, price, brand_name, openModal, onViewAllAccessories  }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
+
 
   const handleOptionChange = (category, option) => {
     const isCheckbox =
@@ -174,29 +44,36 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
       const currentSelection =
         prevOptions[category] || (isCheckbox ? [] : null);
 
+      let newSelection;
+
       if (isCheckbox) {
         const isSelected = currentSelection.includes(option);
-        const newSelection = isSelected
+        newSelection = isSelected
           ? currentSelection.filter((o) => o !== option)
           : [...currentSelection, option];
-        return { ...prevOptions, [category]: newSelection };
+      } else {
+        newSelection = currentSelection === option ? null : option;
       }
 
-      return {
-        ...prevOptions,
-        [category]: currentSelection === option ? null : option,
-      };
-    });
+      const updatedOptions = { ...prevOptions, [category]: newSelection };
 
+      updateTotalPrice(updatedOptions, isCheckbox, category, option);
+
+      return updatedOptions;
+    });
+  };
+  const updateTotalPrice = (updatedOptions, isCheckbox, category, option) => {
     const optionPrice = option.price || 0;
+
     setTotalPrice((prevPrice) => {
       if (isCheckbox) {
-        const isSelected = selectedOptions[category]?.includes(option);
-        return prevPrice + (isSelected ? -optionPrice : optionPrice);
+        const isSelected = updatedOptions[category]?.includes(option);
+        return prevPrice + (isSelected ? optionPrice : -optionPrice);
+      } else {
+        const prevSelectedOptionPrice =
+          (selectedOptions[category] && selectedOptions[category].price) || 0;
+        return prevPrice - prevSelectedOptionPrice + optionPrice;
       }
-      const prevSelectedOptionPrice =
-        selectedOptions[category]?.price || 0 || 0;
-      return prevPrice - prevSelectedOptionPrice + optionPrice;
     });
   };
 
@@ -205,14 +82,14 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
     setIsPopupOpen(!isPopupOpen);
   };
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-  };
+  // const sliderSettings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   arrows: true,
+  // };
 
   return (
     <div className={styles.container}>
@@ -221,44 +98,104 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
       <p className={styles.subtitle}>Build your product</p>
 
       {short_desc &&
-        short_desc?.map((section, index) => (
-          <div key={index} className={styles.section}>
-            <h3 className={styles.sectionTitle}>{section.name}</h3>
+        short_desc?.map((section, index) => {
+          if (
+            section.name === "ZERO CLEARANCE PACKAGE" ||
+            section.name === "CHIMNEY INSERT PACKAGE"
+          ) {
+            return (
+              <div key={index} className={styles.section}>
+                <h3 className={styles.sectionTitle}>{section.name}</h3>
 
-            <div
-              className={
-                section.name === "MATERIAL & FINISH OPTIONS"
-                  ? styles.materialOptionsRow
-                  : ""
-              }
-            >
-              {section.value.map((option, optionIndex) => (
-                <label
-                  key={optionIndex}
-                  className={`${styles.option} ${
+                <div
+                  className={
                     section.name === "MATERIAL & FINISH OPTIONS"
-                      ? styles.materialOptionLabel
+                      ? styles.materialOptionsRow
                       : ""
-                  }`}
+                  }
                 >
-                  <input
-                    type={
-                      section.name === "ZERO CLEARANCE PACKAGE" ||
-                      section.name === "CHIMNEY INSERT PACKAGE"
-                        ? "checkbox"
-                        : "radio"
-                    }
-                    name={section.name}
-                    checked={
-                      Array.isArray(selectedOptions[section.name])
-                        ? selectedOptions[section.name]?.includes(option)
-                        : selectedOptions[section.name] === option
-                    }
-                    onChange={() => handleOptionChange(section.name, option)}
-                  />
-                  {section.name === "MATERIAL & FINISH OPTIONS" ? (
-                    <div>
-                      <Image
+                  {section.value.map((option, optionIndex) => (
+                    <label
+                      key={optionIndex}
+                      className={`${styles.option} ${
+                        section.name === "MATERIAL & FINISH OPTIONS"
+                          ? styles.materialOptionLabel
+                          : ""
+                      }`}
+                    >
+                      <input
+                        key={optionIndex}
+                        type={
+                          section.name === "ZERO CLEARANCE PACKAGE" ||
+                          section.name === "CHIMNEY INSERT PACKAGE"
+                            ? "checkbox"
+                            : "radio"
+                        }
+                        name={section.name}
+                        checked={
+                          Array.isArray(selectedOptions[section.name])
+                            ? selectedOptions[section.name]?.includes(option)
+                            : selectedOptions[section.name] === option
+                        }
+                        onChange={() =>
+                          handleOptionChange(section.name, option)
+                        }
+                      />
+                      {section.name === "MATERIAL & FINISH OPTIONS" ? (
+                        <div
+                          key={`${option?.name}-${optionIndex}`}
+                          className={styles.accessoriesCategory}
+                        >
+                          <LightGallery
+                            speed={500}
+                            plugins={[lgThumbnail, lgZoom, lgFullscreen]}
+                            mode="lg-fade"
+                            closable={true}
+                            download={true}
+                            zoomFromOrigin={false}
+                            mousewheel={true}
+                          >
+                            <a
+                              key={optionIndex}
+                              href={
+                                "https://23909229.fs1.hubspotusercontent-na1.net/hubfs/23909229/Fascia%20and%20Trim/Regency/Fascia-GFi750-3-Sided%20Black%20Backing%20Plate.jpg"
+                              }
+                              data-src={
+                                "https://23909229.fs1.hubspotusercontent-na1.net/hubfs/23909229/Fascia%20and%20Trim/Regency/Fascia-GFi750-3-Sided%20Black%20Backing%20Plate.jpg"
+                              }
+                              data-lg-size="1600-2400"
+                              data-sub-html={`<h4>${option?.name}</h4>`}
+                              className={styles.imageLink}
+                            >
+                              <Image
+                                src={
+                                  option.image_url === "url"
+                                    ? optionsImage
+                                    : option.image_url
+                                }
+                                alt={option.name}
+                                width={150}
+                                height={150}
+                                // onClick={() =>
+                                //   togglePopup(
+                                //     section.value.map((opt) => opt.image_url)
+                                //   )
+                                // }
+                                style={{ cursor: "pointer" }}
+                              />
+                            </a>
+                          </LightGallery>
+
+                          <span
+                            style={{
+                              position: "relative",
+                              left: "10%",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {option.name}
+                          </span>
+                          {/* <Image
                         src={
                           option.image_url === "url"
                             ? optionsImage
@@ -279,19 +216,170 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
                         }}
                       >
                         {option.name}
+                      </span> */}
+                        </div>
+                      ) : (
+                        <span>
+                          {option.value || option.name}{" "}
+                          {option.price ? `(+$${option.price.toFixed(2)})` : ""}
+                        </span>
+                      )}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+        })}
+      {short_desc &&
+        short_desc?.map((section, index) => {
+          if (section.name === "MATERIAL & FINISH OPTIONS") {
+            return (
+              <div key={index} className={styles.section}>
+                <h3 className={styles.sectionTitle}>{section.name}</h3>
+                <div className={styles.materialOptionsRow}>
+                  {/* LightGallery wraps all images together */}
+                  <LightGallery
+                    speed={500}
+                    plugins={[lgThumbnail, lgZoom, lgFullscreen]}
+                    mode="lg-fade"
+                    closable={true}
+                    download={true}
+                    zoomFromOrigin={false}
+                    mousewheel={true}
+                    selector={`.${styles.imageLink}`} // Selector to bind to specific links
+                  >
+                    {section.value.map((option, optionIndex) => {
+                      const imageUrl =
+                        option.image_url !== "url" && option.image_url
+                          ? option.image_url
+                          : "https://23909229.fs1.hubspotusercontent-na1.net/hubfs/23909229/Fascia%20and%20Trim/Regency/Fascia-GFi750-3-Sided%20Black%20Backing%20Plate.jpg";
+
+                      return (
+                        <div
+                          key={optionIndex}
+                          className={`${styles.option} ${styles.materialOptionLabel}`}
+                          style={{ display: "flex", flexDirection: "column" }}
+                        >
+                          <label
+                            style={{ display: "flex", flexDirection: "column" }}
+                            // onClick={(e) => e.stopPropagation()}
+                          >
+                            <input
+                              type={
+                                section.name === "ZERO CLEARANCE PACKAGE" ||
+                                section.name === "CHIMNEY INSERT PACKAGE"
+                                  ? "checkbox"
+                                  : "radio"
+                              }
+                              name={section.name}
+                              checked={selectedOptions[section.name] === option}
+                              // {
+                              //   Array.isArray(selectedOptions[section.name])
+                              //     ? selectedOptions[section.name]?.includes(
+                              //         option
+                              //       )
+                              //     : selectedOptions[section.name] === option
+                              // }
+                              onChange={(e) => {
+                                handleOptionChange(section.name, option);
+                                // e.stopPropagation();
+                              }}
+                            />
+                          </label>
+                          <a
+                            href={imageUrl}
+                            data-src={imageUrl}
+                            data-lg-size="1600-2400"
+                            data-sub-html={`<h4>${option?.name}</h4>`}
+                            className={`${styles.imageLink}`} // Bind this class to LightGallery
+                          >
+                            <Image
+                              src={imageUrl}
+                              alt={option.name}
+                              width={150}
+                              height={150}
+                              style={{ cursor: "pointer", marginTop: "8px" }}
+                            />
+                          </a>
+
+                          <span
+                            style={{
+                              marginTop: "8px",
+                              cursor: "pointer",
+                              display: "flex",
+                              textAlign: "center",
+                            }}
+                          >
+                            {option.name}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </LightGallery>
+                </div>
+                <div
+                  onClick={onViewAllAccessories}
+                  style={{ cursor: "pointer" }}
+                >
+                  View All Accessories
+                </div>
+              </div>
+            );
+          }
+        })}
+
+      {short_desc &&
+        short_desc?.map((section, index) => {
+          if (section.name === "DELIVERY") {
+            return (
+              <div key={index} className={styles.section}>
+                <h3 className={styles.sectionTitle}>{section.name}</h3>
+
+                <div
+                  className={
+                    section.name === "DELIVERY"
+                      ? styles.materialOptionsRowDelivery
+                      : ""
+                  }
+                >
+                  {section.value.map((option, optionIndex) => (
+                    <label
+                      key={optionIndex}
+                      className={`${styles.option} ${
+                        section.name === "MATERIAL & FINISH OPTIONS"
+                          ? styles.materialOptionLabel
+                          : ""
+                      }`}
+                    >
+                      <input
+                        type={
+                          section.name === "ZERO CLEARANCE PACKAGE" ||
+                          section.name === "CHIMNEY INSERT PACKAGE"
+                            ? "checkbox"
+                            : "radio"
+                        }
+                        name={section.name}
+                        checked={
+                          Array.isArray(selectedOptions[section.name])
+                            ? selectedOptions[section.name]?.includes(option)
+                            : selectedOptions[section.name] === option
+                        }
+                        onChange={() =>
+                          handleOptionChange(section.name, option)
+                        }
+                      />
+                      <span>
+                        {option.value || option.name}{" "}
+                        {option.price ? `(+$${option.price.toFixed(2)})` : ""}
                       </span>
-                    </div>
-                  ) : (
-                    <span>
-                      {option.value || option.name}{" "}
-                      {option.price ? `(+$${option.price.toFixed(2)})` : ""}
-                    </span>
-                  )}
-                </label>
-              ))}
-            </div>
-          </div>
-        ))}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+        })}
 
       <div className={styles.priceContainer}>
         <p className={styles.price}>
@@ -309,7 +397,7 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
         </button>
       </div>
 
-      {isPopupOpen && (
+      {/* {isPopupOpen && (
         <div
           style={{
             position: "fixed",
@@ -355,7 +443,7 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
             </Slider>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

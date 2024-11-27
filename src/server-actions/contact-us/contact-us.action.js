@@ -9,7 +9,6 @@ export const addContactUsData = async (payload) => {
   const result = await addContactUsDataRepo(payload).catch((err) => {
     return [];  // In case of error, return an empty array or handle it accordingly
   });
-// console.log(result)
   return {
     ...responsePayload,
     success: true,

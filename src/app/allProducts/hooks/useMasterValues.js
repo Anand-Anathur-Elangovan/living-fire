@@ -13,16 +13,24 @@ const useMasterValues = () => {
       fuelTypes: [],
       productTypes: [],
       subTypes: [],
+      installationTypes: [],
+      glassOrientationTypes: [],
     },
     isFetched: isFetchedValues,
   } = useQuery({
     queryKey: ["getMasterValuesAction"],
     queryFn: () => getMasterValuesAction(),
     select: (res) => {
-      // console.log(res);
       if (res.success) return res.result;
       toast.error(res.message);
-      return { ranges: [], fuelTypes: [], productTypes: [], subTypes: [] };
+      return {
+        ranges: [],
+        fuelTypes: [],
+        productTypes: [],
+        subTypes: [],
+        installationTypes: [],
+        glassOrientationTypes: [],
+      };
     },
   });
 

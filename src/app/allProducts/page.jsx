@@ -26,6 +26,8 @@ const Page = () => {
   const [searchText, setSearchText] = useState("");
   const [bestSelling, setBestSelling] = useState(false);
   const [subType, setSubType] = useState(null);
+  const [installationType, setInstallationType] = useState(null);
+  const [glassOrientationType, setglassOrientationType] = useState(null);
   const [rangeType, setRangeType] = useState(null);
 
   const searchParams = useSearchParams();
@@ -44,7 +46,9 @@ const Page = () => {
     bestSelling === false ? null : bestSelling,
     searchText,
     subType ?? 0,
-    rangeType ?? 0
+    rangeType ?? 0,
+    installationType ?? 0,
+    glassOrientationType ?? 0
   );
 
   useEffect(() => {

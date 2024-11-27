@@ -48,16 +48,6 @@ export const getBrandsRepo = async () => {
     console.error("Error fetching users:", error);
     throw error;
   }
-  // const result = await prisma
-  //   .$queryRawUnsafe(query)
-  //   .then((res) => {
-  //     // console.log(res);
-  //     return res[0].fn_get_brands;
-  //   })
-  //   .catch((err) => {
-  //     throw err;
-  //   });
-  // return result;
 };
 
 export const getUserFeedbackRepo = async () => {

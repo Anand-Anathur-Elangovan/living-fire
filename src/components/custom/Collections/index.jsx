@@ -30,8 +30,6 @@ const Collections = () => {
     fetchImageUrl();
   }, []);
 
-  // console.log("imageUrl", imageUrl);
-  // Dummy data for images and descriptions
   const carouselItems = imageUrl && [
     {
       image: imageUrl,
