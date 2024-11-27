@@ -26,8 +26,6 @@ export const addContactUsData = async (payload) => {
     ${payload.filelink?"'"+payload.filelink  +"'":null}
   )`;
   try {
-    // console.log(query)
-    // console.log(payload)
     const result = await pool.query(query);
     console.log(result.rows)
     return result.rows;

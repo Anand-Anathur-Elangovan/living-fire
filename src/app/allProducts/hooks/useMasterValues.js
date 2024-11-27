@@ -21,7 +21,6 @@ const useMasterValues = () => {
     queryKey: ["getMasterValuesAction"],
     queryFn: () => getMasterValuesAction(),
     select: (res) => {
-      // console.log(res);
       if (res.success) return res.result;
       toast.error(res.message);
       return {

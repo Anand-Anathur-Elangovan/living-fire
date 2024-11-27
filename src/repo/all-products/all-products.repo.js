@@ -55,7 +55,7 @@ export const getFuelTypesRepo = async () => {
     const query = `select * from public.tbl_fueltype WHERE is_active=true`;
 
     const result = await pool.query(query); // Await the pool query directly
-    // console.log(result.rows);
+    
     return result.rows;
   } catch (error) {
     console.error("Error fetching Firetypes:", error);
@@ -68,7 +68,7 @@ export const getRangeRepo = async () => {
     const query = `select * from public.tbl_range WHERE is_active=true`;
 
     const result = await pool.query(query); // Await the pool query directly
-    // console.log(result.rows);
+  
     return result.rows;
   } catch (error) {
     console.error("Error fetching Range:", error);
@@ -81,7 +81,7 @@ export const getProductTypesRepo = async () => {
     const query = `select * from public.tbl_product_type WHERE is_active=true order by 1`;
 
     const result = await pool.query(query); // Await the pool query directly
-    // console.log(result.rows);
+    
     return result.rows;
   } catch (error) {
     console.error("Error fetching Range:", error);
@@ -94,7 +94,7 @@ export const getSubTypesRepo = async () => {
     const query = `select * from public.tbl_subtype WHERE is_active=true order by 1`;
 
     const result = await pool.query(query); // Await the pool query directly
-    // console.log(result.rows);
+    
     return result.rows;
   } catch (error) {
     console.error("Error fetching Range:", error);
@@ -107,7 +107,7 @@ export const getInstallationTypesRepo = async () => {
     const query = `select * from public.tbl_installation WHERE is_active=true order by 1`;
 
     const result = await pool.query(query); // Await the pool query directly
-    // console.log(result.rows);
+  
     return result.rows;
   } catch (error) {
     console.error("Error fetching Range:", error);
@@ -120,7 +120,7 @@ export const getGlassOrientationTypesRepo = async () => {
     const query = `select * from public.tbl_glass_orientation WHERE is_active=true order by 1`;
 
     const result = await pool.query(query); // Await the pool query directly
-    // console.log(result.rows);
+    
     return result.rows;
   } catch (error) {
     console.error("Error fetching Range:", error);

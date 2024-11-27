@@ -16,7 +16,6 @@ const ProductCard = ({
 }) => {
   const router = useRouter();
   const { setNavigationState } = useNavigationState();
-  // console.log(productDetails);
   const imageURL = useMemo(() => {
     if (fn_get_products?.hero_image) {
       if (fn_get_products?.hero_image[0]?.value?.includes("http"))

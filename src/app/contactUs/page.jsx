@@ -31,7 +31,6 @@ const ContactUs = () => {
   const [formData, setFormData] = useState(initialFormData);
 
   const { mutate, isLoading, isError, isSuccess, error, data } = useContactUs();
-  // console.log(mutate, isLoading, isError, isSuccess, error, data)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

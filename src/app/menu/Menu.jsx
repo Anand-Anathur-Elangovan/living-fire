@@ -32,11 +32,8 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
     0,
     0
   );
-  // console.log(searchRef.current?.value);
-  // console.log(searchText, searchText !== "", "MENU");
 
   useEffect(() => {
-    // console.log("EFFECT");
     const setProducts = () => {
       setFilteredProducts(allProducts?.slice(0, 10));
     };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 // import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
@@ -28,50 +28,13 @@ const PriceFormatter = ({ price }) => {
   return formattedPrice;
 };
 
-const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
+const ProductOptions = ({ short_desc, name, price, brand_name, openModal, onViewAllAccessories  }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  // const handleOptionChange = (category, option) => {
-  //   console.log("coming up");
-  //   const isCheckbox =
-  //     category === "ZERO CLEARANCE PACKAGE" ||
-  //     category === "CHIMNEY INSERT PACKAGE";
 
-  //   setSelectedOptions((prevOptions) => {
-  //     const currentSelection =
-  //       prevOptions[category] || (isCheckbox ? [] : null);
 
-  //     if (isCheckbox) {
-  //       const isSelected = currentSelection.includes(option);
-  //       const newSelection = isSelected
-  //         ? currentSelection.filter((o) => o !== option)
-  //         : [...currentSelection, option];
-  //       return { ...prevOptions, [category]: newSelection };
-  //     }
-
-  //     return {
-  //       ...prevOptions,
-  //       [category]: currentSelection === option ? null : option,
-  //     };
-  //   });
-
-  //   const optionPrice = option.price || 0;
-  //   setTotalPrice((prevPrice) => {
-  //     if (isCheckbox) {
-  //       const isSelected = selectedOptions[category]?.includes(option);
-  //       return prevPrice + (isSelected ? -optionPrice : optionPrice);
-  //     }
-  //     const prevSelectedOptionPrice =
-  //       selectedOptions[category]?.price || 0 || 0;
-  //     return prevPrice - prevSelectedOptionPrice + optionPrice;
-  //   });
-  // };
   const handleOptionChange = (category, option) => {
     const isCheckbox =
       category === "ZERO CLEARANCE PACKAGE" ||
@@ -89,21 +52,16 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
           ? currentSelection.filter((o) => o !== option)
           : [...currentSelection, option];
       } else {
-        // Set radio selection
         newSelection = currentSelection === option ? null : option;
       }
 
-      // Update state with new selection
       const updatedOptions = { ...prevOptions, [category]: newSelection };
 
-      // Update total price based on new selection
       updateTotalPrice(updatedOptions, isCheckbox, category, option);
 
       return updatedOptions;
     });
   };
-  console.log("selectedOptions", selectedOptions);
-  // Function to update the total price based on selected options
   const updateTotalPrice = (updatedOptions, isCheckbox, category, option) => {
     const optionPrice = option.price || 0;
 
@@ -132,9 +90,7 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
   //   slidesToScroll: 1,
   //   arrows: true,
   // };
-  // useEffect(() => {
-  //   console.log("Selected Options Updated:", selectedOptions);
-  // }, [selectedOptions]);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.brand}>{brand_name}</h2>
@@ -331,7 +287,6 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
                               }}
                             />
                           </label>
-
                           <a
                             href={imageUrl}
                             data-src={imageUrl}
@@ -362,6 +317,12 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal }) => {
                       );
                     })}
                   </LightGallery>
+                </div>
+                <div
+                  onClick={onViewAllAccessories}
+                  style={{ cursor: "pointer" }}
+                >
+                  View All Accessories
                 </div>
               </div>
             );
