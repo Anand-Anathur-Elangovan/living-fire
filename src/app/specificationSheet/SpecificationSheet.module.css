@@ -172,11 +172,11 @@
 .productsColumn .column {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 60px;
+  column-gap: 80px;
   row-gap: 20px;
   align-items: center;
   align-content: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .productSpecs {
   width: 400px;
