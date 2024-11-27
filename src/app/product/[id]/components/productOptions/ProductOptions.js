@@ -28,12 +28,18 @@ const PriceFormatter = ({ price }) => {
   return formattedPrice;
 };
 
-const ProductOptions = ({ short_desc, name, price, brand_name, openModal, onViewAllAccessories  }) => {
+const ProductOptions = ({
+  short_desc,
+  name,
+  price,
+  brand_name,
+  openModal,
+  onViewAllAccessories,
+}) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
-
 
   const handleOptionChange = (category, option) => {
     const isCheckbox =
@@ -320,7 +326,11 @@ const ProductOptions = ({ short_desc, name, price, brand_name, openModal, onView
                 </div>
                 <div
                   onClick={onViewAllAccessories}
-                  style={{ cursor: "pointer" }}
+                  style={{
+                    cursor: "pointer",
+                    color: "#1741be",
+                    textDecoration: "none",
+                  }}
                 >
                   View All Accessories
                 </div>
