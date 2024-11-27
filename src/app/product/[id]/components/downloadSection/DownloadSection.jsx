@@ -4,10 +4,74 @@ import { useState } from "react";
 import Image from "next/image";
 import styles from "./DownloadSection.module.css";
 import brochureIcon from "@/public/assets/product/brochure.svg";
+import dynamic from "next/dynamic";
+import "lightgallery/css/lightgallery.css"; // Base CSS
+import "lightgallery/css/lg-thumbnail.css"; // Thumbnail plugin
+import "lightgallery/css/lg-zoom.css"; // Zoom plugin
+import "lightgallery/css/lg-fullscreen.css"; // Fullscreen plugin
+import { useRouter } from "next/navigation";
+
+const LightGallery = dynamic(() => import("lightgallery/react"), {
+  ssr: false,
+});
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+import lgFullscreen from "lightgallery/plugins/fullscreen";
 
 const DownloadSection = ({ product_details, openDrawer }) => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("Downloads");
   const [openFAQ, setOpenFAQ] = useState(null);
+  const is424 = window.location.href.includes("424");
+
+  const accessories = {
+    name: "Accessories",
+    value: [
+      {
+        name: "Fascia Options",
+        value: [
+          {
+            fileurl:
+              "https://23909229.fs1.hubspotusercontent-na1.net/hubfs/23909229/Fascia%20and%20Trim/Regency/Fascia-GFi750-3-Sided%20Black%20Backing%20Plate.jpg",
+            filename: "3 Sided Black Backing Plate",
+          },
+        ],
+      },
+      {
+        name: "Inner Panels Options",
+        value: [
+          {
+            fileurl:
+              "https://23909229.fs1.hubspotusercontent-na1.net/hubfs/23909229/Inner%20Panels/Regency/GFi750-Metallic%20Black%20Inner%20Panels.jpg",
+            filename: "Metallic Black Inner Panels",
+          },
+          {
+            fileurl:
+              "https://23909229.fs1.hubspotusercontent-na1.net/hubfs/23909229/Inner%20Panels/Regency/GFi750-Reflective%20Black%20Inner%20Panels.jpg",
+            filename: "Reflective Black Inner Panels",
+          },
+        ],
+      },
+      // {
+      //   name: "Inner Panels Options",
+      //   value: [
+      //     {
+      //       name: "Inner Panels Options 1",
+      //       fileurl:
+      //         "https://23909229.fs1.hubspotusercontent-na1.net/hubfs/23909229/Inner%20Panels/Regency/GFi750-Metallic%20Black%20Inner%20Panels.jpg",
+      //       filename: "Metallic Black Inner Panels",
+      //     },
+      //     {
+      //       name: "Inner Panels Options 2",
+      //       fileurl:
+      //         "https://23909229.fs1.hubspotusercontent-na1.net/hubfs/23909229/Inner%20Panels/Regency/GFi750-Reflective%20Black%20Inner%20Panels.jpg",
+      //       filename: "Reflective Black Inner Panels",
+      //     },
+      //   ],
+      // },
+    ],
+  };
+  const productDetails = is424 ? product_details : product_details;
 
   const toggleFAQ = (index) => {
     setOpenFAQ(openFAQ === index ? null : index);
@@ -16,9 +80,60 @@ const DownloadSection = ({ product_details, openDrawer }) => {
   const handleImageClick = (fileurl) => {
     window.open(fileurl, "_blank");
   };
+  const renderAccessoriesContent = (accessoriesData) => {
+    return (
+      <div className={styles.accessoriesContainer}>
+        {/* <h1 className={styles.accessoriesTitle}>{accessoriesData.name}</h1> */}
+        {accessoriesData.value.map((category, index) => {
+          return (
+            category?.value?.length > 0 && (
+              <div
+                key={`${category.name}-${index}`}
+                className={styles.accessoriesCategory}
+              >
+                <h2 className={styles.categoryTitle}>{category.name}</h2>
+
+                <LightGallery
+                  speed={500}
+                  plugins={[lgThumbnail, lgZoom, lgFullscreen]}
+                  mode="lg-fade"
+                  closable={true}
+                  download={true}
+                  zoomFromOrigin={false}
+                  mousewheel
+                >
+                  {/* <div className={styles.accessoriesRowContainer}> */}
+                  {category.value.map((item, idx) => (
+                    <a
+                      key={idx}
+                      href={item.fileurl}
+                      data-src={item?.fileurl}
+                      data-lg-size="1600-2400"
+                      data-sub-html={`<h4>${item.filename}</h4>`}
+                      className={styles.imageLink}
+                    >
+                      <Image
+                        src={item.fileurl}
+                        alt={item.filename}
+                        className={styles.image}
+                        width={400}
+                        height={240}
+                      />
+                      <p className={styles.imageTitle}>{item.name}</p>
+                    </a>
+                  ))}
+                  {/* </div> */}
+                </LightGallery>
+              </div>
+            )
+          );
+        })}
+      </div>
+    );
+  };
 
   const renderTabContent = () => {
-    const tabContent = product_details.find(
+    const tabContent = productDetails?.find(
       (item) => item.name.toLowerCase() === activeTab.toLowerCase()
     );
     if (!tabContent) return null;
@@ -51,7 +166,8 @@ const DownloadSection = ({ product_details, openDrawer }) => {
               ))}
             <button
               className={`${styles.flexRowCenterCenter} ${styles.viewAllSpecs} ${styles.sizeLg} ${styles.outline} ${styles.square}`}
-              onClick={openDrawer}
+              // onClick={openDrawer}
+              onClick={() => router.push(`/specificationSheet`)}
             >
               View All Specs
             </button>
@@ -80,6 +196,8 @@ const DownloadSection = ({ product_details, openDrawer }) => {
           ))}
         </div>
       );
+    } else if (activeTab === "Accessories") {
+      return renderAccessoriesContent(tabContent);
     } else {
       return (
         <div className={styles.contentSection}>
@@ -99,7 +217,7 @@ const DownloadSection = ({ product_details, openDrawer }) => {
         <div className={styles.infosection}>
           <div>
             <div className={styles.tabSection}>
-              {product_details.map((tabItem) => (
+              {productDetails?.map((tabItem) => (
                 <div
                   key={tabItem.name}
                   className={`${styles.tab} ${
@@ -123,197 +241,3 @@ const DownloadSection = ({ product_details, openDrawer }) => {
 };
 
 export default DownloadSection;
-
-// import { useState } from "react";
-// import Image from "next/image";
-// import styles from "./DownloadSection.module.css";
-// import brochure from "@/public/assets/product/brochure.svg";
-
-// const DownloadSection = ({ product_details }) => {
-//   const [activeTab, setActiveTab] = useState("downloads");
-//   const [openFAQ, setOpenFAQ] = useState(null);
-
-//   const toggleFAQ = (index) => {
-//     setOpenFAQ(openFAQ === index ? null : index);
-//   };
-//   // console.log("product_details", product_details);
-//   console.log(JSON.stringify(product_details, null, 2));
-//   return (
-//     <section className={styles.downloadSection}>
-//       <div className={styles.row}>
-//         <div className={styles.infosection}>
-//           <div>
-//             <div className={styles.tabSection}>
-//               <div
-//                 className={`${styles.tab} ${
-//                   activeTab === "downloads" && styles.activeTab
-//                 }`}
-//                 onClick={() => setActiveTab("downloads")}
-//               >
-//                 <p className={`${styles.ui} ${styles.sizeH4}`}>Downloads</p>
-//               </div>
-//               <div
-//                 className={`${styles.tab1} ${
-//                   activeTab === "about" && styles.activeTab
-//                 }`}
-//                 onClick={() => setActiveTab("about")}
-//               >
-//                 <p className={`${styles.descriptionTwo} ${styles.sizeH4}`}>
-//                   About the brand
-//                 </p>
-//               </div>
-//               <div
-//                 className={`${styles.tab1} ${
-//                   activeTab === "installation" && styles.activeTab
-//                 }`}
-//                 onClick={() => setActiveTab("installation")}
-//               >
-//                 <p className={`${styles.descriptionTwo} ${styles.sizeH4}`}>
-//                   Installation
-//                 </p>
-//               </div>
-//               <div
-//                 className={`${styles.tab1} ${
-//                   activeTab === "faqs" && styles.activeTab
-//                 }`}
-//                 onClick={() => setActiveTab("faqs")}
-//               >
-//                 <p className={`${styles.descriptionTwo} ${styles.sizeH4}`}>
-//                   FAQs
-//                 </p>
-//               </div>
-//             </div>
-//             <div className={styles.lineelevenOne}></div>
-//           </div>
-
-//           {activeTab === "faqs" && (
-//             <div className={`${styles.faqSection}`}>
-//               {[
-//                 {
-//                   question: "Is there a warranty provided with the purchase?",
-//                   answer:
-//                     "Yes, all our fireplaces come with a manufacturer's warranty for added peace of mind. We also offer maintenance services to ensure your fireplace remains in top condition for years to come.",
-//                 },
-//                 {
-//                   question:
-//                     "Can I schedule an in-home consultation before purchasing?",
-//                   answer:
-//                     "Yes, we offer in-home consultations to help you choose the perfect fireplace for your space. Our experts will review your home layout, discuss options, and make recommendations.",
-//                 },
-//                 {
-//                   question:
-//                     "Do you provide installation services or recommend installers?",
-//                   answer:
-//                     "We work with a trusted network of professional installation partners. If you need assistance, we can recommend installers who are experienced with our products for a seamless installation process.",
-//                 },
-//                 {
-//                   question:
-//                     "What is the estimated delivery time, and are there any delays due to stock availability?",
-//                   answer:
-//                     "Delivery times vary depending on stock availability and your location. Typically, delivery takes 2-3 weeks, but we will inform you immediately if there are any delays.",
-//                 },
-//               ].map((faq, index) => (
-//                 <div
-//                   key={index}
-//                   className={`${styles.faqItem} ${
-//                     index % 2 === 0 ? styles.faqItemLeft : styles.faqItemRight
-//                   }`}
-//                 >
-//                   <div
-//                     className={styles.faqQuestion}
-//                     onClick={() => toggleFAQ(index)}
-//                   >
-//                     <p>{faq.question}</p>
-//                     <span>{openFAQ === index ? "✕" : "+"}</span>
-//                   </div>
-//                   {openFAQ === index && (
-//                     <div className={styles.faqAnswer}>
-//                       <p>{faq.answer}</p>
-//                     </div>
-//                   )}
-//                   <div className={styles.divider}></div>
-//                 </div>
-//               ))}
-//             </div>
-//           )}
-//           {activeTab === "downloads" && (
-//             <div className={styles.brochureSection}>
-//               <div className={styles.listspecsheet}>
-//                 <div className={styles.columnTwo}>
-//                   <p className={`${styles.materialfinish} ${styles.sizeH6}`}>
-//                     Brochure
-//                   </p>
-//                   <div className={styles.rowtext}>
-//                     <Image
-//                       src={brochure}
-//                       alt="Imageclass"
-//                       className={styles.imageclass}
-//                     />
-//                     <p className={`${styles.text7} ${styles.sizeBodyMedium}`}>
-//                       Regency – GFI750 – Brochure
-//                     </p>
-//                   </div>
-//                 </div>
-//                 <div className={styles.columnTwo}>
-//                   <p className={`${styles.materialfinish} ${styles.sizeH6}`}>
-//                     Spec Sheet
-//                   </p>
-//                   <div className={styles.rowtext}>
-//                     <Image
-//                       src={brochure}
-//                       alt="Imageclass"
-//                       className={styles.imageclass}
-//                     />
-//                     <p className={`${styles.text7} ${styles.sizeBodyMedium}`}>
-//                       Regency – GFI750 – Spec Sheet
-//                     </p>
-//                   </div>
-//                 </div>
-//                 <div className={styles.columnTwo}>
-//                   <p className={`${styles.materialfinish} ${styles.sizeH6}`}>
-//                     Manual
-//                   </p>
-//                   <div className={styles.rowtext}>
-//                     <Image
-//                       src={brochure}
-//                       alt="Imageclass"
-//                       className={styles.imageclass}
-//                     />
-//                     <p className={`${styles.text7} ${styles.sizeBodyMedium}`}>
-//                       Regency – GFI750 – Manual
-//                     </p>
-//                   </div>
-//                 </div>
-//                 {/* Additional columns for Spec Sheet and Manual */}
-//               </div>
-//               <button
-//                 className={`${styles.flexRowCenterCenter} ${styles.viewAllSpecs} ${styles.sizeLg} ${styles.outline} ${styles.square}`}
-//               >
-//                 View All Specs
-//               </button>
-//             </div>
-//           )}
-//           {activeTab === "about" && (
-//             <div className={styles.faqSection}>
-//               Yes, all our fireplaces come with a manufacturer's warranty for
-//               added peace of mind. We also offer maintenance services to ensure
-//               your fireplace remains in top condition for years to come. Yes,
-//               all our fireplaces come with a manufacturer's warranty for added
-//               peace of mind. We also offer maintenance services to ensure your
-//               fireplace remains in top condition for years to come.
-//             </div>
-//           )}
-//           {activeTab === "installation" && (
-//             <div className={styles.faqSection}>
-//               Yes, all our fireplaces come with a manufacturer's warranty for
-//               added peace of mind. We also offer maintenance services to ensure
-//               your fireplace remains in top condition for years to come.
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default DownloadSection;
