@@ -102,6 +102,32 @@ export const getSubTypesRepo = async () => {
   }
 };
 
+export const getInstallationTypesRepo = async () => {
+  try {
+    const query = `select * from public.tbl_installation WHERE is_active=true order by 1`;
+
+    const result = await pool.query(query); // Await the pool query directly
+    // console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching Range:", error);
+    throw error;
+  }
+};
+
+export const getGlassOrientationTypesRepo = async () => {
+  try {
+    const query = `select * from public.tbl_glass_orientation WHERE is_active=true order by 1`;
+
+    const result = await pool.query(query); // Await the pool query directly
+    // console.log(result.rows);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching Range:", error);
+    throw error;
+  }
+};
+
 // export const searchProducts = async (searchTerm, brandIds, ptypeIds) => {
 //   try {
 //     const products = await prismaClient.tblProduct.findMany({

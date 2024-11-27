@@ -19,7 +19,11 @@ const SpecificationSheet = () => {
   const searchRef = useRef(null);
   const {
     brands,
-    masterValues: { fuelTypes = [], productTypes: allProductMenu = [] },
+    masterValues: {
+      fuelTypes = [],
+      productTypes: allProductMenu = [],
+      glassOrientationTypes: glassOrientationTypes = [],
+    },
   } = useMasterValues();
 
   const [productMenuIndex, setProductMenuIndex] = useState(1);
@@ -72,7 +76,12 @@ const SpecificationSheet = () => {
     setIsOpenSpecDrawer(true);
   }, []);
   const closeDrawer = () => setIsOpenSpecDrawer(false);
-  console.log("allProducts", allProducts);
+  console.log(
+    "allProducts",
+    allProducts,
+    "glassOrientationTypes",
+    glassOrientationTypes
+  );
   return (
     <section>
       {/* Search Banner Section */}
@@ -162,6 +171,8 @@ const SpecificationSheet = () => {
         fuelTypes={fuelTypes}
         fireplaceType={fireplaceType}
         setFireplaceType={setFireplaceType}
+        glassOrientationTypes={glassOrientationTypes}
+        setglassOrientationType={setglassOrientationType}
       />
 
       {/* Product List Section */}

@@ -4,6 +4,8 @@ import { responsePayload } from "@/src/constants/reponse-payload";
 import {
   getAllProducts,
   getFuelTypesRepo,
+  getGlassOrientationTypesRepo,
+  getInstallationTypesRepo,
   getProductTypesRepo,
   getRangeRepo,
   getSubTypesRepo,
@@ -66,11 +68,24 @@ export const getMasterValuesAction = async () => {
   const subTypes = await getSubTypesRepo()
     .then((res) => res)
     .catch((err) => []);
+  const installationTypes = await getInstallationTypesRepo()
+    .then((res) => res)
+    .catch((err) => []);
+  const glassOrientationTypes = await getGlassOrientationTypesRepo()
+    .then((res) => res)
+    .catch((err) => []);
 
   return {
     ...responsePayload,
     success: true,
     message: "Fetched All Firetypes data",
-    result: { ranges, fuelTypes, productTypes, subTypes },
+    result: {
+      ranges,
+      fuelTypes,
+      productTypes,
+      subTypes,
+      installationTypes,
+      glassOrientationTypes,
+    },
   };
 };
