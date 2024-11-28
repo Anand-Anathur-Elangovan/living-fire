@@ -153,28 +153,39 @@ const DownloadSection = forwardRef(
             <div className={styles.listspecsheet}>
               {tabContent.value &&
                 Array.isArray(tabContent.value) &&
-                tabContent.value.map((downloadItem, index) => (
-                  <div key={index} className={styles.columnTwo}>
-                    <p className={`${styles.materialfinish} ${styles.sizeH6}`}>
-                      {downloadItem.name?.toUpperCase()}
-                    </p>
-                    <div
-                      className={styles.rowtext}
-                      onClick={() =>
-                        window.open(downloadItem.fileurl, "_blank")
-                      }
-                    >
-                      <Image
-                        src={brochureIcon}
-                        alt="Imageclass"
-                        className={styles.imageclass}
-                      />
-                      <p className={`${styles.text7} ${styles.sizeBodyMedium}`}>
-                        {downloadItem.filename}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                tabContent.value.map((downloadItem, index) => {
+                  if (
+                    downloadItem.name === "brochure" ||
+                    downloadItem.name === "spec sheet" ||
+                    downloadItem.name === "manual"
+                  )
+                    return (
+                      <div key={index} className={styles.columnTwo}>
+                        <p
+                          className={`${styles.materialfinish} ${styles.sizeH6}`}
+                        >
+                          {downloadItem.name?.toUpperCase()}
+                        </p>
+                        <div
+                          className={styles.rowtext}
+                          onClick={() =>
+                            window.open(downloadItem.fileurl, "_blank")
+                          }
+                        >
+                          <Image
+                            src={brochureIcon}
+                            alt="Imageclass"
+                            className={styles.imageclass}
+                          />
+                          <p
+                            className={`${styles.text7} ${styles.sizeBodyMedium}`}
+                          >
+                            {downloadItem.filename}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                })}
               <button
                 className={`${styles.flexRowCenterCenter} ${styles.viewAllSpecs} ${styles.sizeLg} ${styles.outline} ${styles.square}`}
                 // onClick={openDrawer}
