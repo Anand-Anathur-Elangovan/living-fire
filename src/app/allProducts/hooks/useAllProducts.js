@@ -23,6 +23,7 @@ const useAllProducts = (
   const {
     data: allProducts = initialData,
     isFetched,
+    isStale,
     isFetchedAfterMount,
   } = useQuery({
     queryKey: [
@@ -49,7 +50,7 @@ const useAllProducts = (
         installationType,
         glassOrientationType,
       }),
-    staleTime: 0,
+    // staleTime: 0,
     // enabled: productMenuIndex ? true : false,
     select: (res) => {
       if (res.success) return res.result;
@@ -62,6 +63,7 @@ const useAllProducts = (
     allProducts,
     isFetched,
     isFetchedAfterMount,
+    isStale,
   };
 };
 

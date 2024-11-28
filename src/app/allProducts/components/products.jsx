@@ -1,5 +1,11 @@
 "use client";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import RightArrowIcon from "@/public/assets/allProducts/rightArrow.svg";
 import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import LeftArrowDisabledIcon from "@/public/assets/allProducts/leftArrowDisabled.svg";
@@ -31,12 +37,25 @@ const Products = ({
   subType,
   setRangeType,
   rangeType,
+  bestSelling,
+  setInstallationType,
+  installationType,
+  setglassOrientationType,
+  glassOrientationType,
+  updatedValues,
+  isStale,
 }) => {
   // const { allProducts, isFetched } = useAllProducts(type ?? 0);
 
   const {
     brands,
-    masterValues: { fuelTypes, ranges, subTypes },
+    masterValues: {
+      fuelTypes,
+      ranges,
+      subTypes,
+      installationTypes,
+      glassOrientationTypes,
+    },
   } = useMasterValues(type);
 
   const [refreshPage, setRefreshPage] = useState(false);
@@ -51,6 +70,11 @@ const Products = ({
   const [allProductsTempForSubType, setAllProductsTempForSubType] = useState(
     []
   );
+  const [firePlaceSubType, setFirePlaceSubType] = useState({
+    installation: false,
+    glassOrientation: false,
+  });
+
   const searchRef = useRef(null);
   useEffect(() => {
     const checkFitlers = () => {
@@ -60,12 +84,14 @@ const Products = ({
     };
     checkFitlers();
   }, [searchText, type, brandType, fireplaceType]);
+
   useEffect(() => {
     const updateFilteredProducts = () => {
+      if (allProducts.length === 0) return;
       setFilteredProducts(allProducts?.slice(0, 12));
     };
     updateFilteredProducts();
-  }, [allProducts, isFetched]);
+  }, [isFetched, allProducts]);
 
   useEffect(() => {
     if (!rangeType && allProducts && allProducts?.length > 0) {
@@ -178,8 +204,43 @@ const Products = ({
     setRangeType(null);
     searchRef.current.value = "";
     setBestSelling(false);
+    setFirePlaceSubType(() => ({
+      installation: false,
+      glassOrientation: false,
+    }));
+    setInstallationType(null);
+    setglassOrientationType(null);
   };
-  console.log(allProducts, "allProducts");
+
+  // console.log(allProducts, "allProducts");
+  // console.log(
+  //   installationTypes,
+  //   glassOrientationTypes,
+  //   subTypes,
+  //   fuelTypes,
+  //   "Types"
+  // );
+
+  // const fueltypeValues = useMemo(() => {
+  //   let values = [];
+  //   values = allProducts.map((p) => p.fn_get_products.fueltype_id);
+  //   return [...new Set([].concat(...values))].filter((v) => v !== null);
+  // }, [allProducts]);
+
+  // const installationValues = useMemo(() => {
+  //   let values = [];
+  //   values = allProducts.map((p) => p.fn_get_products.installation_id);
+  //   return [...new Set(values)].filter((v) => v !== null);
+  // }, [allProducts]);
+
+  // const glassOrientationValues = useMemo(() => {
+  //   let values = [];
+  //   values = allProducts.map((p) => p.fn_get_products.glass_orientation_ids);
+  //   return [...new Set([].concat(...values))]
+  //     .filter((v) => v !== null)
+  //     .map((x) => parseInt(x));
+  // }, [allProducts]);
+  console.log(updatedValues, "installationValues");
 
   return (
     <>
@@ -330,7 +391,7 @@ const Products = ({
                     )}
                   </span>
                   <div id="fireplaceFilterId" className="flex flex-col gap-3">
-                    {fireplaceType && subType && (
+                    {/* {fireplaceType && subType && (
                       <span
                         key={"subTypes_selected"}
                         className="font-sans font-normal font-small leading-5 text-base text-black"
@@ -340,40 +401,122 @@ const Products = ({
                             ?.subtype_name
                         }
                       </span>
-                    )}
+                    )} */}
 
-                    {fireplaceType
-                      ? subTypes
-                          ?.filter((subType) =>
-                            allProductsTempForSubType?.some(
-                              (item) =>
-                                item.fn_get_products?.subtype_id ===
-                                subType.subtype_id
-                            )
-                          )
-                          .map((val) =>
-                            val?.subtype_id === subType ? null : (
-                              <span
-                                key={"types" + val?.subtype_id}
-                                className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
-                                onClick={() => setSubType(val?.subtype_id)}
-                              >
-                                {val?.subtype_name}
-                              </span>
-                            )
-                          )
-                      : fuelTypes?.map((val) => (
+                    {fireplaceType ? (
+                      <>
+                        {updatedValues?.installationValues?.length > 0 && (
                           <span
-                            key={"types" + val.fueltype_id}
-                            className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
-                            onClick={() => {
-                              setSubType(null);
-                              setFireplaceType(val?.fueltype_id);
-                            }}
+                            key={"InstallationTypes"}
+                            className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                              firePlaceSubType.installation
+                                ? "text-black"
+                                : "text-gray-400"
+                            }`}
+                            onClick={() =>
+                              setFirePlaceSubType(() => ({
+                                installation: true,
+                                glassOrientation: false,
+                              }))
+                            }
                           >
-                            {val?.fueltype_name}
+                            Installtion Types
                           </span>
-                        ))}
+                        )}
+
+                        {firePlaceSubType.installation && (
+                          <div className="ml-4 flex flex-col gap-3 ">
+                            {installationTypes.map(
+                              (val) =>
+                                updatedValues?.installationValues?.includes(
+                                  val?.installation_id
+                                ) && (
+                                  <span
+                                    key={"types" + val?.installation_id}
+                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                      val?.installation_id === installationType
+                                        ? "text-black"
+                                        : "text-gray-400"
+                                    }`}
+                                    onClick={() => {
+                                      setInstallationType(val?.installation_id);
+                                      setglassOrientationType(null);
+                                    }}
+                                  >
+                                    {val?.installation_name}
+                                  </span>
+                                )
+                            )}
+                          </div>
+                        )}
+
+                        {updatedValues?.glassOrientationValues?.length > 0 && (
+                          <span
+                            key={"GlassOrientationTypes"}
+                            className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                              firePlaceSubType.glassOrientation
+                                ? "text-black"
+                                : "text-gray-400"
+                            }`}
+                            onClick={() =>
+                              setFirePlaceSubType(() => ({
+                                installation: false,
+                                glassOrientation: true,
+                              }))
+                            }
+                          >
+                            Glass Orientation Types
+                          </span>
+                        )}
+
+                        {firePlaceSubType.glassOrientation && (
+                          <div className="ml-4 flex flex-col gap-3 ">
+                            {glassOrientationTypes.map(
+                              (val) =>
+                                updatedValues?.glassOrientationValues?.includes(
+                                  val?.glass_orientation_id
+                                ) && (
+                                  <span
+                                    key={"types" + val?.glass_orientation_id}
+                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                      val?.glass_orientation_id ===
+                                      glassOrientationType
+                                        ? "text-black"
+                                        : "text-gray-400"
+                                    }`}
+                                    onClick={() => {
+                                      setInstallationType(null);
+                                      setglassOrientationType(
+                                        val?.glass_orientation_id
+                                      );
+                                    }}
+                                  >
+                                    {val?.glass_orientation_name}
+                                  </span>
+                                )
+                            )}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      fuelTypes?.map(
+                        (val) =>
+                          updatedValues?.fueltypeValues?.includes(
+                            val?.fueltype_id
+                          ) && (
+                            <span
+                              key={"types" + val.fueltype_id}
+                              className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                              onClick={() => {
+                                setSubType(null);
+                                setFireplaceType(val?.fueltype_id);
+                              }}
+                            >
+                              {val?.fueltype_name}
+                            </span>
+                          )
+                      )
+                    )}
                   </div>
                 </div>
               )}
@@ -535,6 +678,54 @@ const Products = ({
                   </div>
                 </div>
               }
+            </div>
+            <div className="flex flex-col gap-3 py-3 mr-10">
+              <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
+                Others{" "}
+                {!document
+                  .getElementById("otherFilterId")
+                  ?.classList?.contains("collapse") && (
+                  <Image
+                    src={MinusIcon}
+                    alt="clear"
+                    className="pt-1 cursor-pointer"
+                    onClick={() => {
+                      setRefreshPage((prev) => !prev);
+                      document
+                        .getElementById("otherFilterId")
+                        .classList.add("collapse");
+                    }}
+                  />
+                )}
+                {document
+                  .getElementById("otherFilterId")
+                  ?.classList?.contains("collapse") && (
+                  <Image
+                    src={PlusIcon}
+                    alt="clear"
+                    className="pt-1 cursor-pointer"
+                    onClick={() => {
+                      setRefreshPage((prev) => !prev);
+                      document
+                        .getElementById("otherFilterId")
+                        .classList.remove("collapse");
+                    }}
+                  />
+                )}
+              </span>
+              <div
+                id="otherFilterId"
+                className="flex flex-col gap-3 transistion ease-in-out"
+              >
+                <span
+                  className={`font-sans font-small leading-5 text-normal cursor-pointer ${
+                    bestSelling ? "font-semibold" : ""
+                  }`}
+                  onClick={() => sortProducts(SORTBY.bestSelling)}
+                >
+                  Best Selling
+                </span>
+              </div>
             </div>
             <div className="flex flex-col gap-3 py-3 mr-10">
               <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
@@ -755,3 +946,25 @@ export default Products;
 // ];
 
 // const fireplaceTypes = ["Wood", "Electric", "Gas", "LPG"];
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// subTypes
+//   ?.filter((subType) =>
+//     allProductsTempForSubType?.some(
+//       (item) =>
+//         item.fn_get_products?.subtype_id ===
+//         subType.subtype_id
+//     )
+//   )
+//   .map((val) =>
+//     val?.subtype_id === subType ? null : (
+//       <span
+//         key={"types" + val?.subtype_id}
+//         className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+//         onClick={() => setSubType(val?.subtype_id)}
+//       >
+//         {val?.subtype_name}
+//       </span>
+//     )
+//   )
