@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import OurDifference from "./components/ourDifference";
 import OurShowrooms from "./components/ourShowrooms";
 import Products from "./components/products";
@@ -29,17 +29,13 @@ const Page = () => {
   const [installationType, setInstallationType] = useState(null);
   const [glassOrientationType, setglassOrientationType] = useState(null);
   const [rangeType, setRangeType] = useState(null);
+  const [updatedValues, setUpdatedValues] = useState({
+    fueltypeValues: [],
+    installationValues: [],
+    glassOrientationValues: [],
+  });
 
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    if (state?.typeName === "fuelType") {
-      setFireplaceType(state?.id);
-    } else if (state?.typeName === "brandType") {
-      setBrandType(state?.id);
-    }
-  }, [state]);
-
-  const { allProducts, isFetched } = useAllProducts(
+  const { allProducts, isFetched, isStale } = useAllProducts(
     productMenuIndex,
     fireplaceType ?? 0,
     brandType ?? 0,
@@ -50,6 +46,15 @@ const Page = () => {
     installationType ?? 0,
     glassOrientationType ?? 0
   );
+
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    if (state?.typeName === "fuelType") {
+      setFireplaceType(state?.id);
+    } else if (state?.typeName === "brandType") {
+      setBrandType(state?.id);
+    }
+  }, [state]);
 
   useEffect(() => {
     const setStates = () => {
@@ -64,6 +69,47 @@ const Page = () => {
     };
     setStates();
   }, [searchParams]);
+
+  useEffect(() => {
+    const updateFuelTypeValues = () => {
+      let values = [];
+      let newFuelValues = [];
+      values = allProducts.map((p) => p.fn_get_products?.fueltype_id);
+      newFuelValues = [...new Set(values)].filter((v) => v !== null);
+
+      let installValues = [];
+      let newInstallValues = [];
+      installValues = allProducts.map((p) => p.fn_get_products.installation_id);
+      newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
+
+      let glassValues = [];
+      let newGlassValues = [];
+      glassValues = allProducts.map(
+        (p) => p.fn_get_products.glass_orientation_ids
+      );
+      newGlassValues = [...new Set([].concat(...glassValues))]
+        .filter((v) => v !== null)
+        .map((x) => parseInt(x));
+
+      setUpdatedValues((prev) => {
+        return {
+          ...prev,
+          fueltypeValues: fireplaceType ? prev.fueltypeValues : newFuelValues,
+          installationValues:
+            installationType || glassOrientationType
+              ? prev.installationValues
+              : newInstallValues,
+          glassOrientationValues:
+            installationType || glassOrientationType
+              ? prev.glassOrientationValues
+              : newGlassValues,
+        };
+      });
+    };
+    if (allProducts.length > 0) updateFuelTypeValues();
+  }, [isFetched, allProducts]);
+
+  // console.log(allProducts, fueltypeValues, "fueltypeValues");
 
   return (
     <>
@@ -133,28 +179,39 @@ const Page = () => {
                   src={LeftArrowIcon}
                   alt="Left Arrow"
                   className="cursor-pointer"
-                  onClick={() => setFireplaceType(null)}
+                  onClick={() => {
+                    setFireplaceType(null);
+                    setInstallationType(null);
+                    setglassOrientationType(null);
+                  }}
                 />
-                {fuelTypes.map((fuelType) => (
-                  <div
-                    className="flex flex-col gap-1 items-center text-center cursor-pointer"
-                    key={"fuelTypes" + fuelType?.fueltype_id}
-                    onClick={() => {
-                      setSubType(null);
-                      setFireplaceType(fuelType?.fueltype_id);
-                    }}
-                  >
-                    {fuelType?.fueltype_name ?? "Unknown"}
-                    <div
-                      className={`justify-center block border-b-[3.5px] border-solid border-black rounded transition ease-in-out duration-500`}
-                      style={{
-                        width: `${
-                          fuelType.fueltype_id === fireplaceType ? "50%" : "4px"
-                        }`,
-                      }}
-                    />
-                  </div>
-                ))}
+                {fuelTypes.map(
+                  (fuelType) =>
+                    updatedValues?.fueltypeValues.includes(
+                      fuelType?.fueltype_id
+                    ) && (
+                      <div
+                        className="flex flex-col gap-1 items-center text-center cursor-pointer"
+                        key={"fuelTypes" + fuelType?.fueltype_id}
+                        onClick={() => {
+                          setSubType(null);
+                          setFireplaceType(fuelType?.fueltype_id);
+                        }}
+                      >
+                        {fuelType?.fueltype_name ?? "Unknown"}
+                        <div
+                          className={`justify-center block border-b-[3.5px] border-solid border-black rounded transition ease-in-out duration-500`}
+                          style={{
+                            width: `${
+                              fuelType.fueltype_id === fireplaceType
+                                ? "50%"
+                                : "4px"
+                            }`,
+                          }}
+                        />
+                      </div>
+                    )
+                )}
               </>
             ) : brandType ? (
               <>
@@ -223,6 +280,13 @@ const Page = () => {
           subType={subType}
           setRangeType={setRangeType}
           rangeType={rangeType}
+          bestSelling={bestSelling}
+          setInstallationType={setInstallationType}
+          installationType={installationType}
+          setglassOrientationType={setglassOrientationType}
+          glassOrientationType={glassOrientationType}
+          updatedValues={updatedValues}
+          isStale={isStale}
         />
         <OurDifference />
         <OurShowrooms />
