@@ -9,6 +9,7 @@ import LeftArrow from "@/public/assets/homePage/collections/arrow-left.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useNavigationState } from "@/context/NavigationContext";
+import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 const Featured = ({ headingValue, productRouteHandler }) => {
   const router = useRouter();

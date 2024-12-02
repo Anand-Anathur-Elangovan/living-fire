@@ -51,6 +51,7 @@ import React from "react";
 import styles from "./MaterialFinishOptions.module.css";
 import optionsImage from "@/public/assets/product/electriFireMaterialOptions.png";
 import Image from "next/image";
+import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 const MaterialFinishOptions = ({ short_desc }) => {
   // Filter the JSON to find the "MATERIAL & FINISH OPTIONS" object
@@ -75,7 +76,7 @@ const MaterialFinishOptions = ({ short_desc }) => {
               <Image
                 src={
                   option.image_url && option.image_url !== "url"
-                    ? option.image_url
+                    ? transformImageSrc(option.image_url)
                     : optionsImage
                 } // Use default image if image_url is null
                 alt={option.name || "Material Option"}

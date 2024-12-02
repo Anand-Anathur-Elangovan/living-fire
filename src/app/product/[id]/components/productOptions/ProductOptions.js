@@ -17,6 +17,7 @@ const LightGallery = dynamic(() => import("lightgallery/react"), {
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgFullscreen from "lightgallery/plugins/fullscreen";
+import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 const PriceFormatter = ({ price }) => {
   // Format the price with commas
@@ -106,9 +107,10 @@ const ProductOptions = ({
       {short_desc &&
         short_desc?.map((section, index) => {
           if (
-            section.name === "ZERO CLEARANCE PACKAGE" ||
-            section.name === "CHIMNEY INSERT PACKAGE"
+            section.name !== "MATERIAL & FINISH OPTIONS" &&
+            section.name !== "DELIVERY"
           ) {
+            
             return (
               <div key={index} className={styles.section}>
                 <h3 className={styles.sectionTitle}>{section.name}</h3>
@@ -132,10 +134,11 @@ const ProductOptions = ({
                       <input
                         key={optionIndex}
                         type={
-                          section.name === "ZERO CLEARANCE PACKAGE" ||
-                          section.name === "CHIMNEY INSERT PACKAGE"
-                            ? "checkbox"
-                            : "radio"
+                          "checkbox"
+                          // === "ZERO CLEARANCE PACKAGE" ||
+                          // section.name === "CHIMNEY INSERT PACKAGE"
+                          //   ? "checkbox"
+                          //   : "radio"
                         }
                         name={section.name}
                         checked={
@@ -177,7 +180,7 @@ const ProductOptions = ({
                                 src={
                                   option.image_url === "url"
                                     ? optionsImage
-                                    : option.image_url
+                                    : transformImageSrc(option.image_url)
                                 }
                                 alt={option.name}
                                 width={150}
@@ -258,7 +261,7 @@ const ProductOptions = ({
                     {section.value.map((option, optionIndex) => {
                       const imageUrl =
                         option.image_url !== "url" && option.image_url
-                          ? option.image_url
+                          ? transformImageSrc(option.image_url)
                           : "https://23909229.fs1.hubspotusercontent-na1.net/hubfs/23909229/Fascia%20and%20Trim/Regency/Fascia-GFi750-3-Sided%20Black%20Backing%20Plate.jpg";
 
                       return (

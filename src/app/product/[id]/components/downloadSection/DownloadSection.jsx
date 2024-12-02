@@ -17,6 +17,7 @@ const LightGallery = dynamic(() => import("lightgallery/react"), {
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgFullscreen from "lightgallery/plugins/fullscreen";
+import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 const DownloadSection = forwardRef(
   ({ product_details, openDrawer, activeTab, setActiveTab }, ref) => {
@@ -93,7 +94,7 @@ const DownloadSection = forwardRef(
       return (
         <div className={styles.accessoriesContainer}>
           {/* <h1 className={styles.accessoriesTitle}>{accessoriesData.name}</h1> */}
-          {accessoriesData.value.map((category, index) => {
+          {accessoriesData?.value?.map((category, index) => {
             return (
               category?.value?.length > 0 && (
                 <div
@@ -112,17 +113,17 @@ const DownloadSection = forwardRef(
                     mousewheel
                   >
                     {/* <div className={styles.accessoriesRowContainer}> */}
-                    {category.value.map((item, idx) => (
+                    {category?.value?.map((item, idx) => (
                       <a
                         key={idx}
-                        href={item.fileurl}
-                        data-src={item?.fileurl}
+                        href={transformImageSrc(item.fileurl)}
+                        data-src={transformImageSrc(item?.fileurl)}
                         data-lg-size="1600-2400"
                         data-sub-html={`<h4>${item.filename}</h4>`}
                         className={styles.imageLink}
                       >
                         <Image
-                          src={item.fileurl}
+                          src={transformImageSrc(item?.fileurl)}
                           alt={item.filename}
                           className={styles.image}
                           width={400}
@@ -167,9 +168,12 @@ const DownloadSection = forwardRef(
                           {downloadItem.name?.toUpperCase()}
                         </p>
                         <div
-                          className={styles.rowtext}
+                          className={styles?.rowtext}
                           onClick={() =>
-                            window.open(downloadItem.fileurl, "_blank")
+                            window.open(
+                              transformImageSrc(downloadItem?.fileurl),
+                              "_blank"
+                            )
                           }
                         >
                           <Image

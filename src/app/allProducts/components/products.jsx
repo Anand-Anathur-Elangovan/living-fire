@@ -19,6 +19,7 @@ import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 import { SORTBY } from "@/src/constants/products";
 import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
 import useMasterValues from "../hooks/useMasterValues";
+import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 const Products = ({
   type,
@@ -266,7 +267,7 @@ const Products = ({
               return (
                 <Image
                   key={"image" + id}
-                  src={imageURL ? imageURL : CheckerBoardImg}
+                  src={imageURL ? transformImageSrc(imageURL) : CheckerBoardImg}
                   alt={`Product${productDetails.fn_get_products.p_name}`} //productDetails.fn_get_products.p_name
                   className="element-image"
                   width={35} // specify your desired width
