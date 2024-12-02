@@ -1,20 +1,22 @@
 "use server";
 // import { PrismaClient } from "@prisma/client";
 import pool from "@/src/helper/db/db";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
 // const prisma = new PrismaClient();
 
 export const getProductPage = async (productId) => {
-  const cookieStore = cookies();
-  const cookieProductId = await cookieStore.get("selectedProductId")?.value;
+  // const cookieStore = cookies();
+  // const cookieProductId = await cookieStore.get("selectedProductId")?.value;
+  console.log("productCheck, productId", productId);
   const query = `SELECT * FROM fn_get_product_page(${
-    productId ? productId : cookieProductId ? cookieProductId : "424"
+    productId ? productId : "424"
   })`;
   // const query = "select * FROM fn_get_product_page(424)";
   try {
     const result = await pool.query(query);
     // prisma.$queryRawUnsafe(query);
+    console.log("productCheck123", result.rows);
     return result.rows;
   } catch (err) {
     throw err;

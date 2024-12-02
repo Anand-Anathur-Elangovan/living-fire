@@ -11,6 +11,7 @@ import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 import { useNavigationState } from "@/context/NavigationContext";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
   const { setNavigationState } = useNavigationState();
@@ -145,7 +146,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                         <Image
                           src={
                             isImageURL(fn_get_products.hero_image)
-                              ? fn_get_products.hero_image[0].value
+                              ? transformImageSrc(fn_get_products.hero_image[0].value)
                               : CheckerBoardImg
                           }
                           alt={""} //productDetails.fn_get_products.p_name

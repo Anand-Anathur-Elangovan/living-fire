@@ -8,6 +8,7 @@ import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 import { useRouter } from "next/navigation";
 import { useNavigationState } from "@/context/NavigationContext";
 import { setCookie } from "cookies-next";
+import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 const ProductCard = ({
   productDetails: { fn_get_products },
@@ -80,7 +81,7 @@ const ProductCard = ({
           </div>
         )}
         <Image
-          src={imageURL ? imageURL : CheckerBoardImg}
+          src={imageURL ? transformImageSrc(imageURL): CheckerBoardImg}
           alt={fn_get_products.p_name ?? ""} //productDetails.fn_get_products.p_name
           className="element-image cursor-pointer"
           width={300} // specify your desired width

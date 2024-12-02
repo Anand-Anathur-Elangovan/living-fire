@@ -5,6 +5,7 @@ import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 const HeroImage = ({ src, alt }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -51,7 +52,11 @@ const HeroImage = ({ src, alt }) => {
               style={{ cursor: "pointer" }}
             >
               <Image
-                src={imageSrc?.value !== "TBC" ? imageSrc?.value : ""}
+                src={
+                  imageSrc?.value !== "TBC"
+                    ? transformImageSrc(imageSrc?.value)
+                    : ""
+                }
                 alt={`${alt} ${index + 1}`}
                 className="class-hero-image-size"
                 layout="responsive"
@@ -79,7 +84,11 @@ const HeroImage = ({ src, alt }) => {
               {images?.map((imageSrc, index) => (
                 <div key={index} className="popup-slider-image">
                   <Image
-                    src={imageSrc?.value !== "TBC" ? imageSrc?.value : ""}
+                    src={
+                      imageSrc?.value !== "TBC"
+                        ? transformImageSrc(imageSrc?.value)
+                        : ""
+                    }
                     alt={`${alt} ${index + 1}`}
                     layout="responsive"
                     width={1000}
