@@ -81,7 +81,7 @@ const ProductCard = ({
           </div>
         )}
         <Image
-          src={imageURL ? transformImageSrc(imageURL): CheckerBoardImg}
+          src={imageURL ? transformImageSrc(imageURL) : CheckerBoardImg}
           alt={fn_get_products.p_name ?? ""} //productDetails.fn_get_products.p_name
           className="element-image cursor-pointer"
           width={300} // specify your desired width
