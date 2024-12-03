@@ -241,15 +241,6 @@ const Products = ({
   //     .filter((v) => v !== null)
   //     .map((x) => parseInt(x));
   // }, [allProducts]);
-  console.log(
-    "filteredProducts",
-    filteredProducts?.length,
-    "pageIndex",
-    pageIndex,
-    "maxPageCount",
-    maxPageCount
-  );
-
   return (
     <>
       {/* Compare Products */}
