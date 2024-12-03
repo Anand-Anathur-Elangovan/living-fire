@@ -103,7 +103,7 @@ const Product = ({ params }) => {
   return (
     <section>
       <div className="stackview">
-        <div>
+        <div className="top-container">
           <div>
             <Breadcrumbs
               productType={ptype_name}
@@ -132,35 +132,37 @@ const Product = ({ params }) => {
             p_sku={p_sku}
           />
         </div>
-        {/* {short_desc && <MaterialFinishOptions short_desc={short_desc} />} */}
-        <Specifications specifications={specifications} />
-        <DownloadSection
-          product_details={product_details}
-          openDrawer={openDrawer}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          ref={downloadSectionRef}
-        />
-        <Featured
-          headingValue={"You May Also Like"}
-          productRouteHandler={productRouteHandler}
-        />
-        {/* <OurDifference /> */}
-        <OurShowrooms />
-        <EnquiryFormModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          name={name}
-          brand_name={brand_name}
-        />
-        <ProductSpecsDrawer
-          isOpen={isOpenSpecDrawer}
-          closeDrawer={closeDrawer}
-          openDrawer={openDrawer}
-          name={name}
-          brand_name={brand_name}
-          product_details={product_details}
-        />
+        <div className="second-container">
+          {/* {short_desc && <MaterialFinishOptions short_desc={short_desc} />} */}
+          <Specifications specifications={specifications} />
+          <DownloadSection
+            product_details={product_details}
+            openDrawer={openDrawer}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            ref={downloadSectionRef}
+          />
+          <Featured
+            headingValue={"You May Also Like"}
+            productRouteHandler={productRouteHandler}
+          />
+          {/* <OurDifference /> */}
+          <OurShowrooms />
+          <EnquiryFormModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            name={name}
+            brand_name={brand_name}
+          />
+          <ProductSpecsDrawer
+            isOpen={isOpenSpecDrawer}
+            closeDrawer={closeDrawer}
+            openDrawer={openDrawer}
+            name={name}
+            brand_name={brand_name}
+            product_details={product_details}
+          />
+        </div>
       </div>
     </section>
   );
