@@ -112,7 +112,8 @@ const ProductOptions = ({
         short_desc?.map((section, index) => {
           if (
             section.name !== "MATERIAL & FINISH OPTIONS" &&
-            section.name !== "DELIVERY"
+            section.name !== "DELIVERY" &&
+            section?.name !== "0"
           ) {
             return (
               <div key={index} className={styles.section}>
@@ -165,9 +166,7 @@ const ProductOptions = ({
                           )}
                           <span>
                             {/* {option.value || option.name}{" "} */}
-                            {option.price
-                              ? `(+$${option.price})`
-                              : ""}
+                            {option.price ? `(+$${option.price})` : ""}
                           </span>
                         </div>
                       </label>
@@ -180,7 +179,10 @@ const ProductOptions = ({
         })}
       {short_desc &&
         short_desc?.map((section, index) => {
-          if (section.name === "MATERIAL & FINISH OPTIONS") {
+          if (
+            section.name === "MATERIAL & FINISH OPTIONS" &&
+            section.value?.length > 0
+          ) {
             return (
               <div key={index} className={styles.section}>
                 <h3 className={styles.sectionTitle}>{section.name}</h3>
@@ -336,8 +338,7 @@ const ProductOptions = ({
       <div className={styles.priceContainer}>
         <p className={styles.price}>
           {/* ${totalPrice.toFixed(2)} */}
-          <PriceFormatter price={totalPrice} />{" "}
-          <span>(inc gst)</span>
+          <PriceFormatter price={totalPrice} /> <span>(inc gst)</span>
         </p>
         <span className={styles.inStock}>IN STOCK</span>
       </div>

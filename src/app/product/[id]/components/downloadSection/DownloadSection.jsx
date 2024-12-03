@@ -247,19 +247,22 @@ const DownloadSection = forwardRef(
           <div className={styles.infosection}>
             <div>
               <div className={styles.tabSection}>
-                {productDetails?.map((tabItem) => (
-                  <div
-                    key={tabItem.name}
-                    className={`${styles.tab} ${
-                      activeTab === tabItem.name && styles.activeTab
-                    }`}
-                    onClick={() => setActiveTab(tabItem.name)}
-                  >
-                    <p className={`${styles.ui} ${styles.sizeH4}`}>
-                      {tabItem.name}
-                    </p>
-                  </div>
-                ))}
+                {productDetails?.map(
+                  (tabItem) =>
+                    tabItem?.value?.length > 0 && (
+                      <div
+                        key={tabItem.name}
+                        className={`${styles.tab} ${
+                          activeTab === tabItem.name && styles.activeTab
+                        }`}
+                        onClick={() => setActiveTab(tabItem.name)}
+                      >
+                        <p className={`${styles.ui} ${styles.sizeH4}`}>
+                          {tabItem.name}
+                        </p>
+                      </div>
+                    )
+                )}
               </div>
               <div className={styles.lineelevenOne}></div>
             </div>
