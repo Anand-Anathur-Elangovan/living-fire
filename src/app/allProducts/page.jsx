@@ -109,7 +109,7 @@ const Page = () => {
     if (allProducts.length > 0) updateFuelTypeValues();
   }, [isFetched, allProducts]);
 
-  // console.log(allProducts, fueltypeValues, "fueltypeValues");
+  console.log("allProducts", allProducts, allProducts?.length);
 
   return (
     <>

@@ -79,6 +79,7 @@ const Product = ({ params }) => {
     specifications,
     fueltype_id,
     brand_id,
+    p_sku,
   } = productData;
   console.log("productData", productData);
   const productRouteHandler = (productId) => {
@@ -102,62 +103,66 @@ const Product = ({ params }) => {
   return (
     <section>
       <div className="stackview">
-        <div>
-          <Breadcrumbs
-            productType={ptype_name}
-            fuelType={fueltype_name}
-            productName={name}
-            brandName={brand_name}
-            fuelTypeId={fueltype_id}
-            brandId={brand_id}
-          />
-          {/* <br/> */}
-          <HeroImage
-            // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
-            src={hero_image}
-            alt="Product Hero Image"
+        <div className="top-container">
+          <div>
+            <Breadcrumbs
+              productType={ptype_name}
+              fuelType={fueltype_name}
+              productName={name}
+              brandName={brand_name}
+              fuelTypeId={fueltype_id}
+              brandId={brand_id}
+            />
+            {/* <br/> */}
+            <HeroImage
+              // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
+              src={hero_image}
+              alt="Product Hero Image"
+            />
+          </div>
+          {product_desc && <DescriptionColumn product_desc={product_desc} />}
+
+          <ProductOptions
+            short_desc={short_desc}
+            name={name}
+            price={price}
+            brand_name={brand_name}
+            openModal={openModal}
+            onViewAllAccessories={handleViewAllAccessories}
+            p_sku={p_sku}
           />
         </div>
-        {product_desc && <DescriptionColumn product_desc={product_desc} />}
-
-        <ProductOptions
-          short_desc={short_desc}
-          name={name}
-          price={price}
-          brand_name={brand_name}
-          openModal={openModal}
-          onViewAllAccessories={handleViewAllAccessories}
-        />
-
-        {short_desc && <MaterialFinishOptions short_desc={short_desc} />}
-        <Specifications specifications={specifications} />
-        <DownloadSection
-          product_details={product_details}
-          openDrawer={openDrawer}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          ref={downloadSectionRef}
-        />
-        <Featured
-          headingValue={"You May Also Like"}
-          productRouteHandler={productRouteHandler}
-        />
-        {/* <OurDifference /> */}
-        <OurShowrooms />
-        <EnquiryFormModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          name={name}
-          brand_name={brand_name}
-        />
-        <ProductSpecsDrawer
-          isOpen={isOpenSpecDrawer}
-          closeDrawer={closeDrawer}
-          openDrawer={openDrawer}
-          name={name}
-          brand_name={brand_name}
-          product_details={product_details}
-        />
+        <div className="second-container">
+          {/* {short_desc && <MaterialFinishOptions short_desc={short_desc} />} */}
+          <Specifications specifications={specifications} />
+          <DownloadSection
+            product_details={product_details}
+            openDrawer={openDrawer}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            ref={downloadSectionRef}
+          />
+          <Featured
+            headingValue={"You May Also Like"}
+            productRouteHandler={productRouteHandler}
+          />
+          {/* <OurDifference /> */}
+          <OurShowrooms />
+          <EnquiryFormModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            name={name}
+            brand_name={brand_name}
+          />
+          <ProductSpecsDrawer
+            isOpen={isOpenSpecDrawer}
+            closeDrawer={closeDrawer}
+            openDrawer={openDrawer}
+            name={name}
+            brand_name={brand_name}
+            product_details={product_details}
+          />
+        </div>
       </div>
     </section>
   );

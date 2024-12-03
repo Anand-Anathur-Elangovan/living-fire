@@ -13,7 +13,7 @@
 
   position: relative;
   width: 55%;
-  height: auto;
+  height: 95vh;
   left: 100px;
   /* Adjust if necessary */
   /* bottom: 220px; */
@@ -22,7 +22,7 @@
 
 .columndesc {
   margin-bottom: 1.5rem;
-  gap: 15px;
+  gap: 16px;
   display: flex;
   flex-direction: column;
 }

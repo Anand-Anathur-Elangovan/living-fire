@@ -8,7 +8,6 @@ import pool from "@/src/helper/db/db";
 export const getProductPage = async (productId) => {
   // const cookieStore = cookies();
   // const cookieProductId = await cookieStore.get("selectedProductId")?.value;
-  console.log("productCheck, productId", productId);
   const query = `SELECT * FROM fn_get_product_page(${
     productId ? productId : "424"
   })`;

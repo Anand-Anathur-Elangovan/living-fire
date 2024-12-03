@@ -26,7 +26,7 @@ const HeroImage = ({ src, alt }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     arrows: false,
     afterChange: (index) => setCurrentImageIndex(index),
@@ -91,8 +91,9 @@ const HeroImage = ({ src, alt }) => {
                     }
                     alt={`${alt} ${index + 1}`}
                     layout="responsive"
-                    width={1000}
-                    height={800}
+                    width={"100%"}
+                    height={"600px"}
+                    style={{ minHeight: "600px", height: "600px" }}
                   />
                 </div>
               ))}
@@ -152,6 +153,10 @@ const HeroImage = ({ src, alt }) => {
         .slick-next:before {
           font-size: 2rem;
           color: #333; /* Arrow color */
+        }
+        .slick-slide img {
+          display: block;
+          height: 600px !important;
         }
       `}</style>
     </>

@@ -562,6 +562,25 @@
   transform: scale(1); /* Slightly enlarge the active dot for emphasis */
   border-radius: 50%;
 }
+
+.top-container {
+  /* min-height: calc(100vh + 60vh); */
+  display: flex;
+  flex-direction: column;
+  gap: 49px;
+}
+
+.second-container {
+  /* min-height: calc(100vh + 60vh); */
+  display: flex;
+  flex-direction: column;
+  gap: 49px;
+}
+.slick-slide img {
+  display: block;
+  height: 600px !important;
+}
+
 @media only screen and (max-width: 1025px) {
   .material-finish-options .img-list {
     flex-direction: column;

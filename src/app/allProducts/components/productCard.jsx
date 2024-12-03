@@ -17,6 +17,11 @@ const ProductCard = ({
 }) => {
   const router = useRouter();
   const { setNavigationState } = useNavigationState();
+  const downloadsData = Array.isArray(fn_get_products?.product_details)
+    ? fn_get_products?.product_details?.filter(
+        (productDetail) => productDetail?.name?.toLowerCase() === "downloads"
+      )?.[0]?.value
+    : undefined;
   const imageURL = useMemo(() => {
     if (fn_get_products?.hero_image) {
       if (fn_get_products?.hero_image[0]?.value?.includes("http"))
@@ -26,25 +31,49 @@ const ProductCard = ({
   });
 
   const brochureURL = useMemo(() => {
-    if (fn_get_products?.brochure) {
-      if (fn_get_products?.brochure[0]?.value?.includes("http"))
-        return fn_get_products.brochure[0].value;
+    // if (fn_get_products?.brochure) {
+    //   if (fn_get_products?.brochure[0]?.value?.includes("http"))
+    //     return fn_get_products.brochure[0].value;
+    // }
+    if (downloadsData?.length > 0) {
+      const download = downloadsData.find(
+        (download) => download?.name?.toLowerCase() === "brochure"
+      );
+      return download?.fileurl?.includes("http")
+        ? transformImageSrc(download?.fileurl)
+        : null;
     }
     return null;
   });
 
   const pricebookURL = useMemo(() => {
-    if (fn_get_products?.pricebook) {
-      if (fn_get_products?.pricebook[0]?.value?.includes("http"))
-        return fn_get_products.pricebook[0].value;
+    // if (fn_get_products?.pricebook) {
+    //   if (fn_get_products?.pricebook[0]?.value?.includes("http"))
+    //     return fn_get_products.pricebook[0].value;
+    // }
+    if (downloadsData?.length > 0) {
+      const download = downloadsData.find(
+        (download) => download?.name?.toLowerCase() === "manual"
+      );
+      return download?.fileurl?.includes("http")
+        ? transformImageSrc(download?.fileurl)
+        : null;
     }
     return null;
   });
 
   const specSheetURL = useMemo(() => {
-    if (fn_get_products?.spec_sheet) {
-      if (fn_get_products?.spec_sheet[0]?.value?.includes("http"))
-        return fn_get_products.spec_sheet[0].value;
+    // if (fn_get_products?.spec_sheet) {
+    //   if (fn_get_products?.spec_sheet[0]?.value?.includes("http"))
+    //     return fn_get_products.spec_sheet[0].value;
+    // }
+    if (downloadsData?.length > 0) {
+      const download = downloadsData.find(
+        (download) => download?.name?.toLowerCase() === "spec sheet"
+      );
+      return download?.fileurl?.includes("http")
+        ? transformImageSrc(download?.fileurl)
+        : null;
     }
     return null;
   });
@@ -81,7 +110,7 @@ const ProductCard = ({
           </div>
         )}
         <Image
-          src={imageURL ? transformImageSrc(imageURL): CheckerBoardImg}
+          src={imageURL ? transformImageSrc(imageURL) : CheckerBoardImg}
           alt={fn_get_products.p_name ?? ""} //productDetails.fn_get_products.p_name
           className="element-image cursor-pointer"
           width={300} // specify your desired width
@@ -131,9 +160,9 @@ const ProductCard = ({
                     className="tooltip"
                   >
                     <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
-                      Download Price Book
+                      Download Manual Book
                     </span>
-                    <Image src={NoPriceIcon} alt="Price Book" />
+                    <Image src={NoPriceIcon} alt="Manual Book" />
                   </a>
                 )}
                 {specSheetURL && (

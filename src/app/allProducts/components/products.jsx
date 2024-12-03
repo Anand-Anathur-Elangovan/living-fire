@@ -241,8 +241,6 @@ const Products = ({
   //     .filter((v) => v !== null)
   //     .map((x) => parseInt(x));
   // }, [allProducts]);
-  console.log(updatedValues, "installationValues");
-
   return (
     <>
       {/* Compare Products */}
@@ -833,7 +831,7 @@ const Products = ({
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center gap-2 font-[Satoru] text-[26px] cursor-pointer">
+      {/* <div className="flex justify-center gap-2 font-[Satoru] text-[26px] cursor-pointer">
         {!(pageIndex === 0) && (
           <Image
             src={LeftArrowIcon}
@@ -875,6 +873,80 @@ const Products = ({
           </span>
         )}
         {pageIndex + 4 <= maxPageCount && (
+          <Image
+            src={RightArrowIcon}
+            alt="Right Arrow"
+            className="pt-1 cursor-pointer"
+            onClick={() => onPageIndexClick(pageIndex + 1)}
+          />
+        )}
+      </div> */}
+      <div className="flex justify-center gap-2 font-[Satoru] text-[26px] cursor-pointer">
+        {/* Left Arrow */}
+        {pageIndex > 0 && (
+          <Image
+            src={LeftArrowIcon}
+            alt="Left Arrow"
+            className="pt-1 cursor-pointer"
+            onClick={() => onPageIndexClick(pageIndex - 1)}
+          />
+        )}
+
+        {/* First Page */}
+        <span
+          className={`cursor-pointer ${
+            pageIndex === 0 ? "font-bold text-black" : ""
+          }`}
+          onClick={() => onPageIndexClick(0)}
+        >
+          1
+        </span>
+
+        {/* Ellipsis after First Page */}
+        {pageIndex > 2 && <span>...</span>}
+
+        {/* Pages Around Current Page */}
+        {pageIndex > 1 && (
+          <span
+            className="cursor-pointer"
+            onClick={() => onPageIndexClick(pageIndex - 1)}
+          >
+            {pageIndex}
+          </span>
+        )}
+
+        {/* Current Page */}
+        {pageIndex !== 0 && pageIndex !== maxPageCount - 1 && (
+          <span className="font-bold text-black">{pageIndex + 1}</span>
+        )}
+
+        {/* Next Page */}
+        {pageIndex + 1 < maxPageCount - 1 && (
+          <span
+            className="cursor-pointer"
+            onClick={() => onPageIndexClick(pageIndex + 1)}
+          >
+            {pageIndex + 2}
+          </span>
+        )}
+
+        {/* Ellipsis before Last Page */}
+        {pageIndex + 2 < maxPageCount - 1 && <span>...</span>}
+
+        {/* Last Page */}
+        {maxPageCount > 1 && (
+          <span
+            className={`cursor-pointer ${
+              pageIndex === maxPageCount - 1 ? "font-bold text-black" : ""
+            }`}
+            onClick={() => onPageIndexClick(maxPageCount - 1)}
+          >
+            {maxPageCount}
+          </span>
+        )}
+
+        {/* Right Arrow */}
+        {pageIndex < maxPageCount - 1 && (
           <Image
             src={RightArrowIcon}
             alt="Right Arrow"
