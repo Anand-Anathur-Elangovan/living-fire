@@ -39,51 +39,73 @@ const Specifications = ({ specifications }) => {
             <div className={styles.productspecs}>
               {parsedSpecifications?.map((spec, index) => (
                 <div key={index} className={styles.specificationSection}>
-                  <p className={`${styles.materialfinish} ui text size-h6`}>
-                    {spec.spec_name.toUpperCase()}
-                  </p>
-                  {spec.spec_name.toUpperCase() === "ENERGY SPECIFICATIONS" && (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        gap: "10px",
-                        position: "relative",
-                        right: "40px",
-                      }}
-                    >
-                      <p> NG</p>
-                      <p> LG</p>
-                      <p> ULPG</p>
-                    </div>
-                  )}
+                  {Array.isArray(spec.spec_value) &&
+                    spec.spec_value.some((item) => item?.value) && ( // Check if any item has a valid value
+                      <p className={`${styles.materialfinish} ui text size-h6`}>
+                        {spec.spec_name.toUpperCase()}
+                      </p>
+                    )}
                   <div className={styles.specItems}>
                     {spec.spec_value.map((item, idx) => {
-                      if (item.value !== "NA")
-                        return (
-                          <div key={idx} className={styles.specItem}>
-                            <p className="homeelectric ui text size-body_medium">
-                              {item.name}
-                            </p>
-                            {typeof item.value === "object" ? (
-                              <div className={styles.rowng}>
-                                <p className="homeelectric ui text size-body_medium">
-                                  {item.value.NG || "-"}
-                                </p>
-                                <p className="homeelectric ui text size-body_medium">
-                                  {item.value.LP || "-"}
-                                </p>
-                                <p className="homeelectric ui text size-body_medium">
-                                  {item.value.ULPG || "-"}
-                                </p>
-                              </div>
-                            ) : (
-                              <p className="distanceTwo ui text size-body_medium relative -left-10">
-                                {item.value}
+                      if (
+                        item.name == "Wood Fires" ||
+                        item.name == "Gas Fires"
+                      ) {
+                        if (item.value?.length > 0) {
+                          {
+                            return item.value?.map(
+                              (energySpecItem, energySpecIndex) => {
+                                if (
+                                  energySpecItem.value !== "NA" &&
+                                  energySpecItem.value != ""
+                                ) {
+                                  return (
+                                    <div
+                                      key={energySpecIndex}
+                                      className={styles.specItem}
+                                    >
+                                      <p className="homeelectric ui text size-body_medium">
+                                        {energySpecItem.name}
+                                      </p>
+                                      <p className="distanceTwo ui text size-body_medium relative -left-10">
+                                        {energySpecItem.value}
+                                      </p>
+                                    </div>
+                                  );
+                                }
+                                return null;
+                              }
+                            );
+                          }
+                        }
+                      } else {
+                        if (item.value !== "NA" && item.value != "") {
+                          return (
+                            <div key={idx} className={styles.specItem}>
+                              <p className="homeelectric ui text size-body_medium">
+                                {item.name}
                               </p>
-                            )}
-                          </div>
-                        );
+                              {typeof item.value === "object" ? (
+                                <div className={styles.rowng}>
+                                  <p className="homeelectric ui text size-body_medium">
+                                    {item.value.NG || "-"}
+                                  </p>
+                                  <p className="homeelectric ui text size-body_medium">
+                                    {item.value.LP || "-"}
+                                  </p>
+                                  <p className="homeelectric ui text size-body_medium">
+                                    {item.value.ULPG || "-"}
+                                  </p>
+                                </div>
+                              ) : (
+                                <p className="distanceTwo ui text size-body_medium relative -left-10">
+                                  {item.value}
+                                </p>
+                              )}
+                            </div>
+                          );
+                        }
+                      }
                     })}
                   </div>
                 </div>
