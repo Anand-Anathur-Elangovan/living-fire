@@ -83,6 +83,7 @@ const MaterialFinishOptions = ({ short_desc }) => {
                 className={styles.image}
                 width={300} // Specify width
                 height={300} // Specify height
+                unoptimized
               />
               <div className={styles.pricingoptions}>
                 <p className={`${styles.desc} ui text size-body_medium`}>

@@ -128,6 +128,7 @@ const DownloadSection = forwardRef(
                           className={styles.image}
                           width={400}
                           height={240}
+                          unoptimized
                         />
                         <p className={styles.imageTitle}>{item.name}</p>
                       </a>
@@ -180,6 +181,7 @@ const DownloadSection = forwardRef(
                             src={brochureIcon}
                             alt="Imageclass"
                             className={styles.imageclass}
+                            unoptimized
                           />
                           <p
                             className={`${styles.text7} ${styles.sizeBodyMedium}`}

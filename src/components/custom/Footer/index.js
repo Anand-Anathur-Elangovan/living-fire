@@ -162,6 +162,7 @@ export default function Footer() {
               className="iconseight_one"
               width={24}
               height={24}
+              unoptimized
             />
             <Image
               src="/assets/facebook" // Replace with actual path
@@ -169,6 +170,7 @@ export default function Footer() {
               className="iconseight_one"
               width={24}
               height={24}
+              unoptimized
             />
           </div>
           <div className="heading7">

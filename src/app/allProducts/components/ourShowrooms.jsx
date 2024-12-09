@@ -60,12 +60,14 @@ const OurShowrooms = () => {
           width={250}
           height={300}
           style={{ zIndex: 1, height: 300 }}
+          unoptimized
         />
         <Image
           src={OurShowroom1}
           alt="OurShowroomPic"
           width={250}
           style={{ position: "absolute", left: -150, top: -50, zIndex: 0 }}
+          unoptimized
         />
       </div>
     </div>

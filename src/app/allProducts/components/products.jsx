@@ -256,21 +256,30 @@ const Products = ({
               );
               let imageURL;
               if (
-                productDetails.fn_get_products?.hero_image?.includes("value")
+                productDetails.fn_get_products?.hero_image.length > 0 &&
+                productDetails.fn_get_products?.hero_image[0]?.value
               ) {
-                let url =
-                  productDetails.fn_get_products?.hero_image?.split("'")[7];
+                let url = productDetails.fn_get_products?.hero_image[0].value;
                 imageURL = url?.includes("http") ? url : null;
               } else imageURL = null;
+              console.log(productDetails.fn_get_products);
               return (
-                <Image
-                  key={"image" + id}
-                  src={imageURL ? transformImageSrc(imageURL) : CheckerBoardImg}
-                  alt={`Product${productDetails.fn_get_products.p_name}`} //productDetails.fn_get_products.p_name
-                  className="element-image"
-                  width={35} // specify your desired width
-                  height={35} // specify your desired height
-                />
+                <div
+                  key={`compareProducts${id}`}
+                  style={{ width: "40px", height: "40px" }}
+                >
+                  <Image
+                    key={"image" + id}
+                    src={
+                      imageURL ? transformImageSrc(imageURL) : CheckerBoardImg
+                    }
+                    alt={`Product${productDetails.fn_get_products.p_name}`} //productDetails.fn_get_products.p_name
+                    className="element-image"
+                    width={40} // specify your desired width
+                    height={40} // specify your desired height
+                    unoptimized
+                  />
+                </div>
               );
             })}
           </div>
@@ -297,6 +306,7 @@ const Products = ({
                 src={PlusIcon}
                 alt="clear"
                 className="pt-1 cursor-pointer"
+                unoptimized
               />
             </span>
           </div>
@@ -312,6 +322,7 @@ const Products = ({
                   alt="clear"
                   className="pt-1 cursor-pointer"
                   onClick={() => setIsFilter(false)}
+                  unoptimized
                 />
               </span>
               <span
@@ -323,6 +334,7 @@ const Products = ({
                   src={CrossIcon}
                   alt="clear"
                   className="pt-1 cursor-pointer"
+                  unoptimized
                 />
               </span>
             </div>
@@ -347,6 +359,7 @@ const Products = ({
                 onClick={() =>
                   setSearchText(searchRef.current.value?.toLowerCase())
                 }
+                unoptimized
               />
             </div>
             <div className="flex flex-col border-b boder-solid border-[#D3C6BB]">
@@ -371,6 +384,7 @@ const Products = ({
                             .getElementById("fireplaceFilterId")
                             .classList.add("collapse");
                         }}
+                        unoptimized
                       />
                     )}
                     {document
@@ -386,6 +400,7 @@ const Products = ({
                             .getElementById("fireplaceFilterId")
                             .classList.remove("collapse");
                         }}
+                        unoptimized
                       />
                     )}
                   </span>
@@ -539,6 +554,7 @@ const Products = ({
                               .getElementById("rangesFilterId")
                               .classList.add("collapse");
                           }}
+                          unoptimized
                         />
                         {/* <span className="flex items-center font-sans font-normal text-base cursor-pointer">
                           <Image
@@ -564,6 +580,7 @@ const Products = ({
                             .getElementById("rangesFilterId")
                             .classList.remove("collapse");
                         }}
+                        unoptimized
                       />
                     )}
                   </span>
@@ -624,6 +641,7 @@ const Products = ({
                             .getElementById("brandsFilterId")
                             .classList.add("collapse");
                         }}
+                        unoptimized
                       />
                     )}
                     {document
@@ -639,6 +657,7 @@ const Products = ({
                             .getElementById("brandsFilterId")
                             .classList.remove("collapse");
                         }}
+                        unoptimized
                       />
                     )}
                   </span>
@@ -794,6 +813,7 @@ const Products = ({
                         .getElementById("otherFilterId")
                         .classList.add("collapse");
                     }}
+                    unoptimized
                   />
                 )}
                 {document
@@ -809,6 +829,7 @@ const Products = ({
                         .getElementById("otherFilterId")
                         .classList.remove("collapse");
                     }}
+                    unoptimized
                   />
                 )}
               </span>
@@ -842,6 +863,7 @@ const Products = ({
                         .getElementById("sortbyFilterId")
                         .classList.add("collapse");
                     }}
+                    unoptimized
                   />
                 )}
                 {document
@@ -857,6 +879,7 @@ const Products = ({
                         .getElementById("sortbyFilterId")
                         .classList.remove("collapse");
                     }}
+                    unoptimized
                   />
                 )}
               </span>
@@ -989,6 +1012,7 @@ const Products = ({
             alt="Left Arrow"
             className="pt-1 cursor-pointer"
             onClick={() => onPageIndexClick(pageIndex - 1)}
+            unoptimized
           />
         )}
 
@@ -1052,6 +1076,7 @@ const Products = ({
             alt="Right Arrow"
             className="pt-1 cursor-pointer"
             onClick={() => onPageIndexClick(pageIndex + 1)}
+            unoptimized
           />
         )}
       </div>

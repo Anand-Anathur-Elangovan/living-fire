@@ -19,6 +19,7 @@ const BlogSection = () => {
                 src={windowBlogImg}
                 alt="Window Blog Image"
                 className="left-img"
+                unoptimized
                 placeholder="blur" // Optional: For optimized loading
               />
               <div className="right-section">
@@ -27,6 +28,7 @@ const BlogSection = () => {
                     src={woodfireImg}
                     alt="Woodfire Image"
                     className="right-img"
+                    unoptimized
                     placeholder="blur" // Optional
                   />
                   <div className="columnwoodgasan">

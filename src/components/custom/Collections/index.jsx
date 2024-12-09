@@ -86,6 +86,7 @@ const Collections = () => {
                   width={100} // specify your desired width
                   height={600} // specify your desired height
                   layout="responsive" // or any other layout you need
+                  unoptimized
                 />
                 <div
                   className={`description-container ${

@@ -120,6 +120,7 @@ const SpecificationSheet = () => {
                     setSearchText("");
                     searchRef.current.value = "";
                   }}
+                  unoptimized
                 />
               )}
               <Image
@@ -131,6 +132,7 @@ const SpecificationSheet = () => {
                 onClick={() =>
                   setSearchText(searchRef.current.value?.toLowerCase())
                 }
+                unoptimized
               />
             </div>
           </div>
@@ -187,6 +189,7 @@ const SpecificationSheet = () => {
                   width={156}
                   height={120}
                   className={styles.image}
+                  unoptimized
                   loading="lazy" // Lazy loading for better performance
                 />
                 <div className={styles.columnProductName}>
