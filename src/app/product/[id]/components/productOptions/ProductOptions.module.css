@@ -163,16 +163,17 @@
 }
 
 .materialOptionsRow {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
   /* gap: 16px; */
 }
 .materialOptionsRow div {
   display: flex;
-  gap: 2px;
+  /* gap: 2px; */
   flex-wrap: wrap;
   justify-content: flex-start;
   text-align: center;
+  column-gap: 10px;
 }
 .materialOptionsRowDelivery {
   display: flex;
@@ -200,7 +201,7 @@
   align-items: flex-start;
 }
 .sku {
-  width: 100px;
+  width: 125px;
   font-size: 14px;
   border-radius: 20px;
   background-color: black;
