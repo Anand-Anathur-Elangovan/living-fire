@@ -3,6 +3,7 @@
   background-color: #f7f7f5;
   display: flex;
   justify-content: center;
+  width: 60%;
 }
 
 .row {
