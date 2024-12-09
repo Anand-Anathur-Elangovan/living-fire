@@ -647,16 +647,116 @@ const Products = ({
                     className="flex flex-col gap-3 mr-10 "
                   >
                     {brandType && (
-                      <span
-                        key={"brands_selected"}
-                        className="font-sans font-normal font-small leading-5 text-base text-black"
-                        // onClick={() => setBrandType(val?.brand_id)}
-                      >
-                        {
-                          brands?.find((b) => b?.brand_id === brandType)
-                            ?.brand_name
-                        }
-                      </span>
+                      <>
+                        <span
+                          key={"brands_selected"}
+                          className="font-sans font-normal font-small leading-5 text-base text-black"
+                          // onClick={() => setBrandType(val?.brand_id)}
+                        >
+                          {
+                            brands?.find((b) => b?.brand_id === brandType)
+                              ?.brand_name
+                          }
+                        </span>
+                        <>
+                          {updatedValues?.installationValues?.length > 0 && (
+                            <span
+                              key={"InstallationTypes"}
+                              className={`ml-3 font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                firePlaceSubType.installation
+                                  ? "text-black"
+                                  : "text-gray-400"
+                              }`}
+                              onClick={() =>
+                                setFirePlaceSubType(() => ({
+                                  installation: true,
+                                  glassOrientation: false,
+                                }))
+                              }
+                            >
+                              Installtion Types
+                            </span>
+                          )}
+
+                          {firePlaceSubType.installation && (
+                            <div className="ml-4 flex flex-col gap-3 ">
+                              {installationTypes.map(
+                                (val) =>
+                                  updatedValues?.installationValues?.includes(
+                                    val?.installation_id
+                                  ) && (
+                                    <span
+                                      key={"types" + val?.installation_id}
+                                      className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                        val?.installation_id ===
+                                        installationType
+                                          ? "text-black"
+                                          : "text-gray-400"
+                                      }`}
+                                      onClick={() => {
+                                        setInstallationType(
+                                          val?.installation_id
+                                        );
+                                        setglassOrientationType(null);
+                                      }}
+                                    >
+                                      {val?.installation_name}
+                                    </span>
+                                  )
+                              )}
+                            </div>
+                          )}
+
+                          {updatedValues?.glassOrientationValues?.length >
+                            0 && (
+                            <span
+                              key={"GlassOrientationTypes"}
+                              className={`ml-3 font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                firePlaceSubType.glassOrientation
+                                  ? "text-black"
+                                  : "text-gray-400"
+                              }`}
+                              onClick={() =>
+                                setFirePlaceSubType(() => ({
+                                  installation: false,
+                                  glassOrientation: true,
+                                }))
+                              }
+                            >
+                              Glass Orientation Types
+                            </span>
+                          )}
+
+                          {firePlaceSubType.glassOrientation && (
+                            <div className="ml-4 flex flex-col gap-3 ">
+                              {glassOrientationTypes.map(
+                                (val) =>
+                                  updatedValues?.glassOrientationValues?.includes(
+                                    val?.glass_orientation_id
+                                  ) && (
+                                    <span
+                                      key={"types" + val?.glass_orientation_id}
+                                      className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                        val?.glass_orientation_id ===
+                                        glassOrientationType
+                                          ? "text-black"
+                                          : "text-gray-400"
+                                      }`}
+                                      onClick={() => {
+                                        setInstallationType(null);
+                                        setglassOrientationType(
+                                          val?.glass_orientation_id
+                                        );
+                                      }}
+                                    >
+                                      {val?.glass_orientation_name}
+                                    </span>
+                                  )
+                              )}
+                            </div>
+                          )}
+                        </>
+                      </>
                     )}
 
                     {brands.map((val, index) => {
