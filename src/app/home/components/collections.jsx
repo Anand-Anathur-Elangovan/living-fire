@@ -116,11 +116,13 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
             src={RightArrow}
             alt="Right Arrow"
             onClick={() => handleScroll("left")}
+            unoptimized
           />
           <Image
             src={LeftArrow}
             alt="Left Arrow"
             onClick={() => handleScroll("right")}
+            unoptimized
           />
         </div>
       </div>
@@ -149,6 +151,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                   )
                 }
                 style={{ cursor: "pointer" }}
+                unoptimized
               />
               <div className="overlay">
                 <h3

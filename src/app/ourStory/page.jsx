@@ -23,6 +23,7 @@ const OurStory = () => {
                   width={500}
                   height={300}
                   className="img-1"
+                  unoptimized
                 />
                 <Image
                   src={ourwood2}
@@ -30,6 +31,7 @@ const OurStory = () => {
                   width={500}
                   height={300}
                   className="img-2"
+                  unoptimized
                 />
                 <Image
                   src={ourwood3}
@@ -37,6 +39,7 @@ const OurStory = () => {
                   width={500}
                   height={300}
                   className="img-3"
+                  unoptimized
                 />
               </div>
             </div>
@@ -64,6 +67,7 @@ const OurStory = () => {
                   width={200}
                   height={200}
                   className="manimg"
+                  unoptimized
                 />
                 <p className="desc ui text size-body_medium">
                   Paul Agnew’s story begins in his youth, following in his
@@ -135,6 +139,7 @@ const OurStory = () => {
                       width={100}
                       height={100}
                       className="teamimg"
+                      unoptimized
                     />
                     <div className="columnnametext">
                       <p className="nametext ui text size-h4">Name</p>

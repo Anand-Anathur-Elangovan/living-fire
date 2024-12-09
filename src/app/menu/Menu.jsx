@@ -95,6 +95,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
             alt="Logomarkblack"
             className="logomarkblack"
             onClick={() => handleHeaderHomeClick()}
+            unoptimized
           />
         </div>
       </div>
@@ -123,6 +124,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                 alt="search"
                 className="cursor-pointer"
                 onClick={() => setSearchText(searchRef.current.value)}
+                unoptimized
               />
             </div>
           </div>
@@ -146,7 +148,9 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                         <Image
                           src={
                             isImageURL(fn_get_products.hero_image)
-                              ? transformImageSrc(fn_get_products.hero_image[0].value)
+                              ? transformImageSrc(
+                                  fn_get_products.hero_image[0].value
+                                )
                               : CheckerBoardImg
                           }
                           alt={""} //productDetails.fn_get_products.p_name
@@ -156,6 +160,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                           onClick={() =>
                             handleProductClick(fn_get_products?.p_id)
                           }
+                          unoptimized
                         />
                       </div>
                       <div

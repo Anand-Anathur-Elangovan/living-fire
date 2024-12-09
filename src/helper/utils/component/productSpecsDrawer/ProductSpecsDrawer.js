@@ -91,6 +91,7 @@ const ProductSpecsDrawer = ({
                 src={prodSpecImage}
                 alt="Product Specifications"
                 className={styles.prodSpecImg}
+                unoptimized
               />
               <div className={styles.buttonsOverlay}>
                 <button
@@ -107,7 +108,7 @@ const ProductSpecsDrawer = ({
                 </button>
               </div>
               <button onClick={closeDrawer} className={styles.closeButton}>
-                <Image src={closeIcon} alt="Close" />
+                <Image src={closeIcon} alt="Close" unoptimized />
               </button>
             </div>
           </div>
@@ -125,6 +126,7 @@ const FileItem = ({ text, fileUrl }) => (
       target="_blank"
       rel="noopener noreferrer"
       className={`${styles.regencygfi750} ui text size-body_medium`}
+      unoptimized
     >
       {text}
     </a>

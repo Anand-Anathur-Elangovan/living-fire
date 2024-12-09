@@ -116,6 +116,7 @@ const ProductCard = ({
           width={300} // specify your desired width
           height={380} // specify your desired height
           onClick={() => handleProductClick(fn_get_products?.p_id)}
+          unoptimized
         />
       </div>
       <div className="py-2 gap-3" style={{ width: "300px" }}>
@@ -149,7 +150,7 @@ const ProductCard = ({
                     <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
                       Download brochure
                     </span>
-                    <Image src={NoPriceIcon} alt="Brochure" />
+                    <Image src={NoPriceIcon} alt="Brochure" unoptimized />
                   </a>
                 )}
                 {pricebookURL && (
@@ -162,7 +163,7 @@ const ProductCard = ({
                     <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
                       Download Manual Book
                     </span>
-                    <Image src={NoPriceIcon} alt="Manual Book" />
+                    <Image src={NoPriceIcon} alt="Manual Book" unoptimized />
                   </a>
                 )}
                 {specSheetURL && (
@@ -175,7 +176,7 @@ const ProductCard = ({
                     <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
                       Download Spec Sheet
                     </span>
-                    <Image src={NoPriceIcon} alt="Spec Sheet" />
+                    <Image src={NoPriceIcon} alt="Spec Sheet" unoptimized />
                   </a>
                 )}
               </>

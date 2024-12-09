@@ -24,47 +24,100 @@ const OurBrands = () => {
           </div>
           <div className="rowlogo">
             <div className="gridlogo">
-              <Image src={paulLogo} alt="Paul Logo" className="logo" />
-              <Image src={cocoonLogo} alt="Cocoon Logo" className="logo" />
-              <Image src={stovaxLogo} alt="Stovax Logo" className="logo" />
+              <Image
+                src={paulLogo}
+                alt="Paul Logo"
+                className="logo"
+                unoptimized
+              />
+              <Image
+                src={cocoonLogo}
+                alt="Cocoon Logo"
+                className="logo"
+                unoptimized
+              />
+              <Image
+                src={stovaxLogo}
+                alt="Stovax Logo"
+                className="logo"
+                unoptimized
+              />
               <div className="charnwood">
                 <Image
                   src={charnLogo}
                   alt="Charnwood Logo"
                   className="charnwoodlogo"
+                  unoptimized
                 />
               </div>
-              <Image src={hergomLogo} alt="Hergom Logo" className="logo" />
-              <Image src={regencyLogo} alt="Regency Logo" className="logo" />
+              <Image
+                src={hergomLogo}
+                alt="Hergom Logo"
+                className="logo"
+                unoptimized
+              />
+              <Image
+                src={regencyLogo}
+                alt="Regency Logo"
+                className="logo"
+                unoptimized
+              />
               <div className="columnlogobb">
                 <div>
-                  <Image src={kaloraLogo} alt="Kalora Logo" className="logo" />
+                  <Image
+                    src={kaloraLogo}
+                    alt="Kalora Logo"
+                    className="logo"
+                    unoptimized
+                  />
                 </div>
                 <div>
                   <Image
                     src={austroLogo}
                     alt="Austroflamm Logo"
                     className="logo"
+                    unoptimized
                   />
                 </div>
               </div>
               <div className="austroflamm">
-                <Image src={esseLogo} alt="Esse Logo" className="logo" />
+                <Image
+                  src={esseLogo}
+                  alt="Esse Logo"
+                  className="logo"
+                  unoptimized
+                />
               </div>
               <div className="austroflamm">
-                <Image src={morsoLogo} alt="Morso Logo" className="logo" />
+                <Image
+                  src={morsoLogo}
+                  alt="Morso Logo"
+                  className="logo"
+                  unoptimized
+                />
               </div>
               <div className="austroflamm">
-                <Image src={adfLogo} alt="ADF Logo" className="logo" />
+                <Image
+                  src={adfLogo}
+                  alt="ADF Logo"
+                  className="logo"
+                  unoptimized
+                />
               </div>
               <div className="austroflamm">
-                <Image src={heatLogo} alt="Heat Logo" className="logo" />
+                <Image
+                  src={heatLogo}
+                  alt="Heat Logo"
+                  className="logo"
+                  unoptimized
+                />
               </div>
               <div className="austroflamm">
                 <Image
                   src={fireLogo}
                   alt="Fire Logo"
                   className="heatmasterlogo"
+                  unoptimized
                 />
               </div>
             </div>

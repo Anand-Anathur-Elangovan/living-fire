@@ -88,6 +88,7 @@ const ProductSpecsDrawer = ({
                 src={prodSpecImage}
                 alt="Product Specifications"
                 className={styles.prodSpecImg}
+                unoptimized
               />
               <div className={styles.buttonsOverlay}>
                 <button
@@ -103,7 +104,7 @@ const ProductSpecsDrawer = ({
                 </button>
               </div>
               <button onClick={closeDrawer} className={styles.closeButton}>
-                <Image src={closeIcon} alt="Close" />
+                <Image src={closeIcon} alt="Close" unoptimized />
               </button>
             </div>
           </div>
@@ -115,7 +116,12 @@ const ProductSpecsDrawer = ({
 
 const FileItem = ({ text, fileUrl }) => (
   <div className={styles.file}>
-    <Image src={brochureIcon} alt="File" className={styles.fileOne} />
+    <Image
+      src={brochureIcon}
+      alt="File"
+      className={styles.fileOne}
+      unoptimized
+    />
     <a
       href={fileUrl}
       target="_blank"

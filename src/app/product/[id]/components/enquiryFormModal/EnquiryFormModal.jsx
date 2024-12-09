@@ -177,7 +177,7 @@ const EnquiryFormModal = ({ isOpen, onClose, name, brand_name }) => {
     <div className={styles.modalOverlay}>
       <div className={styles.modalContainer}>
         <button className={styles.closeButton} onClick={onClose}>
-          <Image src={close} alt="Close" width={28} height={28} />
+          <Image src={close} alt="Close" width={28} height={28} unoptimized />
         </button>
         <h2 className={styles.title}>SEND AN ENQUIRY</h2>
         <p className={styles.productName}>{formData.product}</p>
