@@ -105,6 +105,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
                 width={160}
                 height={92}
                 className="grayscale hover:grayscale-0 hover:scale-125 transition ease-in-out"
+                unoptimized
               />
             </div>
           );

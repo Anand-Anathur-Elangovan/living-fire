@@ -83,11 +83,13 @@ const Featured = ({ headingValue, productRouteHandler }) => {
             src={RightArrow}
             alt="Right Arrow"
             onClick={() => handleScroll("left")}
+            unoptimized
           />
           <Image
             src={LeftArrow}
             alt="Left Arrow"
             onClick={() => handleScroll("right")}
+            unoptimized
           />
         </div>
       </div>
@@ -110,6 +112,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
               //height={323} // specify your desired height
               //   layout="fill" // or any other layout you need
               style={{ cursor: "pointer" }}
+              unoptimized
             />
             <div
               className="font-sans  text-left uppercase"
@@ -125,7 +128,10 @@ const Featured = ({ headingValue, productRouteHandler }) => {
       </div>
       <div
         className="relative w-[524px] h-[22px] font-sans font-medium text-[16px] leading-[140%] underline uppercase text-black cursor-pointer"
-        onClick={() => {setNavigationState(null);router.push(`/allProducts`)}}
+        onClick={() => {
+          setNavigationState(null);
+          router.push(`/allProducts`);
+        }}
       >
         SHOP ALL
       </div>

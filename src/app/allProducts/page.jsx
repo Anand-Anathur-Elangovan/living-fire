@@ -184,6 +184,7 @@ const Page = () => {
                     setInstallationType(null);
                     setglassOrientationType(null);
                   }}
+                  unoptimized
                 />
                 {fuelTypes.map(
                   (fuelType) =>
@@ -221,7 +222,7 @@ const Page = () => {
                   className="cursor-pointer"
                   onClick={() => setBrandType(null)}
                 /> */}
-                {fuelTypes.map((fuelType) => (
+                {/* {fuelTypes.map((fuelType) => (
                   <div
                     className="flex flex-col gap-1 items-center text-center cursor-pointer"
                     key={"fuelTypes" + fuelType?.fueltype_id}
@@ -240,7 +241,7 @@ const Page = () => {
                       }}
                     />
                   </div>
-                ))}
+                ))} */}
               </>
             ) : (
               <></>

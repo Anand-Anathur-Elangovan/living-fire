@@ -62,6 +62,7 @@ const HeroImage = ({ src, alt }) => {
                 layout="responsive"
                 width={700}
                 height={600}
+                unoptimized
               />
             </div>
           ))}
@@ -94,6 +95,7 @@ const HeroImage = ({ src, alt }) => {
                     width={"100%"}
                     height={"600px"}
                     style={{ minHeight: "600px", height: "600px" }}
+                    unoptimized
                   />
                 </div>
               ))}

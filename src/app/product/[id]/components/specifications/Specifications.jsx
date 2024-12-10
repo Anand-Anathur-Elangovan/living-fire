@@ -27,9 +27,9 @@ const Specifications = ({ specifications }) => {
     <section className={styles.specifications}>
       <div className={styles.row}>
         <div className={styles.rowspecs}>
-          <div className={styles.imgwrap}>
+          {/* <div className={styles.imgwrap}>
             <Image src={specImage} alt="Gfi750" className={styles.gfi750One} />
-          </div>
+          </div> */}
           <div className={styles.table}>
             <div className={styles.head}>
               <p className={`${styles.title} ui text size-h4`}>

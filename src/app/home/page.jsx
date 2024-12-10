@@ -170,6 +170,7 @@ const Home = () => {
             src={homePageMainImg}
             alt="Overlay"
             className={`overlay-image ${zoomImage ? "zoom" : ""}`}
+            unoptimized
           />
           <div className={`text-group show`}>
             <h1

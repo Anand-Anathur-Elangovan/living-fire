@@ -73,6 +73,7 @@ const Header = () => {
               alt="Logo"
               className="custom-header-width"
               onClick={handleHomeIconClick}
+              unoptimized
               // style={{
               //   filter:
               //     color === "white" ? "invert(1) brightness(1.5)" : "none",
@@ -122,6 +123,7 @@ const Header = () => {
                     setShowMenu(true);
                   }}
                   width={30}
+                  unoptimized
                 />
               </div>
             </div>
@@ -138,7 +140,7 @@ const Header = () => {
                 setIsFocus(false);
                 setShowMenu(true);
               }}
-              
+              unoptimized
             />
           </div>
         </header>
@@ -153,6 +155,7 @@ const Header = () => {
                 setShowMenu(false);
                 setSearchTextHeader("");
               }}
+              unoptimized
             />
           </div>
           <div className={`menu-header ${showMenu ? "active" : ""}`}>

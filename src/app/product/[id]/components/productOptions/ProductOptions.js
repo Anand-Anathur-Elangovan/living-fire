@@ -43,10 +43,9 @@ const ProductOptions = ({
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
 
-  const handleOptionChange = (category, option) => {
+  const handleOptionChange1 = (category, option) => {
     const isCheckbox =
-      category === "ZERO CLEARANCE PACKAGE" ||
-      category === "CHIMNEY INSERT PACKAGE";
+      category !== "MATERIAL & FINISH OPTIONS" && category !== "DELIVERY";
 
     setSelectedOptions((prevOptions) => {
       const currentSelection =
@@ -70,7 +69,7 @@ const ProductOptions = ({
       return updatedOptions;
     });
   };
-  const updateTotalPrice = (updatedOptions, isCheckbox, category, option) => {
+  const updateTotalPrice1 = (updatedOptions, isCheckbox, category, option) => {
     const optionPrice = option.price || 0;
 
     setTotalPrice((prevPrice) => {
@@ -82,6 +81,54 @@ const ProductOptions = ({
           (selectedOptions[category] && selectedOptions[category].price) || 0;
         return prevPrice - prevSelectedOptionPrice + optionPrice;
       }
+    });
+  };
+  const updateTotalPrice = (updatedOptions) => {
+    let newPrice = price; // Start with the base price
+
+    Object.keys(updatedOptions).forEach((category) => {
+      const selected = updatedOptions[category];
+
+      if (Array.isArray(selected)) {
+        // Checkbox: sum up all selected options
+        newPrice += selected.reduce(
+          (sum, option) => sum + (option.price || 0),
+          0
+        );
+      } else if (selected) {
+        // Radio button or single selection
+        newPrice += selected.price || 0;
+      }
+    });
+
+    setTotalPrice(newPrice); // Update the total price
+  };
+
+  const handleOptionChange = (category, option) => {
+    const isCheckbox =
+      category !== "MATERIAL & FINISH OPTIONS" && category !== "DELIVERY";
+
+    setSelectedOptions((prevOptions) => {
+      const currentSelection =
+        prevOptions[category] || (isCheckbox ? [] : null);
+
+      let newSelection;
+
+      if (isCheckbox) {
+        const isSelected = currentSelection.includes(option);
+        newSelection = isSelected
+          ? currentSelection.filter((o) => o !== option)
+          : [...currentSelection, option];
+      } else {
+        newSelection = currentSelection === option ? null : option;
+      }
+
+      const updatedOptions = { ...prevOptions, [category]: newSelection };
+
+      // Update the total price based on the updated options
+      updateTotalPrice(updatedOptions);
+
+      return updatedOptions;
     });
   };
 
@@ -249,6 +296,7 @@ const ProductOptions = ({
                               width={150}
                               height={150}
                               style={{ cursor: "pointer", marginTop: "8px" }}
+                              unoptimized
                             />
                           </a>
 
