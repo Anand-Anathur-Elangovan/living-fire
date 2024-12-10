@@ -54,14 +54,14 @@
   0% {
     transform: translateX(70px); /* Start 50px from the left */
   }
-  60% {
+  /* 60% {
     transform: translateX(
       0px
-    ); /* Move past the final position (bounce effect) */
-  }
-  80% {
+    );
+  } */
+  /* 80% {
     transform: translateX(15px);
-  }
+  } */
   /* 85% {
     transform: translateX(0px);
   }
