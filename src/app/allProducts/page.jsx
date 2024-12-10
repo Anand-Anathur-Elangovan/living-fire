@@ -109,7 +109,7 @@ const Page = () => {
     if (allProducts.length > 0) updateFuelTypeValues();
   }, [isFetched, allProducts]);
 
-  console.log("allProducts", allProducts, allProducts?.length);
+  console.log("allProducts", allProducts, allProducts?.length, brandType);
 
   return (
     <>
@@ -140,7 +140,14 @@ const Page = () => {
               modern design.
             </div>
           )}
-          {brandType && (
+
+          {brandType === 10 ? (
+            <div className="flex w-7/12 justify-center text-center font-light text-lg">
+              Regency Fireplaces offer a wide range of gas and wood options,
+              known for their efficiency, style, and craftsmanship, providing a
+              comfortable heating solution for every Australian home.
+            </div>
+          ) : (
             <div className="flex w-7/12 justify-center text-center font-light text-lg">
               Paul Agnew Designs is an internationally recognized manufacturer
               and supplier of high-quality gas, wood, and electric fireplaces.
