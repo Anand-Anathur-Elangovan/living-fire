@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { useNavigationState } from "@/context/NavigationContext";
 import { setCookie } from "cookies-next";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
+import GFi750 from "@/public/assets/allProducts/GFi750.jpg";
+import BELLERIVE from "@/public/assets/allProducts/BELLERIVE.jpg";
 
 const ProductCard = ({
   productDetails: { fn_get_products },
@@ -110,7 +112,15 @@ const ProductCard = ({
           </div>
         )}
         <Image
-          src={imageURL ? transformImageSrc(imageURL) : CheckerBoardImg}
+          src={
+            fn_get_products?.p_id == "424"
+              ? GFi750
+              : fn_get_products?.p_id == "423"
+              ? BELLERIVE
+              : imageURL
+              ? transformImageSrc(imageURL)
+              : CheckerBoardImg
+          }
           alt={fn_get_products.p_name ?? ""} //productDetails.fn_get_products.p_name
           className="element-image cursor-pointer"
           width={300} // specify your desired width
