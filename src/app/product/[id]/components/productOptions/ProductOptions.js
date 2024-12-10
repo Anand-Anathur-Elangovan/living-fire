@@ -249,6 +249,7 @@ const ProductOptions = ({
                               width={150}
                               height={150}
                               style={{ cursor: "pointer", marginTop: "8px" }}
+                              unoptimized
                             />
                           </a>
 

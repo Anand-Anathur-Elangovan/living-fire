@@ -97,6 +97,7 @@ const MaintenanceService = () => {
               src={gasFireplace}
               alt="Gas Fireplace"
               className="fireplace-img"
+              unoptimized
             />
             <div className="left-side-section">
               <h2>GAS FIREPLACES</h2>
@@ -144,6 +145,7 @@ const MaintenanceService = () => {
               src={woodFireplace}
               alt="Wood Fireplace"
               className="fireplace-img"
+              unoptimized
             />
           </div>
 
@@ -152,6 +154,7 @@ const MaintenanceService = () => {
               src={electricFireplace}
               alt="Electric Fireplace"
               className="fireplace-img"
+              unoptimized
             />
             <div className="left-side-section">
               <h2>ELECTRIC FIREPLACES</h2>

@@ -17,6 +17,7 @@ const Blog = () => {
             src={Picture}
             alt="Picture1"
             className="w-full h-[505px] object-cover"
+            unoptimized
           />
         </div>
         <div className="w-1/2 h-[505px] pr-16 flex items-start flex-col justify-between">
@@ -25,6 +26,7 @@ const Blog = () => {
               src={Picture2}
               alt="Picture2"
               className="w-[242px] h-[294px] object-cover"
+              unoptimized
             />
             <div className="flex justify-end flex-col gap-2">
               <span className="font-sans font-medium leading-6 text-base uppercase text-wrap">

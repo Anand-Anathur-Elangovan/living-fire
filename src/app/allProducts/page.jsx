@@ -184,6 +184,7 @@ const Page = () => {
                     setInstallationType(null);
                     setglassOrientationType(null);
                   }}
+                  unoptimized
                 />
                 {fuelTypes.map(
                   (fuelType) =>
