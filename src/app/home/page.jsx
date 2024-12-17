@@ -198,9 +198,10 @@ const Home = () => {
                       )
                     }
                   >
-                    {fuelType?.fueltype_name === "Bio-Ethanol"
+                    {/* {fuelType?.fueltype_name === "Bio-Ethanol"
                       ? "LPG"
-                      : fuelType?.fueltype_name}
+                      : fuelType?.fueltype_name} */}
+                    {fuelType?.fueltype_name}
                   </button>
                 );
             })}
