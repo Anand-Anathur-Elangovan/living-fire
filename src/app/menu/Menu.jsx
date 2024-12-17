@@ -210,18 +210,21 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                     <p className="titleText ui text size-h5">Fireplaces</p>
                   </div>
                   <div className="columnbodymedium">
-                    {fuelTypes.map((val, index) => (
-                      <a
-                        href={`/allProducts?fireplaceType=${val.fueltype_id}`}
-                        key={"types" + val.fueltype_id}
-                      >
-                        <p
-                          className={`bodymedium${index} ui text size-body_medium`}
-                        >
-                          {val.fueltype_name}
-                        </p>
-                      </a>
-                    ))}
+                    {fuelTypes.map((val, index) => {
+                      if (val?.fueltype_name !== "Hybrid - Wood/Electric")
+                        return (
+                          <a
+                            href={`/allProducts?fireplaceType=${val.fueltype_id}`}
+                            key={"types" + val.fueltype_id}
+                          >
+                            <p
+                              className={`bodymedium${index} ui text size-body_medium`}
+                            >
+                              {val.fueltype_name}
+                            </p>
+                          </a>
+                        );
+                    })}
                   </div>
                 </div>
                 <div className="columnheading">
