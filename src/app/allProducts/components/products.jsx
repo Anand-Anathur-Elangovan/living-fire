@@ -422,7 +422,7 @@ const Products = ({
                                   <>
                                     <span
                                       key={"fueltypes" + val.fueltype_id}
-                                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                                      className="font-sans font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
                                       onClick={() => {
                                         setSubType(null);
                                         setFireplaceType(val?.fueltype_id);
