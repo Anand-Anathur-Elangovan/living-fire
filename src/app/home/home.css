@@ -400,7 +400,25 @@
   /* bottom: 15px !important; */
 }
 .slick-dots li.slick-active button {
-  background: black; /* Black fill for active dot */
-  transform: scale(1); /* Slightly enlarge the active dot for emphasis */
+  background: black;
+  transform: scale(1);
   border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  /* .hero h1 {
+    font-size: 2rem;
+  } */
+  .text-group h1 {
+    font-size: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* .hero h1 {
+    font-size: 1.5rem; 
+  } */
+  text-group h1 {
+    font-size: 80px;
+  }
 }
