@@ -411,6 +411,22 @@
   } */
   .text-group h1 {
     font-size: 80px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    line-height: 1;
+  }
+  .text-group {
+    position: absolute;
+    /* bottom: 20px; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 4;
+    flex-direction: column;
+    top: 25%;
+    align-items: baseline;
+    left: 12%;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
   }
 }
 
