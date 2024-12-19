@@ -97,8 +97,11 @@ const ProductCard = ({
   };
 
   return (
-    <div className="product-element-all-product" key={"productCard"}>
-      <div className="relative" style={{ width: "300px", height: "380px" }}>
+    <div
+      className="product-element-all-product w-40 md:w-[300px]"
+      key={"productCard"}
+    >
+      <div className="relative w-40 h-72 md:w-[300px] md:h-[380px]">
         {isCompare && (
           <div className="absolute z-10 right-0 mr-3 mt-5">
             <input
@@ -111,6 +114,7 @@ const ProductCard = ({
             />
           </div>
         )}
+
         <Image
           src={
             fn_get_products?.p_id == "424"
@@ -122,23 +126,25 @@ const ProductCard = ({
               : CheckerBoardImg
           }
           alt={fn_get_products.p_name ?? ""} //productDetails.fn_get_products.p_name
-          className="element-image cursor-pointer"
-          width={300} // specify your desired width
-          height={380} // specify your desired height
+          className="element-image cursor-pointer object-fill"
+          // width={300}
+          // height={380}
+          objectFit="cover"
+          layout="fill"
           onClick={() => handleProductClick(fn_get_products?.p_id)}
           unoptimized
         />
       </div>
-      <div className="py-2 gap-3" style={{ width: "300px" }}>
-        <h3
-          className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer"
+      <div className="py-2 gap-3">
+        <span
+          className="font-sans font-medium leading-6 text-sm font-light md:text-base text-wrap cursor-pointer text-black"
           onClick={() => handleProductClick(fn_get_products?.p_id)}
         >
           {fn_get_products.p_name ||
             fn_get_products?.name ||
             fn_get_products?.p_sku}
-        </h3>
-        <div className="flex flex-row justify-between mr-5">
+        </span>
+        <div className="flex flex-col md:flex-row justify-between mr-5 gap-2 md:gap-0">
           <span
             className="font-sans font-normal leading-5 text-sm cursor-pointer"
             onClick={() => handleProductClick(fn_get_products?.p_id)}
