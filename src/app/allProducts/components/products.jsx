@@ -59,6 +59,8 @@ const Products = ({
     },
   } = useMasterValues(type);
 
+  console.log(updatedValues);
+
   const [refreshPage, setRefreshPage] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(false);
@@ -72,8 +74,8 @@ const Products = ({
     []
   );
   const [firePlaceSubType, setFirePlaceSubType] = useState({
-    installation: false,
-    glassOrientation: false,
+    installation: true,
+    glassOrientation: true,
   });
 
   const searchRef = useRef(null);
@@ -205,10 +207,10 @@ const Products = ({
     setRangeType(null);
     searchRef.current.value = "";
     setBestSelling(false);
-    setFirePlaceSubType(() => ({
-      installation: false,
-      glassOrientation: false,
-    }));
+    // setFirePlaceSubType(() => ({
+    //   installation: false,
+    //   glassOrientation: false,
+    // }));
     setInstallationType(null);
     setglassOrientationType(null);
   };
@@ -364,13 +366,14 @@ const Products = ({
             </div>
             <div className="flex flex-col border-b boder-solid border-[#D3C6BB]">
               {/* FirePlace Types */}
-              {!brandType && (
+              {
                 <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                   <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
-                    {fireplaceType
+                    {"Fireplace Type"}
+                    {/* {fireplaceType
                       ? fuelTypes?.find((x) => x?.fueltype_id === fireplaceType)
                           ?.fueltype_name + " Fireplaces"
-                      : "Fireplace Type"}
+                      : "Fireplace Type"} */}
                     {!document
                       .getElementById("fireplaceFilterId")
                       ?.classList?.contains("collapse") && (
@@ -405,135 +408,130 @@ const Products = ({
                     )}
                   </span>
                   <div id="fireplaceFilterId" className="flex flex-col gap-3">
-                    {/* {fireplaceType && subType && (
-                      <span
-                        key={"subTypes_selected"}
-                        className="font-sans font-normal font-small leading-5 text-base text-black"
-                      >
-                        {
-                          subTypes?.find((b) => b?.subtype_id === subType)
-                            ?.subtype_name
-                        }
-                      </span>
-                    )} */}
-
-                    {fireplaceType ? (
-                      <>
-                        {updatedValues?.installationValues?.length > 0 && (
-                          <span
-                            key={"InstallationTypes"}
-                            className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                              firePlaceSubType.installation
-                                ? "text-black"
-                                : "text-gray-400"
-                            }`}
-                            onClick={() =>
-                              setFirePlaceSubType(() => ({
-                                installation: true,
-                                glassOrientation: false,
-                              }))
-                            }
-                          >
-                            Installtion Types
-                          </span>
-                        )}
-
-                        {firePlaceSubType.installation && (
-                          <div className="ml-4 flex flex-col gap-3 ">
-                            {installationTypes.map(
-                              (val) =>
-                                updatedValues?.installationValues?.includes(
-                                  val?.installation_id
-                                ) && (
+                    {fireplaceType
+                      ? fuelTypes?.map(
+                          (val) =>
+                            updatedValues?.fueltypeValues?.includes(
+                              val?.fueltype_id
+                            ) && (
+                              <div
+                                key={"fireplaceTypes" + val?.fueltype_id ?? ""}
+                                className="flex flex-col gap-3"
+                              >
+                                {val?.fueltype_id === fireplaceType ? (
+                                  <>
+                                    <span
+                                      key={"fueltypes" + val.fueltype_id}
+                                      className="font-sans font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
+                                      onClick={() => {
+                                        setSubType(null);
+                                        setFireplaceType(val?.fueltype_id);
+                                        setInstallationType(null);
+                                        setglassOrientationType(null);
+                                      }}
+                                    >
+                                      {val?.fueltype_name}
+                                    </span>
+                                    {firePlaceSubType.installation &&
+                                      updatedValues?.installationValues
+                                        ?.length > 0 &&
+                                      installationTypes.map(
+                                        (installval) =>
+                                          updatedValues?.installationValues?.includes(
+                                            installval?.installation_id
+                                          ) && (
+                                            <span
+                                              key={
+                                                "installtypes" +
+                                                installval?.installation_id
+                                              }
+                                              className={`ml-4 font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                                installval?.installation_id ===
+                                                installationType
+                                                  ? "text-black"
+                                                  : "text-gray-400"
+                                              }`}
+                                              onClick={() => {
+                                                setInstallationType(
+                                                  installval?.installation_id
+                                                );
+                                                setglassOrientationType(null);
+                                              }}
+                                            >
+                                              {installval?.installation_name}
+                                            </span>
+                                          )
+                                      )}
+                                    {firePlaceSubType.glassOrientation &&
+                                      updatedValues?.glassOrientationValues
+                                        ?.length > 0 &&
+                                      glassOrientationTypes.map(
+                                        (glassval) =>
+                                          updatedValues?.glassOrientationValues?.includes(
+                                            glassval?.glass_orientation_id
+                                          ) && (
+                                            <span
+                                              key={
+                                                "glasstypes" +
+                                                glassval?.glass_orientation_id
+                                              }
+                                              className={`ml-4 font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                                glassval?.glass_orientation_id ===
+                                                glassOrientationType
+                                                  ? "text-black"
+                                                  : "text-gray-400"
+                                              }`}
+                                              onClick={() => {
+                                                setInstallationType(null);
+                                                setglassOrientationType(
+                                                  glassval?.glass_orientation_id
+                                                );
+                                              }}
+                                            >
+                                              {glassval?.glass_orientation_name}
+                                            </span>
+                                          )
+                                      )}
+                                  </>
+                                ) : (
                                   <span
-                                    key={"types" + val?.installation_id}
-                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                      val?.installation_id === installationType
-                                        ? "text-black"
-                                        : "text-gray-400"
-                                    }`}
+                                    key={"types" + val.fueltype_id}
+                                    className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
                                     onClick={() => {
-                                      setInstallationType(val?.installation_id);
+                                      setSubType(null);
+                                      setFireplaceType(val?.fueltype_id);
+                                      setInstallationType(null);
                                       setglassOrientationType(null);
                                     }}
                                   >
-                                    {val?.installation_name}
+                                    {val?.fueltype_name}
                                   </span>
-                                )
-                            )}
-                          </div>
+                                )}
+                              </div>
+                            )
+                        )
+                      : fuelTypes?.map(
+                          (val) =>
+                            updatedValues?.fueltypeValues?.includes(
+                              val?.fueltype_id
+                            ) && (
+                              <span
+                                key={"types" + val.fueltype_id}
+                                className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                                onClick={() => {
+                                  setSubType(null);
+                                  setFireplaceType(val?.fueltype_id);
+                                  setInstallationType(null);
+                                  setglassOrientationType(null);
+                                }}
+                              >
+                                {val?.fueltype_name}
+                              </span>
+                            )
                         )}
-
-                        {updatedValues?.glassOrientationValues?.length > 0 && (
-                          <span
-                            key={"GlassOrientationTypes"}
-                            className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                              firePlaceSubType.glassOrientation
-                                ? "text-black"
-                                : "text-gray-400"
-                            }`}
-                            onClick={() =>
-                              setFirePlaceSubType(() => ({
-                                installation: false,
-                                glassOrientation: true,
-                              }))
-                            }
-                          >
-                            Glass Orientation Types
-                          </span>
-                        )}
-
-                        {firePlaceSubType.glassOrientation && (
-                          <div className="ml-4 flex flex-col gap-3 ">
-                            {glassOrientationTypes.map(
-                              (val) =>
-                                updatedValues?.glassOrientationValues?.includes(
-                                  val?.glass_orientation_id
-                                ) && (
-                                  <span
-                                    key={"types" + val?.glass_orientation_id}
-                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                      val?.glass_orientation_id ===
-                                      glassOrientationType
-                                        ? "text-black"
-                                        : "text-gray-400"
-                                    }`}
-                                    onClick={() => {
-                                      setInstallationType(null);
-                                      setglassOrientationType(
-                                        val?.glass_orientation_id
-                                      );
-                                    }}
-                                  >
-                                    {val?.glass_orientation_name}
-                                  </span>
-                                )
-                            )}
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      fuelTypes?.map(
-                        (val) =>
-                          updatedValues?.fueltypeValues?.includes(
-                            val?.fueltype_id
-                          ) && (
-                            <span
-                              key={"types" + val.fueltype_id}
-                              className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
-                              onClick={() => {
-                                setSubType(null);
-                                setFireplaceType(val?.fueltype_id);
-                              }}
-                            >
-                              {val?.fueltype_name}
-                            </span>
-                          )
-                      )
-                    )}
                   </div>
                 </div>
-              )}
+              }
 
               {/* Ranges Types */}
               {brandType && (
@@ -678,7 +676,7 @@ const Products = ({
                           }
                         </span>
                         <>
-                          {updatedValues?.installationValues?.length > 0 && (
+                          {/* {updatedValues?.installationValues?.length > 0 && (
                             <span
                               key={"InstallationTypes"}
                               className={`ml-3 font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
@@ -773,7 +771,7 @@ const Products = ({
                                   )
                               )}
                             </div>
-                          )}
+                          )} */}
                         </>
                       </>
                     )}
