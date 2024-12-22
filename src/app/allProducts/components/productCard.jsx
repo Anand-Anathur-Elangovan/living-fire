@@ -18,6 +18,7 @@ const ProductCard = ({
   isCompare,
 }) => {
   const router = useRouter();
+  console.log("fn_get_products", fn_get_products);
   const { setNavigationState } = useNavigationState();
   const downloadsData = Array.isArray(fn_get_products?.product_details)
     ? fn_get_products?.product_details?.filter(
@@ -25,7 +26,13 @@ const ProductCard = ({
       )?.[0]?.value
     : undefined;
   const imageURL = useMemo(() => {
-    if (fn_get_products?.hero_image) {
+    if (
+      fn_get_products?.catalogue_image &&
+      fn_get_products?.catalogue_image?.length > 0
+    ) {
+      if (fn_get_products?.catalogue_image[0]?.value?.includes("http"))
+        return fn_get_products.catalogue_image[0].value;
+    } else if (fn_get_products?.hero_image) {
       if (fn_get_products?.hero_image[0]?.value?.includes("http"))
         return fn_get_products.hero_image[0].value;
     }
