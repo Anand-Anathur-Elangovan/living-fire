@@ -13,6 +13,7 @@ module.exports = {
       },
       fontFamily: {
         satoru: ["Satoru", "sans-serif"], // Ensure you import the font in your project
+        sans: ["Public Sans"],
       },
     },
   },
