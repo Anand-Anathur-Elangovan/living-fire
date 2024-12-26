@@ -92,7 +92,7 @@ const ProductOptions = ({
       if (Array.isArray(selected)) {
         // Checkbox: sum up all selected options
         newPrice += selected.reduce(
-          (sum, option) => sum + (option.price || 0),
+          (sum, option) => sum + (Number(option.price) || 0),
           0
         );
       } else if (selected) {
@@ -174,7 +174,6 @@ const ProductOptions = ({
                   }
                 >
                   {section.value.map((option, optionIndex) => {
-                    console.log("option", option);
                     return (
                       <label
                         key={optionIndex}

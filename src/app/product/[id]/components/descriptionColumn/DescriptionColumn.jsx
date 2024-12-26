@@ -21,11 +21,16 @@ export default function DescriptionColumn({ product_desc }) {
               </p>
             ) : (
               // For other sections, render as bullet points
-              <ul className={styles["distanceList"]}>
-                {section.value.map((item, itemIndex) => (
-                  <li key={itemIndex}>{item}</li>
-                ))}
-              </ul>
+              // <ul className={styles["distanceList"]}>
+              //   {section.value.map((item, itemIndex) => (
+              //     <li key={itemIndex}>{item}</li>
+              //   ))}
+              // </ul>
+              <p className={styles["distanceList"]}>
+              {section.value.map((item, itemIndex) => (
+                <p key={itemIndex}>{item}</p>
+              ))}
+            </p>
             )}
           </div>
         ))}
