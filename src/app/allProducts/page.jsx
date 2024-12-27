@@ -133,7 +133,7 @@ const Page = () => {
                 "Unknown Brand"}
           </div>
 
-          {fireplaceType && (
+          {fireplaceType && !brandType && (
             <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
               Experience warmth and elegance with our indoor luxury wood
               fireplaces, blending timeless craftsmanship with contemporary
