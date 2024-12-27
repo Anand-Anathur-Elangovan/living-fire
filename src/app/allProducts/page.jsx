@@ -113,7 +113,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="flex flex-col px-6 md:px-16 gap-3 bg-[#F7F7F5] ">
+      <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
         <div className="flex flex-col items-center gap-5">
           <div className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
             {!brandType
