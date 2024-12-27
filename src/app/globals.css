@@ -54,7 +54,16 @@ body {
   line-height: 140%;
   color: #000000;
 }
-
+@media (max-width: 768px) {
+  .heading1 {
+    font-family: "Satoru";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 140%;
+    color: #000000;
+  }
+}
 .tooltip {
   position: relative;
   display: inline-block;

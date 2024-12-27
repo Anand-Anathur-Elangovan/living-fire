@@ -124,14 +124,7 @@ const Home = () => {
     router.push(`/product/${productId}`);
   };
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: "#F7F7F5",
-        gap: "75px",
-      }}
-    >
+    <div className="flex flex-col bg-[#F7F7F5] gap-[32px] md:gap-[75px]">
       <div
         className="home-page"
         onMouseEnter={() => setHover(true)}
@@ -181,8 +174,10 @@ const Home = () => {
               LIVING FIRE
             </h1>
             {/* <h1 className={`blur-text`}>Architectural</h1> */}
-            <h2 className={`blur-text`}>Architectural</h2>
-            <h2 className={`blur-text`}>Fireplace Design</h2>
+            <div>
+              <h2 className={`blur-text`}>Architectural</h2>
+              <h2 className={`blur-text`}>Fireplace Design</h2>
+            </div>
           </div>
           <div className={`button-group ${showButtons ? "show" : ""}`}>
             {fuelTypes?.map((fuelType, index) => {
@@ -212,7 +207,21 @@ const Home = () => {
           </div>
         </div>
       </div>
-
+      <div className={` mr-8 ml-8 md:hidden`}>
+        <section className="hero-back">
+          <div className="hero-back-content">
+            <h1>STUNNING FIREPLACES FOR ANY HOME.</h1>
+            <p>
+              At Living Fire, we believe our work is complete only when our
+              clients are enjoying the warmth of their new fireplace with a
+              glass of wine in hand. To ensure every customer across Melbourne
+              and Australia finds their match, we have curated an exceptional
+              selection of luxury fireplace brands. Visit our showrooms in
+              Richmond and Moorabbin to experience our products firsthand.
+            </p>
+          </div>
+        </section>
+      </div>
       <Collections
         fuelTypes={fuelTypes}
         allProductsRouteHandler={allProductsRouteHandler}
@@ -226,7 +235,7 @@ const Home = () => {
         productRouteHandler={productRouteHandler}
       />
       <Testimonials />
-      <Blog />
+      {/* <Blog /> */}
     </div>
   );
 };

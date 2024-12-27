@@ -106,9 +106,9 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
   };
   const mergedOutput = mergeInputs(carouselItems, fuelTypes);
   return (
-    <div className="ml-16 mr-16 flex relative justify-center flex-col">
+    <div className="flex relative justify-center flex-col ml-0 mr-0 md:ml-16 md:mr-16">
       <div className="flex flex-row items-center w-full mb-10">
-        <div className="heading1 flex w-full justify-center uppercase">
+        <div className="heading1 flex w-full uppercase justify-start ml-8 md:justify-center md:ml-0">
           Collections
         </div>
         <div className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer">
@@ -129,31 +129,66 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
 
       <div
         ref={carouselRef}
-        className="grid grid-flow-col auto-cols-[25%] gap-1 overflow-x-auto overscroll-x-contain element-snaps hide-scrollbar"
+        className="grid grid-flow-col auto-cols-[100%] gap-1 overflow-x-auto overscroll-x-contain element-snaps hide-scrollbar
+        md:auto-cols-[25%]"
       >
         {/*carousel*/}
         {/*grid grid-flow-col auto-cols-[23%] gap-1 overflow-x-auto overscroll-x-contain element-snaps */}
         {imageUrl &&
           mergedOutput?.map((item, index) => (
-            <div className="element" key={"collections" + index}>
-              <Image
-                src={item.image}
-                alt={item.title}
-                className="element-image"
-                width={300} // specify your desired width
-                height={600} // specify your desired height
-                //   layout="fill" // or any other layout you need
-                onClick={() =>
-                  allProductsRouteHandler(
-                    "fuelType",
-                    item?.fueltype_name,
-                    item.fueltype_id
-                  )
-                }
-                style={{ cursor: "pointer" }}
-                unoptimized
-              />
-              <div className="overlay">
+            <div key={index}>
+              <div className="element" key={"collections" + index}>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  className="element-image"
+                  width={300} // specify your desired width
+                  height={600} // specify your desired height
+                  //   layout="fill" // or any other layout you need
+                  onClick={() =>
+                    allProductsRouteHandler(
+                      "fuelType",
+                      item?.fueltype_name,
+                      item.fueltype_id
+                    )
+                  }
+                  style={{ cursor: "pointer" }}
+                  unoptimized
+                />
+                <div className="overlay">
+                  <h3
+                    className="font-sans font-medium leading-6 text-base text-wrap"
+                    style={{ cursor: "pointer" }}
+                    onClick={() =>
+                      allProductsRouteHandler(
+                        "fuelType",
+                        item?.fueltype_name,
+                        item.fueltype_id
+                      )
+                    }
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="font-sans font-normal leading-5 text-sm">
+                    {item.description}
+                  </p>
+                  <div
+                    className="uppercase font-medium font-sans text-base underline"
+                    // href="#"
+                    style={{ cursor: "pointer" }}
+                    onClick={() =>
+                      allProductsRouteHandler(
+                        "fuelType",
+                        item?.fueltype_name,
+                        item.fueltype_id
+                      )
+                    }
+                  >
+                    View Collection
+                  </div>
+                </div>
+              </div>
+              <div className="mr-8 ml-8 gap-4 flex flex-col md:hidden">
                 <h3
                   className="font-sans font-medium leading-6 text-base text-wrap"
                   style={{ cursor: "pointer" }}
