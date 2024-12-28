@@ -170,7 +170,9 @@ const Page = () => {
                     key={"productMenu" + index}
                     onClick={() => setproductMenuIndex(productMenu.ptype_id)}
                   >
-                    {productMenu.ptype_name}
+                    {productMenu.ptype_name === "Fire Tools"
+                      ? "Firetools & Accessories"
+                      : productMenu.ptype_name}
                     <div
                       className={`justify-center block border-b-[3.5px] border-solid border-black rounded transition ease-in-out duration-500`}
                       style={{
