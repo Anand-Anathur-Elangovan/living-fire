@@ -40,6 +40,7 @@ const Product = ({ params }) => {
   const openDrawer = () => setIsOpenSpecDrawer(true);
   const closeDrawer = () => setIsOpenSpecDrawer(false);
   const [unwrappedParams, setUnwrappedParams] = useState(null);
+  const [isAccessories, setIsAccessories] = useState(false);
   const [activeTab, setActiveTab] = useState("Downloads");
   const downloadSectionRef = useRef(null);
   // Unwrap params inside useEffect if needed
@@ -130,6 +131,7 @@ const Product = ({ params }) => {
             openModal={openModal}
             onViewAllAccessories={handleViewAllAccessories}
             p_sku={p_sku}
+            isAccessories={isAccessories}
           />
         </div>
         <div className="second-container">
@@ -140,6 +142,7 @@ const Product = ({ params }) => {
             openDrawer={openDrawer}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
+            setIsAccessories={setIsAccessories}
             ref={downloadSectionRef}
           />
           <Featured
