@@ -20,7 +20,10 @@ import lgFullscreen from "lightgallery/plugins/fullscreen";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 const DownloadSection = forwardRef(
-  ({ product_details, openDrawer, activeTab, setActiveTab }, ref) => {
+  (
+    { product_details, openDrawer, activeTab, setActiveTab, setIsAccessories },
+    ref
+  ) => {
     const router = useRouter();
     // const [activeTab, setActiveTab] = useState("Downloads");
     const [openFAQ, setOpenFAQ] = useState(null);
@@ -239,7 +242,6 @@ const DownloadSection = forwardRef(
         );
       }
     };
-
     return (
       <section
         ref={ref}
@@ -261,7 +263,13 @@ const DownloadSection = forwardRef(
                         onClick={() => setActiveTab(tabItem.name)}
                       >
                         <p className={`${styles.ui} ${styles.sizeH4}`}>
-                          {tabItem.name}
+                          {tabItem.name === "Accessories"
+                            ? tabItem?.value?.some((item) => {
+                                item?.value?.length > 0 &&
+                                  setIsAccessories(true);
+                                return item?.value?.length > 0 ? true : false;
+                              }) && tabItem.name
+                            : tabItem.name}
                         </p>
                       </div>
                     )
