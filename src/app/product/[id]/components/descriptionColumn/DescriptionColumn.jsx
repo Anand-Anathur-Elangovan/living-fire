@@ -7,7 +7,9 @@ export default function DescriptionColumn({ product_desc }) {
         .filter((section) => section.name !== "MATERIAL & FINISH OPTIONS") // Filter out "MATERIAL & FINISH OPTIONS"
         .map((section, index) => (
           <div key={index} className={styles["columndesc"]}>
-            <p className={styles["materialfinish"]}>{section.name}</p>
+            {section.value?.length > 0 && section.value?.[0] != "" > 0 && (
+              <p className={styles["materialfinish"]}>{section.name}</p>
+            )}
 
             {/* Check if the section is "description" and render it as a paragraph */}
             {section.name === "DESCRIPTION" ? (
@@ -27,10 +29,10 @@ export default function DescriptionColumn({ product_desc }) {
               //   ))}
               // </ul>
               <p className={styles["distanceList"]}>
-              {section.value.map((item, itemIndex) => (
-                <p key={itemIndex}>{item}</p>
-              ))}
-            </p>
+                {section.value.map((item, itemIndex) => (
+                  <p key={itemIndex}>{item}</p>
+                ))}
+              </p>
             )}
           </div>
         ))}
