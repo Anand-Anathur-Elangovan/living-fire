@@ -18,7 +18,6 @@ const ProductCard = ({
   isCompare,
 }) => {
   const router = useRouter();
-  console.log("fn_get_products", fn_get_products);
   const { setNavigationState } = useNavigationState();
   const downloadsData = Array.isArray(fn_get_products?.product_details)
     ? fn_get_products?.product_details?.filter(
