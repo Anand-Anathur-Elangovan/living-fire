@@ -157,9 +157,10 @@ const DownloadSection = forwardRef(
                 Array.isArray(tabContent.value) &&
                 tabContent.value.map((downloadItem, index) => {
                   if (
-                    downloadItem.name === "brochure" ||
-                    downloadItem.name === "spec sheet" ||
-                    downloadItem.name === "manual"
+                    downloadItem?.name?.toLowerCase() === "brochure" ||
+                    downloadItem?.name?.toLowerCase() === "spec sheet" ||
+                    downloadItem?.name?.toLowerCase() === "manual" ||
+                    downloadItem?.name?.toLowerCase() === "install manual"
                   )
                     return (
                       <div key={index} className={styles.columnTwo}>
