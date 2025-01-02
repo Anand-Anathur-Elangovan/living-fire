@@ -253,26 +253,26 @@ const DownloadSection = forwardRef(
             <div>
               <div className={styles.tabSection}>
                 {productDetails?.map(
-                  (tabItem) =>
-                    tabItem?.value?.length > 0 && (
-                      <div
-                        key={tabItem.name}
-                        className={`${styles.tab} ${
-                          activeTab === tabItem.name && styles.activeTab
-                        }`}
-                        onClick={() => setActiveTab(tabItem.name)}
-                      >
-                        <p className={`${styles.ui} ${styles.sizeH4}`}>
-                          {tabItem.name === "Accessories"
-                            ? tabItem?.value?.some((item) => {
-                                item?.value?.length > 0 &&
-                                  setIsAccessories(true);
-                                return item?.value?.length > 0 ? true : false;
-                              }) && tabItem.name
-                            : tabItem.name}
-                        </p>
-                      </div>
-                    )
+                  (tabItem) => (
+                    // tabItem?.value?.length > 0 && (
+                    <div
+                      key={tabItem.name}
+                      className={`${styles.tab} ${
+                        activeTab === tabItem.name && styles.activeTab
+                      }`}
+                      onClick={() => setActiveTab(tabItem.name)}
+                    >
+                      <p className={`${styles.ui} ${styles.sizeH4}`}>
+                        {tabItem.name == "Accessories"
+                          ? tabItem?.value?.some((item) => {
+                              item?.value?.length > 0 && setIsAccessories(true);
+                              return item?.value?.length > 0 ? true : false;
+                            }) && tabItem.name
+                          : tabItem.name}
+                      </p>
+                    </div>
+                  )
+                  // )
                 )}
               </div>
               <div className={styles.lineelevenOne}></div>
