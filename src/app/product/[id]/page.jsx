@@ -136,7 +136,7 @@ const Product = ({ params }) => {
         </div>
         <div className="second-container">
           {/* {short_desc && <MaterialFinishOptions short_desc={short_desc} />} */}
-          <Specifications specifications={specifications} />
+          {specifications && <Specifications specifications={specifications} />}
           <DownloadSection
             product_details={product_details}
             openDrawer={openDrawer}
