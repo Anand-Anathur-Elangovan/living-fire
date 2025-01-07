@@ -5,13 +5,13 @@ import Image from "next/image";
 
 const Blog = () => {
   return (
-    <div className="flex relative justify-center flex-col gap-10">
+    <div className="flex relative justify-center flex-col gap-10 mb-40">
       <div className="flex flex-row items-center w-full mb-4">
         <div className="heading1 flex w-full justify-center uppercase">
           Blog
         </div>
       </div>
-      <div className="w-full h-[600px] flex flex-row gap-8 pl-16 pb-10">
+      <div className="w-full h-[600px] flex flex-row gap-9 pl-16 pb-10">
         <div className="w-1/2 h-[505px] ">
           <Image
             src={Picture}
@@ -29,10 +29,10 @@ const Blog = () => {
               unoptimized
             />
             <div className="flex justify-end flex-col gap-2">
-              <span className="font-sans font-medium leading-6 text-base uppercase text-wrap">
+              <span className="font-sans font-extralight leading-6 text-lg uppercase text-wrap">
                 Wood, Gas, and Electric Fireplaces: What’s Right for You?
               </span>
-              <p className="font-sans font-normal leading-5 text-sm text-gray-400 line-clamp-3">
+              <p className="font-sans font-light leading-5 text-sm text-black line-clamp-3">
                 Each type of fireplace offers its own unique advantages, from
                 the traditional charm of wood to the convenience of gas and the
                 versatility of electric. This guide helps you navigate the pros
@@ -47,10 +47,10 @@ const Blog = () => {
           </div>
           <div className="flex">
             <div className="w-[242px] flex justify-end flex-col gap-2">
-              <span className="font-sans font-medium leading-6 text-base uppercase text-wrap">
+              <span className="font-sans font-extralight leading-6 text-lg uppercase text-wrap">
                 Maximising Energy Efficiency with Your Fireplace
               </span>
-              <p className="font-sans font-normal leading-5 text-sm text-gray-400 line-clamp-3">
+              <p className="font-sans font-light leading-5 text-sm text-black line-clamp-3">
                 A well-chosen fireplace not only enhances your home’s beauty but
                 can also improve its energy efficiency. Learn how to select a
                 fireplace that offers optimal heat output and efficiency,

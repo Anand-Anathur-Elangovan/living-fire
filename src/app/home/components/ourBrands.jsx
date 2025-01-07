@@ -85,7 +85,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
           Our Brands
         </div>
       </div>
-      <div className="bg-white h-[470px] mx-16 my-8 flex justify-center bg-red flex-wrap flex-row px-[40px] py-[50px] gap-[48px] ">
+      <div className="bg-white h-[470px] mx-[80px] my-8 flex justify-center bg-red flex-wrap flex-row px-[40px] py-[50px] gap-[48px] basis-1/6 grow">
         {brands.map((brand, index) => {
           return (
             <div

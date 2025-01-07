@@ -42,14 +42,14 @@ const Testimonials = (props) => {
           {content.map((item, index) => (
             <div className="" key={index}>
               <div
-                className="relative flex flex-row w-[500px] px-4 py-4 ml-auto mr-auto before:content-['\201c'] before:text-[200px] before:absolute before:z-10 before:top-[-70px] before:left-[0px]"
+                className="relative flex flex-row w-[500px] px-4 py-4 ml-auto mr-auto before:content-['\201c'] before:text-[200px] before:absolute before:z-10 before:top-[-70px] before:left-[0px] before:text-[#94999F]"
                 key={index}
               >
                 <div
                   className="font-sans flex pl-16 pr-4 py-4 flex-col justify-around"
                   key={index}
                 >
-                  <p className="font-lignt leading-5 text-base text-justify">
+                  <p className="font-extralight leading-5 text-lg text-justify">
                     {item.body}
                   </p>
                   <h3 className="font-medium leading-5 text-base mt-8">

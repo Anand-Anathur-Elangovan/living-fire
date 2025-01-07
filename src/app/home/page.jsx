@@ -181,8 +181,11 @@ const Home = () => {
               LIVING FIRE
             </h1>
             {/* <h1 className={`blur-text`}>Architectural</h1> */}
-            <h2 className={`blur-text`}>Architectural</h2>
-            <h2 className={`blur-text`}>Fireplace Design</h2>
+            {/* <h2 className={`blur-text`}>Architectural</h2>
+            <h2 className={`blur-text`}>Fireplace Design</h2> */}
+          </div>
+          <div className={`text-group-subheading show`}>
+            <span className={`blur-text`}>Architectural Fireplace Design</span>
           </div>
           <div className={`button-group ${showButtons ? "show" : ""}`}>
             {fuelTypes?.map((fuelType, index) => {
@@ -197,11 +200,15 @@ const Home = () => {
                         fuelType.fueltype_id
                       )
                     }
+                    className="p-0 m-0 flex gap-3"
                   >
                     {/* {fuelType?.fueltype_name === "Bio-Ethanol"
                       ? "LPG"
                       : fuelType?.fueltype_name} */}
                     {fuelType?.fueltype_name}
+                    {fuelTypes.length !== index + 1 && (
+                      <span className="flex items-center text-white">|</span>
+                    )}
                   </button>
                 );
             })}

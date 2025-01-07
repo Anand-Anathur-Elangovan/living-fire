@@ -73,7 +73,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
   };
 
   return (
-    <div className="ml-16 mr-16 flex relative justify-center flex-col gap-10">
+    <div className="ml-20 mr-20 flex relative justify-center flex-col gap-10">
       <div className="flex flex-row items-center w-full">
         <div className="heading1 flex w-full justify-center uppercase">
           {headingValue}
@@ -96,10 +96,11 @@ const Featured = ({ headingValue, productRouteHandler }) => {
 
       <div
         ref={carouselRef}
-        className="grid grid-flow-col auto-cols-[20%] gap-5 overflow-x-auto overscroll-x-contain feature-snaps before:px-1 hide-scrollbar"
+        className="grid grid-flow-col auto-cols-[20%] gap-[36px] overflow-x-auto overscroll-x-contain feature-snaps before:px-1 hide-scrollbar"
       >
         {carouselItems.map((item, index) => (
           <div
+            className="w-[323px]"
             key={"featured" + index}
             onClick={() => productRouteHandler(item.p_id)}
           >
@@ -118,8 +119,10 @@ const Featured = ({ headingValue, productRouteHandler }) => {
               className="font-sans  text-left uppercase"
               style={{ cursor: "pointer" }}
             >
-              <h3 className="font-medium leading-6 text-base ">{item.title}</h3>
-              <p className="font-small leading-5 text-sm text-gray-400">
+              <h3 className="leading-6 text-lg font-extralight">
+                {item.title}
+              </h3>
+              <p className="font-medium leading-5 text-sm text-[#94999F]">
                 {item.description}
               </p>
             </div>
