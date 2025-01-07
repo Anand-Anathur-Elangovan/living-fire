@@ -37,6 +37,7 @@ const ProductOptions = ({
   openModal,
   onViewAllAccessories,
   p_sku,
+  isAccessories
 }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
@@ -314,7 +315,7 @@ const ProductOptions = ({
                     })}
                   </LightGallery>
                 </div>
-                <div
+                {isAccessories&&<div
                   onClick={onViewAllAccessories}
                   style={{
                     cursor: "pointer",
@@ -324,7 +325,7 @@ const ProductOptions = ({
                   }}
                 >
                   View All Accessories
-                </div>
+                </div>}
               </div>
             );
           }

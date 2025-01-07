@@ -133,7 +133,7 @@ const Page = () => {
                 "Unknown Brand"}
           </div>
 
-          {fireplaceType && (
+          {fireplaceType && !brandType && (
             <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
               Experience warmth and elegance with our indoor luxury wood
               fireplaces, blending timeless craftsmanship with contemporary
@@ -141,23 +141,27 @@ const Page = () => {
             </div>
           )}
 
-          {brandType &&
-            (brandType === 10 ? (
-              <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
-                Regency Fireplaces offer a wide range of gas and wood options,
-                known for their efficiency, style, and craftsmanship, providing
-                a comfortable heating solution for every Australian home.
-              </div>
-            ) : (
-              <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
-                Paul Agnew Designs is an internationally recognized manufacturer
-                and supplier of high-quality gas, wood, and electric fireplaces.
-                With years of industry experience and premium end-to-end
-                service, Paul Agnew Designs is a trusted supplier of the
-                industry&apos;s most advanced, unique, and elegant heating
-                solutions.
-              </div>
-            ))}
+          {
+            brandType &&
+              brands.find((b) => b?.brand_id === brandType)?.brand_desc
+
+            // (brandType === 10 ? (
+            //   <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
+            //     Regency Fireplaces offer a wide range of gas and wood options,
+            //     known for their efficiency, style, and craftsmanship, providing
+            //     a comfortable heating solution for every Australian home.
+            //   </div>
+            // ) : (
+            //   <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
+            //     Paul Agnew Designs is an internationally recognized manufacturer
+            //     and supplier of high-quality gas, wood, and electric fireplaces.
+            //     With years of industry experience and premium end-to-end
+            //     service, Paul Agnew Designs is a trusted supplier of the
+            //     industry&apos;s most advanced, unique, and elegant heating
+            //     solutions.
+            //   </div>
+            // ))
+          }
         </div>
         {!brandType && (
           <div className="flex flex-row justify-between bg-[#DDE6ED] md:bg-transparent">
@@ -170,7 +174,9 @@ const Page = () => {
                     key={"productMenu" + index}
                     onClick={() => setproductMenuIndex(productMenu.ptype_id)}
                   >
-                    {productMenu.ptype_name}
+                    {productMenu.ptype_name === "Fire Tools"
+                      ? "Firetools & Accessories"
+                      : productMenu.ptype_name}
                     <div
                       className={`justify-center block border-b-[3.5px] border-solid border-black rounded transition ease-in-out duration-500`}
                       style={{

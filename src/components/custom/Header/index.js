@@ -132,7 +132,7 @@ const Header = () => {
             <Image
               src={menuIcon}
               alt="searchIcon"
-              className="cursor-pointer"
+              className="cursor-pointer w-[45px] md:w-[53px]"
               style={{
                 filter:
                   color === "white" ? "invert(1) brightness(1.5)" : "none",

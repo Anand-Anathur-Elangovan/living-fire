@@ -81,16 +81,16 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
   return (
     <div className="flex relative justify-center flex-col">
       <div className="flex flex-row items-center w-full mb-4">
-        <div className="heading1 flex w-full justify-center uppercase">
+        <div className="heading1 flex w-full uppercase justify-start ml-8 md:justify-center">
           Our Brands
         </div>
       </div>
-      <div className="bg-white h-[470px] mx-[80px] my-8 flex justify-center bg-red flex-wrap flex-row px-[40px] py-[50px] gap-[48px] basis-1/6 grow">
+      <div className="bg-white h-[625px] md:h-[470px] mx-[80px] md:mx-16 my-8 flex p-3  justify-around md:justify-center bg-red flex-wrap flex-row gap-y-6 gap-x-2 md:px-[40px] md:py-[50px] md:gap-[48px] basis-1/6 grow">
         {brands.map((brand, index) => {
           return (
             <div
               key={"brands" + index}
-              className="w-[160px] h-[92px]"
+              className="w-[120px] h-[70px] md:w-[160px] md:h-[92px]"
               onClick={() =>
                 allProductsRouteHandler(
                   "brandType",

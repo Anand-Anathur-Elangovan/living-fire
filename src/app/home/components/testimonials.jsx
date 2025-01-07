@@ -26,14 +26,14 @@ const Testimonials = (props) => {
     slidesToShow: 2,
     slidesToScroll: 1,
     className: "flex gap-4",
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     arrows: false,
   };
   return (
     <div className="flex relative justify-center flex-col p-2">
       <div className="flex flex-row items-center w-full py-4">
-        <div className="heading1 flex w-full justify-center uppercase">
+        <div className="heading1 flex w-full justify-center uppercase text-[26px] md:text-[40px]">
           Experience The Difference
         </div>
       </div>

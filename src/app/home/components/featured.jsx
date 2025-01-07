@@ -57,7 +57,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
   ];
   const handleScroll = (direction) => {
     if (carouselRef.current) {
-      const scrollAmount = 300; // Adjust the scroll amount as needed
+      const scrollAmount = 320; // Adjust the scroll amount as needed
       if (direction === "left") {
         carouselRef.current.scrollBy({
           left: -scrollAmount,
@@ -73,9 +73,9 @@ const Featured = ({ headingValue, productRouteHandler }) => {
   };
 
   return (
-    <div className="ml-20 mr-20 flex relative justify-center flex-col gap-10">
+    <div className="flex relative justify-center flex-col gap-10 ml-0 mr-0 md:ml-20 md:mr-20">
       <div className="flex flex-row items-center w-full">
-        <div className="heading1 flex w-full justify-center uppercase">
+        <div className="heading1 flex w-full uppercase justify-start ml-8 md:justify-center md:ml-0">
           {headingValue}
         </div>
         <div className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer">
@@ -96,7 +96,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
 
       <div
         ref={carouselRef}
-        className="grid grid-flow-col auto-cols-[20%] gap-[36px] overflow-x-auto overscroll-x-contain feature-snaps before:px-1 hide-scrollbar"
+        className="grid grid-flow-col auto-cols-[100%] gap-[36px] overflow-x-auto overscroll-x-contain feature-snaps before:px-1 hide-scrollbar ml-8  md:auto-cols-[25%]"
       >
         {carouselItems.map((item, index) => (
           <div
@@ -107,7 +107,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
             <Image
               src={item.image}
               alt={item.title}
-              className=""
+              className="w-[360px] md:w-80"
               key={index}
               //width={323} // specify your desired width
               //height={323} // specify your desired height
@@ -130,7 +130,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
         ))}
       </div>
       <div
-        className="relative w-[524px] h-[22px] font-sans font-medium text-[16px] leading-[140%] underline uppercase text-black cursor-pointer"
+        className="relative w-[524px] h-[22px] font-sans font-medium text-[16px] leading-[140%] underline uppercase text-black cursor-pointer ml-8 md:ml-0"
         onClick={() => {
           setNavigationState(null);
           router.push(`/allProducts`);
