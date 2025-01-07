@@ -2,7 +2,7 @@
   padding-top: 72px;
   padding-bottom: 72px;
   display: flex;
-  background-color: #dde6ed;
+  background-color: #94999f;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@
   gap: 20px;
 }
 .foot-heading p {
-  color: #000000 !important;
+  color: white !important;
   font-size: 16px;
   font-weight: 700 !important;
 }

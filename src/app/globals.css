@@ -112,3 +112,10 @@ body {
 textarea {
   caret-color: auto !important; 
 } */
+.slick-dots li.slick-active button:before {
+  background-color: #94999f !important;
+}
+
+.slick-dots li button:before {
+  border-color: #94999f !important;
+}

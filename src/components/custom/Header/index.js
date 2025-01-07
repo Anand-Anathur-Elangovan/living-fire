@@ -5,6 +5,7 @@ import "./header.css";
 import logo from "@/public/assets/homePage/rightSideLogo.svg";
 import searchIcon from "@/public/assets/homePage/searchIcon.svg";
 import menu from "@/public/assets/homePage/burgerMenuIcon.svg";
+import menuIcon from "@/public/assets/homePage/burgerMenu.svg";
 import Image from "next/image";
 import Menu from "@/src/app/menu/Menu";
 import CloseIcon from "@/public/assets/menu/close.svg";
@@ -31,7 +32,7 @@ const Header = () => {
 
     if (currentScroll > 1) {
       setScrolled(true);
-      if (isHomePage && currentScroll > 0.6 * window.innerHeight) {
+      if (isHomePage && currentScroll > 0) {
         setColor("black");
       }
     } else {
@@ -68,7 +69,7 @@ const Header = () => {
       {!showMenu && (
         <header className={headerClasses.join(" ")}>
           <div className="image-container">
-            <Image
+            {/* <Image
               src={logo}
               alt="Logo"
               className="custom-header-width"
@@ -78,7 +79,7 @@ const Header = () => {
               //   filter:
               //     color === "white" ? "invert(1) brightness(1.5)" : "none",
               // }}
-            />
+            /> */}
           </div>
           <div
             className="custom-header-right-side-icons"
@@ -129,7 +130,7 @@ const Header = () => {
             </div>
 
             <Image
-              src={menu}
+              src={menuIcon}
               alt="searchIcon"
               className="cursor-pointer w-[45px] md:w-[53px]"
               style={{

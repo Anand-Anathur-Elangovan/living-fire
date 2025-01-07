@@ -62,7 +62,8 @@ select,
 button {
 appearance: none;
 background-color: transparent;
-border-color: unset; border-width: 0;
+border-color: unset; 
+border-width: 0;
 border-radius: unset;
 padding: unset;
 font-size: unset;
@@ -150,8 +151,9 @@ label{
 }
 .foot-heading p{   
     color: #000000 !important;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 200;
+    font-family: sans-serif;
 }
 .footer-column1 {
     gap: 22px;
