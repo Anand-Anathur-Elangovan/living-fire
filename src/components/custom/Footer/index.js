@@ -2,6 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import "./footer.css";
+import InstagramIcon from "@/public/assets/homePage/instagram.svg";
+import FacebookIcon from "@/public/assets/homePage/facebook.svg";
 
 export default function Footer() {
   return (
@@ -21,10 +23,7 @@ export default function Footer() {
                 359-361 Swan Street, <br />
                 Richmond, Victoria 3121
               </p>
-              <p>
-                info@livingfire.com.au <br />
-                (03) 9977 7886
-              </p>
+              <p>(03) 9977 7886</p>
             </div>
           </div>
           <div className="columnheadingfi-3">
@@ -38,13 +37,13 @@ export default function Footer() {
               </p>
               <div className="column_two">
                 <div className="heading7">
-                  <p>info@livingfire.com.au</p>
-                </div>
-                <div className="heading7">
                   <p>(03) 9977 7887</p>
                 </div>
               </div>
             </div>
+          </div>
+          <div className="text-white">
+            <p>info@livingfire.com.au</p>
           </div>
         </div>
 
@@ -53,7 +52,7 @@ export default function Footer() {
           <div className="foot-heading headingfive ui text size-h6 uppercase text-base">
             <p>Information</p>
           </div>
-          <ul className="columnbodysmall-2 flex flex-col gap-2">
+          <ul className="flex flex-col gap-2 font-sans text-sm text-white font-light">
             <li>
               <a href="/ourStory">
                 <p className="nofilechosen ui text size-body_small">
@@ -93,7 +92,7 @@ export default function Footer() {
           <div className="foot-heading headingfive ui text size-h6 uppercase">
             <p>Customer Care</p>
           </div>
-          <ul className="columnbodysmall-3 flex flex-col gap-2">
+          <ul className="flex flex-col gap-2 font-sans text-sm text-white font-light">
             {/* <li>
               <a href="#">
                 <p className="nofilechosen ui text size-body_small">
@@ -150,33 +149,38 @@ export default function Footer() {
         {/* Column 4: Stay in the Loop */}
         <div className="footer-column4">
           <div className="rowheadingfive-2">
-            <p className="headingfive_six ui text size-h3">Stay in the loop</p>
+            <p className="headingfive_six ui text size-h3 font-sans text-lg text-white font-extralight">
+              Stay in the loop
+            </p>
           </div>
           <label className="email ui input gray_900 size-xs underline square">
-            <input name="email" placeholder="Email" type="text" />
+            <input
+              name="email"
+              placeholder="Email"
+              type="text"
+              className="placeholder-shown:text-[#94999F]"
+            />
           </label>
-          <div className="rowiconseight">
+          <div className="flex flex-row gap-3">
             <Image
-              src="/assets/instagram" // Replace with actual path
+              src={InstagramIcon} //"/assets/instagram" // Replace with actual path
               alt="Instagram Icon"
-              className="iconseight_one"
+              className="bg-white"
               width={24}
               height={24}
               unoptimized
             />
             <Image
-              src="/assets/facebook" // Replace with actual path
+              src={FacebookIcon} //"/assets/facebook" // Replace with actual path
               alt="Facebook Icon"
-              className="iconseight_one"
+              className="bg-white"
               width={24}
               height={24}
               unoptimized
             />
           </div>
           <div className="heading7">
-            <p className="bodysmall ui text size-body_small">
-              © Copyright 2024 Living Fire
-            </p>
+            <p className="bodysmall">© Copyright 2024 Living Fire</p>
           </div>
         </div>
       </div>

@@ -99,15 +99,27 @@
   flex-direction: column;
 }
 .columnbodysmall {
-  gap: 8px;
+  /* gap: 8px; */
   display: flex;
   flex-direction: column;
   align-items: start;
-}
-.bodysmall {
-  color: #000000 !important;
+  color: white;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 300;
+  font-family: sans-serif;
+}
+.foot-heading p {
+  color: white !important;
+  font-size: 18px;
+  font-weight: 200;
+  font-family: sans-serif;
+}
+
+.bodysmall {
+  color: white !important;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: sans-serif;
 }
 .rowbody {
   display: flex;
