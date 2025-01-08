@@ -33,7 +33,7 @@ const Testimonials = (props) => {
   return (
     <div className="flex relative justify-center flex-col p-2">
       <div className="flex flex-row items-center w-full py-4">
-        <div className="heading1 flex w-full justify-center uppercase text-[26px] md:text-[40px]">
+        <div className="heading1 flex w-full justify-center text-[26px] md:text-[40px]">
           Experience The Difference
         </div>
       </div>

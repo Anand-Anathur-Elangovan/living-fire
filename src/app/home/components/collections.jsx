@@ -108,7 +108,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
   return (
     <div className="flex relative justify-center flex-col ml-0 mr-0 md:ml-16 md:mr-16">
       <div className="flex flex-row items-center w-full mb-10">
-        <div className="heading1 flex w-full uppercase justify-start ml-8 md:justify-center md:ml-0">
+        <div className="heading1 flex w-full justify-start ml-8 md:justify-center md:ml-0">
           Collections
         </div>
         <div className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer">
