@@ -81,7 +81,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
   return (
     <div className="flex relative justify-center flex-col">
       <div className="flex flex-row items-center w-full mb-4">
-        <div className="heading1 flex w-full uppercase justify-start ml-8 md:justify-center">
+        <div className="heading1 flex w-full justify-start ml-8 md:justify-center">
           Our Brands
         </div>
       </div>

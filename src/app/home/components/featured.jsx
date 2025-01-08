@@ -75,7 +75,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
   return (
     <div className="flex relative justify-center flex-col gap-10 ml-0 mr-0 md:ml-20 md:mr-20">
       <div className="flex flex-row items-center w-full">
-        <div className="heading1 flex w-full uppercase justify-start ml-8 md:justify-center md:ml-0">
+        <div className="heading1 flex w-full justify-start ml-8 md:justify-center md:ml-0">
           {headingValue}
         </div>
         <div className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer">
@@ -100,7 +100,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
       >
         {carouselItems.map((item, index) => (
           <div
-            className="w-[323px]"
+            className="w-[323px] flex flex-col gap-5"
             key={"featured" + index}
             onClick={() => productRouteHandler(item.p_id)}
           >
@@ -116,7 +116,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
               unoptimized
             />
             <div
-              className="font-sans  text-left uppercase"
+              className="font-sans  text-left"
               style={{ cursor: "pointer" }}
             >
               <h3 className="leading-6 text-lg font-extralight">

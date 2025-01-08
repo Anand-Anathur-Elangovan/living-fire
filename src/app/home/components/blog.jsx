@@ -7,7 +7,7 @@ const Blog = () => {
   return (
     <div className="flex relative justify-center flex-col gap-10 mb-40">
       <div className="flex flex-row items-center w-full mb-4">
-        <div className="heading1 flex w-full justify-center uppercase">
+        <div className="heading1 flex w-full justify-center">
           Blog
         </div>
       </div>
