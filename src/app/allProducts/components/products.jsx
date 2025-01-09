@@ -461,7 +461,7 @@ const Products = ({
                                       >
                                         {val?.fueltype_name}
                                       </span>
-                                      {firePlaceSubType.installation &&
+                                      {/* {firePlaceSubType.installation &&
                                         updatedValues?.installationValues
                                           ?.length > 0 &&
                                         installationTypes.map(
@@ -490,8 +490,8 @@ const Products = ({
                                                 {installval?.installation_name}
                                               </span>
                                             )
-                                        )}
-                                      {firePlaceSubType.glassOrientation &&
+                                        )} */}
+                                      {/* {firePlaceSubType.glassOrientation &&
                                         updatedValues?.glassOrientationValues
                                           ?.length > 0 &&
                                         glassOrientationTypes.map(
@@ -522,7 +522,7 @@ const Products = ({
                                                 }
                                               </span>
                                             )
-                                        )}
+                                        )} */}
                                     </>
                                   ) : (
                                     <span
@@ -560,6 +560,176 @@ const Products = ({
                                 </span>
                               )
                           )}
+                    </div>
+                  </div>
+                }
+
+                {/* Glass Orientation Types */}
+                {
+                  <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
+                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
+                      {`Glass Orientation Type`}
+                      {!document
+                        .getElementById("glassOrientationTypeFilterId")
+                        ?.classList?.contains("collapse") && (
+                        <div style={{ display: "flex", gap: "30px" }}>
+                          <Image
+                            src={MinusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("glassOrientationTypeFilterId")
+                                .classList.add("collapse");
+                            }}
+                            unoptimized
+                          />
+                          {/* <span className="flex items-center font-sans font-normal text-base cursor-pointer">
+                          <Image
+                            src={CrossIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => setRangeType(null)}
+                          />
+                        </span> */}
+                        </div>
+                      )}
+
+                      {document
+                        .getElementById("glassOrientationTypeFilterId")
+                        ?.classList?.contains("collapse") && (
+                        <Image
+                          src={PlusIcon}
+                          alt="clear"
+                          className="md:pt-1 cursor-pointer"
+                          onClick={() => {
+                            setRefreshPage((prev) => !prev);
+                            document
+                              .getElementById("glassOrientationTypeFilterId")
+                              .classList.remove("collapse");
+                          }}
+                          unoptimized
+                        />
+                      )}
+                    </span>
+                    <div
+                      id="glassOrientationTypeFilterId"
+                      className="flex flex-col gap-3 mr-10"
+                    >
+                      {firePlaceSubType.glassOrientation &&
+                        updatedValues?.glassOrientationValues?.length > 0 &&
+                        glassOrientationTypes.map(
+                          (glassval) =>
+                            updatedValues?.glassOrientationValues?.includes(
+                              glassval?.glass_orientation_id
+                            ) && (
+                              <span
+                                key={
+                                  "glasstypes" + glassval?.glass_orientation_id
+                                }
+                                className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                  glassval?.glass_orientation_id ===
+                                  glassOrientationType
+                                    ? "text-black"
+                                    : "text-gray-400"
+                                }`}
+                                onClick={() => {
+                                  setInstallationType(null);
+                                  setglassOrientationType(
+                                    glassval?.glass_orientation_id
+                                  );
+                                }}
+                              >
+                                {glassval?.glass_orientation_name}
+                              </span>
+                            )
+                        )}
+                    </div>
+                  </div>
+                }
+
+                {/* Installation Types */}
+                {
+                  <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
+                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
+                      {`Installation Type`}
+                      {!document
+                        .getElementById("installationTypeFilterId")
+                        ?.classList?.contains("collapse") && (
+                        <div style={{ display: "flex", gap: "30px" }}>
+                          <Image
+                            src={MinusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("installationTypeFilterId")
+                                .classList.add("collapse");
+                            }}
+                            unoptimized
+                          />
+                          {/* <span className="flex items-center font-sans font-normal text-base cursor-pointer">
+                          <Image
+                            src={CrossIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => setRangeType(null)}
+                          />
+                        </span> */}
+                        </div>
+                      )}
+
+                      {document
+                        .getElementById("installationTypeFilterId")
+                        ?.classList?.contains("collapse") && (
+                        <Image
+                          src={PlusIcon}
+                          alt="clear"
+                          className="md:pt-1 cursor-pointer"
+                          onClick={() => {
+                            setRefreshPage((prev) => !prev);
+                            document
+                              .getElementById("installationTypeFilterId")
+                              .classList.remove("collapse");
+                          }}
+                          unoptimized
+                        />
+                      )}
+                    </span>
+                    <div
+                      id="installationTypeFilterId"
+                      className="flex flex-col gap-3 mr-10"
+                    >
+                      {firePlaceSubType.installation &&
+                        updatedValues?.installationValues?.length > 0 &&
+                        installationTypes.map(
+                          (installval) =>
+                            updatedValues?.installationValues?.includes(
+                              installval?.installation_id
+                            ) && (
+                              <span
+                                key={
+                                  "installtypes" + installval?.installation_id
+                                }
+                                className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                  installval?.installation_id ===
+                                  installationType
+                                    ? "text-black"
+                                    : "text-gray-400"
+                                }`}
+                                onClick={() => {
+                                  setInstallationType(
+                                    installval?.installation_id
+                                  );
+                                  setglassOrientationType(null);
+                                }}
+                              >
+                                {installval?.installation_name}
+                              </span>
+                            )
+                        )}
                     </div>
                   </div>
                 }
