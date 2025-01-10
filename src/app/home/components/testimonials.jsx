@@ -49,10 +49,8 @@ const Testimonials = (props) => {
                   className="font-sans flex pl-16 pr-4 py-4 flex-col justify-around"
                   key={index}
                 >
-                  <p className="font-extralight leading-5 text-lg text-justify">
-                    {item.body}
-                  </p>
-                  <h3 className="font-medium leading-5 text-base mt-8">
+                  <p className="font-light leading-5 text-base">{item.body}</p>
+                  <h3 className="font-extralight leading-5 text-lg mt-8 text-black">
                     {item.title}
                   </h3>
                 </div>
