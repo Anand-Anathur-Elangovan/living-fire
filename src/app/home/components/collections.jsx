@@ -157,7 +157,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                 />
                 <div className="overlay">
                   <h3
-                    className="font-sans font-medium leading-6 text-base text-wrap"
+                    className="font-sans font-extralight leading-6 text-lg text-wrap"
                     style={{ cursor: "pointer" }}
                     onClick={() =>
                       allProductsRouteHandler(
