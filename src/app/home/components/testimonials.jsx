@@ -34,7 +34,7 @@ const Testimonials = (props) => {
     <div className="flex relative justify-center flex-col p-2">
       <div className="flex flex-row items-center w-full py-4">
         <div className="heading1 flex w-full justify-center text-[26px] md:text-[40px]">
-          Experience The Difference
+          Experience the Difference
         </div>
       </div>
       <div className="slider-container px-60 py-4 h-[300px]">
@@ -49,7 +49,7 @@ const Testimonials = (props) => {
                   className="font-sans flex pl-16 pr-4 py-4 flex-col justify-around"
                   key={index}
                 >
-                  <p className="font-light leading-5 text-base">{item.body}</p>
+                  <p className="font-light leading-5 text-sm">{item.body}</p>
                   <h3 className="font-extralight leading-5 text-lg mt-8 text-black">
                     {item.title}
                   </h3>

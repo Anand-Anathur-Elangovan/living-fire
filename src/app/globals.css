@@ -17,7 +17,7 @@
 h1,
 h2,
 .title {
-  font-family: "Satoru", sans-serif;
+  font-family: "Public Sans", sans-serif;
 }
 
 body,
@@ -47,7 +47,7 @@ body {
 }
 
 .heading1 {
-  font-family: "Satoru";
+  font-family: "Public Sans";
   font-style: normal;
   font-weight: 200;
   font-size: 36px;
@@ -56,10 +56,10 @@ body {
 }
 @media (max-width: 768px) {
   .heading1 {
-    font-family: "Satoru";
+    font-family: "Public Sans";
     font-style: normal;
     font-weight: 200;
-    font-size: 32px;
+    font-size: 36px;
     line-height: 140%;
     color: #000000;
   }
