@@ -49,8 +49,8 @@ body {
 .heading1 {
   font-family: "Satoru";
   font-style: normal;
-  font-weight: 400;
-  font-size: 40px;
+  font-weight: 200;
+  font-size: 36px;
   line-height: 140%;
   color: #000000;
 }
@@ -58,7 +58,7 @@ body {
   .heading1 {
     font-family: "Satoru";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 200;
     font-size: 32px;
     line-height: 140%;
     color: #000000;

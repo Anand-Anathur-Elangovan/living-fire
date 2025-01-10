@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="footerRow">
         {/* Column 1: Showrooms */}
         <div className="footer-column1">
-          <div className="foot-heading uppercase">
+          <div className="foot-heading">
             <p>Our Showrooms</p>
           </div>
           <div className="columnheadingfi-2">
@@ -49,7 +49,7 @@ export default function Footer() {
 
         {/* Column 2: Information */}
         <div className="footer-column2 flex flex-col gap-2">
-          <div className="foot-heading headingfive ui text size-h6 uppercase text-base">
+          <div className="foot-heading headingfive ui text size-h6 text-base">
             <p>Information</p>
           </div>
           <ul className="flex flex-col gap-2 font-sans text-sm text-white font-light">
@@ -89,7 +89,7 @@ export default function Footer() {
 
         {/* Column 3: Customer Care */}
         <div className="footer-column3">
-          <div className="foot-heading headingfive ui text size-h6 uppercase">
+          <div className="foot-heading headingfive ui text size-h6">
             <p>Customer Care</p>
           </div>
           <ul className="flex flex-col gap-2 font-sans text-sm text-white font-light">

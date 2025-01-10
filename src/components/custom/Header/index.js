@@ -69,7 +69,7 @@ const Header = () => {
       {!showMenu && (
         <header className={headerClasses.join(" ")}>
           <div className="image-container">
-            {/* <Image
+            <Image
               src={logo}
               alt="Logo"
               className="custom-header-width"
@@ -79,7 +79,7 @@ const Header = () => {
               //   filter:
               //     color === "white" ? "invert(1) brightness(1.5)" : "none",
               // }}
-            /> */}
+            />
           </div>
           <div
             className="custom-header-right-side-icons"
