@@ -21,6 +21,7 @@ import { SORTBY } from "@/src/constants/products";
 import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
 import useMasterValues from "../hooks/useMasterValues";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Products = ({
   type,
@@ -60,8 +61,22 @@ const Products = ({
     },
   } = useMasterValues(type);
 
-  console.log(updatedValues);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const updateQueryParams = (params) => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    Object.keys(params).forEach((key) => {
+      if (params[key] !== null && params[key] !== undefined) {
+        currentParams.set(key, params[key]);
+      } else {
+        currentParams.delete(key);
+      }
+    });
 
+    router.push(`?${currentParams.toString()}`, { shallow: true });
+  };
+
+  console.log(updatedValues);
   const [refreshPage, setRefreshPage] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(false);
@@ -215,6 +230,7 @@ const Products = ({
     // }));
     setInstallationType(null);
     setglassOrientationType(null);
+    router.push("/allProducts");
   };
 
   // console.log(allProducts, "allProducts");
@@ -245,6 +261,36 @@ const Products = ({
   //     .filter((v) => v !== null)
   //     .map((x) => parseInt(x));
   // }, [allProducts]);
+  useEffect(() => {
+    const queryParams = {
+      searchText: searchParams.get("searchText"),
+      fireplaceType: searchParams.get("fireplaceType"),
+      brand: searchParams.get("brand"),
+      glassOrientationType: searchParams.get("glassOrientationType"),
+      installationType: searchParams.get("installationType"),
+      rangeType: searchParams.get("rangeType"),
+      productMenuIndex: searchParams.get("productMenuIndex"),
+    };
+
+    if (queryParams.searchText) setSearchText(queryParams.searchText);
+    if (queryParams.fireplaceType)
+      setFireplaceType(Number(queryParams.fireplaceType));
+    if (queryParams.brand) setBrandType(Number(queryParams.brand));
+    if (queryParams.glassOrientationType)
+      setglassOrientationType(Number(queryParams.glassOrientationType));
+    if (queryParams.installationType)
+      setInstallationType(Number(queryParams.installationType));
+    if (queryParams.rangeType) setRangeType(Number(queryParams.rangeType));
+    if (queryParams.productMenuIndex)
+      setproductMenuIndex(Number(queryParams.productMenuIndex));
+  }, [searchParams]);
+
+  useEffect(() => {
+    type !== 0 &&
+      updateQueryParams({
+        productMenuIndex: type,
+      });
+  }, [type]);
   return (
     <>
       {/* Compare Products */}
@@ -266,7 +312,6 @@ const Products = ({
                 let url = productDetails.fn_get_products?.hero_image[0].value;
                 imageURL = url?.includes("http") ? url : null;
               } else imageURL = null;
-              console.log(productDetails.fn_get_products);
               return (
                 <div
                   key={`compareProducts${id}`}
@@ -374,6 +419,9 @@ const Products = ({
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       setSearchText(searchRef.current.value?.toLowerCase());
+                      updateQueryParams({
+                        searchText: searchRef.current.value?.toLowerCase(),
+                      });
                     }
                   }}
                 />
@@ -381,9 +429,12 @@ const Products = ({
                   src={SearchIcon}
                   alt="search"
                   className="md:pt-1 cursor-pointer"
-                  onClick={() =>
-                    setSearchText(searchRef.current.value?.toLowerCase())
-                  }
+                  onClick={() => {
+                    setSearchText(searchRef.current.value?.toLowerCase());
+                    updateQueryParams({
+                      searchText: searchRef.current.value?.toLowerCase(),
+                    });
+                  }}
                   unoptimized
                 />
               </div>
@@ -455,8 +506,11 @@ const Products = ({
                                         onClick={() => {
                                           setSubType(null);
                                           setFireplaceType(val?.fueltype_id);
-                                          setInstallationType(null);
-                                          setglassOrientationType(null);
+                                          updateQueryParams({
+                                            fireplaceType: val?.fueltype_id,
+                                          });
+                                          // setInstallationType(null);
+                                          // setglassOrientationType(null);
                                         }}
                                       >
                                         {val?.fueltype_name}
@@ -531,8 +585,11 @@ const Products = ({
                                       onClick={() => {
                                         setSubType(null);
                                         setFireplaceType(val?.fueltype_id);
-                                        setInstallationType(null);
-                                        setglassOrientationType(null);
+                                        updateQueryParams({
+                                          fireplaceType: val?.fueltype_id,
+                                        });
+                                        // setInstallationType(null);
+                                        // setglassOrientationType(null);
                                       }}
                                     >
                                       {val?.fueltype_name}
@@ -552,8 +609,11 @@ const Products = ({
                                   onClick={() => {
                                     setSubType(null);
                                     setFireplaceType(val?.fueltype_id);
-                                    setInstallationType(null);
-                                    setglassOrientationType(null);
+                                    updateQueryParams({
+                                      fireplaceType: val?.fueltype_id,
+                                    });
+                                    // setInstallationType(null);
+                                    // setglassOrientationType(null);
                                   }}
                                 >
                                   {val?.fueltype_name}
@@ -635,10 +695,14 @@ const Products = ({
                                     : "text-gray-400"
                                 }`}
                                 onClick={() => {
-                                  setInstallationType(null);
+                                  // setInstallationType(null);
                                   setglassOrientationType(
                                     glassval?.glass_orientation_id
                                   );
+                                  updateQueryParams({
+                                    glassOrientationType:
+                                      glassval?.glass_orientation_id,
+                                  });
                                 }}
                               >
                                 {glassval?.glass_orientation_name}
@@ -723,7 +787,11 @@ const Products = ({
                                   setInstallationType(
                                     installval?.installation_id
                                   );
-                                  setglassOrientationType(null);
+                                  updateQueryParams({
+                                    installationType:
+                                      installval?.installation_id,
+                                  });
+                                  // setglassOrientationType(null);
                                 }}
                               >
                                 {installval?.installation_name}
@@ -812,7 +880,12 @@ const Products = ({
                             <span
                               key={"ranges" + val?.range_id}
                               className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                              onClick={() => setRangeType(val?.range_id)}
+                              onClick={() => {
+                                setRangeType(val?.range_id);
+                                updateQueryParams({
+                                  rangeType: val?.range_id,
+                                });
+                              }}
                             >
                               {val?.range_name}
                             </span>
@@ -986,6 +1059,7 @@ const Products = ({
                             onClick={() => {
                               setRangeType(null);
                               setBrandType(val?.brand_id);
+                              updateQueryParams({ brand: val?.brand_id });
                             }}
                           >
                             {val?.brand_name}
