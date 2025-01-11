@@ -107,7 +107,7 @@ const Home = () => {
       displayName: displayName,
       id: arguId,
     });
-    router.push(`/allProducts`);
+    router.push(`/allProducts?brand=${arguId}`);
   };
   const productRouteHandler = (productId) => {
     setCookie(
