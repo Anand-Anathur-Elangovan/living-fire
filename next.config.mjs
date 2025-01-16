@@ -36,6 +36,13 @@ const nextConfig = {
         destination: "/home", // Redirect to /home
         permanent: true, // Use a 301 redirect for SEO
       },
+      // {
+      //   source:
+      //     "/fireplace-brands/wood-yunca/regency-city-series-san-francisco-bay-40-gas-fireplace/",
+      //   destination: "/product/470",
+      //   permanent: true, // 301 redirect to new path
+      // },
+      // Add more redirections as needed
     ];
   },
 

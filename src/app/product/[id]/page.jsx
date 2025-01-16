@@ -47,14 +47,15 @@ const Product = ({ params }) => {
   useEffect(() => {
     async function fetchParams() {
       if (params) {
+        console.log("params", params?.id);
         const resolvedParams = await params;
-        setUnwrappedParams(resolvedParams);
+        setUnwrappedParams(resolvedParams?.id);
       }
     }
     fetchParams();
   }, [params]);
   // const state = getNavigationState();
-  let { data } = useProductPage(unwrappedParams?.id);
+  let { data } = useProductPage(unwrappedParams);
 
   useEffect(() => {
     if (productId) {

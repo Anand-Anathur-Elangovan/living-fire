@@ -242,6 +242,16 @@ const DownloadSection = forwardRef(
         );
       }
     };
+
+    useEffect(() => {
+      const hasAccessories = productDetails?.some(
+        (tabItem) =>
+          tabItem.name === "Accessories" &&
+          tabItem.value?.some((item) => item?.value?.length > 0)
+      );
+      setIsAccessories(hasAccessories);
+    }, [productDetails]);
+
     return (
       <section
         ref={ref}
@@ -265,7 +275,7 @@ const DownloadSection = forwardRef(
                       <p className={`${styles.ui} ${styles.sizeH4}`}>
                         {tabItem.name == "Accessories"
                           ? tabItem?.value?.some((item) => {
-                              item?.value?.length > 0 && setIsAccessories(true);
+                              // item?.value?.length > 0 && setIsAccessories(true);
                               return item?.value?.length > 0 ? true : false;
                             }) && tabItem.name
                           : tabItem.name}
