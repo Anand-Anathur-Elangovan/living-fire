@@ -107,7 +107,11 @@ const Home = () => {
       displayName: displayName,
       id: arguId,
     });
-    router.push(`/allProducts?brand=${arguId}`);
+    router.push(
+      `/allProducts?${
+        typeName === "fuelType" ? "fireplaceType" : "brand"
+      }=${arguId}`
+    );
   };
   const productRouteHandler = (productId) => {
     setCookie(
