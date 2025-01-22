@@ -121,7 +121,6 @@ const Product = ({ params }) => {
               alt="Product Hero Image"
             />
           </div>
-          {product_desc && <DescriptionColumn product_desc={product_desc} />}
 
           <ProductOptions
             short_desc={short_desc}
@@ -133,6 +132,7 @@ const Product = ({ params }) => {
             p_sku={p_sku}
             isAccessories={isAccessories}
           />
+          {product_desc && <DescriptionColumn product_desc={product_desc} />}
         </div>
         <div className="second-container">
           {/* {short_desc && <MaterialFinishOptions short_desc={short_desc} />} */}
