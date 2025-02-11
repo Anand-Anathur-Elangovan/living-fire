@@ -1,0 +1,52 @@
+.materialFinishOptions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: self-start;
+  margin-left: 100px;
+  margin-top: 20px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.imgList {
+  display: flex;
+  /* gap: 16px; */
+  justify-content: space-around;
+  width: 100%;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  height: auto;
+  margin-bottom: 8px;
+  width: 400px;
+  gap: 0px;
+  /* opacity: 0px; */
+}
+
+.pricingoptions {
+  text-align: center;
+}
+
+.desc {
+  font-size: 1rem;
+  color: black;
+}
