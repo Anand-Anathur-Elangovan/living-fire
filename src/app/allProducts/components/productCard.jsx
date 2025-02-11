@@ -86,11 +86,12 @@ const ProductCard = ({
     return null;
   });
 
-  const handleProductClick = (productId) => {
-    // setNavigationState({ productId });
-    setCookie(
-      "selectedProductId",
-      productId
+  const handleProductClick = (productName, brandName) => {
+    const formattedProductName = productName.replace(/\s+/g, "_");
+    const formattedBrandName = brandName.replace(/\s+/g, "_");
+    // setCookie(
+    //   "selectedProduct",
+    //   productName
       //   , {
       //   path: "/", // Cookie available site-wide
       //   secure: true, // Only sent over HTTPS
@@ -98,8 +99,10 @@ const ProductCard = ({
       //   sameSite: "strict", // Only sent for same-site requests
       //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
       // }
-    );
-    router.push(`/product/${productId}`);
+    // );
+    setCookie("selectedProduct", formattedProductName);
+    setCookie("selectedBrand", formattedBrandName);
+    router.push(`/${formattedBrandName}/${formattedProductName}`);
   };
 
   return (
@@ -137,14 +140,14 @@ const ProductCard = ({
           // height={380}
           objectFit="cover"
           layout="fill"
-          onClick={() => handleProductClick(fn_get_products?.p_id)}
+          onClick={() => handleProductClick(fn_get_products?.name,fn_get_products?.brand_name )}
           unoptimized
         />
       </div>
       <div className="py-2 gap-3">
         <span
           className="font-sans md:font-medium font-normal text-sm md:text-base text-wrap cursor-pointer text-black" ///leading-5 md:leading-6
-          onClick={() => handleProductClick(fn_get_products?.p_id)}
+          onClick={() => handleProductClick(fn_get_products?.name,fn_get_products?.brand_name)}
         >
           {fn_get_products.p_name ||
             fn_get_products?.name ||
@@ -153,7 +156,7 @@ const ProductCard = ({
         <div className="flex flex-col md:flex-row justify-between mr-5 gap-2 md:gap-0">
           <span
             className="font-sans font-normal leading-5 text-sm cursor-pointer text-[#94999F]"
-            onClick={() => handleProductClick(fn_get_products?.p_id)}
+            onClick={() => handleProductClick(fn_get_products?.name,fn_get_products?.brand_name)}
           >
             {fn_get_products?.brand_name}
           </span>

@@ -5,16 +5,41 @@ import pool from "@/src/helper/db/db";
 
 // const prisma = new PrismaClient();
 
-export const getProductPage = async (productId) => {
+export const getProductPage = async (productName) => {
   // const cookieStore = cookies();
   // const cookieProductId = await cookieStore.get("selectedProductId")?.value;
-  const query = `SELECT * FROM fn_get_product_page(${
-    productId ? productId : "424"
-  })`;
+  // const query = `SELECT * FROM fn_get_product_page(${
+  //   productId ? productId : "424"
+  // })`;
   // const query = "select * FROM fn_get_product_page(424)";
   try {
-    const result = await pool.query(query);
-    // prisma.$queryRawUnsafe(query);
+    // const result = await pool.query(query);
+    const result = await pool.query(
+      `SELECT 
+        p_id,
+        sku AS p_sku,
+        name,
+        brand_name,
+        fueltype_name,
+        ptype_name,
+        short_desc,
+        product_desc,
+        price,
+        best_selling,
+        is_featured,
+        made_country,
+        type,
+        hero_image,
+        product_details,
+        specifications,
+        brand_id
+      FROM tbl_master
+      WHERE name = $1;`, 
+      [productName] // Passing productId as a parameter
+    );
+    
+    // console.log("resultCheck", resultCheck.rows);
+    
     console.log("productCheck123", result.rows);
     return result.rows;
   } catch (err) {

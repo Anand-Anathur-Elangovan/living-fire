@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useNavigationState } from "@/context/NavigationContext";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
-const Featured = ({ headingValue, productRouteHandler }) => {
+const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
   const router = useRouter();
   const { setNavigationState } = useNavigationState();
   const carouselRef = useRef(null);
@@ -21,6 +21,8 @@ const Featured = ({ headingValue, productRouteHandler }) => {
       image: collectionImg1,
       title: "775 Wood Heater",
       description: "ESSE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Regency"
     },
     {
       p_id: "424",
@@ -28,6 +30,8 @@ const Featured = ({ headingValue, productRouteHandler }) => {
       // collectionImg2,
       title: "Ilektro 2000 Landscape",
       description: "Paul Agnew Designs",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Regency"
     },
     {
       p_id: "424",
@@ -35,24 +39,32 @@ const Featured = ({ headingValue, productRouteHandler }) => {
       // collectionImg3,
       title: "Loxton 5 Standard Fireplace",
       description: "EUROSTOVE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Regency"
     },
     {
       p_id: "424",
       image: collectionImg1,
       title: "775 Wood Heater",
       description: "ESSE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Regency"
     },
     {
       p_id: "424",
       image: collectionImg1,
       title: "775 Wood Heater",
       description: "ESSE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Regency"
     },
     {
       p_id: "424",
       image: collectionImg1,
       title: "775 Wood Heater",
       description: "ESSE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Regency"
     },
   ];
   const handleScroll = (direction) => {
@@ -102,7 +114,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
           <div
             className="w-[323px] flex flex-col gap-5"
             key={"featured" + index}
-            onClick={() => productRouteHandler(item.p_id)}
+            onClick={() => productRouteHandler(item.name,item?.brand_name )}
           >
             <Image
               src={item.image}

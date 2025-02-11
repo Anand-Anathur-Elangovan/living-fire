@@ -1,20 +1,20 @@
 "use client";
 import HeroImage from "./components/HeroImage";
-import DescriptionSection from "./components/DescriptionSection";
-import PackageOption from "./components/PackageOption";
-import MaterialOption from "./components/MaterialOption";
-import DeliveryOption from "./components/DeliveryOption";
-import PricingInfo from "./components/PricingInfo";
-import ActionButtons from "./components/ActionButtons";
+// import DescriptionSection from "./components/DescriptionSection";
+// import PackageOption from "./components/PackageOption";
+// import MaterialOption from "./components/MaterialOption";
+// import DeliveryOption from "./components/DeliveryOption";
+// import PricingInfo from "./components/PricingInfo";
+// import ActionButtons from "./components/ActionButtons";
 import { useEffect, useState, useRef } from "react";
 import "./product.css";
 import useProductPage from "./hooks/useProductPage";
 import ProductOptions from "./components/productOptions/ProductOptions";
 import DescriptionColumn from "./components/descriptionColumn/DescriptionColumn";
-import MaterialFinishOptions from "./components/materialFinishOptions/MaterialFinishOptions";
+// import MaterialFinishOptions from "./components/materialFinishOptions/MaterialFinishOptions";
 import Specifications from "./components/specifications/Specifications";
 import DownloadSection from "./components/downloadSection/DownloadSection";
-import OurDifference from "../../allProducts/components/ourDifference";
+// import OurDifference from "../../allProducts/components/ourDifference";
 import OurShowrooms from "../../allProducts/components/ourShowrooms";
 import Breadcrumbs from "./components/Breadcrumbs";
 import EnquiryFormModal from "./components/enquiryFormModal/EnquiryFormModal";
@@ -28,7 +28,7 @@ import Loader from "@/src/helper/loader/Loader";
 
 const Product = ({ params }) => {
   const router = useRouter();
-  const productId = getCookie("selectedProductId");
+  const productName = getCookie("selectedProduct");
   // const { getNavigationState } = useNavigationState();
   const [productData, setProductData] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -47,9 +47,10 @@ const Product = ({ params }) => {
   useEffect(() => {
     async function fetchParams() {
       if (params) {
-        console.log("params", params?.id);
+        console.log("params", params);
         const resolvedParams = await params;
-        setUnwrappedParams(resolvedParams?.id);
+        const formattedProduct = resolvedParams?.product?.replace(/_/g, " ");
+        setUnwrappedParams(formattedProduct);
       }
     }
     fetchParams();
@@ -58,10 +59,10 @@ const Product = ({ params }) => {
   let { data } = useProductPage(unwrappedParams);
 
   useEffect(() => {
-    if (productId) {
-      // Make your API call here with state.productId
-      console.log("Cookie Product ID:", productId);
-    }
+    // if (productId) {
+    //   // Make your API call here with state.productId
+    //   console.log("Cookie Product ID:", productId);
+    // }
     setProductData(data?.product?.[0]);
   }, [data]);
 
@@ -84,20 +85,39 @@ const Product = ({ params }) => {
     p_sku,
   } = productData;
   console.log("productData", productData);
-  const productRouteHandler = (productId) => {
-    setCookie(
-      "selectedProductId",
-      productId
-      //   , {
-      //   path: "/", // Cookie available site-wide
-      //   secure: true, // Only sent over HTTPS
-      //   httpOnly: true, // Prevents client-side JS from accessing it
-      //   sameSite: "strict", // Only sent for same-site requests
-      //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
-      // }
-    );
-    router.push(`/product/${productId}`);
-  };
+  // const productRouteHandler = (productId) => {
+  //   setCookie(
+  //     "selectedProductId",
+  //     productId
+  //     //   , {
+  //     //   path: "/", // Cookie available site-wide
+  //     //   secure: true, // Only sent over HTTPS
+  //     //   httpOnly: true, // Prevents client-side JS from accessing it
+  //     //   sameSite: "strict", // Only sent for same-site requests
+  //     //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
+  //     // }
+  //   );
+  //   router.push(`/product/${productId}`);
+  // };
+
+  const productRouteHandler = (productName, brandName) => {
+      const formattedProductName = productName.replace(/\s+/g, "_");
+      const formattedBrandName = brandName.replace(/\s+/g, "_");
+      // setCookie(
+      //   "selectedProduct",
+      //   productName
+        //   , {
+        //   path: "/", // Cookie available site-wide
+        //   secure: true, // Only sent over HTTPS
+        //   httpOnly: true, // Prevents client-side JS from accessing it
+        //   sameSite: "strict", // Only sent for same-site requests
+        //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
+        // }
+      // );
+      setCookie("selectedProduct", formattedProductName);
+      setCookie("selectedBrand", formattedBrandName);
+      router.push(`/${formattedBrandName}/${formattedProductName}`);
+    };
   const handleViewAllAccessories = () => {
     setActiveTab("Accessories");
     downloadSectionRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -149,6 +169,8 @@ const Product = ({ params }) => {
           <Featured
             headingValue={"You May Also Like"}
             productRouteHandler={productRouteHandler}
+            name={name}
+            brand_name={brand_name}
           />
           {/* <OurDifference /> */}
           <OurShowrooms />
