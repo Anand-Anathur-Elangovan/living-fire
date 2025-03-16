@@ -1,55 +1,139 @@
 "use client";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import RightArrowIcon from "@/public/assets/allProducts/rightArrow.svg";
+// import React, { useEffect, useMemo, useState } from "react";
+import OurDifference from "./components/ourDifference";
+import OurShowrooms from "./components/ourShowrooms";
+import Products from "./components/products";
 import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
-import LeftArrowDisabledIcon from "@/public/assets/allProducts/leftArrowDisabled.svg";
-import CrossIcon from "@/public/assets/allProducts/cross.svg";
-import MinusIcon from "@/public/assets/allProducts/minus.svg";
-import PlusIcon from "@/public/assets/allProducts/plus.svg";
-import SortIcon from "@/public/assets/allProducts/sortIcon.svg";
+import "./page.css";
 import Image from "next/image";
-import useAllProducts from "../hooks/useAllProducts";
-import ProductCard from "./productCard";
-import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
-import { SORTBY } from "@/src/constants/products";
-import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
-import useMasterValues from "../hooks/useMasterValues";
-import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
-import { useRouter, useSearchParams } from "next/navigation";
+import useMasterValues from "./hooks/useMasterValues";
+// import { useSearchParams } from "next/navigation";
+import useAllProducts from "./hooks/useAllProducts";
+import { useNavigationState } from "@/context/NavigationContext";
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+  } from "react";
+  import RightArrowIcon from "@/public/assets/allProducts/rightArrow.svg";
+//   import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
+  import LeftArrowDisabledIcon from "@/public/assets/allProducts/leftArrowDisabled.svg";
+  import CrossIcon from "@/public/assets/allProducts/cross.svg";
+  import MinusIcon from "@/public/assets/allProducts/minus.svg";
+  import PlusIcon from "@/public/assets/allProducts/plus.svg";
+  import SortIcon from "@/public/assets/allProducts/sortIcon.svg";
+//   import Image from "next/image";
+//   import useAllProducts from "../hooks/useAllProducts";
+  import ProductCard from "./productCard";
+  import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
+  import { SORTBY } from "@/src/constants/products";
+  import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
+//   import useMasterValues from "../hooks/useMasterValues";
+  import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
+  import { useRouter, useSearchParams } from "next/navigation";
 
-const Products = ({
-  type,
-  setproductMenuIndex,
-  brandType,
-  setBrandType,
-  fireplaceType,
-  setFireplaceType,
-  isCompare,
-  allProducts,
-  isFetched,
-  setSearchText,
-  searchText,
-  setBestSelling,
-  setSubType,
-  subType,
-  setRangeType,
-  rangeType,
-  bestSelling,
-  setInstallationType,
-  installationType,
-  setglassOrientationType,
-  glassOrientationType,
-  updatedValues,
-  isStale,
-}) => {
-  // const { allProducts, isFetched } = useAllProducts(type ?? 0);
 
+const Page = () => {
+  const {
+    // brands,
+    masterValues: { fuelTypes:any = [], productTypes: allProductMenu = [] },
+  } = useMasterValues();
+  const { getNavigationState } = useNavigationState();
+  const state = getNavigationState();
+
+  const [productMenuIndex, setproductMenuIndex] = useState(0);
+  const [isCompare, setIsCompare] = useState(false);
+  const [fireplaceType, setFireplaceType] = useState(null);
+  const [brandType, setBrandType] = useState(null);
+  const [searchText, setSearchText] = useState("");
+  const [bestSelling, setBestSelling] = useState(false);
+  const [subType, setSubType] = useState(null);
+  const [installationType, setInstallationType] = useState(null);
+  const [glassOrientationType, setglassOrientationType] = useState(null);
+  const [rangeType, setRangeType] = useState(null);
+  const [updatedValues, setUpdatedValues] = useState({
+    fueltypeValues: [],
+    installationValues: [],
+    glassOrientationValues: [],
+  });
+
+  const { allProducts, isFetched, isStale } = useAllProducts(
+    productMenuIndex,
+    fireplaceType ?? 0,
+    brandType ?? 0,
+    bestSelling === false ? null : bestSelling,
+    searchText,
+    subType ?? 0,
+    rangeType ?? 0,
+    installationType ?? 0,
+    glassOrientationType ?? 0
+  );
+
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    if (state?.typeName === "fuelType") {
+      setFireplaceType(state?.id);
+    } else if (state?.typeName === "brandType") {
+      setBrandType(state?.id);
+    }
+  }, [state]);
+
+  useEffect(() => {
+    const setStates = () => {
+      let text = searchParams.get("searchText");
+      if (text) setSearchText(text);
+      let fireplaceType = searchParams.get("fireplaceType");
+      if (fireplaceType) setFireplaceType(parseInt(fireplaceType));
+      let productMenu = searchParams.get("productMenu");
+      if (productMenu) setproductMenuIndex(parseInt(productMenu));
+      let brand = searchParams.get("brand");
+      if (brand) setBrandType(parseInt(brand));
+    };
+    setStates();
+  }, [searchParams]);
+
+  useEffect(() => {
+    const updateFuelTypeValues = () => {
+      let values = [];
+      let newFuelValues = [];
+      values = allProducts.map((p) => p.fn_get_products?.fueltype_id);
+      newFuelValues = [...new Set(values)].filter((v) => v !== null);
+
+      let installValues = [];
+      let newInstallValues = [];
+      installValues = allProducts.map((p) => p.fn_get_products.installation_id);
+      newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
+
+      let glassValues = [];
+      let newGlassValues = [];
+      glassValues = allProducts.map(
+        (p) => p.fn_get_products.glass_orientation_ids
+      );
+      newGlassValues = [...new Set([].concat(...glassValues))]
+        .filter((v) => v !== null)
+        .map((x) => parseInt(x));
+
+      setUpdatedValues((prev) => {
+        return {
+          ...prev,
+          fueltypeValues: fireplaceType ? prev.fueltypeValues : newFuelValues,
+          installationValues:
+            installationType || glassOrientationType
+              ? prev.installationValues
+              : newInstallValues,
+          glassOrientationValues:
+            installationType || glassOrientationType
+              ? prev.glassOrientationValues
+              : newGlassValues,
+        };
+      });
+    };
+    if (allProducts.length > 0) updateFuelTypeValues();
+  }, [isFetched, allProducts]);
+
+  // console.log("allProducts", allProducts, allProducts?.length, brandType);
   const {
     brands,
     masterValues: {
@@ -59,10 +143,10 @@ const Products = ({
       installationTypes,
       glassOrientationTypes,
     },
-  } = useMasterValues(type);
+  } = useMasterValues(type?type:"");
 
   const router = useRouter();
-  const searchParams = useSearchParams();
+//   const searchParams = useSearchParams();
   const updateQueryParams = (params) => {
     const currentParams = new URLSearchParams(searchParams.toString());
     Object.keys(params).forEach((key) => {
@@ -233,34 +317,7 @@ const Products = ({
     router.push("/allProducts");
   };
 
-  // console.log(allProducts, "allProducts");
-  // console.log(
-  //   installationTypes,
-  //   glassOrientationTypes,
-  //   subTypes,
-  //   fuelTypes,
-  //   "Types"
-  // );
-
-  // const fueltypeValues = useMemo(() => {
-  //   let values = [];
-  //   values = allProducts.map((p) => p.fn_get_products.fueltype_id);
-  //   return [...new Set([].concat(...values))].filter((v) => v !== null);
-  // }, [allProducts]);
-
-  // const installationValues = useMemo(() => {
-  //   let values = [];
-  //   values = allProducts.map((p) => p.fn_get_products.installation_id);
-  //   return [...new Set(values)].filter((v) => v !== null);
-  // }, [allProducts]);
-
-  // const glassOrientationValues = useMemo(() => {
-  //   let values = [];
-  //   values = allProducts.map((p) => p.fn_get_products.glass_orientation_ids);
-  //   return [...new Set([].concat(...values))]
-  //     .filter((v) => v !== null)
-  //     .map((x) => parseInt(x));
-  // }, [allProducts]);
+  
   useEffect(() => {
     const queryParams = {
       searchText: searchParams.get("searchText"),
@@ -281,8 +338,8 @@ const Products = ({
     if (queryParams.installationType)
       setInstallationType(Number(queryParams.installationType));
     if (queryParams.rangeType) setRangeType(Number(queryParams.rangeType));
-    // if (queryParams.productMenuIndex)
-    //   setproductMenuIndex(Number(queryParams.productMenuIndex));
+    if (queryParams.productMenuIndex)
+      setproductMenuIndex(Number(queryParams.productMenuIndex));
   }, [searchParams]);
 
   useEffect(() => {
@@ -293,6 +350,120 @@ const Products = ({
   }, [type]);
   return (
     <>
+      <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
+        <div className="flex flex-col items-center gap-5">
+          <div className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
+            {!brandType
+              ? `${
+                  fireplaceType
+                    ? fuelTypes.find((x) => x.fueltype_id === fireplaceType)
+                        ?.fueltype_name ?? "Unknown"
+                    : "All"
+                } ${
+                  productMenuIndex
+                    ? allProductMenu.find(
+                        (x) => x.ptype_id === productMenuIndex
+                      )?.ptype_name ?? "Products"
+                    : "Products"
+                }`
+              : `${brands.find((x) => x.brand_id === brandType)?.brand_name}` ??
+                "Unknown Brand"}
+          </div>
+
+          {fireplaceType && !brandType && (
+            <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
+              Experience warmth and elegance with our indoor luxury wood
+              fireplaces, blending timeless craftsmanship with contemporary
+              modern design.
+            </div>
+          )}
+
+          {
+            brandType &&
+              brands.find((b) => b?.brand_id === brandType)?.brand_desc
+
+          }
+        </div>
+        {!brandType && (
+          <div className="flex flex-row justify-between bg-[#DDE6ED] md:bg-transparent">
+            <div className="flex flex-row md:justify-center items-center w-full gap-8 md:gap-14 p-3 overflow-x-auto">
+              {!fireplaceType &&
+                !brandType &&
+                allProductMenu.map((productMenu, index) => (
+                  <div
+                    className="flex flex-col gap-1 items-center text-center cursor-pointer text-xs md:text-base"
+                    key={"productMenu" + index}
+                    onClick={() => setproductMenuIndex(productMenu.ptype_id)}
+                  >
+                    {productMenu.ptype_name === "Fire Tools"
+                      ? "Firetools & Accessories"
+                      : productMenu.ptype_name}
+                    <div
+                      className={`justify-center block border-b-[3.5px] border-solid border-black rounded transition ease-in-out duration-500`}
+                      style={{
+                        width: `${
+                          productMenu.ptype_id === productMenuIndex
+                            ? "50%"
+                            : "4px"
+                        }`,
+                      }}
+                    />
+                  </div>
+                ))}
+              {fireplaceType ? (
+                <>
+                </>
+              ) : brandType ? (
+                <>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+            {false && productMenuIndex !== 0 && (
+              <div className="flex flex-row gap-1 items-center text-center">
+                <span>Compare</span>
+                <div className="container">
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      id="checkbox"
+                      checked={isCompare}
+                      onChange={(e) => setIsCompare(e.target.checked)}
+                    />
+                    <div className="slider round"></div>
+                  </label>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+        <Products
+          type={productMenuIndex}
+          setproductMenuIndex={setproductMenuIndex}
+          isCompare={isCompare}
+          fireplaceType={fireplaceType}
+          brandType={brandType}
+          setFireplaceType={setFireplaceType}
+          setBrandType={setBrandType}
+          allProducts={allProducts}
+          isFetched={isFetched}
+          setSearchText={setSearchText}
+          searchText={searchText}
+          setBestSelling={setBestSelling}
+          setSubType={setSubType}
+          subType={subType}
+          setRangeType={setRangeType}
+          rangeType={rangeType}
+          bestSelling={bestSelling}
+          setInstallationType={setInstallationType}
+          installationType={installationType}
+          setglassOrientationType={setglassOrientationType}
+          glassOrientationType={glassOrientationType}
+          updatedValues={updatedValues}
+          isStale={isStale}
+        />
+         <>
       {/* Compare Products */}
       {compareProducts.length > 1 && (
         <div className="px-1 border-t border-solid border-[#D3C6BB] w-full flex flex-row-reverse items-center pt-5 gap-3">
@@ -448,10 +619,6 @@ const Products = ({
                   <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                     <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                       {"Fireplace Type"}
-                      {/* {fireplaceType
-                      ? fuelTypes?.find((x) => x?.fueltype_id === fireplaceType)
-                          ?.fueltype_name + " Fireplaces"
-                      : "Fireplace Type"} */}
                       {!document
                         .getElementById("fireplaceFilterId")
                         ?.classList?.contains("collapse") && (
@@ -515,68 +682,6 @@ const Products = ({
                                       >
                                         {val?.fueltype_name}
                                       </span>
-                                      {/* {firePlaceSubType.installation &&
-                                        updatedValues?.installationValues
-                                          ?.length > 0 &&
-                                        installationTypes.map(
-                                          (installval) =>
-                                            updatedValues?.installationValues?.includes(
-                                              installval?.installation_id
-                                            ) && (
-                                              <span
-                                                key={
-                                                  "installtypes" +
-                                                  installval?.installation_id
-                                                }
-                                                className={`ml-4 font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                                  installval?.installation_id ===
-                                                  installationType
-                                                    ? "text-black"
-                                                    : "text-gray-400"
-                                                }`}
-                                                onClick={() => {
-                                                  setInstallationType(
-                                                    installval?.installation_id
-                                                  );
-                                                  setglassOrientationType(null);
-                                                }}
-                                              >
-                                                {installval?.installation_name}
-                                              </span>
-                                            )
-                                        )} */}
-                                      {/* {firePlaceSubType.glassOrientation &&
-                                        updatedValues?.glassOrientationValues
-                                          ?.length > 0 &&
-                                        glassOrientationTypes.map(
-                                          (glassval) =>
-                                            updatedValues?.glassOrientationValues?.includes(
-                                              glassval?.glass_orientation_id
-                                            ) && (
-                                              <span
-                                                key={
-                                                  "glasstypes" +
-                                                  glassval?.glass_orientation_id
-                                                }
-                                                className={`ml-4 font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                                  glassval?.glass_orientation_id ===
-                                                  glassOrientationType
-                                                    ? "text-black"
-                                                    : "text-gray-400"
-                                                }`}
-                                                onClick={() => {
-                                                  setInstallationType(null);
-                                                  setglassOrientationType(
-                                                    glassval?.glass_orientation_id
-                                                  );
-                                                }}
-                                              >
-                                                {
-                                                  glassval?.glass_orientation_name
-                                                }
-                                              </span>
-                                            )
-                                        )} */}
                                     </>
                                   ) : (
                                     <span
@@ -645,14 +750,6 @@ const Products = ({
                             }}
                             unoptimized
                           />
-                          {/* <span className="flex items-center font-sans font-normal text-base cursor-pointer">
-                          <Image
-                            src={CrossIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => setRangeType(null)}
-                          />
-                        </span> */}
                         </div>
                       )}
 
@@ -734,14 +831,6 @@ const Products = ({
                             }}
                             unoptimized
                           />
-                          {/* <span className="flex items-center font-sans font-normal text-base cursor-pointer">
-                          <Image
-                            src={CrossIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => setRangeType(null)}
-                          />
-                        </span> */}
                         </div>
                       )}
 
@@ -826,14 +915,6 @@ const Products = ({
                             }}
                             unoptimized
                           />
-                          {/* <span className="flex items-center font-sans font-normal text-base cursor-pointer">
-                          <Image
-                            src={CrossIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => setRangeType(null)}
-                          />
-                        </span> */}
                         </div>
                       )}
 
@@ -954,102 +1035,7 @@ const Products = ({
                             }
                           </span>
                           <>
-                            {/* {updatedValues?.installationValues?.length > 0 && (
-                            <span
-                              key={"InstallationTypes"}
-                              className={`ml-3 font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                firePlaceSubType.installation
-                                  ? "text-black"
-                                  : "text-gray-400"
-                              }`}
-                              onClick={() =>
-                                setFirePlaceSubType(() => ({
-                                  installation: true,
-                                  glassOrientation: false,
-                                }))
-                              }
-                            >
-                              Installtion Types
-                            </span>
-                          )}
-
-                          {firePlaceSubType.installation && (
-                            <div className="ml-4 flex flex-col gap-3 ">
-                              {installationTypes.map(
-                                (val) =>
-                                  updatedValues?.installationValues?.includes(
-                                    val?.installation_id
-                                  ) && (
-                                    <span
-                                      key={"types" + val?.installation_id}
-                                      className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                        val?.installation_id ===
-                                        installationType
-                                          ? "text-black"
-                                          : "text-gray-400"
-                                      }`}
-                                      onClick={() => {
-                                        setInstallationType(
-                                          val?.installation_id
-                                        );
-                                        setglassOrientationType(null);
-                                      }}
-                                    >
-                                      {val?.installation_name}
-                                    </span>
-                                  )
-                              )}
-                            </div>
-                          )}
-
-                          {updatedValues?.glassOrientationValues?.length >
-                            0 && (
-                            <span
-                              key={"GlassOrientationTypes"}
-                              className={`ml-3 font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                firePlaceSubType.glassOrientation
-                                  ? "text-black"
-                                  : "text-gray-400"
-                              }`}
-                              onClick={() =>
-                                setFirePlaceSubType(() => ({
-                                  installation: false,
-                                  glassOrientation: true,
-                                }))
-                              }
-                            >
-                              Glass Orientation Types
-                            </span>
-                          )}
-
-                          {firePlaceSubType.glassOrientation && (
-                            <div className="ml-4 flex flex-col gap-3 ">
-                              {glassOrientationTypes.map(
-                                (val) =>
-                                  updatedValues?.glassOrientationValues?.includes(
-                                    val?.glass_orientation_id
-                                  ) && (
-                                    <span
-                                      key={"types" + val?.glass_orientation_id}
-                                      className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                        val?.glass_orientation_id ===
-                                        glassOrientationType
-                                          ? "text-black"
-                                          : "text-gray-400"
-                                      }`}
-                                      onClick={() => {
-                                        setInstallationType(null);
-                                        setglassOrientationType(
-                                          val?.glass_orientation_id
-                                        );
-                                      }}
-                                    >
-                                      {val?.glass_orientation_name}
-                                    </span>
-                                  )
-                              )}
-                            </div>
-                          )} */}
+                           
                           </>
                         </>
                       )}
@@ -1241,58 +1227,6 @@ const Products = ({
           ))}
         </div>
       </div>
-
-      {/* Pagination */}
-      {/* <div className="flex justify-center gap-2 font-[Satoru] text-[26px] cursor-pointer">
-        {!(pageIndex === 0) && (
-          <Image
-            src={LeftArrowIcon}
-            alt="Left Arrow"
-            className="md:pt-1 cursor-pointer"
-            onClick={() => onPageIndexClick(pageIndex - 1)}
-          />
-        )}
-        {pageIndex > 1 && maxPageCount > 4 && (
-          <span className="cursor-pointer" onClick={() => onPageIndexClick(1)}>
-            {1}
-          </span>
-        )}
-        {pageIndex > 2 && maxPageCount > 4 && (
-          <span className="cursor-pointer" onClick={() => onPageIndexClick(2)}>
-            {2}
-          </span>
-        )}
-        {pageIndex > 1 && <span>...</span>}
-        {maxPageCount - pageIndex > 1 && maxPageCount > 0 && (
-          <span onClick={() => onPageIndexClick(pageIndex)}>
-            {pageIndex + 1}
-          </span>
-        )}
-        {maxPageCount - pageIndex > 2 && maxPageCount > 1 && (
-          <span onClick={() => onPageIndexClick(pageIndex + 2)}>
-            {pageIndex + 2}
-          </span>
-        )}
-        {maxPageCount - pageIndex > 3 && maxPageCount > 2 && (
-          <span onClick={() => onPageIndexClick(pageIndex + 3)}>
-            {pageIndex + 3}
-          </span>
-        )}
-        {maxPageCount - pageIndex - 3 > 1 && <span>...</span>}
-        {maxPageCount > 3 && (
-          <span onClick={() => onPageIndexClick(maxPageCount)}>
-            {maxPageCount}
-          </span>
-        )}
-        {pageIndex + 4 <= maxPageCount && (
-          <Image
-            src={RightArrowIcon}
-            alt="Right Arrow"
-            className="md:pt-1 cursor-pointer"
-            onClick={() => onPageIndexClick(pageIndex + 1)}
-          />
-        )}
-      </div> */}
       <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
         {/* Left Arrow */}
         {pageIndex > 0 && (
@@ -1370,88 +1304,11 @@ const Products = ({
         )}
       </div>
     </>
+        <OurDifference />
+        <OurShowrooms />
+      </div>
+    </>
   );
 };
 
-export default Products;
-
-// const test = allProducts.map((productDetails) => {
-//   let s = productDetails.fn_get_products.hero_image.split("'");
-//   if (s.length === 1 || s.length === 9) return;
-//   else console.log(productDetails, s.length, "Test");
-// });
-
-// const allProductsD = Array(70)
-//     .fill()
-//     .map((_, i) => i);
-
-// const brands = [
-//   { brand_id: 1, brand_name: "Paul Agnew Designs" },
-//   { brand_id: 2, brand_name: "Esse" },
-//   { brand_id: 3, brand_name: "Austroflamm" },
-//   { brand_id: 4, brand_name: "Morso" },
-//   { brand_id: 5, brand_name: "Stovax" },
-//   { brand_id: 6, brand_name: "Heatmaster" },
-//   { brand_id: 7, brand_name: "Hergom" },
-//   { brand_id: 8, brand_name: "ADF" },
-//   { brand_id: 9, brand_name: "Firefox" },
-//   { brand_id: 10, brand_name: "Regency" },
-//   { brand_id: 11, brand_name: "Kalora" },
-//   { brand_id: 12, brand_name: "Pacific Energy" },
-//   { brand_id: 13, brand_name: "Charnwood" },
-//   { brand_id: 14, brand_name: "Bosq" },
-//   { brand_id: 15, brand_name: "Cocoon" },
-//   { brand_id: 16, brand_name: "Eurostove" },
-//   { brand_id: 17, brand_name: "Gazco" },
-//   { brand_id: 18, brand_name: "Icon Fires" },
-//   { brand_id: 19, brand_name: "Living Fire" },
-//   { brand_id: 20, brand_name: "Metters" },
-//   { brand_id: 21, brand_name: "Fire Up" },
-// ];
-// const fuelTypes = [
-//   { fueltype_id: 1, fueltype_name: "Hybrid - Wood/Electric" },
-//   { fueltype_id: 2, fueltype_name: "Bio-Ethanol" },
-//   { fueltype_id: 3, fueltype_name: "Gas" },
-//   { fueltype_id: 4, fueltype_name: "Wood" },
-//   { fueltype_id: 5, fueltype_name: "Electric" },
-// ];
-// const ranges = [
-//   { range_id: 1, range_name: "Firepit" },
-//   { range_id: 2, range_name: "Heatmaster Wood" },
-//   { range_id: 3, range_name: "Studio 2" },
-//   { range_id: 4, range_name: "Greenfire" },
-//   { range_id: 5, range_name: "City Series" },
-//   { range_id: 6, range_name: "Heatmaster Gas" },
-//   { range_id: 7, range_name: "ilektro Freestanding" },
-//   { range_id: 8, range_name: "Aerion" },
-//   { range_id: 9, range_name: "ilektro insert" },
-//   { range_id: 10, range_name: "Hestia" },
-//   { range_id: 11, range_name: "Pyro" },
-//   { range_id: 12, range_name: "ilektro" },
-//   { range_id: 13, range_name: "ilektro Slimline" },
-//   { range_id: 14, range_name: "Ironheart Range" },
-// ];
-
-// const fireplaceTypes = ["Wood", "Electric", "Gas", "LPG"];
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// subTypes
-//   ?.filter((subType) =>
-//     allProductsTempForSubType?.some(
-//       (item) =>
-//         item.fn_get_products?.subtype_id ===
-//         subType.subtype_id
-//     )
-//   )
-//   .map((val) =>
-//     val?.subtype_id === subType ? null : (
-//       <span
-//         key={"types" + val?.subtype_id}
-//         className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
-//         onClick={() => setSubType(val?.subtype_id)}
-//       >
-//         {val?.subtype_name}
-//       </span>
-//     )
-//   )
+export default Page;

@@ -1,14 +1,14 @@
 "use client";
 // import React, { useEffect, useMemo, useState } from "react";
-import OurDifference from "./components/ourDifference";
-import OurShowrooms from "./components/ourShowrooms";
-import Products from "./components/products";
+import OurDifference from "../components/ourDifference";
+import OurShowrooms from "../components/ourShowrooms";
+import Products from "../components/products";
 import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import "./page.css";
 import Image from "next/image";
-import useMasterValues from "./hooks/useMasterValues";
+import useMasterValues from "../hooks/useMasterValues";
 // import { useSearchParams } from "next/navigation";
-import useAllProducts from "./hooks/useAllProducts";
+import useAllProducts from "../hooks/useAllProducts";
 import { useNavigationState } from "@/context/NavigationContext";
 import React, {
   useCallback,
@@ -26,7 +26,7 @@ import PlusIcon from "@/public/assets/allProducts/plus.svg";
 import SortIcon from "@/public/assets/allProducts/sortIcon.svg";
 //   import Image from "next/image";
 //   import useAllProducts from "../hooks/useAllProducts";
-import ProductCard from "./components/productCard";
+import ProductCard from "../components/productCard";
 import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 import { SORTBY } from "@/src/constants/products";
 import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
@@ -472,7 +472,7 @@ const Page = () => {
     //   setFireplaceType(Number(queryParams.fireplaceType));
     if (queryParams.brand) setBrandType(Number(queryParams.brand));
     if (queryParams.glassOrientationType)
-      setGlassOrientationType(Number(queryParams.glassOrientationType));
+      setglassOrientationType(Number(queryParams.glassOrientationType));
     if (queryParams.installationType)
       setInstallationType(Number(queryParams.installationType));
     if (queryParams.rangeType) setRangeType(Number(queryParams.rangeType));
@@ -487,11 +487,6 @@ const Page = () => {
   //     });
   // }, [productMenuIndex]);
   // console.log("fuelTypes", fuelTypes, "brands", brands);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
   return (
     <>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
@@ -738,7 +733,7 @@ const Page = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                           {"Fireplace Type"}
-                          {isClient && !document
+                          {!document
                             .getElementById("fireplaceFilterId")
                             ?.classList?.contains("collapse") && (
                             <Image
@@ -754,7 +749,7 @@ const Page = () => {
                               unoptimized
                             />
                           )}
-                          {isClient && document
+                          {document
                             .getElementById("fireplaceFilterId")
                             ?.classList?.contains("collapse") && (
                             <Image
@@ -874,7 +869,7 @@ const Page = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
                           {`Installation Type`}
-                          {isClient &&!document
+                          {!document
                             .getElementById("installationTypeFilterId")
                             ?.classList?.contains("collapse") && (
                             <div style={{ display: "flex", gap: "30px" }}>
@@ -893,7 +888,7 @@ const Page = () => {
                             </div>
                           )}
 
-                          {isClient && document
+                          {document
                             .getElementById("installationTypeFilterId")
                             ?.classList?.contains("collapse") && (
                             <Image
@@ -961,7 +956,7 @@ const Page = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
                           {`Glass Orientation Type`}
-                          {isClient && !document
+                          {!document
                             .getElementById("glassOrientationTypeFilterId")
                             ?.classList?.contains("collapse") && (
                             <div style={{ display: "flex", gap: "30px" }}>
@@ -982,7 +977,7 @@ const Page = () => {
                             </div>
                           )}
 
-                          {isClient && document
+                          {document
                             .getElementById("glassOrientationTypeFilterId")
                             ?.classList?.contains("collapse") && (
                             <Image
@@ -1053,7 +1048,7 @@ const Page = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
                           {`Ranges`}
-                          {isClient && !document
+                          {!document
                             .getElementById("rangesFilterId")
                             ?.classList?.contains("collapse") && (
                             <div style={{ display: "flex", gap: "30px" }}>
@@ -1072,7 +1067,7 @@ const Page = () => {
                             </div>
                           )}
 
-                          {isClient && document
+                          {document
                             .getElementById("rangesFilterId")
                             ?.classList?.contains("collapse") && (
                             <Image
@@ -1140,7 +1135,7 @@ const Page = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 ">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                           Brands{" "}
-                          {isClient && !document
+                          {!document
                             .getElementById("brandsFilterId")
                             ?.classList?.contains("collapse") && (
                             <Image
@@ -1156,7 +1151,7 @@ const Page = () => {
                               unoptimized
                             />
                           )}
-                          {isClient && document
+                          {document
                             .getElementById("brandsFilterId")
                             ?.classList?.contains("collapse") && (
                             <Image
@@ -1225,7 +1220,7 @@ const Page = () => {
                   >
                     <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                       Others{" "}
-                      {isClient && !document
+                      {!document
                         .getElementById("otherFilterId")
                         ?.classList?.contains("collapse") && (
                         <Image
@@ -1241,7 +1236,7 @@ const Page = () => {
                           unoptimized
                         />
                       )}
-                      {isClient && document
+                      {document
                         .getElementById("otherFilterId")
                         ?.classList?.contains("collapse") && (
                         <Image
@@ -1281,7 +1276,7 @@ const Page = () => {
                   >
                     <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
                       Sort By{" "}
-                      {isClient && !document
+                      {!document
                         .getElementById("sortbyFilterId")
                         ?.classList?.contains("collapse") && (
                         <Image
@@ -1298,7 +1293,7 @@ const Page = () => {
                           unoptimized
                         />
                       )}
-                      {isClient && document
+                      {document
                         .getElementById("sortbyFilterId")
                         ?.classList?.contains("collapse") && (
                         <Image
