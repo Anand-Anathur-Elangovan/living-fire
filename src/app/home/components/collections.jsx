@@ -37,7 +37,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
   const carouselItems = [
     {
       fueltype_id: 5,
-      image: imageUrl,
+      image: collectionImg1,
       title: "Electric Fireplaces",
       description:
         "Discover our range of luxury indoor electric fireplaces and transform your home into a cosy haven of warmth and style. Visit our Melbourne showroom.",
@@ -105,6 +105,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
     }
   };
   const mergedOutput = mergeInputs(carouselItems, fuelTypes);
+  console.log("mergedOutput", mergedOutput)
   return (
     <div className="flex relative justify-center flex-col ml-0 mr-0 md:ml-16 md:mr-16">
       <div className="flex flex-row items-center w-full mb-10">
@@ -134,12 +135,13 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       >
         {/*carousel*/}
         {/*grid grid-flow-col auto-cols-[23%] gap-1 overflow-x-auto overscroll-x-contain element-snaps */}
-        {imageUrl &&
+        {
+        // imageUrl &&
           mergedOutput?.map((item, index) => (
             <div key={index}>
               <div className="element" key={"collections" + index}>
                 <Image
-                  src={item.image}
+                  src={item?.image?.src}
                   alt={item.title}
                   className="element-image"
                   width={300} // specify your desired width

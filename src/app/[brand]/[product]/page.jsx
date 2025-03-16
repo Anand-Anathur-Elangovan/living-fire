@@ -47,7 +47,7 @@ const Product = ({ params }) => {
   useEffect(() => {
     async function fetchParams() {
       if (params) {
-        console.log("params", params);
+        // console.log("params", params);
         const resolvedParams = await params;
         const formattedProduct = resolvedParams?.product?.replace(/_/g, " ");
         setUnwrappedParams(formattedProduct);
@@ -84,7 +84,7 @@ const Product = ({ params }) => {
     brand_id,
     p_sku,
   } = productData;
-  console.log("productData", productData);
+  // console.log("productData", productData);
   // const productRouteHandler = (productId) => {
   //   setCookie(
   //     "selectedProductId",

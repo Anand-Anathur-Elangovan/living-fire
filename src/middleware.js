@@ -4,7 +4,7 @@ export function middleware(req) {
   const response = NextResponse.next();
 
   // Log to check if middleware is being executed
-  console.log("Middleware is running for:", req.url);
+  // console.log("Middleware is running for:", req.url);
 
   // Set CORS headers
   response.headers.set("Access-Control-Allow-Origin", "*");
@@ -16,7 +16,7 @@ export function middleware(req) {
 
   // Handle preflight requests
   if (req.method === "OPTIONS") {
-    console.log("Handling preflight request");
+    // console.log("Handling preflight request");
     return new Response(null, { status: 204, headers: response.headers });
   }
 
@@ -29,7 +29,7 @@ export function middleware(req) {
   const url = req.nextUrl.clone();
   // Check if the requested path matches an alias
   if (urlAliases[url.pathname]) {
-    console.log("Rewriting to:", urlAliases[url.pathname]);
+    // console.log("Rewriting to:", urlAliases[url.pathname]);
     url.pathname = urlAliases[url.pathname];
     return NextResponse.rewrite(url);
   }
