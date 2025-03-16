@@ -14,7 +14,12 @@ const FilterComponent = dynamic(
   () => import("./components/FilterComponent/FilterComponent"),
   { ssr: false } // Load dynamically to improve initial page load
 );
-
+export const metadata = {
+  title: "Specification Sheet",
+  alternates: {
+    canonical: "https://living-fire.vercel.app/specificationSheet",
+  },
+};
 const SpecificationSheet = () => {
   const searchRef = useRef(null);
   const {
