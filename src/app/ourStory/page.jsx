@@ -1,8 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import ourwood1 from "@/public/assets/ourStory/stackimg1.png";
-import ourwood2 from "@/public/assets/ourStory/image2.png";
-import ourwood3 from "@/public/assets/ourStory/image3.png";
+// import ourwood1 from "@/public/assets/ourStory/stackimg1.png";
+// import ourwood2 from "@/public/assets/ourStory/image2.png";
+// import ourwood3 from "@/public/assets/ourStory/image3.png";
+import ourwood1 from "@/public/assets/ourStory/1.jpg";
+import ourwood2 from "@/public/assets/ourStory/2.jpg";
+import ourwood3 from "@/public/assets/ourStory/3.jpg";
 import manimg from "@/public/assets/ourStory/image4.png";
 import "./ourstory.css";
 import Image from "next/image";
@@ -122,7 +125,7 @@ const OurStory = () => {
           </div>
         </section>
 
-        <section>
+        {/* <section>
           <div className="four-cards">
             <div className="column">
               <div className="rowheading">
@@ -150,7 +153,7 @@ const OurStory = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section>
           <div className="find-us">
@@ -158,14 +161,13 @@ const OurStory = () => {
               <div className="columnheading">
                 <p className="heading ui text size-h1">Find Us</p>
                 <p className="desc ui text size-body_large">
-                  Our showrooms showcase a curated selection of fireplaces from
-                  Europe, all surpassing Australian standards and offering
-                  hassle-free installation. From the moment you step into our
-                  showroom, we aim to provide an exceptional experience, guiding
-                  you through the process with personalised service and expert
-                  advice. We take pride in going above and beyond for our
-                  customers, reviewing plans, discussing options, and making
-                  tailored recommendations.
+                  Our showrooms feature a carefully curated selection of
+                  international and Australian fireplaces. From the moment you
+                  walk in, we strive to deliver an exceptional experience with
+                  personalised service and expert guidance. We take pride in
+                  going above and beyond—reviewing plans, exploring options, and
+                  providing tailored recommendations to ensure the perfect fit
+                  for your space.
                 </p>
               </div>
               <div className="showroominfo">
