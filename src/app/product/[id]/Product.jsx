@@ -26,7 +26,7 @@ import { getCookie } from "cookies-next";
 import { setCookie } from "cookies-next";
 import Loader from "@/src/helper/loader/Loader";
 
-const Page = ({ params }) => {
+const Product = ({ params }) => {
   const router = useRouter();
   const productId = getCookie("selectedProductId");
   // const { getNavigationState } = useNavigationState();
@@ -172,4 +172,4 @@ const Page = ({ params }) => {
   );
 };
 
-export default Page;
+export default Product;

@@ -8,19 +8,19 @@ export default function DescriptionColumn({ product_desc }) {
         .map((section, index) => (
           <div key={index} className={styles["columndesc"]}>
             {section.value?.length > 0 && section.value?.[0] != "" > 0 && (
-              <p className={styles["materialfinish"]}>{section.name}</p>
+              <div className={styles["materialfinish"]}>{section.name}</div>
             )}
 
             {/* Check if the section is "description" and render it as a paragraph */}
             {section.name === "DESCRIPTION" ? (
-              <p className={styles["description"]}>
+              <div className={styles["description"]}>
                 {section.value.map((item, itemIndex) => (
                   <span key={itemIndex}>
                     {item}
                     {itemIndex < section.value.length - 1 && <br />}
                   </span>
                 ))}
-              </p>
+              </div>
             ) : (
               // For other sections, render as bullet points
               // <ul className={styles["distanceList"]}>
@@ -28,11 +28,11 @@ export default function DescriptionColumn({ product_desc }) {
               //     <li key={itemIndex}>{item}</li>
               //   ))}
               // </ul>
-              <p className={styles["distanceList"]}>
+              <div className={styles["distanceList"]}>
                 {section.value.map((item, itemIndex) => (
-                  <p key={itemIndex}>{item}</p>
+                  <div key={itemIndex}>{item}</div>
                 ))}
-              </p>
+              </div>
             )}
           </div>
         ))}
