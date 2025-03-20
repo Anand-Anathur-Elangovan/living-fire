@@ -26,6 +26,14 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: "/api/sitemap",
+        headers: [{ key: "Content-Type", value: "application/xml" }],
+      },
+      {
+        source: "/api/robots",
+        headers: [{ key: "Content-Type", value: "text/plain" }],
+      },
     ];
   },
 

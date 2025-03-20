@@ -102,30 +102,36 @@ const Home = () => {
     masterValues: { fuelTypes, productTypes: allProductMenu },
   } = useMasterValues();
   const allProductsRouteHandler = (typeName, displayName, arguId) => {
+    console.log("displayName", displayName)
     setNavigationState({
       typeName: typeName,
       displayName: displayName,
       id: arguId,
     });
+    // router.push(
+    //   `/allProducts?${
+    //     typeName === "fuelType" ? "fireplaceType" : "brand"
+    //   }=${arguId}`
+    // );
     router.push(
-      `/allProducts?${
-        typeName === "fuelType" ? "fireplaceType" : "brand"
-      }=${arguId}`
+      `/allProducts/${displayName}`
     );
   };
-  const productRouteHandler = (productId) => {
-    setCookie(
-      "selectedProductId",
-      productId
-      //   , {
-      //   path: "/", // Cookie available site-wide
-      //   secure: true, // Only sent over HTTPS
-      //   httpOnly: true, // Prevents client-side JS from accessing it
-      //   sameSite: "strict", // Only sent for same-site requests
-      //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
-      // }
-    );
-    router.push(`/product/${productId}`);
+  const productRouteHandler = (ProductName,brandName) => {
+    const formattedProductName = ProductName.replace(/\s+/g, "_");
+    const formattedBrandName = brandName.replace(/\s+/g, "_");
+    // setCookie(
+    //   "selectedProductId",
+    //   productId
+    //   //   , {
+    //   //   path: "/", // Cookie available site-wide
+    //   //   secure: true, // Only sent over HTTPS
+    //   //   httpOnly: true, // Prevents client-side JS from accessing it
+    //   //   sameSite: "strict", // Only sent for same-site requests
+    //   //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
+    //   // }
+    // );
+    router.push(`/${formattedBrandName}/${formattedProductName}`);
   };
   return (
     <div
