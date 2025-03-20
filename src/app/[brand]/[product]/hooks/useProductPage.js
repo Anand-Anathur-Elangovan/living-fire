@@ -1,7 +1,7 @@
 import { getProductPageDataAction } from "@/src/server-actions/product/product.action";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import Product from "../page";
+// import Product from "../page";
 
 const useProductPage = (productName) => {
   const initialHomePageData = {
