@@ -31,15 +31,7 @@ const Breadcrumbs = ({
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        marginTop: "10px",
-        marginBottom: "20px",
-        color: "black",
-      }}
-    >
+    <div className="flex justify-center mt-[10px] mb-[20px] text-black font-sans font-light text-sm md:text-base">
       <nav>
         <Link href="/home">Home</Link> /
         <span

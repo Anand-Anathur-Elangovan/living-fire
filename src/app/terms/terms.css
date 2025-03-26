@@ -1,98 +1,97 @@
 .privacy-policy-container-body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f7f5;
-  }
-  
-  .privacy-policy-container {
-    font-family: "Times New Roman", serif;
-    padding: 20px;
-    max-width: 1120px !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .breadcrumb {
-    color: #888;
-    margin-bottom: 10px;
-  }
-  .title-group {
-    width: 1120px;
-    height: 280px;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Vertically center the content */
-    align-items: center; /* Horizontally center the content */
-    /* gap: 24px; */
-    margin: 0 auto;
-  }
-  .title {
-    font-size: 90px;
-    text-align: center;
-    margin: 15px 0;
-    letter-spacing: 1px;
-    line-height: 108px;
-    font-family: Satoru;
-    color: #000000;
-  }
-  
-  .title-category {
-    font-size: 40px;
-    text-align: center;
-    margin: 20px 0;
-    letter-spacing: 1px;
-    /* width: 215px; */
-    height: 40px;
-    font-family: Satoru;
-    color: #000000;
-  }
-  .custom-divider {
-    border: none; /* Remove default border */
-    border-top: 1px solid #d3c6bb; /* Apply your custom border */
-    width: 100%; /* Full width divider */
-    margin: 40px 0; /* Add some vertical spacing */
-  }
-  .privacy-container {
-    width: 80%;
-    margin: 0 auto;
-    font-family: Satoru;
-    color: #333;
-    line-height: 1.6;
-  }
-  
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f5;
+}
+
+.privacy-policy-container {
+  font-family: "Times New Roman", serif;
+  padding: 20px;
+  max-width: 1400px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.breadcrumb {
+  color: #888;
+  margin-bottom: 10px;
+}
+.title-group {
+  width: 1120px;
+  height: 280px;
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Vertically center the content */
+  align-items: center; /* Horizontally center the content */
+  /* gap: 24px; */
+  margin: 0 auto;
+}
+.title {
+  font-size: 90px;
+  text-align: center;
+  margin: 15px 0;
+  letter-spacing: 1px;
+  line-height: 108px;
+  font-family: Satoru;
+  color: #000000;
+}
+
+.title-category {
+  font-size: 40px;
+  text-align: center;
+  margin: 20px 0;
+  letter-spacing: 1px;
+  /* width: 215px; */
+  height: 40px;
+  font-family: Satoru;
+  color: #000000;
+}
+.custom-divider {
+  border: none; /* Remove default border */
+  border-top: 1px solid #d3c6bb; /* Apply your custom border */
+  width: 100%; /* Full width divider */
+  margin: 40px 0; /* Add some vertical spacing */
+}
+.privacy-container {
+  width: 90%;
+  margin: 0 auto;
+  font-family: Satoru;
+  color: #333;
+  line-height: 1.6;
+}
+
+.privacy-content {
+  column-count: 2; /* Two columns */
+  column-gap: 40px; /* Space between columns */
+}
+
+.privacy-content p {
+  margin-bottom: 16px;
+}
+
+.section {
+  break-inside: avoid; /* Prevents section from breaking across columns */
+  padding-bottom: 16px; /* Adds spacing between sections */
+}
+
+.section h2 {
+  margin-top: 0;
+}
+
+.section-title {
+  font-size: large;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
   .privacy-content {
-    column-count: 2; /* Two columns */
-    column-gap: 40px; /* Space between columns */
+    column-count: 1; /* Single column for smaller screens */
   }
-  
-  .privacy-content p {
-    margin-bottom: 16px;
-  }
-
-  .section {
-    break-inside: avoid; /* Prevents section from breaking across columns */
-    padding-bottom: 16px; /* Adds spacing between sections */
-  }
-  
-  .section h2 {
-    margin-top: 0;
-  }
-
-  .section-title{
-    font-size: large;
-    font-weight: bold;
-  }
-  
-  @media (max-width: 768px) {
-    .privacy-content {
-      column-count: 1; /* Single column for smaller screens */
-    }
-  }
-  
+}

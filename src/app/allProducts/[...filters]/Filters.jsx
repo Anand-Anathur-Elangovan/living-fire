@@ -488,11 +488,13 @@ const Filters = () => {
   //     });
   // }, [productMenuIndex]);
   // console.log("fuelTypes", fuelTypes, "brands", brands);
-   const [isClient, setIsClient] = useState(false);
-  
-    useEffect(() => {
-      setIsClient(true);
-    }, []);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  console.log(fireplaceType, "fireplaceType");
   return (
     <>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
@@ -502,7 +504,7 @@ const Filters = () => {
               ? `${
                   fireplaceType
                     ? fuelTypes.find((x) => x.fueltype_id === fireplaceType)
-                        ?.fueltype_name ?? "Unknown"
+                        ?.fueltype_name ?? "ALL"
                     : "All"
                 } ${
                   productMenuIndex
@@ -511,17 +513,43 @@ const Filters = () => {
                       )?.ptype_name ?? "Products"
                     : "Products"
                 }`
-              : `${brands.find((x) => x.brand_id === brandType)?.brand_name}` ??
-                "Unknown Brand"}
+              : `${
+                  brands.length > 0
+                    ? brands.find((x) => x.brand_id === brandType)?.brand_name
+                    : "All Products"
+                }` ?? "Unknown Brand"}
           </div>
 
-          {fireplaceType && !brandType && (
-            <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
-              Experience warmth and elegance with our indoor luxury wood
-              fireplaces, blending timeless craftsmanship with contemporary
-              modern design.
-            </div>
-          )}
+          {fireplaceType &&
+            !brandType &&
+            ((fireplaceType === 4 && (
+              <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
+                Experience warmth and elegance with our indoor luxury wood
+                fireplaces, blending timeless craftsmanship with contemporary
+                modern design.
+              </div>
+            )) ||
+              (fireplaceType === 5 && (
+                <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
+                  Discover our range of luxury indoor electric fireplaces and
+                  transform your home into a cosy haven of warmth and style.
+                  Visit our Melbourne showroom.
+                </div>
+              )) ||
+              (fireplaceType === 3 && (
+                <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
+                  Explore our indoor gas fireplaces and turn your home into a
+                  warm and inviting retreat. Whatever your interior style, we
+                  have the perfect gas fireplace to enhance your living space.
+                </div>
+              )) ||
+              (fireplaceType === 2 && (
+                <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
+                  Experience warmth and elegance with our indoor luxury wood
+                  fireplaces, blending timeless craftsmanship with contemporary
+                  modern design.
+                </div>
+              )))}
 
           {brandType &&
             brands.find((b) => b?.brand_id === brandType)?.brand_desc}
@@ -1479,7 +1507,7 @@ const Filters = () => {
             )}
           </div>
         </>
-        <OurDifference />
+        <OurDifference fireplaceType={fireplaceType} />
         <OurShowrooms />
       </div>
     </>
