@@ -26,7 +26,7 @@ import { getCookie } from "cookies-next";
 import { setCookie } from "cookies-next";
 import Loader from "@/src/helper/loader/Loader";
 
-const Product = ({ params }) => {
+const Page = ({ params }) => {
   const router = useRouter();
   const productId = getCookie("selectedProductId");
   // const { getNavigationState } = useNavigationState();
@@ -62,7 +62,7 @@ const Product = ({ params }) => {
       // Make your API call here with state.productId
       console.log("Cookie Product ID:", productId);
     }
-    setProductData(data?.product?.[0]?.fn_get_product_page);
+    setProductData(data?.product?.[0]);
   }, [data]);
 
   if (!productData) return <Loader />;
@@ -172,4 +172,4 @@ const Product = ({ params }) => {
   );
 };
 
-export default Product;
+export default Page;

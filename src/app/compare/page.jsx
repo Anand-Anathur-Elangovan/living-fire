@@ -31,7 +31,7 @@ const Page = () => {
     setNewProducts();
   }, [searchParams]);
 
-  console.log(products);
+  // console.log(products);
   return (
     <div className="flex flex-col px-16 gap-3 bg-[#F7F7F5] mt-[5.5rem] ">
       <div className="border-b border-solid border-[#D3C6BB] flex flex-row pb-3">

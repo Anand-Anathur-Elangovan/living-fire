@@ -76,7 +76,7 @@ const Products = ({
     router.push(`?${currentParams.toString()}`, { shallow: true });
   };
 
-  console.log(updatedValues);
+  // console.log(updatedValues);
   const [refreshPage, setRefreshPage] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(false);
@@ -281,8 +281,8 @@ const Products = ({
     if (queryParams.installationType)
       setInstallationType(Number(queryParams.installationType));
     if (queryParams.rangeType) setRangeType(Number(queryParams.rangeType));
-    if (queryParams.productMenuIndex)
-      setproductMenuIndex(Number(queryParams.productMenuIndex));
+    // if (queryParams.productMenuIndex)
+    //   setproductMenuIndex(Number(queryParams.productMenuIndex));
   }, [searchParams]);
 
   useEffect(() => {

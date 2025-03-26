@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../home.css"; // Add your styles here
 import collectionImg1 from "@/public/assets/homePage/collections/collectionsImg1.svg";
-import collectionImg2 from "@/public/assets/homePage/collections/collectionsImg2.svg";
-import collectionImg3 from "@/public/assets/homePage/collections/collectionsImg3.svg";
-import collectionImg4 from "@/public/assets/homePage/collections/collectionsImg4.svg";
+import featureImg1 from "@/public/assets/homePage/feature/1.webp";
+import featureImg2 from "@/public/assets/homePage/feature/22.webp";
+import featureImg3 from "@/public/assets/homePage/feature/3.webp";
+import featureImg5 from "@/public/assets/homePage/feature/5.png";
+import featureImg6 from "@/public/assets/homePage/feature/6.jpg";
 import RightArrow from "@/public/assets/homePage/collections/arrow-right.svg";
 import LeftArrow from "@/public/assets/homePage/collections/arrow-left.svg";
 import Image from "next/image";
@@ -11,48 +13,60 @@ import { useRouter } from "next/navigation";
 import { useNavigationState } from "@/context/NavigationContext";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
-const Featured = ({ headingValue, productRouteHandler }) => {
+const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
   const router = useRouter();
   const { setNavigationState } = useNavigationState();
   const carouselRef = useRef(null);
   const carouselItems = [
     {
       p_id: "424",
-      image: collectionImg1,
-      title: "775 Wood Heater",
+      image: featureImg1,
+      title: "Ilektro 1250",
       description: "ESSE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Paul Agnew Designs"
     },
     {
       p_id: "424",
-      image: collectionImg1,
+      image: featureImg2,
       // collectionImg2,
-      title: "Ilektro 2000 Landscape",
+      title: "Ilektro 2600",
       description: "Paul Agnew Designs",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Paul Agnew Designs"
     },
     {
       p_id: "424",
-      image: collectionImg1,
+      image: featureImg3,
       // collectionImg3,
-      title: "Loxton 5 Standard Fireplace",
+      title: "Ilektro integra anson",
       description: "EUROSTOVE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Paul Agnew Designs"
     },
     {
       p_id: "424",
       image: collectionImg1,
-      title: "775 Wood Heater",
+      title: "Pyro Siena GF",
       description: "ESSE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Regency"
     },
     {
       p_id: "424",
-      image: collectionImg1,
-      title: "775 Wood Heater",
+      image: featureImg5,
+      title: "Heatmaster Seamless",
       description: "ESSE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Heatmaster"
     },
     {
       p_id: "424",
-      image: collectionImg1,
-      title: "775 Wood Heater",
+      image: featureImg6,
+      title: "Regency FG39",
       description: "ESSE",
+      name:"HZO42 - Outdoor - LPG", 
+      brand_name:"Regency"
     },
   ];
   const handleScroll = (direction) => {
@@ -102,7 +116,7 @@ const Featured = ({ headingValue, productRouteHandler }) => {
           <div
             className="w-[323px] flex flex-col gap-5"
             key={"featured" + index}
-            onClick={() => productRouteHandler(item.p_id)}
+            onClick={() => productRouteHandler(item.name,item?.brand_name )}
           >
             <Image
               src={item.image}
