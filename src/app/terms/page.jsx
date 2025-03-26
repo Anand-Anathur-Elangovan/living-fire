@@ -1,5 +1,7 @@
 // import Terms from "./Terms";
 import "./terms.css";
+// import Terms from "./Terms";
+
 export const metadata = {
   title: "Terms & Conditions | Living Fire",
   description:
