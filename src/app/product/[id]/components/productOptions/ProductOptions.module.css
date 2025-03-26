@@ -19,8 +19,8 @@
 
   .brand {
     color: #b0b0b0;
-    font-size: 14px;
-    font-weight: 200;
+    font-size: 28px;
+    font-weight: normal;
     text-transform: uppercase;
     font-family: "Public Sans", sans-serif;
   }

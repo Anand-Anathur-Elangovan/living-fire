@@ -37,7 +37,7 @@ const ProductOptions = ({
   openModal,
   onViewAllAccessories,
   p_sku,
-  isAccessories
+  isAccessories,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
@@ -150,7 +150,7 @@ const ProductOptions = ({
   return (
     <div className={styles.container}>
       <div>
-        <h2 className={styles.brand}>{brand_name}</h2>
+        <h1 className={styles.brand}>{brand_name}</h1>
         <h1 className={styles.title}>{name?.toUpperCase()}</h1>
       </div>
       <p className={styles.sku}>{p_sku}</p>
@@ -315,17 +315,19 @@ const ProductOptions = ({
                     })}
                   </LightGallery>
                 </div>
-                {isAccessories&&<div
-                  onClick={onViewAllAccessories}
-                  style={{
-                    cursor: "pointer",
-                    color: "#1741be",
-                    textDecoration: "none",
-                    fontWeight: "600",
-                  }}
-                >
-                  View All Accessories
-                </div>}
+                {isAccessories && (
+                  <div
+                    onClick={onViewAllAccessories}
+                    style={{
+                      cursor: "pointer",
+                      color: "#1741be",
+                      textDecoration: "none",
+                      fontWeight: "600",
+                    }}
+                  >
+                    View All Accessories
+                  </div>
+                )}
               </div>
             );
           }
