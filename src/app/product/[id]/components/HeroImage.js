@@ -58,7 +58,7 @@ const HeroImage = ({ src, alt }) => {
                     : ""
                 }
                 alt={`${alt} ${index + 1}`}
-                className="class-hero-image-size"
+                className="class-hero-image-size w-[326px] h-[285px] md:w-[700px] md:h-[600px]"
                 layout="responsive"
                 width={700}
                 height={600}
