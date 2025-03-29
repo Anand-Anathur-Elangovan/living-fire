@@ -510,13 +510,13 @@ const Filters = () => {
                   productMenuIndex
                     ? allProductMenu.find(
                         (x) => x.ptype_id === productMenuIndex
-                      )?.ptype_name ?? "Products"
-                    : "Products"
+                      )?.ptype_name ?? "Fireplaces"
+                    : "Fireplaces"
                 }`
               : `${
                   brands.length > 0
                     ? brands.find((x) => x.brand_id === brandType)?.brand_name
-                    : "All Products"
+                    : "All Fireplaces"
                 }` ?? "Unknown Brand"}
           </div>
 

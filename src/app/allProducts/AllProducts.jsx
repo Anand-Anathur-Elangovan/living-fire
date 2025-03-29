@@ -507,7 +507,7 @@ const AllProducts = () => {
                   productMenuIndex
                     ? allProductMenu.find(
                         (x) => x.ptype_id === productMenuIndex
-                      )?.ptype_name ?? "Products"
+                      )?.ptype_name ?? "Fireplaces"
                     : "Products"
                 }`
               : `${brands.find((x) => x.brand_id === brandType)?.brand_name}` ??
