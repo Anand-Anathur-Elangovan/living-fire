@@ -150,7 +150,7 @@ const ProductOptions = ({
   return (
     <div className={styles.container}>
       <div>
-        <h2 className={styles.brand}>{brand_name}</h2>
+        <h1 className={styles.brand}>{brand_name}</h1>
         <h1 className={styles.title}>{name?.toUpperCase()}</h1>
       </div>
       <p className={styles.sku}>{p_sku}</p>

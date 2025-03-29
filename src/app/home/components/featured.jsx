@@ -4,6 +4,7 @@ import collectionImg1 from "@/public/assets/homePage/collections/collectionsImg1
 import featureImg1 from "@/public/assets/homePage/feature/1.webp";
 import featureImg2 from "@/public/assets/homePage/feature/22.webp";
 import featureImg3 from "@/public/assets/homePage/feature/3.webp";
+import featureImg4 from "@/public/assets/homePage/feature/4.png";
 import featureImg5 from "@/public/assets/homePage/feature/5.png";
 import featureImg6 from "@/public/assets/homePage/feature/6.jpg";
 import RightArrow from "@/public/assets/homePage/collections/arrow-right.svg";
@@ -22,8 +23,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       p_id: "424",
       image: featureImg1,
       title: "Ilektro 1250",
-      description: "ESSE",
-      name:"HZO42 - Outdoor - LPG", 
+      description: "Paul Agnew Designs",
+      name:"Ilektro 1250 Landscape Tunnel", 
       brand_name:"Paul Agnew Designs"
     },
     {
@@ -32,7 +33,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       // collectionImg2,
       title: "Ilektro 2600",
       description: "Paul Agnew Designs",
-      name:"HZO42 - Outdoor - LPG", 
+      name:"Ilektro 2600 Landscape", 
       brand_name:"Paul Agnew Designs"
     },
     {
@@ -40,32 +41,32 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       image: featureImg3,
       // collectionImg3,
       title: "Ilektro integra anson",
-      description: "EUROSTOVE",
+      description: "Paul Agnew Designs",
       name:"HZO42 - Outdoor - LPG", 
       brand_name:"Paul Agnew Designs"
     },
     {
       p_id: "424",
-      image: collectionImg1,
-      title: "Pyro Siena GF",
-      description: "ESSE",
-      name:"HZO42 - Outdoor - LPG", 
-      brand_name:"Regency"
+      image: featureImg4,
+      title: "Pyro Siena 750GF Freestanding",
+      description: "Paul Agnew Designs",
+      name:"Siena 750GF Freestanding", 
+      brand_name:"Paul Agnew Designs"
     },
     {
       p_id: "424",
       image: featureImg5,
       title: "Heatmaster Seamless",
-      description: "ESSE",
-      name:"HZO42 - Outdoor - LPG", 
+      description: "Heatmaster",
+      name:"Seamless", 
       brand_name:"Heatmaster"
     },
     {
       p_id: "424",
       image: featureImg6,
       title: "Regency FG39",
-      description: "ESSE",
-      name:"HZO42 - Outdoor - LPG", 
+      description: "Regency",
+      name:"FG39", 
       brand_name:"Regency"
     },
   ];
