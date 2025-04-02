@@ -12,6 +12,7 @@ import HergomLogo from "@/public/assets/homePage/ourBrands/hergom.svg";
 import KaloraLogo from "@/public/assets/homePage/ourBrands/kaloraLogo.png";
 import MorsoLogo from "@/public/assets/homePage/ourBrands/morso.svg";
 import RegencyLogo from "@/public/assets/homePage/ourBrands/regency.svg";
+import eurostoveLogo from "@/public/assets/homePage/ourBrands/eurostoveLogo.png";
 
 import Image from "next/image";
 
@@ -77,6 +78,11 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
     //   image: FireFoxLogo,
     //   title: "Stovax",
     // },
+    {
+      brand_id: 16,
+      image: eurostoveLogo,
+      title: "Eurostove",
+    },
   ];
   return (
     <div className="flex relative justify-center flex-col">
