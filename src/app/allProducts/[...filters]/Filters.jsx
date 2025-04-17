@@ -33,6 +33,7 @@ import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
 //   import useMasterValues from "../hooks/useMasterValues";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { CircularProgress, Box } from "@mui/material";
 
 const filterMappingsMock = [
   { id: 1, value: "Fireplace", filterType: "type" },
@@ -94,7 +95,7 @@ const Filters = () => {
     glassOrientationValues: [],
   });
   const [filters, setFilters] = useState([]);
-  const { allProducts, isFetched, isStale } = useAllProducts(
+  const { allProducts, isLoading, isFetched, isStale } = useAllProducts(
     productMenuIndex,
     fireplaceType ?? 0,
     brandType ?? 0,
@@ -105,13 +106,13 @@ const Filters = () => {
     installationType ?? 0,
     glassOrientationType ?? 0
   );
+  console.log("isLoading", isLoading);
   useEffect(() => {
     const pathSegments = pathname
       .split("/")
       .filter((segment) => segment)
       ?.map((item) => item.replace(/%20|_/g, " "));
     let extractedFilters = [];
-    console.log("pathSegments", pathSegments);
     pathSegments.forEach((segment) => {
       const matchingFilter = filterMappingsMock.find(
         (item) => item.value.toLowerCase() === segment.toLowerCase()
@@ -260,10 +261,8 @@ const Filters = () => {
     } else {
       filters.push({ value, id, filterType });
     }
-    console.log("filters", filters, filterType);
     sessionStorage.setItem("filtersJson", JSON.stringify(filters));
     let path = filters.map((item) => `${item.value}`).join("/");
-    console.log("path", path);
     router.push(`/allProducts/${path}`);
   }
 
@@ -278,7 +277,7 @@ const Filters = () => {
       glassOrientationTypes,
     },
   } = useMasterValues(productMenuIndex);
-
+  console.log("ranges", JSON.stringify(ranges))
   //   const searchParams = useSearchParams();
   const updateQueryParams = (params) => {
     const currentParams = new URLSearchParams(searchParams.toString());
@@ -494,7 +493,6 @@ const Filters = () => {
     setIsClient(true);
   }, []);
 
-  console.log(fireplaceType, "fireplaceType");
   return (
     <>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
@@ -1138,6 +1136,7 @@ const Filters = () => {
                               className="font-sans font-normal font-small leading-5 text-base text-black"
                               // onClick={() => setBrandType(val?.brand_id)}
                             >
+                             
                               {
                                 ranges?.find((b) => b?.range_id === rangeType)
                                   ?.range_name
@@ -1418,16 +1417,28 @@ const Filters = () => {
                 isFilter ? "md:w-[80%]" : "w-full"
               }`}
             >
-              {filteredProducts?.map((product, index) => (
-                <ProductCard
-                  key={index}
-                  productDetails={product}
-                  addToCompare={addToCompareProducts}
-                  isCompare={isCompare}
-                  // title={"Beta Outdoor Fire Pit"}
-                  // description={"Living Fire" + val}
-                />
-              ))}
+              {isLoading ? (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  minHeight="200px"
+                  width="100%"
+                >
+                  <CircularProgress sx={{color:"black"}}/>
+                </Box>
+              ) : (
+                filteredProducts?.map((product, index) => (
+                  <ProductCard
+                    key={index}
+                    productDetails={product}
+                    addToCompare={addToCompareProducts}
+                    isCompare={isCompare}
+                    // title={"Beta Outdoor Fire Pit"}
+                    // description={"Living Fire" + val}
+                  />
+                ))
+              )}
             </div>
           </div>
           <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">

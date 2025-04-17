@@ -21,7 +21,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
     {
       brand_id: 1,
       image: PaulAgnewLogo,
-      title: "Paul Agnew",
+      title: "Paul Agnew Designs",
     },
     {
       brand_id: 15,

@@ -1,6 +1,5 @@
 import Filters from "./Filters";
 export async function generateMetadata({ params }) {
-  console.log("params in generateMetadata:", params); // Debugging
 
   if (!params?.filters || params.filters.length === 0) {
     return {

@@ -2,7 +2,6 @@
 import React from "react";
 
 const OurDifference = ({ fireplaceType }) => {
-  console.log(fireplaceType, "fireplaceType OURs");
   if (fireplaceType === 4)
     return (
       <div className="flex flex-col md:flex-row w-full px-8 py-10 gap-4 md:pr-20 md:pl-16 md:py-10 md:gap-32">

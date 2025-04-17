@@ -82,12 +82,6 @@ const SpecificationSheet = () => {
     setIsOpenSpecDrawer(true);
   }, []);
   const closeDrawer = () => setIsOpenSpecDrawer(false);
-  console.log(
-    "allProducts",
-    allProducts,
-    "glassOrientationTypes",
-    glassOrientationTypes
-  );
   return (
     <section>
       {/* Search Banner Section */}

@@ -46,7 +46,6 @@ export async function POST(request) {
       });
     }
     const query = `SELECT * FROM fn_get_products(0,0,0,${type_id},false,0,'')`;
-    console.log(query);
 
     const result = await pool.query(query);
 

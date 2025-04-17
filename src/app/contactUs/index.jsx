@@ -29,7 +29,6 @@ const ContactUs = () => {
     try {
       const response = await axios.post('/api/contact', formData); // Replace with your API endpoint
       alert('Form submitted successfully!');
-      console.log(response.data);
     } catch (error) {
       console.error('Form submission error:', error);
       alert('An error occurred. Please try again.');

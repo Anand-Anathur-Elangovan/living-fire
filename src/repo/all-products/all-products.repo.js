@@ -20,6 +20,17 @@ export const getAllProducts = async ({
   glassOrientationType,
 }) => {
   try {
+    console.table([
+      { Key: 'type_id', Value: type_id },
+      { Key: 'fireplaceType', Value: fireplaceType },
+      { Key: 'brandType', Value: brandType },
+      { Key: 'bestSelling', Value: bestSelling },
+      { Key: 'searchText', Value: searchText },
+      { Key: 'subType', Value: subType },
+      { Key: 'rangeType', Value: rangeType },
+      { Key: 'installationType', Value: installationType },
+      { Key: 'glassOrientationType', Value: glassOrientationType },
+    ]);
     const query = `SELECT * FROM fn_get_products(0,${fireplaceType},${brandType},${type_id},${rangeType},${bestSelling},${subType},${installationType},${glassOrientationType},'${searchText?.toLowerCase()}')`;
     console.log("query", query);
     const result = await pool.query(query); // Await the pool query directly

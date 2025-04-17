@@ -109,7 +109,6 @@ const AllProducts = () => {
   useEffect(() => {
     const pathSegments = (pathname.split("/").filter((segment) => segment))?.map(item => item.replace(/%20|_/g, ' '));
     let extractedFilters = [];
-    console.log("pathSegments", pathSegments)
     pathSegments.forEach((segment) => {
       const matchingFilter = filterMappingsMock.find(
         (item) => item.value.toLowerCase() === segment.toLowerCase()
@@ -124,7 +123,6 @@ const AllProducts = () => {
     });
     setFilters(extractedFilters);
     console.log("extractedFilters", extractedFilters)
-    sessionStorage.setItem("filtersJson", JSON.stringify(extractedFilters));
     const typeFilter = extractedFilters.find(
       (filter) => filter.filterType === "type"
     );
@@ -262,11 +260,9 @@ const AllProducts = () => {
     console.log("filters", filters, filterType);
     sessionStorage.setItem("filtersJson", JSON.stringify(filters));
     let path = filters.map((item) => `${item.value}`).join("/");
-    console.log("path", path);
     router.push(`/allProducts/${path}`);
   }
 
-  // console.log("allProducts", allProducts, allProducts?.length, brandType);
   const {
     brands,
     masterValues: {
