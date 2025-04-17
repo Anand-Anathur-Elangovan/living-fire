@@ -105,7 +105,6 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
     }
   };
   const mergedOutput = mergeInputs(carouselItems, fuelTypes);
-  console.log("mergedOutput", mergedOutput)
   return (
     <div className="flex relative justify-center flex-col ml-0 mr-0 md:ml-16 md:mr-16">
       <div className="flex flex-row items-center w-full mb-10">

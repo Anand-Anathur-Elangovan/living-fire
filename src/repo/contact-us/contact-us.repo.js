@@ -27,7 +27,6 @@ export const addContactUsData = async (payload) => {
   )`;
   try {
     const result = await pool.query(query);
-    console.log(result.rows)
     return result.rows;
   } catch (err) {
     throw err;

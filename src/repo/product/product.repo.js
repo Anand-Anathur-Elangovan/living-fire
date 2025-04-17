@@ -39,8 +39,6 @@ export const getProductPage = async (productName) => {
     );
     
     // console.log("resultCheck", resultCheck.rows);
-    
-    console.log("productCheck123", result.rows);
     return result.rows;
   } catch (err) {
     throw err;

@@ -102,7 +102,6 @@ const Home = () => {
     masterValues: { fuelTypes, productTypes: allProductMenu },
   } = useMasterValues();
   const allProductsRouteHandler = (typeName, displayName, arguId) => {
-    console.log("displayName", displayName)
     setNavigationState({
       typeName: typeName,
       displayName: displayName,

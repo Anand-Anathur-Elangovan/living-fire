@@ -22,6 +22,7 @@ const useAllProducts = (
   const initialData = [];
   const {
     data: allProducts = initialData,
+    isLoading,
     isFetched,
     isStale,
     isFetchedAfterMount,
@@ -61,6 +62,7 @@ const useAllProducts = (
 
   return {
     allProducts,
+    isLoading,
     isFetched,
     isFetchedAfterMount,
     isStale,
