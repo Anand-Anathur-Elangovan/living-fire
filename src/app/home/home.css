@@ -264,7 +264,7 @@
 .text-group-subheading {
   position: absolute;
   bottom: 120px;
-  /* width: 50%; */
+  width: 50%;
   display: flex;
   justify-content: center;
   font-weight: 200;
@@ -493,6 +493,17 @@
     font-size: 1.2rem;
     max-width: 1000px;
     margin: 0 auto;
+  }
+
+  .text-group-subheading {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 100px;
+    line-height: 40px;
+    font-size: 24px;
+    left: 84px;
   }
 }
 
