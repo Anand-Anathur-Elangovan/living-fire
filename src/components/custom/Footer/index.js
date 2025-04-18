@@ -74,32 +74,15 @@ export default function Footer() {
                 </p>
               </a>
             </li>
-            {/* <li>
-              <a href="#">
-                <p className="nofilechosen ui text size-body_small">Gallery</p>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <p className="nofilechosen ui text size-body_small">Blog</p>
-              </a>
-            </li> */}
           </ul>
         </div>
 
-        {/* Column 3: Customer Care */}
         <div className="footer-column3">
           <div className="foot-heading headingfive ui text size-h6">
             <p>Customer Care</p>
           </div>
           <ul className="flex flex-col gap-2 font-sans text-sm text-white font-light">
-            {/* <li>
-              <a href="#">
-                <p className="nofilechosen ui text size-body_small">
-                  Trade Accounts
-                </p>
-              </a>
-            </li> */}
+          
             <li>
               <a href="/warranty" className="bodysmall-link">
                 <p className="nofilechosen ui text size-body_small">
@@ -122,31 +105,8 @@ export default function Footer() {
               </a>
             </li>
           </ul>
-          {/* <p className="headingfive ui text size-h6">Specs &amp; Guides</p>
-          <ul>
-            <li>
-              <a href="#" className="bodysmall-link-3">
-                <p className="nofilechosen ui text size-body_small">
-                  Industry Hub
-                </p>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="bodysmall-link-1">
-                <p className="nofilechosen ui text size-body_small">
-                  Product Specifications
-                </p>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="bodysmall-link-1">
-                <p className="nofilechosen ui text size-body_small">Glossary</p>
-              </a>
-            </li>
-          </ul> */}
+          
         </div>
-
-        {/* Column 4: Stay in the Loop */}
         <div className="footer-column4">
           <div className="rowheadingfive-2">
             <p className="headingfive_six ui text size-h3 font-sans text-lg text-white font-extralight">
