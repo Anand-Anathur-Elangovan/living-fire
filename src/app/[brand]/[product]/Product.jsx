@@ -47,7 +47,6 @@ const Product = ({ params }) => {
   useEffect(() => {
     async function fetchParams() {
       if (params) {
-        // console.log("params", params);
         const resolvedParams = await params;
         const formattedProduct = resolvedParams?.product?.replace(/_/g, " ");
         setUnwrappedParams(formattedProduct);
@@ -59,10 +58,7 @@ const Product = ({ params }) => {
   let { data } = useProductPage(unwrappedParams);
 
   useEffect(() => {
-    // if (productId) {
-    //   // Make your API call here with state.productId
-    //   console.log("Cookie Product ID:", productId);
-    // }
+
     setProductData(data?.product?.[0]);
   }, [data]);
 

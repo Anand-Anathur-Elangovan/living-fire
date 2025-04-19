@@ -299,7 +299,9 @@ const AllProducts = () => {
       setUpdatedValues((prev) => {
         return {
           ...prev,
-          fueltypeValues: fireplaceType ? prev.fueltypeValues : newFuelValues,
+          fueltypeValues: fuelTypes?.map(val => val.fueltype_id) ,
+          //  newFuelValues,
+          // fireplaceType ? prev.fueltypeValues : newFuelValues,
           installationValues:
             installationType || glassOrientationType
               ? prev.installationValues
@@ -324,7 +326,6 @@ const AllProducts = () => {
     } else {
       filters.push({ value, id, filterType });
     }
-    console.log("filters", filters, filterType);
     sessionStorage.setItem("filtersJson", JSON.stringify(filters));
     let path = filters.map((item) => `${item.value}`).join("/");
     router.push(`/allProducts/${path}`);
@@ -365,7 +366,6 @@ const AllProducts = () => {
   const [filteredProducts, setFilteredProducts] = useState(
     allProducts?.slice(0, 12)
   );
-  console.log("isFilter in outer", isFilter);
   const [compareProducts, setCompareProducts] = useState([]);
   const [allProductsTemp, setAllProductsTemp] = useState([]);
   const [allProductsTempForSubType, setAllProductsTempForSubType] = useState(
@@ -852,7 +852,7 @@ const AllProducts = () => {
                           id="fireplaceFilterId"
                           className="flex flex-col gap-3"
                         >
-                          {fireplaceType
+                         {fireplaceType
                             ? fuelTypes?.map(
                                 (val) =>
                                   updatedValues?.fueltypeValues?.includes(
