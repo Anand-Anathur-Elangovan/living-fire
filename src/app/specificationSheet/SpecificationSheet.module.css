@@ -1,4 +1,4 @@
-.searchBanner {
+/* .searchBanner {
   height: auto;
   background-image: url("/assets/specificationSheet/specpageimg.png");
   background-size: cover;
@@ -17,7 +17,6 @@
 
 .searchByProduct {
   gap: 32px;
-  /* background-color: #00000019; */
   display: flex;
   width: 28%;
   flex-direction: column;
@@ -61,13 +60,10 @@
   font-size: 16px;
   outline: none;
   flex: 1;
-  /* padding: 8px 40px;
-  border: 1px solid #ccc;
-  border-radius: 4px; */
 }
 .clearIcon {
   position: absolute;
-  right: 48px; /* Adjust based on your layout */
+  right: 48px; 
   cursor: pointer;
   z-index: 2;
   transition: opacity 0.2s ease;
@@ -103,8 +99,6 @@
   width: 100%;
   flex-direction: column;
   align-items: start;
-  /* max-width: 1280px;
-  margin: 0 auto; */
 }
 
 .filter {
@@ -182,7 +176,6 @@
   width: 400px;
   display: flex;
   gap: 32px;
-  /* margin-bottom: 20px; */
   padding-bottom: 24px;
   padding-top: 24px;
   border-bottom: 1px solid #cfb59e;
@@ -197,7 +190,6 @@
 }
 
 .productDetails {
-  /* margin-bottom: 10px; */
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -205,7 +197,6 @@
 
 .productName {
   font-size: 18px;
-  /* font-weight: 700; */
 }
 
 .wood {
@@ -225,7 +216,6 @@
   cursor: pointer;
 }
 
-/* Responsive styling */
 @media only screen and (max-width: 1025px) {
   .searchBanner {
     padding: 20px;
@@ -246,4 +236,1002 @@
   .productsColumn .column {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+} */
+
+
+/* 
+.specificationSheet {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.searchBanner {
+  height: auto;
+  min-height: 400px;
+  background-image: url("/assets/specificationSheet/specpageimg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px;
+  position: relative;
+}
+
+.searchBanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.searchBanner .column {
+  margin-top: 100px;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.searchByProduct {
+  gap: 24px;
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  flex-direction: column;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.searchText h3 {
+  color: #ffffff;
+  font-family: Satoru;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: none;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-bottom-color: #007bff;
+}
+
+.clearIcon {
+  position: absolute;
+  right: 48px;
+  cursor: pointer;
+  z-index: 2;
+  transition: opacity 0.2s ease;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.searchIcon:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.selectABrand {
+  padding: 40px 0;
+  background-color: #f7f7f5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brandSelect {
+  padding: 0 24px;
+  gap: 24px;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filter {
+  color: #000000;
+  font-family: Satoru;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.chipviewbrandse {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brandSelector {
+  color: #000000;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1.5px solid #000000;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  will-change: transform;
+}
+
+.brandSelector:hover {
+  background-color: #e0e0e0;
+}
+
+.selectedBrand {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.filterSkeleton {
+  height: 100px;
+  background: #f0f0f0;
+  margin: 20px 0;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.productsColumn {
+  padding: 40px 24px;
+  background-color: #f7f7f5;
+}
+
+.productsColumn .column {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.productSpecs {
+  display: flex;
+  gap: 24px;
+  padding: 20px;
+  border-bottom: 1px solid #cfb59e;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.productSpecs:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.columnProductName {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 16px;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.wood {
+  font-size: 14px;
+  color: #555;
+  opacity: 0.75;
+  margin: 0;
+}
+
+.viewSpecification {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.viewSpecificationText {
+  font-size: 14px;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.viewSpecificationText:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.noProducts {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+@media only screen and (max-width: 1024px) {
+  .searchBanner {
+    padding: 30px 20px;
+    min-height: 350px;
+  }
+  
+  .searchBanner .column {
+    margin-top: 60px;
+    gap: 30px;
+  }
+  
+  .searchByProduct {
+    padding: 20px;
+    max-width: 100%;
+  }
+  
+  .brandSelect {
+    padding: 0 20px;
+  }
+  
+  .productsColumn {
+    padding: 30px 20px;
+  }
+  
+  .productsColumn .column {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .productSpecs {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .imageWrapper {
+    width: 100%;
+    height: 180px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .searchBanner {
+    padding: 20px 16px;
+    min-height: 300px;
+  }
+  
+  .searchBanner .column {
+    margin-top: 40px;
+    gap: 20px;
+  }
+  
+  .searchText h3, .filter {
+    font-size: 22px;
+  }
+  
+  .searchByProduct {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .selectABrand {
+    padding: 30px 0;
+  }
+  
+  .brandSelect {
+    gap: 16px;
+    padding: 0 16px;
+  }
+  
+  .chipviewbrandse {
+    gap: 8px;
+  }
+  
+  .brandSelector {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .productsColumn {
+    padding: 24px 16px;
+  }
+  
+  .productsColumn .column {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .productSpecs {
+    padding: 16px;
+  }
+  
+  .imageWrapper {
+    height: 150px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .searchBanner {
+    min-height: 280px;
+  }
+  
+  .searchText h3, .filter {
+    font-size: 20px;
+  }
+  
+  .searchInput {
+    font-size: 14px;
+    padding: 10px 36px 10px 10px;
+  }
+  
+  .clearIcon {
+    right: 40px;
+  }
+  
+  .productName {
+    font-size: 16px;
+  }
+  
+  .wood {
+    font-size: 13px;
+  }
+  
+  .viewSpecificationText {
+    font-size: 13px;
+  }
+} */
+
+
+/* Base Styles */
+.specificationSheet {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.searchBanner {
+  height: auto;
+  min-height: 400px;
+  background-image: url("/assets/specificationSheet/specpageimg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px;
+  position: relative;
+}
+
+.searchBanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.searchBanner .column {
+  margin-top: 100px;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.searchByProduct {
+  gap: 24px;
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  flex-direction: column;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.searchText h3 {
+  color: #ffffff;
+  font-family: Satoru;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: none;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-bottom-color: #007bff;
+}
+
+.clearIcon {
+  position: absolute;
+  right: 48px;
+  cursor: pointer;
+  z-index: 2;
+  transition: opacity 0.2s ease;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.searchIcon:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.selectABrand {
+  padding: 40px 0;
+  background-color: #f7f7f5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brandSelect {
+  padding: 0 24px;
+  gap: 24px;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filter {
+  color: #000000;
+  font-family: Satoru;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.chipviewbrandse {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brandSelector {
+  color: #000000;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1.5px solid #000000;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  will-change: transform;
+}
+
+.brandSelector:hover {
+  background-color: #e0e0e0;
+}
+
+.selectedBrand {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.filterSkeleton {
+  height: 100px;
+  background: #f0f0f0;
+  margin: 20px 0;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.productsColumn {
+  padding: 40px 24px;
+  background-color: #f7f7f5;
+}
+
+.productsColumn .column {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.productSpecs {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid #cfb59e;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.productSpecs:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.columnProductName {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 12px;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.productName {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.wood {
+  font-size: 13px;
+  color: #555;
+  opacity: 0.75;
+  margin: 0;
+}
+
+.viewSpecification {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.viewSpecificationText {
+  font-size: 13px;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.viewSpecificationText:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.noProducts {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+  grid-column: 1 / -1;
+}
+
+.paginationButton {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background-color: #f0f0f0;
+}
+
+.paginationButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.activePage {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+/* Tablet Styles */
+@media only screen and (max-width: 1024px) {
+  .searchBanner {
+    padding: 30px 20px;
+    min-height: 350px;
+  }
+  
+  .searchBanner .column {
+    margin-top: 80px;
+    gap: 30px;
+  }
+  
+  .searchByProduct {
+    padding: 20px;
+    max-width: 100%;
+  }
+  
+  .brandSelect {
+    padding: 0 20px;
+  }
+  
+  .productsColumn {
+    padding: 30px 20px;
+  }
+  
+  .productsColumn .column {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .productSpecs {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .imageWrapper {
+    width: 100%;
+    height: 160px;
+  }
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 768px) {
+  .searchBanner {
+    padding: 20px 16px;
+    min-height: 300px;
+  }
+  
+  .searchBanner .column {
+    margin-top: 80px;
+    gap: 20px;
+  }
+  
+  .searchText h3, .filter {
+    font-size: 22px;
+  }
+  
+  .searchByProduct {
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .selectABrand {
+    padding: 30px 0;
+  }
+  
+  .brandSelect {
+    gap: 16px;
+    padding: 0 16px;
+  }
+  
+  .chipviewbrandse {
+    gap: 8px;
+  }
+  
+  .brandSelector {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .productsColumn {
+    padding: 24px 16px;
+  }
+  
+  .productsColumn .column {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .productSpecs {
+    padding: 12px;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .imageWrapper {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .columnProductName {
+    gap: 8px;
+  }
+  
+  .productName {
+    font-size: 15px;
+  }
+  
+  .wood {
+    font-size: 12px;
+  }
+  
+  .viewSpecificationText {
+    font-size: 12px;
+  }
+  
+  /* Filter Component Mobile Styles */
+  .filterComponent {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .filterDropdown {
+    width: 100%;
+  }
+  
+  .pagination {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  
+  .paginationButton {
+    padding: 6px 12px;
+    font-size: 13px;
+    min-width: 36px;
+  height: 36px;
+  }
+}
+
+/* Small Mobile Styles */
+@media only screen and (max-width: 480px) {
+  .searchBanner {
+    min-height: 280px;
+  }
+  
+  .searchText h3, .filter {
+    font-size: 20px;
+  }
+  
+  .searchInput {
+    font-size: 14px;
+    padding: 10px 36px 10px 10px;
+  }
+  
+  .clearIcon {
+    right: 40px;
+  }
+  
+  .productSpecs {
+    padding: 10px;
+  }
+  
+  .imageWrapper {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .productName {
+    font-size: 14px;
+  }
+  
+  .pagination {
+    margin-top: 30px;
+  }
+  
+  .paginationButton {
+    padding: 4px 8px;
+    font-size: 12px;
+    min-width: 32px;
+    height: 32px;
+  }
+}
+
+/* Add these styles to your CSS file */
+
+.filterContainer {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #f7f7f5;
+  flex-wrap: wrap;
+}
+
+.filterSection {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filterLabel {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #000;
+  font-weight: 500;
+}
+
+.filterDropdown {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  font-size: 14px;
+}
+
+/* Mobile-specific styles */
+@media only screen and (max-width: 768px) {
+  .filterContainer {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .filterSection {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .filterLabel {
+    font-size: 14px;
+    display: block; /* Ensure label is always visible */
+  }
+
+  .filterDropdown {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+
+/* Loading styles */
+.loaderOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.filterLoader,
+.contentLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  width: 100%;
+}
+
+/* You might want to add this to ensure proper centering */
+.MuiCircularProgress-root {
+  display: block;
+  margin: 0 auto;
 }
