@@ -230,6 +230,7 @@ const Filters = () => {
     newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
     fuelTypeFilter &&
       setUpdatedValues((prev) => {
+        console.log("prev.fueltypeValues", prev.fueltypeValues)
         return {
           ...prev,
           fueltypeValues: fuelTypeFilter.id
@@ -298,11 +299,12 @@ const Filters = () => {
       let newRangeValues = [];
       rangeValues = allProducts.map((p) => p.fn_get_products.range_id);
       newRangeValues = [...new Set(rangeValues)].filter((v) => v !== null);
-
       setUpdatedValues((prev) => {
         return {
           ...prev,
-          fueltypeValues: fireplaceType ? prev.fueltypeValues : newFuelValues,
+          fueltypeValues: fuelTypes?.map(val => val.fueltype_id) ,
+          //  newFuelValues,
+          // fireplaceType ? prev.fueltypeValues : newFuelValues,
           installationValues:
             installationType || glassOrientationType
               ? prev.installationValues
@@ -887,6 +889,7 @@ const Filters = () => {
                           id="fireplaceFilterId"
                           className="flex flex-col gap-3"
                         >
+                          {console.log("fireplaceType", fireplaceType,fuelTypes,updatedValues?.fueltypeValues  )}
                           {fireplaceType
                             ? fuelTypes?.map(
                                 (val) =>
@@ -907,9 +910,6 @@ const Filters = () => {
                                             className="font-sans font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
                                             onClick={() => {
                                               setSubType(null);
-                                              // setFireplaceType(
-                                              //   val?.fueltype_id
-                                              // );
                                               updateFilter(
                                                 "fuelType",
                                                 val?.fueltype_name,
@@ -918,12 +918,6 @@ const Filters = () => {
                                               if (window.innerWidth <= 768) {
                                                 setIsFilter(false);
                                               }
-
-                                              // updateQueryParams({
-                                              //   fireplaceType: val?.fueltype_id,
-                                              // });
-                                              // setInstallationType(null);
-                                              // setglassOrientationType(null);
                                             }}
                                           >
                                             {val?.fueltype_name}
@@ -935,10 +929,6 @@ const Filters = () => {
                                           className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
                                           onClick={() => {
                                             setSubType(null);
-                                            // setFireplaceType(val?.fueltype_id);
-                                            // updateQueryParams({
-                                            //   fireplaceType: val?.fueltype_id,
-                                            // });
                                             updateFilter(
                                               "fuelType",
                                               val?.fueltype_name,
@@ -947,8 +937,6 @@ const Filters = () => {
                                             if (window.innerWidth <= 768) {
                                               setIsFilter(false);
                                             }
-                                            // setInstallationType(null);
-                                            // setglassOrientationType(null);
                                           }}
                                         >
                                           {val?.fueltype_name}

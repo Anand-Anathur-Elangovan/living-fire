@@ -163,37 +163,37 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
     {
       brand_id: 7,
       image: HergomLogo,
-      title: "HergomLogo",
+      title: "Hergom",
       isSvg: true,
     },
     {
       brand_id: 10,
       image: RegencyLogo,
-      title: "RegencyLogo",
+      title: "Regency",
       isSvg: true,
     },
     {
       brand_id: 11,
       image: KaloraLogo,
-      title: "KaloraLogo",
+      title: "Kalora",
       isSvg: false,
     },
     {
       brand_id: 3,
       image: AustroLogo,
-      title: "AustroLogo",
+      title: "Austroflamm",
       isSvg: true,
     },
     {
       brand_id: 2,
       image: EsseLogo,
-      title: "EsseLogo",
+      title: "Esse",
       isSvg: true,
     },
     { 
       brand_id: 4, 
       image: MorsoLogo, 
-      title: "MorsoLogo",
+      title: "Morso",
       isSvg: true,
     },
     {
