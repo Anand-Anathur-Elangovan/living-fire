@@ -1,0 +1,64 @@
+/* Featured Component Styles */
+.heading1 {
+  font-family: 'Satoru', sans-serif;
+  font-weight: normal;
+  color: #000;
+}
+
+.feature-snaps {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+}
+
+.feature-snaps > * {
+  scroll-snap-align: start;
+}
+
+/* Hide scrollbar for Webkit-based browsers */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for other browsers */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .heading1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .heading1 {
+    font-size: 2rem;
+  }
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
