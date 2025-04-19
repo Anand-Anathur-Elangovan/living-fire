@@ -1,4 +1,4 @@
-.privacy-policy {
+/* .privacy-policy {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,6 @@
 
 .privacy-policy .privacypolicy.text {
   color: #000000;
-  /* font-family: "Public Sans", sans-serif; */
   font-family: Satoru;
   font-size: 90px;
   font-weight: 400;
@@ -47,11 +46,11 @@
 .privacy-policy .column-two {
   display: flex;
   flex-direction: column;
-  width: 48%; /* Ensure each column takes up approximately half of the row */
+  width: 48%;
 }
 
 .privacy-policy .column-two {
-  margin-left: 4%; /* Small gap between columns */
+  margin-left: 4%; 
 }
 
 .privacy-policy .howdoweuse {
@@ -91,16 +90,190 @@
 @media only screen and (max-width: 1050px) {
   .privacy-policy .rowdescription {
     flex-direction: column;
-    gap: 20px; /* Reduce gap on smaller screens */
+    gap: 20px;
   }
 
   .privacy-policy .column-one,
   .privacy-policy .column-two {
-    width: 100%; /* Full width for columns on smaller screens */
+    width: 100%;
     margin-left: 0;
   }
 
   .privacy-policy .column-two {
     margin-left: 0;
+  }
+} */
+
+.privacy-policy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+  padding-bottom: 60px;
+  background-color: #f7f7f5;
+  overflow-x: hidden;
+}
+
+.privacy-policy .privacy-col {
+  padding: 0 20px;
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.privacy-policy .privacy-text {
+  width: 100%;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #d3c6bb;
+  padding-top: 50px;
+}
+
+.privacy-policy .privacypolicy.text {
+  color: #000000;
+  font-family: Satoru;
+  font-size: 90px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.privacy-policy .rowdescription {
+  gap: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.privacy-policy .column-one,
+.privacy-policy .column-two {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+
+.privacy-policy .column-two {
+  margin-left: 4%;
+}
+
+.privacy-policy .howdoweuse {
+  color: #000000 !important;
+  font-size: 22px;
+  font-weight: 400;
+  padding-bottom: 20px;
+}
+
+.privacy-policy .description {
+  color: #000000 !important;
+  text-align: justify;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+.privacy-policy .description-2 {
+  color: #000000 !important;
+  text-align: justify;
+  font-size: 14px;
+  font-weight: 400;
+  width: 100%;
+  line-height: 140%;
+}
+
+.privacy-policy ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.privacy-policy ul li {
+  padding-bottom: 10px;
+}
+
+/* Tablet Styles */
+@media only screen and (max-width: 1024px) {
+  .privacy-policy {
+    margin-top: 50px;
+    padding-bottom: 50px;
+  }
+  
+  .privacy-policy .privacy-col {
+    padding: 0 30px;
+    gap: 30px;
+  }
+  
+  .privacy-policy .privacypolicy.text {
+    font-size: 70px;
+  }
+  
+  .privacy-policy .rowdescription {
+    gap: 30px;
+  }
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 768px) {
+  .privacy-policy {
+    margin-top: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .privacy-policy .privacy-col {
+    padding: 0 20px;
+    gap: 20px;
+  }
+  
+  .privacy-policy .privacypolicy.text {
+    font-size: 50px;
+  }
+  
+  .privacy-policy .rowdescription {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .privacy-policy .column-one,
+  .privacy-policy .column-two {
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  .privacy-policy .howdoweuse {
+    font-size: 20px;
+  }
+  
+  .privacy-policy .description,
+  .privacy-policy .description-2 {
+    font-size: 14px;
+  }
+}
+
+/* Small Mobile Styles */
+@media only screen and (max-width: 480px) {
+  .privacy-policy {
+    margin-top: 30px;
+    padding-bottom: 30px;
+  }
+  
+  .privacy-policy .privacy-col {
+    padding: 0 15px;
+  }
+  
+  .privacy-policy .privacypolicy.text {
+    font-size: 40px;
+  }
+  
+  .privacy-policy .howdoweuse {
+    font-size: 18px;
+  }
+  
+  .privacy-policy .description,
+  .privacy-policy .description-2 {
+    font-size: 13px;
   }
 }
