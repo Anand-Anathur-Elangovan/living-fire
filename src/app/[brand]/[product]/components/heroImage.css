@@ -1,4 +1,599 @@
+.material-finish-options {
+  margin-top: 48px;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.material-finish-options .column {
+  gap: 16px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: start;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.material-finish-options .column .title {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.material-finish-options .img-list {
+  gap: 40px;
+  display: flex;
+  align-self: stretch;
+}
+
+.material-finish-options .col {
+  gap: 8px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.material-finish-options .pricingoptions {
+  padding-left: 56px;
+  padding-right: 56px;
+  display: flex;
+  justify-content: center;
+}
+
+.material-finish-options .pricingoptions .desc {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.specifications {
+  margin-top: 64px;
+  align-self: stretch;
+  display: flex;
+}
+
+.specifications .row {
+  width: 100%;
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.specifications .rowspecs {
+  width: 100%;
+  display: flex;
+  align-items: start;
+}
+
+.specifications .imgwrap {
+  margin-top: 132px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.specifications .imgwrap img {
+  height: 518px;
+  width: 94%;
+  object-fit: contain;
+}
+
+.specifications .table {
+  margin-top: 132px;
+  gap: 40px;
+  align-self: end;
+  display: flex;
+  width: 46%;
+  flex-direction: column;
+  align-items: end;
+}
+
+.specifications .table .head {
+  padding: 0 42px;
+  align-self: stretch;
+  display: flex;
+}
+
+.specifications .table .head .title {
+  color: #000000 !important;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.specifications .productspecs {
+  margin-left: 42px;
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  flex: 1;
+  align-items: start;
+  max-width: 544px;
+  width: 100%;
+}
+
+.productspecs .energynotes {
+  color: #000000 !important;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.productspecs .specs {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  align-self: stretch;
+  display: flex;
+}
+
+.productspecs .specs-1 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  align-self: stretch;
+  display: flex;
+  border-bottom: 1px solid #000000;
+}
+
+.productspecs .rowng {
+  padding-left: 20px;
+  padding-right: 20px;
+  gap: 32px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.dimensions {
+  gap: 16px;
+  display: flex;
+  width: 92%;
+  flex-direction: column;
+  align-items: start;
+}
+
+.dimensions .columnproducts {
+  align-self: stretch;
+}
+
+.dimensions .specs-6 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  border-bottom: 1px solid #000000;
+}
+
+.materialfinish {
+  color: #000000 !important;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.download-section {
+  margin-top: 120px;
+  align-self: stretch;
+  display: flex;
+}
+
+.download-section .row {
+  width: 100%;
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.download-section .infosection {
+  gap: 30px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.download-section .tab-section {
+  display: flex;
+  align-items: center;
+}
+
+.download-section .tab-section .tab {
+  padding-top: 22px;
+  padding-bottom: 22px;
+  display: flex;
+  border-bottom: 3px solid #000000;
+}
+
+.download-section .tab-section .tab-1 {
+  display: flex;
+  padding: 22px 60px 22px 56px;
+}
+
+.download-section .lineeleven_one {
+  height: 1px;
+  background-color: #000000;
+}
+
+.brochure-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brochure-section .listspecsheet {
+  gap: 128px;
+  display: flex;
+  width: 74%;
+}
+
+.brochure-section .column_two {
+  gap: 8px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: start;
+  max-width: 238px;
+  margin: 0 auto;
+}
+
+.brochure-section .rowtext {
+  gap: 16px;
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+}
+
+.brochure-section .imageclass {
+  height: 16px;
+}
+
+.brochure-section button {
+  color: #1741be;
+  border: 1px solid #1741be;
+  height: 52px;
+  padding: 0 32px;
+  font-size: 14px;
+}
+
+.stackview {
+  height: auto;
+  position: relative;
+  margin-top: 80px;
+  background-color: #f7f7f5;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.stack-section {
+  height: 1058px;
+  width: 88%;
+  position: absolute;
+  top: 7%;
+  right: 0px;
+  left: 0px;
+  margin: auto;
+}
+
+.stack-section .column {
+  gap: 30px;
+  background-color: #ffffff;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  position: absolute;
+  right: 1px;
+  bottom: 0px;
+  top: 0px;
+  margin: auto 0;
+  height: max-content;
+  padding: 40px 48px;
+}
+
+.stack-section .column .columnregency {
+  gap: 8px;
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  align-items: start;
+}
+
+.stack-section .column .columnregency .regency {
+  color: #878e96;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.stack-section .column .columnregency .gfing {
+  color: #000000 !important;
+  margin-bottom: 6px;
+  font-family: Satoru !important;
+  font-size: 40px;
+  font-weight: 400;
+}
+
+.stack-section .buildyour {
+  color: #000000 !important;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.stack-section .col-package {
+  gap: 16px;
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  align-items: start;
+}
+
+.stack-section .pricingoption {
+  gap: 16px;
+  display: flex;
+  align-self: stretch;
+  align-items: start;
+  border: none;
+  height: auto;
+}
+
+.stack-section .pricingoption input {
+  width: auto;
+}
+
+.stack-section .col-material {
+  gap: 24px;
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  align-items: start;
+}
+
+.stack-section .colourchoices {
+  gap: 18px;
+  display: flex;
+  align-self: stretch;
+}
+
+.stack-section .colourchoices .colourchoice {
+  gap: 8px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  max-width: 130px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stack-section .colourchoices .colourchoice .reflectiveblack {
+  height: 110px;
+  object-fit: cover;
+}
+
+.stack-section .colourchoices .colourchoice .choice-radio {
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  height: auto;
+}
+
+.stack-section .colourchoices .colourchoice .zeroclearancete {
+  color: #000000 !important;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  align-self: stretch;
+  line-height: 140%;
+}
+
+.stack-section .col-delivery {
+  gap: 16px;
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  align-items: start;
+}
+
+.stack-section .delivery-address {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stack-section .delivery-address .address {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 300;
+  gap: 16px;
+  display: flex;
+  line-height: 140%;
+  border: none;
+  height: auto;
+}
+
+.stack-section .delivery-address .address input {
+  width: auto;
+}
+
+.stack-section .rowprice {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+}
+
+.stack-section .rowprice .price {
+  color: #000000 !important;
+  margin-bottom: 8px;
+  font-size: 32px;
+  font-weight: 300;
+}
+
+.stack-section .rowprice .price .price-span {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.stack-section .rowprice .rowinstock {
+  align-self: center;
+  background-color: #000000;
+  display: flex;
+  border-radius: 12px;
+  padding: 2px 12px;
+}
+
+.stack-section .rowprice .rowinstock .instock {
+  color: #ffffff !important;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.stack-section .row-btn {
+  gap: 16px;
+  align-self: stretch;
+  display: flex;
+}
+
+.stack-section .row-btn .add_to_cart {
+  background-color: #000000;
+  color: #ffffff;
+  height: 52px;
+  padding: 0 32px;
+  font-size: 14px;
+}
+
+.stack-section .row-btn .send_an_enquiry {
+  color: #1741be;
+  border: 1px solid #1741be;
+  height: 52px;
+  padding: 0 32px;
+  font-size: 14px;
+}
+
+.desc-column {
+  gap: 46px;
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 1px;
+  right: 0px;
+  left: 0px;
+  margin: auto;
+}
+
+.columndesc {
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.hero-slider {
+  padding: 0px 100px;
+  width: 100%;
+  max-height: 600px !important;
+}
+
+.slider-image {
+  position: relative;
+  width: 100%;
+  max-height: 600px !important;
+}
+
+.class-hero-image-size {
+  color: transparent;
+  width: 100%;
+  max-height: 600px !important;
+  object-fit: contain !important;
+}
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+
+.product-hero-image.slick-dots li.slick-active button:before {
+
+}
+.product-hero-image .slick-dots li button:before {
+
+  opacity: 1 !important;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  content: "" !important;
+}
+
+.product-hero-image .slick-dots li.slick-active button:before {
+  color: white;
+  opacity: 1;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+.product-hero-image .slick-dots {
+  bottom: 40px !important;
+}
+.product-hero-image .slick-dots li.slick-active button {
+  background: white !important; 
+  transform: scale(1); 
+  border-radius: 50%;
+}
+
+.top-container {
+  display: flex;
+  flex-direction: column;
+  gap: 49px;
+}
+
+.second-container {
+  display: flex;
+  flex-direction: column;
+  gap: 49px;
+}
 .slick-slide img {
   display: block;
   height: 600px !important;
+}
+
+@media only screen and (max-width: 1025px) {
+  .material-finish-options .img-list {
+    flex-direction: column;
+  }
+
+  .material-finish-options .col {
+    max-width: 100%;
+  }
+
+  .specifications .rowspecs {
+    flex-direction: column;
+  }
+
+  .specifications .productspecs {
+    margin: 0 auto;
+  }
+
+  .specifications .table {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .specifications .dimensions {
+    width: 100%;
+  }
+
+  .productspecs .rowng {
+    gap: 10px;
+  }
 }
