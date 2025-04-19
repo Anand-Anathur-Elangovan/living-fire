@@ -1,0 +1,515 @@
+.hero {
+    height: 100vh;
+    /* background-image: url("/path-to-hero-image.jpg"); */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #f7f7f5; */
+    width: 1440px;
+    height: 832px;
+  }
+  
+  .hero-content {
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    height: 50vh;
+    line-height: 1.2;
+  }
+  
+  .hero h1 {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    font-family: Satoru;
+    font-weight: normal;
+    max-width: 1000px;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  /* Full page setup */
+  .home-page {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    background-size: cover;
+    overflow: hidden;
+    background-position: center;
+  }
+  
+  /* Base container which will fade out */
+  .base-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: #f7f7f5;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 3; /* Ensure it's on top initially */
+    background-size: cover;
+    overflow: hidden;
+    background-position: center;
+  }
+  
+  .base-container.hidden {
+    opacity: 0;
+    pointer-events: none; /* Disable interaction once it's hidden */
+  }
+  
+  /* Hero section with text */
+  .hero {
+    text-align: center;
+  }
+  
+  /* White panels that will slide out */
+  .panel-left,
+  .panel-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: whitesmoke;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out, transform 1s ease-in-out;
+  }
+  
+  .panel-left {
+    left: 0;
+    transform: translateX(-10%); /* Initial position */
+  }
+  
+  .panel-right {
+    right: 0;
+    transform: translateX(10%); /* Initial position */
+  }
+  
+  .show-panelsLeft {
+    opacity: 1; /* Fade panels in */
+  }
+  .show-panelsRight {
+    opacity: 1; /* Fade panels in */
+  }
+  
+  .animateLeft {
+    transform: translateX(-70%); /* Slide left */
+  }
+  
+  .animateRight {
+    transform: translateX(70%); /* Slide right */
+  }
+  
+  .animateFutherLeft {
+    transform: translateX(-100%);
+  }
+  .animateFutherRight {
+    transform: translateX(100%);
+  }
+  
+  /* Overlay image (behind the panels) */
+  .overlay-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    z-index: 1; /* Ensure it's behind the panels */
+    background-size: cover;
+    overflow: hidden;
+    background-position: center;
+  }
+  
+  .animate .overlay-container {
+    opacity: 1;
+  }
+  
+  .overlay-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1); /* Initial scale */
+    transition: transform 1s ease-in-out; /* Delayed zoom-in effect */
+    filter: brightness(70%);
+  }
+  
+  .show-panels {
+    opacity: 1; /* Overlay fades in when panels fade in */
+  }
+  
+  .zoom {
+    transform: scale(1.2); /* Slight zoom in */
+  }
+  
+  /* Button styles */
+  .button-group {
+    position: absolute;
+    bottom: 80px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 4;
+    border-radius: 20px;
+    /* background: blue; */
+    /* background: transparent; */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(10px);
+    gap: 10px;
+  }
+  
+  .button-group.show {
+    opacity: 1; /* Fade in the buttons */
+  }
+  
+  .button-group button {
+    background: transparent;
+    color: #fff;
+    border: none;
+    padding: 10px 0px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: relative;
+    margin: 0 0px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .button-group button::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #060606; /* Orange underline */
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+  }
+  
+  .button-group button:hover::before {
+    width: 100%;
+    left: 0;
+  }
+  
+  .button-group button:hover {
+    color: white; /* Change text color when hovering */
+  }
+  
+  .underline-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    position: relative;
+    cursor: pointer;
+    padding-bottom: 5px;
+    font-family: Satoru;
+  }
+  
+  .underline-button::after {
+    content: "";
+    position: absolute;
+    width: 5px; /* Start as a dot */
+    height: 2px;
+    background-color: white;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .underline-button:hover::after {
+    width: 100%; /* Expand to full line on hover */
+  }
+  
+  .blur-text {
+    transition: filter 0.8s ease-in-out;
+  }
+  
+  /* .blurred {
+    filter: blur(5px);
+  } */
+  
+  .text-group {
+    position: absolute;
+    /* bottom: 20px; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 4; /* Ensure it's above the image */
+    flex-direction: column;
+    align-items: center;
+  }
+  .text-group-subheading {
+    position: absolute;
+    bottom: 120px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    font-weight: 200;
+    z-index: 4;
+    font-family: sans-serif;
+    font-size: 2.25rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+  .text-group h1 {
+    font-family: Satoru;
+    font-size: 10rem;
+    margin-bottom: 1rem;
+    font-weight: normal;
+    max-width: 1200px;
+    color: white;
+    /* -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black; */
+  }
+  .show {
+    opacity: 1; /* Fade in the buttons */
+  }
+  
+  .carousel {
+    display: flex;
+  }
+  
+  .element {
+    display: flex;
+    flex: 1 1;
+    flex-basis: 25%;
+  
+    /* display: grid;
+    grid-template-rows: 330px 0fr; */
+  
+    padding: 1rem;
+    gap: 5px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .element-image {
+    inline-size: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+    position: relative;
+  }
+  
+  /* Slight zoom on hover */
+  /* .element:hover .element > img {
+    transform: scale(1.05); 
+  } */
+  
+  .overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    transition: transform 0.5s ease;
+    flex-direction: column;
+    padding: 40px 20%;
+    gap: 10px;
+    transform: translateX(100%);
+  }
+  
+  .element:hover img {
+    transform: translateX(-80%);
+  }
+  
+  /* .element .element-image:hover {
+    transform: translateX(10%);
+  } */
+  
+  .element:hover .overlay {
+    transform: translateX(10%);
+  }
+  
+  /* .overlay:hover {
+    transform: translateX(0); 
+    opacity: 1;
+  } */
+  
+  .element-snaps {
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 1rem;
+  }
+  
+  .element-snaps > * {
+    scroll-snap-align: start;
+  }
+  .feature-snaps {
+    scroll-snap-type: inline mandatory;
+    /* scroll-padding-inline: 5rem; */
+    /* scroll-padding-inline: 1rem; */
+  }
+  
+  .feature-snaps > * {
+    scroll-snap-align: start;
+  }
+  
+  /* Hide scrollbar for Webkit-based browsers */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for other browsers */
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .slick-dots li button:before {
+    /* font-size: 12px; */
+    /* color: black; */
+    opacity: 1 !important;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    border: 1.5px solid black;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    content: "" !important;
+  }
+  
+  .slick-dots li.slick-active button:before {
+    color: black;
+    opacity: 1;
+    transition: color 0.3s ease, opacity 0.3s ease;
+  }
+  .slick-dots {
+    /* bottom: 15px !important; */
+  }
+  .slick-dots li.slick-active button {
+    background: black;
+    transform: scale(1);
+    border-radius: 50%;
+  }
+  
+  @media (max-width: 768px) {
+    .text-group h1 {
+      font-size: 80px;
+      /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); */
+      line-height: 1;
+    }
+    .text-group {
+      position: absolute;
+      /* bottom: 20px; */
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
+      z-index: 4;
+      flex-direction: column;
+      top: 25%;
+      align-items: baseline;
+      left: 18%;
+      /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); */
+      gap: 42px;
+    }
+    .text-group h2 {
+      font-size: 1.5rem;
+    }
+  
+    .overlay-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1) !important;
+      transition: transform 1s ease-in-out;
+      filter: brightness(80%);
+      object-position: left;
+      object-position: 64% 16%;
+    }
+    .button-group {
+      flex-direction: column;
+      left: 65%;
+      gap: 32px;
+      font-size: 20px;
+      width: 30%;
+      height: min-content;
+    }
+    .button-group button {
+      padding: 10px 0px;
+    }
+    .element-image {
+      inline-size: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      position: relative;
+      margin-left: 20px;
+      width: 92%;
+    }
+    .hero-back {
+      /* height: 100vh; */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-back-content {
+      color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      /* height: 50vh; */
+      line-height: 1.2;
+    }
+    .hero-back h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-family: Satoru;
+      font-weight: normal;
+      max-width: 1000px;
+    }
+  
+    .hero-back p {
+      font-size: 1.2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+  
+    .text-group-subheading {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 100px;
+      line-height: 40px;
+      font-size: 24px;
+      left: 84px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    text-group h1 {
+      font-size: 80px;
+    }
+  }
+  

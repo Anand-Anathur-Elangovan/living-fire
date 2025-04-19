@@ -219,7 +219,7 @@ const Filters = () => {
     if (rangeFilter) {
       setRangeType(rangeFilter?.id);
     }
-    
+
     let values = [];
     let newFuelValues = [];
     values = allProducts.map((p) => p.fn_get_products?.fueltype_id);
@@ -247,7 +247,6 @@ const Filters = () => {
         };
       });
   }, [pathname]);
-
 
   useEffect(() => {}, [filters]);
 
@@ -295,12 +294,11 @@ const Filters = () => {
         .filter((v) => v !== null)
         .map((x) => parseInt(x));
 
-        let rangeValues = [];
-        let newRangeValues = [];
-        rangeValues = allProducts.map((p) => p.fn_get_products.range_id);
-        newRangeValues = [...new Set(rangeValues)].filter((v) => v !== null);
+      let rangeValues = [];
+      let newRangeValues = [];
+      rangeValues = allProducts.map((p) => p.fn_get_products.range_id);
+      newRangeValues = [...new Set(rangeValues)].filter((v) => v !== null);
 
-        
       setUpdatedValues((prev) => {
         return {
           ...prev,
@@ -313,9 +311,7 @@ const Filters = () => {
             installationType || glassOrientationType
               ? prev.glassOrientationValues
               : newGlassValues,
-              rangeValues: rangeType
-              ? prev.rangeValues
-              : newRangeValues,
+          rangeValues: rangeType ? prev.rangeValues : newRangeValues,
         };
       });
     };
@@ -370,12 +366,14 @@ const Filters = () => {
 
   const [refreshPage, setRefreshPage] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
-  const [isFilter, setIsFilter] = useState(true);
+  const [isFilter, setIsFilter] = useState(
+    window.innerWidth <= 768 ? false : true
+  );
   const [isSort, setIsSort] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(
     allProducts?.slice(0, 12)
   );
-
+  console.log("isFilter in inner", isFilter);
   const [compareProducts, setCompareProducts] = useState([]);
   const [allProductsTemp, setAllProductsTemp] = useState([]);
   const [allProductsTempForSubType, setAllProductsTempForSubType] = useState(
@@ -396,7 +394,11 @@ const Filters = () => {
         !fireplaceType
       )
         return;
-      setIsFilter(true);
+      if (window.innerWidth <= 768) {
+        setIsFilter(false);
+      } else {
+        setIsFilter(true);
+      }
     };
     checkFitlers();
   }, [searchText, productMenuIndex, brandType, fireplaceType]);
@@ -566,6 +568,13 @@ const Filters = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // useEffect(() => {
+  //   const isMobile = window.innerWidth <= 768;
+  //   if (isMobile) {
+  //     setIsFilter(false);
+  //   }
+  // }, []);
 
   return (
     <>
@@ -906,6 +915,10 @@ const Filters = () => {
                                                 val?.fueltype_name,
                                                 val?.fueltype_id
                                               );
+                                              if (window.innerWidth <= 768) {
+                                                setIsFilter(false);
+                                              }
+
                                               // updateQueryParams({
                                               //   fireplaceType: val?.fueltype_id,
                                               // });
@@ -931,6 +944,9 @@ const Filters = () => {
                                               val?.fueltype_name,
                                               val?.fueltype_id
                                             );
+                                            if (window.innerWidth <= 768) {
+                                              setIsFilter(false);
+                                            }
                                             // setInstallationType(null);
                                             // setglassOrientationType(null);
                                           }}
@@ -960,6 +976,9 @@ const Filters = () => {
                                           val?.fueltype_name,
                                           val?.fueltype_id
                                         );
+                                        if (window.innerWidth <= 768) {
+                                          setIsFilter(false);
+                                        }
                                         // setInstallationType(null);
                                         // setglassOrientationType(null);
                                       }}
@@ -1048,6 +1067,9 @@ const Filters = () => {
                                         installval?.installation_name,
                                         installval?.installation_id
                                       );
+                                      if (window.innerWidth <= 768) {
+                                        setIsFilter(false);
+                                      }
                                       // updateQueryParams({
                                       //   installationType:
                                       //     installval?.installation_id,
@@ -1146,6 +1168,9 @@ const Filters = () => {
                                         glassval?.glass_orientation_name,
                                         glassval?.glass_orientation_id
                                       );
+                                      if (window.innerWidth <= 768) {
+                                        setIsFilter(false);
+                                      }
                                     }}
                                   >
                                     {glassval?.glass_orientation_name}
@@ -1240,6 +1265,9 @@ const Filters = () => {
                                       val?.range_name,
                                       val?.range_id
                                     );
+                                    if (window.innerWidth <= 768) {
+                                      setIsFilter(false);
+                                    }
                                   }}
                                 >
                                   {val?.range_name}
@@ -1326,6 +1354,9 @@ const Filters = () => {
                                     val?.brand_name,
                                     val?.brand_id
                                   );
+                                  if (window.innerWidth <= 768) {
+                                    setIsFilter(false);
+                                  }
                                 }}
                               >
                                 {val?.brand_name}
@@ -1386,7 +1417,12 @@ const Filters = () => {
                         className={`font-sans font-small leading-5 text-normal cursor-pointer ${
                           bestSelling ? "font-semibold" : ""
                         }`}
-                        onClick={() => sortProducts(SORTBY.bestSelling)}
+                        onClick={() => {
+                          sortProducts(SORTBY.bestSelling);
+                          if (window.innerWidth <= 768) {
+                            setIsFilter(false);
+                          }
+                        }}
                       >
                         Best Selling
                       </span>

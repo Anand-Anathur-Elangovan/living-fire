@@ -162,7 +162,10 @@ const AllProducts = () => {
     glassOrientationType ?? 0
   );
   useEffect(() => {
-    const pathSegments = (pathname.split("/").filter((segment) => segment))?.map(item => item.replace(/%20|_/g, ' '));
+    const pathSegments = pathname
+      .split("/")
+      .filter((segment) => segment)
+      ?.map((item) => item.replace(/%20|_/g, " "));
     let extractedFilters = [];
     pathSegments.forEach((segment) => {
       const matchingFilter = filterMappingsMock.find(
@@ -177,7 +180,7 @@ const AllProducts = () => {
       }
     });
     setFilters(extractedFilters);
-    console.log("extractedFilters", extractedFilters)
+    console.log("extractedFilters", extractedFilters);
     const typeFilter = extractedFilters.find(
       (filter) => filter.filterType === "type"
     );
@@ -203,25 +206,25 @@ const AllProducts = () => {
       setFireplaceType(fuelTypeFilter.id);
     }
     if (installationTypeFilter) {
-    setInstallationType(installationTypeFilter?.id);
+      setInstallationType(installationTypeFilter?.id);
     }
     if (glassOrientationTypeFilter) {
       setGlassOrientationType(glassOrientationTypeFilter?.id);
-      }
-      if (brandFilter) {
-        setBrandType(brandFilter?.id);
-        }
-        if (rangeFilter) {
-          setRangeType(rangeFilter?.id);
-        }
+    }
+    if (brandFilter) {
+      setBrandType(brandFilter?.id);
+    }
+    if (rangeFilter) {
+      setRangeType(rangeFilter?.id);
+    }
     let values = [];
     let newFuelValues = [];
     values = allProducts.map((p) => p.fn_get_products?.fueltype_id);
     newFuelValues = [...new Set(values)].filter((v) => v !== null);
     let installValues = [];
-      let newInstallValues = [];
-      installValues = allProducts.map((p) => p.fn_get_products.installation_id);
-      newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
+    let newInstallValues = [];
+    installValues = allProducts.map((p) => p.fn_get_products.installation_id);
+    newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
     fuelTypeFilter &&
       setUpdatedValues((prev) => {
         return {
@@ -231,18 +234,16 @@ const AllProducts = () => {
             : newFuelValues,
         };
       });
-      installationTypeFilter &&
+    installationTypeFilter &&
       setUpdatedValues((prev) => {
         return {
           ...prev,
-          installationValues:
-          installationTypeFilter?.id
-              ? prev.installationValues
-              : newInstallValues,
+          installationValues: installationTypeFilter?.id
+            ? prev.installationValues
+            : newInstallValues,
         };
       });
   }, [pathname]);
-
 
   useEffect(() => {}, [filters]);
 
@@ -290,10 +291,10 @@ const AllProducts = () => {
         .filter((v) => v !== null)
         .map((x) => parseInt(x));
 
-        let rangeValues = [];
-        let newRangeValues = [];
-        rangeValues = allProducts.map((p) => p.fn_get_products.range_id);
-        newRangeValues = [...new Set(rangeValues)].filter((v) => v !== null);
+      let rangeValues = [];
+      let newRangeValues = [];
+      rangeValues = allProducts.map((p) => p.fn_get_products.range_id);
+      newRangeValues = [...new Set(rangeValues)].filter((v) => v !== null);
 
       setUpdatedValues((prev) => {
         return {
@@ -307,9 +308,7 @@ const AllProducts = () => {
             installationType || glassOrientationType
               ? prev.glassOrientationValues
               : newGlassValues,
-              rangeValues: rangeType
-              ? prev.rangeValues
-              : newRangeValues,
+          rangeValues: rangeType ? prev.rangeValues : newRangeValues,
         };
       });
     };
@@ -359,12 +358,14 @@ const AllProducts = () => {
   // console.log(updatedValues);
   const [refreshPage, setRefreshPage] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
-  const [isFilter, setIsFilter] = useState(true);
+  const [isFilter, setIsFilter] = useState(
+    window.innerWidth <= 768 ? false : true
+  );
   const [isSort, setIsSort] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(
     allProducts?.slice(0, 12)
   );
-
+  console.log("isFilter in outer", isFilter);
   const [compareProducts, setCompareProducts] = useState([]);
   const [allProductsTemp, setAllProductsTemp] = useState([]);
   const [allProductsTempForSubType, setAllProductsTempForSubType] = useState(
@@ -385,7 +386,11 @@ const AllProducts = () => {
         !fireplaceType
       )
         return;
-      setIsFilter(true);
+      if (window.innerWidth <= 768) {
+        setIsFilter(false);
+      } else {
+        setIsFilter(true);
+      }
     };
     checkFitlers();
   }, [searchText, productMenuIndex, brandType, fireplaceType]);
@@ -501,7 +506,7 @@ const AllProducts = () => {
   };
 
   const clearFilters = () => {
-    sessionStorage.removeItem('filtersJson');
+    sessionStorage.removeItem("filtersJson");
     sessionStorage.clear();
     setFireplaceType(null);
     setBrandType(null);
@@ -606,6 +611,9 @@ const AllProducts = () => {
                         productMenu.ptype_name,
                         productMenu.ptype_id
                       );
+                      if (window.innerWidth <= 768) {
+                        setIsFilter(false);
+                      }
                     }}
                   >
                     {productMenu.ptype_name === "Fire Tools"
@@ -788,6 +796,9 @@ const AllProducts = () => {
                         updateQueryParams({
                           searchText: searchRef.current.value?.toLowerCase(),
                         });
+                        if (window.innerWidth <= 768) {
+                          setIsFilter(false);
+                        }
                       }}
                       unoptimized
                     />
@@ -802,38 +813,40 @@ const AllProducts = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                           {"Fireplace Type"}
-                          {isClient && !document
-                            .getElementById("fireplaceFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <Image
-                              src={MinusIcon}
-                              alt="clear"
-                              className="md:pt-1 cursor-pointer"
-                              onClick={() => {
-                                setRefreshPage((prev) => !prev);
-                                document
-                                  .getElementById("fireplaceFilterId")
-                                  .classList.add("collapse");
-                              }}
-                              unoptimized
-                            />
-                          )}
-                          {isClient && document
-                            .getElementById("fireplaceFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <Image
-                              src={PlusIcon}
-                              alt="clear"
-                              className="md:pt-1 cursor-pointer"
-                              onClick={() => {
-                                setRefreshPage((prev) => !prev);
-                                document
-                                  .getElementById("fireplaceFilterId")
-                                  .classList.remove("collapse");
-                              }}
-                              unoptimized
-                            />
-                          )}
+                          {isClient &&
+                            !document
+                              .getElementById("fireplaceFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={MinusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  document
+                                    .getElementById("fireplaceFilterId")
+                                    .classList.add("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                          {isClient &&
+                            document
+                              .getElementById("fireplaceFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  document
+                                    .getElementById("fireplaceFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
                         </span>
                         <div
                           id="fireplaceFilterId"
@@ -867,6 +880,9 @@ const AllProducts = () => {
                                                 val?.fueltype_name,
                                                 val?.fueltype_id
                                               );
+                                              if (window.innerWidth <= 768) {
+                                                setIsFilter(false);
+                                              }
                                               // updateQueryParams({
                                               //   fireplaceType: val?.fueltype_id,
                                               // });
@@ -892,6 +908,9 @@ const AllProducts = () => {
                                               val?.fueltype_name,
                                               val?.fueltype_id
                                             );
+                                            if (window.innerWidth <= 768) {
+                                              setIsFilter(false);
+                                            }
                                             // setInstallationType(null);
                                             // setglassOrientationType(null);
                                           }}
@@ -921,6 +940,9 @@ const AllProducts = () => {
                                           val?.fueltype_name,
                                           val?.fueltype_id
                                         );
+                                        if (window.innerWidth <= 768) {
+                                          setIsFilter(false);
+                                        }
                                         // setInstallationType(null);
                                         // setglassOrientationType(null);
                                       }}
@@ -938,41 +960,45 @@ const AllProducts = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
                           {`Installation Type`}
-                          {isClient &&!document
-                            .getElementById("installationTypeFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <div style={{ display: "flex", gap: "30px" }}>
+                          {isClient &&
+                            !document
+                              .getElementById("installationTypeFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <div style={{ display: "flex", gap: "30px" }}>
+                                <Image
+                                  src={MinusIcon}
+                                  alt="clear"
+                                  className="md:pt-1 cursor-pointer"
+                                  onClick={() => {
+                                    setRefreshPage((prev) => !prev);
+                                    document
+                                      .getElementById(
+                                        "installationTypeFilterId"
+                                      )
+                                      .classList.add("collapse");
+                                  }}
+                                  unoptimized
+                                />
+                              </div>
+                            )}
+
+                          {isClient &&
+                            document
+                              .getElementById("installationTypeFilterId")
+                              ?.classList?.contains("collapse") && (
                               <Image
-                                src={MinusIcon}
+                                src={PlusIcon}
                                 alt="clear"
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
                                   document
                                     .getElementById("installationTypeFilterId")
-                                    .classList.add("collapse");
+                                    .classList.remove("collapse");
                                 }}
                                 unoptimized
                               />
-                            </div>
-                          )}
-
-                          {isClient && document
-                            .getElementById("installationTypeFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <Image
-                              src={PlusIcon}
-                              alt="clear"
-                              className="md:pt-1 cursor-pointer"
-                              onClick={() => {
-                                setRefreshPage((prev) => !prev);
-                                document
-                                  .getElementById("installationTypeFilterId")
-                                  .classList.remove("collapse");
-                              }}
-                              unoptimized
-                            />
-                          )}
+                            )}
                         </span>
                         <div
                           id="installationTypeFilterId"
@@ -1005,6 +1031,9 @@ const AllProducts = () => {
                                         installval?.installation_name,
                                         installval?.installation_id
                                       );
+                                      if (window.innerWidth <= 768) {
+                                        setIsFilter(false);
+                                      }
                                       // updateQueryParams({
                                       //   installationType:
                                       //     installval?.installation_id,
@@ -1025,12 +1054,34 @@ const AllProducts = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
                           {`Glass Orientation Type`}
-                          {isClient && !document
-                            .getElementById("glassOrientationTypeFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <div style={{ display: "flex", gap: "30px" }}>
+                          {isClient &&
+                            !document
+                              .getElementById("glassOrientationTypeFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <div style={{ display: "flex", gap: "30px" }}>
+                                <Image
+                                  src={MinusIcon}
+                                  alt="clear"
+                                  className="md:pt-1 cursor-pointer"
+                                  onClick={() => {
+                                    setRefreshPage((prev) => !prev);
+                                    document
+                                      .getElementById(
+                                        "glassOrientationTypeFilterId"
+                                      )
+                                      .classList.add("collapse");
+                                  }}
+                                  unoptimized
+                                />
+                              </div>
+                            )}
+
+                          {isClient &&
+                            document
+                              .getElementById("glassOrientationTypeFilterId")
+                              ?.classList?.contains("collapse") && (
                               <Image
-                                src={MinusIcon}
+                                src={PlusIcon}
                                 alt="clear"
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
@@ -1039,31 +1090,11 @@ const AllProducts = () => {
                                     .getElementById(
                                       "glassOrientationTypeFilterId"
                                     )
-                                    .classList.add("collapse");
+                                    .classList.remove("collapse");
                                 }}
                                 unoptimized
                               />
-                            </div>
-                          )}
-
-                          {isClient && document
-                            .getElementById("glassOrientationTypeFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <Image
-                              src={PlusIcon}
-                              alt="clear"
-                              className="md:pt-1 cursor-pointer"
-                              onClick={() => {
-                                setRefreshPage((prev) => !prev);
-                                document
-                                  .getElementById(
-                                    "glassOrientationTypeFilterId"
-                                  )
-                                  .classList.remove("collapse");
-                              }}
-                              unoptimized
-                            />
-                          )}
+                            )}
                         </span>
                         <div
                           id="glassOrientationTypeFilterId"
@@ -1101,6 +1132,9 @@ const AllProducts = () => {
                                         glassval?.glass_orientation_name,
                                         glassval?.glass_orientation_id
                                       );
+                                      if (window.innerWidth <= 768) {
+                                        setIsFilter(false);
+                                      }
                                     }}
                                   >
                                     {glassval?.glass_orientation_name}
@@ -1117,41 +1151,43 @@ const AllProducts = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
                           {`Ranges`}
-                          {isClient && !document
-                            .getElementById("rangesFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <div style={{ display: "flex", gap: "30px" }}>
+                          {isClient &&
+                            !document
+                              .getElementById("rangesFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <div style={{ display: "flex", gap: "30px" }}>
+                                <Image
+                                  src={MinusIcon}
+                                  alt="clear"
+                                  className="md:pt-1 cursor-pointer"
+                                  onClick={() => {
+                                    setRefreshPage((prev) => !prev);
+                                    document
+                                      .getElementById("rangesFilterId")
+                                      .classList.add("collapse");
+                                  }}
+                                  unoptimized
+                                />
+                              </div>
+                            )}
+
+                          {isClient &&
+                            document
+                              .getElementById("rangesFilterId")
+                              ?.classList?.contains("collapse") && (
                               <Image
-                                src={MinusIcon}
+                                src={PlusIcon}
                                 alt="clear"
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
                                   document
                                     .getElementById("rangesFilterId")
-                                    .classList.add("collapse");
+                                    .classList.remove("collapse");
                                 }}
                                 unoptimized
                               />
-                            </div>
-                          )}
-
-                          {isClient && document
-                            .getElementById("rangesFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <Image
-                              src={PlusIcon}
-                              alt="clear"
-                              className="md:pt-1 cursor-pointer"
-                              onClick={() => {
-                                setRefreshPage((prev) => !prev);
-                                document
-                                  .getElementById("rangesFilterId")
-                                  .classList.remove("collapse");
-                              }}
-                              unoptimized
-                            />
-                          )}
+                            )}
                         </span>
                         <div
                           id="rangesFilterId"
@@ -1193,6 +1229,9 @@ const AllProducts = () => {
                                       val?.range_name,
                                       val?.range_id
                                     );
+                                    if (window.innerWidth <= 768) {
+                                      setIsFilter(false);
+                                    }
                                   }}
                                 >
                                   {val?.range_name}
@@ -1209,38 +1248,40 @@ const AllProducts = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 ">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                           Brands{" "}
-                          {isClient && !document
-                            .getElementById("brandsFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <Image
-                              src={MinusIcon}
-                              alt="clear"
-                              className="md:pt-1 cursor-pointer"
-                              onClick={() => {
-                                setRefreshPage((prev) => !prev);
-                                document
-                                  .getElementById("brandsFilterId")
-                                  .classList.add("collapse");
-                              }}
-                              unoptimized
-                            />
-                          )}
-                          {isClient && document
-                            .getElementById("brandsFilterId")
-                            ?.classList?.contains("collapse") && (
-                            <Image
-                              src={PlusIcon}
-                              alt="clear"
-                              className="md:pt-1 cursor-pointer"
-                              onClick={() => {
-                                setRefreshPage((prev) => !prev);
-                                document
-                                  .getElementById("brandsFilterId")
-                                  .classList.remove("collapse");
-                              }}
-                              unoptimized
-                            />
-                          )}
+                          {isClient &&
+                            !document
+                              .getElementById("brandsFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={MinusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  document
+                                    .getElementById("brandsFilterId")
+                                    .classList.add("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                          {isClient &&
+                            document
+                              .getElementById("brandsFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  document
+                                    .getElementById("brandsFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
                         </span>
                         <div
                           id="brandsFilterId"
@@ -1277,6 +1318,9 @@ const AllProducts = () => {
                                     val?.brand_name,
                                     val?.brand_id
                                   );
+                                  if (window.innerWidth <= 768) {
+                                    setIsFilter(false);
+                                  }
                                 }}
                               >
                                 {val?.brand_name}
@@ -1294,38 +1338,40 @@ const AllProducts = () => {
                   >
                     <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                       Others{" "}
-                      {isClient && !document
-                        .getElementById("otherFilterId")
-                        ?.classList?.contains("collapse") && (
-                        <Image
-                          src={MinusIcon}
-                          alt="clear"
-                          className="md:pt-1 cursor-pointer"
-                          onClick={() => {
-                            setRefreshPage((prev) => !prev);
-                            document
-                              .getElementById("otherFilterId")
-                              .classList.add("collapse");
-                          }}
-                          unoptimized
-                        />
-                      )}
-                      {isClient && document
-                        .getElementById("otherFilterId")
-                        ?.classList?.contains("collapse") && (
-                        <Image
-                          src={PlusIcon}
-                          alt="clear"
-                          className="md:pt-1 cursor-pointer"
-                          onClick={() => {
-                            setRefreshPage((prev) => !prev);
-                            document
-                              .getElementById("otherFilterId")
-                              .classList.remove("collapse");
-                          }}
-                          unoptimized
-                        />
-                      )}
+                      {isClient &&
+                        !document
+                          .getElementById("otherFilterId")
+                          ?.classList?.contains("collapse") && (
+                          <Image
+                            src={MinusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("otherFilterId")
+                                .classList.add("collapse");
+                            }}
+                            unoptimized
+                          />
+                        )}
+                      {isClient &&
+                        document
+                          .getElementById("otherFilterId")
+                          ?.classList?.contains("collapse") && (
+                          <Image
+                            src={PlusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("otherFilterId")
+                                .classList.remove("collapse");
+                            }}
+                            unoptimized
+                          />
+                        )}
                     </span>
                     <div
                       id="otherFilterId"
@@ -1335,7 +1381,12 @@ const AllProducts = () => {
                         className={`font-sans font-small leading-5 text-normal cursor-pointer ${
                           bestSelling ? "font-semibold" : ""
                         }`}
-                        onClick={() => sortProducts(SORTBY.bestSelling)}
+                        onClick={() => {
+                          if (window.innerWidth <= 768) {
+                            setIsFilter(false);
+                          }
+                          sortProducts(SORTBY.bestSelling);
+                        }}
                       >
                         Best Selling
                       </span>
@@ -1350,39 +1401,41 @@ const AllProducts = () => {
                   >
                     <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
                       Sort By{" "}
-                      {isClient && !document
-                        .getElementById("sortbyFilterId")
-                        ?.classList?.contains("collapse") && (
-                        <Image
-                          src={MinusIcon}
-                          alt="clear"
-                          className="md:pt-1 cursor-pointer"
-                          onClick={() => {
-                            setRefreshPage((prev) => !prev);
-                            document
-                              .getElementById("sortbyFilterId")
-                              .classList.add("collapse");
-                            setIsSort(false);
-                          }}
-                          unoptimized
-                        />
-                      )}
-                      {isClient && document
-                        .getElementById("sortbyFilterId")
-                        ?.classList?.contains("collapse") && (
-                        <Image
-                          src={PlusIcon}
-                          alt="clear"
-                          className="md:pt-1 cursor-pointer"
-                          onClick={() => {
-                            setRefreshPage((prev) => !prev);
-                            document
-                              .getElementById("sortbyFilterId")
-                              .classList.remove("collapse");
-                          }}
-                          unoptimized
-                        />
-                      )}
+                      {isClient &&
+                        !document
+                          .getElementById("sortbyFilterId")
+                          ?.classList?.contains("collapse") && (
+                          <Image
+                            src={MinusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("sortbyFilterId")
+                                .classList.add("collapse");
+                              setIsSort(false);
+                            }}
+                            unoptimized
+                          />
+                        )}
+                      {isClient &&
+                        document
+                          .getElementById("sortbyFilterId")
+                          ?.classList?.contains("collapse") && (
+                          <Image
+                            src={PlusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("sortbyFilterId")
+                                .classList.remove("collapse");
+                            }}
+                            unoptimized
+                          />
+                        )}
                     </span>
                     <div
                       id="sortbyFilterId"

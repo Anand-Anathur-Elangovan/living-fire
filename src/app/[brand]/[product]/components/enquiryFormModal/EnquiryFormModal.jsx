@@ -122,7 +122,119 @@
 // };
 
 // export default EnquiryFormModal;
-import React, { useState } from "react";
+// import React, { useState } from "react";
+// import Image from "next/image";
+// import close from "@/public/assets/product/close.svg";
+// import styles from "./EnquiryFormModal.module.css";
+
+// const EnquiryFormModal = ({ isOpen, onClose, name, brand_name }) => {
+//   const [formData, setFormData] = useState({
+//     serviceName: "Enquiry Service",
+//     product: `${name} - ${brand_name}`, // Pre-filled product info
+//     userName: "",
+//     phone: "",
+//     email: "",
+//     message: "",
+//   });
+
+//   if (!isOpen) return null;
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await fetch("/api/send-email", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(formData),
+//       });
+
+//       if (response.ok) {
+//         alert("Your message has been sent!");
+//         setFormData({
+//           serviceName: "Enquiry Service",
+//           product: `${name} - ${brand_name}`,
+//           userName: "",
+//           phone: "",
+//           email: "",
+//           message: "",
+//         });
+//         onClose();
+//       } else {
+//         alert("There was an issue sending your message.");
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert("An error occurred while sending your message.");
+//     }
+//   };
+
+//   return (
+//     <div className={styles.modalOverlay}>
+//       <div className={styles.modalContainer}>
+//         <button className={styles.closeButton} onClick={onClose}>
+//           <Image src={close} alt="Close" width={28} height={28} unoptimized />
+//         </button>
+//         <h2 className={styles.title}>SEND AN ENQUIRY</h2>
+//         <p className={styles.productName}>{formData.product}</p>
+//         <form onSubmit={handleSubmit}>
+//           <div className={styles.row}>
+//             <div className={styles.inputField}>
+//               <input
+//                 type="text"
+//                 name="userName"
+//                 placeholder="Name *"
+//                 required
+//                 value={formData.userName}
+//                 onChange={handleChange}
+//               />
+//             </div>
+//             <div className={styles.inputField}>
+//               <input
+//                 type="text"
+//                 name="phone"
+//                 placeholder="Phone *"
+//                 required
+//                 value={formData.phone}
+//                 onChange={handleChange}
+//               />
+//             </div>
+//           </div>
+//           <div className={styles.inputField}>
+//             <input
+//               type="email"
+//               name="email"
+//               placeholder="Email *"
+//               required
+//               value={formData.email}
+//               onChange={handleChange}
+//             />
+//           </div>
+//           <div className={styles.inputField}>
+//             <textarea
+//               name="message"
+//               placeholder="Message *"
+//               required
+//               value={formData.message}
+//               onChange={handleChange}
+//             />
+//           </div>
+//           <button className={styles.submitButton} type="submit">
+//             SEND
+//           </button>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default EnquiryFormModal;
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import close from "@/public/assets/product/close.svg";
 import styles from "./EnquiryFormModal.module.css";
@@ -130,14 +242,26 @@ import styles from "./EnquiryFormModal.module.css";
 const EnquiryFormModal = ({ isOpen, onClose, name, brand_name }) => {
   const [formData, setFormData] = useState({
     serviceName: "Enquiry Service",
-    product: `${name} - ${brand_name}`, // Pre-filled product info
+    product: `${name} - ${brand_name}`,
     userName: "",
     phone: "",
     email: "",
     message: "",
   });
+  const [isMounted, setIsMounted] = useState(false);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      setIsMounted(true);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -173,11 +297,19 @@ const EnquiryFormModal = ({ isOpen, onClose, name, brand_name }) => {
     }
   };
 
+  if (!isOpen && !isMounted) return null;
+
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContainer}>
+    <div className={`${styles.modalOverlay} ${isOpen ? styles.show : styles.hide}`}>
+      <div className={`${styles.modalContainer} ${isOpen ? styles.show : styles.hide}`}>
         <button className={styles.closeButton} onClick={onClose}>
-          <Image src={close} alt="Close" width={28} height={28} unoptimized />
+          <Image 
+            src={close} 
+            alt="Close" 
+            width={24} 
+            height={24} 
+            loading="lazy"
+          />
         </button>
         <h2 className={styles.title}>SEND AN ENQUIRY</h2>
         <p className={styles.productName}>{formData.product}</p>
@@ -195,7 +327,7 @@ const EnquiryFormModal = ({ isOpen, onClose, name, brand_name }) => {
             </div>
             <div className={styles.inputField}>
               <input
-                type="text"
+                type="tel"
                 name="phone"
                 placeholder="Phone *"
                 required
@@ -232,4 +364,4 @@ const EnquiryFormModal = ({ isOpen, onClose, name, brand_name }) => {
   );
 };
 
-export default EnquiryFormModal;
+export default React.memo(EnquiryFormModal);
