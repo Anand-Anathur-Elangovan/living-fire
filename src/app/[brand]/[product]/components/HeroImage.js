@@ -222,9 +222,8 @@ const HeroImage = ({ src, alt }) => {
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 5000,
-    arrows: true,
+    arrows: false,
     afterChange: (index) => setCurrentImageIndex(index),
-    
   };
 
   const popupSettings = {
