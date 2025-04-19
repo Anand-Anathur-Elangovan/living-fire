@@ -268,7 +268,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setHover(true);
-    }, 1500);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
   
