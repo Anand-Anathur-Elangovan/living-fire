@@ -67,6 +67,62 @@ const filterMappingsMock = [
   { id: 4, value: "Morso", filterType: "brand" },
   { id: 10, value: "Regency", filterType: "brand" },
   { id: 5, value: "Stovax", filterType: "brand" },
+  { id: 1, value: "Firepit", filterType: "rangeType" },
+  { id: 2, value: "Heatmaster Wood", filterType: "rangeType" },
+  { id: 3, value: "Studio 2", filterType: "rangeType" },
+  { id: 4, value: "Greenfire", filterType: "rangeType" },
+  { id: 5, value: "City Series", filterType: "rangeType" },
+  { id: 6, value: "Heatmaster Gas", filterType: "rangeType" },
+  { id: 7, value: "ilektro Freestanding", filterType: "rangeType" },
+  { id: 8, value: "Aerion", filterType: "rangeType" },
+  { id: 9, value: "ilektro insert", filterType: "rangeType" },
+  { id: 10, value: "Hestia", filterType: "rangeType" },
+  { id: 11, value: "Pyro", filterType: "rangeType" },
+  { id: 12, value: "ilektro", filterType: "rangeType" },
+  { id: 13, value: "ilektro Slimline", filterType: "rangeType" },
+  { id: 14, value: "Ironheart Range", filterType: "rangeType" },
+  { id: 15, value: "Aere", filterType: "rangeType" },
+  { id: 16, value: "Churchill", filterType: "rangeType" },
+  { id: 17, value: "E-Series", filterType: "rangeType" },
+  { id: 18, value: "eStudio", filterType: "rangeType" },
+  { id: 19, value: "Glance", filterType: "rangeType" },
+  { id: 20, value: "Hayra", filterType: "rangeType" },
+  { id: 21, value: "Linea", filterType: "rangeType" },
+  { id: 22, value: "Nero", filterType: "rangeType" },
+  { id: 23, value: "Onyx", filterType: "rangeType" },
+  { id: 24, value: "Siena", filterType: "rangeType" },
+  { id: 25, value: "Slimline", filterType: "rangeType" },
+  { id: 26, value: "zenitth", filterType: "rangeType" },
+  { id: 27, value: "Cocoon Pedestal", filterType: "rangeType" },
+  { id: 28, value: "Vellum", filterType: "rangeType" },
+  { id: 29, value: "1000", filterType: "rangeType" },
+  { id: 30, value: "Regency Wood", filterType: "rangeType" },
+  { id: 31, value: "Regency Gas", filterType: "rangeType" },
+  { id: 32, value: "Regency Electric", filterType: "rangeType" },
+  { id: 33, value: "Forno", filterType: "rangeType" },
+  { id: 34, value: "Ignis", filterType: "rangeType" },
+  { id: 35, value: "Kamino", filterType: "rangeType" },
+  { id: 36, value: "Lanterns", filterType: "rangeType" },
+  { id: 37, value: "Morso Grill 17", filterType: "rangeType" },
+  { id: 38, value: "Tuscan", filterType: "rangeType" },
+  { id: 39, value: "Austroflamm Wood", filterType: "rangeType" },
+  { id: 40, value: "Dexter", filterType: "rangeType" },
+  { id: 41, value: "Kalora Wood", filterType: "rangeType" },
+  { id: 42, value: "Chalet", filterType: "rangeType" },
+  { id: 43, value: "Urban", filterType: "rangeType" },
+  { id: 44, value: "Kalora Gas", filterType: "rangeType" },
+  { id: 45, value: "Zenith", filterType: "rangeType" },
+  { id: 46, value: "Nexus", filterType: "rangeType" },
+  { id: 47, value: "Alto", filterType: "rangeType" },
+  { id: 48, value: "Quadro", filterType: "rangeType" },
+  { id: 49, value: "Vue", filterType: "rangeType" },
+  { id: 50, value: "Modica", filterType: "rangeType" },
+  { id: 51, value: "Petra", filterType: "rangeType" },
+  { id: 52, value: "Hergom Fire Pits", filterType: "rangeType" },
+  { id: 53, value: "Pyro Cast", filterType: "rangeType" },
+  { id: 54, value: "Ironheart", filterType: "rangeType" },
+  { id: 55, value: "Bakeheart", filterType: "rangeType" },
+  { id: 56, value: "Warmheart", filterType: "rangeType" },
 ];
 
 const Filters = () => {
@@ -106,7 +162,6 @@ const Filters = () => {
     installationType ?? 0,
     glassOrientationType ?? 0
   );
-  console.log("isLoading", isLoading);
   useEffect(() => {
     const pathSegments = pathname
       .split("/")
@@ -143,6 +198,9 @@ const Filters = () => {
     const brandFilter = extractedFilters.find(
       (filter) => filter.filterType === "brand"
     );
+    const rangeFilter = extractedFilters.find(
+      (filter) => filter.filterType === "rangeType"
+    );
     if (typeFilter) {
       setproductMenuIndex(typeFilter.id);
     }
@@ -158,6 +216,10 @@ const Filters = () => {
     if (brandFilter) {
       setBrandType(brandFilter?.id);
     }
+    if (rangeFilter) {
+      setRangeType(rangeFilter?.id);
+    }
+    
     let values = [];
     let newFuelValues = [];
     values = allProducts.map((p) => p.fn_get_products?.fueltype_id);
@@ -186,7 +248,6 @@ const Filters = () => {
       });
   }, [pathname]);
 
-  // console.log("filters", filters);
 
   useEffect(() => {}, [filters]);
 
@@ -234,6 +295,12 @@ const Filters = () => {
         .filter((v) => v !== null)
         .map((x) => parseInt(x));
 
+        let rangeValues = [];
+        let newRangeValues = [];
+        rangeValues = allProducts.map((p) => p.fn_get_products.range_id);
+        newRangeValues = [...new Set(rangeValues)].filter((v) => v !== null);
+
+        
       setUpdatedValues((prev) => {
         return {
           ...prev,
@@ -246,6 +313,9 @@ const Filters = () => {
             installationType || glassOrientationType
               ? prev.glassOrientationValues
               : newGlassValues,
+              rangeValues: rangeType
+              ? prev.rangeValues
+              : newRangeValues,
         };
       });
     };
@@ -266,7 +336,6 @@ const Filters = () => {
     router.push(`/allProducts/${path}`);
   }
 
-  // console.log("allProducts", allProducts, allProducts?.length, brandType);
   const {
     brands,
     masterValues: {
@@ -277,7 +346,14 @@ const Filters = () => {
       glassOrientationTypes,
     },
   } = useMasterValues(productMenuIndex);
-  console.log("ranges", JSON.stringify(ranges))
+
+  // const transformed = ranges.map((item) => ({
+  //   id: item.range_id,
+  //   value: item.range_name,
+  //   filterType: "rangeType",
+  // }));
+
+  // console.log(JSON.stringify(transformed));
   //   const searchParams = useSearchParams();
   const updateQueryParams = (params) => {
     const currentParams = new URLSearchParams(searchParams.toString());
@@ -292,7 +368,6 @@ const Filters = () => {
     router.push(`?${currentParams.toString()}`, { shallow: true });
   };
 
-  // console.log(updatedValues);
   const [refreshPage, setRefreshPage] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(true);
@@ -486,7 +561,6 @@ const Filters = () => {
   //       productMenuIndex: productMenuIndex,
   //     });
   // }, [productMenuIndex]);
-  // console.log("fuelTypes", fuelTypes, "brands", brands);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -1136,7 +1210,6 @@ const Filters = () => {
                               className="font-sans font-normal font-small leading-5 text-base text-black"
                               // onClick={() => setBrandType(val?.brand_id)}
                             >
-                             
                               {
                                 ranges?.find((b) => b?.range_id === rangeType)
                                   ?.range_name
@@ -1158,10 +1231,15 @@ const Filters = () => {
                                   key={"ranges" + val?.range_id}
                                   className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                                   onClick={() => {
-                                    setRangeType(val?.range_id);
-                                    updateQueryParams({
-                                      rangeType: val?.range_id,
-                                    });
+                                    // setRangeType(val?.range_id);
+                                    // updateQueryParams({
+                                    //   rangeType: val?.range_id,
+                                    // });
+                                    updateFilter(
+                                      "rangeType",
+                                      val?.range_name,
+                                      val?.range_id
+                                    );
                                   }}
                                 >
                                   {val?.range_name}
@@ -1425,7 +1503,7 @@ const Filters = () => {
                   minHeight="200px"
                   width="100%"
                 >
-                  <CircularProgress sx={{color:"black"}}/>
+                  <CircularProgress sx={{ color: "black" }} />
                 </Box>
               ) : (
                 filteredProducts?.map((product, index) => (
