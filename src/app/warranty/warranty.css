@@ -1,4 +1,4 @@
-.warrenty-page {
+/* .warrenty-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -259,4 +259,311 @@ form {
     padding-left: 56px;
     padding-right: 56px;
   }
+} */
+
+.warrenty-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+  padding-bottom: 60px;
+  background-color: #f7f7f5;
+  overflow-x: hidden;
+}
+
+.warrenty-form {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+label {
+  color: #878e96;
+  border-bottom: 1px solid #000000;
+  height: 40px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+input:focus {
+  outline: none;
+}
+
+[type="text"],
+input:not([type]),
+[type="email"],
+[type="url"],
+[type="password"],
+[type="number"],
+[type="date"],
+[type="datetime-local"],
+[type="month"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="week"],
+[multiple],
+textarea,
+select,
+button {
+  appearance: none;
+  background-color: transparent;
+  border-color: unset;
+  border-width: 0;
+  border-radius: unset;
+  padding: unset;
+  font-size: unset;
+  line-height: unset;
+  color: inherit;
+  width: 100%;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+select[multiple]:focus-visible {
+  outline: none;
+}
+
+.column1,
+.column2 {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.column1 {
+  gap: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.column2 {
+  margin-top: 40px;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.columnsubmit {
+  gap: 32px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.columnform {
+  gap: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.columnstreetadd {
+  gap: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.submitBtn {
+  background-color: #000000;
+  color: #ffffff;
+  height: 52px;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 14px;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.textarea {
+  color: #878e96;
+  border: 1px solid #000000;
+  width: 100%;
+  height: 120px;
+  font-size: 15px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.warrenty-title-left {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 140%;
+}
+
+.accc-web {
+  display: inline;
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.warrentyFormHeading .heading {
+  color: #000000 !important;
+  margin-bottom: 16px;
+  font-family: Satoru !important;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.warrenty-form .desc {
+  color: #000000 !important;
+  text-align: justify;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  border: none;
+}
+
+.columnaustralia,
+.columnpaulagnew {
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: calc(100% - 8px);
+  color: #878e96;
+  border-bottom: 1px solid #000000;
+  padding: 0 8px;
+  height: 40px;
+}
+
+.warrentyTitle {
+  font-family: Satoru;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 25px;
+}
+
+.form_three {
+  color: #878e96;
+  border-bottom: 1px solid #000000;
+  height: 40px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 15px;
+  width: 100%;
+}
+
+.choosefile {
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.popsection .text {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 22.4px;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.popsection .button {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid #000000;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rowform_three,
+.rowphonenumber {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.streetaddress {
+  width: 100%;
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 600px) {
+  .warrentyTitle {
+    font-size: 60px;
+  }
+
+  .rowform_three,
+  .rowphonenumber {
+    flex-direction: row;
+    gap: 25px;
+  }
+
+  .form_three {
+    width: calc(50% - 12.5px);
+  }
+
+  .dropdown {
+    width: calc(50% - 12.5px);
+  }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 1024px) {
+  .warrenty-page {
+    margin-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  .warrenty-form {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    flex-direction: row;
+  }
+
+  .warrentyTitle {
+    font-size: 90px;
+    line-height: 140px;
+  }
+
+  .column1 {
+    width: 50%;
+    padding: 0 56px;
+  }
+
+  .column2 {
+    width: 50%;
+    margin-top: 0;
+    padding: 0 56px;
+  }
+}
+
+/* Animation Styles */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

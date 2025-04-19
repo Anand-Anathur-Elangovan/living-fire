@@ -136,6 +136,15 @@
     backdrop-filter: none;
     opacity: 1;
   }
+  .scrolled {
+    position: fixed; /* Set to fixed to avoid glitches with 'sticky' */
+    top: 0;
+    transform: translateY(0); /* Ensures it stays at the top smoothly */
+    background: white; /* Transparent, you can add blur effect */
+    /* backdrop-filter: blur(10px); */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    opacity: 1; /* Keep opacity at 1 for smooth transition */
+  }
   .logo {
     padding: 0 0 0 20px;
   }
