@@ -1,7 +1,5 @@
-/* Make sure the parent container has a positioning context */
-.parent-container {
+/* .parent-container {
   position: relative;
-  /* Ensure this exists if it's a parent container */
 }
 
 .desc-column {
@@ -13,11 +11,7 @@
 
   position: relative;
   width: 50%;
-  /* height: 95vh; */
   left: 100px;
-  /* Adjust if necessary */
-  /* bottom: 220px; */
-  /* top: 40px; */
 }
 
 .columndesc {
@@ -50,7 +44,6 @@
   font-size: 1rem;
 }
 
-/* Add a local class for the list */
 .distanceList {
   font-size: 1rem;
   color: black;
@@ -59,4 +52,161 @@
 .columndesc ul {
   list-style-type: disc;
   margin-left: 1.5rem;
+} */
+
+.parent-container {
+  position: relative;
+}
+
+.desc-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.columndesc {
+  margin-bottom: 1.5rem;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.materialfinish {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.distance {
+  font-size: 1rem;
+  color: #555;
+}
+
+.size-h6 {
+  font-size: 1.2rem;
+}
+
+.size-body_medium {
+  font-size: 1rem;
+}
+
+.distanceList {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.columndesc ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+/* Skeleton Loader */
+.skeletonLoader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeletonItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeletonTitle {
+  height: 24px;
+  width: 60%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeletonContent {
+  height: 16px;
+  width: 100%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .desc-column {
+    width: 45%;
+    padding: 0 40px 0 0;
+    margin: 0 auto 0 0;
+  }
+  
+  .materialfinish {
+    font-size: 1.1rem;
+  }
+  
+  .description, .distanceList {
+    font-size: 0.95rem;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+  .desc-column {
+    width: 45%;
+    padding: 0 60px 0 0;
+    margin: 0 auto 0 100px;
+    left: 0;
+    right: auto;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  .desc-column {
+    padding: 0 15px;
+    gap: 15px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .columndesc {
+    margin-bottom: 1rem;
+    gap: 12px;
+  }
+  
+  .materialfinish {
+    font-size: 1rem;
+  }
+  
+  .description, .distanceList {
+    font-size: 0.9rem;
+  }
+  
+  .columndesc ul {
+    margin-left: 1rem;
+  }
 }
