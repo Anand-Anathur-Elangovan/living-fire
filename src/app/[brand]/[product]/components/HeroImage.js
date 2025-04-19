@@ -421,6 +421,21 @@ const HeroImage = ({ src, alt }) => {
           .slick-dots li button:before {
             font-size: 10px;
           }
+          .slick-slide img {
+           display: block;
+           height: 300px !important
+         }
+         .popup-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 90%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.9);
+          backdrop-filter: blur(5px);
+          /* margin-top: 10%; */
+          padding: 50% 12% 0% 0%
+        }
         }
       `}</style>
     </>

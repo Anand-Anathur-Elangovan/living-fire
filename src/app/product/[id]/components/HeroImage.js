@@ -158,7 +158,7 @@ const HeroImage = ({ src, alt }) => {
         }
         .slick-slide img {
           display: block;
-          height: 600px !important;
+          /* height: 600px !important; */
         }
       `}</style>
     </>

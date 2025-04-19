@@ -612,3 +612,9 @@
     gap: 10px;
   }
 }
+@media (max-width: 480px) {
+  .slick-slide img {
+   display: block;
+   height: 300px !important
+ }
+}
