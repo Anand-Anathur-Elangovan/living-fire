@@ -31,6 +31,8 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
     false,
     searchText,
     0,
+    0, 
+    0, 
     0
   );
 
@@ -214,7 +216,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                       if (val?.fueltype_name !== "Hybrid - Wood/Electric")
                         return (
                           <a
-                            href={`/allProducts?fireplaceType=${val.fueltype_id}`}
+                            href={`/allProducts/${val.fueltype_name}`}
                             key={"types" + val.fueltype_id}
                           >
                             <p
@@ -234,7 +236,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                   <div className="columnbodysmall">
                     {allProductMenu.map((productMenu, index) => (
                       <a
-                        href={`/allProducts?productMenu=${productMenu.ptype_id}`}
+                        href={`/allProducts/${productMenu.ptype_name}`}
                         key={"productTypes" + index}
                       >
                         <p className="bodysmall ui text size-body_small">
@@ -253,7 +255,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                   {brands.map((val, index) => (
                     <a
                       key={"brands" + val.brand_id}
-                      href={`/allProducts?brand=${val.brand_id}`}
+                      href={`/allProducts/${val.brand_name}`}
                     >
                       <p className="bodysmall ui text size-body_small">
                         {val.brand_name}
