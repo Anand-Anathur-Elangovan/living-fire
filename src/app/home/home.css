@@ -34,7 +34,6 @@
   margin: 0 auto;
 }
 
-/* Full page setup */
 .home-page {
   position: relative;
   width: 100%;
@@ -465,14 +464,10 @@
   }
 }
 
-@media (max-width: 480px) {
-  text-group h1 {
-    font-size: 80px;
-  }
-}
 
 
-/* Hero content styles */
+
+
 .hero-content {
   color: #000;
   display: flex;
@@ -499,8 +494,8 @@
   margin: 0 auto;
 }
 
-/* Responsive styles */
-@media (max-width: 1024px) { /* Tablet */
+
+@media (max-width: 1024px) {
   .hero-content {
     height: 60vh;
   }
@@ -515,13 +510,13 @@
   }
 }
 
-@media (max-width: 768px) { /* Large Mobile */
+@media (max-width: 768px) { 
   .hero-content {
     height: 70vh;
     padding-top: 60px;
-    justify-content: center; /* Changed from flex-start to center */
-    align-items: center; /* Changed from flex-start to center */
-    text-align: center; /* Changed from left to center */
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
   }
   
   .hero h1 {
@@ -535,26 +530,8 @@
   }
 }
 
-@media (max-width: 480px) { /* Small Mobile */
-  .hero-content {
-    height: 80vh;
-    padding-top: 40px;
-    justify-content: center; /* Changed from flex-start to center */
-    align-items: center; /* Changed from flex-start to center */
-    text-align: center; /* Changed from left to center */
-  }
-  
-  .hero h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .hero p {
-    font-size: 0.9rem;
-  }
-}
 
-/* Button group fade animation */
+
 .button-group {
   position: absolute;
   bottom: 80px;
@@ -567,7 +544,7 @@
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(10px);
   gap: 10px;
-  transition: opacity 1s linear !important; /* Changed to linear for pure fade */
+  transition: opacity 1s linear !important; 
 }
 
 @media (max-width: 768px) {
@@ -582,5 +559,76 @@
   
   .button-group button {
     padding: 10px 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  text-group h1 {
+    font-size: 80px;
+  }
+}
+
+@media (max-width: 480px) { 
+
+  .hero-content {
+    height: 80vh;
+    padding-top: 40px;
+    justify-content: center;
+    align-items: center; 
+    text-align: center; 
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 380px) { 
+
+  .text-group h1 {
+    font-size: 70px;
+  }
+
+  .text-group-subheading {
+    position: absolute;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    top: 140px;
+    line-height: 32px;
+    font-size: 22px;
+    left: 75px;
+}
+
+  .button-group {
+    flex-direction: column;
+    left: 65%;
+    gap: 10px;
+    font-size: 20px;
+    width: 30%;
+    height: min-content;
+}
+
+  .hero-content {
+    height: 80vh;
+    padding-top: 40px;
+    justify-content: center;
+    align-items: center; 
+    text-align: center; 
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 0.9rem;
   }
 }
