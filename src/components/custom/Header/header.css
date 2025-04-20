@@ -151,7 +151,7 @@
   .close-icon {
     position: absolute;
     z-index: 3;
-    top: 50px;
+    top: 25px;
     right: 5%;
   }
   .menu .column2 {
@@ -165,8 +165,8 @@
     display: flex;
     position: absolute;
     /* line-height: normal; */
-    left: 20%;
-    top: 64%;
+    /* left: 20%;
+    top: 64%; */
   }
 }
 /* Menu container styles */
