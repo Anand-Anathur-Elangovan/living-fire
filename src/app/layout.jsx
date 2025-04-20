@@ -62,6 +62,7 @@ import Providers from "../helper/provider/providers";
 import { NavigationProvider } from "@/context/NavigationContext";
 import { Suspense } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script"; // ✅ import next/script
 
 // Local fonts
 const geistSans = localFont({
@@ -89,23 +90,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" style={{ backgroundColor: "#f7f7f5" }}>
       <head>
-        {/* Google tag (gtag.js) */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-XVDY2WJ890"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XVDY2WJ890');
-            `,
-          }}
-        />
-
-        {/* Load Google Fonts directly via <link> */}
+        {/* Load Google Fonts via <link> */}
         <link
           href="https://fonts.googleapis.com/css2?family=Satoru:wght@400&family=Public+Sans:wght@400&display=swap"
           rel="stylesheet"
@@ -114,6 +99,21 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XD9XM6CVMJ"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+        >{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XD9XM6CVMJ');
+        `}</Script>
+
         <NavigationProvider>
           <Providers>
             <div>
@@ -128,3 +128,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
