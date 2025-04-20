@@ -457,10 +457,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 100px;
+    top: 120px;
     line-height: 40px;
     font-size: 24px;
-    left: 84px;
+    left: 80px;
   }
 }
 
@@ -555,6 +555,14 @@
     font-size: 20px;
     width: 30%;
     height: min-content;
+    flex-direction: column;
+    left: 65%;
+    gap: 10px;
+    font-size: 20px;
+    width: 30%;
+    height: min-content;
+    justify-content: center;
+    align-items: center;
   }
   
   .button-group button {
