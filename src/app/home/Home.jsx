@@ -223,7 +223,7 @@ const Home = () => {
   const [showButtons, setShowButtons] = useState(false);
   const router = useRouter();
   const { setNavigationState } = useNavigationState();
-  
+
   useEffect(() => {
     if (hover) {
       setTimeout(() => {
@@ -244,12 +244,12 @@ const Home = () => {
       setZoomImage(false);
     }
   }, [hover]);
-  
+
   const {
     brands,
     masterValues: { fuelTypes, productTypes: allProductMenu },
   } = useMasterValues();
-  
+
   const allProductsRouteHandler = (typeName, displayName, arguId) => {
     setNavigationState({
       typeName: typeName,
@@ -258,20 +258,20 @@ const Home = () => {
     });
     router.push(`/allProducts/${displayName}`);
   };
-  
+
   const productRouteHandler = (ProductName, brandName) => {
     const formattedProductName = ProductName.replace(/\s+/g, "_");
     const formattedBrandName = brandName.replace(/\s+/g, "_");
     router.push(`/${formattedBrandName}/${formattedProductName}`);
   };
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setHover(true);
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
-  
+
   return (
     <div
       style={{
@@ -298,7 +298,7 @@ const Home = () => {
               transition={{ duration: 0.8 }}
             >
               <section className="hero">
-                <motion.div 
+                <motion.div
                   className="hero-content"
                   // initial={{ opacity: 0 }}
                   // animate={{ opacity: 1 }}
@@ -307,12 +307,13 @@ const Home = () => {
                 >
                   <h1>STUNNING FIREPLACES FOR ANY HOME.</h1>
                   <p>
-                    At Living Fire, we believe our work is complete only when our
-                    clients are enjoying the warmth of their new fireplace with a
-                    glass of wine in hand. To ensure every customer across Melbourne
-                    and Australia finds their match, we have curated an exceptional
-                    selection of luxury fireplace brands. Visit our showrooms in
-                    Richmond and Moorabbin to experience our products firsthand.
+                    At Living Fire, we believe our work is complete only when
+                    our clients are enjoying the warmth of their new fireplace
+                    with a glass of wine in hand. To ensure every customer
+                    across Melbourne and Australia finds their match, we have
+                    curated an exceptional selection of luxury fireplace brands.
+                    Visit our showrooms in Richmond and Moorabbin to experience
+                    our products firsthand.
                   </p>
                 </motion.div>
               </section>
@@ -326,10 +327,12 @@ const Home = () => {
             showPanels ? "animateLeft" : ""
           } ${animatePanels ? "animateFutherLeft" : ""}`}
           initial={{ x: "-100%" }}
-          animate={{ x: showPanels ? (animatePanels ? "-100%" : "-70%") : "-10%" }}
+          animate={{
+            x: showPanels ? (animatePanels ? "-100%" : "-70%") : "-10%",
+          }}
           transition={{ duration: 1, ease: "easeInOut" }}
         ></motion.div>
-        
+
         <motion.div
           className={`panel-right ${showPanels ? "show-panelsRight" : ""} ${
             showPanels ? "animateRight" : ""
@@ -338,7 +341,7 @@ const Home = () => {
           animate={{ x: showPanels ? (animatePanels ? "100%" : "70%") : "10%" }}
           transition={{ duration: 1, ease: "easeInOut" }}
         ></motion.div>
-        
+
         <div className={`overlay-container ${zoomImage ? "show-panels" : ""}`}>
           <Image
             src={homePageMainImg}
@@ -348,7 +351,7 @@ const Home = () => {
             loading="lazy"
             placeholder="blur"
           />
-          <motion.div 
+          <motion.div
             className={`text-group show`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -362,8 +365,8 @@ const Home = () => {
               LIVING FIRE
             </h1>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className={`text-group-subheading show`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -371,8 +374,8 @@ const Home = () => {
           >
             <span className={`blur-text`}>Architectural Fireplace Design</span>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className={`button-group ${showButtons ? "show" : ""}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: showButtons ? 1 : 0 }}
@@ -394,7 +397,9 @@ const Home = () => {
                   >
                     {fuelType?.fueltype_name}
                     {fuelTypes.length !== index + 1 && (
-                      <span className="flex items-center text-white">|</span>
+                      <span className="hidden md:flex items-center text-white">
+                        |
+                      </span>
                     )}
                   </button>
                 );
