@@ -268,7 +268,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setHover(true);
-    }, 1000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -283,10 +283,10 @@ const Home = () => {
     >
       <div
         className="home-page"
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(true)}
-        onMouseOver={() => setHover(true)}
-        onMouseMoveCapture={() => setHover(true)}
+        // onMouseEnter={() => setHover(true)}
+        // onMouseLeave={() => setHover(true)}
+        // onMouseOver={() => setHover(true)}
+        // onMouseMoveCapture={() => setHover(true)}
       >
         {/* Base Component - this will fade out */}
         <AnimatePresence>
