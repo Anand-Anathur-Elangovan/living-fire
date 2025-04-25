@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export function GET() {
-    const siteUrl = "https://www.livingfire.com.au"; // Update to the final domain
+    const siteUrl = "https://www.livingfires.com.au"; // Update to the final domain
 
     const robotsTxt = `
 User-agent: *
