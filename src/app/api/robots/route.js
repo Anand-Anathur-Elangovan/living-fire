@@ -29,7 +29,7 @@ Allow: /privacyPolicy/
 Allow: /specificationSheet/
 Allow: /ourStory/
 
-Sitemap: ${siteUrl}/sitemap.xml
+Sitemap: ${siteUrl}/api/sitemap.xml
     `.trim();
 
     return new NextResponse(robotsTxt, {
