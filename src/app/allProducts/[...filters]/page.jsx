@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
     )} at Living Fire.`,
     keywords: filters.join(", "),
     alternates: {
-      canonical: `https://living-fire.vercel.app/allProducts/${filters
+      canonical: `https://livingfires.com.au/allProducts/${filters
         .map(encodeURIComponent)
         .join("/")}`,
     },

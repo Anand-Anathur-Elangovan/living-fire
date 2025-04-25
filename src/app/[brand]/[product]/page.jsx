@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
       description: `Discover the ${product} by ${brand}, a premium fireplace designed for elegance and performance.`,
       keywords: `${product}, ${brand} fireplaces, modern ${product}, luxury fireplaces, ${brand} heating solutions, designer fireplaces`,
       alternates: {
-          canonical: `https://living-fire.vercel.app/${encodeURIComponent(brand)}/${encodeURIComponent(product)}`,
+          canonical: `https://livingfires.com.au/${encodeURIComponent(brand)}/${encodeURIComponent(product)}`,
       },
       robots: "index, follow",
   };
