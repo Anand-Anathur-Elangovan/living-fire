@@ -43,6 +43,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@builder.io/partytown": "^0.10.3",
     "@types/nodemailer": "^6.4.16",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",
