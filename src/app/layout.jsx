@@ -63,7 +63,7 @@ import { NavigationProvider } from "@/context/NavigationContext";
 import { Suspense } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script"; // ✅ import next/script
-
+import { Analytics } from "@vercel/analytics/react"
 // Local fonts
 const geistSans = localFont({
   src: "../../public/fonts/GeistVF.woff",
@@ -124,6 +124,7 @@ export default function RootLayout({ children }) {
           </Providers>
         </NavigationProvider>
         <SpeedInsights />
+        <Analytics/>
       </body>
     </html>
   );
