@@ -134,6 +134,8 @@ const Product = ({ params }) => {
             {/* <br/> */}
             <HeroImage
               // src={JSON.parse(hero_image?.replace(/'/g, '"'))}
+              productName={name}
+              brandName={brand_name}
               src={hero_image}
               alt="Product Hero Image"
             />
