@@ -54,21 +54,21 @@ export default function Footer() {
           </div>
           <ul className="flex flex-col gap-2 font-sans text-sm text-white font-light">
             <li>
-              <a href="/ourStory">
+              <a href="/our-story">
                 <p className="nofilechosen ui text size-body_small">
                   Our Story
                 </p>
               </a>
             </li>
             <li>
-              <a href="/maintenanceService">
+              <a href="/maintenance-service">
                 <p className="nofilechosen ui text size-body_small">
                   Our Services
                 </p>
               </a>
             </li>
             <li>
-              <a href="/contactUs">
+              <a href="/contact">
                 <p className="nofilechosen ui text size-body_small">
                   Contact Us
                 </p>
@@ -82,7 +82,13 @@ export default function Footer() {
             <p>Customer Care</p>
           </div>
           <ul className="flex flex-col gap-2 font-sans text-sm text-white font-light">
-          
+          <li>
+              <a href="/maintenance-service" className="bodysmall-link">
+                <p className="nofilechosen ui text size-body_small">
+                  Maintenance Service
+                </p>
+              </a>
+            </li>
             <li>
               <a href="/warranty" className="bodysmall-link">
                 <p className="nofilechosen ui text size-body_small">

@@ -274,7 +274,7 @@
 //               <p className="titleText ui text size-h3">Sale</p>
 //             </div>
 //             <div className="sale-row2">
-//               <a href="/ourStory">
+//               <a href="/our-story">
 //                 <p className="headingthree ui text size-h3">Our Story</p>
 //               </a>
 //               {/* <a href="#">
@@ -286,7 +286,7 @@
 //               <a href="#">
 //                 <p className="headingthree-3 ui text size-h3">Blog</p>
 //               </a>
-//               <a href="/contactUs">
+//               <a href="/contact">
 //                 <p className="headingthree-3 ui text size-h3">Contact Us</p>
 //               </a>
 //             </div>
@@ -641,7 +641,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                 </div> */}
                 <div className="sale-row2">
                   <motion.a 
-                    href="/ourStory"
+                    href="/our-story"
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
@@ -655,7 +655,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                     <p className="headingthree-3 ui text size-h3">Blog</p>
                   </motion.a>
                   <motion.a 
-                    href="/contactUs"
+                    href="/contact"
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >

@@ -403,17 +403,17 @@ async function getAllPages() {
 
   // Construct filter URLs
   const filterUrls = filters.map(
-    (filterArray) => `/${filterArray.map(encodeURIComponent).join("/")}`
+    (filterArray) => `allProducts/${filterArray.map(encodeURIComponent).join("/")}`
   );
 
   // Static pages
   const staticPages = [
     "/",
     "/home",
-    "/ourStory",
-    "/maintenanceService",
+    "/our-story",
+    "/maintenance-service",
     "/about",
-    "/contactUs",
+    "/contact",
     "/warranty",
     "/terms",
     "/privacyPolicy",
