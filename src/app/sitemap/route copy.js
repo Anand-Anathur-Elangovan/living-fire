@@ -1,53 +1,8 @@
 import { NextResponse } from "next/server";
 
-// Helper function to generate filter combinations (SEO-optimized)
-function generateFilterUrls() {
-  const filters = {
-    category: ['Fireplace', 'Fireplace%20Mantels', 'Outdoor', 'Cast%20Iron'],
-    fuelType: ['Wood', 'Electric', 'Gas', 'Hybrid%20-%20Wood/Electric'],
-    placement: ['Freestanding', 'Inbuilt', 'Outdoor'],
-    design: ['Single%20Sided', 'Two%20Sided', 'Three%20Sided'],
-    brand: ['Esse', 'Gazco', 'Stovax', 'Regency', 'Morso', 'Living%20Fire', 'Paul%20Agnew%20Designs']
-  };
-
-  const urlCombinations = [];
-
-  // 1. High-value: Category + Brand (e.g., /Fireplace/Esse)
-  filters.category.forEach(cat => {
-    filters.brand.forEach(brand => {
-      urlCombinations.push(`/allProducts/${cat}/${brand}`);
-    });
-  });
-
-  // 2. Medium-value: Category + Fuel Type (e.g., /Fireplace/Wood)
-  filters.category.forEach(cat => {
-    filters.fuelType.forEach(fuel => {
-      urlCombinations.push(`/allProducts/${cat}/${fuel}`);
-    });
-  });
-
-  // 3. Medium-value: Category + Placement (e.g., /Fireplace/Freestanding)
-  filters.category.forEach(cat => {
-    filters.placement.forEach(place => {
-      urlCombinations.push(`/allProducts/${cat}/${place}`);
-    });
-  });
-
-  // 4. Limited 3-filter combinations (avoid spammy URLs)
-  const topCategories = ['Fireplace', 'Outdoor'];
-  topCategories.forEach(cat => {
-    filters.fuelType.slice(0, 2).forEach(fuel => {
-      filters.placement.slice(0, 2).forEach(place => {
-        urlCombinations.push(`/allProducts/${cat}/${fuel}/${place}`);
-      });
-    });
-  });
-
-  return [...new Set(urlCombinations)]; // Remove duplicates
-}
-
+// Dummy function to simulate database or API call
 async function getAllPages() {
-  // Your existing product data
+  // Fetch or construct dynamic URLs from your database
   const products = [
     { brand: "Eurostove", product: "Churchill_5_Convection_Dual_Control" },
     { brand: "Living_Fire", product: "Kosi_No.25" },
@@ -405,12 +360,9 @@ async function getAllPages() {
     { brand: "Paul_Agnew_Designs", product: "Malvern_Insert_Black" },
     { brand: "Paul_Agnew_Designs", product: "Royal_Arch_Insert_-_Black" },
   ];
-
-  // Construct product URLs
-  const productUrls = products.map(
-    ({ brand, product }) => `/${encodeURIComponent(brand)}/${encodeURIComponent(product)}`
-  );
   const filters = [
+    ["gas", "wall_mounted"],
+    ["modern", "glass_fronted", "freestanding"],
     ["Fireplace"],
     ["Fireplace%20Mantels"],
     ["Fire%20Tools"],
@@ -442,59 +394,23 @@ async function getAllPages() {
     ["Regency"],
     ["Morso"],
     ["Stovax"],
-    ["Firepit"],
-    ["Heatmaster Wood"],
-    ["Studio 2"],
-    ["Greenfire"],
-    ["City Series"],
-    ["Heatmaster Gas"],
-    ["ilektro Freestanding"],
-    ["Aerion"],
-    ["ilektro insert"],
-    ["Hestia"],
-    ["Pyro"],
-    ["ilektro"],
-    ["ilektro Slimline"],
-    ["Ironheart Range"],
-    ["Aere"],
-    ["Churchill"],
-    ["E-Series"],
-    ["eStudio"],
-    ["Glance"],
-    ["Hayra"],
-    ["Linea"],
-    ["Nero"],
-    ["Onyx"],
-    ["Siena"],
-    ["Slimline"],
-    ["zenitth"],
-    ["Cocoon Pedestal"],
-    ["Vellum"],
-    ["1000"],
-    ["Regency Wood"],
-    ["Regency Gas"],
-    ["Regency Electric"],
-    ["Forno"],
-    ["Ignis"],
-    ["Kamino"],
-    ["Lanterns"],
-    ["Morso Grill 17"],
-    ["Tuscan"],
-    ["Austroflamm Wood"],
-    ["Dexter"],
-    ["Kalora Wood"]
   ];
 
-  const filterSingleUrls = filters.map(
+  // Construct product URLs
+  const productUrls = products.map(
+    ({ brand, product }) =>
+      `/` + encodeURIComponent(brand) + `/` + encodeURIComponent(product)
+  );
+
+  // Construct filter URLs
+  const filterUrls = filters.map(
     (filterArray) => `/allProducts/${filterArray.map(encodeURIComponent).join("/")}`
   );
-  
-  // Generate SEO-optimized filter URLs
-  const filterUrls = generateFilterUrls();
 
-  // Static pages (with corrected paths)
+  // Static pages
   const staticPages = [
     "/",
+    "/home",
     "/our-story",
     "/maintenance-service",
     "/about",
@@ -503,191 +419,32 @@ async function getAllPages() {
     "/terms",
     "/privacy-policy",
     "/specificationSheet",
-    "/privacy-policy",
-    "/specification-sheet", // Changed from specificationSheet
-    "/blog", // Added for content marketing
-    "/showrooms" // Added if applicable
   ];
 
-  return [...staticPages, ...productUrls, ...filterUrls, ...filterSingleUrls];
+  return [...staticPages, ...productUrls, ...filterUrls];
 }
 
-// export async function GET() {
-//   const pages = await getAllPages();
-//   const siteUrl = "https://livingfires.com.au";
-
-//   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-//   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
-
-//   pages.forEach((page) => {
-//     // Skip duplicate or invalid URLs
-//     if (!page || page.includes('undefined')) return;
-
-//     xml += `  <url>\n`;
-//     xml += `    <loc>${siteUrl}${page}</loc>\n`;
-//     xml += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
-    
-//     // Dynamic priority based on URL type
-//     if (page === "/") {
-//       xml += `    <priority>1.0</priority>\n`;
-//     } else if (page.startsWith("/allProducts")) {
-//       xml += `    <priority>0.7</priority>\n`;
-//     } else {
-//       xml += `    <priority>0.8</priority>\n`;
-//     }
-
-//     // Smart changefreq
-//     if (page.includes("blog")) {
-//       xml += `    <changefreq>weekly</changefreq>\n`;
-//     } else {
-//       xml += `    <changefreq>monthly</changefreq>\n`;
-//     }
-
-//     xml += `  </url>\n`;
-//   });
-
-//   xml += `</urlset>`;
-
-//   return new NextResponse(xml, {
-//     headers: {
-//       "Content-Type": "application/xml",
-//       "Cache-Control": "public, s-maxage=86400" // Cache for 24 hours
-//     },
-//   });
-// }
 export async function GET() {
-  const siteUrl = "https://livingfires.com.au";
-  const lastModDate = new Date().toISOString().split('T')[0];
-  
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n`;
-  xml += `        xmlns:xhtml="http://www.w3.org/1999/xhtml"\n`;
-  xml += `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
-
-  // 1. Get all pages (static + dynamic)
   const pages = await getAllPages();
-  const urlSet = new Set();
+  const siteUrl = "https://livingfires.com.au"; // Change to your domain
 
-  // 2. Process all URLs
-  for (const page of pages) {
-    if (!page || typeof page !== 'string' || page.includes('undefined')) continue;
-    
-    const cleanedUrl = page.replace(/\/{2,}/g, '/').replace(/\/$/, '');
-    if (urlSet.has(cleanedUrl)) continue;
-    urlSet.add(cleanedUrl);
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-    // Priority logic
-    const isProductUrl = /\/[^/]+\/[^/]+$/.test(cleanedUrl);
-    const priority = cleanedUrl === '/' ? '1.0' : 
-                   isProductUrl ? '0.9' : 
-                   cleanedUrl.startsWith('/allProducts') ? '0.7' : '0.8';
-    
+  pages.forEach((page) => {
     xml += `  <url>\n`;
-    xml += `    <loc>${siteUrl}${cleanedUrl}</loc>\n`;
-    xml += `    <lastmod>${lastModDate}</lastmod>\n`;
-    xml += `    <changefreq>${cleanedUrl.includes('/blog/') ? 'weekly' : 'monthly'}</changefreq>\n`;
-    xml += `    <priority>${priority}</priority>\n`;
-    
-    // Add hero images for product pages
-    if (isProductUrl) {
-      const [brand, productName] = cleanedUrl.split('/').filter(Boolean);
-      
-      try {
-        // Fetch product data with hero images
-        const { rows } = await pool.query(
-          `SELECT 
-            name,
-            brand_name,
-            hero_image
-          FROM tbl_master
-          WHERE name = $1 AND brand_name = $2`,
-          [decodeURIComponent(productName), decodeURIComponent(brand)]
-        );
-
-        if (rows.length > 0) {
-          const product = rows[0];
-          
-          // Handle hero_image format (array or single object)
-          let heroImages = [];
-          if (Array.isArray(product?.hero_image)) {
-            heroImages = product?.hero_image;
-          } else if (product?.hero_image?.value) {
-            heroImages = [product?.hero_image];
-          }
-
-          // Add all hero images to sitemap
-          heroImages.forEach((image, index) => {
-            if (image?.value && image.value !== "TBC") {
-              xml += `    <image:image>\n`;
-              xml += `      <image:loc>${image.value}</image:loc>\n`;
-              xml += `      <image:title>${product.brand_name} ${product.name} ${index > 0 ? `- Image ${index + 1}` : ''}</image:title>\n`;
-              xml += `      <image:caption>${product.brand_name} ${product.name}</image:caption>\n`;
-              xml += `    </image:image>\n`;
-            }
-          });
-        }
-      } catch (error) {
-        console.error(`Error fetching product data for ${cleanedUrl}:`, error);
-      }
-    }
-
+    xml += `    <loc>${siteUrl}${page}</loc>\n`;
+    xml += `    <lastmod>${new Date().toISOString()}</lastmod>\n`;
+    xml += `    <changefreq>daily</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
     xml += `  </url>\n`;
-  }
+  });
 
   xml += `</urlset>`;
 
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=3600"
     },
   });
 }
-
-// Helper function to get all pages
-// async function getAllPages() {
-//   const staticPages = [
-//     "/",
-//     "/our-story",
-//     "/maintenance-service",
-//     "/about",
-//     "/contact",
-//     "/warranty",
-//     "/terms",
-//     "/privacy-policy",
-//     "/specification-sheet"
-//   ];
-
-//   // Generate filter URLs
-//   const filterUrls = await generateFilterUrls();
-
-//   // Get product URLs from database
-//   const { rows: products } = await pool.query(
-//     `SELECT brand_name, name FROM tbl_master WHERE active = true`
-//   );
-//   const productUrls = products.map(p => 
-//     `/${encodeURIComponent(p.brand_name.toLowerCase().replace(/\s+/g, '-'))}/${encodeURIComponent(p.name.toLowerCase().replace(/\s+/g, '-'))}`
-//   );
-
-//   return [...staticPages, ...filterUrls, ...productUrls];
-// }
-
-// // Example filter URL generator
-// async function generateFilterUrls() {
-//   const filters = {
-//     category: ['Fireplace', 'Outdoor', 'Cast-Iron'],
-//     brand: ['Esse', 'Gazco', 'Stovax', 'Regency', 'Morso']
-//   };
-
-//   const urls = [];
-  
-//   filters.category.forEach(cat => {
-//     urls.push(`/allProducts/${encodeURIComponent(cat)}`);
-//     filters.brand.forEach(brand => {
-//       urls.push(`/allProducts/${encodeURIComponent(cat)}/${encodeURIComponent(brand)}`);
-//     });
-//   });
-
-//   return urls;
-// }
-

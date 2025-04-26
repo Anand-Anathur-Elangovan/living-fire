@@ -35,7 +35,7 @@ export const getProductPage = async (productName) => {
         brand_id
       FROM tbl_master
       WHERE name = $1;`, 
-      [productName] // Passing productId as a parameter
+      [productName] // Passing productName as a parameter
     );
     
     // console.log("resultCheck", resultCheck.rows);
@@ -43,14 +43,6 @@ export const getProductPage = async (productName) => {
   } catch (err) {
     throw err;
   }
-  // const query = "SELECT * FROM fn_get_fireplace_page(1)";
-  // const result = await prisma
-  //   .$queryRaw(query)
-  //   .then((res) => res)
-  //   .catch((err) => {
-  //     throw err;
-  //   });
-  // return result?.rows;
 };
 
 // export const insertProductEnquiry = async () => {
