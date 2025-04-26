@@ -1,53 +1,8 @@
 import { NextResponse } from "next/server";
 
-// Helper function to generate filter combinations (SEO-optimized)
-function generateFilterUrls() {
-  const filters = {
-    category: ['Fireplace', 'Fireplace%20Mantels', 'Outdoor', 'Cast%20Iron'],
-    fuelType: ['Wood', 'Electric', 'Gas', 'Hybrid%20-%20Wood/Electric'],
-    placement: ['Freestanding', 'Inbuilt', 'Outdoor'],
-    design: ['Single%20Sided', 'Two%20Sided', 'Three%20Sided'],
-    brand: ['Esse', 'Gazco', 'Stovax', 'Regency', 'Morso', 'Living%20Fire', 'Paul%20Agnew%20Designs']
-  };
-
-  const urlCombinations = [];
-
-  // 1. High-value: Category + Brand (e.g., /Fireplace/Esse)
-  filters.category.forEach(cat => {
-    filters.brand.forEach(brand => {
-      urlCombinations.push(`/allProducts/${cat}/${brand}`);
-    });
-  });
-
-  // 2. Medium-value: Category + Fuel Type (e.g., /Fireplace/Wood)
-  filters.category.forEach(cat => {
-    filters.fuelType.forEach(fuel => {
-      urlCombinations.push(`/allProducts/${cat}/${fuel}`);
-    });
-  });
-
-  // 3. Medium-value: Category + Placement (e.g., /Fireplace/Freestanding)
-  filters.category.forEach(cat => {
-    filters.placement.forEach(place => {
-      urlCombinations.push(`/allProducts/${cat}/${place}`);
-    });
-  });
-
-  // 4. Limited 3-filter combinations (avoid spammy URLs)
-  const topCategories = ['Fireplace', 'Outdoor'];
-  topCategories.forEach(cat => {
-    filters.fuelType.slice(0, 2).forEach(fuel => {
-      filters.placement.slice(0, 2).forEach(place => {
-        urlCombinations.push(`/allProducts/${cat}/${fuel}/${place}`);
-      });
-    });
-  });
-
-  return [...new Set(urlCombinations)]; // Remove duplicates
-}
-
+// Dummy function to simulate database or API call
 async function getAllPages() {
-  // Your existing product data
+  // Fetch or construct dynamic URLs from your database
   const products = [
     { brand: "Eurostove", product: "Churchill_5_Convection_Dual_Control" },
     { brand: "Living_Fire", product: "Kosi_No.25" },
@@ -405,12 +360,9 @@ async function getAllPages() {
     { brand: "Paul_Agnew_Designs", product: "Malvern_Insert_Black" },
     { brand: "Paul_Agnew_Designs", product: "Royal_Arch_Insert_-_Black" },
   ];
-
-  // Construct product URLs
-  const productUrls = products.map(
-    ({ brand, product }) => `/${encodeURIComponent(brand)}/${encodeURIComponent(product)}`
-  );
   const filters = [
+    ["gas", "wall_mounted"],
+    ["modern", "glass_fronted", "freestanding"],
     ["Fireplace"],
     ["Fireplace%20Mantels"],
     ["Fire%20Tools"],
@@ -442,59 +394,23 @@ async function getAllPages() {
     ["Regency"],
     ["Morso"],
     ["Stovax"],
-    ["Firepit"],
-    ["Heatmaster Wood"],
-    ["Studio 2"],
-    ["Greenfire"],
-    ["City Series"],
-    ["Heatmaster Gas"],
-    ["ilektro Freestanding"],
-    ["Aerion"],
-    ["ilektro insert"],
-    ["Hestia"],
-    ["Pyro"],
-    ["ilektro"],
-    ["ilektro Slimline"],
-    ["Ironheart Range"],
-    ["Aere"],
-    ["Churchill"],
-    ["E-Series"],
-    ["eStudio"],
-    ["Glance"],
-    ["Hayra"],
-    ["Linea"],
-    ["Nero"],
-    ["Onyx"],
-    ["Siena"],
-    ["Slimline"],
-    ["zenitth"],
-    ["Cocoon Pedestal"],
-    ["Vellum"],
-    ["1000"],
-    ["Regency Wood"],
-    ["Regency Gas"],
-    ["Regency Electric"],
-    ["Forno"],
-    ["Ignis"],
-    ["Kamino"],
-    ["Lanterns"],
-    ["Morso Grill 17"],
-    ["Tuscan"],
-    ["Austroflamm Wood"],
-    ["Dexter"],
-    ["Kalora Wood"]
   ];
 
-  const filterSingleUrls = filters.map(
+  // Construct product URLs
+  const productUrls = products.map(
+    ({ brand, product }) =>
+      `/` + encodeURIComponent(brand) + `/` + encodeURIComponent(product)
+  );
+
+  // Construct filter URLs
+  const filterUrls = filters.map(
     (filterArray) => `/allProducts/${filterArray.map(encodeURIComponent).join("/")}`
   );
-  
-  // Generate SEO-optimized filter URLs
-  const filterUrls = generateFilterUrls();
 
-  // Static pages (with corrected paths)
+  // Static pages
   const staticPages = [
     "/",
+    "/home",
     "/our-story",
     "/maintenance-service",
     "/about",
@@ -503,46 +419,24 @@ async function getAllPages() {
     "/terms",
     "/privacy-policy",
     "/specificationSheet",
-    "/privacy-policy",
-    "/specification-sheet", // Changed from specificationSheet
-    "/blog", // Added for content marketing
-    "/showrooms" // Added if applicable
   ];
 
-  return [...staticPages, ...productUrls, ...filterUrls, ...filterSingleUrls];
+  return [...staticPages, ...productUrls, ...filterUrls];
 }
 
 export async function GET() {
   const pages = await getAllPages();
-  const siteUrl = "https://livingfires.com.au";
+  const siteUrl = "https://livingfires.com.au"; // Change to your domain
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
   pages.forEach((page) => {
-    // Skip duplicate or invalid URLs
-    if (!page || page.includes('undefined')) return;
-
     xml += `  <url>\n`;
     xml += `    <loc>${siteUrl}${page}</loc>\n`;
-    xml += `    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
-    
-    // Dynamic priority based on URL type
-    if (page === "/") {
-      xml += `    <priority>1.0</priority>\n`;
-    } else if (page.startsWith("/allProducts")) {
-      xml += `    <priority>0.7</priority>\n`;
-    } else {
-      xml += `    <priority>0.8</priority>\n`;
-    }
-
-    // Smart changefreq
-    if (page.includes("blog")) {
-      xml += `    <changefreq>weekly</changefreq>\n`;
-    } else {
-      xml += `    <changefreq>monthly</changefreq>\n`;
-    }
-
+    xml += `    <lastmod>${new Date().toISOString()}</lastmod>\n`;
+    xml += `    <changefreq>daily</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
     xml += `  </url>\n`;
   });
 
@@ -551,7 +445,6 @@ export async function GET() {
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "public, s-maxage=86400" // Cache for 24 hours
     },
   });
 }

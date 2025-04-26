@@ -104,7 +104,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="/privacyPolicy" className="bodysmall-link">
+              <a href="/privacy-policy" className="bodysmall-link">
                 <p className="nofilechosen ui text size-body_small">
                   Privacy Policy
                 </p>
