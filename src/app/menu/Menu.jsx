@@ -274,7 +274,7 @@
 //               <p className="titleText ui text size-h3">Sale</p>
 //             </div>
 //             <div className="sale-row2">
-//               <a href="/ourStory">
+//               <a href="/our-story">
 //                 <p className="headingthree ui text size-h3">Our Story</p>
 //               </a>
 //               {/* <a href="#">
@@ -641,7 +641,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                 </div> */}
                 <div className="sale-row2">
                   <motion.a 
-                    href="/ourStory"
+                    href="/our-story"
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >

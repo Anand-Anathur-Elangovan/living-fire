@@ -18,16 +18,16 @@ Allow: /brands/
 Allow: /filters/
 Allow: /home/
 Allow: /allProducts/
-Allow: /ourStory/
+Allow: /our-story/
 
-Allow: /maintenanceService/
+Allow: /maintenance-service/
 Allow: /about/
 Allow: /contact/
 Allow: /warranty/
 Allow: /terms/
 Allow: /privacyPolicy/
 Allow: /specificationSheet/
-Allow: /ourStory/
+Allow: /our-story/
 
 Sitemap: ${siteUrl}/api/sitemap.xml
     `.trim();
