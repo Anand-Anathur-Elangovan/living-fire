@@ -22,7 +22,7 @@ Allow: /ourStory/
 
 Allow: /maintenanceService/
 Allow: /about/
-Allow: /contactUs/
+Allow: /contact/
 Allow: /warranty/
 Allow: /terms/
 Allow: /privacyPolicy/

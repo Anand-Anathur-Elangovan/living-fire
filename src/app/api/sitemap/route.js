@@ -413,7 +413,7 @@ async function getAllPages() {
     "/ourStory",
     "/maintenanceService",
     "/about",
-    "/contactUs",
+    "/contact",
     "/warranty",
     "/terms",
     "/privacyPolicy",

@@ -68,7 +68,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="/contactUs">
+              <a href="/contact">
                 <p className="nofilechosen ui text size-body_small">
                   Contact Us
                 </p>

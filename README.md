@@ -34,3 +34,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+For Better SEO
+Keep critters updated:
+Periodically run:
+
+bash
+npm update critters
+This solution is actually better for SEO than disabling the optimization, as it maintains all your existing SEO benefits while adding performance improvements that directly impact search rankings.
