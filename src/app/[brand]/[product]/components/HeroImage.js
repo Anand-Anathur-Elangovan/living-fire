@@ -201,7 +201,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
-const HeroImage = ({ src, alt }) => {
+const HeroImage = ({ productName, brandName, src, alt }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -261,14 +261,22 @@ const HeroImage = ({ src, alt }) => {
                       ? transformImageSrc(imageSrc?.value)
                       : ""
                   }
-                  alt={`${alt} ${index + 1}`}
+                  alt={`${productName} ${brandName} - ${
+                    index > 0
+                      ? `Detail View ${index + 1}`
+                      : "Main Product Image"
+                  }`}
+                  // alt={`${alt} ${index + 1}`}
                   width={700}
                   height={600}
                   sizes="(max-width: 480px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 700px"
                   className="class-hero-image-size"
                   style={{ width: "100%", height: "auto" }}
-                  loading="lazy"
-                  unoptimized
+                  // loading="lazy"
+                  priority={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  unoptimized={false}
+                  quality={85}
                 />
               </motion.div>
             </div>
@@ -298,7 +306,11 @@ const HeroImage = ({ src, alt }) => {
                           ? transformImageSrc(imageSrc?.value)
                           : ""
                       }
-                      alt={`${alt} ${index + 1}`}
+                      alt={`${productName} ${brandName} - ${
+                        index > 0
+                          ? `Detail View ${index + 1}`
+                          : "Main Product Image"
+                      }`}
                       width={1200}
                       height={800}
                       sizes="(max-width: 480px) 95vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 1000px"
@@ -308,8 +320,10 @@ const HeroImage = ({ src, alt }) => {
                         maxHeight: "80vh",
                         objectFit: "contain",
                       }}
-                      loading="lazy"
-                      unoptimized
+                      priority={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      unoptimized={false}
+                      quality={85}
                     />
                   </div>
                 ))}
@@ -346,7 +360,7 @@ const HeroImage = ({ src, alt }) => {
           background: rgba(0, 0, 0, 0.9);
           backdrop-filter: blur(5px);
           /* margin-top: 10%; */
-          padding-top:10%
+          padding-top: 10%;
         }
 
         .popup-content {
@@ -422,20 +436,20 @@ const HeroImage = ({ src, alt }) => {
             font-size: 10px;
           }
           .slick-slide img {
-           display: block;
-           height: 300px !important
-         }
-         .popup-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 90%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.9);
-          backdrop-filter: blur(5px);
-          /* margin-top: 10%; */
-          padding: 50% 12% 0% 0%
-        }
+            display: block;
+            height: 300px !important;
+          }
+          .popup-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 90%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+            /* margin-top: 10%; */
+            padding: 50% 12% 0% 0%;
+          }
         }
       `}</style>
     </>
