@@ -201,7 +201,7 @@ const Header = () => {
   const [color, setColor] = useState("white");
   const [isMobile, setIsMobile] = useState(false);
 
-  const isHomePage = pathname === "/home";
+  const isHomePage = pathname === "/";
   let lastScroll = 0;
 
   useEffect(() => {
@@ -251,7 +251,7 @@ const Header = () => {
     headerClasses.push("hidden");
   }
   const handleHomeIconClick = () => {
-    router.push(`/home`);
+    router.push(`/`);
   };
   const [isClosing, setIsClosing] = useState(false);
 

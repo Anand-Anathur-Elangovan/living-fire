@@ -33,7 +33,7 @@ const Breadcrumbs = ({
   return (
     <div className="flex justify-center mt-[10px] mb-[20px] text-black font-sans font-light text-sm md:text-base">
       <nav>
-        <Link href="/home">Home</Link> /
+        <Link href="/">Home</Link> /
         <span
           style={{ cursor: "pointer", color: "black" }}
           onClick={() =>
