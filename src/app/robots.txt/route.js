@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export function GET() {
-    const siteUrl = "https://www.livingfires.com.au";
+    const siteUrl = "https://livingfires.com.au";
 
     const robotsTxt = `
 # SEO-optimized robots.txt for Living Fires
@@ -31,15 +31,17 @@ Allow: /privacy-policy/
 Allow: /specificationSheet/
 Allow: /specification-sheet/
 Allow: /blog/
+Allow: /*/
 
 # Googlebot directives
 User-agent: Googlebot
-Allow: /
-Allow: /allProducts/*  # Allow all filter combinations (e.g., /allProducts/Fireplace/Esse)
-Allow: /*/  # Allow brand/product URLs (e.g., /Gazco/eStudio_ES165R)
-Disallow: /allProducts/*?*  # Block parameterized URLs
-Disallow: /*?*  # Block all other parameterized URLs
-Disallow: /*?*
+Allow: /allProducts/*          # Product/category pages
+Allow: /*/                     # Brand/product URLs (e.g., /Gazco/eStudio_ES165R)
+Allow: /allProducts/*?sort=*
+Disallow: /allProducts/*?*     # Block parameterized filters (e.g., ?ref=test)
+Disallow: /*?utm_*             # Block tracking URLs (optional)
+Disallow: /*?gclid=*           # Block Google Ads parameters (optional)
+
 
 # Social/media bots
 User-agent: Twitterbot
