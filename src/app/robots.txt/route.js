@@ -34,11 +34,12 @@ Allow: /blog/
 
 # Googlebot directives
 User-agent: Googlebot
-Allow: /home
+Allow: /
 Allow: /allProducts/*  # Allow all filter combinations (e.g., /allProducts/Fireplace/Esse)
 Allow: /*/  # Allow brand/product URLs (e.g., /Gazco/eStudio_ES165R)
 Disallow: /allProducts/*?*  # Block parameterized URLs
 Disallow: /*?*  # Block all other parameterized URLs
+Disallow: /*?*
 
 # Social/media bots
 User-agent: Twitterbot

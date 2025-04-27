@@ -378,7 +378,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
 
   const handleHeaderHomeClick = () => {
     setShowMenu(false);
-    router.push(`/home`);
+    router.push(`/`);
   };
 
   useEffect(() => {

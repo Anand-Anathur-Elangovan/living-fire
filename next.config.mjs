@@ -146,11 +146,11 @@ const nextConfig = {
   // Redirects for SEO
   async redirects() {
     return [
-      {
-        source: "/",
-        destination: "/home",
-        permanent: true, // 301 redirect
-      },
+      // {
+      //   source: "/",
+      //   destination: "/home",
+      //   permanent: true, // 301 redirect
+      // },
       // Example product redirect (uncomment when needed)
       // {
       //   source: "/fireplace-brands/wood-yunca/regency-city-series-san-francisco-bay-40-gas-fireplace/",

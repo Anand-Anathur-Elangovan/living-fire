@@ -41,7 +41,7 @@ const Breadcrumbs = ({
       }}
     >
       <nav>
-        <Link href="/home">Home</Link> /
+        <Link href="/">Home</Link> /
         <span
           style={{ cursor: "pointer", color: "black" }}
           onClick={() =>
