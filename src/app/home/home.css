@@ -27,6 +27,13 @@
   font-weight: normal;
   max-width: 1000px;
 }
+#hero-heading {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  font-family: Satoru;
+  font-weight: normal;
+  max-width: 1000px;
+}
 
 .hero p {
   font-size: 1.2rem;
@@ -445,6 +452,13 @@
     font-weight: normal;
     max-width: 1000px;
   }
+  #hero-heading {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: Satoru;
+    font-weight: normal;
+    max-width: 1000px;
+  }
 
   .hero-back p {
     font-size: 1.2rem;
@@ -488,6 +502,12 @@
   font-family: Satoru;
   font-weight: normal;
 }
+#hero-heading {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  font-family: Satoru;
+  font-weight: normal;
+}
 
 .hero p {
   font-size: 1.2rem;
@@ -501,6 +521,9 @@
   }
   
   .hero h1 {
+    font-size: 3.5rem;
+  }
+  #hero-heading {
     font-size: 3.5rem;
   }
   
@@ -520,6 +543,10 @@
   }
   
   .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  #hero-heading {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
   }
@@ -590,6 +617,10 @@
     font-size: 2rem;
     margin-bottom: 1rem;
   }
+  #hero-heading {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
   
   .hero p {
     font-size: 0.9rem;
@@ -632,6 +663,10 @@
   }
   
   .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  #hero-heading{
     font-size: 2rem;
     margin-bottom: 1rem;
   }
