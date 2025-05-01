@@ -1,14 +1,15 @@
 export const metadata = {
-  title: "Premium Fireplaces in Melbourne | Living Fire",
-  description: "Discover Melbourne’s finest range of premium local and European fireplaces at Living Fire. With 60 years of expertise, we provide luxury fireplaces that blend innovation, craftsmanship, and timeless design.",
-  keywords: "fireplaces Melbourne, luxury fireplaces, European fireplaces, modern fireplaces, wood fireplaces, gas fireplaces, designer fireplaces, Living Fire, custom fireplaces",
+  title: "Luxury Fireplaces in Melbourne | European, Gas & Wood Fireplaces | Living Fire",
+  description: "Explore Melbourne’s most luxurious range of fireplaces at Living Fire. From custom-designed European fireplaces to modern gas and wood-burning styles, we bring over 60 years of expertise in elegance, craftsmanship, and innovation.",
+  keywords: "luxury fireplaces Melbourne, European fireplaces, gas fireplaces Melbourne, wood fireplaces, modern fireplaces, custom fireplaces, designer fireplaces, indoor fireplaces, outdoor fireplaces, Living Fire",
   alternates: {
-    canonical: "https://livingfires.com.au/warranty",
+    canonical: "https://livingfires.com.au/",
   },
   robots: "index, follow",
   authors: [{ name: "Living Fire Team", url: "https://livingfires.com.au" }],
   publisher: "Living Fire",
 };
+
 
 import Home from "./home/Home";
 

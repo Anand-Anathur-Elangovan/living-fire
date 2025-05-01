@@ -239,20 +239,20 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
   const [imageUrl, setImageUrl] = useState("");
   const carouselRef = useRef(null);
 
-  useEffect(() => {
-    async function fetchImageUrl() {
-      const response = await fetch("/api/s3Url", {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setImageUrl(data.url);
-    }
+  // useEffect(() => {
+  //   async function fetchImageUrl() {
+  //     const response = await fetch("/api/s3Url", {
+  //       method: "GET",
+  //       headers: {
+  //         "content-type": "application/json",
+  //       },
+  //     });
+  //     const data = await response.json();
+  //     setImageUrl(data.url);
+  //   }
 
-    fetchImageUrl();
-  }, []);
+  //   fetchImageUrl();
+  // }, []);
 
   const carouselItems = [
     {
