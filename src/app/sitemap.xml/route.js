@@ -3,10 +3,22 @@ import pool from "@/src/helper/db/db";
 // Helper function to generate filter combinations (SEO-optimized)
 function generateFilterUrls() {
   const filters = {
-    category: ["Fireplace", "Fireplace%20Mantels", "Outdoor", "Cast%20Iron"],
-    fuelType: ["Wood", "Electric", "Gas", "Hybrid%20-%20Wood/Electric"],
+    category: [
+      "Fireplace",
+      "Fireplace%20Mantels",
+      "Fire%20Tools",
+      "Outdoor",
+      "Cast%20Iron",
+    ],
+    fuelType: [
+      "Wood",
+      "Electric",
+      "Gas",
+      "Hybrid%20-%20Wood/Electric",
+      "Bio-Ethanol",
+    ],
     placement: ["Freestanding", "Inbuilt", "Outdoor"],
-    design: ["Single%20Sided", "Two%20Sided", "Three%20Sided"],
+    design: ["Single%20Sided", "Two%20Sided", "Three%20Sided", "Four%20Sided"],
     brand: [
       "Esse",
       "Gazco",
@@ -15,6 +27,13 @@ function generateFilterUrls() {
       "Morso",
       "Living%20Fire",
       "Paul%20Agnew%20Designs",
+      "Kalora",
+      "ADF",
+      "Austroflamm",
+      "Bosq",
+      "Eurostove",
+      "Heatmaster",
+      "Hergom",
     ],
   };
 
@@ -42,7 +61,13 @@ function generateFilterUrls() {
   });
 
   // 4. Limited 3-filter combinations (avoid spammy URLs)
-  const topCategories = ["Fireplace", "Outdoor"];
+  const topCategories = [
+    "Fireplace",
+    "Fireplace%20Mantels",
+    "Outdoor",
+    "Fire%20Tools",
+    "Cast%20Iron",
+  ];
   topCategories.forEach((cat) => {
     filters.fuelType.slice(0, 2).forEach((fuel) => {
       filters.placement.slice(0, 2).forEach((place) => {
@@ -452,19 +477,19 @@ async function getAllPages() {
     ["Morso"],
     ["Stovax"],
     ["Firepit"],
-    ["Heatmaster Wood"],
-    ["Studio 2"],
+    ["Heatmaster%20Wood"],
+    ["Studio%202"],
     ["Greenfire"],
-    ["City Series"],
-    ["Heatmaster Gas"],
-    ["ilektro Freestanding"],
+    ["City%20Series"],
+    ["Heatmaster%20Gas"],
+    ["ilektro%20Freestanding"],
     ["Aerion"],
-    ["ilektro insert"],
+    ["ilektro%20insert"],
     ["Hestia"],
     ["Pyro"],
     ["ilektro"],
-    ["ilektro Slimline"],
-    ["Ironheart Range"],
+    ["ilektro%20Slimline"],
+    ["Ironheart%20Range"],
     ["Aere"],
     ["Churchill"],
     ["E-Series"],
@@ -477,21 +502,21 @@ async function getAllPages() {
     ["Siena"],
     ["Slimline"],
     ["zenitth"],
-    ["Cocoon Pedestal"],
+    ["Cocoon%20Pedestal"],
     ["Vellum"],
     ["1000"],
-    ["Regency Wood"],
-    ["Regency Gas"],
-    ["Regency Electric"],
+    ["Regency%20Wood"],
+    ["Regency%20Gas"],
+    ["Regency%20Electric"],
     ["Forno"],
     ["Ignis"],
     ["Kamino"],
     ["Lanterns"],
-    ["Morso Grill 17"],
+    ["Morso%20Grill%2017"],
     ["Tuscan"],
-    ["Austroflamm Wood"],
+    ["Austroflamm%20Wood"],
     ["Dexter"],
-    ["Kalora Wood"],
+    ["Kalora%20Wood"],
   ];
 
   const filterSingleUrls = filters.map(
@@ -661,7 +686,10 @@ export async function GET() {
         product: "Nero_Framed_Slimline_-_Black_Fascia_-_1450mm",
       },
       { brand: "ADF", product: "Linea_100_Insert" },
-      { brand: "Living_Fire", product: "Aeris_Hanging_–_Black_Shell_-_S/S_Pole" },
+      {
+        brand: "Living_Fire",
+        product: "Aeris_Hanging_–_Black_Shell_-_S/S_Pole",
+      },
       { brand: "Living_Fire", product: "Slimline_Firebox_2000_-_Black_Fascia" },
       {
         brand: "Living_Fire",
@@ -734,7 +762,10 @@ export async function GET() {
       { brand: "Living_Fire", product: "3-Fold_Rounded_Fire_Screen" },
       { brand: "Gazco", product: "eStudio_-_ES85R" },
       { brand: "Living_Fire", product: "Vellum_Wall_Mounted_-_S/S" },
-      { brand: "Paul_Agnew_Designs", product: "Ilektro_Slimline_50in_(1270mm)" },
+      {
+        brand: "Paul_Agnew_Designs",
+        product: "Ilektro_Slimline_50in_(1270mm)",
+      },
       { brand: "Regency", product: "Berwick" },
       { brand: "Paul_Agnew_Designs", product: "Alto_Tunnel" },
       { brand: "Paul_Agnew_Designs", product: "Vue_1250_Bay" },
@@ -754,7 +785,10 @@ export async function GET() {
       { brand: "Regency", product: "Cardinia" },
       { brand: "Regency", product: "Alterra" },
       { brand: "Regency", product: "Gosford" },
-      { brand: "Living_Fire", product: "2_Tier_Wood_Rack_w/_Firetools_-_Large" },
+      {
+        brand: "Living_Fire",
+        product: "2_Tier_Wood_Rack_w/_Firetools_-_Large",
+      },
       { brand: "Austroflamm", product: "Clou_Xtra" },
       { brand: "Regency", product: "GF1500L" },
       { brand: "Austroflamm", product: "S120-45s_Cassette" },
@@ -831,8 +865,14 @@ export async function GET() {
         product: "4-Fold_Fire_Screen_Black_W/_Pewter_Finish",
       },
       { brand: "Paul_Agnew_Designs", product: "Ilektro_Woodland_Stove" },
-      { brand: "Paul_Agnew_Designs", product: "Ilektro_Slimline_60in_(1524mm)" },
-      { brand: "Paul_Agnew_Designs", product: "Ilektro_Slimline_72in_(1828mm)" },
+      {
+        brand: "Paul_Agnew_Designs",
+        product: "Ilektro_Slimline_60in_(1524mm)",
+      },
+      {
+        brand: "Paul_Agnew_Designs",
+        product: "Ilektro_Slimline_72in_(1828mm)",
+      },
       { brand: "Paul_Agnew_Designs", product: "Alto_Glass_Fronted" },
       { brand: "Living_Fire", product: "Black_-_4pc_Set" },
       { brand: "Paul_Agnew_Designs", product: "Quadro_800_Glass_Fronted" },
@@ -953,17 +993,29 @@ export async function GET() {
       { brand: "Morso", product: "Morso_-_Ash_Scraper" },
       { brand: "Paul_Agnew_Designs", product: "Athena_-_Black_Granite_-_1500" },
       { brand: "Paul_Agnew_Designs", product: "Riversdale_-_White_-_1500" },
-      { brand: "Paul_Agnew_Designs", product: "Bouvet_-_Italian_Carrara_-_1310" },
+      {
+        brand: "Paul_Agnew_Designs",
+        product: "Bouvet_-_Italian_Carrara_-_1310",
+      },
       { brand: "Paul_Agnew_Designs", product: "Chilton-White-1370" },
-      { brand: "Paul_Agnew_Designs", product: "Hampshire_-_Standard_Raw_-_1500" },
+      {
+        brand: "Paul_Agnew_Designs",
+        product: "Hampshire_-_Standard_Raw_-_1500",
+      },
       { brand: "Paul_Agnew_Designs", product: "Milos_-_Lu_Grey_-_1310" },
-      { brand: "Paul_Agnew_Designs", product: "700_Victorian_Fascia_-_Polished" },
+      {
+        brand: "Paul_Agnew_Designs",
+        product: "700_Victorian_Fascia_-_Polished",
+      },
       {
         brand: "Paul_Agnew_Designs",
         product: "New_William_IV_-_Italian_Cararra_-_1500",
       },
       { brand: "Paul_Agnew_Designs", product: "Paros_-_Lu_Grey_-_1459" },
-      { brand: "Paul_Agnew_Designs", product: "Naxos_Mantel_-_Luna_Grey_-_1420" },
+      {
+        brand: "Paul_Agnew_Designs",
+        product: "Naxos_Mantel_-_Luna_Grey_-_1420",
+      },
       {
         brand: "Paul_Agnew_Designs",
         product: "Victorian_Arched_-_Italian_Cararra_-_1650",
@@ -980,7 +1032,10 @@ export async function GET() {
         brand: "Paul_Agnew_Designs",
         product: "Victorian_Corbel_-_Mocha_Beige_-_1500",
       },
-      { brand: "Paul_Agnew_Designs", product: "Victorian_Corbel_-_White_-_1470" },
+      {
+        brand: "Paul_Agnew_Designs",
+        product: "Victorian_Corbel_-_White_-_1470",
+      },
       {
         brand: "Paul_Agnew_Designs",
         product: "Windsor_-_Italian_Cararra_-_1650",
@@ -1006,33 +1061,61 @@ export async function GET() {
       { brand: "Paul_Agnew_Designs", product: "Malvern_Insert_Black" },
       { brand: "Paul_Agnew_Designs", product: "Royal_Arch_Insert_-_Black" },
 
-      { brand: "Living_Fire", product: "Aeris_Hanging_%E2%80%93_Black_Shell_-_S%2FS_Pole" },
-      { brand: "Living_Fire", product: "Double_Sided_Slimline_Firebox_1350_-_Brushed_S%2FS_Fascia" },
-      { brand: "ADF", product: "Linea_100_B_Duo_L_Freestanding_Heater_%5BInc_Open_Base%5D" },
-      { brand: "Living_Fire", product: "Cocoon_Pedestal_Standing_%E2%80%93_Black_Shell_-_S%2FS_Stand" },
+      {
+        brand: "Living_Fire",
+        product: "Aeris_Hanging_%E2%80%93_Black_Shell_-_S%2FS_Pole",
+      },
+      {
+        brand: "Living_Fire",
+        product: "Double_Sided_Slimline_Firebox_1350_-_Brushed_S%2FS_Fascia",
+      },
+      {
+        brand: "ADF",
+        product: "Linea_100_B_Duo_L_Freestanding_Heater_%5BInc_Open_Base%5D",
+      },
+      {
+        brand: "Living_Fire",
+        product: "Cocoon_Pedestal_Standing_%E2%80%93_Black_Shell_-_S%2FS_Stand",
+      },
       { brand: "Living_Fire", product: "Vellum_Wall_Mounted_-_S%2FS" },
-      { brand: "Living_Fire", product: "2_Tier_Wood_Rack_w%2F_Firetools_-_Large" },
-      { brand: "Living_Fire", product: "4-Fold_Fire_Screen_Black_W%2F_Pewter_Finish" },
-      { brand: "Living_Fire", product: "3-Fold_Rounded_-_Black_W%2F_Nickel_Plated_Top_Frame" },
-      { brand: "Paul_Agnew_Designs", product: "700_Square_W%2F_Motif_Fascia_-_Black" },
+      {
+        brand: "Living_Fire",
+        product: "2_Tier_Wood_Rack_w%2F_Firetools_-_Large",
+      },
+      {
+        brand: "Living_Fire",
+        product: "4-Fold_Fire_Screen_Black_W%2F_Pewter_Finish",
+      },
+      {
+        brand: "Living_Fire",
+        product: "3-Fold_Rounded_-_Black_W%2F_Nickel_Plated_Top_Frame",
+      },
+      {
+        brand: "Paul_Agnew_Designs",
+        product: "700_Square_W%2F_Motif_Fascia_-_Black",
+      },
       { brand: "Morso", product: "Forno_-_S%2FS_Fire_Divide" },
-      { brand: "Morso", product: "Morso_-_Culi_BBQ_Grill_Turner_%5BSpatula%5D" },
+      {
+        brand: "Morso",
+        product: "Morso_-_Culi_BBQ_Grill_Turner_%5BSpatula%5D",
+      },
       { brand: "Morso", product: "Mors%C3%B8_-_Frying_Dish_and_Serving_Plate" },
-      { brand: "Morso", product: "Morso_-_Multi_Cocotte_4.6L_w%2F_Griddle_Lid" },
+      {
+        brand: "Morso",
+        product: "Morso_-_Multi_Cocotte_4.6L_w%2F_Griddle_Lid",
+      },
       { brand: "Morso", product: "Morso_-_Pizza_%26_Herb_Cutter" },
-      { brand: "Morso", product: "Morso_-_Vetro_Pizza_%26_Frying_Plate" }
+      { brand: "Morso", product: "Morso_-_Vetro_Pizza_%26_Frying_Plate" },
     ];
-    const productNames = products.map(p => p.product);
+    const productNames = products.map((p) => p.product);
     let priority = "0.7"; // Default priority
     if (cleanedUrl === "/" || !cleanedUrl) {
       priority = "1.0"; // Highest priority for homepage
     } else if (cleanedUrl.includes("/home")) {
       priority = "1.0";
-    } 
-    else if (cleanedUrl.includes("/allProducts")) {
+    } else if (cleanedUrl.includes("/allProducts")) {
       priority = "0.8";
-    } 
-    else if (productNames?.some(product => cleanedUrl.includes(product))) {
+    } else if (productNames?.some((product) => cleanedUrl.includes(product))) {
       priority = "0.9";
     }
     let changefreq = "monthly"; // default
@@ -1055,7 +1138,9 @@ export async function GET() {
     xml += `  <url>\n`;
     xml += `    <loc>${siteUrl}${cleanedUrl}</loc>\n`;
     xml += `    <lastmod>${lastModDate}</lastmod>\n`;
-    xml += `    <changefreq>${changefreq?changefreq:'monthly'}</changefreq>\n`;
+    xml += `    <changefreq>${
+      changefreq ? changefreq : "monthly"
+    }</changefreq>\n`;
     xml += `    <priority>${priority}</priority>\n`;
 
     // Add images for product pages
