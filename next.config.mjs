@@ -1,4 +1,3 @@
-
 // /** @type {import('next').NextConfig} */
 // const nextConfig = {
 //   // Image optimization settings
@@ -139,7 +138,6 @@
 
 // export default nextConfig;
 
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Enhanced Image Optimization
@@ -148,16 +146,16 @@ const nextConfig = {
       "living-fire-dev--use1-az4--x-s3.s3express-use1-az4.us-east-1.amazonaws.com",
       "23909229.fs1.hubspotusercontent-na1.net",
       "www.livingfires.com.au",
-      "livingfires.com.au" // Added root domain
+      "livingfires.com.au", // Added root domain
     ],
-    formats: ['image/webp'], // Removed avif for wider compatibility
+    formats: ["image/webp"], // Removed avif for wider compatibility
     minimumCacheTTL: 60 * 60 * 24 * 30, // Increased to 30 days
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048], // Added more sizes
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840], // Added more sizes
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // Thumbnail sizes
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**.livingfires.com.au',
+        protocol: "https",
+        hostname: "**.livingfires.com.au",
       },
     ],
   },
@@ -166,70 +164,70 @@ const nextConfig = {
   async headers() {
     const securityHeaders = [
       {
-        key: 'X-DNS-Prefetch-Control',
-        value: 'on'
+        key: "X-DNS-Prefetch-Control",
+        value: "on",
       },
       {
-        key: 'Strict-Transport-Security',
-        value: 'max-age=63072000; includeSubDomains; preload'
+        key: "Strict-Transport-Security",
+        value: "max-age=63072000; includeSubDomains; preload",
       },
       {
-        key: 'X-XSS-Protection',
-        value: '1; mode=block'
+        key: "X-XSS-Protection",
+        value: "1; mode=block",
       },
       {
-        key: 'X-Frame-Options',
-        value: 'SAMEORIGIN'
+        key: "X-Frame-Options",
+        value: "SAMEORIGIN",
       },
       {
-        key: 'X-Content-Type-Options',
-        value: 'nosniff'
+        key: "X-Content-Type-Options",
+        value: "nosniff",
       },
       {
-        key: 'Referrer-Policy',
-        value: 'origin-when-cross-origin'
+        key: "Referrer-Policy",
+        value: "origin-when-cross-origin",
       },
       {
-        key: 'Permissions-Policy',
-        value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()'
-      }
+        key: "Permissions-Policy",
+        value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+      },
     ];
 
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: securityHeaders.concat([
           {
-            key: 'Access-Control-Allow-Origin',
-            value: '*'
-            // process.env.NODE_ENV === 'development' 
-            //   ? '*' 
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+            // process.env.NODE_ENV === 'development'
+            //   ? '*'
             //   : 'https://www.livingfires.com.au'
           },
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, stale-while-revalidate=86400'
-          }
-        ])
+            key: "Cache-Control",
+            value: "public, max-age=3600, stale-while-revalidate=86400",
+          },
+        ]),
       },
       {
-        source: '/_next/image(.*)',
+        source: "/_next/image(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
       },
       {
-        source: '/(.*)\\.(jpg|jpeg|png|webp|gif|ico|svg|woff2)',
+        source: "/(.*)\\.(jpg|jpeg|png|webp|gif|ico|svg|woff2)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      }
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 
@@ -237,20 +235,20 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/home',
-        destination: '/',
-        permanent: true
+        source: "/home",
+        destination: "/",
+        permanent: true,
       },
       {
-        source: '/fireplaces/:path*',
-        destination: '/products/:path*',
-        permanent: true
+        source: "/fireplaces/:path*",
+        destination: "/products/:path*",
+        permanent: true,
       },
       {
-        source: '/:path+/',
-        destination: '/:path+',
-        permanent: true
-      }
+        source: "/:path+/",
+        destination: "/:path+",
+        permanent: true,
+      },
     ];
   },
 
@@ -260,7 +258,7 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
-
+  staticPageGenerationTimeout: 300,
   // Advanced Experimental Features
   experimental: {
     optimizeCss: true,
@@ -275,7 +273,9 @@ const nextConfig = {
     //     '.svg': ['@svgr/webpack'],
     //   },
     // },
-    instrumentationHook: true,
+    // instrumentationHook: true,
+    instrumentationHook: false, // Disabled unless needed
+    taint: true, // Extra safety for production
   },
 
   // Webpack optimizations
@@ -283,13 +283,14 @@ const nextConfig = {
     // Client-side only optimizations
     if (!isServer) {
       config.optimization.splitChunks = {
-        chunks: 'all',
+        chunks: "all",
         maxSize: 244 * 1024, // 244KB
         cacheGroups: {
           commons: {
             test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
+            name: "vendors",
+            chunks: "all",
+            reuseExistingChunk: true,
           },
         },
       };
@@ -306,10 +307,11 @@ const nextConfig = {
 
   // Environment variables
   env: {
-    SITE_URL: process.env.NODE_ENV === 'development'
-      ? 'https://www.livingfires.com.au'
-      : 'http://localhost:3000',
-  }
+    SITE_URL:
+      process.env.NODE_ENV === "development"
+        ? "https://www.livingfires.com.au"
+        : "http://localhost:3000",
+  },
 };
 
 export default nextConfig;
