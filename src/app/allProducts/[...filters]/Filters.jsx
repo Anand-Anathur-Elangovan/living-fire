@@ -230,7 +230,6 @@ const Filters = () => {
     newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
     fuelTypeFilter &&
       setUpdatedValues((prev) => {
-        console.log("prev.fueltypeValues", prev.fueltypeValues)
         return {
           ...prev,
           fueltypeValues: fuelTypeFilter.id
@@ -375,7 +374,6 @@ const Filters = () => {
   const [filteredProducts, setFilteredProducts] = useState(
     allProducts?.slice(0, 12)
   );
-  console.log("isFilter in inner", isFilter);
   const [compareProducts, setCompareProducts] = useState([]);
   const [allProductsTemp, setAllProductsTemp] = useState([]);
   const [allProductsTempForSubType, setAllProductsTempForSubType] = useState(
@@ -889,7 +887,7 @@ const Filters = () => {
                           id="fireplaceFilterId"
                           className="flex flex-col gap-3"
                         >
-                          {console.log("fireplaceType", fireplaceType,fuelTypes,updatedValues?.fueltypeValues  )}
+                          
                           {fireplaceType
                             ? fuelTypes?.map(
                                 (val) =>
