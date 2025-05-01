@@ -477,7 +477,7 @@ async function getAllPages() {
     ["Morso"],
     ["Stovax"],
     ["Firepit"],
-    ["Heatmaster%20Wood"],
+    // ["Heatmaster%20Wood"],
     ["Studio%202"],
     ["Greenfire"],
     ["City%20Series"],

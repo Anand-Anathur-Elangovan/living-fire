@@ -347,7 +347,7 @@ const Home = () => {
             src={homePageMainImg}
             alt="Overlay"
             className={`overlay-image ${zoomImage ? "zoom" : ""}`}
-            unoptimized
+            // unoptimized
             loading="lazy"
             placeholder="blur"
           />
