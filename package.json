@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "optimize-images": "node scripts/optimize-images.js",
+    "prebuild": "npm run optimize-images && npm run lint",
+    "export": "next export",
+    "test:perf": "lighthouse https://www.livingfires.com.au --view --output=json --output-path=./lighthouse-report.json",
+    "optimize-svgs": "svgo -f public/ -r -q",
+    "check-seo": "npm run build && npm run export"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.670.0",
@@ -45,11 +51,20 @@
   },
   "devDependencies": {
     "@builder.io/partytown": "^0.10.3",
+    "@next/bundle-analyzer": "^15.3.1",
+    "@svgr/webpack": "^8.1.0",
     "@types/nodemailer": "^6.4.16",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",
+    "glob": "^11.0.2",
+    "imagemin": "^9.0.1",
+    "imagemin-webp": "^8.0.0",
+    "lighthouse": "^12.6.0",
+    "next-sitemap": "^4.2.3",
     "postcss": "^8",
     "prisma": "^5.21.1",
+    "sharp": "^0.34.1",
+    "svgo": "^3.3.2",
     "tailwindcss": "^3.4.1"
   }
 }

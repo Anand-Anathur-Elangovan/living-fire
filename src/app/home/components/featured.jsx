@@ -333,17 +333,17 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                 src={item.image}
                 alt={item.title}
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-500"
+                className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
                 sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
                 loading="lazy"
                 quality={85}
               />
             </div>
             <div className="font-sans text-left">
-              <h3 className="leading-6 text-base md:text-lg font-extralight">
+              <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
                 {item.title}
               </h3>
-              <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F]">
+              <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
                 {item.description}
               </p>
             </div>

@@ -4,7 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 const BlackWhiteSpinner = styled(CircularProgress)({
   color: "black", // Spinner color
-  background: "white", // Background color
+  background: "transparent", // Background color
 });
 const Loader = () => {
   return (
