@@ -365,9 +365,9 @@
 //         title: "Esse",
 //         isSvg: true,
 //       },
-//       { 
-//         brand_id: 4, 
-//         image: MorsoLogo, 
+//       {
+//         brand_id: 4,
+//         image: MorsoLogo,
 //         title: "Morso",
 //         isSvg: true,
 //       },
@@ -634,7 +634,6 @@
 
 // export default Home;
 
-
 "use client";
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import homePageMainImg from "@/public/assets/homePage/homePageMainImg.png";
@@ -661,7 +660,8 @@ const brandLogos = {
   kalora: () => import("@/public/assets/homePage/ourBrands/kaloraLogo.png"),
   morso: () => import("@/public/assets/homePage/ourBrands/morso.svg"),
   regency: () => import("@/public/assets/homePage/ourBrands/regency.svg"),
-  eurostove: () => import("@/public/assets/homePage/ourBrands/eurostoveLogo.png")
+  eurostove: () =>
+    import("@/public/assets/homePage/ourBrands/eurostoveLogo.png"),
 };
 
 // Dynamically load components
@@ -687,9 +687,9 @@ const Home = () => {
         setTimeout(() => setShowPanels(true), 1000),
         setTimeout(() => setAnimatePanels(true), 2500),
         setTimeout(() => setZoomImage(true), 2500),
-        setTimeout(() => setShowButtons(true), 3000)
+        setTimeout(() => setShowButtons(true), 3000),
       ];
-      return () => timers.forEach(timer => clearTimeout(timer));
+      return () => timers.forEach((timer) => clearTimeout(timer));
     } else {
       setShowPanels(false);
       setAnimatePanels(false);
@@ -697,7 +697,10 @@ const Home = () => {
     }
   }, [hover]);
 
-  const { brands, masterValues: { fuelTypes } } = useMasterValues();
+  const {
+    brands,
+    masterValues: { fuelTypes },
+  } = useMasterValues();
 
   const allProductsRouteHandler = (typeName, displayName, arguId) => {
     setNavigationState({ typeName, displayName, id: arguId });
@@ -705,7 +708,9 @@ const Home = () => {
   };
 
   const productRouteHandler = (ProductName, brandName) => {
-    router.push(`/${brandName.replace(/\s+/g, "_")}/${ProductName.replace(/\s+/g, "_")}`);
+    router.push(
+      `/${brandName.replace(/\s+/g, "_")}/${ProductName.replace(/\s+/g, "_")}`
+    );
   };
 
   useEffect(() => {
@@ -714,7 +719,12 @@ const Home = () => {
   }, []);
 
   const brandsList = [
-    { brand_id: 1, imageKey: "paulAgnew", title: "Paul Agnew Designs", isSvg: true },
+    {
+      brand_id: 1,
+      imageKey: "paulAgnew",
+      title: "Paul Agnew Designs",
+      isSvg: true,
+    },
     { brand_id: 15, imageKey: "cocoon", title: "Cocoon", isSvg: true },
     { brand_id: 5, imageKey: "stovax", title: "Stovax", isSvg: true },
     { brand_id: 7, imageKey: "hergom", title: "Hergom", isSvg: true },
@@ -729,12 +739,14 @@ const Home = () => {
   ];
 
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      backgroundColor: "#F7F7F5",
-      gap: "75px"
-    }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#F7F7F5",
+        gap: "75px",
+      }}
+    >
       {/* LocalBusiness Schema */}
       <script
         type="application/ld+json"
@@ -745,7 +757,7 @@ const Home = () => {
             name: "Living Fire",
             image: [
               "https://livingfires.com.au/logo.webp", // Convert to WebP
-              "https://livingfires.com.au/assets/homePage/homePageMainImg.webp"
+              "https://livingfires.com.au/assets/homePage/homePageMainImg.webp",
             ],
             address: {
               "@type": "PostalAddress",
@@ -753,22 +765,31 @@ const Home = () => {
               addressLocality: "Moorabbin",
               addressRegion: "VIC",
               postalCode: "3189",
-              addressCountry: "AU"
+              addressCountry: "AU",
             },
             geo: {
               "@type": "GeoCoordinates",
               latitude: "-37.9399438839525",
-              longitude: "145.0849985832501"
+              longitude: "145.0849985832501",
             },
             telephone: "+61 3 9977 7888",
-            openingHoursSpecification: [{
-              "@type": "OpeningHoursSpecification",
-              dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-              opens: "08:00",
-              closes: "17:00"
-            }],
-            priceRange: "$$$"
-          })
+            openingHoursSpecification: [
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                ],
+                opens: "08:00",
+                closes: "17:00",
+              },
+            ],
+            priceRange: "$$$",
+          }),
         }}
       />
 
@@ -784,7 +805,13 @@ const Home = () => {
             >
               <section className="hero" aria-label="Premium Fireplace Showroom">
                 <motion.div className="hero-content">
-                  <h1>STUNNING FIREPLACES FOR ANY HOME.</h1>
+                  {/* <h1>STUNNING FIREPLACES FOR ANY HOME.</h1> */}
+                  <div
+                    id="hero-heading"
+                    className="text-4xl font-bold leading-tight"
+                  >
+                    STUNNING FIREPLACES FOR ANY HOME.
+                  </div>
                   <p>
                     At Living Fire, we believe our work is complete only when
                     our clients are enjoying the warmth of their new fireplace
@@ -804,7 +831,9 @@ const Home = () => {
         <motion.div
           className={`panel-left ${showPanels ? "show-panelsLeft" : ""}`}
           initial={{ x: "-100%" }}
-          animate={{ x: showPanels ? (animatePanels ? "-100%" : "-70%") : "-10%" }}
+          animate={{
+            x: showPanels ? (animatePanels ? "-100%" : "-70%") : "-10%",
+          }}
           transition={{ duration: 1, ease: "easeInOut" }}
           aria-hidden="true"
         />
@@ -830,42 +859,85 @@ const Home = () => {
             sizes="(max-width: 768px) 100vw, 50vw"
             placeholder="blur"
           />
-          
-          <motion.div className="text-group show" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-            <h1 className="blur-text" onClick={() => router.push(`/allProducts`)} style={{ cursor: "pointer" }}>
+
+          <motion.div
+            className="text-group show"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+          >
+            <h1
+              className="blur-text"
+              onClick={() => router.push(`/allProducts`)}
+              style={{ cursor: "pointer" }}
+            >
               LIVING FIRE
             </h1>
           </motion.div>
 
-          <motion.div className="text-group-subheading show" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+          <motion.div
+            className="text-group-subheading show"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
             <span className="blur-text">Architectural Fireplace Design</span>
           </motion.div>
 
-          <motion.div className={`button-group ${showButtons ? "show" : ""}`} initial={{ opacity: 0 }} animate={{ opacity: showButtons ? 1 : 0 }} transition={{ duration: 1 }}>
-            {fuelTypes?.map((fuelType, index) => (
-              fuelType?.fueltype_name !== "Hybrid - Wood/Electric" && (
-                <button
-                  key={`fuelType-${fuelType.fueltype_id}`}
-                  onClick={() => allProductsRouteHandler("fuelType", fuelType.fueltype_name, fuelType.fueltype_id)}
-                  className="p-0 m-0 flex gap-3"
-                  aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
-                >
-                  {fuelType.fueltype_name}
-                  {index < fuelTypes.length - 1 && (
-                    <span className="hidden md:flex items-center text-white">|</span>
-                  )}
-                </button>
-              )
-            ))}
+          <motion.div
+            className={`button-group ${showButtons ? "show" : ""}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: showButtons ? 1 : 0 }}
+            transition={{ duration: 1 }}
+          >
+            {fuelTypes?.map(
+              (fuelType, index) =>
+                fuelType?.fueltype_name !== "Hybrid - Wood/Electric" && (
+                  <button
+                    key={`fuelType-${fuelType.fueltype_id}`}
+                    onClick={() =>
+                      allProductsRouteHandler(
+                        "fuelType",
+                        fuelType.fueltype_name,
+                        fuelType.fueltype_id
+                      )
+                    }
+                    className="p-0 m-0 flex gap-3"
+                    aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
+                  >
+                    {fuelType.fueltype_name}
+                    {index < fuelTypes.length - 1 && (
+                      <span className="hidden md:flex items-center text-white">
+                        |
+                      </span>
+                    )}
+                  </button>
+                )
+            )}
           </motion.div>
         </div>
       </div>
 
       {/* Dynamically Loaded Sections */}
-      <Suspense fallback={<div className="loading-spinner"><Loader /></div>}>
-        <Collections fuelTypes={fuelTypes} allProductsRouteHandler={allProductsRouteHandler} />
-        <OurBrands brandList={brandsList} allProductsRouteHandler={allProductsRouteHandler} />
-        <Featured headingValue="Featured" productRouteHandler={productRouteHandler} />
+      <Suspense
+        fallback={
+          <div className="loading-spinner">
+            <Loader />
+          </div>
+        }
+      >
+        <Collections
+          fuelTypes={fuelTypes}
+          allProductsRouteHandler={allProductsRouteHandler}
+        />
+        <OurBrands
+          brandList={brandsList}
+          allProductsRouteHandler={allProductsRouteHandler}
+        />
+        <Featured
+          headingValue="Featured"
+          productRouteHandler={productRouteHandler}
+        />
         <Testimonials />
         <Blog />
       </Suspense>
@@ -883,13 +955,18 @@ const Home = () => {
               item: {
                 "@type": "Product",
                 name: `${brand.title} Fireplace`,
-                url: `https://livingfires.com.au/allProducts/${brand.title.replace(/\s+/g, "_")}`,
-                image: `https://livingfires.com.au/assets/homePage/ourBrands/${brand.imageKey}.${brand.isSvg ? 'svg' : 'png'}`,
+                url: `https://livingfires.com.au/allProducts/${brand.title.replace(
+                  /\s+/g,
+                  "_"
+                )}`,
+                image: `https://livingfires.com.au/assets/homePage/ourBrands/${
+                  brand.imageKey
+                }.${brand.isSvg ? "svg" : "png"}`,
                 description: `Premium ${brand.title} fireplace collection`,
-                brand: { "@type": "Brand", name: brand.title }
-              }
-            }))
-          })
+                brand: { "@type": "Brand", name: brand.title },
+              },
+            })),
+          }),
         }}
       />
     </div>
