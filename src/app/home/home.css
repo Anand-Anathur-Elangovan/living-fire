@@ -63,7 +63,7 @@
   justify-content: center;
   align-items: center;
   transition: opacity 0.8s ease-in-out;
-  z-index: 3; 
+  z-index: 3;
   background-size: cover;
   overflow: hidden;
   background-position: center;
@@ -71,7 +71,7 @@
 
 .base-container.hidden {
   opacity: 0;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .hero {
@@ -88,6 +88,10 @@
   z-index: 2;
   opacity: 1;
   transition: opacity 0.3s ease-in-out, transform 1s ease-in-out;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* Promote to own layer */
+  transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .panel-left {
@@ -97,7 +101,7 @@
 
 .panel-right {
   right: 0;
-  transform: translateX(10%); 
+  transform: translateX(10%);
 }
 
 .show-panelsLeft {
@@ -148,18 +152,22 @@
   height: 100%;
   object-fit: cover;
   transform: scale(1);
-  transition: transform 1s ease-in-out; 
+  transition: transform 1s ease-in-out;
   filter: brightness(70%);
+  content-visibility: auto;
+  contain-intrinsic-size: 1920px 1080px;
+  will-change: transform;
+  transition: transform 1.2s cubic-bezier(0.33, 1, 0.68, 1);
+  transform: translateZ(0);
 }
 
 .show-panels {
-  opacity: 1; 
+  opacity: 1;
 }
 
 .zoom {
   transform: scale(1.2);
 }
-
 
 .button-group {
   position: absolute;
@@ -177,7 +185,7 @@
 }
 
 .button-group.show {
-  opacity: 1; 
+  opacity: 1;
 }
 
 .button-group button {
@@ -199,7 +207,7 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: #060606; 
+  background: #060606;
   transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
@@ -209,7 +217,7 @@
 }
 
 .button-group button:hover {
-  color: white; 
+  color: white;
 }
 
 .underline-button {
@@ -226,7 +234,7 @@
 .underline-button::after {
   content: "";
   position: absolute;
-  width: 5px; 
+  width: 5px;
   height: 2px;
   background-color: white;
   left: 50%;
@@ -243,17 +251,17 @@
   transition: filter 0.8s ease-in-out;
 }
 
-
 .text-group {
   position: absolute;
-   width: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   opacity: 0;
   transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
-  z-index: 4; 
+  z-index: 4;
   flex-direction: column;
   align-items: center;
+  will-change: opacity, transform;
 }
 .text-group-subheading {
   position: absolute;
@@ -277,7 +285,7 @@
   color: white;
 }
 .show {
-  opacity: 1; 
+  opacity: 1;
 }
 
 .carousel {
@@ -303,7 +311,6 @@
   position: relative;
 }
 
-
 .overlay {
   width: 100%;
   height: 100%;
@@ -326,7 +333,6 @@
   transform: translateX(10%);
 }
 
-
 .element-snaps {
   scroll-snap-type: inline mandatory;
   scroll-padding-inline: 1rem;
@@ -348,8 +354,8 @@
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .slick-dots li button:before {
@@ -478,10 +484,6 @@
   }
 }
 
-
-
-
-
 .hero-content {
   color: #000;
   display: flex;
@@ -514,34 +516,33 @@
   margin: 0 auto;
 }
 
-
 @media (max-width: 1024px) {
   .hero-content {
     height: 60vh;
   }
-  
+
   .hero h1 {
     font-size: 3.5rem;
   }
   #hero-heading {
     font-size: 3.5rem;
   }
-  
+
   .hero p {
     font-size: 1.1rem;
     max-width: 90%;
   }
 }
 
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
   .hero-content {
     height: 70vh;
     padding-top: 60px;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     text-align: center;
   }
-  
+
   .hero h1 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
@@ -550,14 +551,12 @@
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .hero p {
     font-size: 1rem;
     max-width: 100%;
   }
 }
-
-
 
 .button-group {
   position: absolute;
@@ -571,7 +570,7 @@
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(10px);
   gap: 10px;
-  transition: opacity 1s linear !important; 
+  transition: opacity 1s linear !important;
 }
 
 @media (max-width: 768px) {
@@ -591,7 +590,7 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   .button-group button {
     padding: 10px 0px;
   }
@@ -603,16 +602,15 @@
   }
 }
 
-@media (max-width: 480px) { 
-
+@media (max-width: 480px) {
   .hero-content {
     height: 80vh;
     padding-top: 40px;
     justify-content: center;
-    align-items: center; 
-    text-align: center; 
+    align-items: center;
+    text-align: center;
   }
-  
+
   .hero h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -621,29 +619,27 @@
     font-size: 2rem;
     margin-bottom: 1rem;
   }
-  
+
   .hero p {
     font-size: 0.9rem;
   }
 }
 
-@media (max-width: 380px) { 
-
+@media (max-width: 380px) {
   .text-group h1 {
     font-size: 70px;
   }
 
   .text-group-subheading {
     position: absolute;
-    display: flex
-;
+    display: flex;
     justify-content: center;
     align-items: center;
     top: 140px;
     line-height: 32px;
     font-size: 22px;
     left: 75px;
-}
+  }
 
   .button-group {
     flex-direction: column;
@@ -652,25 +648,25 @@
     font-size: 20px;
     width: 30%;
     height: min-content;
-}
+  }
 
   .hero-content {
     height: 80vh;
     padding-top: 40px;
     justify-content: center;
-    align-items: center; 
-    text-align: center; 
+    align-items: center;
+    text-align: center;
   }
-  
+
   .hero h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
   }
-  #hero-heading{
+  #hero-heading {
     font-size: 2rem;
     margin-bottom: 1rem;
   }
-  
+
   .hero p {
     font-size: 0.9rem;
   }
