@@ -251,6 +251,8 @@ const Header = () => {
     headerClasses.push("hidden");
   }
   const handleHomeIconClick = () => {
+    sessionStorage.removeItem("filtersJson");
+    sessionStorage.clear();
     router.push(`/`);
   };
   const [isClosing, setIsClosing] = useState(false);
@@ -271,10 +273,10 @@ const handleCloseMenu = () => {
           <div className="image-container">
             <Image
               src={logo}
-              alt="Living Fires Company Logo"
+              alt="Living Fire Company Logo"
               className="custom-header-width"
               onClick={handleHomeIconClick}
-              title="Living Fires Company Logo"
+              title="Living Fire Company Logo"
               // unoptimized
             />
           </div>

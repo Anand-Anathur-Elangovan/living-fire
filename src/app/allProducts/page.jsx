@@ -13,5 +13,6 @@ export const metadata = {
 import AllProducts from "./AllProducts";
 
 export default function Page() {
+  console.log("allproducts")
   return <AllProducts />;
 }
