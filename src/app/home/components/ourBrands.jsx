@@ -156,8 +156,8 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
                 height={92}
                 className="grayscale hover:grayscale-0 transition-all duration-300 object-contain"
                 loading="lazy" // Native lazy loading
-                quality={75}   // Adjust based on need
-                priority={false}
+                // quality={75}   // Adjust based on need
+                // priority={false}
               />
             ) : (
               <Image
@@ -168,8 +168,8 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
                 height={92}
                 className="grayscale hover:grayscale-0 transition-all duration-300 object-contain"
                 loading="lazy" // Native lazy loading
-                quality={75}   // Adjust based on need
-                priority={false}
+                // quality={75}   // Adjust based on need
+                // priority={false}
                 placeholder="blur"
               />
             )}

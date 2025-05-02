@@ -145,9 +145,9 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
               onClick={() => handleScroll("left")}
               // unoptimized
               className="hover:opacity-70 transition-opacity"
-              loading="lazy" // Native lazy loading
-              quality={75}   // Adjust based on need
-              priority={false}
+              // loading="lazy" // Native lazy loading
+              // quality={75}   // Adjust based on need
+              // priority={false}
             />
             <Image
               src={LeftArrow}
@@ -156,9 +156,9 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
               onClick={() => handleScroll("right")}
               // unoptimized
               className="hover:opacity-70 transition-opacity"
-              loading="lazy" // Native lazy loading
-              quality={75}   // Adjust based on need
-              priority={false}
+              // loading="lazy" // Native lazy loading
+              // quality={75}   // Adjust based on need
+              // priority={false}
             />
           </div>
         )}
@@ -185,8 +185,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                 className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
                 sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
                 loading="lazy" // Native lazy loading
-                quality={75}   // Adjust based on need
-                priority={false}
+                // quality={75}   // Adjust based on need
+                // priority={false}
                 
               />
             </div>
@@ -214,9 +214,9 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
               width={20}
               height={20}
               title="Right Arrow"
-              loading="lazy" // Native lazy loading
-              quality={75}   // Adjust based on need
-              priority={false}
+              // loading="lazy" // Native lazy loading
+              // quality={75}   // Adjust based on need
+              // priority={false}
               // unoptimized
             />
           </div>
@@ -230,9 +230,9 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
               title="Left Arrow"
               width={20}
               height={20}
-              loading="lazy" // Native lazy loading
-              quality={75}   // Adjust based on need
-              priority={false}
+              // loading="lazy" // Native lazy loading
+              // quality={75}   // Adjust based on need
+              // priority={false}
               // unoptimized
             />
           </div>
