@@ -7,18 +7,21 @@ const Blog = () => {
   return (
     <div className="flex relative justify-center flex-col gap-6 md:gap-10 mb-20 md:mb-40 px-4 sm:px-6 md:pl-16">
       <div className="flex flex-row items-center w-full mb-2 md:mb-4">
-        <div className="heading1 flex w-full justify-center text-3xl md:text-4xl lg:text-5xl">Blog</div>
+        <div className="heading1 flex w-full justify-center text-3xl md:text-4xl lg:text-5xl">
+          Blog
+        </div>
       </div>
       <div className="w-full h-auto md:h-[600px] flex flex-col md:flex-row gap-6 md:gap-9 pb-6 md:pb-10">
         {/* Main Image - Full width on mobile, half on desktop */}
         <div className="w-full md:w-1/2 h-[300px] sm:h-[400px] md:h-[505px]">
           <Image
             src={Picture}
-            alt="Picture1"
+            alt="Premium European Wood, Gas, and Electric Fireplaces Melbourne"
             className="w-full h-full object-cover"
+            title="Premium European Wood, Gas, and Electric Fireplaces Melbourne"
           />
         </div>
-        
+
         {/* Content Section - Full width on mobile, half on desktop */}
         <div className="w-full md:w-1/2 h-auto md:h-[505px] pr-0 md:pr-16 flex flex-col md:items-start gap-6 md:gap-0 md:justify-between">
           {/* First Blog Post */}
@@ -26,8 +29,9 @@ const Blog = () => {
             <div className="w-full sm:w-[242px] h-[200px] sm:h-[294px]">
               <Image
                 src={Picture2}
-                alt="Picture2"
+                alt="Luxury European Wood, Gas, and Electric Fireplaces Melbourne"
                 className="w-full h-full object-cover"
+                title="Luxury European Wood, Gas, and Electric Fireplaces Melbourne"
               />
             </div>
             <div className="flex justify-end flex-col gap-2 w-full">
@@ -49,7 +53,7 @@ const Blog = () => {
               </a>
             </div>
           </div>
-          
+
           {/* Second Blog Post */}
           <div className="flex w-full">
             <div className="w-full sm:w-[242px] flex justify-end flex-col gap-2">

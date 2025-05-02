@@ -131,18 +131,20 @@ export default function Footer() {
             <Image
               src={InstagramIcon} //"/assets/instagram" // Replace with actual path
               alt="Instagram Icon"
+              title="Instagram Icon"
               className="bg-white"
               width={24}
               height={24}
-              unoptimized
+              // unoptimized
             />
             <Image
               src={FacebookIcon} //"/assets/facebook" // Replace with actual path
               alt="Facebook Icon"
+              title="Facebook Icon"
               className="bg-white"
               width={24}
               height={24}
-              unoptimized
+              // unoptimized
             />
           </div>
           <div className="heading7">

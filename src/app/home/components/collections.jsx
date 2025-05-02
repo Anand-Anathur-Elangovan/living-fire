@@ -379,14 +379,16 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
           <Image
             src={RightArrow}
             alt="Right Arrow"
+            title="Right Arrow"
             onClick={() => handleScroll("left")}
-            unoptimized
+            // unoptimized
           />
           <Image
             src={LeftArrow}
+            title="Left Arrow"
             alt="Left Arrow"
             onClick={() => handleScroll("right")}
-            unoptimized
+            // unoptimized
           />
         </motion.div>
       </div>
@@ -410,6 +412,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
               <Image
                 src={item?.image?.src}
                 alt={item.title}
+                title={item.title}
                 className="element-image"
                 width={300}
                 height={600}

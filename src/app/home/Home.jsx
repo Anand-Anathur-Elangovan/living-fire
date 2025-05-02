@@ -850,6 +850,7 @@ const Home = () => {
         <div className={`overlay-container ${zoomImage ? "show-panels" : ""}`}>
           <Image
             src={homePageMainImg}
+            title="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
             alt="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
             className={`overlay-image ${zoomImage ? "zoom" : ""}`}
             priority
