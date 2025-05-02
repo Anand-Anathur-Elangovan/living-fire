@@ -3,8 +3,8 @@ import Product from "./Product";
 export async function generateMetadata({ params }) {
   const formatName =  (name) => (name?.includes("_") ? name.replace(/_/g, " ") : name);
 
-  const brand = await params?.brand ? formatName(params?.brand) : "Premium";
-  const product = await params?.product ? formatName(params?.product) : "Fireplace";
+  const brand =  params?.brand ? formatName(params?.brand) : "Premium";
+  const product = params?.product ? formatName(params?.product) : "Fireplace";
 
   return {
       title: `${product} by ${brand} | Living Fire`,

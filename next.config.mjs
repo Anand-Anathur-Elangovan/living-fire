@@ -148,7 +148,7 @@ const nextConfig = {
       "www.livingfires.com.au",
       "livingfires.com.au", // Added root domain
     ],
-    formats: ["image/webp"], // Removed avif for wider compatibility
+    formats: ["image/avif", "image/webp"], // Removed avif for wider compatibility
     minimumCacheTTL: 60 * 60 * 24 * 30, // Increased to 30 days
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840], // Added more sizes
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // Thumbnail sizes
