@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useNavigationState } from "@/context/NavigationContext";
 import { motion, AnimatePresence } from "framer-motion";
 import Loader from "@/src/helper/loader/Loader";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 // Brand logos (optimized imports)
 const brandLogos = {
   cocoon: () => import("@/public/assets/homePage/ourBrands/cocoon.svg"),
@@ -29,9 +29,15 @@ const brandLogos = {
 };
 
 // Dynamically load components
-const Collections = lazy(() => import("./components/collections"));
+const Collections = lazy(() => import("./components/collections"), {
+  // This is an experimental flag that may improve performance
+  unstable_expectedLoadTime: 2000, // Estimate of load time
+});
 const OurBrands = lazy(() => import("./components/ourBrands"));
-const Featured = lazy(() => import("./components/featured"));
+const Featured = lazy(() => import("./components/featured"), {
+  // This is an experimental flag that may improve performance
+  unstable_expectedLoadTime: 2000, // Estimate of load time
+});
 const Testimonials = lazy(() => import("./components/testimonials"));
 const Blog = lazy(() => import("./components/blog"));
 
