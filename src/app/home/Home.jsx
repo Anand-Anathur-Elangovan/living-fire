@@ -42,22 +42,22 @@ const Collections = dynamic(() => import("./components/collections"), {
 
 const OurBrands = dynamic(() => import("./components/ourBrands"), {
   loading: () => <Loader />,
-  ssr: false,
+  ssr: true,
 });
 
 const Featured = dynamic(() => import("./components/featured"), {
   loading: () => <Loader />,
-  ssr: false,
+  ssr: true,
 });
 
 const Testimonials = dynamic(() => import("./components/testimonials"), {
   loading: () => <Loader />,
-  ssr: false,
+  ssr: true,
 });
 
 const Blog = dynamic(() => import("./components/blog"), {
   loading: () => <Loader />,
-  ssr: false,
+  ssr: true,
 });
 
 const Home = () => {
