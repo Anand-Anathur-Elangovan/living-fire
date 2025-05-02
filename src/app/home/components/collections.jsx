@@ -421,7 +421,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                   )
                 }
                 style={{ cursor: "pointer" }}
-                unoptimized
+                // unoptimized
               />
               <div className="overlay">
                 <h3
