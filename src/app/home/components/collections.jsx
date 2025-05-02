@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import collectionImg1 from "@/public/assets/homePage/collections/collectionsImg1.svg";

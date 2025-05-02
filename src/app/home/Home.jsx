@@ -29,36 +29,36 @@ const brandLogos = {
 };
 
 // Dynamically load components
-// const Collections = lazy(() => import("./components/collections"));
-// const OurBrands = lazy(() => import("./components/ourBrands"));
-// const Featured = lazy(() => import("./components/featured"));
-// const Testimonials = lazy(() => import("./components/testimonials"));
-// const Blog = lazy(() => import("./components/blog"));
+const Collections = lazy(() => import("./components/collections"));
+const OurBrands = lazy(() => import("./components/ourBrands"));
+const Featured = lazy(() => import("./components/featured"));
+const Testimonials = lazy(() => import("./components/testimonials"));
+const Blog = lazy(() => import("./components/blog"));
 
-const Collections = dynamic(() => import("./components/collections"), {
-  loading: () => <Loader />,
-  ssr: false, // disable SSR if the component depends on browser-only APIs
-});
+// const Collections = dynamic(() => import("./components/collections"), {
+//   loading: () => <Loader />,
+//   ssr: false, // disable SSR if the component depends on browser-only APIs
+// });
 
-const OurBrands = dynamic(() => import("./components/ourBrands"), {
-  loading: () => <Loader />,
-  ssr: true,
-});
+// const OurBrands = dynamic(() => import("./components/ourBrands"), {
+//   loading: () => <Loader />,
+//   ssr: true,
+// });
 
-const Featured = dynamic(() => import("./components/featured"), {
-  loading: () => <Loader />,
-  ssr: true,
-});
+// const Featured = dynamic(() => import("./components/featured"), {
+//   loading: () => <Loader />,
+//   ssr: true,
+// });
 
-const Testimonials = dynamic(() => import("./components/testimonials"), {
-  loading: () => <Loader />,
-  ssr: true,
-});
+// const Testimonials = dynamic(() => import("./components/testimonials"), {
+//   loading: () => <Loader />,
+//   ssr: true,
+// });
 
-const Blog = dynamic(() => import("./components/blog"), {
-  loading: () => <Loader />,
-  ssr: true,
-});
+// const Blog = dynamic(() => import("./components/blog"), {
+//   loading: () => <Loader />,
+//   ssr: true,
+// });
 
 const Home = () => {
   const useAnimationState = (initialValue) => {
