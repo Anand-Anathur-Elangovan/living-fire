@@ -20,8 +20,8 @@ const Blog = () => {
             className="w-full h-full object-cover"
             title="Premium European Wood, Gas, and Electric Fireplaces Melbourne"
             loading="lazy" // Native lazy loading
-            quality={75}   // Adjust based on need
-            priority={false}
+            // quality={75}   // Adjust based on need
+            // priority={false}
           />
         </div>
 
@@ -36,8 +36,8 @@ const Blog = () => {
                 className="w-full h-full object-cover"
                 title="Luxury European Wood, Gas, and Electric Fireplaces Melbourne"
                 loading="lazy" // Native lazy loading
-                quality={75}   // Adjust based on need
-                priority={false}
+                // quality={75}   // Adjust based on need
+                // priority={false}
               />
             </div>
             <div className="flex justify-end flex-col gap-2 w-full">
