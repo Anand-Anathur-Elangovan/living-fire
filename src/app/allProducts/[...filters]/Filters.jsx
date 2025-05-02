@@ -368,7 +368,7 @@ const Filters = () => {
   const [refreshPage, setRefreshPage] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(
-    window.innerWidth <= 768 ? false : true
+    window?.innerWidth <= 768 ? false : true
   );
   const [isSort, setIsSort] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(
@@ -394,7 +394,7 @@ const Filters = () => {
         !fireplaceType
       )
         return;
-      if (window.innerWidth <= 768) {
+      if (window?.innerWidth <= 768) {
         setIsFilter(false);
       } else {
         setIsFilter(true);
@@ -570,7 +570,7 @@ const Filters = () => {
   }, []);
 
   // useEffect(() => {
-  //   const isMobile = window.innerWidth <= 768;
+  //   const isMobile = window?.innerWidth <= 768;
   //   if (isMobile) {
   //     setIsFilter(false);
   //   }
@@ -913,7 +913,7 @@ const Filters = () => {
                                                 val?.fueltype_name,
                                                 val?.fueltype_id
                                               );
-                                              if (window.innerWidth <= 768) {
+                                              if (window?.innerWidth <= 768) {
                                                 setIsFilter(false);
                                               }
                                             }}
@@ -932,7 +932,7 @@ const Filters = () => {
                                               val?.fueltype_name,
                                               val?.fueltype_id
                                             );
-                                            if (window.innerWidth <= 768) {
+                                            if (window?.innerWidth <= 768) {
                                               setIsFilter(false);
                                             }
                                           }}
@@ -962,7 +962,7 @@ const Filters = () => {
                                           val?.fueltype_name,
                                           val?.fueltype_id
                                         );
-                                        if (window.innerWidth <= 768) {
+                                        if (window?.innerWidth <= 768) {
                                           setIsFilter(false);
                                         }
                                         // setInstallationType(null);
@@ -1053,7 +1053,7 @@ const Filters = () => {
                                         installval?.installation_name,
                                         installval?.installation_id
                                       );
-                                      if (window.innerWidth <= 768) {
+                                      if (window?.innerWidth <= 768) {
                                         setIsFilter(false);
                                       }
                                       // updateQueryParams({
@@ -1154,7 +1154,7 @@ const Filters = () => {
                                         glassval?.glass_orientation_name,
                                         glassval?.glass_orientation_id
                                       );
-                                      if (window.innerWidth <= 768) {
+                                      if (window?.innerWidth <= 768) {
                                         setIsFilter(false);
                                       }
                                     }}
@@ -1251,7 +1251,7 @@ const Filters = () => {
                                       val?.range_name,
                                       val?.range_id
                                     );
-                                    if (window.innerWidth <= 768) {
+                                    if (window?.innerWidth <= 768) {
                                       setIsFilter(false);
                                     }
                                   }}
@@ -1340,7 +1340,7 @@ const Filters = () => {
                                     val?.brand_name,
                                     val?.brand_id
                                   );
-                                  if (window.innerWidth <= 768) {
+                                  if (window?.innerWidth <= 768) {
                                     setIsFilter(false);
                                   }
                                 }}
@@ -1405,7 +1405,7 @@ const Filters = () => {
                         }`}
                         onClick={() => {
                           sortProducts(SORTBY.bestSelling);
-                          if (window.innerWidth <= 768) {
+                          if (window?.innerWidth <= 768) {
                             setIsFilter(false);
                           }
                         }}

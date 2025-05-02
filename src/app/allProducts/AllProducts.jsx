@@ -360,7 +360,7 @@ const AllProducts = () => {
   const [refreshPage, setRefreshPage] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [isFilter, setIsFilter] = useState(
-    window.innerWidth <= 768 ? false : true
+    window?.innerWidth <= 768 ? false : true
   );
   const [isSort, setIsSort] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(
@@ -386,7 +386,7 @@ const AllProducts = () => {
         !fireplaceType
       )
         return;
-      if (window.innerWidth <= 768) {
+      if (window?.innerWidth <= 768) {
         setIsFilter(false);
       } else {
         setIsFilter(true);
@@ -577,7 +577,7 @@ const AllProducts = () => {
                     ? allProductMenu.find(
                         (x) => x.ptype_id === productMenuIndex
                       )?.ptype_name ?? "Fireplaces"
-                    : "Products"
+                    : "Fireplace Products"
                 }`
               : `${brands.find((x) => x.brand_id === brandType)?.brand_name}` ??
                 "Unknown Brand"}
@@ -611,7 +611,7 @@ const AllProducts = () => {
                         productMenu.ptype_name,
                         productMenu.ptype_id
                       );
-                      if (window.innerWidth <= 768) {
+                      if (window?.innerWidth <= 768) {
                         setIsFilter(false);
                       }
                     }}
@@ -796,7 +796,7 @@ const AllProducts = () => {
                         updateQueryParams({
                           searchText: searchRef.current.value?.toLowerCase(),
                         });
-                        if (window.innerWidth <= 768) {
+                        if (window?.innerWidth <= 768) {
                           setIsFilter(false);
                         }
                       }}
@@ -880,7 +880,7 @@ const AllProducts = () => {
                                                 val?.fueltype_name,
                                                 val?.fueltype_id
                                               );
-                                              if (window.innerWidth <= 768) {
+                                              if (window?.innerWidth <= 768) {
                                                 setIsFilter(false);
                                               }
                                               // updateQueryParams({
@@ -908,7 +908,7 @@ const AllProducts = () => {
                                               val?.fueltype_name,
                                               val?.fueltype_id
                                             );
-                                            if (window.innerWidth <= 768) {
+                                            if (window?.innerWidth <= 768) {
                                               setIsFilter(false);
                                             }
                                             // setInstallationType(null);
@@ -940,7 +940,7 @@ const AllProducts = () => {
                                           val?.fueltype_name,
                                           val?.fueltype_id
                                         );
-                                        if (window.innerWidth <= 768) {
+                                        if (window?.innerWidth <= 768) {
                                           setIsFilter(false);
                                         }
                                         // setInstallationType(null);
@@ -1031,7 +1031,7 @@ const AllProducts = () => {
                                         installval?.installation_name,
                                         installval?.installation_id
                                       );
-                                      if (window.innerWidth <= 768) {
+                                      if (window?.innerWidth <= 768) {
                                         setIsFilter(false);
                                       }
                                       // updateQueryParams({
@@ -1132,7 +1132,7 @@ const AllProducts = () => {
                                         glassval?.glass_orientation_name,
                                         glassval?.glass_orientation_id
                                       );
-                                      if (window.innerWidth <= 768) {
+                                      if (window?.innerWidth <= 768) {
                                         setIsFilter(false);
                                       }
                                     }}
@@ -1229,7 +1229,7 @@ const AllProducts = () => {
                                       val?.range_name,
                                       val?.range_id
                                     );
-                                    if (window.innerWidth <= 768) {
+                                    if (window?.innerWidth <= 768) {
                                       setIsFilter(false);
                                     }
                                   }}
@@ -1318,7 +1318,7 @@ const AllProducts = () => {
                                     val?.brand_name,
                                     val?.brand_id
                                   );
-                                  if (window.innerWidth <= 768) {
+                                  if (window?.innerWidth <= 768) {
                                     setIsFilter(false);
                                   }
                                 }}
@@ -1382,7 +1382,7 @@ const AllProducts = () => {
                           bestSelling ? "font-semibold" : ""
                         }`}
                         onClick={() => {
-                          if (window.innerWidth <= 768) {
+                          if (window?.innerWidth <= 768) {
                             setIsFilter(false);
                           }
                           sortProducts(SORTBY.bestSelling);
