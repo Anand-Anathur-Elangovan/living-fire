@@ -301,15 +301,17 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
             <Image
               src={RightArrow}
               alt="Right Arrow"
+              title="Right Arrow"
               onClick={() => handleScroll("left")}
-              unoptimized
+              // unoptimized
               className="hover:opacity-70 transition-opacity"
             />
             <Image
               src={LeftArrow}
               alt="Left Arrow"
+              title="Left Arrow"
               onClick={() => handleScroll("right")}
-              unoptimized
+              // unoptimized
               className="hover:opacity-70 transition-opacity"
             />
           </div>
@@ -332,6 +334,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
               <Image
                 src={item.image}
                 alt={item.title}
+                title={item.title}
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
                 sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
@@ -362,7 +365,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
               alt="Right Arrow"
               width={20}
               height={20}
-              unoptimized
+              title="Right Arrow"
+              // unoptimized
             />
           </div>
           <div 
@@ -372,9 +376,10 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
             <Image
               src={LeftArrow}
               alt="Left Arrow"
+              title="Left Arrow"
               width={20}
               height={20}
-              unoptimized
+              // unoptimized
             />
           </div>
         </div>

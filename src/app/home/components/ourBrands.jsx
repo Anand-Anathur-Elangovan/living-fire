@@ -275,6 +275,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
               <Image
                 src={brand.image}
                 alt={brand.title}
+                title={brand.title}
                 width={160}
                 height={92}
                 className="grayscale hover:grayscale-0 transition-all duration-300 object-contain"
@@ -284,6 +285,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
               <Image
                 src={brand.image}
                 alt={brand.title}
+                title={brand.title}
                 width={160}
                 height={92}
                 className="grayscale hover:grayscale-0 transition-all duration-300 object-contain"

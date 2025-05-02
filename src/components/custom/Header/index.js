@@ -271,10 +271,11 @@ const handleCloseMenu = () => {
           <div className="image-container">
             <Image
               src={logo}
-              alt="Logo"
+              alt="Living Fires Company Logo"
               className="custom-header-width"
               onClick={handleHomeIconClick}
-              unoptimized
+              title="Living Fires Company Logo"
+              // unoptimized
             />
           </div>
           <div
@@ -288,7 +289,8 @@ const handleCloseMenu = () => {
                 >
                   <Image
                     src={SearchIcon}
-                    alt="searchIcon"
+                    alt="Search Icon"
+                    title="Search Icon"
                     style={{ filter: color === "white" ? "invert(1)" : "none" }}
                     className="cursor-pointer"
                     onClick={() => {
@@ -296,7 +298,7 @@ const handleCloseMenu = () => {
                       setShowMenu(true);
                     }}
                     width={30}
-                    unoptimized
+                    // unoptimized
                   />
                 </div>
               </div>
@@ -304,7 +306,8 @@ const handleCloseMenu = () => {
 
             <Image
               src={isMobile ? menu : menuIcon}
-              alt="menuIcon"
+              alt="Menu Icon"
+              title="Menu Icon"
               className={`cursor-pointer ${isMobile ? "w-[30px]" : "w-[45px] md:w-[53px]"}`}
               style={{
                 filter:
@@ -314,7 +317,7 @@ const handleCloseMenu = () => {
                 setIsFocus(false);
                 setShowMenu(true);
               }}
-              unoptimized
+              // unoptimized
             />
           </div>
         </header>
@@ -346,9 +349,10 @@ const handleCloseMenu = () => {
     <div className="close-icon cursor-pointer">
       <Image
         src={CloseIcon}
-        alt="Close"
+        alt="Close Icon"
+        title="Close Icon"
         onClick={handleCloseMenu}
-        unoptimized
+        // unoptimized
       />
     </div>
     <div className={`menu-header ${showMenu ? "active" : ""}`}>
