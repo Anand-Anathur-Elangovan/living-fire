@@ -13,7 +13,11 @@
   caret-color: transparent;
   caret-color: auto;
 }
-
+@font-face {
+  font-family: 'Satoru';
+  src: url('/fonts/Satoru.woff2') format('woff2');
+  font-display: swap;
+}
 h1,
 h2,
 .title {

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useNavigationState } from "@/context/NavigationContext";
 import { motion, AnimatePresence } from "framer-motion";
 import Loader from "@/src/helper/loader/Loader";
-
+import dynamic from 'next/dynamic';
 // Brand logos (optimized imports)
 const brandLogos = {
   cocoon: () => import("@/public/assets/homePage/ourBrands/cocoon.svg"),
@@ -29,11 +29,36 @@ const brandLogos = {
 };
 
 // Dynamically load components
-const Collections = lazy(() => import("./components/collections"));
-const OurBrands = lazy(() => import("./components/ourBrands"));
-const Featured = lazy(() => import("./components/featured"));
-const Testimonials = lazy(() => import("./components/testimonials"));
-const Blog = lazy(() => import("./components/blog"));
+// const Collections = lazy(() => import("./components/collections"));
+// const OurBrands = lazy(() => import("./components/ourBrands"));
+// const Featured = lazy(() => import("./components/featured"));
+// const Testimonials = lazy(() => import("./components/testimonials"));
+// const Blog = lazy(() => import("./components/blog"));
+
+const Collections = dynamic(() => import("./components/collections"), {
+  loading: () => <Loader />,
+  ssr: false, // disable SSR if the component depends on browser-only APIs
+});
+
+const OurBrands = dynamic(() => import("./components/ourBrands"), {
+  loading: () => <Loader />,
+  ssr: false,
+});
+
+const Featured = dynamic(() => import("./components/featured"), {
+  loading: () => <Loader />,
+  ssr: false,
+});
+
+const Testimonials = dynamic(() => import("./components/testimonials"), {
+  loading: () => <Loader />,
+  ssr: false,
+});
+
+const Blog = dynamic(() => import("./components/blog"), {
+  loading: () => <Loader />,
+  ssr: false,
+});
 
 const Home = () => {
   const useAnimationState = (initialValue) => {
@@ -50,77 +75,13 @@ const Home = () => {
     return [state, setStateOptimized];
   };
   const [hover, setHover] = useState(false);
-  // const [showPanels, setShowPanels] = useState(false);
-  // const [animatePanels, setAnimatePanels] = useState(false);
-  // const [zoomImage, setZoomImage] = useState(false);
-  // const [showButtons, setShowButtons] = useState(false);
   const [showPanels, setShowPanels] = useAnimationState(false);
   const [animatePanels, setAnimatePanels] = useAnimationState(false);
   const [zoomImage, setZoomImage] = useAnimationState(false);
   const [showButtons, setShowButtons] = useAnimationState(false);
-  // const [animationBudget, setAnimationBudget] = useState(1);
   const router = useRouter();
   const { setNavigationState } = useNavigationState();
 
-  // Animation sequence
-  // useEffect(() => {
-  //   if (hover) {
-  //     const timers = [
-  //       setTimeout(() => setShowPanels(true), 1000),
-  //       setTimeout(() => setAnimatePanels(true), 2500),
-  //       setTimeout(() => setZoomImage(true), 2500),
-  //       setTimeout(() => setShowButtons(true), 3000),
-  //     ];
-  //     return () => timers.forEach((timer) => clearTimeout(timer));
-  //   } else {
-  //     setShowPanels(false);
-  //     setAnimatePanels(false);
-  //     setZoomImage(false);
-  //   }
-  // }, [hover]);
-
-  // useEffect(() => {
-  //   if (!hover) {
-  //     setShowPanels(false);
-  //     setAnimatePanels(false);
-  //     setZoomImage(false);
-  //     setShowButtons(false);
-  //     return;
-  //   }
-
-  //   // Animation timeline using requestAnimationFrame
-  //   const animationStart = performance.now();
-  //   let animationFrameId;
-
-  //   const animate = (timestamp) => {
-  //     const elapsed = timestamp - animationStart;
-
-  //     // Phase 1: Show panels at 1000ms (unchanged)
-  //     if (elapsed >= 1000 && !showPanels) {
-  //       setShowPanels(true);
-  //     }
-
-  //     // Phase 2: Animate panels and zoom at 2500ms (unchanged)
-  //     if (elapsed >= 2500 && !animatePanels) {
-  //       setAnimatePanels(true);
-  //       setZoomImage(true);
-  //     }
-
-  //     // Phase 3: Show buttons at 3000ms (unchanged)
-  //     if (elapsed >= 3000 && !showButtons) {
-  //       setShowButtons(true);
-  //       return; // Animation complete
-  //     }
-
-  //     animationFrameId = requestAnimationFrame(animate);
-  //   };
-
-  //   animationFrameId = requestAnimationFrame(animate);
-
-  //   return () => {
-  //     cancelAnimationFrame(animationFrameId);
-  //   };
-  // }, [hover]);
   useEffect(() => {
     if (!hover) {
       setShowPanels(false);
@@ -129,34 +90,34 @@ const Home = () => {
       setShowButtons(false);
       return;
     }
-  
+
     // Single animation driver using requestAnimationFrame
     const startTime = performance.now();
     let rafId;
-  
+
     const animate = (now) => {
       const elapsed = now - startTime;
-  
+
       // Phase 1: Show panels at 1000ms (unchanged)
       if (elapsed >= 1000) setShowPanels(true);
-  
+
       // Phase 2: Animate panels + zoom at 2500ms (unchanged)
       if (elapsed >= 2500) {
         setAnimatePanels(true);
         setZoomImage(true);
       }
-  
+
       // Phase 3: Show buttons at 3000ms (unchanged)
       if (elapsed >= 3000) {
         setShowButtons(true);
         return; // Animation complete
       }
-  
+
       rafId = requestAnimationFrame(animate);
     };
-  
+
     rafId = requestAnimationFrame(animate);
-  
+
     return () => cancelAnimationFrame(rafId);
   }, [hover]);
 
@@ -176,9 +137,29 @@ const Home = () => {
     );
   };
 
+  // useEffect(() => {
+  //   const timer = setTimeout(() => setHover(true), 2000);
+  //   return () => clearTimeout(timer);
+  // }, []);
+
   useEffect(() => {
-    const timer = setTimeout(() => setHover(true), 2000);
-    return () => clearTimeout(timer);
+    let start = null;
+    let frameId;
+
+    const animate = (timestamp) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+
+      if (elapsed >= 2000) {
+        setHover(true);
+      } else {
+        frameId = requestAnimationFrame(animate);
+      }
+    };
+
+    frameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frameId);
   }, []);
 
   const brandsList = [
@@ -200,12 +181,6 @@ const Home = () => {
     { brand_id: 8, imageKey: "adf", title: "ADF", isSvg: true },
     { brand_id: 16, imageKey: "eurostove", title: "Eurostove", isSvg: false },
   ];
-  // useEffect(() => {
-  //   // Detect device capability
-  //   const isLowPower =
-  //     navigator.hardwareConcurrency < 4 || navigator.deviceMemory < 4;
-  //   setAnimationBudget(isLowPower ? 0.7 : 1);
-  // }, []);
   return (
     <div
       style={{
@@ -330,6 +305,10 @@ const Home = () => {
             placeholder="blur"
             loading="eager"
             decoding="async"
+            style={{
+              contentVisibility: "auto",
+              containIntrinsicSize: "1200px 800px",
+            }}
           />
 
           <motion.div
