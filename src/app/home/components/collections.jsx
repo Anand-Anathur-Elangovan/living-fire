@@ -156,14 +156,18 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
             alt="Right Arrow"
             title="Right Arrow"
             onClick={() => handleScroll("left")}
-            // unoptimized
+            loading="lazy" // Native lazy loading
+            quality={75}   // Adjust based on need
+            priority={false}
           />
           <Image
             src={LeftArrow}
             title="Left Arrow"
             alt="Left Arrow"
             onClick={() => handleScroll("right")}
-            // unoptimized
+            loading="lazy" // Native lazy loading
+            quality={75}   // Adjust based on need
+            priority={false}
           />
         </motion.div>
       </div>
@@ -199,6 +203,9 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                   )
                 }
                 style={{ cursor: "pointer" }}
+                loading="lazy" // Native lazy loading
+                quality={75}   // Adjust based on need
+                priority={false}
                 // unoptimized
               />
               <div className="overlay">
