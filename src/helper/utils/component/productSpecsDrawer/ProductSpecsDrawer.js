@@ -314,7 +314,7 @@ const ProductSpecsDrawer = ({
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   className={`${styles.viewProductButton} ${styles.hoverEffect}`}
-                  onClick={() => router.push(`/product/${selectedProductId}`)}
+                  onClick={() => router.push(`/${brand_name.replace(/\s+/g, "_")}/${name.replace(/\s+/g, "_")}`)}
                 >
                   View Product
                 </motion.button>
