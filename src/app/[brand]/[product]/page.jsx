@@ -107,8 +107,8 @@ export async function generateMetadata({ params }) {
 export async function generateStaticParams() {
   // Replace with actual top products from your CMS/database
   const topProducts = [
-    { brand: "Esse", product: "Ironheart" },
-    { brand: "Paul_Agnew", product: "Linear_Fire" },
+    { brand: "Regency", product: "FG39" },
+    { brand: "Paul_Agnew_Designs", product: "Ilektro_1250_Landscape_Tunnel" },
   ];
   
   return topProducts.map(({ brand, product }) => ({
