@@ -195,7 +195,7 @@ export default function RootLayout({ children }) {
       
       <body className="antialiased">
         {/* Optimized Google Tag Manager */}
-        <Script
+        {/* <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XD9XM6CVMJ"
           strategy="lazyOnload"
           id="gtm-script"
@@ -213,7 +213,7 @@ export default function RootLayout({ children }) {
               });
             `,
           }}
-        />
+        /> */}
 
         <NavigationProvider>
           <Providers>
