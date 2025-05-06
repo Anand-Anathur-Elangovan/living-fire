@@ -21,7 +21,7 @@
 //   return <Product params={params}/>;
 // }
 import Product from "./Product";
-
+import { cookies } from 'next/headers';
 // Helper function to format text for URLs and display
 const formatName = (name) => 
   name ? decodeURIComponent(name).replace(/_/g, " ").trim() : "";
@@ -43,7 +43,9 @@ export async function generateMetadata({ params }) {
     formatName(brand),
     formatName(product)
   );
-
+  const cookieStore = cookies();
+  const fuelTypeName = cookieStore.get("fuelTypeName")?.value;
+  console.log("fuelTypeName", fuelTypeName&&fuelTypeName)
   // SEO-optimized strings
   const seoTitle = `${productName} | ${brandName} ${category} | Living Fire Australia`;
   const seoDescription = `Explore the ${productName} ${category.toLowerCase()} by ${brandName}. ${features.join(", ")}. Premium quality for Australian homes.`;
