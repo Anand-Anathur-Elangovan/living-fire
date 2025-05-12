@@ -97,34 +97,59 @@ const Home = () => {
       return;
     }
 
-    // Single animation driver using requestAnimationFrame
+    const timeline = [
+      { time: 500, action: () => setShowPanels(true) },      // Show panels after hero fades out
+      { time: 1800, action: () => setAnimatePanels(true) },  // Animate panels
+      { time: 1800, action: () => setZoomImage(true) },       // Zoom image
+      { time: 2500, action: () => setShowButtons(true) }      // Show buttons
+    ];
+  
     const startTime = performance.now();
     let rafId;
-
+  
     const animate = (now) => {
       const elapsed = now - startTime;
-
-      // Phase 1: Show panels at 1000ms (unchanged)
-      if (elapsed >= 1000) setShowPanels(true);
-
-      // Phase 2: Animate panels + zoom at 2500ms (unchanged)
-      if (elapsed >= 2500) {
-        setAnimatePanels(true);
-        setZoomImage(true);
+      
+      timeline.forEach(({ time, action }) => {
+        if (elapsed >= time) action();
+      });
+  
+      if (elapsed < Math.max(...timeline.map(t => t.time))) {
+        rafId = requestAnimationFrame(animate);
       }
-
-      // Phase 3: Show buttons at 3000ms (unchanged)
-      if (elapsed >= 3000) {
-        setShowButtons(true);
-        return; // Animation complete
-      }
-
-      rafId = requestAnimationFrame(animate);
     };
-
+  
     rafId = requestAnimationFrame(animate);
-
+  
     return () => cancelAnimationFrame(rafId);
+    // // Single animation driver using requestAnimationFrame
+    // const startTime = performance.now();
+    // let rafId;
+
+    // const animate = (now) => {
+    //   const elapsed = now - startTime;
+
+    //   // Phase 1: Show panels at 1000ms (unchanged)
+    //   if (elapsed >= 1000) setShowPanels(true);
+
+    //   // Phase 2: Animate panels + zoom at 2500ms (unchanged)
+    //   if (elapsed >= 2500) {
+    //     setAnimatePanels(true);
+    //     setZoomImage(true);
+    //   }
+
+    //   // Phase 3: Show buttons at 3000ms (unchanged)
+    //   if (elapsed >= 3000) {
+    //     setShowButtons(true);
+    //     return; // Animation complete
+    //   }
+
+    //   rafId = requestAnimationFrame(animate);
+    // };
+
+    // rafId = requestAnimationFrame(animate);
+
+    // return () => cancelAnimationFrame(rafId);
   }, [hover]);
 
   const {
@@ -143,10 +168,10 @@ const Home = () => {
     );
   };
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => setHover(true), 2000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => setHover(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     let start = null;
@@ -250,10 +275,17 @@ const Home = () => {
               className="base-container"
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
+              // transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <section className="hero" aria-label="Premium Fireplace Showroom">
-                <motion.div className="hero-content">
+                <motion.div
+                  className="hero-content"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration:0.5, delay: 0.1 }}
+                >
                   {/* <h1>STUNNING FIREPLACES FOR ANY HOME.</h1> */}
                   <div
                     id="hero-heading"
