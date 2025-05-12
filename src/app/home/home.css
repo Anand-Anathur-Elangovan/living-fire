@@ -18,6 +18,8 @@
   text-align: center;
   height: 50vh;
   line-height: 1.2;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .hero h1 {
@@ -62,11 +64,12 @@
   background-color: #f7f7f5;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.8s ease-in-out;
+  /* transition: opacity 0.8s ease-in-out; */
   z-index: 3;
   background-size: cover;
   overflow: hidden;
   background-position: center;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .base-container.hidden {
@@ -157,7 +160,8 @@
   content-visibility: auto;
   contain-intrinsic-size: 1920px 1080px;
   will-change: transform;
-  transition: transform 1.2s cubic-bezier(0.33, 1, 0.68, 1);
+  /* transition: transform 1.2s cubic-bezier(0.33, 1, 0.68, 1); */
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
   transform: translateZ(0);
 }
 
@@ -381,7 +385,9 @@
   transform: scale(1);
   border-radius: 50%;
 }
-
+.panel-left, .panel-right {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
 @media (max-width: 768px) {
   .text-group h1 {
     font-size: 80px;

@@ -97,34 +97,59 @@ const Home = () => {
       return;
     }
 
-    // Single animation driver using requestAnimationFrame
+    const timeline = [
+      { time: 500, action: () => setShowPanels(true) }, // Show panels after hero fades out
+      { time: 1800, action: () => setAnimatePanels(true) }, // Animate panels
+      { time: 1800, action: () => setZoomImage(true) }, // Zoom image
+      { time: 2500, action: () => setShowButtons(true) }, // Show buttons
+    ];
+
     const startTime = performance.now();
     let rafId;
 
     const animate = (now) => {
       const elapsed = now - startTime;
 
-      // Phase 1: Show panels at 1000ms (unchanged)
-      if (elapsed >= 1000) setShowPanels(true);
+      timeline.forEach(({ time, action }) => {
+        if (elapsed >= time) action();
+      });
 
-      // Phase 2: Animate panels + zoom at 2500ms (unchanged)
-      if (elapsed >= 2500) {
-        setAnimatePanels(true);
-        setZoomImage(true);
+      if (elapsed < Math.max(...timeline.map((t) => t.time))) {
+        rafId = requestAnimationFrame(animate);
       }
-
-      // Phase 3: Show buttons at 3000ms (unchanged)
-      if (elapsed >= 3000) {
-        setShowButtons(true);
-        return; // Animation complete
-      }
-
-      rafId = requestAnimationFrame(animate);
     };
 
     rafId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(rafId);
+    // // Single animation driver using requestAnimationFrame
+    // const startTime = performance.now();
+    // let rafId;
+
+    // const animate = (now) => {
+    //   const elapsed = now - startTime;
+
+    //   // Phase 1: Show panels at 1000ms (unchanged)
+    //   if (elapsed >= 1000) setShowPanels(true);
+
+    //   // Phase 2: Animate panels + zoom at 2500ms (unchanged)
+    //   if (elapsed >= 2500) {
+    //     setAnimatePanels(true);
+    //     setZoomImage(true);
+    //   }
+
+    //   // Phase 3: Show buttons at 3000ms (unchanged)
+    //   if (elapsed >= 3000) {
+    //     setShowButtons(true);
+    //     return; // Animation complete
+    //   }
+
+    //   rafId = requestAnimationFrame(animate);
+    // };
+
+    // rafId = requestAnimationFrame(animate);
+
+    // return () => cancelAnimationFrame(rafId);
   }, [hover]);
 
   const {
@@ -143,10 +168,10 @@ const Home = () => {
     );
   };
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => setHover(true), 2000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => setHover(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     let start = null;
@@ -250,10 +275,17 @@ const Home = () => {
               className="base-container"
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
+              // transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               <section className="hero" aria-label="Premium Fireplace Showroom">
-                <motion.div className="hero-content">
+                <motion.div
+                  className="hero-content"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                >
                   {/* <h1>STUNNING FIREPLACES FOR ANY HOME.</h1> */}
                   <div
                     id="hero-heading"
@@ -275,104 +307,114 @@ const Home = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Animated Panels */}
         <motion.div
-          className={`panel-left ${showPanels ? "show-panelsLeft" : ""}`}
-          initial={{ x: "-100%" }}
-          animate={{
-            x: showPanels ? (animatePanels ? "-100%" : "-70%") : "-10%",
-          }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          aria-hidden="true"
-        />
-
-        <motion.div
-          className={`panel-right ${showPanels ? "show-panelsRight" : ""}`}
-          initial={{ x: "100%" }}
-          animate={{ x: showPanels ? (animatePanels ? "100%" : "70%") : "10%" }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          aria-hidden="true"
-        />
-
-        {/* Optimized Hero Image */}
-        <div className={`overlay-container ${zoomImage ? "show-panels" : ""}`}>
-          <Image
-            src={homePageMainImg}
-            title="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
-            alt="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
-            className={`overlay-image ${zoomImage ? "zoom" : ""}`}
-            priority
-            fetchPriority="high"
-            quality={65}
-            width={1920}
-            height={1080}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            placeholder="blur"
-            loading="eager"
-            decoding="async"
-            style={{
-              contentVisibility: "auto",
-              containIntrinsicSize: "1200px 800px",
+          // className={`overlay-container ${showPanels  ? "show-panels" : ""}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: showPanels ? 1 : 0 }}
+          transition={{ duration: 0.3, delay: showPanels ? 0 : 0.3 }}
+        >
+          {/* Animated Panels */}
+          <motion.div
+            className={`panel-left ${showPanels ? "show-panelsLeft" : ""}`}
+            initial={{ x: "-100%" }}
+            animate={{
+              x: showPanels ? (animatePanels ? "-100%" : "-70%") : "-10%",
             }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            aria-hidden="true"
           />
 
           <motion.div
-            className="text-group show"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
+            className={`panel-right ${showPanels ? "show-panelsRight" : ""}`}
+            initial={{ x: "100%" }}
+            animate={{
+              x: showPanels ? (animatePanels ? "100%" : "70%") : "10%",
+            }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            aria-hidden="true"
+          />
+
+          {/* Optimized Hero Image */}
+          <div
+            className={`overlay-container ${zoomImage ? "show-panels" : ""}`}
           >
-            <h1
-              className="blur-text"
-              onClick={() => router.push(`/allProducts`)}
-              style={{ cursor: "pointer" }}
+            <Image
+              src={homePageMainImg}
+              title="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
+              alt="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
+              className={`overlay-image ${zoomImage ? "zoom" : ""}`}
+              priority
+              fetchPriority="high"
+              quality={65}
+              width={1920}
+              height={1080}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              placeholder="blur"
+              loading="eager"
+              decoding="async"
+              style={{
+                contentVisibility: "auto",
+                containIntrinsicSize: "1200px 800px",
+              }}
+            />
+
+            <motion.div
+              className="text-group show"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
             >
-              LIVING FIRE
-            </h1>
-          </motion.div>
+              <h1
+                className="blur-text"
+                onClick={() => router.push(`/allProducts`)}
+                style={{ cursor: "pointer" }}
+              >
+                LIVING FIRE
+              </h1>
+            </motion.div>
 
-          <motion.div
-            className="text-group-subheading show"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-          >
-            <span className="blur-text">Architectural Fireplace Design</span>
-          </motion.div>
+            <motion.div
+              className="text-group-subheading show"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              <span className="blur-text">Architectural Fireplace Design</span>
+            </motion.div>
 
-          <motion.div
-            className={`button-group ${showButtons ? "show" : ""}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: showButtons ? 1 : 0 }}
-            transition={{ duration: 1 }}
-          >
-            {fuelTypes?.map(
-              (fuelType, index) =>
-                fuelType?.fueltype_name !== "Hybrid - Wood/Electric" && (
-                  <button
-                    key={`fuelType-${fuelType.fueltype_id}`}
-                    onClick={() =>
-                      allProductsRouteHandler(
-                        "fuelType",
-                        fuelType.fueltype_name,
-                        fuelType.fueltype_id
-                      )
-                    }
-                    className="p-0 m-0 flex gap-3"
-                    aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
-                  >
-                    {fuelType.fueltype_name}
-                    {index < fuelTypes.length - 1 && (
-                      <span className="hidden md:flex items-center text-white">
-                        |
-                      </span>
-                    )}
-                  </button>
-                )
-            )}
-          </motion.div>
-        </div>
+            <motion.div
+              className={`button-group ${showButtons ? "show" : ""}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: showButtons ? 1 : 0 }}
+              transition={{ duration: 1 }}
+            >
+              {fuelTypes?.map(
+                (fuelType, index) =>
+                  fuelType?.fueltype_name !== "Hybrid - Wood/Electric" && (
+                    <button
+                      key={`fuelType-${fuelType.fueltype_id}`}
+                      onClick={() =>
+                        allProductsRouteHandler(
+                          "fuelType",
+                          fuelType.fueltype_name,
+                          fuelType.fueltype_id
+                        )
+                      }
+                      className="p-0 m-0 flex gap-3"
+                      aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
+                    >
+                      {fuelType.fueltype_name}
+                      {index < fuelTypes.length - 1 && (
+                        <span className="hidden md:flex items-center text-white">
+                          |
+                        </span>
+                      )}
+                    </button>
+                  )
+              )}
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
 
       {/* Dynamically Loaded Sections */}
