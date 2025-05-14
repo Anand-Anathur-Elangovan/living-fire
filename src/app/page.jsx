@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Premium European Fireplaces Melbourne | Living Fire",
-  description: "Melbourne's finest custom European gas & wood fireplaces. 60+ years of craftsmanship. Visit our Richmond & Moorabbin showrooms.",
+  title: "Luxury Fireplaces Australia - Living Fire",
+  description: "Discover elegance with our luxury fireplaces across Melbourne & Australia. Elevate your home's ambience with our fireplaces. Visit our Richmond showroom today!",
   keywords: "luxury fireplaces Melbourne, European fireplaces, gas fireplaces Melbourne, wood fireplaces, modern fireplaces, custom fireplaces, designer fireplaces, indoor fireplaces, outdoor fireplaces, Living Fire",
   alternates: {
     canonical: "https://livingfires.com.au/",

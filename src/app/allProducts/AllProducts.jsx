@@ -565,7 +565,7 @@ const AllProducts = () => {
     <>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
         <div className="flex flex-col items-center gap-5">
-          <div className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
+          <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
             {!brandType
               ? `${
                   fireplaceType
@@ -581,14 +581,14 @@ const AllProducts = () => {
                 }`
               : `${brands.find((x) => x.brand_id === brandType)?.brand_name}` ??
                 "Unknown Brand"}
-          </div>
+          </h1>
 
           {fireplaceType && !brandType && (
-            <div className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
+            <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
               Experience warmth and elegance with our indoor luxury wood
               fireplaces, blending timeless craftsmanship with contemporary
               modern design.
-            </div>
+            </h2>
           )}
 
           {brandType &&
@@ -600,7 +600,7 @@ const AllProducts = () => {
               {!fireplaceType &&
                 !brandType &&
                 allProductMenu.map((productMenu, index) => (
-                  <div
+                  <h2
                     className="flex flex-col gap-1 items-center text-center cursor-pointer text-xs md:text-base"
                     key={"productMenu" + index}
                     onClick={() => {
@@ -629,7 +629,7 @@ const AllProducts = () => {
                         }`,
                       }}
                     />
-                  </div>
+                  </h2>
                 ))}
               {fireplaceType ? <></> : brandType ? <></> : <></>}
             </div>

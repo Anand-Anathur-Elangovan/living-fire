@@ -288,6 +288,14 @@
   max-width: 1200px;
   color: white;
 }
+#company-name {
+  font-family: Satoru;
+  font-size: 10rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  max-width: 1200px;
+  color: white;
+}
 .show {
   opacity: 1;
 }
@@ -385,11 +393,16 @@
   transform: scale(1);
   border-radius: 50%;
 }
-.panel-left, .panel-right {
+.panel-left,
+.panel-right {
   transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 @media (max-width: 768px) {
   .text-group h1 {
+    font-size: 80px;
+    line-height: 1;
+  }
+  #company-name {
     font-size: 80px;
     line-height: 1;
   }
@@ -606,6 +619,9 @@
   text-group h1 {
     font-size: 80px;
   }
+  #company-name {
+    font-size: 80px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -633,6 +649,9 @@
 
 @media (max-width: 380px) {
   .text-group h1 {
+    font-size: 70px;
+  }
+  #company-name {
     font-size: 70px;
   }
 
