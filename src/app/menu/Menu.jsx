@@ -60,9 +60,12 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
   };
 
   const handleProductClick = async (productName, brandName, fuelTypeName) => {
-    // await setNavigationState({ fueltypeName });
-    await setCookie("fuelTypeName", fuelTypeName);
-    // sessionStorage.setItem('fuelTypeName', fuelTypeName);
+    if (fuelTypeName) {
+    setCookie("fuelTypeName", fuelTypeName);
+  } else {
+    // Option 1: Clear the cookie safely
+    setCookie("fuelTypeName", "", { maxAge: 0 }); // or expires in the past
+  }
     const formattedProductName = productName?.replace(/\s+/g, "_");
     const formattedBrandName = brandName?.replace(/\s+/g, "_");
     router.push(`/${formattedBrandName}/${formattedProductName}`);

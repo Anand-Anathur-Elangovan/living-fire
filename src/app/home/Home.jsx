@@ -364,13 +364,21 @@ const Home = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              <h1
+              {/* <h1
                 className="blur-text"
                 onClick={() => router.push(`/allProducts`)}
                 style={{ cursor: "pointer" }}
               >
                 LIVING FIRE
-              </h1>
+              </h1> */}
+              <div
+              id="company-name"
+                className="blur-text text-4xl font-bold"
+                onClick={() => router.push(`/allProducts`)}
+                style={{ cursor: "pointer" }}
+              >
+                LIVING FIRE
+              </div>
             </motion.div>
 
             <motion.div
