@@ -843,7 +843,8 @@ const Filters = () => {
                   <div
                     className={`${
                       !isSort ? "flex" : "hidden"
-                    } md:flex flex-col border-b boder-solid border-[#D3C6BB]`}
+                    } md:flex flex-col `}
+                    //  border-b boder-solid border-[#D3C6BB]`}
                   >
                     {/* FirePlace Types */}
                     {
@@ -887,7 +888,7 @@ const Filters = () => {
                         </span>
                         <div
                           id="fireplaceFilterId"
-                          className="flex flex-col gap-3"
+                          className={`flex flex-col gap-3 ${!fireplaceType ? "collapse" : ""}`}
                         >
                           {fireplaceType
                             ? fuelTypes?.map(
@@ -1025,7 +1026,7 @@ const Filters = () => {
                         </span>
                         <div
                           id="installationTypeFilterId"
-                          className="flex flex-col gap-3 mr-10"
+                          className={`flex flex-col gap-3 mr-10 ${!installationType ? "collapse" : ""}`}
                         >
                           {firePlaceSubType.installation &&
                             updatedValues?.installationValues?.length > 0 &&
@@ -1121,7 +1122,7 @@ const Filters = () => {
                         </span>
                         <div
                           id="glassOrientationTypeFilterId"
-                          className="flex flex-col gap-3 mr-10"
+                          className={`flex flex-col gap-3 mr-10 ${!glassOrientationType ? "collapse" : ""}`}
                         >
                           {firePlaceSubType.glassOrientation &&
                             updatedValues?.glassOrientationValues?.length > 0 &&
@@ -1214,7 +1215,7 @@ const Filters = () => {
                         </span>
                         <div
                           id="rangesFilterId"
-                          className="flex flex-col gap-3 mr-10"
+                          className={`flex flex-col gap-3 mr-10 ${!rangeType ? "collapse" : ""}`}
                         >
                           {rangeType && (
                             <span
@@ -1268,7 +1269,7 @@ const Filters = () => {
 
                     {/* Brands Types */}
                     {
-                      <div className="flex flex-col gap-3 py-3 mr-10 ">
+                      <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                           Brands{" "}
                           {isClient &&
@@ -1308,7 +1309,7 @@ const Filters = () => {
                         </span>
                         <div
                           id="brandsFilterId"
-                          className="flex flex-col gap-3 mr-10 "
+                          className={`flex flex-col gap-3 mr-10 ${!brandType ? "collapse" : ""}`}
                         >
                           {brandType && (
                             <>
@@ -1354,12 +1355,12 @@ const Filters = () => {
                       </div>
                     }
                   </div>
-                  <div
+                  {/* <div
                     className={`${
                       !isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 mr-10`}
+                    } md:flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]`}
                   >
-                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
+                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base ">
                       Others{" "}
                       {isClient &&
                         !document
@@ -1398,7 +1399,7 @@ const Filters = () => {
                     </span>
                     <div
                       id="otherFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out"
+                      className="flex flex-col gap-3 transistion ease-in-out collapse"
                     >
                       <span
                         className={`font-sans font-small leading-5 text-normal cursor-pointer ${
@@ -1414,13 +1415,13 @@ const Filters = () => {
                         Best Selling
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                 </>
                 <>
                   <div
                     className={`${
                       isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 md:mr-10`}
+                    } md:flex flex-col gap-3 py-3 md:mr-10 `}
                   >
                     <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
                       Sort By{" "}
@@ -1462,9 +1463,9 @@ const Filters = () => {
                     </span>
                     <div
                       id="sortbyFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out"
+                      className="flex flex-col gap-3 transistion ease-in-out collapse"
                     >
-                      <div
+                      {/* <div
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
                         onClick={() => sortProducts(SORTBY.priceLowToHigh)}
                       >
@@ -1475,20 +1476,28 @@ const Filters = () => {
                         onClick={() => sortProducts(SORTBY.priceHighToLow)}
                       >
                         Price: High to Low
-                      </span>
+                      </span> */}
                       <span
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.A2Z)}
+                        onClick={() => {sortProducts(SORTBY.A2Z)
+                          if (window?.innerWidth <= 768) {
+                            setIsFilter(false);
+                          }
+                        }}
                       >
                         A-Z
                       </span>
                       <span
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.Z2A)}
+                        onClick={() => {
+                          sortProducts(SORTBY.Z2A)
+                        if (window?.innerWidth <= 768) {
+                            setIsFilter(false);
+                          }}}
                       >
                         Z-A
                       </span>
-                      <span
+                      {/* <span
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
                         onClick={() => sortProducts(SORTBY.oldToNew)}
                       >
@@ -1499,10 +1508,15 @@ const Filters = () => {
                         onClick={() => sortProducts(SORTBY.newToOld)}
                       >
                         Newest to Oldest
-                      </span>
+                      </span> */}
                       <span
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.bestSelling)}
+                        onClick={() => {
+                          sortProducts(SORTBY.bestSelling)
+                        if (window?.innerWidth <= 768) {
+                            setIsFilter(false);
+                          }
+                        }}
                       >
                         Best Selling
                       </span>

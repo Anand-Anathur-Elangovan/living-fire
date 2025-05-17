@@ -806,7 +806,8 @@ const AllProducts = () => {
                   <div
                     className={`${
                       !isSort ? "flex" : "hidden"
-                    } md:flex flex-col border-b boder-solid border-[#D3C6BB]`}
+                    } md:flex flex-col `}
+                    //  border-b boder-solid border-[#D3C6BB]`}
                   >
                     {/* FirePlace Types */}
                     {
@@ -850,7 +851,7 @@ const AllProducts = () => {
                         </span>
                         <div
                           id="fireplaceFilterId"
-                          className="flex flex-col gap-3"
+                          className="flex flex-col gap-3 collapse"
                         >
                          {fireplaceType
                             ? fuelTypes?.map(
@@ -967,7 +968,7 @@ const AllProducts = () => {
                               <div style={{ display: "flex", gap: "30px" }}>
                                 <Image
                                   src={MinusIcon}
-                                  alt="clear"
+                                  alt="collapse"
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
@@ -1002,7 +1003,7 @@ const AllProducts = () => {
                         </span>
                         <div
                           id="installationTypeFilterId"
-                          className="flex flex-col gap-3 mr-10"
+                          className="flex flex-col gap-3 mr-10 collapse"
                         >
                           {firePlaceSubType.installation &&
                             updatedValues?.installationValues?.length > 0 &&
@@ -1098,7 +1099,7 @@ const AllProducts = () => {
                         </span>
                         <div
                           id="glassOrientationTypeFilterId"
-                          className="flex flex-col gap-3 mr-10"
+                          className="flex flex-col gap-3 mr-10 collapse"
                         >
                           {firePlaceSubType.glassOrientation &&
                             updatedValues?.glassOrientationValues?.length > 0 &&
@@ -1191,7 +1192,7 @@ const AllProducts = () => {
                         </span>
                         <div
                           id="rangesFilterId"
-                          className="flex flex-col gap-3 mr-10"
+                          className="flex flex-col gap-3 mr-10 collapse"
                         >
                           {rangeType && (
                             <span
@@ -1245,7 +1246,7 @@ const AllProducts = () => {
 
                     {/* Brands Types */}
                     {
-                      <div className="flex flex-col gap-3 py-3 mr-10 ">
+                      <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                           Brands{" "}
                           {isClient &&
@@ -1285,7 +1286,7 @@ const AllProducts = () => {
                         </span>
                         <div
                           id="brandsFilterId"
-                          className="flex flex-col gap-3 mr-10 "
+                          className="flex flex-col gap-3 mr-10 collapse"
                         >
                           {brandType && (
                             <>
@@ -1331,10 +1332,10 @@ const AllProducts = () => {
                       </div>
                     }
                   </div>
-                  <div
+                  {/* <div
                     className={`${
                       !isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 mr-10`}
+                    } md:flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]`}
                   >
                     <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
                       Others{" "}
@@ -1375,7 +1376,7 @@ const AllProducts = () => {
                     </span>
                     <div
                       id="otherFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out"
+                      className="flex flex-col gap-3 transistion ease-in-out collapse"
                     >
                       <span
                         className={`font-sans font-small leading-5 text-normal cursor-pointer ${
@@ -1391,7 +1392,7 @@ const AllProducts = () => {
                         Best Selling
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                 </>
                 <>
                   <div
@@ -1439,9 +1440,9 @@ const AllProducts = () => {
                     </span>
                     <div
                       id="sortbyFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out"
+                      className="flex flex-col gap-3 transistion ease-in-out collapse"
                     >
-                      <div
+                      {/* <div
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
                         onClick={() => sortProducts(SORTBY.priceLowToHigh)}
                       >
@@ -1452,7 +1453,7 @@ const AllProducts = () => {
                         onClick={() => sortProducts(SORTBY.priceHighToLow)}
                       >
                         Price: High to Low
-                      </span>
+                      </span> */}
                       <span
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
                         onClick={() => sortProducts(SORTBY.A2Z)}
@@ -1465,7 +1466,7 @@ const AllProducts = () => {
                       >
                         Z-A
                       </span>
-                      <span
+                      {/* <span
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
                         onClick={() => sortProducts(SORTBY.oldToNew)}
                       >
@@ -1476,13 +1477,13 @@ const AllProducts = () => {
                         onClick={() => sortProducts(SORTBY.newToOld)}
                       >
                         Newest to Oldest
-                      </span>
+                      </span>*/}
                       <span
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
                         onClick={() => sortProducts(SORTBY.bestSelling)}
                       >
                         Best Selling
-                      </span>
+                      </span> 
                     </div>
                   </div>
                 </>
