@@ -26,9 +26,21 @@ const Header = () => {
   const [searchTextHeader, setSearchTextHeader] = useState("");
   const [color, setColor] = useState("white");
   const [isMobile, setIsMobile] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(true);
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
   const isHomePage = pathname === "/";
   let lastScroll = 0;
+
+  // useEffect(() => {
+  //   if (pathname !== prevPathname) {
+  //     // Only animate if coming from another page (not initial load)
+
+  //     setShouldAnimate(true);
+
+  //     setPrevPathname(pathname);
+  //   }
+  // }, [pathname, prevPathname]);
 
   useEffect(() => {
     // Check if mobile on mount and on resize
@@ -38,6 +50,9 @@ const Header = () => {
 
     checkIfMobile();
     window.addEventListener("resize", checkIfMobile);
+
+    setShouldAnimate(true);
+    const timer = setTimeout(() => setShouldAnimate(false), 3000);
 
     return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
@@ -77,6 +92,8 @@ const Header = () => {
     headerClasses.push("hidden");
   }
   const handleHomeIconClick = () => {
+    setShouldAnimate(true);
+    setTimeout(() => setShouldAnimate(false), 3000);
     sessionStorage.removeItem("filtersJson");
     sessionStorage.clear();
     router.push(`/`);
@@ -91,7 +108,12 @@ const Header = () => {
       setIsClosing(false);
     }, 400); // Match this with your CSS animation duration
   };
-
+  useEffect(() => {
+    if (shouldAnimate) {
+      const timer = setTimeout(() => setShouldAnimate(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [shouldAnimate]);
   return (
     <>
       {!showMenu && (
@@ -108,61 +130,76 @@ const Header = () => {
               <>
                 {/* Main Logo - slides in from right */}
                 <AnimatePresence>
-                  <motion.div
-                    initial={{ x: "50%", opacity: 1 }}
-                    animate={{
-                      x: 0,
-                      transition: {
-                        type: "spring",
-                        stiffness: 150,
-                        damping: 15,
-                        mass: 0.7,
-                        delay: 2,
-                      },
-                    }}
-                  >
-                    <Image
-                      src={LFLogo}
-                      alt="Living Fire Company Logo"
-                      className="custom-header-width"
-                      onClick={handleHomeIconClick}
-                      title="Living Fire Company Logo"
-                    />
-                  </motion.div>
-                </AnimatePresence>
-                {/* Title Logo - slides left and fades out */}
-                <AnimatePresence>
-                  <motion.div
-                    key="title-logo"
-                    initial={{ x: "8%", opacity: 1 }}
-                    animate={{
-                      x: 0,
-                      opacity: 0,
-                      transition: {
-                        x: {
+                  {shouldAnimate ? (
+                    <motion.div
+                      initial={{ x: "50%", opacity: 1 }}
+                      animate={{
+                        x: 0,
+                        transition: {
                           type: "spring",
                           stiffness: 150,
                           damping: 15,
                           mass: 0.7,
                           delay: 2,
                         },
-                        opacity: {
-                          duration: 2,
-                          ease: [0.22, 1, 0.36, 1],
-                          delay: 1,
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Image
+                        src={LFLogo}
+                        alt="Living Fire Company Logo"
+                        className="custom-header-width"
+                        onClick={handleHomeIconClick}
+                        title="Living Fire Company Logo"
+                      />
+                    </motion.div>
+                  ) : (
+                    <div key="static-logo">
+                      <Image
+                        src={LFLogo}
+                        alt="Living Fire Company Logo"
+                        className="custom-header-width"
+                        onClick={handleHomeIconClick}
+                        title="Living Fire Company Logo"
+                      />
+                    </div>
+                  )}
+                </AnimatePresence>
+                {/* Title Logo - slides left and fades out */}
+                <AnimatePresence>
+                  {shouldAnimate && (
+                    <motion.div
+                      key="title-logo"
+                      initial={{ x: "8%", opacity: 1 }}
+                      animate={{
+                        x: 0,
+                        opacity: 0,
+                        transition: {
+                          x: {
+                            type: "spring",
+                            stiffness: 150,
+                            damping: 15,
+                            mass: 0.7,
+                            delay: 2,
+                          },
+                          opacity: {
+                            duration: 2,
+                            ease: [0.22, 1, 0.36, 1],
+                            delay: 1,
+                          },
                         },
-                      },
-                    }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <Image
-                      src={LFTitleLogo}
-                      alt="Living Fire Company Title Logo"
-                      className="custom-header-width"
-                      onClick={handleHomeIconClick}
-                      title="Living Fire Company Title Logo"
-                    />
-                  </motion.div>
+                      }}
+                      exit={{ opacity: 0 }}
+                    >
+                      <Image
+                        src={LFTitleLogo}
+                        alt="Living Fire Company Title Logo"
+                        className="custom-header-width"
+                        onClick={handleHomeIconClick}
+                        title="Living Fire Company Title Logo"
+                      />
+                    </motion.div>
+                  )}
                 </AnimatePresence>
               </>
             )}
