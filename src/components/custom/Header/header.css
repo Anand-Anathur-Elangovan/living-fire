@@ -28,18 +28,27 @@
   transform: translateY(-100%); /* Slide out of view */
   opacity: 0; /* Fade out */
 }
+
 .image-container {
-  width: 326px; /* Initial width */
   height: auto;
-  overflow: hidden; /* Hide the part that gets cropped */
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Add some gap between logos */
 }
+
 .custom-header-width {
-  height: auto; /* Adjust to your logo size */
+  height: auto;
   cursor: pointer;
-  width: 100%;
-  object-fit: cover;
-  animation: cutImage 2s ease-in-out forwards, bounceIn 2s ease-in-out forwards;
-  /* animation: bounceIn 2s ease-in-out forwards; */
+  max-height: 74px;
+  object-fit: contain; /* Changed from cover to contain for better logo display */
+  will-change: transform, opacity; /* Optimize for animations */
+}
+.image-container motion.div {
+  will-change: transform, opacity;
+  display: flex;
+  flex-shrink: 0; /* Prevent shrinking during animation */
 }
 @keyframes cutImage {
   0% {
@@ -50,28 +59,14 @@
   }
 }
 
-@keyframes bounceIn {
+/* @keyframes bounceIn {
   0% {
-    transform: translateX(70px); /* Start 50px from the left */
+    transform: translateX(70px); 
   }
-  /* 60% {
-    transform: translateX(
-      0px
-    );
-  } */
-  /* 80% {
-    transform: translateX(15px);
-  } */
-  /* 85% {
-    transform: translateX(0px);
-  }
-  90% {
-    transform: translateX(5px);
-  } */
   100% {
-    transform: translateX(0); /* Settle at the final position (0px from left) */
+    transform: translateX(0); 
   }
-}
+} */
 
 .custom-header-right-side-icons {
   display: flex;
