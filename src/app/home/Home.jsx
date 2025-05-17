@@ -372,7 +372,7 @@ const Home = () => {
                 LIVING FIRE
               </h1> */}
               <div
-              id="company-name"
+                id="company-name"
                 className="blur-text text-4xl font-bold"
                 onClick={() => router.push(`/allProducts`)}
                 style={{ cursor: "pointer" }}
@@ -433,6 +433,25 @@ const Home = () => {
           </div>
         }
       >
+        <motion.div
+          className="hero-content-underneath"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          {/* <h1>STUNNING FIREPLACES FOR ANY HOME.</h1> */}
+          <div id="hero-heading" className="text-4xl font-bold leading-tight">
+            STUNNING FIREPLACES FOR ANY HOME.
+          </div>
+          <p>
+            At Living Fire, we believe our work is complete only when our
+            clients are enjoying the warmth of their new fireplace with a glass
+            of wine in hand. To ensure every customer across Melbourne and
+            Australia finds their match, we have curated an exceptional
+            selection of luxury fireplace brands. Visit our showrooms in
+            Richmond and Moorabbin to experience our products firsthand.
+          </p>
+        </motion.div>
         <Collections
           fuelTypes={fuelTypes}
           allProductsRouteHandler={allProductsRouteHandler}
