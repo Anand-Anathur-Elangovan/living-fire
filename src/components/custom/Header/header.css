@@ -163,6 +163,13 @@
     /* left: 20%;
     top: 64%; */
   }
+  .custom-header-width {
+  height: auto;
+  cursor: pointer;
+  max-height: 74px;
+  object-fit: contain; /* Changed from cover to contain for better logo display */
+  width: 83px;
+}
 }
 /* Menu container styles */
 /* .menu-container {
