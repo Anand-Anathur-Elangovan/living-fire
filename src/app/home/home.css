@@ -403,7 +403,7 @@
   transition: color 0.3s ease, opacity 0.3s ease;
 }
 .slick-dots {
- bottom: 20px !important;
+ bottom: 35px !important;
 }
 .slick-dots li.slick-active button {
   background: black;
@@ -415,6 +415,32 @@
   transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 2;
   transform: translateZ(0);
+}
+.scroll-indicator {
+  position: absolute;
+  bottom: 5px;
+  /* left: 50% !important; */
+  transform: translateX(-50%) ;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* cursor: pointer; */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /* background-color: rgba(255, 255, 255, 0.2); */
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  transition: all 0.3s ease;
+}
+
+.scroll-indicator:hover {
+  /* background-color: rgba(255, 255, 255, 0.3); */
+}
+
+.scroll-indicator svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 @media (max-width: 768px) {
   .custom-dots-container {
