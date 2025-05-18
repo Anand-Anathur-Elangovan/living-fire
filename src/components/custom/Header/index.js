@@ -10,10 +10,34 @@ import menuIcon from "@/public/assets/homePage/burgerMenu.svg";
 import Image from "next/image";
 import Menu from "@/src/app/menu/Menu";
 import CloseIcon from "@/public/assets/menu/close.svg";
+import CloseIconMui from '@mui/icons-material/Close';
 import { useRouter } from "next/navigation";
 import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Collapse,
+  Divider,
+  Box,
+  Typography,
+  styled,
+} from "@mui/material";
+// import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+
+const MultiColumnList = styled(Box)(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+  gap: '8px',
+  padding: '16px 0 16px 24px',
+}));
+
 
 const Header = () => {
   const pathname = usePathname();
@@ -22,12 +46,14 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showMenuNav, setShowMenuNav] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const [searchTextHeader, setSearchTextHeader] = useState("");
   const [color, setColor] = useState("white");
   const [isMobile, setIsMobile] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(true);
   const [prevPathname, setPrevPathname] = useState(pathname);
+  const [openCategories, setOpenCategories] = useState({});
 
   const isHomePage = pathname === "/";
   let lastScroll = 0;
@@ -104,9 +130,10 @@ const Header = () => {
     setIsClosing(true);
     setTimeout(() => {
       setShowMenu(false);
+      setShowMenuNav(false)
       setSearchTextHeader("");
       setIsClosing(false);
-    }, 400); // Match this with your CSS animation duration
+    }, 0); // Match this with your CSS animation duration
   };
   useEffect(() => {
     if (shouldAnimate) {
@@ -114,6 +141,132 @@ const Header = () => {
       return () => clearTimeout(timer);
     }
   }, [shouldAnimate]);
+
+   const menuItems = [
+    {
+      title: "Fireplaces",
+      subItems: [
+        { title: "Wood", href: "/allProducts/Wood/" },
+        { title: "Gas", href: "/allProducts/Gas/" },
+        { title: "Electric", href: "/allProducts/Electric/" },
+        { title: "Bioethanol", href: "/allProducts/Bio-Ethanol/" },
+        // { title: "Modern", href: "/modern-fireplaces/" },
+        // { title: "Traditional", href: "/traditional-fireplaces/" },
+      ],
+    },
+    {
+      title: "Additional Products",
+      subItems: [
+        { title: "Fireplace", href: "/allProducts/Fireplace/" },
+        { title: "Fireplace Mantels", href: "/allProducts/Fireplace%20Mantels/" },
+        { title: "Fire Tools", href: "/allProducts/Fire%20Tools/" },
+        { title: "Outdoor", href: "/allProducts/Outdoor/" },
+        { title: "Cast Iron", href: "/allProducts/Cast%20Iron/" },
+      ],
+    },
+    {
+      title: "Brands",
+      subItems: [
+        { title: "Esse", href: "/allProducts/Esse/" },
+        { title: "ADF", href: "/allProducts/ADF/" },
+        { title: "Austroflamm", href: "/allProducts/Austroflamm/" },
+        { title: "Bosq", href: "/allProducts/Bosq/" },
+         { title: "Eurostove", href: "/allProducts/Eurostove/" },
+        { title: "Gazco", href: "/allProducts/Gazco/" },
+        { title: "Heatmaster", href: "/allProducts/Heatmaster/" },
+        { title: "Hergom", href: "/allProducts/Hergom/" },
+         { title: "Kalora", href: "/allProducts/Kalora/" },
+        { title: "Living Fire", href: "/allProducts/Living Fire/" },
+        { title: "Morso", href: "/allProducts/Morso/" },
+        { title: "Paul Agnew Designs", href: "/allProducts/Paul Agnew Designs/" },
+        { title: "Regency", href: "/allProducts/Regency/" },
+        { title: "Stovax", href: "/allProducts/Stovax/" },
+      ],
+    },
+     {
+      title: "Services",
+      subItems: [
+        { title: "Maintenance & Servicing", href: "/maintenance-service/" },
+        { title: "Warranty & Servicing", href: "/warranty/" }
+      ],
+    },
+    // Add more categories as needed
+  ];
+  const bottomMenuItems = [
+    { title: "About Us", href: "/our-story/" },
+    { title: "News & Blogs", href: "/" },
+    { title: "Contact Us", href: "/contact/" },
+    // { title: "Contact", href: "/contact/" },
+  ];
+  const handleCategoryClick = (category) => {
+    setOpenCategories((prev) => ({
+      ...prev,
+      [category]: !prev[category],
+    }));
+  };
+
+   useEffect(() => {
+    if ( showMenuNav) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [ showMenuNav]);
+
+    // Effect to handle body scroll locking
+  useEffect(() => {
+    if (showMenuNav) {
+      // Add class to body to prevent scrolling
+      document.body.classList.add('drawer-open');
+      // Alternatively, you can directly set styles:
+      // document.body.style.overflow = 'hidden';
+      // document.body.style.position = 'fixed';
+      // document.body.style.width = '100%';
+    } else {
+      // Remove class when drawer closes
+      document.body.classList.remove('drawer-open');
+      // Or remove inline styles:
+      // document.body.style.overflow = '';
+      // document.body.style.position = '';
+      // document.body.style.width = '';
+    }
+
+    // Cleanup function
+    return () => {
+      document.body.classList.remove('drawer-open');
+      // Or:
+      // document.body.style.overflow = '';
+      // document.body.style.position = '';
+      // document.body.style.width = '';
+    };
+  }, [showMenuNav]);
+
+  useEffect(() => {
+    if (showMenuNav) {
+      // Save current scroll position
+      const scrollY = window.scrollY;
+      
+      // Apply styles to body
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        // Restore styles and scroll position
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [showMenuNav]);
+
+
   return (
     <>
       {!showMenu && (
@@ -243,7 +396,8 @@ const Header = () => {
               }}
               onClick={() => {
                 setIsFocus(false);
-                setShowMenu(true);
+                setShowMenuNav(true);
+                // setShowMenu(true);
               }}
               // unoptimized
             />
@@ -274,6 +428,212 @@ const Header = () => {
           </div>
         </div>
       )}
+      <Drawer
+        anchor="right"
+        open={showMenuNav}
+        onClose={handleCloseMenu}
+        sx={{
+          "& .MuiDrawer-paper": {
+            width: { xs: '100%', sm: '600px' },
+            maxWidth: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.9)",
+            color: "white",
+            overflowY: 'auto',
+          },
+        }}
+        ModalProps={{
+          disableScrollLock: false,
+          keepMounted: true, // Prevent background scrolling
+          BackdropProps: {
+            style: {
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              backdropFilter: 'blur(4px)',
+            }
+          }
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            padding: "20px",
+          }}
+        >
+          {/* Close button */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginBottom: "20px",
+            }}
+          >
+            <Image
+              src={CloseIcon}
+              alt="Close Icon"
+              onClick={handleCloseMenu}
+              style={{ cursor: "pointer", filter: "brightness(0) invert(1)", height: "auto" }}
+            />
+            {/* <CloseIconMui alt="Close Icon"
+              onClick={handleCloseMenu}
+              style={{ cursor: "pointer", color:"white" }}/> */}
+          </Box>
+
+          {/* Logo */}
+          <Box sx={{ marginBottom: "40px" }}>
+            <Image
+              src={LFLogo}
+              alt="Logo"
+              style={{ filter: "brightness(0) invert(1)", height: "auto" }}
+            />
+             {/* <Image
+              src={LFTitleLogo}
+              alt="Logo Title"
+              style={{ filter: "brightness(0) invert(1)", height: "auto" }}
+            /> */}
+          </Box>
+
+          {/* Main Navigation */}
+          <List sx={{ flexGrow: 1 }}>
+            {menuItems.map((item) => (
+              <React.Fragment key={item.title}>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    onClick={() => handleCategoryClick(item.title)}
+                    sx={{
+                      padding: "12px 0",
+                      borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                       '&:hover': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      },
+                    }}
+                  >
+                    <ListItemText
+                      primary={item.title}
+                      primaryTypographyProps={{
+                        fontSize: "1.3rem",
+                        fontWeight: "medium",
+                      }}
+                    />
+                    {openCategories[item.title] ? (
+                      <ExpandLessIcon />
+                    ) : (
+                      <ExpandMoreIcon />
+                    )}
+                  </ListItemButton>
+                </ListItem>
+                <Collapse
+                  in={openCategories[item.title]}
+                  timeout="auto"
+                  unmountOnExit
+                >
+                  <MultiColumnList>
+                    {item.subItems.map((subItem) => (
+                      // <ListItem key={subItem.title} disablePadding>
+                        <ListItemButton
+                         key={subItem.title}
+                           sx={{
+                          padding: '8px 12px',
+                          borderRadius: '4px',
+                          '&:hover': {
+                            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                            color: '#fff',
+                          },
+                        }}
+                          onClick={() => {
+                            router.push(subItem.href);
+                            handleCloseMenu();
+                          }}
+                        >
+                          <Typography variant="body1">
+                          {subItem.title}
+                        </Typography>
+                        </ListItemButton>
+                      // </ListItem>
+                    ))}
+                     </MultiColumnList>
+                  {/* <List component="div" disablePadding>
+                    {item.subItems.map((subItem) => (
+                      <ListItem key={subItem.title} disablePadding>
+                        <ListItemButton
+                          sx={{
+                            padding: "10px 0 10px 20px",
+                            borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
+                          }}
+                          onClick={() => {
+                            router.push(subItem.href);
+                            handleCloseMenu();
+                          }}
+                        >
+                          <ListItemText
+                            primary={subItem.title}
+                            primaryTypographyProps={{
+                              fontSize: "1rem",
+                              color: "rgba(255, 255, 255, 0.8)",
+                            }}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                    ))}
+                  </List> */}
+                </Collapse>
+              </React.Fragment>
+            ))}
+          </List>
+
+          {/* Bottom Navigation */}
+          {/* <List>
+            <Divider sx={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
+            {bottomMenuItems.map((item) => (
+              <ListItem key={item.title} disablePadding>
+                <ListItemButton
+                  sx={{ padding: "12px 0" }}
+                  onClick={() => {
+                    router.push(item.href);
+                    handleCloseMenu();
+                  }}
+                >
+                  <ListItemText
+                    primary={item.title}
+                    primaryTypographyProps={{
+                      fontSize: "1rem",
+                      color: "rgba(255, 255, 255, 0.8)",
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List> */}
+          <Box sx={{ marginTop: 'auto' }}>
+            <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+            <List>
+              {bottomMenuItems.map((item) => (
+                <ListItem key={item.title} disablePadding>
+                  <ListItemButton
+                    sx={{
+                      padding: '14px 0',
+                      '&:hover': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      },
+                    }}
+                    onClick={() => {
+                      router.push(item.href);
+                      handleCloseMenu();
+                    }}
+                  >
+                    <ListItemText
+                      primary={item.title}
+                      primaryTypographyProps={{
+                        fontSize: '1.1rem',
+                      }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Box>
+      </Drawer>
     </>
   );
 };
