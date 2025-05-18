@@ -443,8 +443,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                   variants={itemVariants}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
-                  {/* <div className="relative overflow-hidden rounded-lg aspect-square"> */}
-                    <div className="relative overflow-hidden rounded-lg aspect-[4/3] h-[280px]">
+                  <div className="relative overflow-hidden rounded-lg aspect-square">
+                    {/* <div className="relative overflow-hidden rounded-lg aspect-[4/3] h-[280px]"> */}
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -481,8 +481,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                   variants={itemVariants}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
-                  {/* <div className="relative overflow-hidden rounded-lg aspect-square"> */}
-                    <div className="relative overflow-hidden rounded-lg aspect-[4/3] h-[280px]">
+                  <div className="relative overflow-hidden rounded-lg aspect-square">
+                    {/* <div className="relative overflow-hidden rounded-lg aspect-[4/3] h-[280px]"> */}
                     <Image
                       src={item.image}
                       alt={item.title}

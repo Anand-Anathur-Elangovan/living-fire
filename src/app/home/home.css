@@ -164,17 +164,18 @@
 }
 
 .overlay-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1);
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transform: scale(1) !important;
   transition: transform 1s ease-in-out;
   filter: brightness(70%);
   content-visibility: auto;
   contain-intrinsic-size: 1920px 1080px;
   will-change: transform;
+  transform-origin: center center;
   /* transition: transform 1.2s cubic-bezier(0.33, 1, 0.68, 1); */
-  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
   transform: translateZ(0);
 }
 
@@ -183,9 +184,11 @@
 }
 
 .zoom {
-  transform: scale(1.2);
+  transform: scale(1.2) !important;
 }
-
+.zoom .overlay-image {
+  transform: scale(1) !important;
+}
 .button-group {
   position: absolute;
   bottom: 80px;
@@ -400,6 +403,7 @@
   transition: color 0.3s ease, opacity 0.3s ease;
 }
 .slick-dots {
+ bottom: 20px !important;
 }
 .slick-dots li.slick-active button {
   background: black;
@@ -409,8 +413,17 @@
 .panel-left,
 .panel-right {
   transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
+  transform: translateZ(0);
 }
 @media (max-width: 768px) {
+  .custom-dots-container {
+    bottom: 20px;
+  }
+
+  .carousel-slide {
+    height: 100vh;
+  }
   .text-group h1 {
     font-size: 80px;
     line-height: 1;
@@ -623,6 +636,88 @@
   -webkit-backdrop-filter: blur(10px);
   gap: 10px;
   transition: opacity 1s linear !important;
+}
+
+.hero-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+.slick-list {
+  height: 100%;
+  overflow: visible; /* Change to visible to allow zoom */
+}
+
+.slick-list,
+.slick-track {
+  height: 100%;
+}
+
+.slick-track {
+  display: flex !important;
+}
+
+.slick-slide {
+  height: 100%;
+  float: none !important;
+}
+
+.slick-slide > div {
+  height: 100%;
+}
+
+/* Custom dots styling */
+.custom-dots-container {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+  transform: translateY(-20px);
+}
+
+.custom-dots-container ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.custom-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slick-active .custom-dot {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+/* Ensure the carousel slides take full height */
+.slick-list,
+.slick-track {
+  height: 100%;
+}
+
+.overlay-container .slick-slide > div {
+  height: 100%;
 }
 
 @media (max-width: 768px) {
