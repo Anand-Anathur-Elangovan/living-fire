@@ -1,6 +1,5 @@
 // import React, { useState, useEffect, useRef } from "react";
 // import "./featured.css";
-// import collectionImg1 from "@/public/assets/homePage/collections/collectionsImg1.svg";
 // import featureImg1 from "@/public/assets/homePage/feature/1.webp";
 // import featureImg2 from "@/public/assets/homePage/feature/22.webp";
 // import featureImg3 from "@/public/assets/homePage/feature/3.webp";
@@ -13,7 +12,6 @@
 // import { useRouter } from "next/navigation";
 // import { useNavigationState } from "@/context/NavigationContext";
 // import { motion } from "framer-motion";
-// import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 
 // const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
 //   const router = useRouter();
@@ -21,6 +19,13 @@
 //   const carouselRef = useRef(null);
 //   const [isMobile, setIsMobile] = useState(false);
 //   const [isTablet, setIsTablet] = useState(false);
+
+//   useEffect(() => {
+//     const prefetchRoutes = async () => {
+//       router.prefetch('/allProducts');
+//     };
+//     prefetchRoutes();
+//   }, [router]);
 
 //   useEffect(() => {
 //     const handleResize = () => {
@@ -43,7 +48,7 @@
 //       brand_name: "Paul Agnew Designs"
 //     },
 //     {
-//       p_id: "424",
+//       p_id: "425",
 //       image: featureImg2,
 //       title: "Ilektro 2600",
 //       description: "Paul Agnew Designs",
@@ -51,7 +56,7 @@
 //       brand_name: "Paul Agnew Designs"
 //     },
 //     {
-//       p_id: "424",
+//       p_id: "426",
 //       image: featureImg3,
 //       title: "Ilektro integra anson",
 //       description: "Paul Agnew Designs",
@@ -59,7 +64,7 @@
 //       brand_name: "Paul Agnew Designs"
 //     },
 //     {
-//       p_id: "424",
+//       p_id: "427",
 //       image: featureImg4,
 //       title: "Pyro Siena 750GF Freestanding",
 //       description: "Paul Agnew Designs",
@@ -67,7 +72,7 @@
 //       brand_name: "Paul Agnew Designs"
 //     },
 //     {
-//       p_id: "424",
+//       p_id: "428",
 //       image: featureImg5,
 //       title: "Heatmaster Seamless",
 //       description: "Heatmaster",
@@ -75,7 +80,7 @@
 //       brand_name: "Heatmaster"
 //     },
 //     {
-//       p_id: "424",
+//       p_id: "429",
 //       image: featureImg6,
 //       title: "Regency FG39",
 //       description: "Regency",
@@ -133,32 +138,30 @@
 //       variants={containerVariants}
 //     >
 //       <div className="flex flex-row items-center w-full">
-//         <div className="heading1 flex w-full justify-start md:justify-center md:ml-0 text-2xl md:text-3xl">
+//         <h2 className="heading1 flex w-full justify-start md:justify-center md:ml-0 text-2xl md:text-3xl">
 //           {headingValue}
-//         </div>
+//         </h2>
 //         {!isMobile && (
 //           <div className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer">
 //             <Image
 //               src={RightArrow}
-//               alt="Right Arrow"
-//               title="Right Arrow"
+//               alt="Scroll left"
+//               width={24}
+//               height={24}
 //               onClick={() => handleScroll("left")}
-//               // unoptimized
 //               className="hover:opacity-70 transition-opacity"
-//               // loading="lazy" // Native lazy loading
-//               // quality={75}   // Adjust based on need
-//               // priority={false}
+//               loading="eager"
+//               priority
 //             />
 //             <Image
 //               src={LeftArrow}
-//               alt="Left Arrow"
-//               title="Left Arrow"
+//               alt="Scroll right"
+//               width={24}
+//               height={24}
 //               onClick={() => handleScroll("right")}
-//               // unoptimized
 //               className="hover:opacity-70 transition-opacity"
-//               // loading="lazy" // Native lazy loading
-//               // quality={75}   // Adjust based on need
-//               // priority={false}
+//               loading="eager"
+//               priority
 //             />
 //           </div>
 //         )}
@@ -171,7 +174,7 @@
 //         {carouselItems.map((item, index) => (
 //           <motion.div
 //             className="w-full flex flex-col gap-3 md:gap-5"
-//             key={"featured" + index}
+//             key={`featured-${item.p_id}-${index}`}
 //             onClick={() => productRouteHandler(item.name, item?.brand_name)}
 //             variants={itemVariants}
 //             whileHover={{ y: -5, transition: { duration: 0.2 } }}
@@ -180,14 +183,12 @@
 //               <Image
 //                 src={item.image}
 //                 alt={item.title}
-//                 title={item.title}
 //                 fill
 //                 className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
 //                 sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
-//                 loading="lazy" // Native lazy loading
-//                 // quality={75}   // Adjust based on need
-//                 // priority={false}
-                
+//                 loading={index < 2 ? "eager" : "lazy"}
+//                 quality={85}
+//                 placeholder="blur"
 //               />
 //             </div>
 //             <div className="font-sans text-left">
@@ -204,38 +205,34 @@
 
 //       {isMobile && (
 //         <div className="flex justify-center gap-4 mt-4">
-//           <div 
+//           <button 
 //             className="p-2 rounded-full bg-gray-100 cursor-pointer"
 //             onClick={() => handleScroll("left")}
+//             aria-label="Scroll left"
 //           >
 //             <Image
 //               src={RightArrow}
-//               alt="Right Arrow"
+//               alt=""
 //               width={20}
 //               height={20}
-//               title="Right Arrow"
-//               // loading="lazy" // Native lazy loading
-//               // quality={75}   // Adjust based on need
-//               // priority={false}
-//               // unoptimized
+//               loading="eager"
+//               priority
 //             />
-//           </div>
-//           <div 
+//           </button>
+//           <button 
 //             className="p-2 rounded-full bg-gray-100 cursor-pointer"
 //             onClick={() => handleScroll("right")}
+//             aria-label="Scroll right"
 //           >
 //             <Image
 //               src={LeftArrow}
-//               alt="Left Arrow"
-//               title="Left Arrow"
+//               alt=""
 //               width={20}
 //               height={20}
-//               // loading="lazy" // Native lazy loading
-//               // quality={75}   // Adjust based on need
-//               // priority={false}
-//               // unoptimized
+//               loading="eager"
+//               priority
 //             />
-//           </div>
+//           </button>
 //         </div>
 //       )}
 
@@ -245,6 +242,7 @@
 //           setNavigationState(null);
 //           router.push(`/allProducts`);
 //         }}
+//         onMouseEnter={() => router.prefetch('/allProducts')}
 //       >
 //         SHOP ALL
 //       </div>
@@ -252,7 +250,7 @@
 //   );
 // };
 
-// export default Featured;
+// export default React.memo(Featured);
 
 import React, { useState, useEffect, useRef } from "react";
 import "./featured.css";
@@ -275,6 +273,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
   const carouselRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     const prefetchRoutes = async () => {
@@ -287,6 +286,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 640);
       setIsTablet(window.innerWidth > 640 && window.innerWidth <= 1024);
+      setIsDesktop(window.innerWidth > 1024);
     };
 
     handleResize();
@@ -299,7 +299,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       p_id: "424",
       image: featureImg1,
       title: "Ilektro 1250",
-      description: "Paul Agnew Designs",
+      range: "Paul Agnew Designs",
+      description: "Premium electric fire with realistic flame effect and efficient heating",
       name: "Ilektro 1250 Landscape Tunnel",
       brand_name: "Paul Agnew Designs"
     },
@@ -307,7 +308,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       p_id: "425",
       image: featureImg2,
       title: "Ilektro 2600",
-      description: "Paul Agnew Designs",
+      range: "Paul Agnew Designs",
+      description: "Large format electric fire with stunning visual effects",
       name: "Ilektro 2600 Landscape",
       brand_name: "Paul Agnew Designs"
     },
@@ -315,7 +317,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       p_id: "426",
       image: featureImg3,
       title: "Ilektro integra anson",
-      description: "Paul Agnew Designs",
+      range: "Paul Agnew Designs",
+      description: "Sleek integrated design with advanced heating technology",
       name: "HZO42 - Outdoor - LPG",
       brand_name: "Paul Agnew Designs"
     },
@@ -323,7 +326,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       p_id: "427",
       image: featureImg4,
       title: "Pyro Siena 750GF Freestanding",
-      description: "Paul Agnew Designs",
+      range: "Paul Agnew Designs",
+      description: "Freestanding gas fire with elegant traditional styling",
       name: "Siena 750GF Freestanding",
       brand_name: "Paul Agnew Designs"
     },
@@ -331,7 +335,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       p_id: "428",
       image: featureImg5,
       title: "Heatmaster Seamless",
-      description: "Heatmaster",
+      range: "Heatmaster",
+      description: "Modern seamless design with powerful heat output",
       name: "Seamless",
       brand_name: "Heatmaster"
     },
@@ -339,7 +344,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       p_id: "429",
       image: featureImg6,
       title: "Regency FG39",
-      description: "Regency",
+      range: "Regency",
+      description: "High-efficiency gas fireplace with realistic log set",
       name: "FG39",
       brand_name: "Regency"
     },
@@ -397,7 +403,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
         <h2 className="heading1 flex w-full justify-start md:justify-center md:ml-0 text-2xl md:text-3xl">
           {headingValue}
         </h2>
-        {!isMobile && (
+        {!isMobile && !isDesktop && (
           <div className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer">
             <Image
               src={RightArrow}
@@ -423,73 +429,162 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
         )}
       </div>
 
-      <div
-        ref={carouselRef}
-        className="grid grid-flow-col auto-cols-[75%] sm:auto-cols-[45%] md:auto-cols-[30%] lg:auto-cols-[25%] gap-4 md:gap-[36px] overflow-x-auto overscroll-x-contain feature-snaps hide-scrollbar"
-      >
-        {carouselItems.map((item, index) => (
-          <motion.div
-            className="w-full flex flex-col gap-3 md:gap-5"
-            key={`featured-${item.p_id}-${index}`}
-            onClick={() => productRouteHandler(item.name, item?.brand_name)}
-            variants={itemVariants}
-            whileHover={{ y: -5, transition: { duration: 0.2 } }}
-          >
-            <div className="relative overflow-hidden rounded-lg aspect-square">
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
-                sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
-                loading={index < 2 ? "eager" : "lazy"}
-                quality={85}
-                placeholder="blur"
-              />
+      {isDesktop ? (
+        // Desktop View - 2 rows of 3 products
+        <div className="grid grid-cols-3 gap-6 md:gap-8 w-full">
+          <div className="grid grid-rows-2 gap-6 md:gap-8 col-span-3">
+            {/* First Row */}
+            <div className="grid grid-cols-3 gap-6 md:gap-8">
+              {carouselItems.slice(0, 3).map((item, index) => (
+                <motion.div
+                  className="w-full flex flex-col gap-3 md:gap-4"
+                  key={`featured-desktop-${item.p_id}-${index}`}
+                  onClick={() => productRouteHandler(item.name, item?.brand_name)}
+                  variants={itemVariants}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
+                  {/* <div className="relative overflow-hidden rounded-lg aspect-square"> */}
+                    <div className="relative overflow-hidden rounded-lg aspect-[4/3] h-[280px]">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
+                      sizes="(max-width: 1024px) 30vw, 25vw"
+                      // loading={index < 2 ? "eager" : "lazy"}
+                      quality={95}
+                      placeholder="blur"
+                    />
+                  </div>
+                  <div className="font-sans text-left">
+                    <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
+                      {item.title}
+                    </h3>
+                    <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
+                      {item.range}
+                    </p>
+                    <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-            <div className="font-sans text-left">
-              <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
-                {item.title}
-              </h3>
-              <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
-                {item.description}
-              </p>
+            
+            {/* Second Row */}
+            <div className="grid grid-cols-3 gap-6 md:gap-8">
+              {carouselItems.slice(3, 6).map((item, index) => (
+                <motion.div
+                  className="w-full flex flex-col gap-3 md:gap-4"
+                  key={`featured-desktop-${item.p_id}-${index+3}`}
+                  onClick={() => productRouteHandler(item.name, item?.brand_name)}
+                  variants={itemVariants}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
+                  {/* <div className="relative overflow-hidden rounded-lg aspect-square"> */}
+                    <div className="relative overflow-hidden rounded-lg aspect-[4/3] h-[280px]">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
+                      sizes="(max-width: 1024px) 30vw, 25vw"
+                      // loading="lazy"
+                      quality={95}
+                      placeholder="blur"
+                    />
+                  </div>
+                  <div className="font-sans text-left">
+                    <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
+                      {item.title}
+                    </h3>
+                    <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
+                      {item.range}
+                    </p>
+                    <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {isMobile && (
-        <div className="flex justify-center gap-4 mt-4">
-          <button 
-            className="p-2 rounded-full bg-gray-100 cursor-pointer"
-            onClick={() => handleScroll("left")}
-            aria-label="Scroll left"
-          >
-            <Image
-              src={RightArrow}
-              alt=""
-              width={20}
-              height={20}
-              loading="eager"
-              priority
-            />
-          </button>
-          <button 
-            className="p-2 rounded-full bg-gray-100 cursor-pointer"
-            onClick={() => handleScroll("right")}
-            aria-label="Scroll right"
-          >
-            <Image
-              src={LeftArrow}
-              alt=""
-              width={20}
-              height={20}
-              loading="eager"
-              priority
-            />
-          </button>
+          </div>
         </div>
+      ) : (
+        // Mobile/Tablet View - Carousel
+        <>
+          <div
+            ref={carouselRef}
+            className="grid grid-flow-col auto-cols-[75%] sm:auto-cols-[45%] md:auto-cols-[30%] lg:auto-cols-[25%] gap-4 md:gap-[36px] overflow-x-auto overscroll-x-contain feature-snaps hide-scrollbar"
+          >
+            {carouselItems.map((item, index) => (
+              <motion.div
+                className="w-full flex flex-col gap-3 md:gap-5"
+                key={`featured-${item.p_id}-${index}`}
+                onClick={() => productRouteHandler(item.name, item?.brand_name)}
+                variants={itemVariants}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <div className="relative overflow-hidden rounded-lg aspect-square">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
+                    sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
+                    loading={index < 2 ? "eager" : "lazy"}
+                    quality={85}
+                    placeholder="blur"
+                  />
+                </div>
+                <div className="font-sans text-left">
+                  <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
+                    {item.title}
+                  </h3>
+                  <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
+                    {item.range}
+                  </p>
+                  <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {isMobile && (
+            <div className="flex justify-center gap-4 mt-4">
+              <button 
+                className="p-2 rounded-full bg-gray-100 cursor-pointer"
+                onClick={() => handleScroll("left")}
+                aria-label="Scroll left"
+              >
+                <Image
+                  src={RightArrow}
+                  alt=""
+                  width={20}
+                  height={20}
+                  loading="eager"
+                  priority
+                />
+              </button>
+              <button 
+                className="p-2 rounded-full bg-gray-100 cursor-pointer"
+                onClick={() => handleScroll("right")}
+                aria-label="Scroll right"
+              >
+                <Image
+                  src={LeftArrow}
+                  alt=""
+                  width={20}
+                  height={20}
+                  loading="eager"
+                  priority
+                />
+              </button>
+            </div>
+          )}
+        </>
       )}
 
       <div
