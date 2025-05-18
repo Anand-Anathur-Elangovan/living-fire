@@ -501,8 +501,6 @@
 
 // export default Home;
 
-
-
 "use client";
 import React, { useState, useEffect, lazy, Suspense, useRef } from "react";
 import homePageMainImg from "@/public/assets/homePage/homePageMainImg.png";
@@ -516,8 +514,8 @@ import { useNavigationState } from "@/context/NavigationContext";
 import { motion, AnimatePresence } from "framer-motion";
 import Loader from "@/src/helper/loader/Loader";
 import Slider from "react-slick";
-import dynamic from "next/dynamic";
-// Brand logos (optimized imports)
+import { ChevronDown } from "react-feather";
+
 const brandLogos = {
   cocoon: () => import("@/public/assets/homePage/ourBrands/cocoon.svg"),
   paulAgnew: () => import("@/public/assets/homePage/ourBrands/paul-agnew.svg"),
@@ -534,43 +532,15 @@ const brandLogos = {
     import("@/public/assets/homePage/ourBrands/eurostoveLogo.png"),
 };
 
-// Dynamically load components
 const Collections = lazy(() => import("./components/collections"), {
-  // This is an experimental flag that may improve performance
   unstable_expectedLoadTime: 2000, // Estimate of load time
 });
 const OurBrands = lazy(() => import("./components/ourBrands"));
 const Featured = lazy(() => import("./components/featured"), {
-  // This is an experimental flag that may improve performance
   unstable_expectedLoadTime: 2000, // Estimate of load time
 });
 const Testimonials = lazy(() => import("./components/testimonials"));
 const Blog = lazy(() => import("./components/blog"));
-
-// const Collections = dynamic(() => import("./components/collections"), {
-//   loading: () => <Loader />,
-//   ssr: false, // disable SSR if the component depends on browser-only APIs
-// });
-
-// const OurBrands = dynamic(() => import("./components/ourBrands"), {
-//   loading: () => <Loader />,
-//   ssr: true,
-// });
-
-// const Featured = dynamic(() => import("./components/featured"), {
-//   loading: () => <Loader />,
-//   ssr: true,
-// });
-
-// const Testimonials = dynamic(() => import("./components/testimonials"), {
-//   loading: () => <Loader />,
-//   ssr: true,
-// });
-
-// const Blog = dynamic(() => import("./components/blog"), {
-//   loading: () => <Loader />,
-//   ssr: true,
-// });
 
 const Home = () => {
   const useAnimationState = (initialValue) => {
@@ -628,34 +598,6 @@ const Home = () => {
     rafId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(rafId);
-    // // Single animation driver using requestAnimationFrame
-    // const startTime = performance.now();
-    // let rafId;
-
-    // const animate = (now) => {
-    //   const elapsed = now - startTime;
-
-    //   // Phase 1: Show panels at 1000ms (unchanged)
-    //   if (elapsed >= 1000) setShowPanels(true);
-
-    //   // Phase 2: Animate panels + zoom at 2500ms (unchanged)
-    //   if (elapsed >= 2500) {
-    //     setAnimatePanels(true);
-    //     setZoomImage(true);
-    //   }
-
-    //   // Phase 3: Show buttons at 3000ms (unchanged)
-    //   if (elapsed >= 3000) {
-    //     setShowButtons(true);
-    //     return; // Animation complete
-    //   }
-
-    //   rafId = requestAnimationFrame(animate);
-    // };
-
-    // rafId = requestAnimationFrame(animate);
-
-    // return () => cancelAnimationFrame(rafId);
   }, [hover]);
 
   const {
@@ -718,7 +660,7 @@ const Home = () => {
     { brand_id: 8, imageKey: "adf", title: "ADF", isSvg: true },
     { brand_id: 16, imageKey: "eurostove", title: "Eurostove", isSvg: false },
   ];
-   const carouselSettings = {
+  const carouselSettings = {
     dots: true,
     infinite: true,
     speed: 1000,
@@ -728,15 +670,13 @@ const Home = () => {
     autoplaySpeed: 5000,
     pauseOnHover: false,
     arrows: false,
-    cssEase: 'linear',
-    appendDots: dots => (
+    cssEase: "linear",
+    appendDots: (dots) => (
       <div className="custom-dots-container">
         <ul>{dots}</ul>
       </div>
     ),
-    customPaging: i => (
-      <div className="custom-dot"></div>
-    ),
+    customPaging: (i) => <div className="custom-dot"></div>,
   };
   return (
     <div
@@ -952,6 +892,27 @@ const Home = () => {
                     </button>
                   )
               )}
+            </motion.div>
+            <motion.div
+              className="scroll-indicator"
+              initial={{ y: 0, opacity: 0 }}
+              animate={{
+                y: [0, 10, 0],
+                opacity: [0, 1, 1],
+              }}
+              transition={{
+                y: {
+                  repeat: Infinity,
+                  duration: 2,
+                  ease: "easeInOut",
+                },
+                opacity: {
+                  duration: 0.5,
+                  delay: 3, // appears after other animations
+                },
+              }}
+            >
+              <ChevronDown size={48} color="white" />
             </motion.div>
           </div>
         </motion.div>
