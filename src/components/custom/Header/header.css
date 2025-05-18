@@ -263,3 +263,68 @@
     opacity: 0;
   }
 }
+
+.MuiBackdrop-root {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(4px);
+}
+
+/* Menu transitions */
+.MuiCollapse-root {
+  transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.MuiDrawer-paper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+.MuiDrawer-paper::-webkit-scrollbar {
+  width: 6px;
+}
+.MuiDrawer-paper::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.MuiDrawer-paper::-webkit-scrollbar-track {
+  background: transparent;
+}
+body.drawer-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+.MuiModal-hidden {
+  overflow: hidden;
+}
+.MuiListItemButton-root {
+  transition: all 0.3s ease;
+}
+/* Menu item hover effects */
+.MuiListItemButton-root:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Custom scroll for menu */
+.c-overlay-menu--scroll-element {
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Custom scrollbar */
+.c-overlay-menu--scroll-element::-webkit-scrollbar {
+  width: 4px;
+}
+
+.c-overlay-menu--scroll-element::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+/* Multi-column grid adjustments */
+@media (max-width: 600px) {
+  .multi-column-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

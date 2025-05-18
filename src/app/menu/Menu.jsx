@@ -278,7 +278,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
             </AnimatePresence>
           </div>
 
-          {dataStatus && (
+          {/* {dataStatus && (
             <motion.div
               className="rowheading"
               initial="hidden"
@@ -357,9 +357,9 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                 </div>
               </div>
               <div className="column2 sale">
-                {/* <div className="title sale-row1">
+                 <div className="title sale-row1">
                   <p className="titleText ui text size-h3">Sale</p>
-                </div> */}
+                </div> 
                 <div className="sale-row2">
                   <motion.a
                     href="/our-story"
@@ -385,7 +385,7 @@ const Menu = ({ searchTextHeader, setShowMenu, isFocus }) => {
                 </div>
               </div>
             </motion.div>
-          )}
+          )} */}
         </div>
       </div>
     </LazyMotion>
