@@ -53,7 +53,7 @@ const Testimonials = () => {
     slidesToShow: 2,
     slidesToScroll: 1,
     className: "flex gap-4",
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 8000,
     arrows: false,
     pauseOnHover: true,
@@ -119,4 +119,4 @@ console.log("working in testimonials")
   );
 };
 
-export default Testimonials;
+export default React.memo(Testimonials);
