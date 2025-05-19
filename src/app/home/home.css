@@ -403,9 +403,9 @@
   transition: color 0.3s ease, opacity 0.3s ease;
 }
 .hero-carousel {
-.slick-dots {
- bottom: 45px !important;
-}
+  .slick-dots {
+    bottom: 45px !important;
+  }
 }
 .slick-dots li.slick-active button {
   background: black;
@@ -422,7 +422,7 @@
   position: absolute;
   bottom: 5px;
   /* left: 50% !important; */
-  transform: translateX(-50%) ;
+  transform: translateX(-50%);
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -681,9 +681,11 @@
   position: relative;
   overflow: hidden;
 }
-.slick-list {
-  height: 100%;
-  overflow: visible; /* Change to visible to allow zoom */
+.hero-carousel {
+  .slick-list {
+    height: 100%;
+    overflow: visible;
+  }
 }
 
 .slick-list,
