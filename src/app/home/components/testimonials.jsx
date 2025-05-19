@@ -85,7 +85,7 @@ const Testimonials = () => {
       </div>
     );
   }
-
+console.log("working in testimonials")
   return (
     <section aria-labelledby="testimonials-heading" className="flex relative justify-center flex-col p-2">
       <div className="flex flex-row items-center w-full py-4">
@@ -119,4 +119,4 @@ const Testimonials = () => {
   );
 };
 
-export default React.memo(Testimonials);
+export default Testimonials;
