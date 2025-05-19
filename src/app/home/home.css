@@ -402,8 +402,10 @@
   opacity: 1;
   transition: color 0.3s ease, opacity 0.3s ease;
 }
+.hero-carousel {
 .slick-dots {
  bottom: 45px !important;
+}
 }
 .slick-dots li.slick-active button {
   background: black;

@@ -40,6 +40,7 @@ const MultiColumnList = styled(Box)(({ theme }) => ({
 
 
 const Header = () => {
+  const isMobileVar = typeof window !== 'undefined' && window.innerWidth <= 768;
   const pathname = usePathname();
   const router = useRouter();
   const searchRef = useRef(null);
@@ -50,8 +51,8 @@ const Header = () => {
   const [isFocus, setIsFocus] = useState(false);
   const [searchTextHeader, setSearchTextHeader] = useState("");
   const [color, setColor] = useState("white");
-  const [isMobile, setIsMobile] = useState(false);
-  const [shouldAnimate, setShouldAnimate] = useState(true);
+  const [isMobile, setIsMobile] = useState(isMobileVar);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
   const [prevPathname, setPrevPathname] = useState(pathname);
   const [openCategories, setOpenCategories] = useState({});
 
@@ -69,19 +70,15 @@ const Header = () => {
   // }, [pathname, prevPathname]);
 
   useEffect(() => {
-    // Check if mobile on mount and on resize
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+  const handleResize = () => {
+    const mobile = window.innerWidth <= 768;
+    setIsMobile(mobile);
+    setShouldAnimate(!mobile);
+  };
 
-    checkIfMobile();
-    window.addEventListener("resize", checkIfMobile);
-
-    setShouldAnimate(true);
-    const timer = setTimeout(() => setShouldAnimate(false), 3000);
-
-    return () => window.removeEventListener("resize", checkIfMobile);
-  }, []);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
   const handleScroll = () => {
     const currentScroll = window.pageYOffset;
