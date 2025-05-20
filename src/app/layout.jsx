@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
     >
       <head>
         <InlineCriticalCSS />
-        
+         <meta name="robots" content="noindex" />
         {/* Font Preloading */}
         <link
           rel="preload"
