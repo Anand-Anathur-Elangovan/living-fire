@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import pool from "@/src/helper/db/db";
-// Helper function to generate filter combinations (SEO-optimized)
 function generateFilterUrls() {
   const filters = {
     category: [
@@ -547,103 +546,6 @@ async function getAllPages() {
   return [...staticPages, ...productUrls, ...filterUrls, ...filterSingleUrls];
 }
 
-// export async function GET() {
-//   const siteUrl = "https://livingfires.com.au";
-//   const lastModDate = new Date().toISOString().split("T")[0];
-
-//   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-//   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n`;
-//   xml += `        xmlns:xhtml="http://www.w3.org/1999/xhtml"\n`;
-//   xml += `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
-
-//   // 1. Get all pages (static + dynamic)
-//   const pages = await getAllPages();
-//   const urlSet = new Set();
-
-//   // 2. Process all URLs
-//   for (const page of pages) {
-//     if (!page || typeof page !== "string" || page.includes("undefined"))
-//       continue;
-
-//     const cleanedUrl = page.replace(/\/{2,}/g, "/").replace(/\/$/, "");
-//     if (urlSet.has(cleanedUrl)) continue;
-//     urlSet.add(cleanedUrl);
-
-//     // Priority logic
-//     const isProductUrl = /\/[^/]+\/[^/]+$/.test(cleanedUrl);
-//     const priority =
-//       cleanedUrl == "/"
-//         ? "1.0"
-//         : isProductUrl
-//         ? "0.9"
-//         : cleanedUrl.startsWith("/allProducts")
-//         ? "0.7"
-//         : "0.8";
-
-//     xml += `  <url>\n`;
-//     xml += `    <loc>${siteUrl}${cleanedUrl}</loc>\n`;
-//     xml += `    <lastmod>${lastModDate}</lastmod>\n`;
-//     xml += `    <changefreq>${
-//       cleanedUrl.includes("/blog/") ? "weekly" : "monthly"
-//     }</changefreq>\n`;
-//     xml += `    <priority>${priority}</priority>\n`;
-
-//     // Add hero images for product pages
-//     if (isProductUrl) {
-//       const [brand, productName] = cleanedUrl.split("/").filter(Boolean);
-
-//       try {
-//         // Fetch product data with hero images
-//         const { rows } = await pool.query(
-//           `SELECT
-//             name,
-//             brand_name,
-//             hero_image
-//           FROM tbl_master
-//           WHERE name = $1 AND brand_name = $2`,
-//           [decodeURIComponent(productName), decodeURIComponent(brand)]
-//         );
-//         if (rows.length > 0) {
-//           const product = rows[0];
-
-//           // Handle hero_image format (array or single object)
-//           let heroImages = [];
-//           if (Array.isArray(product?.hero_image)) {
-//             heroImages = product?.hero_image;
-//           } else if (product?.hero_image?.value) {
-//             heroImages = [product?.hero_image];
-//           }
-
-//           // Add all hero images to sitemap
-//           heroImages.forEach((image, index) => {
-//             if (image?.value && image.value !== "TBC") {
-//               xml += `    <image:image>\n`;
-//               xml += `      <image:loc>${image.value}</image:loc>\n`;
-//               xml += `      <image:title>${product.brand_name} ${
-//                 product.name
-//               } ${index > 0 ? `- Image ${index + 1}` : ""}</image:title>\n`;
-//               xml += `      <image:caption>${product.brand_name} ${product.name}</image:caption>\n`;
-//               xml += `    </image:image>\n`;
-//             }
-//           });
-//         }
-//       } catch (error) {
-//         console.error(`Error fetching product data for ${cleanedUrl}:`, error);
-//       }
-//     }
-
-//     xml += `  </url>\n`;
-//   }
-
-//   xml += `</urlset>`;
-
-//   return new NextResponse(xml, {
-//     headers: {
-//       "Content-Type": "application/xml",
-//       "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=3600",
-//     },
-//   });
-// }
 
 // Helper function to verify images with Googlebot
 
@@ -667,13 +569,6 @@ export async function GET() {
     if (urlSet.has(cleanedUrl)) continue;
     urlSet.add(cleanedUrl);
 
-    // Priority logic - SIMPLIFIED
-    // alert(cleanedUrl)
-    //   const priority =
-    // cleanedUrl === "/" ? "1.0" : // Highest priority for homepage
-    // !cleanedUrl?"1.0":
-    // cleanedUrl.includes("/allProducts") ? "0.8" :
-    // cleanedUrl.includes(product)? "0.9": "0.7"; // Default priorities
     const products = [
       { brand: "Eurostove", product: "Churchill_5_Convection_Dual_Control" },
       { brand: "Living_Fire", product: "Kosi_No.25" },
@@ -1129,11 +1024,7 @@ export async function GET() {
     } else if (priority === "0.7") {
       changefreq = "monthly";
     }
-    // products?.map(product => {
-    //   if (cleanedUrl.includes(product)) {
-    //     priority = "0.9";
-    //   }
-    // })
+
 
     xml += `  <url>\n`;
     xml += `    <loc>${siteUrl}${cleanedUrl}</loc>\n`;
@@ -1188,24 +1079,3 @@ export async function GET() {
     },
   });
 }
-
-// async function verifyImageWithGooglebot(imageUrl) {
-//   try {
-//     const response = await fetch(imageUrl, {
-//       headers: { 'User-Agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)' }
-//     });
-
-//     return {
-//       url: imageUrl,
-//       status: response.status,
-//       accessible: response.ok,
-//       contentType: response.headers.get('content-type')
-//     };
-//   } catch (error) {
-//     return {
-//       url: imageUrl,
-//       error: error.message,
-//       accessible: false
-//     };
-//   }
-// }
