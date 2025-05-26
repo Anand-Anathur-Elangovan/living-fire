@@ -227,7 +227,7 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background: #060606;
+  background: white;
   transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
@@ -770,6 +770,13 @@
 
   .button-group button {
     padding: 10px 0px;
+  }
+  .button-group button::before {
+    background: white; /* Change to white for mobile */
+  }
+  .button-group button:active::before {
+    width: 100%;
+    left: 0;
   }
 }
 

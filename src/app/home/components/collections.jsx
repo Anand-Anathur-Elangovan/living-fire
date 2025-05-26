@@ -381,7 +381,7 @@
 //   });
 
 //   return (
-//     <motion.section 
+//     <motion.section
 //       initial="hidden"
 //       whileInView="visible"
 //       viewport={{ once: true, margin: "0px" }}
@@ -389,19 +389,19 @@
 //       className="flex relative justify-center flex-col ml-0 mr-0 md:ml-16 md:mr-16"
 //     >
 //       <style>{hoverStyle}</style>
-      
+
 //       <div className="flex flex-row items-center w-full mb-10">
-//         <motion.h1 
+//         <motion.h1
 //           variants={itemVariants}
 //           className="heading1 flex w-full justify-start ml-8 md:justify-center md:ml-0"
 //         >
 //           Collections
 //         </motion.h1>
-//         <motion.div 
+//         <motion.div
 //           variants={itemVariants}
 //           className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer"
 //         >
-//           <button 
+//           <button
 //             onClick={() => handleScroll("left")}
 //             aria-label="Scroll left"
 //             className="p-1 focus:outline-none"
@@ -415,7 +415,7 @@
 //               priority
 //             />
 //           </button>
-//           <button 
+//           <button
 //             onClick={() => handleScroll("right")}
 //             aria-label="Scroll right"
 //             className="p-1 focus:outline-none"
@@ -438,7 +438,7 @@
 //         md:auto-cols-[25%]"
 //       >
 //         {mergedOutput?.map((item, index) => (
-//           <motion.div 
+//           <motion.div
 //             key={`collection-${item.fueltype_id}`}
 //             variants={itemVariants}
 //             className="collection-item"
@@ -463,7 +463,7 @@
 //                 quality={85}
 //                 sizes="(max-width: 768px) 100vw, 25vw"
 //               />
-              
+
 //               {/* Circle Arrow Indicator */}
 //               {hoveredItem === item.fueltype_id && (
 //                 <motion.div
@@ -483,7 +483,7 @@
 //                 </motion.div>
 //               )}
 //             </div>
-            
+
 //             <div className="mt-4 gap-2 flex flex-col">
 //               <h2
 //                 className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
@@ -499,6 +499,289 @@
 //               <p className="font-sans font-normal leading-5 text-sm text-gray-700">
 //                 {item.description}
 //               </p>
+//               </div>
+//               <button
+//                 className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
+//                 onClick={() => {
+//                   handleRoutePrefetch(item.route);
+//                   allProductsRouteHandler("fuelType", item.fueltype_name, item.fueltype_id);
+//                 }}
+//               >
+//                 View Collection
+//                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+//                   <path d="M5 12h14M12 5l7 7-7 7"/>
+//                 </svg>
+//               </button>
+//             </div>
+//           </motion.div>
+//         ))}
+//       </div>
+//     </motion.section>
+//   );
+// };
+
+// export default React.memo(Collections);
+
+// import React, { useState, useRef } from "react";
+// import { motion } from "framer-motion";
+// import collectionImg1 from "@/public/assets/homePage/collections/collectionsImg1.svg";
+// import collectionImg2 from "@/public/assets/homePage/collections/collectionsImg2.svg";
+// import collectionImg3 from "@/public/assets/homePage/collections/collectionsImg3.svg";
+// import collectionImg4 from "@/public/assets/homePage/collections/collectionsImg4.svg";
+// import RightArrow from "@/public/assets/homePage/collections/arrow-right.svg";
+// import LeftArrow from "@/public/assets/homePage/collections/arrow-left.svg";
+// import CircleArrow from "@/public/assets/homePage/collections/circle-arrow.svg";
+// import Image from "next/image";
+// import { useRouter } from "next/navigation";
+
+// const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
+//   const router = useRouter();
+//   const carouselRef = useRef(null);
+//   const [prefetchedRoutes, setPrefetchedRoutes] = useState(new Set());
+//   const [hoveredItem, setHoveredItem] = useState(null);
+
+//   const carouselItems = [
+//     {
+//       fueltype_id: 5,
+//       image: collectionImg1,
+//       title: "Electric Fireplaces",
+//       description: "Discover our range of luxury indoor electric fireplaces and transform your home into a cosy haven of warmth and style. Visit our Melbourne showroom.",
+//       route: "/collections/electric-fireplaces"
+//     },
+//     {
+//       fueltype_id: 3,
+//       image: collectionImg2,
+//       title: "Gas Fireplaces",
+//       description: "Explore our indoor gas fireplaces and turn your home into a warm and inviting retreat. Whatever your interior style, we have the perfect gas fireplace to enhance your living space.",
+//       route: "/collections/gas-fireplaces"
+//     },
+//     {
+//       fueltype_id: 4,
+//       image: collectionImg3,
+//       title: "Wood Fireplaces",
+//       description: "Experience warmth and elegance with our indoor luxury wood fireplaces, blending timeless craftsmanship with contemporary modern design.",
+//       route: "/collections/wood-fireplaces"
+//     },
+//     {
+//       fueltype_id: 2,
+//       image: collectionImg4,
+//       title: "Bio-Ethanol Fireplaces",
+//       description: "Explore our collection of Bio-Ethanol fireplaces, offering efficient and stylish heating solutions for your home. Enjoy the warmth and ambiance of a real flame, with the convenience and clean-burning performance of LPG.",
+//       route: "/collections/bio-ethanol-fireplaces"
+//     },
+//     {
+//       fueltype_id: 1,
+//       image: collectionImg2,
+//       title: "Hybrid - Wood/Electric Fireplaces",
+//       description: "Transform your home with modern Hybrid - Wood/Electric fireplaces...",
+//       route: "/collections/hybrid-fireplaces"
+//     },
+//   ];
+
+//   const handleRoutePrefetch = (route) => {
+//     if (!prefetchedRoutes.has(route)) {
+//       router.prefetch(route);
+//       setPrefetchedRoutes(prev => new Set(prev).add(route));
+//     }
+//   };
+
+//   const handleScroll = (direction) => {
+//     if (carouselRef.current) {
+//       const scrollAmount = window.innerWidth <= 768 ? 300 : 400;
+//       carouselRef.current.scrollBy({
+//         left: direction === "left" ? -scrollAmount : scrollAmount,
+//         behavior: "smooth",
+//       });
+//     }
+//   };
+
+//   const containerVariants = {
+//     hidden: { opacity: 0 },
+//     visible: {
+//       opacity: 1,
+//       transition: {
+//         staggerChildren: 0.05,
+//       },
+//     },
+//   };
+
+//   const itemVariants = {
+//     hidden: { y: 10, opacity: 0 },
+//     visible: {
+//       y: 0,
+//       opacity: 1,
+//       transition: {
+//         duration: 0.3,
+//       },
+//     },
+//   };
+
+//   const arrowVariants = {
+//     hidden: { opacity: 0, scale: 0.8 },
+//     visible: { opacity: 1, scale: 1 },
+//   };
+
+//   const hoverStyle = `
+//     .collection-item {
+//       transition: all 0.3s ease-out;
+//       position: relative;
+//     }
+//     .collection-image-container {
+//       overflow: hidden;
+//       position: relative;
+//     }
+//     .collection-image {
+//       transition: transform 0.5s ease;
+//       will-change: transform;
+//     }
+//     .collection-item:hover .collection-image {
+//       transform: scale(1.05);
+//     }
+//     .circle-arrow {
+//       transition: all 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+//     }
+//     .collection-item:hover .circle-arrow {
+//       transform: translateX(5px);
+//     }
+//     .description-container {
+//       height: 60px;
+//       overflow: hidden;
+//       display: -webkit-box;
+//       -webkit-line-clamp: 3;
+//       -webkit-box-orient: vertical;
+//     }
+//     @media (max-width: 768px) {
+//       .description-container {
+//         height: 72px;
+//         -webkit-line-clamp: 4;
+//       }
+//     }
+//   `;
+
+//   const mergedOutput = carouselItems.map(item => {
+//     const match = fuelTypes.find(ft => ft.fueltype_id === item.fueltype_id);
+//     return match ? { ...item, fueltype_name: match.fueltype_name, is_active: match.is_active } : item;
+//   });
+
+//   return (
+//     <motion.section
+//       initial="hidden"
+//       whileInView="visible"
+//       viewport={{ once: true, margin: "0px" }}
+//       variants={containerVariants}
+//       className="flex relative justify-center flex-col ml-0 mr-0 md:ml-16 md:mr-16"
+//     >
+//       <style>{hoverStyle}</style>
+
+//       <div className="flex flex-row items-center w-full mb-10">
+//         <motion.h1
+//           variants={itemVariants}
+//           className="heading1 flex w-full justify-start ml-8 md:justify-center md:ml-0"
+//         >
+//           Collections
+//         </motion.h1>
+//         <motion.div
+//           variants={itemVariants}
+//           className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer"
+//         >
+//           <button
+//             onClick={() => handleScroll("left")}
+//             aria-label="Scroll left"
+//             className="p-1 focus:outline-none"
+//           >
+//             <Image
+//               src={RightArrow}
+//               alt=""
+//               width={24}
+//               height={24}
+//               loading="eager"
+//               priority
+//             />
+//           </button>
+//           <button
+//             onClick={() => handleScroll("right")}
+//             aria-label="Scroll right"
+//             className="p-1 focus:outline-none"
+//           >
+//             <Image
+//               src={LeftArrow}
+//               alt=""
+//               width={24}
+//               height={24}
+//               loading="eager"
+//               priority
+//             />
+//           </button>
+//         </motion.div>
+//       </div>
+
+//       <div
+//         ref={carouselRef}
+//         className="grid grid-flow-col auto-cols-[100%] gap-6 overflow-x-auto overscroll-x-contain element-snaps hide-scrollbar px-4
+//         md:auto-cols-[25%] md:px-0"
+//       >
+//         {mergedOutput?.map((item, index) => (
+//           <motion.div
+//             key={`collection-${item.fueltype_id}`}
+//             variants={itemVariants}
+//             className="collection-item"
+//             onMouseEnter={() => {
+//               setHoveredItem(item.fueltype_id);
+//               handleRoutePrefetch(item.route);
+//             }}
+//             onMouseLeave={() => setHoveredItem(null)}
+//           >
+//             <div className="collection-image-container rounded-lg overflow-hidden">
+//               <Image
+//                 src={item.image}
+//                 alt={item.title}
+//                 width={600}
+//                 height={800}
+//                 className="collection-image w-full h-auto aspect-[3/4] object-cover"
+//                 onClick={() => {
+//                   handleRoutePrefetch(item.route);
+//                   allProductsRouteHandler("fuelType", item.fueltype_name, item.fueltype_id);
+//                 }}
+//                 loading={index < 2 ? "eager" : "lazy"}
+//                 quality={85}
+//                 sizes="(max-width: 768px) 100vw, 25vw"
+//               />
+
+//               {/* Circle Arrow Indicator */}
+//               {hoveredItem === item.fueltype_id && (
+//                 <motion.div
+//                   className="circle-arrow absolute top-4 right-4 bg-white bg-opacity-80 rounded-full p-2 shadow-md"
+//                   variants={arrowVariants}
+//                   initial="hidden"
+//                   animate="visible"
+//                   exit="hidden"
+//                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
+//                 >
+//                   <Image
+//                     src={CircleArrow}
+//                     alt="Click to view"
+//                     width={24}
+//                     height={24}
+//                   />
+//                 </motion.div>
+//               )}
+//             </div>
+
+//             <div className="mt-4 gap-2 flex flex-col px-2">
+//               <h2
+//                 className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
+//                 onClick={() => {
+//                   handleRoutePrefetch(item.route);
+//                   allProductsRouteHandler("fuelType", item.fueltype_name, item.fueltype_id);
+//                 }}
+//                 tabIndex={0}
+//               >
+//                 {item.title}
+//               </h2>
+//               <div className="description-container">
+//                 <p className="font-sans font-normal leading-5 text-sm text-gray-700">
+//                   {item.description}
+//                 </p>
 //               </div>
 //               <button
 //                 className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
@@ -545,53 +828,48 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       fueltype_id: 5,
       image: collectionImg1,
       title: "Electric Fireplaces",
-      description: "Discover our range of luxury indoor electric fireplaces and transform your home into a cosy haven of warmth and style. Visit our Melbourne showroom.",
-      route: "/collections/electric-fireplaces"
+      description:
+        "Discover our range of luxury indoor electric fireplaces and transform your home into a cosy haven of warmth and style. Visit our Melbourne showroom.",
+      route: "/collections/electric-fireplaces",
     },
     {
       fueltype_id: 3,
       image: collectionImg2,
       title: "Gas Fireplaces",
-      description: "Explore our indoor gas fireplaces and turn your home into a warm and inviting retreat. Whatever your interior style, we have the perfect gas fireplace to enhance your living space.",
-      route: "/collections/gas-fireplaces"
+      description:
+        "Explore our indoor gas fireplaces and turn your home into a warm and inviting retreat. Whatever your interior style, we have the perfect gas fireplace to enhance your living space.",
+      route: "/collections/gas-fireplaces",
     },
     {
       fueltype_id: 4,
       image: collectionImg3,
       title: "Wood Fireplaces",
-      description: "Experience warmth and elegance with our indoor luxury wood fireplaces, blending timeless craftsmanship with contemporary modern design.",
-      route: "/collections/wood-fireplaces"
+      description:
+        "Experience warmth and elegance with our indoor luxury wood fireplaces, blending timeless craftsmanship with contemporary modern design.",
+      route: "/collections/wood-fireplaces",
     },
     {
       fueltype_id: 2,
       image: collectionImg4,
       title: "Bio-Ethanol Fireplaces",
-      description: "Explore our collection of Bio-Ethanol fireplaces, offering efficient and stylish heating solutions for your home. Enjoy the warmth and ambiance of a real flame, with the convenience and clean-burning performance of LPG.",
-      route: "/collections/bio-ethanol-fireplaces"
+      description:
+        "Explore our collection of Bio-Ethanol fireplaces, offering efficient and stylish heating solutions for your home. Enjoy the warmth and ambiance of a real flame, with the convenience and clean-burning performance of LPG.",
+      route: "/collections/bio-ethanol-fireplaces",
     },
     {
       fueltype_id: 1,
       image: collectionImg2,
       title: "Hybrid - Wood/Electric Fireplaces",
-      description: "Transform your home with modern Hybrid - Wood/Electric fireplaces...",
-      route: "/collections/hybrid-fireplaces"
+      description:
+        "Transform your home with modern Hybrid - Wood/Electric fireplaces...",
+      route: "/collections/hybrid-fireplaces",
     },
   ];
 
   const handleRoutePrefetch = (route) => {
     if (!prefetchedRoutes.has(route)) {
       router.prefetch(route);
-      setPrefetchedRoutes(prev => new Set(prev).add(route));
-    }
-  };
-
-  const handleScroll = (direction) => {
-    if (carouselRef.current) {
-      const scrollAmount = window.innerWidth <= 768 ? 300 : 400;
-      carouselRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
+      setPrefetchedRoutes((prev) => new Set(prev).add(route));
     }
   };
 
@@ -658,13 +936,19 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
     }
   `;
 
-  const mergedOutput = carouselItems.map(item => {
-    const match = fuelTypes.find(ft => ft.fueltype_id === item.fueltype_id);
-    return match ? { ...item, fueltype_name: match.fueltype_name, is_active: match.is_active } : item;
+  const mergedOutput = carouselItems.map((item) => {
+    const match = fuelTypes.find((ft) => ft.fueltype_id === item.fueltype_id);
+    return match
+      ? {
+          ...item,
+          fueltype_name: match.fueltype_name,
+          is_active: match.is_active,
+        }
+      : item;
   });
 
   return (
-    <motion.section 
+    <motion.section
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "0px" }}
@@ -672,56 +956,20 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       className="flex relative justify-center flex-col ml-0 mr-0 md:ml-16 md:mr-16"
     >
       <style>{hoverStyle}</style>
-      
+
       <div className="flex flex-row items-center w-full mb-10">
-        <motion.h1 
+        <motion.h1
           variants={itemVariants}
           className="heading1 flex w-full justify-start ml-8 md:justify-center md:ml-0"
         >
           Collections
         </motion.h1>
-        <motion.div 
-          variants={itemVariants}
-          className="flex flex-row items-center gap-2 absolute right-5 cursor-pointer"
-        >
-          <button 
-            onClick={() => handleScroll("left")}
-            aria-label="Scroll left"
-            className="p-1 focus:outline-none"
-          >
-            <Image
-              src={RightArrow}
-              alt=""
-              width={24}
-              height={24}
-              loading="eager"
-              priority
-            />
-          </button>
-          <button 
-            onClick={() => handleScroll("right")}
-            aria-label="Scroll right"
-            className="p-1 focus:outline-none"
-          >
-            <Image
-              src={LeftArrow}
-              alt=""
-              width={24}
-              height={24}
-              loading="eager"
-              priority
-            />
-          </button>
-        </motion.div>
       </div>
 
-      <div
-        ref={carouselRef}
-        className="grid grid-flow-col auto-cols-[100%] gap-6 overflow-x-auto overscroll-x-contain element-snaps hide-scrollbar px-4
-        md:auto-cols-[25%] md:px-0"
-      >
+      {/* Desktop View - Grid Layout */}
+      <div className="hidden md:grid md:grid-cols-5 md:gap-6 md:px-4">
         {mergedOutput?.map((item, index) => (
-          <motion.div 
+          <motion.div
             key={`collection-${item.fueltype_id}`}
             variants={itemVariants}
             className="collection-item"
@@ -740,14 +988,17 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                 className="collection-image w-full h-auto aspect-[3/4] object-cover"
                 onClick={() => {
                   handleRoutePrefetch(item.route);
-                  allProductsRouteHandler("fuelType", item.fueltype_name, item.fueltype_id);
+                  allProductsRouteHandler(
+                    "fuelType",
+                    item.fueltype_name,
+                    item.fueltype_id
+                  );
                 }}
                 loading={index < 2 ? "eager" : "lazy"}
                 quality={85}
-                sizes="(max-width: 768px) 100vw, 25vw"
+                sizes="(max-width: 768px) 100vw, 20vw"
               />
-              
-              {/* Circle Arrow Indicator */}
+
               {hoveredItem === item.fueltype_id && (
                 <motion.div
                   className="circle-arrow absolute top-4 right-4 bg-white bg-opacity-80 rounded-full p-2 shadow-md"
@@ -766,13 +1017,17 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                 </motion.div>
               )}
             </div>
-            
+
             <div className="mt-4 gap-2 flex flex-col px-2">
               <h2
                 className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
                 onClick={() => {
                   handleRoutePrefetch(item.route);
-                  allProductsRouteHandler("fuelType", item.fueltype_name, item.fueltype_id);
+                  allProductsRouteHandler(
+                    "fuelType",
+                    item.fueltype_name,
+                    item.fueltype_id
+                  );
                 }}
                 tabIndex={0}
               >
@@ -787,17 +1042,166 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                 className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
                 onClick={() => {
                   handleRoutePrefetch(item.route);
-                  allProductsRouteHandler("fuelType", item.fueltype_name, item.fueltype_id);
+                  allProductsRouteHandler(
+                    "fuelType",
+                    item.fueltype_name,
+                    item.fueltype_id
+                  );
                 }}
               >
                 View Collection
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </button>
             </div>
           </motion.div>
         ))}
+      </div>
+
+      {/* Mobile View - Carousel */}
+      <div
+        ref={carouselRef}
+        className="md:hidden grid grid-flow-col auto-cols-[100%] gap-6 overflow-x-auto overscroll-x-contain element-snaps hide-scrollbar px-4"
+      >
+        {mergedOutput?.map((item, index) => (
+          <motion.div
+            key={`collection-${item.fueltype_id}`}
+            variants={itemVariants}
+            className="collection-item"
+            onMouseEnter={() => {
+              setHoveredItem(item.fueltype_id);
+              handleRoutePrefetch(item.route);
+            }}
+            onMouseLeave={() => setHoveredItem(null)}
+          >
+            <div className="collection-image-container rounded-lg overflow-hidden">
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={600}
+                height={800}
+                className="collection-image w-full h-auto aspect-[3/4] object-cover"
+                onClick={() => {
+                  handleRoutePrefetch(item.route);
+                  allProductsRouteHandler(
+                    "fuelType",
+                    item.fueltype_name,
+                    item.fueltype_id
+                  );
+                }}
+                loading={index < 2 ? "eager" : "lazy"}
+                quality={85}
+                sizes="(max-width: 768px) 100vw, 100vw"
+              />
+
+              {hoveredItem === item.fueltype_id && (
+                <motion.div
+                  className="circle-arrow absolute top-4 right-4 bg-white bg-opacity-80 rounded-full p-2 shadow-md"
+                  variants={arrowVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <Image
+                    src={CircleArrow}
+                    alt="Click to view"
+                    width={24}
+                    height={24}
+                  />
+                </motion.div>
+              )}
+            </div>
+
+            <div className="mt-4 gap-2 flex flex-col px-2">
+              <h2
+                className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
+                onClick={() => {
+                  handleRoutePrefetch(item.route);
+                  allProductsRouteHandler(
+                    "fuelType",
+                    item.fueltype_name,
+                    item.fueltype_id
+                  );
+                }}
+                tabIndex={0}
+              >
+                {item.title}
+              </h2>
+              <div className="description-container">
+                <p className="font-sans font-normal leading-5 text-sm text-gray-700">
+                  {item.description}
+                </p>
+              </div>
+              <button
+                className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
+                onClick={() => {
+                  handleRoutePrefetch(item.route);
+                  allProductsRouteHandler(
+                    "fuelType",
+                    item.fueltype_name,
+                    item.fueltype_id
+                  );
+                }}
+              >
+                View Collection
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      <div className="hidden md:flex justify-center gap-8 mt-12">
+        <button
+          className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1"
+          onClick={() => router.push("/allProducts")}
+        >
+          View All
+        </button>  
+        <button
+          className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1"
+          onClick={() => router.push("/contact")}
+        >
+          Contact Us
+        </button>
+      </div>
+      {/* Mobile Buttons */}
+      <div className="md:hidden flex flex-col sm:flex-row gap-4 justify-center mt-8 px-4">
+        <button
+          className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit"
+          onClick={() => router.push("/allProducts")}
+        >
+          View All
+        </button>
+        <button
+          className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit"
+          onClick={() => router.push("/contact")}
+        >
+          Contact Us
+        </button>
       </div>
     </motion.section>
   );
