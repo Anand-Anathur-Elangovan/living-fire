@@ -957,7 +957,7 @@ const Home = () => {
           headingValue="Featured"
           productRouteHandler={productRouteHandler}
         />
-        <Testimonials />
+        {/* <Testimonials /> */}
         <Blog />
       </Suspense>
 
