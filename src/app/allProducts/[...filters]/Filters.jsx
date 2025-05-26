@@ -46,6 +46,7 @@ const filterMappingsMock = [
   { id: 3, value: "Gas", filterType: "fuelType" },
   { id: 4, value: "Wood", filterType: "fuelType" },
   { id: 5, value: "Electric", filterType: "fuelType" },
+  { id: 6, value: "Cooker", filterType: "fuelType" },
   { id: 1, value: "Outdoor", filterType: "installationType" },
   { id: 3, value: "Inbuilt", filterType: "installationType" },
   { id: 4, value: "Freestanding", filterType: "installationType" },

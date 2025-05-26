@@ -830,7 +830,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       title: "Electric Fireplaces",
       description:
         "Discover our range of luxury indoor electric fireplaces and transform your home into a cosy haven of warmth and style. Visit our Melbourne showroom.",
-      route: "/collections/electric-fireplaces",
+      route: "/allProducts/Electric",
     },
     {
       fueltype_id: 3,
@@ -838,7 +838,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       title: "Gas Fireplaces",
       description:
         "Explore our indoor gas fireplaces and turn your home into a warm and inviting retreat. Whatever your interior style, we have the perfect gas fireplace to enhance your living space.",
-      route: "/collections/gas-fireplaces",
+      route: "/collections/Gas",
     },
     {
       fueltype_id: 4,
@@ -846,7 +846,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       title: "Wood Fireplaces",
       description:
         "Experience warmth and elegance with our indoor luxury wood fireplaces, blending timeless craftsmanship with contemporary modern design.",
-      route: "/collections/wood-fireplaces",
+      route: "/allProducts/Wood",
     },
     {
       fueltype_id: 2,
@@ -854,15 +854,15 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       title: "Bio-Ethanol Fireplaces",
       description:
         "Explore our collection of Bio-Ethanol fireplaces, offering efficient and stylish heating solutions for your home. Enjoy the warmth and ambiance of a real flame, with the convenience and clean-burning performance of LPG.",
-      route: "/collections/bio-ethanol-fireplaces",
+      route: "/allProducts/Bio-Ethanol",
     },
     {
-      fueltype_id: 1,
+      fueltype_id: 6,
       image: collectionImg2,
-      title: "Hybrid - Wood/Electric Fireplaces",
+      title: "Cooker",
       description:
-        "Transform your home with modern Hybrid - Wood/Electric fireplaces...",
-      route: "/collections/hybrid-fireplaces",
+        "Experience warmth and elegance with our indoor luxury wood fireplaces, blending timeless craftsmanship with contemporary modern design.",
+      route: "/allProducts/Cooker",
     },
   ];
 
