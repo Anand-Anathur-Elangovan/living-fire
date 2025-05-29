@@ -366,7 +366,11 @@
   transform: scale(1);
   border-radius: 50%;
 }
-
+.collection-custom-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
 @media (max-width: 768px) {
   .text-group h1 {
     font-size: 80px;

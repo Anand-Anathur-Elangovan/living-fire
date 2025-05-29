@@ -1018,7 +1018,8 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
               )}
             </div>
 
-            <div className="mt-4 gap-2 flex flex-col px-2">
+            <div className="mt-4 gap-8 flex flex-col px-2">
+              <div className="gap-4 flex flex-col"> 
               <h2
                 className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
                 onClick={() => {
@@ -1030,16 +1031,18 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                   );
                 }}
                 tabIndex={0}
+                style={{ fontFamily: 'Satoru, sans-serif' }}
               >
                 {item.title}
               </h2>
               <div className="description-container">
-                <p className="font-sans font-normal leading-5 text-sm text-gray-700">
+                <p className="font-sans font-normal leading-5 text-sm text-gray-700" style={{ fontFamily: '"Public Sans", sans-serif' }}>
                   {item.description}
                 </p>
               </div>
+              </div>
               <button
-                className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
+                className="font-medium font-sans text-sm cursor-pointer focus:outline-none hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
                 onClick={() => {
                   handleRoutePrefetch(item.route);
                   allProductsRouteHandler(
@@ -1048,6 +1051,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                     item.fueltype_id
                   );
                 }}
+                style={{ fontFamily: 'Satoru, sans-serif' }}
               >
                 View Collection
                 <svg
@@ -1174,7 +1178,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
           </motion.div>
         ))}
       </div>
-      <div className="hidden md:flex justify-center gap-8 mt-12">
+      {/* <div className="hidden md:flex justify-center gap-8 mt-12">
         <button
           className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1"
           onClick={() => router.push("/allProducts")}
@@ -1187,6 +1191,58 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
         >
           Contact Us
         </button>
+      </div> */}
+      <div className="collection-custom-button flex flex-col md:flex-row items-center gap-4 justify-center mt-[50px]">
+        <motion.button
+          className="px-8 py-3 bg-black text-white rounded-full font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
+          onClick={() => {
+            setNavigationState(null);
+            router.push(`/allProducts`);
+          }}
+          onMouseEnter={() => router.prefetch("/allProducts")}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          VIEW ALL
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            />
+          </svg>
+        </motion.button>
+
+        <motion.button
+          className="px-8 py-3 bg-white text-black border border-black rounded-full font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
+          onClick={() => router.push("/contact")}
+          onMouseEnter={() => router.prefetch("/contact")}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          CONTACT US
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>
+        </motion.button>
       </div>
       {/* Mobile Buttons */}
       <div className="md:hidden flex flex-col sm:flex-row gap-4 justify-center mt-8 px-4">
