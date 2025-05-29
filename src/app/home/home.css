@@ -77,7 +77,6 @@
   background-color: #f7f7f5;
   justify-content: center;
   align-items: center;
-  /* transition: opacity 0.8s ease-in-out; */
   z-index: 3;
   background-size: cover;
   overflow: hidden;
@@ -106,7 +105,7 @@
   transition: opacity 0.3s ease-in-out, transform 1s ease-in-out;
   will-change: transform;
   backface-visibility: hidden;
-  transform: translateZ(0); /* Promote to own layer */
+  transform: translateZ(0);
   transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
@@ -174,7 +173,6 @@
   contain-intrinsic-size: 1920px 1080px;
   will-change: transform;
   transform-origin: center center;
-  /* transition: transform 1.2s cubic-bezier(0.33, 1, 0.68, 1); */
   transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
   transform: translateZ(0);
 }
@@ -199,8 +197,6 @@
   transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
   z-index: 4;
   border-radius: 20px;
-  /* backdrop-filter: blur(2px); */
-  /* -webkit-backdrop-filter: blur(10px); */
   gap: 10px;
 }
 
@@ -412,7 +408,6 @@
     align-items: center !important;
     position: relative !important;
     align-content: center !important;
-    /* top: -10px; */
     bottom: 10px !important;
   }
   .slick-dots li {
@@ -437,24 +432,20 @@
 .scroll-indicator {
   position: absolute;
   bottom: 5px;
-  /* left: 50% !important; */
   transform: translateX(-50%);
   z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* cursor: pointer; */
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  /* background-color: rgba(255, 255, 255, 0.2); */
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   transition: all 0.3s ease;
 }
 
 .scroll-indicator:hover {
-  /* background-color: rgba(255, 255, 255, 0.3); */
 }
 
 .scroll-indicator svg {
@@ -677,8 +668,6 @@
   opacity: 0;
   z-index: 4;
   border-radius: 20px;
-  /* backdrop-filter: blur(2px); */
-  /* -webkit-backdrop-filter: blur(10px); */
   gap: 10px;
   transition: opacity 1s linear !important;
 }
@@ -723,7 +712,6 @@
   height: 100%;
 }
 
-/* Custom dots styling */
 .custom-dots-container {
   position: absolute;
   bottom: 60px;
@@ -757,7 +745,6 @@
   transform: scale(1.2);
 }
 
-/* Ensure the carousel slides take full height */
 .slick-list,
 .slick-track {
   height: 100%;
@@ -790,7 +777,7 @@
     padding: 10px 0px;
   }
   .button-group button::before {
-    background: white; /* Change to white for mobile */
+    background: white;
   }
   .button-group button:active::before {
     width: 100%;
