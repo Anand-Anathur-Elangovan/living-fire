@@ -191,7 +191,7 @@
 }
 .button-group {
   position: absolute;
-  bottom: 80px;
+  bottom: 140px !important;
   width: 50%;
   display: flex;
   justify-content: center;
@@ -199,8 +199,8 @@
   transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
   z-index: 4;
   border-radius: 20px;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(2px); */
+  /* -webkit-backdrop-filter: blur(10px); */
   gap: 10px;
 }
 
@@ -285,7 +285,7 @@
 }
 .text-group-subheading {
   position: absolute;
-  bottom: 120px;
+  bottom: 180px;
   width: 50%;
   display: flex;
   justify-content: center;
@@ -404,7 +404,23 @@
 }
 .hero-carousel {
   .slick-dots {
-    bottom: 45px !important;
+    bottom: 35px !important;
+  }
+  .slick-dots ul {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    align-content: center !important;
+    /* top: -10px; */
+    bottom: 10px !important;
+  }
+  .slick-dots li {
+    margin: 0px !important;
+    height: 15px !important;
+    width: 20px !important;
+    display: flex;
+    justify-content: center;
   }
 }
 .slick-dots li.slick-active button {
@@ -428,8 +444,8 @@
   justify-content: center;
   align-items: center;
   /* cursor: pointer; */
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   /* background-color: rgba(255, 255, 255, 0.2); */
   backdrop-filter: blur(0px);
@@ -494,6 +510,7 @@
     font-size: 20px;
     width: 30%;
     height: min-content;
+    bottom: 80px !important;
   }
   .button-group button {
     padding: 10px 0px;
@@ -660,8 +677,8 @@
   opacity: 0;
   z-index: 4;
   border-radius: 20px;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(2px); */
+  /* -webkit-backdrop-filter: blur(10px); */
   gap: 10px;
   transition: opacity 1s linear !important;
 }
@@ -766,6 +783,7 @@
     height: min-content;
     justify-content: center;
     align-items: center;
+    bottom: 80px !important;
   }
 
   .button-group button {
