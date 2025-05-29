@@ -52,22 +52,22 @@ const Header = () => {
   const [searchTextHeader, setSearchTextHeader] = useState("");
   const [color, setColor] = useState("white");
   const [isMobile, setIsMobile] = useState(isMobileVar);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(true);
   const [prevPathname, setPrevPathname] = useState(pathname);
   const [openCategories, setOpenCategories] = useState({});
 
   const isHomePage = pathname === "/";
   let lastScroll = 0;
 
-  // useEffect(() => {
-  //   if (pathname !== prevPathname) {
-  //     // Only animate if coming from another page (not initial load)
+  useEffect(() => {
+    if (pathname !== prevPathname) {
+      // Only animate if coming from another page (not initial load)
 
-  //     setShouldAnimate(true);
+      setShouldAnimate(true);
 
-  //     setPrevPathname(pathname);
-  //   }
-  // }, [pathname, prevPathname]);
+      setPrevPathname(pathname);
+    }
+  }, [pathname, prevPathname]);
 
   useEffect(() => {
   const handleResize = () => {

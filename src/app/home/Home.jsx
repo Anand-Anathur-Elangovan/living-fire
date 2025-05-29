@@ -617,7 +617,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => setHover(true), 2000);
+    const timer = setTimeout(() => setHover(true), 800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -629,7 +629,7 @@ const Home = () => {
       if (!start) start = timestamp;
       const elapsed = timestamp - start;
 
-      if (elapsed >= 2000) {
+      if (elapsed >= 800) {
         setHover(true);
       } else {
         frameId = requestAnimationFrame(animate);
@@ -735,7 +735,7 @@ const Home = () => {
 
       {/* Hero Section */}
       <div className="home-page">
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {!hover && (
             <motion.div
               className="base-container"
@@ -752,7 +752,6 @@ const Home = () => {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                 >
-                  {/* <h1>STUNNING FIREPLACES FOR ANY HOME.</h1> */}
                   <div
                     id="hero-heading"
                     className="text-4xl font-bold leading-tight"
@@ -772,7 +771,7 @@ const Home = () => {
               </section>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
         <motion.div
           // className={`overlay-container ${showPanels  ? "show-panels" : ""}`}
           initial={{ opacity: 0 }}
