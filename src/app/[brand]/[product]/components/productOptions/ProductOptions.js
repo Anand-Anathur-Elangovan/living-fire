@@ -405,7 +405,7 @@ import { useInView } from "react-intersection-observer";
 
 const LightGallery = dynamic(() => import("lightgallery/react"), {
   ssr: false,
-  loading: () => <p>Loading gallery...</p>
+  loading: () => <p>Loading gallery...</p>,
 });
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
@@ -429,13 +429,13 @@ const ProductOptions = ({
   openModal,
   onViewAllAccessories,
   p_sku,
-  isAccessories
+  isAccessories,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
-  
+
   // Animation hooks
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -449,9 +449,9 @@ const ProductOptions = ({
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const itemVariants = {
@@ -461,9 +461,9 @@ const ProductOptions = ({
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const handleOptionChange = (category, option) => {
@@ -524,9 +524,9 @@ const ProductOptions = ({
       variants={containerVariants}
       className={styles.container}
     >
-      <motion.div variants={itemVariants}>
+      {/* <motion.div variants={itemVariants}>
         <h1 className={styles.brand}>{brand_name}</h1>
-        <motion.h1 
+        <motion.h1
           className={styles.title}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -534,19 +534,17 @@ const ProductOptions = ({
         >
           {name?.toUpperCase()}
         </motion.h1>
-      </motion.div>
-      
-      <motion.p 
-        className={styles.sku}
-        variants={itemVariants}
-      >
+      </motion.div> */}
+      <h1 className={styles.title}>
+  <span className={styles.brand}>{brand_name}</span> <br />
+  {name?.toUpperCase()}
+</h1>
+
+      <motion.p className={styles.sku} variants={itemVariants}>
         {p_sku}
       </motion.p>
-      
-      <motion.p 
-        className={styles.subtitle}
-        variants={itemVariants}
-      >
+
+      <motion.p className={styles.subtitle} variants={itemVariants}>
         Build your product
       </motion.p>
 
@@ -558,8 +556,8 @@ const ProductOptions = ({
             section?.name !== "0"
           ) {
             return (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 className={styles.section}
                 variants={itemVariants}
               >
@@ -616,7 +614,7 @@ const ProductOptions = ({
             );
           }
         })}
-        
+
       {short_desc &&
         short_desc?.map((section, index) => {
           if (
@@ -624,8 +622,8 @@ const ProductOptions = ({
             section.value?.length > 0
           ) {
             return (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 className={styles.section}
                 variants={itemVariants}
               >
@@ -726,8 +724,8 @@ const ProductOptions = ({
         short_desc?.map((section, index) => {
           if (section.name === "DELIVERY") {
             return (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 className={styles.section}
                 variants={itemVariants}
               >
@@ -775,29 +773,23 @@ const ProductOptions = ({
           }
         })}
 
-      <motion.div 
-        className={styles.priceContainer}
-        variants={itemVariants}
-      >
+      <motion.div className={styles.priceContainer} variants={itemVariants}>
         <p className={styles.price}>
           <PriceFormatter price={totalPrice} /> <span>(inc gst)</span>
         </p>
         <span className={styles.inStock}>IN STOCK</span>
       </motion.div>
 
-      <motion.div 
-        className={styles.buttonContainer}
-        variants={itemVariants}
-      >
-        <motion.button 
+      <motion.div className={styles.buttonContainer} variants={itemVariants}>
+        <motion.button
           className={styles.addToCart}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
           ADD TO CART
         </motion.button>
-        <motion.button 
-          className={styles.enquiry} 
+        <motion.button
+          className={styles.enquiry}
           onClick={openModal}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
