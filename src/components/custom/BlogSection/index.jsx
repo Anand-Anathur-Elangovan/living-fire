@@ -20,8 +20,24 @@ const BlogSection = () => {
                 alt="Window Blog Image"
                 className="left-img"
                 unoptimized
-                placeholder="blur" // Optional: For optimized loading
+                placeholder="blur" 
               />
+              {/* <div className="columnmaximisin"> */}
+                  <p className="maximising ui text size-h6">
+                    Maximising Energy Efficiency with Your Fireplace
+                  </p>
+                  <p className="description ui text size-body_small">
+                    A well-chosen fireplace not only enhances your home’s beauty
+                    but can also improve its energy efficiency. Learn how to
+                    select a fireplace that offers optimal heat output and
+                    efficiency, reducing your energy bills while keeping your
+                    home cozy. Our tips will guide you in making a choice that’s
+                    both stylish and sustainable.
+                  </p>
+                  <a href="#">
+                    <p className="shopall ui text size-textmd">Read More</p>
+                  </a>
+                {/* </div> */}
               <div className="right-section">
                 <div className="rowwoodgasand">
                   <Image
@@ -29,7 +45,7 @@ const BlogSection = () => {
                     alt="Woodfire Image"
                     className="right-img"
                     unoptimized
-                    placeholder="blur" // Optional
+                    placeholder="blur"
                   />
                   <div className="columnwoodgasan">
                     <p className="woodgasand ui text size-h6">
@@ -49,7 +65,7 @@ const BlogSection = () => {
                     </a>
                   </div>
                 </div>
-                <div className="columnmaximisin">
+                {/* <div className="columnmaximisin">
                   <p className="maximising ui text size-h6">
                     Maximising Energy Efficiency with Your Fireplace
                   </p>
@@ -64,7 +80,7 @@ const BlogSection = () => {
                   <a href="#">
                     <p className="shopall ui text size-textmd">Read More</p>
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
