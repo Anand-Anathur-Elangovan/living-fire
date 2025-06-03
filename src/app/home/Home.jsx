@@ -38,6 +38,8 @@ const Featured = lazy(() => import("./components/featured"), {
 });
 const Testimonials = lazy(() => import("./components/testimonials"));
 const Blog = lazy(() => import("./components/blog"));
+const NewsletterCard = lazy(() => import("./components/newsletterCard"));
+
 
 const Home = () => {
   const useAnimationState = (initialValue) => {
@@ -455,6 +457,7 @@ const Home = () => {
         />
         {/* <Testimonials /> */}
         <Blog />
+        <NewsletterCard/>
       </Suspense>
 
       {/* Product Schema */}
