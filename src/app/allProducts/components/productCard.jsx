@@ -11,6 +11,7 @@ import { setCookie } from "cookies-next";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 import GFi750 from "@/public/assets/allProducts/GFi750.jpg";
 import BELLERIVE from "@/public/assets/allProducts/BELLERIVE.jpg";
+import { generateSlug } from "@/src/helper/slug/slug";
 
 const ProductCard = ({
   productDetails: { fn_get_products },
@@ -102,7 +103,10 @@ const ProductCard = ({
     // );
     setCookie("selectedProduct", formattedProductName);
     setCookie("selectedBrand", formattedBrandName);
-    router.push(`/${formattedBrandName}/${formattedProductName}`);
+    const productSlug = generateSlug(productName);
+    const brandSlug = generateSlug(brandName);
+    console.log("productSlug", productSlug, "brandSlug", brandSlug)
+    router.push(`/${brandSlug}/${productSlug}`);
   };
 
   return (

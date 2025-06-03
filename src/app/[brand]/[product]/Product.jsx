@@ -58,7 +58,7 @@ const Product = ({ params }) => {
   let { data } = useProductPage(unwrappedParams);
 
   useEffect(() => {
-
+    console.log("data?.product?.[0]",data?.product?.[0])
     setProductData(data?.product?.[0]);
   }, [data]);
 

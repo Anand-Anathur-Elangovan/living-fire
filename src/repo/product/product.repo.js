@@ -32,9 +32,10 @@ export const getProductPage = async (productName) => {
         hero_image,
         product_details,
         specifications,
-        brand_id
+        brand_id, 
+        product_slug
       FROM tbl_master
-      WHERE name = $1;`, 
+       WHERE product_slug = $1;`, 
       [productName] // Passing productName as a parameter
     );
     
