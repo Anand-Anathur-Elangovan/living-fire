@@ -171,7 +171,7 @@ const Filters = () => {
     let extractedFilters = [];
     pathSegments.forEach((segment) => {
       const matchingFilter = filterMappingsMock.find(
-        (item) => item.value.toLowerCase() === segment.toLowerCase()
+        (item) => item.slug.toLowerCase() === segment.toLowerCase()
       );
       if (matchingFilter) {
         extractedFilters.push({
@@ -320,17 +320,17 @@ const Filters = () => {
     if (allProducts.length > 0) updateFuelTypeValues();
   }, [isFetched, allProducts]);
 
-  function updateFilter(filterType, value, id) {
+  function updateFilter(filterType, value, id, slug) {
     let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
     let index = filters.findIndex((item) => item.filterType === filterType);
 
     if (index !== -1) {
-      filters[index] = { value, id, filterType };
+      filters[index] = { slug, id, filterType };
     } else {
-      filters.push({ value, id, filterType });
+      filters.push({ slug, id, filterType });
     }
     sessionStorage.setItem("filtersJson", JSON.stringify(filters));
-    let path = filters.map((item) => `${item.value}`).join("/");
+    let path = filters.map((item) => `${item.slug}`).join("/");
     router.push(`/allProducts/${path}`);
   }
 
@@ -577,6 +577,8 @@ const Filters = () => {
   //   }
   // }, []);
 
+  console.log("brands", brands)
+
   return (
     <>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
@@ -653,7 +655,8 @@ const Filters = () => {
                       updateFilter(
                         "type",
                         productMenu.ptype_name,
-                        productMenu.ptype_id
+                        productMenu.ptype_id,
+                        productMenu.slug
                       );
                     }}
                   >
@@ -914,7 +917,8 @@ const Filters = () => {
                                               updateFilter(
                                                 "fuelType",
                                                 val?.fueltype_name,
-                                                val?.fueltype_id
+                                                val?.fueltype_id,
+                                                val?.slug
                                               );
                                               if (window?.innerWidth <= 768) {
                                                 setIsFilter(false);
@@ -933,7 +937,8 @@ const Filters = () => {
                                             updateFilter(
                                               "fuelType",
                                               val?.fueltype_name,
-                                              val?.fueltype_id
+                                              val?.fueltype_id,
+                                              val?.slug
                                             );
                                             if (window?.innerWidth <= 768) {
                                               setIsFilter(false);
@@ -963,7 +968,8 @@ const Filters = () => {
                                         updateFilter(
                                           "fuelType",
                                           val?.fueltype_name,
-                                          val?.fueltype_id
+                                          val?.fueltype_id,
+                                          val?.slug
                                         );
                                         if (window?.innerWidth <= 768) {
                                           setIsFilter(false);
@@ -1054,7 +1060,8 @@ const Filters = () => {
                                       updateFilter(
                                         "installationType",
                                         installval?.installation_name,
-                                        installval?.installation_id
+                                        installval?.installation_id,
+                                         installval?.slug
                                       );
                                       if (window?.innerWidth <= 768) {
                                         setIsFilter(false);
@@ -1155,7 +1162,8 @@ const Filters = () => {
                                       updateFilter(
                                         "glassOrientationType",
                                         glassval?.glass_orientation_name,
-                                        glassval?.glass_orientation_id
+                                        glassval?.glass_orientation_id,
+                                         glassval?.slug
                                       );
                                       if (window?.innerWidth <= 768) {
                                         setIsFilter(false);
@@ -1252,7 +1260,8 @@ const Filters = () => {
                                     updateFilter(
                                       "rangeType",
                                       val?.range_name,
-                                      val?.range_id
+                                      val?.range_id,
+                                      val?.slug
                                     );
                                     if (window?.innerWidth <= 768) {
                                       setIsFilter(false);
@@ -1341,7 +1350,8 @@ const Filters = () => {
                                   updateFilter(
                                     "brand",
                                     val?.brand_name,
-                                    val?.brand_id
+                                    val?.brand_id,
+                                    val?.slug
                                   );
                                   if (window?.innerWidth <= 768) {
                                     setIsFilter(false);
