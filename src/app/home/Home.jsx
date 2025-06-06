@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Loader from "@/src/helper/loader/Loader";
 import Slider from "react-slick";
 import { ChevronDown } from "react-feather";
+import { generateSlug } from "@/src/helper/slug/slug";
 
 const brandLogos = {
   cocoon: () => import("@/public/assets/homePage/ourBrands/cocoon.svg"),
@@ -39,7 +40,6 @@ const Featured = lazy(() => import("./components/featured"), {
 const Testimonials = lazy(() => import("./components/testimonials"));
 const Blog = lazy(() => import("./components/blog"));
 const NewsletterCard = lazy(() => import("./components/newsletterCard"));
-
 
 const Home = () => {
   const useAnimationState = (initialValue) => {
@@ -104,14 +104,18 @@ const Home = () => {
     masterValues: { fuelTypes },
   } = useMasterValues();
 
-  const allProductsRouteHandler = (typeName, displayName, arguId) => {
+  const allProductsRouteHandler = (typeName, displayName, arguId, slug) => {
     setNavigationState({ typeName, displayName, id: arguId });
-    router.push(`/allProducts/${displayName}`);
+    slug
+      ? router.push(`/allProducts/${slug}`)
+      : router.push(`/allProducts/${displayName}`);
   };
 
   const productRouteHandler = (ProductName, brandName) => {
+    const brandSlug = generateSlug(brandName)
+    const productSlug=generateSlug(ProductName)
     router.push(
-      `/${brandName.replace(/\s+/g, "_")}/${ProductName.replace(/\s+/g, "_")}`
+      `/${brandSlug}/${productSlug}`
     );
   };
 
@@ -177,6 +181,7 @@ const Home = () => {
     ),
     customPaging: (i) => <div className="custom-dot"></div>,
   };
+  console.log("fuelTypes Home", fuelTypes);
   return (
     <div
       style={{
@@ -375,7 +380,8 @@ const Home = () => {
                         allProductsRouteHandler(
                           "fuelType",
                           fuelType.fueltype_name,
-                          fuelType.fueltype_id
+                          fuelType.fueltype_id,
+                          fuelType?.slug
                         )
                       }
                       className="p-0 m-0 flex gap-3"
@@ -457,7 +463,7 @@ const Home = () => {
         />
         {/* <Testimonials /> */}
         <Blog />
-        <NewsletterCard/>
+        <NewsletterCard />
       </Suspense>
 
       {/* Product Schema */}
