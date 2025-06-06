@@ -103,27 +103,27 @@
 // // 3. Special combinations lookup map
 // const specialCombinationsMap = new Map(
 //   specialCombinationsMetaData.map(item => [
-//     item.filters.map(f => f.toLowerCase()).sort().join(','), 
+//     item.filters.map(f => f.toLowerCase()).sort().join(','),
 //     item
 //   ])
 // );
 
 // // 4. Helper functions
-// const formatFilter = (filter) => 
+// const formatFilter = (filter) =>
 //   decodeURIComponent(filter).replace(/_/g, ' ').toLowerCase();
 
 // const generateOptimalTitle = (filters) => {
 //   const relevantFilters = filters.slice(0, 4);
 //   let baseTitle = `${relevantFilters.join(" | ")} | Living Fire`;
-  
+
 //   // SEO length optimization (30-65 chars)
 //   if (baseTitle.length < 30) {
 //     baseTitle = `${baseTitle} | Premium Fireplace Collection`;
-//   } 
+//   }
 //   else if (baseTitle.length > 65) {
 //     baseTitle = `${relevantFilters.slice(0, 3).join(" | ")} Fireplaces | Living Fire`;
 //   }
-  
+
 //   return baseTitle;
 // };
 
@@ -131,16 +131,16 @@
 //   const relevantFilters = filters.slice(0, 4);
 //   let baseDescription = `Explore our ${relevantFilters.join(" ")} fireplace collection. ` +
 //                        `Premium quality, innovative designs at Living Fire.`;
-  
+
 //   // SEO length optimization (120-320 chars)
 //   if (baseDescription.length < 120) {
 //     baseDescription += ` Discover the perfect fireplace for your home with expert advice.`;
-//   } 
+//   }
 //   else if (baseDescription.length > 320) {
 //     baseDescription = `Browse ${relevantFilters.slice(0, 3).join(" ")} fireplaces. ` +
 //                      `Premium quality and innovative designs at Living Fire Australia.`;
 //   }
-  
+
 //   return baseDescription;
 // };
 
@@ -202,7 +202,7 @@
 //   }
 
 //   // Prepare metadata
-//   const displayFilters = normalizedFilters.map(f => 
+//   const displayFilters = normalizedFilters.map(f =>
 //     f.charAt(0).toUpperCase() + f.slice(1)
 //   );
 
@@ -212,8 +212,8 @@
 //     return {
 //       title: meta.title || generateOptimalTitle(displayFilters),
 //       description: meta.description || generateOptimalDescription(displayFilters),
-//       keywords: Array.isArray(meta.keywords) ? 
-//                meta.keywords.join(", ") : 
+//       keywords: Array.isArray(meta.keywords) ?
+//                meta.keywords.join(", ") :
 //                meta.keywords || displayFilters.join(", "),
 //       alternates: {
 //         canonical: `https://livingfires.com.au/allProducts/${params?.filters?.join("/")}`
@@ -269,34 +269,51 @@ const specialCombinationsMetaData = [
   {
     filters: ["three sided", "wood"],
     title: "Three Sided Wood Fireplace | Living Fire Australia",
-    description: "Experience 270° views with our three-sided wood fireplaces. Premium craftsmanship for Australian homes.",
-    keywords: ["three sided wood fireplace", "panoramic wood burner", "living fires australia"],
-    ogImage: "/og/three-sided-wood.jpg"
+    description:
+      "Experience 270° views with our three-sided wood fireplaces. Premium craftsmanship for Australian homes.",
+    keywords: [
+      "three sided wood fireplace",
+      "panoramic wood burner",
+      "living fires australia",
+    ],
+    ogImage: "/og/three-sided-wood.jpg",
   },
   {
     filters: ["two sided", "wood"],
     title: "Double Sided Wood Fireplaces | Living Fire",
-    description: "Stylish two-sided wood fireplaces creating perfect room dividers for Australian living spaces.",
-    keywords: ["double sided wood fireplace", "room divider fireplace", "living fires australia"],
-    ogImage: "/og/two-sided-wood.jpg"
+    description:
+      "Stylish two-sided wood fireplaces creating perfect room dividers for Australian living spaces.",
+    keywords: [
+      "double sided wood fireplace",
+      "room divider fireplace",
+      "living fires australia",
+    ],
+    ogImage: "/og/two-sided-wood.jpg",
   },
   {
     filters: ["inbuilt", "wood"],
     title: "Built-In Wood Fireplaces | Seamless Installation | Living Fire",
-    description: "Custom inbuilt wood fireplaces designed for Australian homes with premium materials.",
-    keywords: ["built in wood fireplace", "custom fireplace installation", "living fires australia"],
-    ogImage: "/og/inbuilt-wood.jpg"
-  }
+    description:
+      "Custom inbuilt wood fireplaces designed for Australian homes with premium materials.",
+    keywords: [
+      "built in wood fireplace",
+      "custom fireplace installation",
+      "living fires australia",
+    ],
+    ogImage: "/og/inbuilt-wood.jpg",
+  },
 ];
 
 // 2. Create optimized metadata maps
 const createMetadataMap = (data) => {
   const map = new Map();
-  data.forEach(item => {
-    const key = item.name.toLowerCase().replace(/%20/g, ' ');
+  data.forEach((item) => {
+    const key = item.name.toLowerCase().replace(/%20/g, " ");
     map.set(key, {
       ...item,
-      ogImage: item.ogImage || `/og/default-${item.type.toLowerCase().replace(/ /g, '-')}.jpg`
+      ogImage:
+        item.ogImage ||
+        `/og/default-${item.type.toLowerCase().replace(/ /g, "-")}.jpg`,
     });
   });
   return map;
@@ -307,51 +324,74 @@ const metaDataMaps = {
   fireplace: createMetadataMap(fireplaceTypeMetaData),
   category: createMetadataMap(categoryTypeMetaData),
   glassorientation: createMetadataMap(glassorientationTypeMetaData),
-  installation: createMetadataMap(installationTypeMetaData)
+  installation: createMetadataMap(installationTypeMetaData),
 };
 
 // 3. Pre-build special combinations map
 const specialCombinationsMap = new Map();
-specialCombinationsMetaData.forEach(item => {
-  const key = item.filters.map(f => f.toLowerCase()).sort().join(',');
+specialCombinationsMetaData.forEach((item) => {
+  const key = item.filters
+    .map((f) => f.toLowerCase())
+    .sort()
+    .join(",");
   specialCombinationsMap.set(key, item);
 });
 
 // 4. Helper functions
-const formatFilter = (filter) => 
-  decodeURIComponent(filter).replace(/_/g, ' ').toLowerCase();
+const formatFilter = (filter) =>
+  decodeURIComponent(filter).replace(/_/g, " ").toLowerCase();
 
 const generateSeoData = (filters, matchedMetadata = []) => {
-  console.log("filtersSEO", filters, filters?.length)
-  const displayFilters = filters.map(f => f.charAt(0).toUpperCase() + f.slice(1));
+  console.log(
+    "filtersSEO in filter",
+    filters,
+    filters?.length,
+    matchedMetadata
+  );
+  const displayFilters = filters.map(
+    (f) => f.charAt(0).toUpperCase() + f.slice(1)
+  );
   const firstFour = displayFilters.slice(0, 4);
-  
-  // Title optimization (45-65 chars)
-  let title = `${firstFour.join(" | ")} | Living Fire`;
-  title = title.length < 45 ? `${title} Australia` : title;
-  title = title.length > 65 ? `${firstFour.slice(0, 3).join(" | ")} Fireplaces | Living Fire` : title;
+  let description;
+  let title;
+  if (filters?.length == 1) {
+    title = matchedMetadata?.[0]?.title;
+    description = matchedMetadata?.[0]?.description;
+  } else {
+    title = `${firstFour.join(" | ")} | Living Fire`;
+    title = title.length < 45 ? `${title} Australia` : title;
+    title =
+      title.length > 65
+        ? `${firstFour.slice(0, 3).join(" | ")} Fireplaces | Living Fire`
+        : title;
 
-  // Description optimization (150-300 chars)
-  let description = `Browse our ${firstFour.join(" ")} fireplace collection. Premium Australian-made designs.`;
-  description = description.length < 150 ? `${description} Free consultations available.` : description;
-  description = description.length > 300 ? `Explore ${firstFour.slice(0, 3).join(" ")} fireplaces at Living Fire Australia.` : description;
-
+    description = `Browse our ${firstFour.join(
+      " "
+    )} fireplace collection. Premium Australian-made designs.`;
+    description =
+      description.length < 150
+        ? `${description} Free consultations available.`
+        : description;
+    description =
+      description.length > 300
+        ? `Explore ${firstFour
+            .slice(0, 3)
+            .join(" ")} fireplaces at Living Fire Australia.`
+        : description;
+  }
   // Keyword generation
   const baseKeywords = [
     ...firstFour,
-    ...firstFour.map(f => `${f} fireplace`),
-    "Living Fire Australia"
+    ...firstFour.map((f) => `${f} fireplace`),
+    "Living Fire Australia",
   ];
 
-  const metadataKeywords = matchedMetadata.flatMap(m => 
-    m?.keywords 
-      ? (Array.isArray(m.keywords) ? m.keywords : [m.keywords]) 
-      : []
+  const metadataKeywords = matchedMetadata.flatMap((m) =>
+    m?.keywords ? (Array.isArray(m.keywords) ? m.keywords : [m.keywords]) : []
   );
-  
 
   const keywords = [...new Set([...baseKeywords, ...metadataKeywords])]
-    .filter(k => typeof k === 'string' && k.trim().length > 0)
+    .filter((k) => typeof k === "string" && k.trim().length > 0)
     .slice(0, 15)
     .join(", ");
 
@@ -362,28 +402,32 @@ const generateSeoData = (filters, matchedMetadata = []) => {
 export async function generateMetadata({ params }) {
   const defaultMetadata = {
     title: "Luxury Fireplace Collection | Living Fire Australia",
-    description: "Australia's finest fireplace selection. Gas, wood & electric models with expert installation.",
+    description:
+      "Australia's finest fireplace selection. Gas, wood & electric models with expert installation.",
     alternates: { canonical: "https://livingfires.com.au/allProducts" },
     robots: { index: true, follow: true },
     openGraph: {
-      images: [{ url: "https://livingfires.com.au/og/default-fireplaces.jpg" }]
+      images: [{ url: "https://livingfires.com.au/og/default-fireplaces.jpg" }],
     },
     twitter: {
-      card: "summary_large_image"
-    }
+      card: "summary_large_image",
+    },
   };
 
   if (!params?.filters) return defaultMetadata;
 
   // Normalize filters
   const normalizedFilters = params.filters.map(formatFilter);
-  const sortedKey = [...normalizedFilters].sort().join(',');
+  const sortedKey = [...normalizedFilters].sort().join(",");
 
   // Check special combinations
   if (specialCombinationsMap.has(sortedKey)) {
-    const { title, description, keywords, ogImage } = specialCombinationsMap.get(sortedKey);
-    const canonicalUrl = `https://livingfires.com.au/allProducts/${params.filters.join("/")}`;
-    
+    const { title, description, keywords, ogImage } =
+      specialCombinationsMap.get(sortedKey);
+    const canonicalUrl = `https://livingfires.com.au/allProducts/${params.filters.join(
+      "/"
+    )}`;
+
     return {
       title,
       description,
@@ -394,14 +438,14 @@ export async function generateMetadata({ params }) {
         description,
         url: canonicalUrl,
         images: [{ url: `https://livingfires.com.au${ogImage}` }],
-        siteName: "Living Fire"
+        siteName: "Living Fire",
       },
       twitter: {
         card: "summary_large_image",
         title,
         description,
-        images: [`https://livingfires.com.au${ogImage}`]
-      }
+        images: [`https://livingfires.com.au${ogImage}`],
+      },
     };
   }
 
@@ -417,8 +461,13 @@ export async function generateMetadata({ params }) {
   }
 
   // Generate SEO data
-  const { title, description, keywords } = generateSeoData(normalizedFilters, matchedMetadata);
-  const canonicalUrl = `https://livingfires.com.au/allProducts/${params.filters.join("/")}`;
+  const { title, description, keywords } = generateSeoData(
+    normalizedFilters,
+    matchedMetadata
+  );
+  const canonicalUrl = `https://livingfires.com.au/allProducts/${params.filters.join(
+    "/"
+  )}`;
   const ogImage = matchedMetadata[0]?.ogImage || "/og/default-fireplaces.jpg";
 
   return {
@@ -431,14 +480,14 @@ export async function generateMetadata({ params }) {
       description,
       url: canonicalUrl,
       images: [{ url: `https://livingfires.com.au${ogImage}` }],
-      siteName: "Living Fire"
+      siteName: "Living Fire",
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [`https://livingfires.com.au${ogImage}`]
-    }
+      images: [`https://livingfires.com.au${ogImage}`],
+    },
   };
 }
 
@@ -453,7 +502,7 @@ export async function generateStaticParams() {
     { filters: ["gas"] },
     { filters: ["adf"] },
     { filters: ["regency"] },
-    { filters: ["heatmaster"] }
+    { filters: ["heatmaster"] },
   ];
 }
 
@@ -461,4 +510,3 @@ export async function generateStaticParams() {
 export default function Page({ params }) {
   return <Filters params={params} />;
 }
-
