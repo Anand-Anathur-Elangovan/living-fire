@@ -112,11 +112,9 @@ const Home = () => {
   };
 
   const productRouteHandler = (ProductName, brandName) => {
-    const brandSlug = generateSlug(brandName)
-    const productSlug=generateSlug(ProductName)
-    router.push(
-      `/${brandSlug}/${productSlug}`
-    );
+    const brandSlug = generateSlug(brandName);
+    const productSlug = generateSlug(ProductName);
+    router.push(`/${brandSlug}/${productSlug}`);
   };
 
   useEffect(() => {
@@ -361,7 +359,20 @@ const Home = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
             >
-              <span className="blur-text">Architectural Fireplace Design</span>
+              {/* <span className="blur-text">Architectural Fireplace Design</span> */}
+              <h1
+                className="blur-text"
+                style={{
+                  display: "inline",
+                  fontSize: "inherit",
+                  fontWeight: "inherit",
+                  margin: 0,
+                  padding: 0,
+                  lineHeight: "inherit",
+                }}
+              >
+                Architectural Fireplace Design
+              </h1>
             </motion.div>
 
             <motion.div

@@ -152,12 +152,12 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       <style>{hoverStyle}</style>
 
       <div className="flex flex-row items-center w-full mb-10">
-        <motion.h1
+        <motion.h2
           variants={itemVariants}
           className="heading1 flex w-full justify-start ml-8 md:justify-center md:ml-0"
         >
           Collections
-        </motion.h1>
+        </motion.h2>
       </div>
 
       {/* Desktop View - Grid Layout */}
