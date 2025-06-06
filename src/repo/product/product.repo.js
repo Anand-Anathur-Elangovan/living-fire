@@ -13,6 +13,7 @@ export const getProductPage = async (productName) => {
   // })`;
   // const query = "select * FROM fn_get_product_page(424)";
   try {
+    console.log("productSlug", productName)
     // const result = await pool.query(query);
     const result = await pool.query(
       `SELECT 
