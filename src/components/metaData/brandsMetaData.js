@@ -1,11 +1,12 @@
 export const brandsMetaData = [
   {
-    name: "Paul%20Agnew%20Designs",
+    name: "Paul Agnew Designs",
     title: "Paul Agnew Designs - Fireplace Brands - Living Fire",
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Paul Agnew Designs. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"paul-agnew-designs"
   },
   {
     name: "Esse",
@@ -13,7 +14,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Esse. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"esse"
   },
   {
     name: "Kalora",
@@ -21,7 +23,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Kalora. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"kalora"
   },
   {
     name: "ADF",
@@ -29,7 +32,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including ADF fireplaces. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"adf"
   },
   {
     name: "Austroflamm",
@@ -37,7 +41,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Austroflamm. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"austroflamm"
   },
   {
     name: "Bosq",
@@ -45,7 +50,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Bosq. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"bosq"
   },
   {
     name: "Eurostove",
@@ -53,7 +59,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Eurostove. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"eurostove"
   },
   {
     name: "Gazco",
@@ -61,7 +68,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Gazco. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"gazco"
   },
   {
     name: "Heatmaster",
@@ -69,7 +77,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Heatmaster. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"heatmaster"
   },
   {
     name: "Hergom",
@@ -77,7 +86,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Hergom. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"hergom"
   },
   {
     name: "Living%20Fire",
@@ -85,7 +95,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Living Fire. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:"living-fire"
   },
   {
     name: "Regency",
@@ -93,7 +104,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Regency. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:""
   },
   {
     name: "Morso",
@@ -101,7 +113,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Morso. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:""
   },
   {
     name: "Stovax",
@@ -109,7 +122,8 @@ export const brandsMetaData = [
     description:
       "Living Fire is partnered with a range of premium fireplace brands including Stovax. Visit us online now for more information",
     keywords: "",
-    type:"brand"
+    type:"brand", 
+    slug:""
   }
 ];
 

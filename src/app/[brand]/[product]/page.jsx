@@ -45,7 +45,6 @@ export async function generateMetadata({ params }) {
   );
   const cookieStore = cookies();
   const fuelTypeName = cookieStore.get("fuelTypeName")?.value;
-  console.log("fuelTypeName", fuelTypeName&&fuelTypeName)
   // SEO-optimized strings
   const seoTitle = `${productName} | ${brandName} ${category} | Living Fire Australia`;
   const seoDescription = `Explore the ${productName} ${category.toLowerCase()} by ${brandName}. ${features.join(", ")}. Premium quality for Australian homes.`;

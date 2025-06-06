@@ -181,7 +181,6 @@ const Home = () => {
     ),
     customPaging: (i) => <div className="custom-dot"></div>,
   };
-  console.log("fuelTypes Home", fuelTypes);
   return (
     <div
       style={{
