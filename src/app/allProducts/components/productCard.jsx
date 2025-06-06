@@ -105,7 +105,6 @@ const ProductCard = ({
     setCookie("selectedBrand", formattedBrandName);
     const productSlug = generateSlug(productName);
     const brandSlug = generateSlug(brandName);
-    console.log("productSlug", productSlug, "brandSlug", brandSlug)
     router.push(`/${brandSlug}/${productSlug}`);
   };
 

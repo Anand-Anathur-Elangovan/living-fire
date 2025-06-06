@@ -322,6 +322,7 @@ const formatFilter = (filter) =>
   decodeURIComponent(filter).replace(/_/g, ' ').toLowerCase();
 
 const generateSeoData = (filters, matchedMetadata = []) => {
+  console.log("filtersSEO", filters, filters?.length)
   const displayFilters = filters.map(f => f.charAt(0).toUpperCase() + f.slice(1));
   const firstFour = displayFilters.slice(0, 4);
   
@@ -360,7 +361,7 @@ const generateSeoData = (filters, matchedMetadata = []) => {
 // 5. Main metadata generator
 export async function generateMetadata({ params }) {
   const defaultMetadata = {
-    title: "Premium Fireplace Collection | Living Fire Australia",
+    title: "Luxury Fireplace Collection | Living Fire Australia",
     description: "Australia's finest fireplace selection. Gas, wood & electric models with expert installation.",
     alternates: { canonical: "https://livingfires.com.au/allProducts" },
     robots: { index: true, follow: true },
@@ -446,8 +447,8 @@ export async function generateStaticParams() {
   return [
     { filters: ["wood"] },
     { filters: ["gas"] },
-    { filters: ["Two Sided", "wood"] },
-    { filters: ["Three Sided", "wood"] },
+    { filters: ["two-sided", "wood"] },
+    { filters: ["three-sided", "wood"] },
     { filters: ["electric"] },
     { filters: ["gas"] },
     { filters: ["adf"] },

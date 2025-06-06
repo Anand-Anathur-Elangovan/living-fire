@@ -33,6 +33,7 @@ import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
 //   import useMasterValues from "../hooks/useMasterValues";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { generateSlug } from "@/src/helper/slug/slug";
 
 const filterMappingsMock = [
   { id: 1, value: "Fireplace", filterType: "type", slug: "fireplace" },
@@ -166,7 +167,8 @@ const AllProducts = () => {
     const pathSegments = pathname
       .split("/")
       .filter((segment) => segment)
-      ?.map((item) => item.replace(/%20|_/g, " "));
+      ?.map((item) => generateSlug(item));
+      // ?.map((item) => item.replace(/%20|_/g, " "));
     let extractedFilters = [];
     pathSegments.forEach((segment) => {
       const matchingFilter = filterMappingsMock.find(
@@ -175,8 +177,9 @@ const AllProducts = () => {
       if (matchingFilter) {
         extractedFilters.push({
           id: matchingFilter.id,
-          value: matchingFilter.value,
+          value: matchingFilter.slug,
           filterType: matchingFilter.filterType,
+          slug:matchingFilter.slug
         });
       }
     });
@@ -321,11 +324,10 @@ const AllProducts = () => {
   function updateFilter(filterType, value, id, slug) {
     let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
     let index = filters.findIndex((item) => item.filterType === filterType);
-
     if (index !== -1) {
-      filters[index] = { slug, id, filterType };
+      filters[index] = { value, id, filterType, slug };
     } else {
-      filters.push({ slug, id, filterType });
+      filters.push({ value, id, filterType, slug });
     }
     sessionStorage.setItem("filtersJson", JSON.stringify(filters));
     let path = filters.map((item) => `${item.slug}`).join("/");
@@ -562,7 +564,6 @@ const AllProducts = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
-  console.log("allProductMenu", allProductMenu)
   return (
     <>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
