@@ -7,14 +7,14 @@ import { FiArrowRight } from "react-icons/fi";
 
 const Blog = () => {
   return (
-    <div className="flex relative justify-center flex-col gap-6 md:gap-10 mb-20 md:mb-40 px-4 sm:px-6 md:pl-20  md:pr-20">
+    <div className="flex relative justify-center flex-col gap-6 md:gap-10 mb-20 md:mb-2 px-4 sm:px-6 md:pl-20  md:pr-20">
       <div className="flex flex-row items-center w-full mb-2 md:mb-4">
         <h2 className="heading1 flex w-full justify-center text-3xl md:text-4xl lg:text-5xl">
           News & Blog
         </h2>
       </div>
 
-      <div className="w-full flex flex-col md:flex-row gap-8 md:gap-9 pb-6 md:pb-10">
+      <div className="w-full flex flex-col md:flex-row gap-8 md:gap-9 pb-6 md:pb-1">
         {/* Left Section */}
         <div className="w-full md:w-[44%] flex flex-col gap-6">
           <div className="h-[300px] sm:h-[400px] md:h-[505px] relative">
