@@ -7,14 +7,15 @@ import { FiArrowRight } from "react-icons/fi";
 
 const Blog = () => {
   return (
-    <div className="flex relative justify-center flex-col gap-6 md:gap-10 mb-20 md:mb-2 px-4 sm:px-6 md:pl-20  md:pr-20">
+    <div className="flex relative justify-center flex-col gap-6 md:ml-20 md:mr-20 md:gap-10 mb-20 md:mb-2 px-4 sm:px-6 md:px-[300px]">
       <div className="flex flex-row items-center w-full mb-2 md:mb-4">
         <h2 className="heading1 flex w-full justify-center text-3xl md:text-4xl lg:text-5xl">
           News & Blog
         </h2>
       </div>
 
-      <div className="w-full flex flex-col md:flex-row gap-8 md:gap-9 pb-6 md:pb-1">
+      <div className="w-full flex flex-col md:flex-row gap-8 md:gap-4 pb-6 md:pb-1">
+        <div className="w-full flex flex-col md:flex-row gap-8 md:gap-9 pb-6 md:pb-1">
         {/* Left Section */}
         <div className="w-full md:w-[44%] flex flex-col gap-6">
           <div className="h-[300px] sm:h-[400px] md:h-[505px] relative">
@@ -78,6 +79,7 @@ const Blog = () => {
             </div>
           </div>
         </div>
+        </div>
         
         {/* Arrow Section - Final optimized version */}
         <div className="hidden md:flex flex-col items-center justify-center gap-5 w-[12%] min-w-[120px]">
@@ -88,7 +90,7 @@ const Blog = () => {
           >
             <FiArrowRight className="text-3xl text-gray-700" />
           </Link>
-          <p className="font-sans text-[2rem] font-normal uppercase tracking-wider">View All</p>
+          <p className="font-sans text-[1.4rem] font-normal uppercase tracking-wider">View All</p>
         </div>
       </div>
     </div>

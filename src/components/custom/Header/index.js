@@ -275,6 +275,7 @@ const Header = () => {
                 alt="Living Fire Company Logo"
                 className="custom-header-width"
                 onClick={handleHomeIconClick}
+                style={{ filter: color === "white" ? "invert(1)" : "none" }}
               />
             ) : (
               <>
@@ -311,6 +312,7 @@ const Header = () => {
                         className="custom-header-width"
                         onClick={handleHomeIconClick}
                         title="Living Fire Company Logo"
+                        style={{ filter: color === "white" ? "invert(1)" : "none" }}
                       />
                     </div>
                   )}

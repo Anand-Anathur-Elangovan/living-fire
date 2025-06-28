@@ -173,7 +173,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
             }}
             onMouseLeave={() => setHoveredItem(null)}
           >
-            <div className="collection-image-container rounded-lg overflow-hidden">
+            <div className="collection-image-container overflow-hidden">
               <Image
                 src={item.image}
                 alt={item.title}
@@ -286,7 +286,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
             }}
             onMouseLeave={() => setHoveredItem(null)}
           >
-            <div className="collection-image-container rounded-lg overflow-hidden">
+            <div className="collection-image-container overflow-hidden">
               <Image
                 src={item.image}
                 alt={item.title}
@@ -394,7 +394,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       </div> */}
       <div className="collection-custom-button flex flex-col md:flex-row items-center gap-4 justify-center mt-[50px]">
         <motion.button
-          className="px-8 py-3 bg-black text-white rounded-full font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
+          className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
           onClick={() => {
             setNavigationState(null);
             router.push(`/allProducts`);
@@ -421,7 +421,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
         </motion.button>
 
         <motion.button
-          className="px-8 py-3 bg-white text-black border border-black rounded-full font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
+          className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
           onClick={() => router.push("/contact")}
           onMouseEnter={() => router.prefetch("/contact")}
           whileHover={{ scale: 1.05 }}

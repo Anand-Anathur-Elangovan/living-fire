@@ -133,7 +133,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
   // Prefetch brand route on hover
   const handleBrandHover = (brand) => {
     if (!prefetchedBrands.has(brand.brand_id)) {
-      router.prefetch(brand.route);
+      router?.prefetch(brand.route);
       setPrefetchedBrands(prev => new Set(prev).add(brand.brand_id));
     }
   };

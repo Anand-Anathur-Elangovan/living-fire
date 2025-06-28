@@ -140,7 +140,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
 
   return (
     <motion.div
-      className="flex relative justify-center flex-col gap-6 md:gap-10 ml-0 mr-0 md:ml-20 md:mr-20 px-4 md:px-0"
+      className="flex relative justify-center flex-col gap-6 md:gap-10 ml-0 mr-0 md:ml-20 md:mr-20 px-4 md:px-[250px]"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
@@ -270,7 +270,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                 variants={itemVariants}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="relative overflow-hidden rounded-lg aspect-square">
+                <div className="relative overflow-hidden aspect-square">
                   <Image
                     src={item.image}
                     alt={item.title}
@@ -306,7 +306,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                 variants={itemVariants}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="relative overflow-hidden rounded-lg aspect-square">
+                <div className="relative overflow-hidden aspect-square">
                   <Image
                     src={item.image}
                     alt={item.title}
@@ -422,7 +422,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       <div className="w-full flex flex-col items-center gap-4 mt-8 md:mt-12">
   <div className="flex flex-col md:flex-row items-center gap-4">
     <motion.button
-      className="px-8 py-3 bg-black text-white rounded-full font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
+      className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
       onClick={() => {
         setNavigationState(null);
         router.push(`/allProducts`);
@@ -438,7 +438,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
     </motion.button>
 
     <motion.button
-      className="px-8 py-3 bg-white text-black border border-black rounded-full font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
+      className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
       onClick={() => router.push('/contact')}
       onMouseEnter={() => router.prefetch('/contact')}
       whileHover={{ scale: 1.05 }}
