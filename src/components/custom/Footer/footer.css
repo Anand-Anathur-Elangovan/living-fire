@@ -1,11 +1,15 @@
 .footer {
   padding-top: 72px;
   padding-bottom: 72px;
+  padding-right: 350px;
+  padding-left: 350px;
   display: flex;
-  background-color: #94999f;
+  background-color: black;
   width: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 50px;
 }
 .footerRow {
   width: 100%;

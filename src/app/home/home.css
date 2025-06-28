@@ -189,7 +189,7 @@
 }
 .button-group {
   position: absolute;
-  bottom: 140px !important;
+  bottom: 100px !important;
   width: 50%;
   display: flex;
   justify-content: center;
@@ -281,7 +281,7 @@
 }
 .text-group-subheading {
   position: absolute;
-  bottom: 180px;
+  bottom: 140px;
   width: 50%;
   display: flex;
   justify-content: center;

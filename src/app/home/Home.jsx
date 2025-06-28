@@ -384,6 +384,7 @@ const Home = () => {
               {fuelTypes?.map(
                 (fuelType, index) =>
                   fuelType?.fueltype_name !== "Hybrid - Wood/Electric" && (
+                    <React.Fragment  key={`fuelType-${fuelType.fueltype_id}`}>
                     <button
                       key={`fuelType-${fuelType.fueltype_id}`}
                       onClick={() =>
@@ -398,12 +399,18 @@ const Home = () => {
                       aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
                     >
                       {fuelType.fueltype_name}
-                      {index < fuelTypes.length - 1 && (
+                      {/* {index < fuelTypes.length - 1 && (
+                        <span className="hidden md:flex items-center text-white">
+                          |
+                        </span>
+                      )} */}
+                    </button>
+                    {index < fuelTypes.length - 1 && (
                         <span className="hidden md:flex items-center text-white">
                           |
                         </span>
                       )}
-                    </button>
+                      </React.Fragment>
                   )
               )}
             </motion.div>
