@@ -242,7 +242,6 @@
 //   );
 // }
 
-
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -284,6 +283,85 @@ export default function Footer() {
   };
 
   const showNewsletter = pathname !== "/";
+  const FireplaceTypes = [
+    {
+      name: "Fireplaces",
+      route: "/allProducts/fireplace", // or your actual route path
+    },
+    {
+      name: "Bio-Ethanol",
+      route: "/allProducts/bio-ethanol", // or your actual route path
+    },
+    {
+      name: "Gas",
+      route: "/allProducts/gas", // or your actual route path
+    },
+    {
+      name: "Wood",
+      route: "/allProducts/wood", // or your actual route path
+    },
+    {
+      name: "Electric",
+      route: "/allProducts/electric", // or your actual route path
+    },
+    {
+      name: "Cooker",
+      route: "/allProducts/cooker", // or your actual route path
+    },
+  ];
+
+  const FireplaceAccessories = [
+    {
+      name: "Fireplace Mantels",
+      route: "/allProducts/fireplace-mantels", // or your actual route path
+    },
+    {
+      name: "Fire Tools",
+      route: "/fire-tools", // or your actual route path
+    },
+    {
+      name: "Outdoor",
+      route: "/outdoor", // or your actual route path
+    },
+    {
+      name: "Cast Iron",
+      route: "/cast-iron", // or your actual route path
+    },
+  ];
+
+  const AboutUsLinks = [
+  {
+    name: "Our Story",
+    route: "/our-story" // or your preferred route
+  },
+  {
+    name: "Our Services",
+    route: "/" // or "/services" if standalone
+  },
+  {
+    name: "Contact Us",
+    route: "/contact" // or "/about/contact" if nested
+  }
+];
+
+  const CustomerCare = [
+    {
+      name: "Maintenance Service",
+      route: "/maintenance-service",
+    },
+    {
+      name: "Warranty & Servicing",
+      route: "/warranty",
+    },
+    {
+      name: "Terms of Service",
+      route: "/terms",
+    },
+    {
+      name: "Privacy Policy",
+      route: "/privacy-policy",
+    },
+  ];
 
   return (
     <Box
@@ -291,7 +369,7 @@ export default function Footer() {
       sx={{
         backgroundColor: "#4E4E4E",
         color: "white",
-        paddingTop: "48px"
+        paddingTop: "48px",
       }}
     >
       <Container maxWidth="xl">
@@ -394,74 +472,123 @@ export default function Footer() {
                 <Facebook />
               </IconButton>
             </Box>
-            <Typography variant="body2">
-              Follow us on social media
-            </Typography>
+            <Typography variant="body2">Follow us on social media</Typography>
           </Grid>
 
           {/* Showrooms */}
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
+            <Typography
+              variant="h6"
+              component="h3"
+              gutterBottom
+              sx={{ fontWeight: 600 }}
+            >
               Our Showrooms
             </Typography>
             <Box sx={{ mb: 3 }}>
-              <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 500 }}>
+              <Typography
+                variant="subtitle2"
+                gutterBottom
+                sx={{ fontWeight: 500 }}
+              >
                 Richmond Showroom
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                <LocationOn fontSize="small" sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }} />
-                <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.9)" }}>
+                <LocationOn
+                  fontSize="small"
+                  sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }}
+                />
+                <Typography
+                  variant="body2"
+                  sx={{ color: "rgba(255, 255, 255, 0.9)" }}
+                >
                   359-361 Swan Street, Richmond, Victoria 3121
                 </Typography>
               </Box>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Phone fontSize="small" sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }} />
-                <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.9)" }}>(03) 9977 7886</Typography>
+                <Phone
+                  fontSize="small"
+                  sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }}
+                />
+                <Typography
+                  variant="body2"
+                  sx={{ color: "rgba(255, 255, 255, 0.9)" }}
+                >
+                  (03) 9977 7886
+                </Typography>
               </Box>
             </Box>
             <Box sx={{ mb: 3 }}>
-              <Typography variant="subtitle2" gutterBottom sx={{ fontWeight: 500 }}>
+              <Typography
+                variant="subtitle2"
+                gutterBottom
+                sx={{ fontWeight: 500 }}
+              >
                 Moorabbin Showroom
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                <LocationOn fontSize="small" sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }} />
-                <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.9)" }}>
+                <LocationOn
+                  fontSize="small"
+                  sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }}
+                />
+                <Typography
+                  variant="body2"
+                  sx={{ color: "rgba(255, 255, 255, 0.9)" }}
+                >
                   148-150 Cochranes Road, Moorabbin, Victoria 3189
                 </Typography>
               </Box>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Phone fontSize="small" sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }} />
-                <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.9)" }}>(03) 9977 7887</Typography>
+                <Phone
+                  fontSize="small"
+                  sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }}
+                />
+                <Typography
+                  variant="body2"
+                  sx={{ color: "rgba(255, 255, 255, 0.9)" }}
+                >
+                  (03) 9977 7887
+                </Typography>
               </Box>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Email fontSize="small" sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }} />
-              <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.9)" }}>info@livingfire.com.au</Typography>
+              <Email
+                fontSize="small"
+                sx={{ mr: 1, color: "rgba(255, 255, 255, 0.7)" }}
+              />
+              <Typography
+                variant="body2"
+                sx={{ color: "rgba(255, 255, 255, 0.9)" }}
+              >
+                info@livingfire.com.au
+              </Typography>
             </Box>
           </Grid>
 
           {/* Products */}
           <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
+            <Typography
+              variant="h6"
+              component="h3"
+              gutterBottom
+              sx={{ fontWeight: 600 }}
+            >
               Products
             </Typography>
             <Box component="ul" sx={{ listStyle: "none", pl: 0, m: 0 }}>
-              {[
-                "Fireplaces",
-                "Bio-Ethanol",
-                "Gas",
-                "Wood",
-                "Electric",
-                "Cooker",
-              ].map((item) => (
-                <li key={item}>
+              {FireplaceTypes?.map((item, index) => (
+                <li key={index}>
                   <Link
-                    href="#"
+                    href={item?.route}
                     color="rgba(255, 255, 255, 0.9)"
                     underline="hover"
-                    sx={{ display: "block", py: 0.5, "&:hover": { color: "white" } }}
+                    sx={{
+                      display: "block",
+                      py: 0.5,
+                      "&:hover": { color: "white" },
+                    }}
                   >
-                    {item}
+                    {item?.name}
                   </Link>
                 </li>
               ))}
@@ -470,24 +597,28 @@ export default function Footer() {
 
           {/* Additional Products */}
           <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
+            <Typography
+              variant="h6"
+              component="h3"
+              gutterBottom
+              sx={{ fontWeight: 600 }}
+            >
               Additional Products
             </Typography>
             <Box component="ul" sx={{ listStyle: "none", pl: 0, m: 0 }}>
-              {[
-                "Fireplace Mantels",
-                "Fire Tools",
-                "Outdoor",
-                "Cast Iron",
-              ].map((item) => (
-                <li key={item}>
+              {FireplaceAccessories?.map((item, index) => (
+                <li key={index}>
                   <Link
-                    href="#"
+                    href={item?.route}
                     color="rgba(255, 255, 255, 0.9)"
                     underline="hover"
-                    sx={{ display: "block", py: 0.5, "&:hover": { color: "white" } }}
+                    sx={{
+                      display: "block",
+                      py: 0.5,
+                      "&:hover": { color: "white" },
+                    }}
                   >
-                    {item}
+                    {item?.name}
                   </Link>
                 </li>
               ))}
@@ -496,42 +627,55 @@ export default function Footer() {
 
           {/* About & Customer Care */}
           <Grid item xs={12} sm={6} md={2}>
-            <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
+            <Typography
+              variant="h6"
+              component="h3"
+              gutterBottom
+              sx={{ fontWeight: 600 }}
+            >
               About
             </Typography>
             <Box component="ul" sx={{ listStyle: "none", pl: 0, m: 0, mb: 3 }}>
-              {["Our Story", "Our Services", "Contact Us"].map((item) => (
-                <li key={item}>
+              {AboutUsLinks?.map((item, index) => (
+                <li key={index}>
                   <Link
-                    href="#"
+                    href={item?.route}
                     color="rgba(255, 255, 255, 0.9)"
                     underline="hover"
-                    sx={{ display: "block", py: 0.5, "&:hover": { color: "white" } }}
+                    sx={{
+                      display: "block",
+                      py: 0.5,
+                      "&:hover": { color: "white" },
+                    }}
                   >
-                    {item}
+                    {item?.name}
                   </Link>
                 </li>
               ))}
             </Box>
 
-            <Typography variant="h6" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
+            <Typography
+              variant="h6"
+              component="h3"
+              gutterBottom
+              sx={{ fontWeight: 600 }}
+            >
               Customer Care
             </Typography>
             <Box component="ul" sx={{ listStyle: "none", pl: 0, m: 0 }}>
-              {[
-                "Maintenance Service",
-                "Warranty & Servicing",
-                "Terms of Service",
-                "Privacy Policy",
-              ].map((item) => (
-                <li key={item}>
+              {CustomerCare?.map((item, index) => (
+                <li key={index}>
                   <Link
-                    href="#"
+                    href={item?.route}
                     color="rgba(255, 255, 255, 0.9)"
                     underline="hover"
-                    sx={{ display: "block", py: 0.5, "&:hover": { color: "white" } }}
+                    sx={{
+                      display: "block",
+                      py: 0.5,
+                      "&:hover": { color: "white" },
+                    }}
                   >
-                    {item}
+                    {item?.name}
                   </Link>
                 </li>
               ))}
@@ -539,22 +683,22 @@ export default function Footer() {
           </Grid>
         </Grid>
       </Container>
-       <Box
-          sx={{
-            width: "100%",
-            py: 3,
-            mt: 4,
-            backgroundColor: "grey",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderTop: "white 10px solid"
-          }}
-        >
-          <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
-            © {new Date().getFullYear()} Living Fire. All rights reserved.
-          </Typography>
-        </Box>
+      <Box
+        sx={{
+          width: "100%",
+          py: 3,
+          mt: 4,
+          backgroundColor: "grey",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          borderTop: "white 10px solid",
+        }}
+      >
+        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
+          © {new Date().getFullYear()} Living Fire. All rights reserved.
+        </Typography>
+      </Box>
     </Box>
   );
 }
