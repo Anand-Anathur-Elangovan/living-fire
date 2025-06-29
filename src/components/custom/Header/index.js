@@ -10,7 +10,7 @@ import menuIcon from "@/public/assets/homePage/burgerMenu.svg";
 import Image from "next/image";
 import Menu from "@/src/app/menu/Menu";
 import CloseIcon from "@/public/assets/menu/close.svg";
-import CloseIconMui from '@mui/icons-material/Close';
+import CloseIconMui from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
 import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
 import { usePathname } from "next/navigation";
@@ -28,19 +28,18 @@ import {
   styled,
 } from "@mui/material";
 // import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 const MultiColumnList = styled(Box)(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-  gap: '8px',
-  padding: '16px 0 16px 24px',
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
+  gap: "8px",
+  padding: "16px 0 16px 24px",
 }));
 
-
 const Header = () => {
-  const isMobileVar = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const isMobileVar = typeof window !== "undefined" && window.innerWidth <= 768;
   const pathname = usePathname();
   const router = useRouter();
   const searchRef = useRef(null);
@@ -70,15 +69,15 @@ const Header = () => {
   }, [pathname, prevPathname]);
 
   useEffect(() => {
-  const handleResize = () => {
-    const mobile = window.innerWidth <= 768;
-    setIsMobile(mobile);
-    setShouldAnimate(!mobile);
-  };
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      setShouldAnimate(!mobile);
+    };
 
-  window.addEventListener('resize', handleResize);
-  return () => window.removeEventListener('resize', handleResize);
-}, []);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleScroll = () => {
     const currentScroll = window.pageYOffset;
@@ -127,7 +126,7 @@ const Header = () => {
     setIsClosing(true);
     setTimeout(() => {
       setShowMenu(false);
-      setShowMenuNav(false)
+      setShowMenuNav(false);
       setSearchTextHeader("");
       setIsClosing(false);
     }, 0); // Match this with your CSS animation duration
@@ -139,14 +138,15 @@ const Header = () => {
     }
   }, [shouldAnimate]);
 
-   const menuItems = [
+  const menuItems = [
     {
       title: "Fireplaces",
       subItems: [
-        { title: "Wood", href: "/allProducts/Wood/" },
-        { title: "Gas", href: "/allProducts/Gas/" },
-        { title: "Electric", href: "/allProducts/Electric/" },
-        { title: "Bioethanol", href: "/allProducts/Bio-Ethanol/" },
+        { title: "Wood", href: "/allProducts/wood/" },
+        { title: "Gas", href: "/allProducts/gas/" },
+        { title: "Electric", href: "/allProducts/electric/" },
+        { title: "Bioethanol", href: "/allProducts/bio-ethanol/" },
+        { title: "Cooker", href: "/allProducts/cooker/" },
         // { title: "Modern", href: "/modern-fireplaces/" },
         // { title: "Traditional", href: "/traditional-fireplaces/" },
       ],
@@ -155,7 +155,10 @@ const Header = () => {
       title: "Additional Products",
       subItems: [
         { title: "Fireplace", href: "/allProducts/Fireplace/" },
-        { title: "Fireplace Mantels", href: "/allProducts/Fireplace%20Mantels/" },
+        {
+          title: "Fireplace Mantels",
+          href: "/allProducts/Fireplace%20Mantels/",
+        },
         { title: "Fire Tools", href: "/allProducts/Fire%20Tools/" },
         { title: "Outdoor", href: "/allProducts/Outdoor/" },
         { title: "Cast Iron", href: "/allProducts/Cast%20Iron/" },
@@ -168,23 +171,26 @@ const Header = () => {
         { title: "ADF", href: "/allProducts/ADF/" },
         { title: "Austroflamm", href: "/allProducts/Austroflamm/" },
         { title: "Bosq", href: "/allProducts/Bosq/" },
-         { title: "Eurostove", href: "/allProducts/Eurostove/" },
+        { title: "Eurostove", href: "/allProducts/Eurostove/" },
         { title: "Gazco", href: "/allProducts/Gazco/" },
         { title: "Heatmaster", href: "/allProducts/Heatmaster/" },
         { title: "Hergom", href: "/allProducts/Hergom/" },
-         { title: "Kalora", href: "/allProducts/Kalora/" },
+        { title: "Kalora", href: "/allProducts/Kalora/" },
         { title: "Living Fire", href: "/allProducts/Living Fire/" },
         { title: "Morso", href: "/allProducts/Morso/" },
-        { title: "Paul Agnew Designs", href: "/allProducts/Paul Agnew Designs/" },
+        {
+          title: "Paul Agnew Designs",
+          href: "/allProducts/Paul Agnew Designs/",
+        },
         { title: "Regency", href: "/allProducts/Regency/" },
         { title: "Stovax", href: "/allProducts/Stovax/" },
       ],
     },
-     {
+    {
       title: "Services",
       subItems: [
         { title: "Maintenance & Servicing", href: "/maintenance-service/" },
-        { title: "Warranty & Servicing", href: "/warranty/" }
+        { title: "Warranty & Servicing", href: "/warranty/" },
       ],
     },
     // Add more categories as needed
@@ -193,6 +199,8 @@ const Header = () => {
     { title: "About Us", href: "/our-story/" },
     { title: "News & Blogs", href: "/" },
     { title: "Contact Us", href: "/contact/" },
+    { title: "Terms of Service", href: "/terms/" },
+    { title: "Privacy Policy", href: "/privacy-policy/" },
     // { title: "Contact", href: "/contact/" },
   ];
   const handleCategoryClick = (category) => {
@@ -202,29 +210,29 @@ const Header = () => {
     }));
   };
 
-   useEffect(() => {
-    if ( showMenuNav) {
-      document.body.style.overflow = 'hidden';
+  useEffect(() => {
+    if (showMenuNav) {
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
-  }, [ showMenuNav]);
+  }, [showMenuNav]);
 
-    // Effect to handle body scroll locking
+  // Effect to handle body scroll locking
   useEffect(() => {
     if (showMenuNav) {
       // Add class to body to prevent scrolling
-      document.body.classList.add('drawer-open');
+      document.body.classList.add("drawer-open");
       // Alternatively, you can directly set styles:
       // document.body.style.overflow = 'hidden';
       // document.body.style.position = 'fixed';
       // document.body.style.width = '100%';
     } else {
       // Remove class when drawer closes
-      document.body.classList.remove('drawer-open');
+      document.body.classList.remove("drawer-open");
       // Or remove inline styles:
       // document.body.style.overflow = '';
       // document.body.style.position = '';
@@ -233,7 +241,7 @@ const Header = () => {
 
     // Cleanup function
     return () => {
-      document.body.classList.remove('drawer-open');
+      document.body.classList.remove("drawer-open");
       // Or:
       // document.body.style.overflow = '';
       // document.body.style.position = '';
@@ -245,24 +253,23 @@ const Header = () => {
     if (showMenuNav) {
       // Save current scroll position
       const scrollY = window.scrollY;
-      
+
       // Apply styles to body
-      document.body.style.position = 'fixed';
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-      
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+
       return () => {
         // Restore styles and scroll position
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
         window.scrollTo(0, scrollY);
       };
     }
   }, [showMenuNav]);
-
 
   return (
     <>
@@ -312,7 +319,9 @@ const Header = () => {
                         className="custom-header-width"
                         onClick={handleHomeIconClick}
                         title="Living Fire Company Logo"
-                        style={{ filter: color === "white" ? "invert(1)" : "none" }}
+                        style={{
+                          filter: color === "white" ? "invert(1)" : "none",
+                        }}
                       />
                     </div>
                   )}
@@ -433,11 +442,11 @@ const Header = () => {
         onClose={handleCloseMenu}
         sx={{
           "& .MuiDrawer-paper": {
-            width: { xs: '100%', sm: '600px' },
+            width: { xs: "100%", sm: "600px" },
             maxWidth: "100%",
             backgroundColor: "rgba(0, 0, 0, 0.9)",
             color: "white",
-            overflowY: 'auto',
+            overflowY: "auto",
           },
         }}
         ModalProps={{
@@ -445,10 +454,10 @@ const Header = () => {
           keepMounted: true, // Prevent background scrolling
           BackdropProps: {
             style: {
-              backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              backdropFilter: 'blur(4px)',
-            }
-          }
+              backgroundColor: "rgba(0, 0, 0, 0.8)",
+              backdropFilter: "blur(4px)",
+            },
+          },
         }}
       >
         <Box
@@ -471,7 +480,11 @@ const Header = () => {
               src={CloseIcon}
               alt="Close Icon"
               onClick={handleCloseMenu}
-              style={{ cursor: "pointer", filter: "brightness(0) invert(1)", height: "auto" }}
+              style={{
+                cursor: "pointer",
+                filter: "brightness(0) invert(1)",
+                height: "auto",
+              }}
             />
             {/* <CloseIconMui alt="Close Icon"
               onClick={handleCloseMenu}
@@ -485,7 +498,7 @@ const Header = () => {
               alt="Logo"
               style={{ filter: "brightness(0) invert(1)", height: "auto" }}
             />
-             {/* <Image
+            {/* <Image
               src={LFTitleLogo}
               alt="Logo Title"
               style={{ filter: "brightness(0) invert(1)", height: "auto" }}
@@ -502,8 +515,8 @@ const Header = () => {
                     sx={{
                       padding: "12px 0",
                       borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-                       '&:hover': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      "&:hover": {
+                        backgroundColor: "rgba(255, 255, 255, 0.05)",
                       },
                     }}
                   >
@@ -512,6 +525,7 @@ const Header = () => {
                       primaryTypographyProps={{
                         fontSize: "1.3rem",
                         fontWeight: "medium",
+                        paddingLeft: "10px",
                       }}
                     />
                     {openCategories[item.title] ? (
@@ -529,28 +543,26 @@ const Header = () => {
                   <MultiColumnList>
                     {item.subItems.map((subItem) => (
                       // <ListItem key={subItem.title} disablePadding>
-                        <ListItemButton
-                         key={subItem.title}
-                           sx={{
-                          padding: '8px 12px',
-                          borderRadius: '4px',
-                          '&:hover': {
-                            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                            color: '#fff',
+                      <ListItemButton
+                        key={subItem.title}
+                        sx={{
+                          padding: "8px 12px",
+                          borderRadius: "4px",
+                          "&:hover": {
+                            backgroundColor: "rgba(255, 255, 255, 0.1)",
+                            color: "#fff",
                           },
                         }}
-                          onClick={() => {
-                            router.push(subItem.href);
-                            handleCloseMenu();
-                          }}
-                        >
-                          <Typography variant="body1">
-                          {subItem.title}
-                        </Typography>
-                        </ListItemButton>
+                        onClick={() => {
+                          router.push(subItem.href);
+                          handleCloseMenu();
+                        }}
+                      >
+                        <Typography variant="body1">{subItem.title}</Typography>
+                      </ListItemButton>
                       // </ListItem>
                     ))}
-                     </MultiColumnList>
+                  </MultiColumnList>
                   {/* <List component="div" disablePadding>
                     {item.subItems.map((subItem) => (
                       <ListItem key={subItem.title} disablePadding>
@@ -603,16 +615,16 @@ const Header = () => {
               </ListItem>
             ))}
           </List> */}
-          <Box sx={{ marginTop: 'auto' }}>
-            <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }} />
+          <Box sx={{ marginTop: "auto" }}>
+            <Divider sx={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }} />
             <List>
               {bottomMenuItems.map((item) => (
                 <ListItem key={item.title} disablePadding>
                   <ListItemButton
                     sx={{
-                      padding: '14px 0',
-                      '&:hover': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      padding: "14px 0",
+                      "&:hover": {
+                        backgroundColor: "rgba(255, 255, 255, 0.05)",
                       },
                     }}
                     onClick={() => {
@@ -623,7 +635,8 @@ const Header = () => {
                     <ListItemText
                       primary={item.title}
                       primaryTypographyProps={{
-                        fontSize: '1.1rem',
+                        fontSize: "1.1rem",
+                        paddingLeft: "10px"
                       }}
                     />
                   </ListItemButton>
