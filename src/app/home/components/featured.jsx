@@ -75,7 +75,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       title: "Pyro Siena 750GF Freestanding",
       range: "Paul Agnew Designs",
       description: "Freestanding gas fire with elegant traditional styling, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
-      name: "sie-750-g4-freestanding",
+      name: "siena-750-g4-freestanding",
       brand_name: "Paul Agnew Designs",
     },
     {

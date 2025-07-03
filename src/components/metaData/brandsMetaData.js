@@ -105,7 +105,7 @@ export const brandsMetaData = [
       "Living Fire is partnered with a range of premium fireplace brands including Regency. Visit us online now for more information",
     keywords: "",
     type:"brand", 
-    slug:""
+    slug:"regency"
   },
   {
     name: "Morso",
@@ -114,7 +114,7 @@ export const brandsMetaData = [
       "Living Fire is partnered with a range of premium fireplace brands including Morso. Visit us online now for more information",
     keywords: "",
     type:"brand", 
-    slug:""
+    slug:"morso"
   },
   {
     name: "Stovax",
@@ -123,7 +123,7 @@ export const brandsMetaData = [
       "Living Fire is partnered with a range of premium fireplace brands including Stovax. Visit us online now for more information",
     keywords: "",
     type:"brand", 
-    slug:""
+    slug:"stovax"
   }
 ];
 
