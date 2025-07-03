@@ -113,13 +113,43 @@ const Header = () => {
   if (hidden) {
     headerClasses.push("hidden");
   }
+  // const handleHomeIconClick = () => {
+  //   setShouldAnimate(true);
+  //   setTimeout(() => setShouldAnimate(false), 3000);
+  //   sessionStorage.removeItem("filtersJson");
+  //   sessionStorage.clear();
+  //   router.push(`/`);
+  // };
   const handleHomeIconClick = () => {
-    setShouldAnimate(true);
-    setTimeout(() => setShouldAnimate(false), 3000);
-    sessionStorage.removeItem("filtersJson");
-    sessionStorage.clear();
-    router.push(`/`);
-  };
+  // Trigger animation
+  setShouldAnimate(true);
+  setTimeout(() => setShouldAnimate(false), 3000);
+
+  // Clear all client-side storage
+  localStorage.clear();
+  sessionStorage.clear();
+  
+  // Clear all cookies
+  document.cookie.split(';').forEach(cookie => {
+    const [name] = cookie.trim().split('=');
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
+  });
+
+  // Clear service worker cache if exists
+  if ('caches' in window) {
+    caches.keys().then(cacheNames => {
+      cacheNames.forEach(cacheName => {
+        caches.delete(cacheName);
+      });
+    });
+  }
+
+  // Force hard reload after slight delay to ensure cleanup completes
+  setTimeout(() => {
+    // Use window.location instead of router.push for complete refresh
+    window.location.href = '/';
+  }, 100);
+};
   const [isClosing, setIsClosing] = useState(false);
 
   const handleCloseMenu = () => {
