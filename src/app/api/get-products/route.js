@@ -36,7 +36,7 @@
 // }
 
 import pool from "@/src/helper/db/db";
-
+export const runtime = 'edge';
 export async function POST(request) {
   try {
     const { type_id } = await request.json();

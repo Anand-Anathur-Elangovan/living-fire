@@ -1,23 +1,5 @@
 import { NextResponse } from "next/server";
-
-export function middleware(req) {
-  const response = NextResponse.next();
-  console.log("middleware")
-  // Log to check if middleware is being executed
-
-  // Set CORS headers
-  response.headers.set("Access-Control-Allow-Origin", "*");
-  response.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  response.headers.set(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization"
-  );
-
-  // Handle preflight requests
-  if (req.method === "OPTIONS") {
-   return new Response(null, { status: 204, headers: response.headers });
-  }
-
+export const runtime = 'edge'; 
   // Define URL alias mappings
   const urlAliases = {
   "/discount-fireplaces/albany-wood-heater": "/regency/albany",
@@ -158,6 +140,30 @@ export function middleware(req) {
 "/fireplace-range/gas-fireplaces/inbuilt-gas-fireplaces/enviro-inbuilt-gas-log-fire": "/heatmaster/enviro-lpg-unit-to-suit-coals",
 "/fireplace-range/gas-fireplaces/inbuilt-gas-fireplaces/seamless-gas-log-fire": "/heatmaster/seamless-body"
 };
+export const config = {
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|api|_next/data).*)',
+  ],
+}
+export function middleware(req) {
+  const response = NextResponse.next();
+  console.log("middleware")
+  // Log to check if middleware is being executed
+
+  // Set CORS headers
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  response.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+
+  // Handle preflight requests
+  if (req.method === "OPTIONS") {
+   return new Response(null, { status: 204, headers: response.headers });
+  }
+
+
 
   const url = req.nextUrl.clone();
   // Check if the requested path matches an alias
