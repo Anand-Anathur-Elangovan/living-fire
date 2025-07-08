@@ -172,7 +172,7 @@
 }
 }
 /* Menu container styles */
-/* .menu-container {
+.menu-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -181,7 +181,7 @@
   z-index: 999;
   background-color: white;
   overflow: hidden;
-} */
+}
 
 /* Close button styles */
 .close-icon {
@@ -216,8 +216,12 @@
 
 /* Mobile menu animation */
 .menu-container.mobile-menu {
-  height: 0;
+  /* height: 0; */
+  height: 100vh;
   animation: expandDown 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+.menu-container.closing {
+  animation: collapseUp 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 .menu-container.mobile-menu .menu-header {

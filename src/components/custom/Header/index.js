@@ -121,35 +121,35 @@ const Header = () => {
   //   router.push(`/`);
   // };
   const handleHomeIconClick = () => {
-  // Trigger animation
-  setShouldAnimate(true);
-  setTimeout(() => setShouldAnimate(false), 3000);
+    // Trigger animation
+    setShouldAnimate(true);
+    setTimeout(() => setShouldAnimate(false), 3000);
 
-  // Clear all client-side storage
-  localStorage.clear();
-  sessionStorage.clear();
-  
-  // Clear all cookies
-  document.cookie.split(';').forEach(cookie => {
-    const [name] = cookie.trim().split('=');
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
-  });
+    // Clear all client-side storage
+    localStorage.clear();
+    sessionStorage.clear();
 
-  // Clear service worker cache if exists
-  if ('caches' in window) {
-    caches.keys().then(cacheNames => {
-      cacheNames.forEach(cacheName => {
-        caches.delete(cacheName);
-      });
+    // Clear all cookies
+    document.cookie.split(";").forEach((cookie) => {
+      const [name] = cookie.trim().split("=");
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
     });
-  }
 
-  // Force hard reload after slight delay to ensure cleanup completes
-  setTimeout(() => {
-    // Use window.location instead of router.push for complete refresh
-    window.location.href = '/';
-  }, 100);
-};
+    // Clear service worker cache if exists
+    if ("caches" in window) {
+      caches.keys().then((cacheNames) => {
+        cacheNames.forEach((cacheName) => {
+          caches.delete(cacheName);
+        });
+      });
+    }
+
+    // Force hard reload after slight delay to ensure cleanup completes
+    setTimeout(() => {
+      // Use window.location instead of router.push for complete refresh
+      window.location.href = "/";
+    }, 100);
+  };
   const [isClosing, setIsClosing] = useState(false);
 
   const handleCloseMenu = () => {
@@ -447,6 +447,16 @@ const Header = () => {
           className={`menu-container ${isMobile ? "mobile-menu" : ""} ${
             isClosing ? "closing" : ""
           }`}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100vh",
+            backgroundColor: "white",
+            zIndex: 9999,
+            overflowY: "auto",
+          }}
         >
           <div className="close-icon cursor-pointer">
             <Image
@@ -666,7 +676,7 @@ const Header = () => {
                       primary={item.title}
                       primaryTypographyProps={{
                         fontSize: "1.1rem",
-                        paddingLeft: "10px"
+                        paddingLeft: "10px",
                       }}
                     />
                   </ListItemButton>
