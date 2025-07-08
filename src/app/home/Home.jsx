@@ -398,7 +398,7 @@ const Home = () => {
                       className="p-0 m-0 flex gap-3"
                       aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
                     >
-                      {fuelType.fueltype_name}
+                      {fuelType.fueltype_name === 'Cooker'? 'Cookers': fuelType.fueltype_name}
                       {/* {index < fuelTypes.length - 1 && (
                         <span className="hidden md:flex items-center text-white">
                           |

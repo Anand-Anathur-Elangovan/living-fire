@@ -305,7 +305,7 @@ export default function Footer() {
       route: "/allProducts/electric", // or your actual route path
     },
     {
-      name: "Cooker",
+      name: "Cookers",
       route: "/allProducts/cooker", // or your actual route path
     },
   ];
