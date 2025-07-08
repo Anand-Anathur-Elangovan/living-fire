@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-export const runtime = 'edge'; 
+// export const runtime = 'edge'; 
   // Define URL alias mappings
   const urlAliases = {
   "/discount-fireplaces/albany-wood-heater": "/regency/albany",
