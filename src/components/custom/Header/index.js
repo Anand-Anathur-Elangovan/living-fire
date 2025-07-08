@@ -79,23 +79,47 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleScroll = () => {
-    const currentScroll = window.pageYOffset;
-    lastScroll = currentScroll;
+  // const handleScroll = () => {
+  //   const currentScroll = window.pageYOffset;
+  //   lastScroll = currentScroll;
 
-    if (currentScroll > 1) {
-      setScrolled(true);
-      if (isHomePage && currentScroll > 0) {
-        setColor("black");
-      }
-    } else {
-      setScrolled(false);
-      if (isHomePage) {
-        setColor("white");
-      }
+  //   if (currentScroll > 1) {
+  //     setScrolled(true);
+  //     if (isHomePage && currentScroll > 0) {
+  //       setColor("black");
+  //     }
+  //   } else {
+  //     setScrolled(false);
+  //     if (isHomePage) {
+  //       setColor("white");
+  //     }
+  //   }
+  // };
+const handleScroll = () => {
+  const currentScroll = window.pageYOffset;
+  
+  if (currentScroll > 10) { // Adjust this threshold as needed
+    setScrolled(true);
+    if (isHomePage && currentScroll > 0) {
+      setColor("black");
     }
-  };
-
+    
+    // Optional: Hide header when scrolling down
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  } else {
+    setScrolled(false);
+    setHidden(false);
+    if (isHomePage) {
+      setColor("white");
+    }
+  }
+  
+  lastScroll = currentScroll;
+};
   useEffect(() => {
     if (!isHomePage) {
       setColor("black");
