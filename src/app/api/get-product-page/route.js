@@ -2,7 +2,6 @@
 // import { PrismaClient } from "@prisma/client";
 import { cookies } from "next/headers";
 import pool from "@/src/helper/db/db";
-export const runtime = 'edge';
 // const prisma = new PrismaClient();
 
 export async function POST(req) {

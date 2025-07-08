@@ -1,5 +1,4 @@
 import pool from "@/src/helper/db/db.js";
-export const runtime = 'edge';
 export async function POST(req) {
   try {
     const query = "SELECT * FROM fn_get_filters()";
