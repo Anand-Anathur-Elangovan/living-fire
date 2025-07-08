@@ -301,6 +301,28 @@ const Header = () => {
     }
   }, [showMenuNav]);
 
+
+  useEffect(() => {
+  if (showMenu) {
+    document.body.classList.add('menu-open');
+    // Save current scroll position
+    const scrollY = window.scrollY;
+    document.body.style.top = `-${scrollY}px`;
+  } else {
+    document.body.classList.remove('menu-open');
+    // Restore scroll position
+    const scrollY = parseInt(document.body.style.top || '0');
+    document.body.style.top = '';
+    window.scrollTo(0, -scrollY);
+  }
+
+  return () => {
+    document.body.classList.remove('menu-open');
+    document.body.style.top = '';
+  };
+}, [showMenu]);
+
+
   return (
     <>
       {!showMenu && (
@@ -447,16 +469,16 @@ const Header = () => {
           className={`menu-container ${isMobile ? "mobile-menu" : ""} ${
             isClosing ? "closing" : ""
           }`}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100vh",
-            backgroundColor: "white",
-            zIndex: 9999,
-            overflowY: "auto",
-          }}
+          // style={{
+          //   position: "fixed",
+          //   top: 0,
+          //   left: 0,
+          //   width: "100%",
+          //   height: "100vh",
+          //   backgroundColor: "white",
+          //   zIndex: 9999,
+          //   overflowY: "auto",
+          // }}
         >
           <div className="close-icon cursor-pointer">
             <Image
