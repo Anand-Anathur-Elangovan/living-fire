@@ -178,87 +178,6 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
 
       {isDesktop ? (
         // Desktop View - 2 rows of 3 products
-        // <div className="grid grid-cols-3 gap-6 md:gap-8 w-full">
-        //   <div className="grid grid-rows-2 gap-6 md:gap-8 col-span-3">
-        //     {/* First Row */}
-        //     <div className="grid grid-cols-3 gap-6 md:gap-8">
-        //       {carouselItems.slice(0, 3).map((item, index) => (
-        //         <motion.div
-        //           className="w-full flex flex-col gap-3 md:gap-4"
-        //           key={`featured-desktop-${item.p_id}-${index}`}
-        //           onClick={() => productRouteHandler(item.name, item?.brand_name)}
-        //           variants={itemVariants}
-        //           whileHover={{ y: -5, transition: { duration: 0.2 } }}
-        //         >
-        //           <div className="relative overflow-hidden rounded-lg aspect-square">
-        //             {/* <div className="relative overflow-hidden rounded-lg aspect-[4/3] h-[280px]"> */}
-        //             <Image
-        //               src={item.image}
-        //               alt={item.title}
-        //               fill
-        //               className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
-        //               sizes="(max-width: 1024px) 30vw, 25vw"
-        //               // loading={index < 2 ? "eager" : "lazy"}
-        //               quality={95}
-        //               placeholder="blur"
-        //             />
-        //           </div>
-        //           <div className="font-sans text-left">
-        //             <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
-        //               {item.title}
-        //             </h3>
-        //             <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
-        //               {item.range}
-        //             </p>
-        //             <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
-        //               {item.description}
-        //             </p>
-        //           </div>
-        //         </motion.div>
-        //       ))}
-        //     </div>
-
-        //     {/* Second Row */}
-        //     <div className="grid grid-cols-3 gap-6 md:gap-8">
-        //       {carouselItems.slice(3, 6).map((item, index) => (
-        //         <motion.div
-        //           className="w-full flex flex-col gap-3 md:gap-4"
-        //           key={`featured-desktop-${item.p_id}-${index+3}`}
-        //           onClick={() => productRouteHandler(item.name, item?.brand_name)}
-        //           variants={itemVariants}
-        //           whileHover={{ y: -5, transition: { duration: 0.2 } }}
-        //         >
-        //           <div className="relative overflow-hidden rounded-lg aspect-square">
-        //             {/* <div className="relative overflow-hidden rounded-lg aspect-[4/3] h-[280px]"> */}
-        //             <Image
-        //               src={item.image}
-        //               alt={item.title}
-        //               fill
-        //               className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
-        //               sizes="(max-width: 1024px) 30vw, 25vw"
-        //               // loading="lazy"
-        //               quality={95}
-        //               placeholder="blur"
-        //             />
-        //           </div>
-        //           <div className="font-sans text-left">
-        //             <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
-        //               {item.title}
-        //             </h3>
-        //             <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
-        //               {item.range}
-        //             </p>
-        //             <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
-        //               {item.description}
-        //             </p>
-        //           </div>
-        //         </motion.div>
-        //       ))}
-        //     </div>
-        //   </div>
-        // </div>
-
-        // Desktop View - 2 rows of 3 products
         <div className="grid grid-cols-3 gap-8 w-full px-8">
           {/* First Row */}
           <div className="grid grid-cols-3 gap-8 col-span-3">
@@ -268,14 +187,14 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                 key={`featured-desktop-${item.p_id}-${index}`}
                 onClick={() => productRouteHandler(item.name, item?.brand_name)}
                 variants={itemVariants}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                // whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="relative overflow-hidden aspect-square">
+                <div className="relative overflow-hidden aspect-square group">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
                     sizes="(max-width: 1024px) 30vw, 25vw"
                     quality={95}
                     placeholder="blur"
@@ -304,14 +223,14 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                 key={`featured-desktop-${item.p_id}-${index + 3}`}
                 onClick={() => productRouteHandler(item.name, item?.brand_name)}
                 variants={itemVariants}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                // whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="relative overflow-hidden aspect-square">
+                <div className="relative overflow-hidden aspect-square group">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
                     sizes="(max-width: 1024px) 30vw, 25vw"
                     quality={95}
                     placeholder="blur"
@@ -345,14 +264,14 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                 key={`featured-${item.p_id}-${index}`}
                 onClick={() => productRouteHandler(item.name, item?.brand_name)}
                 variants={itemVariants}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                // whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="relative overflow-hidden rounded-lg aspect-square">
+                <div className="relative overflow-hidden rounded-lg aspect-square group">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-500 cursor-pointer"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
                     sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
                     loading={index < 2 ? "eager" : "lazy"}
                     quality={85}
@@ -408,17 +327,6 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
           )}
         </>
       )}
-
-      {/* <div
-        className="w-full md:w-[524px] font-sans font-medium text-sm md:text-base leading-[140%] underline uppercase text-black cursor-pointer text-center md:text-left hover:text-gray-600 transition-colors"
-        onClick={() => {
-          setNavigationState(null);
-          router.push(`/allProducts`);
-        }}
-        onMouseEnter={() => router.prefetch("/allProducts")}
-      >
-        SHOP ALL
-      </div> */}
       <div className="w-full flex flex-col items-center gap-4 mt-8 md:mt-12">
   <div className="flex flex-col md:flex-row items-center gap-4">
     <motion.button
