@@ -53,7 +53,7 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(isMobileVar);
   const [shouldAnimate, setShouldAnimate] = useState(true);
   const [prevPathname, setPrevPathname] = useState(pathname);
-  const [openCategories, setOpenCategories] = useState({});
+  const [openCategories, setOpenCategories] = useState({'Fireplaces': true});
 
   const isHomePage = pathname === "/";
   let lastScroll = 0;
@@ -346,7 +346,7 @@ const handleScroll = () => {
   };
 }, [showMenu]);
 
-
+console.log("openCategories", openCategories)
   return (
     <>
       {!showMenu && (
