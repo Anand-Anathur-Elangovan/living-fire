@@ -152,6 +152,27 @@ const AllProducts = () => {
     glassOrientationValues: [],
   });
   const [filters, setFilters] = useState([]);
+const [filterStatus, setFilterStatus] = useState({
+    fireplaceFilterIdStatus: false,
+    installationTypeIdStatus: false,
+    glassOrientationIdStatus: false,
+    rangeIdStatus: false,
+    brandIdStatus: false,
+  });
+
+  const handleFilterStatus = (key, status) => {
+    setFilterStatus((prev) => ({
+      ...prev,
+      [key]: status? status : !prev[key],
+    }));
+  };
+// handleFilterStatus('fireplaceFilterIdStatus')
+// handleFilterStatus('installationTypeIdStatus')
+// handleFilterStatus('glassOrientationIdStatus')
+// handleFilterStatus('rangeIdStatus')
+// handleFilterStatus('brandIdStatus')
+// style={{display: !filterStatus?.fireplaceFilterIdStatus&& 'none'}}
+
   const { allProducts, isFetched, isStale } = useAllProducts(
     productMenuIndex,
     fireplaceType ?? 0,
@@ -745,7 +766,7 @@ const AllProducts = () => {
                   <div
                     className={`${
                       !isSort ? "flex" : "hidden"
-                    } md:flex flex-row py-3 justify-between border-b border-solid border-[#D3C6BB]`}
+                    } md:flex flex-row py-3 mr-10 justify-between border-b border-solid border-[#D3C6BB]`}
                   >
                     <span className="flex gap-4 uppercase font-sans font-normal text-base">
                       Filters{" "}
@@ -770,10 +791,53 @@ const AllProducts = () => {
                       />
                     </span>
                   </div>
+                  {/* <div
+                    className={`${
+                      !isSort ? "flex" : "hidden"
+                    } md:flex flex-row gap-3 mr-10 border-b border-solid border-[#D3C6BB] pb-3`}
+                  >
+                    <input
+                      className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
+                      type="text"
+                      ref={searchRef}
+                      defaultValue={searchText}
+                      // onChange={(e) => setSearchText(e.target.value)}
+                      // value={searchText}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          setSearchText(searchRef.current.value?.toLowerCase());
+                          updateQueryParams({
+                            searchText: searchRef.current.value?.toLowerCase(),
+                          });
+                        }
+                      }}
+                    />
+                    <Image
+                      src={SearchIcon}
+                      alt="search"
+                      className="md:pt-1 cursor-pointer"
+                      onClick={() => {
+                        setSearchText(searchRef.current.value?.toLowerCase());
+                        updateQueryParams({
+                          searchText: searchRef.current.value?.toLowerCase(),
+                        });
+                        if (window?.innerWidth <= 768) {
+                          setIsFilter(false);
+                        }
+                      }}
+                      unoptimized
+                    />
+                  </div> */}
                   <div
                     className={`${
                       !isSort ? "flex" : "hidden"
-                    } md:flex flex-row gap-3 border-b border-solid border-[#D3C6BB] pb-3`}
+                    } md:flex flex-col `}
+                    //  border-b boder-solid border-[#D3C6BB]`}
+                  >
+                    <div
+                    className={`${
+                      !isSort ? "flex" : "hidden"
+                    } md:flex flex-row gap-3 mr-10 border-b border-solid border-[#D3C6BB] pb-3`}
                   >
                     <input
                       className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
@@ -807,12 +871,7 @@ const AllProducts = () => {
                       unoptimized
                     />
                   </div>
-                  <div
-                    className={`${
-                      !isSort ? "flex" : "hidden"
-                    } md:flex flex-col `}
-                    //  border-b boder-solid border-[#D3C6BB]`}
-                  >
+                    
                     {/* FirePlace Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
@@ -828,6 +887,7 @@ const AllProducts = () => {
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
+                                  handleFilterStatus('fireplaceFilterIdStatus')
                                   document
                                     .getElementById("fireplaceFilterId")
                                     .classList.add("collapse");
@@ -844,6 +904,7 @@ const AllProducts = () => {
                                 alt="clear"
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
+                                  handleFilterStatus('fireplaceFilterIdStatus')
                                   setRefreshPage((prev) => !prev);
                                   document
                                     .getElementById("fireplaceFilterId")
@@ -856,6 +917,7 @@ const AllProducts = () => {
                         <div
                           id="fireplaceFilterId"
                           className="flex flex-col gap-3 collapse"
+                          style={{display: !filterStatus?.fireplaceFilterIdStatus&& 'none'}}
                         >
                          {fireplaceType
                             ? fuelTypes?.map(
@@ -979,6 +1041,7 @@ const AllProducts = () => {
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
+                                    handleFilterStatus('installationTypeIdStatus')
                                     document
                                       .getElementById(
                                         "installationTypeFilterId"
@@ -1000,6 +1063,7 @@ const AllProducts = () => {
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
+                                  handleFilterStatus('installationTypeIdStatus')
                                   document
                                     .getElementById("installationTypeFilterId")
                                     .classList.remove("collapse");
@@ -1011,6 +1075,7 @@ const AllProducts = () => {
                         <div
                           id="installationTypeFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
+                          style={{display: !filterStatus?.installationTypeIdStatus&& 'none'}}
                         >
                           {firePlaceSubType.installation &&
                             updatedValues?.installationValues?.length > 0 &&
@@ -1074,6 +1139,7 @@ const AllProducts = () => {
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
+                                    handleFilterStatus('glassOrientationIdStatus')
                                     document
                                       .getElementById(
                                         "glassOrientationTypeFilterId"
@@ -1095,6 +1161,7 @@ const AllProducts = () => {
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
+                                  handleFilterStatus('glassOrientationIdStatus')
                                   document
                                     .getElementById(
                                       "glassOrientationTypeFilterId"
@@ -1108,6 +1175,7 @@ const AllProducts = () => {
                         <div
                           id="glassOrientationTypeFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
+                          style={{display: !filterStatus?.glassOrientationIdStatus&& 'none'}}
                         >
                           {firePlaceSubType.glassOrientation &&
                             updatedValues?.glassOrientationValues?.length > 0 &&
@@ -1172,6 +1240,7 @@ const AllProducts = () => {
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
+                                    handleFilterStatus('rangeIdStatus')
                                     document
                                       .getElementById("rangesFilterId")
                                       .classList.add("collapse");
@@ -1191,6 +1260,7 @@ const AllProducts = () => {
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
+                                  handleFilterStatus('rangeIdStatus')
                                   document
                                     .getElementById("rangesFilterId")
                                     .classList.remove("collapse");
@@ -1202,6 +1272,7 @@ const AllProducts = () => {
                         <div
                           id="rangesFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
+                          style={{display: !filterStatus?.rangeIdStatus&& 'none'}}
                         >
                           {rangeType && (
                             <span
@@ -1269,6 +1340,7 @@ const AllProducts = () => {
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
+                                  handleFilterStatus('brandIdStatus')
                                   document
                                     .getElementById("brandsFilterId")
                                     .classList.add("collapse");
@@ -1286,6 +1358,7 @@ const AllProducts = () => {
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
+                                  handleFilterStatus('brandIdStatus')
                                   document
                                     .getElementById("brandsFilterId")
                                     .classList.remove("collapse");
@@ -1297,6 +1370,7 @@ const AllProducts = () => {
                         <div
                           id="brandsFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
+                          style={{display: !filterStatus?.brandIdStatus&& 'none'}}
                         >
                           {brandType && (
                             <>
@@ -1342,71 +1416,8 @@ const AllProducts = () => {
                         </div>
                       </div>
                     }
-                  </div>
-                  {/* <div
-                    className={`${
-                      !isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]`}
-                  >
-                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
-                      Others{" "}
-                      {isClient &&
-                        !document
-                          .getElementById("otherFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={MinusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("otherFilterId")
-                                .classList.add("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                      {isClient &&
-                        document
-                          .getElementById("otherFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={PlusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("otherFilterId")
-                                .classList.remove("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                    </span>
-                    <div
-                      id="otherFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out collapse"
-                    >
-                      <span
-                        className={`font-sans font-small leading-5 text-normal cursor-pointer ${
-                          bestSelling ? "font-semibold" : ""
-                        }`}
-                        onClick={() => {
-                          if (window?.innerWidth <= 768) {
-                            setIsFilter(false);
-                          }
-                          sortProducts(SORTBY.bestSelling);
-                        }}
-                      >
-                        Best Selling
-                      </span>
-                    </div>
-                  </div> */}
-                </>
-                <>
-                  <div
+                    {
+                      <div
                     className={`${
                       isSort ? "flex" : "hidden"
                     } md:flex flex-col gap-3 py-3 md:mr-10`}
@@ -1497,7 +1508,163 @@ const AllProducts = () => {
                       </span> 
                     </div>
                   </div>
+                    }
+                  </div>
+                  {/* <div
+                    className={`${
+                      !isSort ? "flex" : "hidden"
+                    } md:flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]`}
+                  >
+                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
+                      Others{" "}
+                      {isClient &&
+                        !document
+                          .getElementById("otherFilterId")
+                          ?.classList?.contains("collapse") && (
+                          <Image
+                            src={MinusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("otherFilterId")
+                                .classList.add("collapse");
+                            }}
+                            unoptimized
+                          />
+                        )}
+                      {isClient &&
+                        document
+                          .getElementById("otherFilterId")
+                          ?.classList?.contains("collapse") && (
+                          <Image
+                            src={PlusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("otherFilterId")
+                                .classList.remove("collapse");
+                            }}
+                            unoptimized
+                          />
+                        )}
+                    </span>
+                    <div
+                      id="otherFilterId"
+                      className="flex flex-col gap-3 transistion ease-in-out collapse"
+                    >
+                      <span
+                        className={`font-sans font-small leading-5 text-normal cursor-pointer ${
+                          bestSelling ? "font-semibold" : ""
+                        }`}
+                        onClick={() => {
+                          if (window?.innerWidth <= 768) {
+                            setIsFilter(false);
+                          }
+                          sortProducts(SORTBY.bestSelling);
+                        }}
+                      >
+                        Best Selling
+                      </span>
+                    </div>
+                  </div> */}
                 </>
+                {/* <>
+                  <div
+                    className={`${
+                      isSort ? "flex" : "hidden"
+                    } md:flex flex-col gap-3 py-3 md:mr-10`}
+                  >
+                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
+                      Sort By{" "}
+                      {isClient &&
+                        !document
+                          .getElementById("sortbyFilterId")
+                          ?.classList?.contains("collapse") && (
+                          <Image
+                            src={MinusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("sortbyFilterId")
+                                .classList.add("collapse");
+                              setIsSort(false);
+                            }}
+                            unoptimized
+                          />
+                        )}
+                      {isClient &&
+                        document
+                          .getElementById("sortbyFilterId")
+                          ?.classList?.contains("collapse") && (
+                          <Image
+                            src={PlusIcon}
+                            alt="clear"
+                            className="md:pt-1 cursor-pointer"
+                            onClick={() => {
+                              setRefreshPage((prev) => !prev);
+                              document
+                                .getElementById("sortbyFilterId")
+                                .classList.remove("collapse");
+                            }}
+                            unoptimized
+                          />
+                        )}
+                    </span>
+                    <div
+                      id="sortbyFilterId"
+                      className="flex flex-col gap-3 transistion ease-in-out collapse"
+                    >
+                       <div
+                        className="font-sans font-small leading-5 text-normal cursor-pointer"
+                        onClick={() => sortProducts(SORTBY.priceLowToHigh)}
+                      >
+                        Price: Low to High
+                      </div>
+                      <span
+                        className="font-sans font-small leading-5 text-normal cursor-pointer"
+                        onClick={() => sortProducts(SORTBY.priceHighToLow)}
+                      >
+                        Price: High to Low
+                      </span> 
+                      <span
+                        className="font-sans font-small leading-5 text-normal cursor-pointer"
+                        onClick={() => sortProducts(SORTBY.A2Z)}
+                      >
+                        A-Z
+                      </span>
+                      <span
+                        className="font-sans font-small leading-5 text-normal cursor-pointer"
+                        onClick={() => sortProducts(SORTBY.Z2A)}
+                      >
+                        Z-A
+                      </span>
+                      <span
+                        className="font-sans font-small leading-5 text-normal cursor-pointer"
+                        onClick={() => sortProducts(SORTBY.oldToNew)}
+                      >
+                        Oldest to Newest
+                      </span>
+                      <span
+                        className="font-sans font-small leading-5 text-normal cursor-pointer"
+                        onClick={() => sortProducts(SORTBY.newToOld)}
+                      >
+                        Newest to Oldest
+                      </span>
+                      <span
+                        className="font-sans font-small leading-5 text-normal cursor-pointer"
+                        onClick={() => sortProducts(SORTBY.bestSelling)}
+                      >
+                        Best Selling
+                      </span> 
+                    </div>
+                  </div>
+                </> */}
               </div>
             )}
 
