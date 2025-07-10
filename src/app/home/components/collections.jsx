@@ -445,7 +445,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
         </motion.button>
       </div>
       {/* Mobile Buttons */}
-      <div className="md:hidden flex flex-col sm:flex-row gap-4 justify-center mt-8 px-4">
+      {/* <div className="md:hidden flex flex-col sm:flex-row gap-4 justify-center mt-8 px-4">
         <button
           className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit"
           onClick={() => router.push("/allProducts")}
@@ -458,7 +458,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
         >
           Contact Us
         </button>
-      </div>
+      </div> */}
     </motion.section>
   );
 };
