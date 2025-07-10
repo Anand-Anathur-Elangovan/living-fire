@@ -354,7 +354,7 @@ const [filterStatus, setFilterStatus] = useState({
     let path = filters.map((item) => `${item.slug}`).join("/");
     router.push(`/allProducts/${path}`);
   }
-
+ 
   const {
     brands,
     masterValues: {
