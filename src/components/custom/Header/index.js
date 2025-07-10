@@ -201,6 +201,7 @@ const handleScroll = () => {
         { title: "Electric", href: "/allProducts/electric/" },
         { title: "Bioethanol", href: "/allProducts/bio-ethanol/" },
         { title: "Cookers", href: "/allProducts/cooker/" },
+        { title: "All Fireplaces", href: "/allProducts/fireplace/" },
         // { title: "Modern", href: "/modern-fireplaces/" },
         // { title: "Traditional", href: "/traditional-fireplaces/" },
       ],

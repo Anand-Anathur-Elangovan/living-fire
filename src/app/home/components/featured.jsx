@@ -140,7 +140,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
 
   return (
     <motion.div
-      className="flex relative justify-center flex-col gap-6 md:gap-10 ml-0 mr-0 md:ml-20 md:mr-20 px-4 md:px-[250px]"
+      className="flex relative justify-center flex-col gap-6 md:gap-16 ml-0 mr-0 md:ml-20 md:mr-20 px-4 md:px-[250px]"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
