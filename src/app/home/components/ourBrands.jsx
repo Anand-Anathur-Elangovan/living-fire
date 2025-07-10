@@ -14,6 +14,7 @@ import MorsoLogo from "@/public/assets/homePage/ourBrands/morso.svg";
 import RegencyLogo from "@/public/assets/homePage/ourBrands/regency.svg";
 import eurostoveLogo from "@/public/assets/homePage/ourBrands/eurostoveLogo.png";
 import { useRouter } from "next/navigation";
+import { FiArrowRight, FiArrowLeft } from "react-icons/fi";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useMediaQuery } from "react-responsive";
 
@@ -32,84 +33,84 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
       image: PaulAgnewLogo,
       title: "Paul Agnew Designs",
       isSvg: true,
-      slug: "paul-agnew-designs"
+      slug: "paul-agnew-designs",
     },
     {
       brand_id: 15,
       image: CocoonLogo,
       title: "Cocoon",
       isSvg: true,
-      slug: "cocoon"
+      slug: "cocoon",
     },
     {
       brand_id: 5,
       image: StovaxLogo,
       title: "Stovax",
       isSvg: true,
-      slug: "stovax"
+      slug: "stovax",
     },
     {
       brand_id: 7,
       image: HergomLogo,
       title: "Hergom",
       isSvg: true,
-      slug: "hergom"
+      slug: "hergom",
     },
     {
       brand_id: 10,
       image: RegencyLogo,
       title: "Regency",
       isSvg: true,
-      slug: "regency"
+      slug: "regency",
     },
     {
       brand_id: 11,
       image: KaloraLogo,
       title: "Kalora",
       isSvg: false,
-      slug: "kalora"
+      slug: "kalora",
     },
     {
       brand_id: 3,
       image: AustroLogo,
       title: "Austroflamm",
       isSvg: true,
-      slug: "austroflamm"
+      slug: "austroflamm",
     },
     {
       brand_id: 2,
       image: EsseLogo,
       title: "Esse",
       isSvg: true,
-      slug: "esse"
+      slug: "esse",
     },
-    { 
-      brand_id: 4, 
-      image: MorsoLogo, 
+    {
+      brand_id: 4,
+      image: MorsoLogo,
       title: "Morso",
       isSvg: true,
-      slug: "morso"
+      slug: "morso",
     },
     {
       brand_id: 6,
       image: HeatMasterLogo,
       title: "HeatMaster",
       isSvg: true,
-      slug: "heatmaster"
+      slug: "heatmaster",
     },
     {
       brand_id: 8,
       image: ADFLogo,
       title: "ADF",
       isSvg: true,
-      slug: "adf"
+      slug: "adf",
     },
     {
       brand_id: 16,
       image: eurostoveLogo,
       title: "Eurostove",
       isSvg: false,
-      slug: "eurostove"
+      slug: "eurostove",
     },
   ];
 
@@ -119,10 +120,10 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
 
     const interval = setInterval(() => {
       if (!isHovering) {
-        setCurrentIndex(prev => (prev + 1) % brands.length);
+        setCurrentIndex((prev) => (prev + 1) % brands.length);
         controls.start({
           x: `-${(currentIndex + 1) * 200}px`,
-          transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }
+          transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
         });
       }
     }, 3000);
@@ -134,26 +135,26 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
   const handleBrandHover = (brand) => {
     if (!prefetchedBrands.has(brand.brand_id)) {
       router?.prefetch(brand.route);
-      setPrefetchedBrands(prev => new Set(prev).add(brand.brand_id));
+      setPrefetchedBrands((prev) => new Set(prev).add(brand.brand_id));
     }
   };
 
   // Manual scroll handlers for desktop
   const scrollLeft = () => {
     if (isMobile) return;
-    setCurrentIndex(prev => (prev - 1 + brands.length) % brands.length);
+    setCurrentIndex((prev) => (prev - 1 + brands.length) % brands.length);
     controls.start({
-      x: `-${(currentIndex - 1 + brands.length) % brands.length * 200}px`,
-      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
+      x: `-${((currentIndex - 1 + brands.length) % brands.length) * 200}px`,
+      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
     });
   };
 
   const scrollRight = () => {
     if (isMobile) return;
-    setCurrentIndex(prev => (prev + 1) % brands.length);
+    setCurrentIndex((prev) => (prev + 1) % brands.length);
     controls.start({
-      x: `-${(currentIndex + 1) % brands.length * 200}px`,
-      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
+      x: `-${((currentIndex + 1) % brands.length) * 200}px`,
+      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
     });
   };
 
@@ -173,10 +174,18 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
     show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
   };
   return (
-    <section className={`relative w-full ${isMobile ? 'bg-transparent' : 'bg-white'} py-8 md:py-12 overflow-hidden`}>
+    <section
+      className={`relative w-full ${
+        isMobile ? "bg-transparent" : "bg-white"
+      } py-8 md:py-12 overflow-hidden`}
+    >
       {/* <div className={`max-w-7xl mx-auto ${isMobile ? 'px-4' : 'px-4 sm:px-6 lg:px-8'}`}> */}
-        <div className={`${isMobile ? 'max-w-7xl px-4' : 'w-[90vw] mx-auto'} ${isMobile ? '' : 'px-4 sm:px-6 lg:px-8'}`}>
-          <motion.h2 
+      <div
+        className={`${isMobile ? "max-w-7xl px-4" : "w-[90vw] mx-auto"} ${
+          isMobile ? "" : "px-4 sm:px-6 lg:px-8"
+        }`}
+      >
+        <motion.h2
           className="heading1 text-left md:text-center mb-6 md:mb-8"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -199,14 +208,21 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
                 key={`brands-${brand.brand_id}`}
                 className="brand-item w-[120px] h-[60px] sm:w-[120px] sm:h-[70px] md:w-[140px] md:h-[80px] lg:w-[160px] lg:h-[92px] flex items-center justify-center p-2 cursor-pointer grayscale hover:grayscale-0"
                 variants={item}
-                onClick={() => allProductsRouteHandler("brandType", brand.title, brand.brand_id, brand.slug)}
+                onClick={() =>
+                  allProductsRouteHandler(
+                    "brandType",
+                    brand.title,
+                    brand.brand_id,
+                    brand.slug
+                  )
+                }
                 onMouseEnter={() => handleBrandHover(brand)}
                 onFocus={() => handleBrandHover(brand)}
                 tabIndex={0}
                 aria-label={`View ${brand.title} products`}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.1,
-                  transition: { duration: 0.2, ease: "easeOut" }
+                  transition: { duration: 0.2, ease: "easeOut" },
                 }}
               >
                 <Image
@@ -224,13 +240,13 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
           </motion.div>
         ) : (
           // Desktop View - Enhanced Carousel
-          <div 
+          <div
             className="relative"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
             {/* Navigation Arrows */}
-            <AnimatePresence>
+            {/* <AnimatePresence>
               {isHovering && (
                 <>
                   <motion.button
@@ -257,47 +273,77 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
                   </motion.button>
                 </>
               )}
-            </AnimatePresence>
+            </AnimatePresence> */}
 
             {/* Desktop Carousel Container */}
             {/* <div className="relative overflow-hidden py-6"> */}
-              <div className="relative overflow-hidden py-6 w-full">
+            <div className="relative overflow-hidden py-6 w-full">
               <motion.div
-                className="flex"
+                className="flex items-center"
                 ref={carouselRef}
                 animate={controls}
                 initial={{ x: 0 }}
-                style={{ width: `${brands.length * 200 * 3}px` }}
+                style={{ width: `${brands.length * 300 * 3}px` }}
               >
                 {[...brands, ...brands, ...brands].map((brand, index) => (
-                  <motion.div
-                    key={`brand-${brand.brand_id}-${index}`}
-                    className="brand-item mx-6 w-[180px] h-[110px] flex-shrink-0 flex items-center justify-center p-3 cursor-pointer grayscale hover:grayscale-0 relative group"
-                    variants={item}
-                    onClick={() => allProductsRouteHandler("brandType", brand.title, brand.brand_id, brand.slug)}
-                    onMouseEnter={() => handleBrandHover(brand)}
-                    onFocus={() => handleBrandHover(brand)}
-                    tabIndex={0}
-                    aria-label={`View ${brand.title} products`}
-                    whileHover={{ 
-                      scale: 1.15,
-                      transition: { duration: 0.2, ease: "easeOut" }
-                    }}
+                  <React.Fragment
+                    key={`brand-fragment-${brand.brand_id}-${index}`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-100 opacity-0 group-hover:opacity-20 rounded-lg transition-opacity duration-300"></div>
-                    <Image
-                      src={brand.image}
-                      alt={brand.title}
-                      width={180}
-                      height={110}
-                      className="object-contain transform transition-transform duration-300 group-hover:scale-110"
-                      loading={brand.brand_id <= 4 ? "eager" : "lazy"}
-                      quality={90}
-                      {...(!brand.isSvg && { placeholder: "blur" })}
-                    />
-                  </motion.div>
+                    <motion.div
+                      key={`brand-${brand.brand_id}-${index}`}
+                      className="brand-item mx-6 w-[180px] h-[110px] flex-shrink-0 flex items-center justify-center p-3 cursor-pointer grayscale hover:grayscale-0 relative group"
+                      variants={item}
+                      onClick={() =>
+                        allProductsRouteHandler(
+                          "brandType",
+                          brand.title,
+                          brand.brand_id,
+                          brand.slug
+                        )
+                      }
+                      onMouseEnter={() => handleBrandHover(brand)}
+                      onFocus={() => handleBrandHover(brand)}
+                      tabIndex={0}
+                      aria-label={`View ${brand.title} products`}
+                      whileHover={{
+                        scale: 1.05,
+                        transition: { duration: 0.2, ease: "easeOut" },
+                      }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-100 opacity-0 group-hover:opacity-20 rounded-lg transition-opacity duration-300"></div>
+                      <Image
+                        src={brand.image}
+                        alt={brand.title}
+                        width={160}
+                        height={90}
+                        className="object-contain transform transition-transform duration-300 group-hover:scale-110"
+                        loading={brand.brand_id <= 4 ? "eager" : "lazy"}
+                        quality={90}
+                        {...(!brand.isSvg && { placeholder: "blur" })}
+                      />
+                    </motion.div>
+                  </React.Fragment>
                 ))}
               </motion.div>
+            </div>
+            <div className="flex flex-col items-center mt-4 mb-4 gap-8">
+              <div className="flex space-x-4 mb-2">
+                <button
+                  onClick={scrollLeft}
+                  className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                  aria-label="Scroll brands left"
+                >
+                  <FiArrowLeft className="w-8 h-8 text-black-600" />
+                </button>
+                <button
+                  onClick={scrollRight}
+                  className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                  aria-label="Scroll brands right"
+                >
+                  <FiArrowRight className="w-8 h-8 text-black-600" />
+                </button>
+              </div>
+              <div className="w-[85%] h-[3px] bg-black"></div>
             </div>
           </div>
         )}
