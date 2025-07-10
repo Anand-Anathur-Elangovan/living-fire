@@ -346,7 +346,6 @@ const handleScroll = () => {
   };
 }, [showMenu]);
 
-console.log("openCategories", openCategories)
   return (
     <>
       {!showMenu && (
@@ -533,6 +532,7 @@ console.log("openCategories", openCategories)
             backgroundColor: "rgba(0, 0, 0, 0.9)",
             color: "white",
             overflowY: "auto",
+             padding: { xs: "20px", sm: "30px" },
           },
         }}
         ModalProps={{
@@ -551,16 +551,33 @@ console.log("openCategories", openCategories)
             display: "flex",
             flexDirection: "column",
             height: "100%",
-            padding: "20px",
+            // padding: "20px",
           }}
         >
+           <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center", // Vertically align items
+        marginBottom: "40px",
+      }}
+    >
+      {/* Logo */}
+          <Box sx={{ flex: 1 }}>
+            <Image
+              src={LFLogo}
+              alt="Logo"
+              style={{ filter: "brightness(0) invert(1)", height: "auto", maxWidth: "150px" }}
+            />
+          </Box>
+
           {/* Close button */}
           <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginBottom: "20px",
-            }}
+            // sx={{
+            //   display: "flex",
+            //   justifyContent: "flex-end",
+            //   marginBottom: "20px",
+            // }}
           >
             <Image
               src={CloseIcon}
@@ -577,18 +594,7 @@ console.log("openCategories", openCategories)
               style={{ cursor: "pointer", color:"white" }}/> */}
           </Box>
 
-          {/* Logo */}
-          <Box sx={{ marginBottom: "40px" }}>
-            <Image
-              src={LFLogo}
-              alt="Logo"
-              style={{ filter: "brightness(0) invert(1)", height: "auto" }}
-            />
-            {/* <Image
-              src={LFTitleLogo}
-              alt="Logo Title"
-              style={{ filter: "brightness(0) invert(1)", height: "auto" }}
-            /> */}
+          
           </Box>
 
           {/* Main Navigation */}
