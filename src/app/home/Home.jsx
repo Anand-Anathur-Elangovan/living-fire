@@ -179,6 +179,16 @@ const Home = () => {
     ),
     customPaging: (i) => <div className="custom-dot"></div>,
   };
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 1024);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <div
       style={{
@@ -384,33 +394,35 @@ const Home = () => {
               {fuelTypes?.map(
                 (fuelType, index) =>
                   fuelType?.fueltype_name !== "Hybrid - Wood/Electric" && (
-                    <React.Fragment  key={`fuelType-${fuelType.fueltype_id}`}>
-                    <button
-                      key={`fuelType-${fuelType.fueltype_id}`}
-                      onClick={() =>
-                        allProductsRouteHandler(
-                          "fuelType",
-                          fuelType.fueltype_name,
-                          fuelType.fueltype_id,
-                          fuelType?.slug
-                        )
-                      }
-                      className="p-0 m-0 flex gap-3"
-                      aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
-                    >
-                      {fuelType.fueltype_name === 'Cooker'? 'Cookers': fuelType.fueltype_name}
-                      {/* {index < fuelTypes.length - 1 && (
+                    <React.Fragment key={`fuelType-${fuelType.fueltype_id}`}>
+                      <button
+                        key={`fuelType-${fuelType.fueltype_id}`}
+                        onClick={() =>
+                          allProductsRouteHandler(
+                            "fuelType",
+                            fuelType.fueltype_name,
+                            fuelType.fueltype_id,
+                            fuelType?.slug
+                          )
+                        }
+                        className="p-0 m-0 flex gap-3"
+                        aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
+                      >
+                        {fuelType.fueltype_name === "Cooker"
+                          ? "Cookers"
+                          : fuelType.fueltype_name}
+                        {/* {index < fuelTypes.length - 1 && (
                         <span className="hidden md:flex items-center text-white">
                           |
                         </span>
                       )} */}
-                    </button>
-                    {index < fuelTypes.length - 1 && (
+                      </button>
+                      {index < fuelTypes.length - 1 && (
                         <span className="hidden md:flex items-center text-white">
                           |
                         </span>
                       )}
-                      </React.Fragment>
+                    </React.Fragment>
                   )
               )}
             </motion.div>
@@ -470,14 +482,53 @@ const Home = () => {
           fuelTypes={fuelTypes}
           allProductsRouteHandler={allProductsRouteHandler}
         />
-        <OurBrands
-          brandList={brandsList}
-          allProductsRouteHandler={allProductsRouteHandler}
-        />
-        <Featured
-          headingValue="Featured"
-          productRouteHandler={productRouteHandler}
-        />
+        {isDesktop ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "40px",
+              backgroundColor: "white",
+            }}
+          >
+            <OurBrands
+              brandList={brandsList}
+              allProductsRouteHandler={allProductsRouteHandler}
+            />
+            <Featured
+              headingValue="Featured"
+              productRouteHandler={productRouteHandler}
+            />
+          </div>
+        ) : (
+          <>
+            <OurBrands
+              brandList={brandsList}
+              allProductsRouteHandler={allProductsRouteHandler}
+            />
+            <Featured
+              headingValue="Featured"
+              productRouteHandler={productRouteHandler}
+            />
+          </>
+        )}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "40px",
+            backgroundColor: "white",
+          }}
+        >
+          <OurBrands
+            brandList={brandsList}
+            allProductsRouteHandler={allProductsRouteHandler}
+          />
+          <Featured
+            headingValue="Featured"
+            productRouteHandler={productRouteHandler}
+          />
+        </div>
         {/* <Testimonials /> */}
         <Blog />
         <NewsletterCard />
