@@ -56,7 +56,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       image: featureImg2,
       title: "Ilektro 2600",
       range: "Paul Agnew Designs",
-      description: "Large format electric fire with stunning visual effects.Premium electric fire with realistic flame effect and efficient heating.Premium electric fire with realistic flame effect and efficient heating.Premium electric fire with realistic flame effect and efficient heating",
+      description:
+        "Large format electric fire with stunning visual effects.Premium electric fire with realistic flame effect and efficient heating.Premium electric fire with realistic flame effect and efficient heating.Premium electric fire with realistic flame effect and efficient heating",
       name: "Ilektro 2600 Landscape",
       brand_name: "Paul Agnew Designs",
     },
@@ -65,7 +66,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       image: featureImg3,
       title: "Ilektro integra anson",
       range: "Paul Agnew Designs",
-      description: "Sleek integrated design with advanced heating technology, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+      description:
+        "Sleek integrated design with advanced heating technology, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
       name: "HZO42 - Outdoor - LPG",
       brand_name: "Paul Agnew Designs",
     },
@@ -74,7 +76,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       image: featureImg4,
       title: "Pyro Siena 750GF Freestanding",
       range: "Paul Agnew Designs",
-      description: "Freestanding gas fire with elegant traditional styling, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+      description:
+        "Freestanding gas fire with elegant traditional styling, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
       name: "siena-750-g4-freestanding",
       brand_name: "Paul Agnew Designs",
     },
@@ -83,7 +86,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       image: featureImg5,
       title: "Heatmaster Seamless",
       range: "Heatmaster",
-      description: "Modern seamless design with powerful heat output, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+      description:
+        "Modern seamless design with powerful heat output, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
       name: "seamless-body",
       brand_name: "Heatmaster",
     },
@@ -92,7 +96,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       image: featureImg6,
       title: "Regency FG39",
       range: "Regency",
-      description: "High-efficiency gas fireplace with realistic log set, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+      description:
+        "High-efficiency gas fireplace with realistic log set, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
       name: "FG39",
       brand_name: "Regency",
     },
@@ -145,6 +150,16 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
+      style={{
+        ...(isDesktop && {
+          padding: "40px 80px",
+          margin: 0,
+          background:
+            "linear-gradient(to bottom, white 50%, rgb(247, 247, 245) 50%)",
+          minHeight: "100vh",
+          width: "100%",
+        }),
+      }}
     >
       <div className="flex flex-row items-center w-full">
         <h2 className="heading1 flex w-full justify-start md:justify-center md:ml-0 text-2xl md:text-3xl">
@@ -279,10 +294,16 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                   />
                 </div>
                 <div className="font-sans text-left">
-                  <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer" style={{ fontFamily: 'Satoru, sans-serif' }} >
+                  <h3
+                    className="leading-6 text-base md:text-lg font-extralight cursor-pointer"
+                    style={{ fontFamily: "Satoru, sans-serif" }}
+                  >
                     {item.title}
                   </h3>
-                  <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer" style={{ fontFamily: 'Satoru, sans-serif' }}>
+                  <p
+                    className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer"
+                    style={{ fontFamily: "Satoru, sans-serif" }}
+                  >
                     {item.range}
                   </p>
                   <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
@@ -328,37 +349,59 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
         </>
       )}
       <div className="w-full flex flex-col items-center gap-4 mt-8 md:mt-12">
-  <div className="flex flex-col md:flex-row items-center gap-4">
-    <motion.button
-      className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
-      onClick={() => {
-        setNavigationState(null);
-        router.push(`/allProducts`);
-      }}
-      onMouseEnter={() => router.prefetch('/allProducts')}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      SHOP ALL
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-      </svg>
-    </motion.button>
+        <div className="flex flex-col md:flex-row items-center gap-4">
+          <motion.button
+            className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
+            onClick={() => {
+              setNavigationState(null);
+              router.push(`/allProducts`);
+            }}
+            onMouseEnter={() => router.prefetch("/allProducts")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            SHOP ALL
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </motion.button>
 
-    <motion.button
-      className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
-      onClick={() => router.push('/contact')}
-      onMouseEnter={() => router.prefetch('/contact')}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      CONTACT US
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    </motion.button>
-  </div>
-</div>
+          <motion.button
+            className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
+            onClick={() => router.push("/contact")}
+            onMouseEnter={() => router.prefetch("/contact")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            CONTACT US
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+          </motion.button>
+        </div>
+      </div>
     </motion.div>
   );
 };
