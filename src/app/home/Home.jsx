@@ -512,7 +512,7 @@ const Home = () => {
             />
           </>
         )}
-        <div
+        {/* <div
           style={{
             display: "flex",
             flexDirection: "column",
@@ -528,7 +528,7 @@ const Home = () => {
             headingValue="Featured"
             productRouteHandler={productRouteHandler}
           />
-        </div>
+        </div> */}
         {/* <Testimonials /> */}
         <Blog />
         <NewsletterCard />
