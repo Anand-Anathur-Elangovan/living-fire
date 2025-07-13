@@ -347,6 +347,7 @@ const handleScroll = () => {
   };
 }, [showMenu]);
 
+console.log("color", color)
   return (
     <>
       {!showMenu && (
@@ -358,7 +359,9 @@ const handleScroll = () => {
                 alt="Living Fire Company Logo"
                 className="custom-header-width"
                 onClick={handleHomeIconClick}
-                style={{ filter: color === "white" ? "invert(1)" : "none" }}
+                // style={{ filter: color === "white" ? "invert(1)" : "none" }}
+                style={{filter: color === "white" ? "invert(1)" : "invert(1)"}}
+                
               />
             ) : (
               <>
@@ -396,7 +399,8 @@ const handleScroll = () => {
                         onClick={handleHomeIconClick}
                         title="Living Fire Company Logo"
                         style={{
-                          filter: color === "white" ? "invert(1)" : "none",
+                          // filter: color === "white" ? "invert(1)" : "none",
+                          filter: color === "white" ? "invert(1)" : "invert(1)",
                         }}
                       />
                     </div>
@@ -454,7 +458,8 @@ const handleScroll = () => {
                     src={SearchIcon}
                     alt="Search Icon"
                     title="Search Icon"
-                    style={{ filter: color === "white" ? "invert(1)" : "none" }}
+                    // style={{ filter: color === "white" ? "invert(1)" : "none" }}
+                    style={{filter: color === "white" ? "invert(1)" : "invert(1)"}}
                     className="cursor-pointer"
                     onClick={() => {
                       setIsFocus(true);
@@ -475,8 +480,10 @@ const handleScroll = () => {
                 isMobile ? "w-[30px]" : "w-[45px] md:w-[53px]"
               }`}
               style={{
-                filter:
-                  color === "white" ? "invert(1) brightness(1.5)" : "none",
+                // filter:
+                //   color === "white" ? "invert(1) brightness(1.5)" : "none",
+                  filter:
+                  color === "white" ? "invert(1) brightness(1.5)" : "invert(1) brightness(1.5)",
               }}
               onClick={() => {
                 setIsFocus(false);
