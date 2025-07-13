@@ -293,8 +293,11 @@ const Home = () => {
           <motion.div
             className={`panel-left ${showPanels ? "show-panelsLeft" : ""}`}
             initial={{ x: "-100%" }}
+            // animate={{
+            //   x: showPanels ? (animatePanels ? "-100%" : "-70%") : "-10%",
+            // }}
             animate={{
-              x: showPanels ? (animatePanels ? "-100%" : "-70%") : "-10%",
+              x: showPanels ? (animatePanels ? "-100%" : "-100%") : "-10%",
             }}
             transition={{ duration: 1, ease: "easeInOut" }}
             aria-hidden="true"
@@ -303,8 +306,11 @@ const Home = () => {
           <motion.div
             className={`panel-right ${showPanels ? "show-panelsRight" : ""}`}
             initial={{ x: "100%" }}
+            // animate={{
+            //   x: showPanels ? (animatePanels ? "100%" : "70%") : "10%",
+            // }}
             animate={{
-              x: showPanels ? (animatePanels ? "100%" : "70%") : "10%",
+              x: showPanels ? (animatePanels ? "100%" : "100%") : "10%",
             }}
             transition={{ duration: 1, ease: "easeInOut" }}
             aria-hidden="true"
