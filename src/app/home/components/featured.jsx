@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useNavigationState } from "@/context/NavigationContext";
 import { motion } from "framer-motion";
+import { FiArrowRight } from "react-icons/fi";
 
 const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
   const router = useRouter();
@@ -209,11 +210,17 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+                    // className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+                    className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out cursor-pointer"
                     sizes="(max-width: 1024px) 30vw, 25vw"
                     quality={95}
                     placeholder="blur"
                   />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
+                      <FiArrowRight className="text-white text-2xl" />
+                    </div>
+                  </div>
                 </div>
                 <div className="font-sans text-left">
                   <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
@@ -245,11 +252,18 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+                    // className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+                    className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out cursor-pointer"
+                    
                     sizes="(max-width: 1024px) 30vw, 25vw"
                     quality={95}
                     placeholder="blur"
                   />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
+                      <FiArrowRight className="text-white text-2xl" />
+                    </div>
+                  </div>
                 </div>
                 <div className="font-sans text-left">
                   <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
@@ -286,12 +300,18 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+                    // className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+                     className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out cursor-pointer"
                     sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
                     loading={index < 2 ? "eager" : "lazy"}
                     quality={85}
                     placeholder="blur"
                   />
+                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
+      <FiArrowRight className="text-white text-2xl" />
+    </div>
+  </div>
                 </div>
                 <div className="font-sans text-left">
                   <h3
