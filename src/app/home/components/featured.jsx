@@ -156,7 +156,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
           padding: "40px 340px",
           margin: 0,
           background:
-            "linear-gradient(to bottom, white 65%, rgb(247, 247, 245) 50%)",
+            "linear-gradient(to bottom, white 60%, rgb(247, 247, 245) 50%)",
           minHeight: "100vh",
           width: "100%",
         }),
