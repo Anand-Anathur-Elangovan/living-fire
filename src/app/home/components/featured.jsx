@@ -153,10 +153,10 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       variants={containerVariants}
       style={{
         ...(isDesktop && {
-          padding: "40px 80px",
+          padding: "40px 340px",
           margin: 0,
           background:
-            "linear-gradient(to bottom, white 50%, rgb(247, 247, 245) 50%)",
+            "linear-gradient(to bottom, white 65%, rgb(247, 247, 245) 50%)",
           minHeight: "100vh",
           width: "100%",
         }),
