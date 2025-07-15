@@ -34,6 +34,8 @@ import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { generateSlug } from "@/src/helper/slug/slug";
+import LowerArea from "@/src/components/custom/LowerArea";
+import Showrooms from "@/src/components/custom/Showrooms/Showrooms";
 
 const filterMappingsMock = [
   { id: 1, value: "Fireplace", filterType: "type", slug: "fireplace" },
@@ -1763,8 +1765,10 @@ const [filterStatus, setFilterStatus] = useState({
             )}
           </div>
         </>
-        <OurDifference />
-        <OurShowrooms />
+        {/* <OurDifference />
+        <OurShowrooms /> */}
+        <LowerArea/>
+        <Showrooms/>
       </div>
     </>
   );
