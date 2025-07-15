@@ -1767,9 +1767,10 @@ const [filterStatus, setFilterStatus] = useState({
         </>
         {/* <OurDifference />
         <OurShowrooms /> */}
-        <LowerArea/>
-        <Showrooms/>
+        
       </div>
+      <LowerArea/>
+        <Showrooms/>
     </>
   );
 };

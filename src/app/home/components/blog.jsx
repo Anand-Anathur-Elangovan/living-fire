@@ -7,7 +7,7 @@ import { FiArrowRight } from "react-icons/fi";
 
 const Blog = () => {
   return (
-    <div className="flex relative justify-center flex-col gap-6 md:ml-20 md:mr-20 md:gap-10 mb-20 md:mb-2 px-4 sm:px-6 md:px-[300px]">
+    <div className="flex relative justify-center flex-col gap-6 md:ml-20 md:mr-20 md:gap-10 md:mb-20 px-4 sm:px-6 md:px-[300px]">
       <div className="flex flex-row items-center w-full mb-2 md:mb-4">
         <h2 className="heading1 flex w-full justify-center text-3xl md:text-4xl lg:text-5xl">
           News & Blogs
