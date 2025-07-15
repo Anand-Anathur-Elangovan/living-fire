@@ -1,0 +1,122 @@
+.showrooms-section {
+  background-image: url('/assets/lowerArea/Review04.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 20px;
+  position: relative;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.showrooms-overlay {
+  background-color: rgba(0, 0, 0, 0.95);
+  max-width: 900px;
+  margin-left: auto;
+  /* margin-right: auto;       */
+ padding: 80px 150px 80px 50px;
+}
+
+.showrooms-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.showrooms-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.showrooms-divider {
+  border: none;
+  height: 1px;
+  background: white;
+  width: 100%;
+}
+
+.showrooms-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.showrooms-button {
+  background: transparent;
+  border: 1px solid #D6D1CF;
+  color: #D6D1CF;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.3s, color 0.3s;
+}
+
+.showrooms-button:hover {
+  background: white;
+  color: black;
+}
+
+.showrooms-address-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.showrooms-address-block {
+  flex: 1;
+  min-width: 220px;
+}
+
+.showrooms-address-title {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.showrooms-address-text {
+  font-style: normal;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.showrooms-description,
+.showrooms-address-text {
+  color: #D6D1CF;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .showrooms-overlay {
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .showrooms-button {
+    align-self: center;
+  }
+
+  .showrooms-address-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .showrooms-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .showrooms-description {
+    text-align: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .showrooms-overlay {
+    max-width: 800px;
+  }
+}

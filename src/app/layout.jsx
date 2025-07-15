@@ -9,6 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import InlineCriticalCSS from "../components/InlineCriticalCSS";
+import NewsletterCard from "./home/components/newsletterCard";
 
 // Local fonts with optimized loading
 const geistSans = localFont({
@@ -145,6 +146,7 @@ export default function RootLayout({ children }) {
               >
                 {children}
               </Suspense>
+              <NewsletterCard/>
               <Footer />
             </div>
           </Providers>

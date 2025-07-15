@@ -25,6 +25,8 @@ import { useRouter } from "next/navigation";
 import { getCookie } from "cookies-next";
 import { setCookie } from "cookies-next";
 import Loader from "@/src/helper/loader/Loader";
+import LowerArea from "@/src/components/custom/LowerArea";
+import Showrooms from "@/src/components/custom/Showrooms/Showrooms";
 
 const Product = ({ params }) => {
   const router = useRouter();
@@ -171,7 +173,9 @@ const Product = ({ params }) => {
             brand_name={brand_name}
           />
           {/* <OurDifference /> */}
-          <OurShowrooms />
+          {/* <OurShowrooms /> */}
+          <LowerArea/>
+        <Showrooms/>
           <EnquiryFormModal
             isOpen={isModalOpen}
             onClose={closeModal}

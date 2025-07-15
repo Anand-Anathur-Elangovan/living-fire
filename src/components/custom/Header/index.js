@@ -101,7 +101,12 @@ const handleScroll = () => {
   if (currentScroll > 10) { // Adjust this threshold as needed
     setScrolled(true);
     if (isHomePage && currentScroll > 0) {
-      setColor("black");
+      // setColor("black");
+      setColor("white");
+    }
+    if(!isHomePage && currentScroll > 0) {
+      // setColor("black");
+      setColor("white");
     }
     
     // Optional: Hide header when scrolling down
@@ -115,6 +120,9 @@ const handleScroll = () => {
     setHidden(false);
     if (isHomePage) {
       setColor("white");
+    }
+    if (!isHomePage) {
+      setColor("black");
     }
   }
   
@@ -360,7 +368,7 @@ console.log("color", color)
                 className="custom-header-width"
                 onClick={handleHomeIconClick}
                 // style={{ filter: color === "white" ? "invert(1)" : "none" }}
-                style={{filter: color === "white" ? "invert(1)" : "invert(1)"}}
+                style={{filter: color === "white" ? "invert(1)" : "none"}}
                 
               />
             ) : (
@@ -400,7 +408,7 @@ console.log("color", color)
                         title="Living Fire Company Logo"
                         style={{
                           // filter: color === "white" ? "invert(1)" : "none",
-                          filter: color === "white" ? "invert(1)" : "invert(1)",
+                          filter: color === "white" ? "invert(1)" : "none",
                         }}
                       />
                     </div>
@@ -459,7 +467,7 @@ console.log("color", color)
                     alt="Search Icon"
                     title="Search Icon"
                     // style={{ filter: color === "white" ? "invert(1)" : "none" }}
-                    style={{filter: color === "white" ? "invert(1)" : "invert(1)"}}
+                    style={{filter: color === "white" ? "invert(1)" : "none"}}
                     className="cursor-pointer"
                     onClick={() => {
                       setIsFocus(true);
@@ -483,7 +491,7 @@ console.log("color", color)
                 // filter:
                 //   color === "white" ? "invert(1) brightness(1.5)" : "none",
                   filter:
-                  color === "white" ? "invert(1) brightness(1.5)" : "invert(1) brightness(1.5)",
+                  color === "white" ? "invert(1) brightness(1.5)" : "none",
               }}
               onClick={() => {
                 setIsFocus(false);

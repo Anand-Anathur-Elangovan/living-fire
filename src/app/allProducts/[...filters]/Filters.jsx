@@ -35,6 +35,8 @@ import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDraw
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { CircularProgress, Box } from "@mui/material";
 import { generateSlug } from "@/src/helper/slug/slug";
+import LowerArea from "@/src/components/custom/LowerArea";
+import Showrooms from "@/src/components/custom/Showrooms/Showrooms";
 
 const filterMappingsMock = [
   { id: 1, value: "Fireplace", filterType: "type", slug: "fireplace" },
@@ -1787,8 +1789,10 @@ const Filters = () => {
             )}
           </div>
         </>
-        <OurDifference fireplaceType={fireplaceType} />
-        <OurShowrooms />
+        {/* <OurDifference fireplaceType={fireplaceType} />
+        <OurShowrooms /> */}
+        <LowerArea/>
+        <Showrooms/>
       </div>
     </>
   );

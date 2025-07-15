@@ -14,6 +14,7 @@ import Slider from "react-slick";
 import { ChevronDown } from "react-feather";
 import { generateSlug } from "@/src/helper/slug/slug";
 import LowerArea from "@/src/components/custom/LowerArea";
+import Showrooms from "@/src/components/custom/Showrooms/Showrooms";
 
 const brandLogos = {
   cocoon: () => import("@/public/assets/homePage/ourBrands/cocoon.svg"),
@@ -538,8 +539,9 @@ const Home = () => {
         </div> */}
         {/* <Testimonials /> */}
         <Blog />
-        <NewsletterCard />
-        <LowerArea />
+        {/* <NewsletterCard /> */}
+        {/* <LowerArea />
+        <Showrooms/> */}
       </Suspense>
 
       {/* Product Schema */}
