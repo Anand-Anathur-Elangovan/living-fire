@@ -400,7 +400,8 @@
 }
 .hero-carousel {
   .slick-dots {
-    bottom: 35px !important;
+    /* bottom: 35px !important; */
+    bottom: 60px !important;
   }
   .slick-dots ul {
     display: flex !important;
