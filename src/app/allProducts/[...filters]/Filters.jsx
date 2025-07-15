@@ -1791,9 +1791,10 @@ const Filters = () => {
         </>
         {/* <OurDifference fireplaceType={fireplaceType} />
         <OurShowrooms /> */}
-        <LowerArea/>
-        <Showrooms/>
+        
       </div>
+      <LowerArea/>
+        <Showrooms/>
     </>
   );
 };

@@ -539,9 +539,6 @@ const Home = () => {
         </div> */}
         {/* <Testimonials /> */}
         <Blog />
-        {/* <NewsletterCard /> */}
-        {/* <LowerArea />
-        <Showrooms/> */}
       </Suspense>
 
       {/* Product Schema */}
