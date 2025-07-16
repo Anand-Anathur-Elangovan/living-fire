@@ -163,7 +163,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       }}
     >
       <div className="flex flex-row items-center w-full">
-        <h2 className="heading1 flex w-full justify-start md:justify-center md:ml-0 text-2xl md:text-3xl">
+        <h2 className="heading1 flex w-full justify-start md:justify-center md:ml-0 text-2xl md:text-[3rem]">
           {headingValue}
         </h2>
         {!isMobile && !isDesktop && (
@@ -381,7 +381,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
             whileTap={{ scale: 0.95 }}
           >
             SHOP ALL
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
               fill="none"
@@ -394,7 +394,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                 strokeWidth={2}
                 d="M14 5l7 7m0 0l-7 7m7-7H3"
               />
-            </svg>
+            </svg> */}
           </motion.button>
 
           <motion.button
@@ -405,7 +405,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
             whileTap={{ scale: 0.95 }}
           >
             CONTACT US
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
               fill="none"
@@ -418,7 +418,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
                 strokeWidth={2}
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               />
-            </svg>
+            </svg> */}
           </motion.button>
         </div>
       </div>

@@ -62,7 +62,7 @@ const NewsletterCard = () => {
 
               <button
   type="submit"
-  className="max-w-[180px] w-full mx-auto border border-white text-white py-2 px-4 rounded-full hover:bg-white hover:text-black transition-all duration-300 text-sm font-medium"
+  className="max-w-[180px] w-full mx-auto border border-white text-white py-2 px-4 rounded hover:bg-white hover:text-black transition-all duration-300 text-sm font-medium"
 >
   Submit
 </button>

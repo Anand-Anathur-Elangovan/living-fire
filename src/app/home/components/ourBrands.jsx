@@ -343,7 +343,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
                   <FiArrowRight className="w-8 h-8 text-black-600" />
                 </button>
               </div>
-              <div className="w-[85%] h-[3px] bg-black"></div>
+              <div className="w-[85%] h-[2px] bg-black"></div>
             </div>
           </div>
         )}
