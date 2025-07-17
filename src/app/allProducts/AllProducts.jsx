@@ -231,18 +231,23 @@ const [filterStatus, setFilterStatus] = useState({
     }
     if (fuelTypeFilter) {
       setFireplaceType(fuelTypeFilter.id);
+      handleFilterStatus('fireplaceFilterIdStatus', true)
     }
     if (installationTypeFilter) {
       setInstallationType(installationTypeFilter?.id);
+      handleFilterStatus('installationTypeIdStatus', true)
     }
     if (glassOrientationTypeFilter) {
       setGlassOrientationType(glassOrientationTypeFilter?.id);
+      handleFilterStatus('glassOrientationIdStatus', true)
     }
     if (brandFilter) {
       setBrandType(brandFilter?.id);
+      handleFilterStatus('brandIdStatus', true)
     }
     if (rangeFilter) {
       setRangeType(rangeFilter?.id);
+      handleFilterStatus('rangeIdStatus', true)
     }
     let values = [];
     let newFuelValues = [];
