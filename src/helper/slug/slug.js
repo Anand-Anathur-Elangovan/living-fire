@@ -1,5 +1,5 @@
 export function generateSlug(input) {
-  console.log("Generating slug for input:", input);
+  // console.log("Generating slug for input:", input);
   return input
     .replace(/[\[\]\(\)]/g, '') // Remove [, ], (, )
     .replace(/\//g, '-')        // Replace / with -

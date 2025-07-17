@@ -239,11 +239,11 @@ const Filters = () => {
     }
     if (brandFilter) {
       setBrandType(brandFilter?.id);
-      handleFilterStatus('rangeIdStatus', true)
+      handleFilterStatus('brandIdStatus', true)
     }
     if (rangeFilter) {
       setRangeType(rangeFilter?.id);
-      handleFilterStatus('brandIdStatus', true)
+      handleFilterStatus('rangeIdStatus', true)
     }
 
     let values = [];
@@ -1360,6 +1360,7 @@ const Filters = () => {
                           className={`flex flex-col gap-3 mr-10 ${!brandType ? "collapse" : ""}`}
                           style={{display: !filterStatus?.brandIdStatus&& 'none'}}
                         >
+                        {console.log("brandType", brandType, "brands", brands, "filterStatus", filterStatus)}
                           {brandType && (
                             <>
                               <span
