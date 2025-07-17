@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 import { useNavigationState } from "@/context/NavigationContext";
 import { motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
+import Link from "next/link";
+import { generateSlug } from "@/src/helper/slug/slug";
 
 const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
   const router = useRouter();
@@ -198,85 +200,164 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
           {/* First Row */}
           <div className="grid grid-cols-3 gap-8 col-span-3">
             {carouselItems.slice(0, 3).map((item, index) => (
-              <motion.div
-                className="w-full flex flex-col gap-6 px-6"
+              // <motion.div
+              //   className="w-full flex flex-col gap-6 px-6"
+              //   key={`featured-desktop-${item.p_id}-${index}`}
+              //   onClick={() => productRouteHandler(item.name, item?.brand_name)}
+              //   variants={itemVariants}
+              //   // whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              // >
+              //   <div className="relative overflow-hidden aspect-square group">
+              //     <Image
+              //       src={item.image}
+              //       alt={item.title}
+              //       fill
+              //       // className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+              //       className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out cursor-pointer"
+              //       sizes="(max-width: 1024px) 30vw, 25vw"
+              //       quality={95}
+              //       placeholder="blur"
+              //     />
+              //     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              //       <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
+              //         <FiArrowRight className="text-white text-2xl" />
+              //       </div>
+              //     </div>
+              //   </div>
+              //   <div className="font-sans text-left">
+              //     <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
+              //       {item.title}
+              //     </h3>
+              //     <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
+              //       {item.range}
+              //     </p>
+              //     <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
+              //       {item.description}
+              //     </p>
+              //   </div>
+              // </motion.div>
+              <Link
+                href={`/${generateSlug(item.brand_name)}/${generateSlug(
+                  item.name
+                )}`}
+                passHref
+                legacyBehavior
                 key={`featured-desktop-${item.p_id}-${index}`}
-                onClick={() => productRouteHandler(item.name, item?.brand_name)}
-                variants={itemVariants}
-                // whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="relative overflow-hidden aspect-square group">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    // className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
-                    className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out cursor-pointer"
-                    sizes="(max-width: 1024px) 30vw, 25vw"
-                    quality={95}
-                    placeholder="blur"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
-                      <FiArrowRight className="text-white text-2xl" />
+                <motion.a
+                  className="w-full flex flex-col gap-6 px-6"
+                  variants={itemVariants}
+                >
+                  <div className="relative overflow-hidden aspect-square group">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out"
+                      sizes="(max-width: 1024px) 30vw, 25vw"
+                      quality={95}
+                      placeholder="blur"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
+                        <FiArrowRight className="text-white text-2xl" />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="font-sans text-left">
-                  <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
-                    {item.title}
-                  </h3>
-                  <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
-                    {item.range}
-                  </p>
-                  <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
+                  <div className="font-sans text-left">
+                    <h3 className="leading-6 text-base md:text-lg font-extralight hover:underline">
+                      {item.title}
+                    </h3>
+                    <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F]">
+                      {item.range}
+                    </p>
+                    <p className="font-normal leading-5 text-sm mt-2 text-[#333]">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.a>
+              </Link>
             ))}
           </div>
 
           {/* Second Row */}
           <div className="grid grid-cols-3 gap-8 col-span-3 mt-8">
             {carouselItems.slice(3, 6).map((item, index) => (
-              <motion.div
-                className="w-full flex flex-col gap-4 px-2"
+              // <motion.div
+              //   className="w-full flex flex-col gap-4 px-2"
+              //   key={`featured-desktop-${item.p_id}-${index + 3}`}
+              //   onClick={() => productRouteHandler(item.name, item?.brand_name)}
+              //   variants={itemVariants}
+              // >
+              //   <div className="relative overflow-hidden aspect-square group">
+              //     <Image
+              //       src={item.image}
+              //       alt={item.title}
+              //       fill
+              //       className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out cursor-pointer"
+              //       sizes="(max-width: 1024px) 30vw, 25vw"
+              //       quality={95}
+              //       placeholder="blur"
+              //     />
+              //     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              //       <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
+              //         <FiArrowRight className="text-white text-2xl" />
+              //       </div>
+              //     </div>
+              //   </div>
+              //   <div className="font-sans text-left">
+              //     <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
+              //       {item.title}
+              //     </h3>
+              //     <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
+              //       {item.range}
+              //     </p>
+              //     <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
+              //       {item.description}
+              //     </p>
+              //   </div>
+              // </motion.div>
+              <Link
+                href={`/${generateSlug(item.brand_name)}/${generateSlug(
+                  item.name
+                )}`}
+                passHref
+                legacyBehavior
                 key={`featured-desktop-${item.p_id}-${index + 3}`}
-                onClick={() => productRouteHandler(item.name, item?.brand_name)}
-                variants={itemVariants}
-                // whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="relative overflow-hidden aspect-square group">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    // className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
-                    className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out cursor-pointer"
-                    
-                    sizes="(max-width: 1024px) 30vw, 25vw"
-                    quality={95}
-                    placeholder="blur"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
-                      <FiArrowRight className="text-white text-2xl" />
+                <motion.a
+                  className="w-full flex flex-col gap-4 px-2"
+                  variants={itemVariants}
+                >
+                  <div className="relative overflow-hidden aspect-square group">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out"
+                      sizes="(max-width: 1024px) 30vw, 25vw"
+                      quality={95}
+                      placeholder="blur"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
+                        <FiArrowRight className="text-white text-2xl" />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="font-sans text-left">
-                  <h3 className="leading-6 text-base md:text-lg font-extralight cursor-pointer">
-                    {item.title}
-                  </h3>
-                  <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer">
-                    {item.range}
-                  </p>
-                  <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
+                  <div className="font-sans text-left">
+                    <h3 className="leading-6 text-base md:text-lg font-extralight hover:underline">
+                      {item.title}
+                    </h3>
+                    <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F]">
+                      {item.range}
+                    </p>
+                    <p className="font-normal leading-5 text-sm mt-2 text-[#333]">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.a>
+              </Link>
             ))}
           </div>
         </div>
@@ -288,49 +369,97 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
             className="grid grid-flow-col auto-cols-[75%] sm:auto-cols-[45%] md:auto-cols-[30%] lg:auto-cols-[25%] gap-4 md:gap-[36px] overflow-x-auto overscroll-x-contain feature-snaps hide-scrollbar"
           >
             {carouselItems.map((item, index) => (
-              <motion.div
-                className="w-full flex flex-col gap-3 md:gap-5"
+              //             <motion.div
+              //               className="w-full flex flex-col gap-3 md:gap-5"
+              //               key={`featured-${item.p_id}-${index}`}
+              //               onClick={() => productRouteHandler(item.name, item?.brand_name)}
+              //               variants={itemVariants}
+              //               // whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              //             >
+              //               <div className="relative overflow-hidden rounded-lg aspect-square group">
+              //                 <Image
+              //                   src={item.image}
+              //                   alt={item.title}
+              //                   fill
+              //                   // className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
+              //                    className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out cursor-pointer"
+              //                   sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
+              //                   loading={index < 2 ? "eager" : "lazy"}
+              //                   quality={85}
+              //                   placeholder="blur"
+              //                 />
+              //                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              //   <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
+              //     <FiArrowRight className="text-white text-2xl" />
+              //   </div>
+              // </div>
+              //               </div>
+              //               <div className="font-sans text-left">
+              //                 <h3
+              //                   className="leading-6 text-base md:text-lg font-extralight cursor-pointer"
+              //                   style={{ fontFamily: "Satoru, sans-serif" }}
+              //                 >
+              //                   {item.title}
+              //                 </h3>
+              //                 <p
+              //                   className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer"
+              //                   style={{ fontFamily: "Satoru, sans-serif" }}
+              //                 >
+              //                   {item.range}
+              //                 </p>
+              //                 <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
+              //                   {item.description}
+              //                 </p>
+              //               </div>
+              //             </motion.div>
+              <Link
+                href={`/${generateSlug(item.brand_name)}/${generateSlug(
+                  item.name
+                )}`}
+                passHref
+                legacyBehavior
                 key={`featured-${item.p_id}-${index}`}
-                onClick={() => productRouteHandler(item.name, item?.brand_name)}
-                variants={itemVariants}
-                // whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="relative overflow-hidden rounded-lg aspect-square group">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    // className="object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
-                     className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out cursor-pointer"
-                    sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
-                    loading={index < 2 ? "eager" : "lazy"}
-                    quality={85}
-                    placeholder="blur"
-                  />
-                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-    <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
-      <FiArrowRight className="text-white text-2xl" />
-    </div>
-  </div>
-                </div>
-                <div className="font-sans text-left">
-                  <h3
-                    className="leading-6 text-base md:text-lg font-extralight cursor-pointer"
-                    style={{ fontFamily: "Satoru, sans-serif" }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    className="font-medium leading-5 text-xs md:text-sm text-[#94999F] cursor-pointer"
-                    style={{ fontFamily: "Satoru, sans-serif" }}
-                  >
-                    {item.range}
-                  </p>
-                  <p className="font-normal leading-5 text-sm mt-2 text-[#333] cursor-pointer">
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
+                <motion.a
+                  className="w-full flex flex-col gap-3 md:gap-5"
+                  variants={itemVariants}
+                >
+                  <div className="relative overflow-hidden rounded-lg aspect-square group">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 group-hover:brightness-50 transition-all duration-300 ease-in-out"
+                      sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, 25vw"
+                      loading={index < 2 ? "eager" : "lazy"}
+                      quality={85}
+                      placeholder="blur"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-10 h-10 rounded-full border-4 border-white flex items-center justify-center">
+                        <FiArrowRight className="text-white text-2xl" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="font-sans text-left">
+                    <h3
+                      className="leading-6 text-base md:text-lg font-extralight hover:underline"
+                      style={{ fontFamily: "Satoru, sans-serif" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      className="font-medium leading-5 text-xs md:text-sm text-[#94999F]"
+                      style={{ fontFamily: "Satoru, sans-serif" }}
+                    >
+                      {item.range}
+                    </p>
+                    <p className="font-normal leading-5 text-sm mt-2 text-[#333]">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.a>
+              </Link>
             ))}
           </div>
 
@@ -370,7 +499,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       )}
       <div className="w-full flex flex-col items-center gap-4 mt-8 md:mt-12">
         <div className="flex flex-col md:flex-row items-center gap-4">
-          <motion.button
+          {/* <motion.button
             className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
             onClick={() => {
               setNavigationState(null);
@@ -381,23 +510,29 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
             whileTap={{ scale: 0.95 }}
           >
             SHOP ALL
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          </motion.button> */}
+          <Link href="/allProducts" passHref legacyBehavior>
+            <motion.a
+              className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onMouseEnter={() => router.prefetch("/allProducts")}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg> */}
-          </motion.button>
+              SHOP ALL
+            </motion.a>
+          </Link>
+          <Link href="/contact" passHref legacyBehavior>
+            <motion.a
+              className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onMouseEnter={() => router.prefetch("/contact")}
+            >
+              CONTACT US
+            </motion.a>
+          </Link>
 
-          <motion.button
+          {/* <motion.button
             className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
             onClick={() => router.push("/contact")}
             onMouseEnter={() => router.prefetch("/contact")}
@@ -405,21 +540,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
             whileTap={{ scale: 0.95 }}
           >
             CONTACT US
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
-            </svg> */}
-          </motion.button>
+            
+          </motion.button> */}
         </div>
       </div>
     </motion.div>

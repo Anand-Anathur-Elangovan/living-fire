@@ -15,6 +15,7 @@ import { ChevronDown } from "react-feather";
 import { generateSlug } from "@/src/helper/slug/slug";
 import LowerArea from "@/src/components/custom/LowerArea";
 import Showrooms from "@/src/components/custom/Showrooms/Showrooms";
+import Link from "next/link";
 
 const brandLogos = {
   cocoon: () => import("@/public/assets/homePage/ourBrands/cocoon.svg"),
@@ -346,7 +347,7 @@ const Home = () => {
                     className={`overlay-image ${zoomImage ? "zoom" : ""}`}
                     priority
                     fetchPriority="high"
-                    quality={65}
+                    quality={95}
                     width={1920}
                     height={1080}
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -385,11 +386,14 @@ const Home = () => {
                   transition: "opacity 0.5s ease-in-out",
                 }}
               >
-                LIVING FIRE
+                <Link href="/allProducts" legacyBehavior>
+                  <a style={{ color: "inherit", textDecoration: "none" }}>
+                    LIVING FIRE
+                  </a>
+                </Link>
               </div>
             </motion.div>
             <motion.div
-              
               className="text-group-subheading show"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -397,7 +401,7 @@ const Home = () => {
             >
               {/* <span className="blur-text">Architectural Fireplace Design</span> */}
               <h1
-              id="subheading"
+                id="subheading"
                 className="blur-text"
                 style={{
                   display: "inline",
@@ -406,7 +410,8 @@ const Home = () => {
                   margin: 0,
                   padding: 0,
                   lineHeight: "inherit",
-                   opacity: 0, transition: "opacity 0.5s ease-in-out" 
+                  opacity: 0,
+                  transition: "opacity 0.5s ease-in-out",
                 }}
               >
                 Architectural Fireplace Design
@@ -423,28 +428,44 @@ const Home = () => {
                 (fuelType, index) =>
                   fuelType?.fueltype_name !== "Hybrid - Wood/Electric" && (
                     <React.Fragment key={`fuelType-${fuelType.fueltype_id}`}>
-                      <button
-                        key={`fuelType-${fuelType.fueltype_id}`}
-                        onClick={() =>
-                          allProductsRouteHandler(
-                            "fuelType",
-                            fuelType.fueltype_name,
-                            fuelType.fueltype_id,
-                            fuelType?.slug
-                          )
+                      <Link
+                        href={
+                          fuelType?.slug
+                            ? `/allProducts/${fuelType.slug}`
+                            : `/allProducts/${fuelType.fueltype_name}`
                         }
-                        className="p-0 m-0 flex gap-3"
-                        aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
+                        passHref
+                        legacyBehavior
                       >
-                        {fuelType.fueltype_name === "Cooker"
-                          ? "Cookers"
-                          : fuelType.fueltype_name}
-                        {/* {index < fuelTypes.length - 1 && (
+                        <a
+                          className="p-0 m-0 flex gap-3"
+                          aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
+                          style={{ color: "inherit", textDecoration: "none" }}
+                        >
+                          <button
+                            key={`fuelType-${fuelType.fueltype_id}`}
+                            onClick={() =>
+                              allProductsRouteHandler(
+                                "fuelType",
+                                fuelType.fueltype_name,
+                                fuelType.fueltype_id,
+                                fuelType?.slug
+                              )
+                            }
+                            className="p-0 m-0 flex gap-3"
+                            aria-label={`Browse ${fuelType.fueltype_name} fireplaces`}
+                          >
+                            {fuelType.fueltype_name === "Cooker"
+                              ? "Cookers"
+                              : fuelType.fueltype_name}
+                            {/* {index < fuelTypes.length - 1 && (
                         <span className="hidden md:flex items-center text-white">
                           |
                         </span>
                       )} */}
-                      </button>
+                          </button>
+                        </a>
+                      </Link>
                       {index < fuelTypes.length - 1 && (
                         <span className="hidden md:flex items-center text-white">
                           |

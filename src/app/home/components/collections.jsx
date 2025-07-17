@@ -9,6 +9,7 @@ import LeftArrow from "@/public/assets/homePage/collections/arrow-left.svg";
 import CircleArrow from "@/public/assets/homePage/collections/circle-arrow.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
   const router = useRouter();
@@ -136,11 +137,11 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
           ...item,
           fueltype_name: match.fueltype_name,
           is_active: match.is_active,
-          slug:  match.slug
+          slug: match.slug,
         }
       : item;
   });
-
+  console.log("Fuel Types:", mergedOutput);
   return (
     <motion.section
       initial="hidden"
@@ -174,26 +175,37 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
             onMouseLeave={() => setHoveredItem(null)}
           >
             <div className="collection-image-container overflow-hidden">
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={600}
-                height={800}
-                className="collection-image w-full h-auto aspect-[3/4] object-cover"
-                onClick={() => {
-                  handleRoutePrefetch(item.route);
-                  allProductsRouteHandler(
-                    "fuelType",
-                    item.fueltype_name,
-                    item.fueltype_id,
-                    item.slug
-                  );
-                }}
-                loading={index < 2 ? "eager" : "lazy"}
-                quality={85}
-                sizes="(max-width: 768px) 100vw, 20vw"
-              />
-
+              <Link
+                href={
+                  item.slug
+                    ? `/allProducts/${item.slug}`
+                    : `/allProducts/${item.fueltype_name}`
+                }
+                passHref
+                legacyBehavior
+              >
+                <a className="w-full h-full block">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={600}
+                    height={800}
+                    className="collection-image w-full h-auto aspect-[3/4] object-cover"
+                    onClick={() => {
+                      handleRoutePrefetch(item.route);
+                      allProductsRouteHandler(
+                        "fuelType",
+                        item.fueltype_name,
+                        item.fueltype_id,
+                        item.slug
+                      );
+                    }}
+                    loading={index < 2 ? "eager" : "lazy"}
+                    quality={85}
+                    sizes="(max-width: 768px) 100vw, 20vw"
+                  />
+                </a>
+              </Link>
               {hoveredItem === item.fueltype_id && (
                 <motion.div
                   className="circle-arrow absolute top-4 right-4 bg-white bg-opacity-80 rounded-full p-2 shadow-md"
@@ -214,57 +226,85 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
             </div>
 
             <div className="mt-4 gap-8 flex flex-col px-2">
-              <div className="gap-4 flex flex-col"> 
-              <h2
-                className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
-                onClick={() => {
-                  handleRoutePrefetch(item.route);
-                  allProductsRouteHandler(
-                    "fuelType",
-                    item.fueltype_name,
-                    item.fueltype_id, 
-                    item?.slug
-                  );
-                }}
-                tabIndex={0}
-                style={{ fontFamily: 'Satoru, sans-serif' }}
-              >
-                {item.title}
-              </h2>
-              <div className="description-container">
-                <p className="font-sans font-normal leading-5 text-sm text-gray-700" style={{ fontFamily: '"Public Sans", sans-serif' }}>
-                  {item.description}
-                </p>
-              </div>
-              </div>
-              <button
-                className="font-medium font-sans text-sm cursor-pointer focus:outline-none hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
-                onClick={() => {
-                  handleRoutePrefetch(item.route);
-                  allProductsRouteHandler(
-                    "fuelType",
-                    item.fueltype_name,
-                    item.fueltype_id,
-                    item?.slug
-                  );
-                }}
-                style={{ fontFamily: 'Satoru, sans-serif' }}
-              >
-                View Collection
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              <div className="gap-4 flex flex-col">
+                <Link
+                  href={
+                    item.slug
+                      ? `/allProducts/${item.slug}`
+                      : `/allProducts/${item.fueltype_name}`
+                  }
+                  passHref
+                  legacyBehavior
                 >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </button>
+                  <a className="font-sans font-medium leading-6 text-base text-wrap hover:underline">
+                    <h2
+                      className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
+                      onClick={() => {
+                        handleRoutePrefetch(item.route);
+                        allProductsRouteHandler(
+                          "fuelType",
+                          item.fueltype_name,
+                          item.fueltype_id,
+                          item?.slug
+                        );
+                      }}
+                      tabIndex={0}
+                      style={{ fontFamily: "Satoru, sans-serif" }}
+                    >
+                      {item.title}
+                    </h2>
+                  </a>
+                </Link>
+
+                <div className="description-container">
+                  <p
+                    className="font-sans font-normal leading-5 text-sm text-gray-700"
+                    style={{ fontFamily: '"Public Sans", sans-serif' }}
+                  >
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+              <Link
+                href={
+                  item.slug
+                    ? `/allProducts/${item.slug}`
+                    : `/allProducts/${item.fueltype_name}`
+                }
+                passHref
+                legacyBehavior
+              >
+                <a className="font-medium font-sans text-sm hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1">
+                  <button
+                    className="font-medium font-sans text-sm cursor-pointer focus:outline-none hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
+                    onClick={() => {
+                      handleRoutePrefetch(item.route);
+                      allProductsRouteHandler(
+                        "fuelType",
+                        item.fueltype_name,
+                        item.fueltype_id,
+                        item?.slug
+                      );
+                    }}
+                    style={{ fontFamily: "Satoru, sans-serif" }}
+                  >
+                    View Collection
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </a>
+              </Link>
             </div>
           </motion.div>
         ))}
@@ -393,56 +433,27 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
         </button>
       </div> */}
       <div className="collection-custom-button flex flex-col md:flex-row items-center gap-4 justify-center mt-[50px]">
-        <motion.button
-          className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
-          onClick={() => {
-            setNavigationState(null);
-            router.push(`/allProducts`);
-          }}
-          onMouseEnter={() => router.prefetch("/allProducts")}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          VIEW ALL
-          {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M14 5l7 7m0 0l-7 7m7-7H3"
-            />
-          </svg> */}
-        </motion.button>
+         <Link href="/allProducts" passHref legacyBehavior>
+    <motion.a
+      className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onMouseEnter={() => router.prefetch("/allProducts")}
+    >
+      VIEW ALL
+    </motion.a>
+  </Link>
 
-        <motion.button
-          className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
-          onClick={() => router.push("/contact")}
-          onMouseEnter={() => router.prefetch("/contact")}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          CONTACT US
-          {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-            />
-          </svg> */}
-        </motion.button>
+        <Link href="/contact" passHref legacyBehavior>
+    <motion.a
+      className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onMouseEnter={() => router.prefetch("/contact")}
+    >
+      CONTACT US
+    </motion.a>
+  </Link>
       </div>
       {/* Mobile Buttons */}
       {/* <div className="md:hidden flex flex-col sm:flex-row gap-4 justify-center mt-8 px-4">
