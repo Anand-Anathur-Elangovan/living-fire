@@ -129,9 +129,11 @@ const Product = ({ params }) => {
               productType={ptype_name}
               fuelType={fueltype_name}
               productName={name}
+              // productSlug={product_slug}
               brandName={brand_name}
               fuelTypeId={fueltype_id}
               brandId={brand_id}
+              unwrappedParams={unwrappedParams}
             />
             {/* <br/> */}
             <HeroImage
