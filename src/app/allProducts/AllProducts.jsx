@@ -207,7 +207,7 @@ const [filterStatus, setFilterStatus] = useState({
       }
     });
     setFilters(extractedFilters);
-    console.log("extractedFilters", extractedFilters);
+    // console.log("extractedFilters", extractedFilters);
     const typeFilter = extractedFilters.find(
       (filter) => filter.filterType === "type"
     );
@@ -592,6 +592,8 @@ const [filterStatus, setFilterStatus] = useState({
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  
   return (
     <>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
