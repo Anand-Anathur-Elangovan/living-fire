@@ -60,7 +60,7 @@
 
 .home-button, .contact-button {
   padding: 0.8rem 1.8rem;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;

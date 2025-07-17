@@ -78,7 +78,7 @@ const Home = () => {
     const timeline = [
       { time: 500, action: () => setShowPanels(true) }, // Show panels after hero fades out
       { time: 1800, action: () => setAnimatePanels(true) }, // Animate panels
-      { time: 1800, action: () => setZoomImage(true) }, // Zoom image
+      // { time: 1800, action: () => setZoomImage(true) }, // Zoom image
       {
         time: 2000,
         action: () => {

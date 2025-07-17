@@ -500,7 +500,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       <div className="w-full flex flex-col items-center gap-4 mt-8 md:mt-12">
         <div className="flex flex-col md:flex-row items-center gap-4">
           {/* <motion.button
-            className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
+            className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300  flex items-center gap-2"
             onClick={() => {
               setNavigationState(null);
               router.push(`/allProducts`);
@@ -513,7 +513,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
           </motion.button> */}
           <Link href="/allProducts" passHref legacyBehavior>
             <motion.a
-              className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
+              className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300  flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onMouseEnter={() => router.prefetch("/allProducts")}
@@ -523,7 +523,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
           </Link>
           <Link href="/contact" passHref legacyBehavior>
             <motion.a
-              className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
+              className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300  flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onMouseEnter={() => router.prefetch("/contact")}
@@ -533,7 +533,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
           </Link>
 
           {/* <motion.button
-            className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
+            className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300  flex items-center gap-2"
             onClick={() => router.push("/contact")}
             onMouseEnter={() => router.prefetch("/contact")}
             whileHover={{ scale: 1.05 }}

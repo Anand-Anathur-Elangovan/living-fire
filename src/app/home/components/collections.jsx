@@ -435,7 +435,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       <div className="collection-custom-button flex flex-col md:flex-row items-center gap-4 justify-center mt-[50px]">
          <Link href="/allProducts" passHref legacyBehavior>
     <motion.a
-      className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300 shadow-lg flex items-center gap-2"
+      className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300  flex items-center gap-2"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onMouseEnter={() => router.prefetch("/allProducts")}
@@ -446,7 +446,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
 
         <Link href="/contact" passHref legacyBehavior>
     <motion.a
-      className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center gap-2"
+      className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300  flex items-center gap-2"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onMouseEnter={() => router.prefetch("/contact")}
