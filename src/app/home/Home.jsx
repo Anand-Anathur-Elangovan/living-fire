@@ -78,6 +78,20 @@ const Home = () => {
       { time: 500, action: () => setShowPanels(true) }, // Show panels after hero fades out
       { time: 1800, action: () => setAnimatePanels(true) }, // Animate panels
       { time: 1800, action: () => setZoomImage(true) }, // Zoom image
+      {
+        time: 2000,
+        action: () => {
+          // First fade in "Living Fire" (company-name)
+          document.getElementById("company-name").style.opacity = 1;
+        },
+      },
+      {
+        time: 2500,
+        action: () => {
+          // Then fade in "Architectural Fireplace Design" (text-group-subheading)
+          document.getElementById("subheading").style.opacity = 1;
+        },
+      },
       { time: 2500, action: () => setShowButtons(true) }, // Show buttons
     ];
 
@@ -365,13 +379,17 @@ const Home = () => {
                 id="company-name"
                 className="blur-text text-4xl font-bold"
                 onClick={() => router.push(`/allProducts`)}
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                  opacity: 0,
+                  transition: "opacity 0.5s ease-in-out",
+                }}
               >
                 LIVING FIRE
               </div>
             </motion.div>
-
             <motion.div
+              
               className="text-group-subheading show"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -379,6 +397,7 @@ const Home = () => {
             >
               {/* <span className="blur-text">Architectural Fireplace Design</span> */}
               <h1
+              id="subheading"
                 className="blur-text"
                 style={{
                   display: "inline",
@@ -387,6 +406,7 @@ const Home = () => {
                   margin: 0,
                   padding: 0,
                   lineHeight: "inherit",
+                   opacity: 0, transition: "opacity 0.5s ease-in-out" 
                 }}
               >
                 Architectural Fireplace Design
