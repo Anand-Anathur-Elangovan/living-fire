@@ -250,7 +250,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
               {isHovering && (
                 <>
                   <motion.button
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-all"
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm p-3 rounded-full  hover:bg-white transition-all"
                     onClick={scrollLeft}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -261,7 +261,7 @@ const OurBrands = ({ brandList, allProductsRouteHandler }) => {
                     <FiChevronLeft className="w-6 h-6 text-gray-700" />
                   </motion.button>
                   <motion.button
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-all"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm p-3 rounded-full  hover:bg-white transition-all"
                     onClick={scrollRight}
                     initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}

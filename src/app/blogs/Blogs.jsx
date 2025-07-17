@@ -142,7 +142,7 @@ const Blogs = () => {
           </Link>
         </motion.div>
         
-        <motion.div 
+        {/* <motion.div 
           className="construction-icon"
           animate={{
             rotate: [0, 10, -10, 0],
@@ -156,7 +156,7 @@ const Blogs = () => {
           variants={fadeInUp}
         >
           🚧
-        </motion.div>
+        </motion.div> */}
       </motion.div>
     </div>
   );

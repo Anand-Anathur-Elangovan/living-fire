@@ -220,7 +220,7 @@ const Footer = () => {
       <Box
         sx={{
           py: 4,
-          backgroundColor: "grey",
+          backgroundColor: "black",
           borderTop: "10px solid white",
           display: "flex",
           flexDirection: "column",
@@ -228,11 +228,11 @@ const Footer = () => {
           gap: 1,
         }}
       >
-        <Image
+        {/* <Image
           src={LFTitleLogo}
           alt="Living Fire Title Logo"
           style={{ filter: "invert(1)", height: 40, width: "auto" }}
-        />
+        /> */}
         <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
           © {new Date().getFullYear()} Living Fire. All rights reserved.
         </Typography>
