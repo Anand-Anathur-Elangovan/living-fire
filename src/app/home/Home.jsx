@@ -472,6 +472,12 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
+          style={{
+            padding: isDesktop ? "0" : "0 20px",
+            textAlign: "center",
+            maxWidth: "1200px",
+            margin: "0 auto",
+          }}
         >
           {/* <h1>STUNNING FIREPLACES FOR ANY HOME.</h1> */}
           <div id="hero-heading" className="text-4xl font-bold leading-tight">
