@@ -238,7 +238,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                 >
                   <a className="font-sans font-medium leading-6 text-base text-wrap hover:underline">
                     <h2
-                      className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
+                      className="uppercase font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
                       onClick={() => {
                         handleRoutePrefetch(item.route);
                         allProductsRouteHandler(
@@ -249,7 +249,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                         );
                       }}
                       tabIndex={0}
-                      style={{ fontFamily: "Satoru, sans-serif" }}
+                      // style={{ fontFamily: "Satoru, sans-serif" }}
                     >
                       {item.title}
                     </h2>
@@ -276,7 +276,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
               >
                 <a className="font-medium font-sans text-sm hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1">
                   <button
-                    className="font-medium font-sans text-sm cursor-pointer focus:outline-none hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
+                    className="uppercase font-medium font-sans text-sm cursor-pointer focus:outline-none hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
                     onClick={() => {
                       handleRoutePrefetch(item.route);
                       allProductsRouteHandler(
@@ -286,7 +286,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                         item?.slug
                       );
                     }}
-                    style={{ fontFamily: "Satoru, sans-serif" }}
+                    // style={{ fontFamily: "Satoru, sans-serif" }}
                   >
                     View Collection
                     <svg
