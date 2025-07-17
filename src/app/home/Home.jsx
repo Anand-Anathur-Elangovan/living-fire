@@ -483,7 +483,15 @@ const Home = () => {
           <div id="hero-heading" className="text-4xl font-bold leading-tight">
             STUNNING FIREPLACES FOR ANY HOME.
           </div>
-          <p>
+          <p
+            style={{
+              fontSize: isDesktop ? "1.1rem" : "1rem",
+              lineHeight: 1.5,
+              margin: "0 auto",
+              maxWidth: "800px",
+              padding: isDesktop ? "0" : "0 10px",
+            }}
+          >
             At Living Fire, we believe our work is complete only when our
             clients are enjoying the warmth of their new fireplace with a glass
             of wine in hand. To ensure every customer across Melbourne and
