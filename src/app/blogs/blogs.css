@@ -1,0 +1,151 @@
+.under-construction-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+  /* Background image with overlay */
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.7)), 
+    url('/assets/lowerArea/Review04.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+}
+
+.content-wrapper {
+  max-width: 800px;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+ left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff7a18, #ff4d00);
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.home-button, .contact-button {
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none; /* Removes underline */
+  display: inline-block; /* Better for motion */
+  border: none; /* Reset for home button */
+}
+
+.home-button {
+  background-color: #000;
+  color: white;
+  border: 2px solid #000;
+}
+
+.contact-button {
+  background-color: transparent;
+  color: #000;
+  border: 2px solid #000;
+}
+
+.home-button:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+.contact-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.construction-icon {
+  font-size: 4rem;
+  margin-top: 2rem;
+  color: #000;
+}
+
+/* Fire-like subtle gradient effects */
+.content-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    transparent, 
+    rgba(255, 120, 24, 0.1), 
+    transparent);
+  z-index: -1;
+  border-radius: 18px;
+  animation: fireGlow 8s infinite alternate;
+}
+
+@keyframes fireGlow {
+  0% { opacity: 0.1; }
+  100% { opacity: 0.3; }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 2rem 1.5rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+  
+  .button-group {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .home-button, .contact-button {
+    width: 100%;
+  }
+
+  .under-construction-container {
+    padding: 1rem;
+    background: 
+      linear-gradient(rgba(0, 0, 0, 0.8)), 
+      url('/assets/lowerArea/Review04.jpg') no-repeat center center;
+    background-size: cover;
+  }
+}

@@ -1713,8 +1713,8 @@ const Filters = () => {
               )}
             </div>
           </div>
-          <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
-            {/* Left Arrow */}
+          {/* <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
+      
             {pageIndex > 0 && (
               <Image
                 src={LeftArrowIcon}
@@ -1725,7 +1725,7 @@ const Filters = () => {
               />
             )}
 
-            {/* First Page */}
+     
             <span
               className={`cursor-pointer ${
                 pageIndex === 0 ? "font-bold text-black" : ""
@@ -1735,10 +1735,10 @@ const Filters = () => {
               1
             </span>
 
-            {/* Ellipsis after First Page */}
+       
             {pageIndex > 2 && <span>...</span>}
 
-            {/* Pages Around Current Page */}
+       
             {pageIndex > 1 && (
               <span
                 className="cursor-pointer"
@@ -1748,12 +1748,12 @@ const Filters = () => {
               </span>
             )}
 
-            {/* Current Page */}
+       
             {pageIndex !== 0 && pageIndex !== maxPageCount - 1 && (
               <span className="font-bold text-black">{pageIndex + 1}</span>
             )}
 
-            {/* Next Page */}
+        
             {pageIndex + 1 < maxPageCount - 1 && (
               <span
                 className="cursor-pointer"
@@ -1763,10 +1763,10 @@ const Filters = () => {
               </span>
             )}
 
-            {/* Ellipsis before Last Page */}
+       
             {pageIndex + 2 < maxPageCount - 1 && <span>...</span>}
 
-            {/* Last Page */}
+       
             {maxPageCount > 1 && (
               <span
                 className={`cursor-pointer ${
@@ -1778,7 +1778,7 @@ const Filters = () => {
               </span>
             )}
 
-            {/* Right Arrow */}
+     
             {pageIndex < maxPageCount - 1 && (
               <Image
                 src={RightArrowIcon}
@@ -1788,7 +1788,118 @@ const Filters = () => {
                 unoptimized
               />
             )}
-          </div>
+          </div> */}
+          <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
+  {/* First Page (<<) */}
+  {pageIndex > 0 && (
+    <>
+      <span 
+        className="cursor-pointer"
+        onClick={() => onPageIndexClick(0)}
+      >
+        &lt;&lt;
+      </span>
+      <span className="mx-1"> </span>
+      {/* <span className="mx-1">|</span> */}
+    </>
+  )}
+
+  {/* Previous Page (<) */}
+  {pageIndex > 0 && (
+    <span 
+      className="cursor-pointer"
+      onClick={() => onPageIndexClick(pageIndex - 1)}
+    >
+      &lt;
+    </span>
+  )}
+
+  {/* Page Numbers */}
+  {(() => {
+    const pages = [];
+    // Always show first page
+    pages.push(
+      <span
+        key={0}
+        className={`cursor-pointer ${
+          pageIndex === 0 ? "font-bold text-black" : ""
+        }`}
+        onClick={() => onPageIndexClick(0)}
+      >
+        1
+      </span>
+    );
+
+    // Show current page and adjacent pages
+    const startPage = Math.max(1, pageIndex - 1);
+    const endPage = Math.min(maxPageCount - 1, pageIndex + 1);
+
+    if (startPage > 1) {
+      pages.push(<span key="left-ellipsis">...</span>);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      if (i > 0 && i < maxPageCount - 1) {
+        pages.push(
+          <span
+            key={i}
+            className={`cursor-pointer ${
+              pageIndex === i ? "font-bold text-black" : ""
+            }`}
+            onClick={() => onPageIndexClick(i)}
+          >
+            {i + 1}
+          </span>
+        );
+      }
+    }
+
+    if (endPage < maxPageCount - 2) {
+      pages.push(<span key="right-ellipsis">...</span>);
+    }
+
+    // Always show last page if there are multiple pages
+    if (maxPageCount > 1) {
+      pages.push(
+        <span
+          key={maxPageCount - 1}
+          className={`cursor-pointer ${
+            pageIndex === maxPageCount - 1 ? "font-bold text-black" : ""
+          }`}
+          onClick={() => onPageIndexClick(maxPageCount - 1)}
+        >
+          {maxPageCount}
+        </span>
+      );
+    }
+
+    return pages;
+  })()}
+
+  {/* Next Page (>) */}
+  {pageIndex < maxPageCount - 1 && (
+    <span 
+      className="cursor-pointer"
+      onClick={() => onPageIndexClick(pageIndex + 1)}
+    >
+      &gt;
+    </span>
+  )}
+
+  {/* Last Page (>>) */}
+  {pageIndex < maxPageCount - 1 && (
+    <>
+      {/* <span className="mx-1">|</span> */}
+      <span className="mx-1"> </span>
+      <span 
+        className="cursor-pointer"
+        onClick={() => onPageIndexClick(maxPageCount - 1)}
+      >
+        &gt;&gt;
+      </span>
+    </>
+  )}
+</div>
         </>
         {/* <OurDifference fireplaceType={fireplaceType} />
         <OurShowrooms /> */}
