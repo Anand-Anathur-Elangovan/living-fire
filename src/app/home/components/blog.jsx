@@ -119,11 +119,11 @@ const Blog = () => {
   return (
     <div className="flex relative justify-center flex-col gap-6 md:ml-20 md:mr-20 md:gap-10 md:mb-20 px-4 sm:px-6 md:px-[300px]">
       <div className="flex flex-row items-center w-full mb-2 md:mb-4">
-        <Link href="/blogs" passHref>
-          <h2 className="heading1 flex w-full justify-center text-3xl md:text-4xl lg:text-5xl cursor-pointer hover:underline">
+        {/* <Link href="/blogs" passHref> */}
+          <h2 className="heading1 flex w-full justify-center text-3xl md:text-4xl lg:text-5xl cursor-pointer">
             News & Blogs
           </h2>
-        </Link>
+        {/* </Link> */}
       </div>
 
       <div className="w-full flex flex-col md:flex-row gap-8 md:gap-4 pb-6 md:pb-1">
