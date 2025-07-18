@@ -148,21 +148,25 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
 
   return (
     <motion.div
-      className="flex relative justify-center flex-col gap-6 md:gap-16 ml-0 mr-0 md:ml-20 md:mr-20 px-4 md:px-[250px]"
+  //     className={`flex relative justify-center flex-col gap-6 md:gap-16 ml-0 mr-0 md:ml-20 md:mr-20 ${
+  //   isDesktop ? "desktop-feature-container" : ""
+  // }`}
+className={`featured-container ${isDesktop ? "desktop-feature-container" : "standard-margins"}`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={containerVariants}
-      style={{
-        ...(isDesktop && {
-          padding: "40px 340px",
-          margin: 0,
-          background:
-            "linear-gradient(to bottom, white 60%, rgb(247, 247, 245) 50%)",
-          minHeight: "100vh",
-          width: "100%",
-        }),
-      }}
+      // style={{
+      //   ...(isDesktop && {
+      //     // padding: "40px 340px",
+      //     padding: "40px clamp(120px, 17.7vw, 340px)", 
+      //     margin: 0,
+      //     background:
+      //       "linear-gradient(to bottom, white 60%, rgb(247, 247, 245) 50%)",
+      //     minHeight: "100vh",
+      //     width: "100%",
+      //   }),
+      // }}
     >
       <div className="flex flex-row items-center w-full">
         <h2 className="heading1 flex w-full justify-start md:justify-center md:ml-0 text-2xl md:text-[3rem]">
@@ -196,7 +200,8 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
 
       {isDesktop ? (
         // Desktop View - 2 rows of 3 products
-        <div className="grid grid-cols-3 gap-8 w-full px-8">
+        <div className="grid grid-cols-3 gap-8 w-full">
+        {/* // <div className="grid grid-cols-3 gap-4 md:gap-6 lg:gap-8 w-full px-4 md:px-6 lg:px-8"> */}
           {/* First Row */}
           <div className="grid grid-cols-3 gap-8 col-span-3">
             {carouselItems.slice(0, 3).map((item, index) => (

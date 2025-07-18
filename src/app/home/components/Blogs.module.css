@@ -1,0 +1,123 @@
+.container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 0 1rem;
+}
+
+.heading {
+  font-family: "Satoru", sans-serif;
+  font-weight: normal;
+  color: #000;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.blogGrid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.blogItem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.imageContainer {
+  position: relative;
+  overflow: hidden;
+  height: 280px;
+}
+
+.blogContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-family: sans-serif;
+  font-weight: 200;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.description {
+  font-family: sans-serif;
+  font-weight: 300;
+  line-height: 1.25;
+  color: #000;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.arrowSection {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 12%;
+  min-width: 120px;
+}
+
+/* Media Queries */
+@media (min-width: 640px) {
+  .imageContainer {
+    height: 380px;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin-left: 5rem;
+    margin-right: 5rem;
+    gap: 2.5rem;
+    padding: 0 12.5rem;
+  }
+  
+  .heading {
+    margin-bottom: 1rem;
+    font-size: 2.25rem;
+  }
+  
+  .blogGrid {
+    flex-direction: row;
+    gap: 1rem;
+    padding-bottom: 0.25rem;
+  }
+  
+  .blogItem {
+    width: 44%;
+    gap: 1.5rem;
+  }
+  
+  .imageContainer {
+    height: 450px;
+  }
+  
+  .arrowSection {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    font-size: 3rem;
+  }
+}

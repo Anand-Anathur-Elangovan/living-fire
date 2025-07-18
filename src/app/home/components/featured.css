@@ -22,6 +22,41 @@
   scrollbar-width: none;
 }
 
+
+/* Base container styles */
+.featured-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem; /* 24px - equivalent to gap-6 */
+}
+
+/* Standard margins (non-desktop) */
+.standard-margins {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (min-width: 768px) { /* md breakpoint */
+  .standard-margins {
+    margin-left: 5rem; /* 80px - equivalent to md:ml-20 */
+    margin-right: 5rem; /* 80px - equivalent to md:mr-20 */
+    gap: 4rem; /* 64px - equivalent to md:gap-16 */
+  }
+}
+
+/* Desktop-specific styles */
+.desktop-feature-container {
+  padding: 40px clamp(120px, 17.7vw, 340px);
+  margin: 0 !important; /* Forces override */
+  background: linear-gradient(to bottom, white 60%, rgb(247, 247, 245) 50%);
+  min-height: 100vh;
+  width: 100%;
+  gap: 4rem; /* Consistent with md:gap-16 */
+}
+
+
 @media (max-width: 640px) {
   .heading1 {
     font-size: 1.5rem;
@@ -74,5 +109,14 @@
   }
   .feature-row {
     display: contents;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .desktop-feature-container {
+    padding: 40px clamp(80px, 12vw, 200px);
+  }
+  
+  .feature-grid {
+    gap: 1.5rem;
   }
 }

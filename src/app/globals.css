@@ -7,7 +7,6 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  /* --font-satoru: "Satoru", sans-serif; */
   --font-satoru: "Satoru";
   --font-public-sans: "Public Sans", sans-serif;
   caret-color: transparent;
@@ -31,12 +30,6 @@ p,
   font-family: "Public Sans", sans-serif;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
 
 body {
   color: var(--foreground);
@@ -73,7 +66,7 @@ body {
   display: inline-block;
 }
 
-/* Tooltip text */
+
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -112,10 +105,7 @@ body {
 .cursor-default {
   cursor: default;
 }
-/* .input,
-textarea {
-  caret-color: auto !important; 
-} */
+
 .slick-dots li.slick-active button:before {
   background-color: #94999f !important;
 }
