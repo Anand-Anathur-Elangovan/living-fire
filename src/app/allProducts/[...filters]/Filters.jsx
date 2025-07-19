@@ -711,7 +711,7 @@ const Filters = () => {
   //   }
   // }, []);
 
-  console.log("filteredProducts", filteredProducts);
+  console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
   return (
     <>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
@@ -1844,7 +1844,7 @@ const Filters = () => {
                 >
                   <CircularProgress sx={{ color: "black" }} />
                 </Box>
-              ) : filteredProducts?.length === 0 ? (
+              ) : (allProducts?.length == 0) ? (
                 <div className="w-full flex flex-col items-center justify-center py-10 gap-6">
                   <h3 className="text-2xl font-medium text-center">
                     We dont have products for the selected criteria
