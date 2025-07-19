@@ -368,9 +368,11 @@ console.log("color", color)
                 className="custom-header-width"
                 onClick={handleHomeIconClick}
                 // style={{ filter: color === "white" ? "invert(1)" : "none" }}
-                style={{filter: color === "white" ? "invert(1)" : "invert(1)"}}
-                
-                
+                // style={{filter: color === "white" ? "invert(1)" : "invert(1)"}}
+                 style={{
+                          // filter: color === "white" ? "invert(1)" : "none",
+                           filter: isHomePage? "invert(1)" : color === "white" ? "invert(1)": "none",
+                        }}
               />
             ) : (
               <>
@@ -399,7 +401,7 @@ console.log("color", color)
                         title="Living Fire Company Logo"
                         style={{
                           // filter: color === "white" ? "invert(1)" : "none",
-                          filter: color === "white" ? "invert(1)" : "invert(1)",
+                          filter: isHomePage? "invert(1)" : color === "white" ? "invert(1)": "none",
                         }}
                       />
                     </motion.div>
@@ -413,7 +415,7 @@ console.log("color", color)
                         title="Living Fire Company Logo"
                         style={{
                           // filter: color === "white" ? "invert(1)" : "none",
-                          filter: color === "white" ? "invert(1)" : "invert(1)",
+                           filter: isHomePage? "invert(1)" : color === "white" ? "invert(1)": "none",
                         }}
                       />
                     </div>
