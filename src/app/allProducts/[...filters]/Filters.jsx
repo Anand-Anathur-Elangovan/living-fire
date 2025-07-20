@@ -722,25 +722,25 @@ const Filters = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
-useEffect(() => {
-  // Installation
-  let installValues = allProducts?.map((p) => p?.fn_get_products?.installation_id);
-  let newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
+// useEffect(() => {
+//   // Installation
+//   let installValues = allProducts?.map((p) => p?.fn_get_products?.installation_id);
+//   let newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
 
-  // Glass Orientation
-  let glassOrientationValues = allProducts?.map(
-    (p) => p?.fn_get_products?.glass_orientation_ids[0]
-  );
-  let newGlassOrientationValues = [...new Set(glassOrientationValues)].filter(
-    (v) => v !== null && v !== undefined
-  ).map((x) => parseInt(x));
-console.log("newGlassOrientationValuesCheck", newGlassOrientationValues)
-  setUpdatedValues((prev) => ({
-    ...prev,
-    installationValues: installationType ? prev.installationValues : newInstallValues,
-    glassOrientationValues: glassOrientationType ? prev.glassOrientationValues : newGlassOrientationValues,
-  }));
-}, [glassOrientationType, installationType, allProducts]);
+//   // Glass Orientation
+//   let glassOrientationValues = allProducts?.map(
+//     (p) => p?.fn_get_products?.glass_orientation_ids[0]
+//   );
+//   let newGlassOrientationValues = [...new Set(glassOrientationValues)].filter(
+//     (v) => v !== null && v !== undefined
+//   ).map((x) => parseInt(x));
+// console.log("newGlassOrientationValuesCheck", newGlassOrientationValues)
+//   setUpdatedValues((prev) => ({
+//     ...prev,
+//     installationValues: installationType ? prev.installationValues : newInstallValues,
+//     glassOrientationValues: glassOrientationType ? prev.glassOrientationValues : newGlassOrientationValues,
+//   }));
+// }, [glassOrientationType, installationType, allProducts]);
 
 
   // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
@@ -1341,15 +1341,17 @@ console.log("newGlassOrientationValuesCheck", newGlassOrientationValues)
                             "glassOrientationTypes",
                             glassOrientationTypes,
                             "filterStatus?.glassOrientationIdStatus",
-                            filterStatus?.glassOrientationIdStatus
+                            filterStatus?.glassOrientationIdStatus, 
+                            "glassOrientationType", glassOrientationType
                           )}
                           {firePlaceSubType.glassOrientation &&
-                            updatedValues?.glassOrientationValues?.length > 0 &&
+                            // updatedValues?.glassOrientationValues?.length > 0 &&
                             glassOrientationTypes?.map(
                               (glassval) =>
-                                updatedValues?.glassOrientationValues?.includes(
-                                  glassval?.glass_orientation_id
-                                ) && (
+                                // updatedValues?.glassOrientationValues?.includes(
+                                //   glassval?.glass_orientation_id
+                                // ) && 
+                                (
                                   <span
                                     key={
                                       "glasstypes" +
