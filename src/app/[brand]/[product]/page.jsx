@@ -134,6 +134,8 @@ import { kaloraProductsMetaData } from '@/src/components/metaData/kaloraProducts
 import { paulAgnewProductsMetaData } from '@/src/components/metaData/paulAgnewProductsMetaData';
 import { simpleProductLayoutMetaData } from '@/src/components/metaData/simpleProductLayoutMetaData';
 import { heatmasterProductsMetaData } from '@/src/components/metaData/heatmasterProductsMetaData';
+import { bosqProductsMetaData } from '@/src/components/metaData/bosqProductsMetaData';
+import { esseFiresProductsMetaData } from '@/src/components/metaData/esseFiresProductsMetaData';
 
 import { eurostoveProductsMetaData } from '@/src/components/metaData/eurostoveProductsMetaData';
 // Combine all metadata arrays into one searchable collection
@@ -147,7 +149,9 @@ const allProductsMetaData = [
   ...paulAgnewProductsMetaData,
   ...simpleProductLayoutMetaData,
   ...heatmasterProductsMetaData, 
-  ...eurostoveProductsMetaData
+  ...eurostoveProductsMetaData, 
+  ...bosqProductsMetaData,
+  ...esseFiresProductsMetaData
 ];
 
 export async function generateMetadata({ params }) {
