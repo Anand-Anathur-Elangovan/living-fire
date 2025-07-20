@@ -368,11 +368,11 @@ const Filters = () => {
     let glassOrientationValues = [];
     let newGlassOrientationValues = [];
     glassOrientationValues = allProducts.map(
-      (p) => p?.fn_get_products?.glass_orientation_id
+      (p) => p?.fn_get_products?.glass_orientation_ids[0]
     );
     newGlassOrientationValues = [...new Set(glassOrientationValues)].filter(
-      (v) => v !== null
-    );
+      (v) => v !== null&& v !== undefined
+    ).map((x) => parseInt(x));
 
     console.log(
       "newInstallValues",
@@ -450,10 +450,10 @@ const Filters = () => {
       let glassValues = [];
       let newGlassValues = [];
       glassValues = allProducts.map(
-        (p) => p.fn_get_products.glass_orientation_ids
+        (p) => p.fn_get_products.glass_orientation_ids[0]
       );
       newGlassValues = [...new Set([].concat(...glassValues))]
-        .filter((v) => v !== null)
+        .filter((v) => v !== null && v !== undefined)
         .map((x) => parseInt(x));
 
       let rangeValues = [];
@@ -724,17 +724,17 @@ const Filters = () => {
   }, []);
 useEffect(() => {
   // Installation
-  let installValues = allProducts.map((p) => p?.fn_get_products?.installation_id);
+  let installValues = allProducts?.map((p) => p?.fn_get_products?.installation_id);
   let newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
 
   // Glass Orientation
-  let glassOrientationValues = allProducts.map(
-    (p) => p?.fn_get_products?.glass_orientation_id
+  let glassOrientationValues = allProducts?.map(
+    (p) => p?.fn_get_products?.glass_orientation_ids[0]
   );
   let newGlassOrientationValues = [...new Set(glassOrientationValues)].filter(
-    (v) => v !== null
-  );
-
+    (v) => v !== null && v !== undefined
+  ).map((x) => parseInt(x));
+console.log("newGlassOrientationValuesCheck", newGlassOrientationValues)
   setUpdatedValues((prev) => ({
     ...prev,
     installationValues: installationType ? prev.installationValues : newInstallValues,
