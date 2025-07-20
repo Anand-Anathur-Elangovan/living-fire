@@ -405,7 +405,7 @@ const Filters = () => {
           ...prev,
           glassOrientationValues: glassOrientationTypeFilter?.id
             ? prev.glassOrientationValues
-            : newInstallValues,
+            : newGlassOrientationValues,
         };
       });
   }, [pathname]);
@@ -716,24 +716,32 @@ const Filters = () => {
     //   setproductMenuIndex(Number(queryParams.productMenuIndex));
   }, [searchParams]);
 
-  // useEffect(() => {
-  //   productMenuIndex !== 0 &&
-  //     updateQueryParams({
-  //       productMenuIndex: productMenuIndex,
-  //     });
-  // }, [productMenuIndex]);
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+useEffect(() => {
+  // Installation
+  let installValues = allProducts.map((p) => p?.fn_get_products?.installation_id);
+  let newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
 
-  // useEffect(() => {
-  //   const isMobile = window?.innerWidth <= 768;
-  //   if (isMobile) {
-  //     setIsFilter(false);
-  //   }
-  // }, []);
+  // Glass Orientation
+  let glassOrientationValues = allProducts.map(
+    (p) => p?.fn_get_products?.glass_orientation_id
+  );
+  let newGlassOrientationValues = [...new Set(glassOrientationValues)].filter(
+    (v) => v !== null
+  );
+
+  setUpdatedValues((prev) => ({
+    ...prev,
+    installationValues: installationType ? prev.installationValues : newInstallValues,
+    glassOrientationValues: glassOrientationType ? prev.glassOrientationValues : newGlassOrientationValues,
+  }));
+}, [glassOrientationType, installationType, allProducts]);
+
 
   // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
   return (
