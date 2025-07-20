@@ -722,25 +722,7 @@ const Filters = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
-// useEffect(() => {
-//   // Installation
-//   let installValues = allProducts?.map((p) => p?.fn_get_products?.installation_id);
-//   let newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
 
-//   // Glass Orientation
-//   let glassOrientationValues = allProducts?.map(
-//     (p) => p?.fn_get_products?.glass_orientation_ids[0]
-//   );
-//   let newGlassOrientationValues = [...new Set(glassOrientationValues)].filter(
-//     (v) => v !== null && v !== undefined
-//   ).map((x) => parseInt(x));
-// console.log("newGlassOrientationValuesCheck", newGlassOrientationValues)
-//   setUpdatedValues((prev) => ({
-//     ...prev,
-//     installationValues: installationType ? prev.installationValues : newInstallValues,
-//     glassOrientationValues: glassOrientationType ? prev.glassOrientationValues : newGlassOrientationValues,
-//   }));
-// }, [glassOrientationType, installationType, allProducts]);
 
 
   // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
@@ -808,8 +790,9 @@ const Filters = () => {
         {!brandType && (
           <div className="flex flex-row justify-between bg-[#DDE6ED] md:bg-transparent">
             <div className="flex flex-row md:justify-center items-center w-full gap-8 md:gap-14 p-3 overflow-x-auto">
-              {!fireplaceType &&
-                !brandType &&
+              {
+              // !fireplaceType &&
+              //   !brandType &&
                 allProductMenu.map((productMenu, index) => (
                   <div
                     className="flex flex-col gap-1 items-center text-center cursor-pointer text-xs md:text-base"
@@ -1074,9 +1057,10 @@ const Filters = () => {
                           {fireplaceType
                             ? fuelTypes?.map(
                                 (val) =>
-                                  updatedValues?.fueltypeValues?.includes(
-                                    val?.fueltype_id
-                                  ) && (
+                                  // updatedValues?.fueltypeValues?.includes(
+                                  //   val?.fueltype_id
+                                  // ) &&
+                                   (
                                     <div
                                       key={
                                         "fireplaceTypes" + val?.fueltype_id ??

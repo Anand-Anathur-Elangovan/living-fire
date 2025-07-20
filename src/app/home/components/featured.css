@@ -34,8 +34,8 @@
 
 /* Standard margins (non-desktop) */
 .standard-margins {
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 @media (min-width: 768px) { /* md breakpoint */
