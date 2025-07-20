@@ -290,7 +290,7 @@ const Filters = () => {
     installationType ?? 0,
     glassOrientationType ?? 0
   );
-
+  console.log("pathname", pathname);
   useEffect(() => {
     const pathSegments = pathname
       .split("/")
@@ -362,9 +362,24 @@ const Filters = () => {
     newFuelValues = [...new Set(values)].filter((v) => v !== null);
     let installValues = [];
     let newInstallValues = [];
-    installValues = allProducts.map((p) => p.fn_get_products.installation_id);
+    installValues = allProducts.map((p) => p?.fn_get_products?.installation_id);
     newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
-    console.log("newInstallValues", newInstallValues, "installValues", installValues)
+
+    let glassOrientationValues = [];
+    let newGlassOrientationValues = [];
+    glassOrientationValues = allProducts.map(
+      (p) => p?.fn_get_products?.glass_orientation_id
+    );
+    newGlassOrientationValues = [...new Set(glassOrientationValues)].filter(
+      (v) => v !== null
+    );
+
+    console.log(
+      "newInstallValues",
+      newInstallValues,
+      "installValues",
+      installValues
+    );
     fuelTypeFilter &&
       setUpdatedValues((prev) => {
         return {
@@ -380,6 +395,16 @@ const Filters = () => {
           ...prev,
           installationValues: installationTypeFilter?.id
             ? prev.installationValues
+            : newInstallValues,
+        };
+      });
+
+    glassOrientationTypeFilter &&
+      setUpdatedValues((prev) => {
+        return {
+          ...prev,
+          glassOrientationValues: glassOrientationTypeFilter?.id
+            ? prev.glassOrientationValues
             : newInstallValues,
         };
       });
@@ -441,14 +466,12 @@ const Filters = () => {
           fueltypeValues: fuelTypes?.map((val) => val.fueltype_id),
           //  newFuelValues,
           // fireplaceType ? prev.fueltypeValues : newFuelValues,
-          installationValues:
-            installationType
-              ? prev.installationValues
-              : newInstallValues,
-          glassOrientationValues:
-            glassOrientationType
-              ? prev.glassOrientationValues
-              : newGlassValues,
+          installationValues: installationType
+            ? prev.installationValues
+            : newInstallValues,
+          glassOrientationValues: glassOrientationType
+            ? prev.glassOrientationValues
+            : newGlassValues,
           rangeValues: rangeType ? prev.rangeValues : newRangeValues,
         };
       });
@@ -1302,8 +1325,15 @@ const Filters = () => {
                               !filterStatus?.glassOrientationIdStatus && "none",
                           }}
                         >
-                          {console.log('firePlaceSubType.glassOrientation', firePlaceSubType.glassOrientation, "updatedValues?.glassOrientationValues?.length", updatedValues?.glassOrientationValues,
-                            "glassOrientationTypes", glassOrientationTypes, "filterStatus?.glassOrientationIdStatus", filterStatus?.glassOrientationIdStatus
+                          {console.log(
+                            "firePlaceSubType.glassOrientation",
+                            firePlaceSubType.glassOrientation,
+                            "updatedValues?.glassOrientationValues?.length",
+                            updatedValues?.glassOrientationValues,
+                            "glassOrientationTypes",
+                            glassOrientationTypes,
+                            "filterStatus?.glassOrientationIdStatus",
+                            filterStatus?.glassOrientationIdStatus
                           )}
                           {firePlaceSubType.glassOrientation &&
                             updatedValues?.glassOrientationValues?.length > 0 &&
@@ -1848,7 +1878,7 @@ const Filters = () => {
                 >
                   <CircularProgress sx={{ color: "black" }} />
                 </Box>
-              ) : (allProducts?.length == 0) ? (
+              ) : allProducts?.length == 0 ? (
                 <div className="w-full flex flex-col items-center justify-center py-10 gap-6">
                   <h3 className="text-2xl font-medium text-center">
                     We dont have products for the selected criteria
@@ -1991,17 +2021,18 @@ const Filters = () => {
             {(() => {
               const pages = [];
               // Always show first page
-              filteredProducts?.length> 0 && pages.push(
-                <span
-                  key={0}
-                  className={`cursor-pointer ${
-                    pageIndex === 0 ? "font-bold text-black" : ""
-                  }`}
-                  onClick={() => onPageIndexClick(0)}
-                >
-                  1
-                </span>
-              );
+              filteredProducts?.length > 0 &&
+                pages.push(
+                  <span
+                    key={0}
+                    className={`cursor-pointer ${
+                      pageIndex === 0 ? "font-bold text-black" : ""
+                    }`}
+                    onClick={() => onPageIndexClick(0)}
+                  >
+                    1
+                  </span>
+                );
 
               // Show current page and adjacent pages
               const startPage = Math.max(1, pageIndex - 1);
