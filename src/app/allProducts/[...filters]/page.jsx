@@ -341,13 +341,7 @@ specialCombinationsMetaData.forEach((item) => {
 const formatFilter = (filter) =>
   decodeURIComponent(filter).replace(/_/g, " ").toLowerCase();
 
-const generateSeoData = (filters, matchedMetadata = []) => {
-  console.log(
-    "filtersSEO in filter",
-    filters,
-    filters?.length,
-    matchedMetadata
-  );
+const generateSeoData = (filters, matchedMetadata = []) => {;
   const displayFilters = filters.map(
     (f) => f.charAt(0).toUpperCase() + f.slice(1)
   );
