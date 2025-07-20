@@ -142,7 +142,7 @@ const Blog = () => {
     
   return (
     <div className="flex flex-col items-center justify-center gap-6 px-4 sm:px-6 md:ml-20 md:mr-20 md:gap-10 md:mb-20"
-      style={{ padding: isDesktop ? "40px clamp(120px, 17.7vw, 240px)" : "20px 80px" }}>
+      style={{ padding: isDesktop ? "40px clamp(120px, 17.7vw, 240px)" : "20px 45px" }}>
       {/* Header */}
       <div className="flex w-full items-center justify-center mb-2 md:mb-4">
         <h2 className="w-full text-center font-satoru text-3xl font-normal text-black md:text-4xl lg:text-5xl">
