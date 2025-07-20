@@ -364,6 +364,7 @@ const Filters = () => {
     let newInstallValues = [];
     installValues = allProducts.map((p) => p.fn_get_products.installation_id);
     newInstallValues = [...new Set(installValues)].filter((v) => v !== null);
+    console.log("newInstallValues", newInstallValues, "installValues", installValues)
     fuelTypeFilter &&
       setUpdatedValues((prev) => {
         return {
@@ -441,11 +442,11 @@ const Filters = () => {
           //  newFuelValues,
           // fireplaceType ? prev.fueltypeValues : newFuelValues,
           installationValues:
-            installationType || glassOrientationType
+            installationType
               ? prev.installationValues
               : newInstallValues,
           glassOrientationValues:
-            installationType || glassOrientationType
+            glassOrientationType
               ? prev.glassOrientationValues
               : newGlassValues,
           rangeValues: rangeType ? prev.rangeValues : newRangeValues,
@@ -711,7 +712,7 @@ const Filters = () => {
   //   }
   // }, []);
 
-  console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
+  // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
   return (
     <>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
@@ -1301,7 +1302,7 @@ const Filters = () => {
                               !filterStatus?.glassOrientationIdStatus && "none",
                           }}
                         >
-                          {console.log('firePlaceSubType.glassOrientation', firePlaceSubType.glassOrientation, "updatedValues?.glassOrientationValues?.length", updatedValues?.glassOrientationValues?.length,
+                          {console.log('firePlaceSubType.glassOrientation', firePlaceSubType.glassOrientation, "updatedValues?.glassOrientationValues?.length", updatedValues?.glassOrientationValues,
                             "glassOrientationTypes", glassOrientationTypes, "filterStatus?.glassOrientationIdStatus", filterStatus?.glassOrientationIdStatus
                           )}
                           {firePlaceSubType.glassOrientation &&
