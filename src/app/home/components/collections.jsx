@@ -141,7 +141,6 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
         }
       : item;
   });
-  console.log("Fuel Types:", mergedOutput);
   return (
     <motion.section
       initial="hidden"

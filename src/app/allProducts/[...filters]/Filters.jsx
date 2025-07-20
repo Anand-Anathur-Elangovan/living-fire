@@ -1301,9 +1301,12 @@ const Filters = () => {
                               !filterStatus?.glassOrientationIdStatus && "none",
                           }}
                         >
+                          {console.log('firePlaceSubType.glassOrientation', firePlaceSubType.glassOrientation, "updatedValues?.glassOrientationValues?.length", updatedValues?.glassOrientationValues?.length,
+                            "glassOrientationTypes", glassOrientationTypes, "filterStatus?.glassOrientationIdStatus", filterStatus?.glassOrientationIdStatus
+                          )}
                           {firePlaceSubType.glassOrientation &&
                             updatedValues?.glassOrientationValues?.length > 0 &&
-                            glassOrientationTypes.map(
+                            glassOrientationTypes?.map(
                               (glassval) =>
                                 updatedValues?.glassOrientationValues?.includes(
                                   glassval?.glass_orientation_id
