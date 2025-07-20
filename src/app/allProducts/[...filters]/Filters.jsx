@@ -1225,12 +1225,13 @@ const Filters = () => {
                           }}
                         >
                           {firePlaceSubType.installation &&
-                            updatedValues?.installationValues?.length > 0 &&
+                            // updatedValues?.installationValues?.length > 0 &&
                             installationTypes.map(
                               (installval) =>
-                                updatedValues?.installationValues?.includes(
-                                  installval?.installation_id
-                                ) && (
+                                // updatedValues?.installationValues?.includes(
+                                //   installval?.installation_id
+                                // ) &&
+                                 (
                                   <span
                                     key={
                                       "installtypes" +
