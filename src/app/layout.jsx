@@ -67,6 +67,7 @@ export default function RootLayout({ children }) {
       <head>
         <InlineCriticalCSS />
          <meta name="robots" content="noindex" />
+         {/* <meta name="google-site-verification" content="SLUTUDd4zGYmysqN2rWQooOLlsUXLshc1n-dert7AXU" /> */}
         {/* Font Preloading */}
         <link
           rel="preload"
