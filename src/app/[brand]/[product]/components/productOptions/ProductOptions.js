@@ -781,13 +781,13 @@ const ProductOptions = ({
       </motion.div>
 
       <motion.div className={styles.buttonContainer} variants={itemVariants}>
-        <motion.button
+        {/* <motion.button
           className={styles.addToCart}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
           ADD TO CART
-        </motion.button>
+        </motion.button> */}
         <motion.button
           className={styles.enquiry}
           onClick={openModal}
