@@ -115,7 +115,7 @@ export default function RootLayout({ children }) {
       <body className="antialiased">
         {/* Optimized Google Tag Manager */}
          <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XD9XM6CVMJ"
+          src="https://www.googletagmanager.com/gtag/js?id=KYR1VR1063"
           strategy="lazyOnload"
           id="gtm-script"
         />
@@ -127,7 +127,7 @@ export default function RootLayout({ children }) {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-XD9XM6CVMJ', {
+              gtag('config', 'KYR1VR1063', {
                 page_path: window.location.pathname,
               });
             `,
