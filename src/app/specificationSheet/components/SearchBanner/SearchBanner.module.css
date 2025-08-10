@@ -1,0 +1,79 @@
+.searchBanner {
+  height: 818px;
+  background-image: url("/assets/specpageimg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  align-self: stretch;
+  padding: 56px;
+}
+.column {
+  margin-top: 242px;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.searchByProduct {
+  gap: 32px;
+  background-color: #00000019;
+  display: flex;
+  width: 28%;
+  flex-direction: column;
+  padding: 38px;
+}
+.searchText {
+  display: flex;
+  justify-content: center;
+}
+.searchBy {
+  color: #ffffff;
+  font-family: Satoru, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+}
+.searchContainer {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+}
+.searchInput {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  border: none;
+  border-bottom: 0.5px solid white;
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+.searchInput::placeholder {
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 400;
+}
+.searchIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40px;
+  pointer-events: none;
+}
+.selectABrand {
+  padding: 40px 0;
+  background-color: #f7f7f5;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.brandSelect {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.brandSelector {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

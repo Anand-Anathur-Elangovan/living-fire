@@ -1,0 +1,94 @@
+/* Add these to your home.css file */
+
+/* Base styles for all devices */
+.slider-container {
+    width: 100%;
+  }
+  
+  /* Tablet styles (768px - 1024px) */
+  @media (max-width: 1024px) {
+    .slider-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      height: auto;
+      min-height: 300px;
+    }
+  
+    .slider-container .slick-slide > div {
+      width: 100%;
+    }
+  
+    .slider-container .slick-slide > div > div {
+      width: 100% !important;
+      max-width: 100%;
+      padding: 1rem;
+    }
+  
+    .slider-container .slick-slide > div > div::before {
+      font-size: 120px;
+      top: -50px;
+    }
+  
+    .slider-container .slick-slide > div > div > div {
+      padding-left: 4rem;
+      padding-right: 1rem;
+    }
+  
+    .heading1 {
+      font-size: 32px !important;
+    }
+  }
+  
+  /* Mobile styles (up to 767px) */
+  @media (max-width: 767px) {
+    .slider-container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      height: auto;
+      min-height: 400px;
+    }
+  
+    .slider-container .slick-slide {
+      padding: 0 5px;
+    }
+  
+    .slider-container .slick-slide > div {
+      width: 100%;
+    }
+  
+    .slider-container .slick-slide > div > div {
+      width: 100% !important;
+      max-width: 100%;
+      padding: 0.5rem;
+    }
+  
+    .slider-container .slick-slide > div > div::before {
+      font-size: 80px;
+      top: -30px;
+      left: -10px !important;
+    }
+  
+    .slider-container .slick-slide > div > div > div {
+      padding-left: 3rem;
+      padding-right: 0.5rem;
+    }
+  
+    .heading1 {
+      font-size: 24px !important;
+      text-align: center;
+    }
+  
+    /* Adjust slider settings for mobile */
+    .slider-container .slick-slider {
+      width: 100%;
+    }
+  
+    /* Show only one testimonial at a time on mobile */
+    .slider-container .slick-slide {
+      /* margin: 0 5px; */
+    }
+  
+    .slider-container .slick-list {
+      margin: 0 -5px;
+    }
+  }

@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@import url("https://fonts.googleapis.com/css2?family=Satoru:wght@400;700&display=swap");
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-satoru: "Satoru";
+  --font-public-sans: "Public Sans", sans-serif;
+  caret-color: transparent;
+  caret-color: auto;
+}
+@font-face {
+  font-family: 'Satoru';
+  src: url('/fonts/Satoru.woff2') format('woff2');
+  font-display: swap;
+}
+h1,
+h2,
+.title {
+  font-family: "Public Sans", sans-serif;
+}
+
+body,
+p,
+.subtitle,
+.option {
+  font-family: "Public Sans", sans-serif;
+}
+
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.heading1 {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 3rem;
+  line-height: 140%;
+  color: #000000;
+}
+@media (max-width: 768px) {
+  .heading1 {
+    font-family: "Public Sans";
+    font-style: normal;
+    font-weight: 200;
+    font-size: 36px;
+    line-height: 140%;
+    color: #000000;
+  }
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #c7c7ad;
+  color: black;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  border: #c7c7ad;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #c7c7ad transparent transparent transparent;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.slick-dots li.slick-active button:before {
+  background-color: #94999f !important;
+}
+
+.slick-dots li button:before {
+  border-color: #94999f !important;
+}

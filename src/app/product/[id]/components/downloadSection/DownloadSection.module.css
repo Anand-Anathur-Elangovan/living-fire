@@ -1,0 +1,240 @@
+.downloadSection {
+  align-self: stretch;
+  display: flex;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  padding: 0 100px;
+}
+
+.infosection {
+  gap: 30px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  min-height: 30vh;
+}
+
+.tabSection {
+  display: flex;
+  align-items: center;
+}
+
+.tab,
+.tab1 {
+  cursor: pointer;
+  padding: 22px 56px;
+  color: grey;
+}
+
+.activeTab {
+  border-bottom: 3px solid black !important;
+  color: black;
+}
+
+.lineelevenOne {
+  height: 1px;
+  background-color: #000000;
+}
+
+.faqSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+  align-items: flex-start; /* Ensures independent height */
+}
+
+/* .faqItem {
+  display: flex;
+  flex-direction: column;
+} */
+.faqItem {
+  width: 48%;
+  margin-bottom: 20px;
+}
+
+.faqQuestion {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+  font-size: 18px;
+}
+
+.faqAnswer {
+  padding-top: 10px;
+  color: #666;
+  font-size: 16px;
+}
+
+.divider {
+  height: 1px;
+  background-color: #000000;
+  margin-top: 10px;
+}
+
+.brochureSection {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.listspecsheet {
+  /* gap: 128px; */
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.columnTwo {
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  max-width: 300px;
+}
+
+.rowtext {
+  gap: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.imageclass {
+  height: 16px;
+  cursor: pointer;
+}
+
+.flexRowCenterCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewAllSpecs {
+  color: #1741be;
+  border: 1px solid #1741be;
+  height: 52px;
+  padding: 0 32px;
+  font-size: 14px;
+}
+
+.sizeH4 {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.sizeH6 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sizeBodyMedium {
+  font-size: 14px;
+}
+
+/* .descriptionTwo {
+  color: #666;
+} */
+
+.materialfinish {
+  color: black;
+}
+
+.text7 {
+  color: #1741be;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.DownloadSection_text7__rR7_c:hover {
+  color: darkblue;
+}
+
+.accessoriesContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.accessoriesTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.accessoriesCategory {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.accessoriesCategory div {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  text-align: center;
+}
+.accessoriesRowContainer {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.categoryTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  /* margin-bottom: 10px; */
+}
+
+.imageLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+  cursor: pointer;
+
+  position: relative;
+  display: block;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, opacity 0.3s;
+  border-radius: 10px;
+}
+
+.image {
+  /* width: 100%; */
+  max-width: 400px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+.imageLink:hover {
+  /* transform: scale(1.03); */
+}
+.image:hover {
+  transform: scale(1.05);
+}
+.imageLink:hover .image {
+  transform: scale(1.05);
+}
+.imageTitle {
+  font-size: 1rem;
+  /* text-align: center; */
+  margin-top: 5px;
+  color: #555;
+  /* text-align: center; */
+}
+
+.lg-backdrop {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.lg-outer {
+  transition: all 0.5s ease-in-out !important;
+}
