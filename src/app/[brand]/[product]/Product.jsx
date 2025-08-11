@@ -44,7 +44,11 @@ const Product = ({ params }) => {
   const [unwrappedParams, setUnwrappedParams] = useState(null);
   const [isAccessories, setIsAccessories] = useState(false);
   const [activeTab, setActiveTab] = useState("Downloads");
+  const [productOptionsHeight, setProductOptionsHeight] = useState();
+  const [descriptionColumnHeight, setDescriptionColumn] = useState();
   const downloadSectionRef = useRef(null);
+  // Add ref for ProductOptions
+  const productOptionsRef = useRef(null);
   // Unwrap params inside useEffect if needed
   useEffect(() => {
     async function fetchParams() {
@@ -56,6 +60,23 @@ const Product = ({ params }) => {
     }
     fetchParams();
   }, [params]);
+  useEffect(() => {
+    if (window?.innerWidth > 768) { 
+       if (
+        productOptionsHeight > descriptionColumnHeight &&
+        (productOptionsHeight - 450) > descriptionColumnHeight
+      ) {
+        console.log("productOptionsHeight", productOptionsHeight, "descriptionColumnHeight", descriptionColumnHeight);
+        const padValue = ((productOptionsHeight-450) - descriptionColumnHeight)+10;
+        console.log("padValue", padValue);
+        const topContainer = document.querySelector('.top-container');
+        if (topContainer) {
+          topContainer.style.paddingBottom = `${padValue}px`;
+        }
+      }
+    }
+  }, [productOptionsHeight, descriptionColumnHeight]);
+   
   // const state = getNavigationState();
   let { data } = useProductPage(unwrappedParams);
 
@@ -63,6 +84,8 @@ const Product = ({ params }) => {
     console.log("data?.product?.[0]",data?.product?.[0])
     setProductData(data?.product?.[0]);
   }, [data]);
+
+
 
   if (!productData) return <Loader />;
   // <p>Loading...</p>;
@@ -82,21 +105,7 @@ const Product = ({ params }) => {
     brand_id,
     p_sku,
   } = productData;
-  // console.log("productData", productData);
-  // const productRouteHandler = (productId) => {
-  //   setCookie(
-  //     "selectedProductId",
-  //     productId
-  //     //   , {
-  //     //   path: "/", // Cookie available site-wide
-  //     //   secure: true, // Only sent over HTTPS
-  //     //   httpOnly: true, // Prevents client-side JS from accessing it
-  //     //   sameSite: "strict", // Only sent for same-site requests
-  //     //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
-  //     // }
-  //   );
-  //   router.push(`/product/${productId}`);
-  // };
+
 
   const productRouteHandler = (productName, brandName) => {
       const formattedProductName = productName.replace(/\s+/g, "_");
@@ -120,6 +129,7 @@ const Product = ({ params }) => {
     setActiveTab("Accessories");
     downloadSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
   return (
     <section>
       <div className="stackview">
@@ -144,9 +154,10 @@ const Product = ({ params }) => {
               alt="Product Hero Image"
             />
           </div>
-          {product_desc && <DescriptionColumn product_desc={product_desc} />}
+          {product_desc && <DescriptionColumn product_desc={product_desc} descriptionColumnHeight={descriptionColumnHeight} setDescriptionColumn={setDescriptionColumn} />}
 
           <ProductOptions
+            ref={productOptionsRef}
             short_desc={short_desc}
             name={name}
             price={price}
@@ -155,6 +166,8 @@ const Product = ({ params }) => {
             onViewAllAccessories={handleViewAllAccessories}
             p_sku={p_sku}
             isAccessories={isAccessories}
+            productOptionsHeight={productOptionsHeight} 
+            setProductOptionsHeight={setProductOptionsHeight}
           />
         </div>
         <div className="second-container">
@@ -195,6 +208,7 @@ const Product = ({ params }) => {
         </div>
       </div>
     </section>
+
   );
 };
 

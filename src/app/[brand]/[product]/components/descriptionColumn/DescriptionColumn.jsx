@@ -35,10 +35,13 @@
 import styles from "./DescriptionColumn.module.css";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-export default function DescriptionColumn({ product_desc }) {
-  const [ref, inView] = useInView({
+export default function DescriptionColumn({ product_desc, descriptionColumnHeight, setDescriptionColumn }) {
+  // Ref for root element to measure height
+    const containerRef = useRef(null);
+    
+    const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
     rootMargin: "50px",
@@ -56,6 +59,13 @@ export default function DescriptionColumn({ product_desc }) {
       return () => clearTimeout(timer);
     }
   }, [inView, isLoading, product_desc]);
+
+    useEffect(() => {
+      if (containerRef.current && typeof setDescriptionColumn === 'function') {
+        console.log("descriptionColumn height:", containerRef.current.offsetHeight);
+        setDescriptionColumn(containerRef.current.offsetHeight);
+      }
+    }, [product_desc, isLoading]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -80,7 +90,10 @@ export default function DescriptionColumn({ product_desc }) {
 
   return (
     <motion.div
-      ref={ref}
+      ref={(el) => {
+        ref(el);
+        containerRef.current = el;
+      }}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       variants={containerVariants}
