@@ -158,11 +158,11 @@ const NewsletterCard = () => {
               Stay Warm and in the loop.
             </h2>
 
-            <p className="text-gray-300 text-sm max-w-[600px] mx-auto">
+            {/* <p className="text-gray-300 text-sm max-w-[600px] mx-auto">
               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
               nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
               erat volutpat.
-            </p>
+            </p> */}
 
             <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto w-full">
               <div className="space-y-4">

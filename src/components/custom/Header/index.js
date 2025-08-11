@@ -259,8 +259,8 @@ const handleScroll = () => {
     // Add more categories as needed
   ];
   const bottomMenuItems = [
-    { title: "About Us", href: "/our-story/" },
-    { title: "News & Blogs", href: "/" },
+    // { title: "About Us", href: "/our-story/" },
+    { title: "News & Blogs", href: "/blogs" },
     { title: "Contact Us", href: "/contact/" },
     { title: "Terms of Service", href: "/terms/" },
     { title: "Privacy Policy", href: "/privacy-policy/" },
@@ -378,7 +378,20 @@ const handleScroll = () => {
               <>
                 {/* Main Logo - slides in from right */}
                 <AnimatePresence>
-                  {shouldAnimate ? (
+                  <div key="static-logo">
+                      <Image
+                        src={LFLogo}
+                        alt="Living Fire Company Logo"
+                        className="custom-header-width"
+                        onClick={handleHomeIconClick}
+                        title="Living Fire Company Logo"
+                        style={{
+                          // filter: color === "white" ? "invert(1)" : "none",
+                           filter: isHomePage? "invert(1)" : color === "white" ? "invert(1)": "none",
+                        }}
+                      />
+                    </div>
+                  {/* {shouldAnimate ? (
                     <motion.div
                       initial={{ x: "50%", opacity: 1 }}
                       animate={{
@@ -419,10 +432,10 @@ const handleScroll = () => {
                         }}
                       />
                     </div>
-                  )}
+                  )} */}
                 </AnimatePresence>
                 {/* Title Logo - slides left and fades out */}
-                <AnimatePresence>
+                {/* <AnimatePresence>
                   {shouldAnimate && (
                     <motion.div
                       key="title-logo"
@@ -460,7 +473,7 @@ const handleScroll = () => {
                       />
                     </motion.div>
                   )}
-                </AnimatePresence>
+                </AnimatePresence> */}
               </>
             )}
           </div>
@@ -754,7 +767,7 @@ const handleScroll = () => {
                     <ListItemText
                       primary={item.title}
                       primaryTypographyProps={{
-                        fontSize: "1.1rem",
+                        fontSize: "1rem",
                         paddingLeft: "10px",
                       }}
                     />

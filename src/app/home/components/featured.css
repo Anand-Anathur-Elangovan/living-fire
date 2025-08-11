@@ -1,7 +1,8 @@
 .heading1 {
-  font-family: "Satoru", sans-serif;
+  font-family: "Public Sans", sans-serif !important;
   font-weight: normal;
   color: #000;
+  text-transform: uppercase;
 }
 
 .feature-snaps {
