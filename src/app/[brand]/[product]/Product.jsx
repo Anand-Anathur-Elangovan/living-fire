@@ -176,7 +176,7 @@ const Product = ({ params }) => {
           />
           {/* <OurDifference /> */}
           {/* <OurShowrooms /> */}
-          <LowerArea/>
+          {/* <LowerArea/> */}
         <Showrooms/>
           <EnquiryFormModal
             isOpen={isModalOpen}
