@@ -67,7 +67,7 @@ const Footer = () => {
             xs: "2rem 1rem",
             sm: "2rem 2rem",
             md: "2rem 4rem",
-            lg: "2rem 18rem",
+            lg: "2rem 6rem",
           },
           // borderTop: "20px solid white",
         }}
