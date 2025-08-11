@@ -370,9 +370,9 @@ const Filters = () => {
     glassOrientationValues = allProducts.map(
       (p) => p?.fn_get_products?.glass_orientation_ids[0]
     );
-    newGlassOrientationValues = [...new Set(glassOrientationValues)].filter(
-      (v) => v !== null&& v !== undefined
-    ).map((x) => parseInt(x));
+    newGlassOrientationValues = [...new Set(glassOrientationValues)]
+      .filter((v) => v !== null && v !== undefined)
+      .map((x) => parseInt(x));
 
     console.log(
       "newInstallValues",
@@ -716,18 +716,15 @@ const Filters = () => {
     //   setproductMenuIndex(Number(queryParams.productMenuIndex));
   }, [searchParams]);
 
-
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-
-
   // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
   return (
-    <>
+    <div style={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
         <div className="flex flex-col items-center gap-5">
           <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
@@ -791,8 +788,8 @@ const Filters = () => {
           <div className="flex flex-row justify-between bg-[#DDE6ED] md:bg-transparent">
             <div className="flex flex-row md:justify-center items-center w-full gap-8 md:gap-14 p-3 overflow-x-auto">
               {
-              // !fireplaceType &&
-              //   !brandType &&
+                // !fireplaceType &&
+                //   !brandType &&
                 allProductMenu.map((productMenu, index) => (
                   <div
                     className="flex flex-col gap-1 items-center text-center cursor-pointer text-xs md:text-base"
@@ -822,7 +819,8 @@ const Filters = () => {
                       }}
                     />
                   </div>
-                ))}
+                ))
+              }
               {fireplaceType ? <></> : brandType ? <></> : <></>}
             </div>
             {false && productMenuIndex !== 0 && (
@@ -1055,63 +1053,59 @@ const Filters = () => {
                           }}
                         >
                           {fireplaceType
-                            ? fuelTypes?.map(
-                                (val) =>
-                                  // updatedValues?.fueltypeValues?.includes(
-                                  //   val?.fueltype_id
-                                  // ) &&
-                                   (
-                                    <div
-                                      key={
-                                        "fireplaceTypes" + val?.fueltype_id ??
-                                        ""
-                                      }
-                                      className="flex flex-col gap-3"
+                            ? fuelTypes?.map((val) => (
+                                // updatedValues?.fueltypeValues?.includes(
+                                //   val?.fueltype_id
+                                // ) &&
+                                <div
+                                  key={
+                                    "fireplaceTypes" + val?.fueltype_id ?? ""
+                                  }
+                                  className="flex flex-col gap-3"
+                                >
+                                  {val?.fueltype_id === fireplaceType ? (
+                                    <>
+                                      <span
+                                        key={"fueltypes" + val.fueltype_id}
+                                        className="font-sans font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
+                                        onClick={() => {
+                                          setSubType(null);
+                                          updateFilter(
+                                            "fuelType",
+                                            val?.fueltype_name,
+                                            val?.fueltype_id,
+                                            val?.slug
+                                          );
+                                          if (window?.innerWidth <= 768) {
+                                            setIsFilter(false);
+                                          }
+                                        }}
+                                      >
+                                        {val?.fueltype_name}
+                                      </span>
+                                    </>
+                                  ) : (
+                                    <span
+                                      key={"types" + val.fueltype_id}
+                                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                                      onClick={() => {
+                                        setSubType(null);
+                                        updateFilter(
+                                          "fuelType",
+                                          val?.fueltype_name,
+                                          val?.fueltype_id,
+                                          val?.slug
+                                        );
+                                        if (window?.innerWidth <= 768) {
+                                          setIsFilter(false);
+                                        }
+                                      }}
                                     >
-                                      {val?.fueltype_id === fireplaceType ? (
-                                        <>
-                                          <span
-                                            key={"fueltypes" + val.fueltype_id}
-                                            className="font-sans font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
-                                            onClick={() => {
-                                              setSubType(null);
-                                              updateFilter(
-                                                "fuelType",
-                                                val?.fueltype_name,
-                                                val?.fueltype_id,
-                                                val?.slug
-                                              );
-                                              if (window?.innerWidth <= 768) {
-                                                setIsFilter(false);
-                                              }
-                                            }}
-                                          >
-                                            {val?.fueltype_name}
-                                          </span>
-                                        </>
-                                      ) : (
-                                        <span
-                                          key={"types" + val.fueltype_id}
-                                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
-                                          onClick={() => {
-                                            setSubType(null);
-                                            updateFilter(
-                                              "fuelType",
-                                              val?.fueltype_name,
-                                              val?.fueltype_id,
-                                              val?.slug
-                                            );
-                                            if (window?.innerWidth <= 768) {
-                                              setIsFilter(false);
-                                            }
-                                          }}
-                                        >
-                                          {val?.fueltype_name}
-                                        </span>
-                                      )}
-                                    </div>
-                                  )
-                              )
+                                      {val?.fueltype_name}
+                                    </span>
+                                  )}
+                                </div>
+                              ))
                             : fuelTypes?.map(
                                 (val) =>
                                   updatedValues?.fueltypeValues?.includes(
@@ -1210,47 +1204,43 @@ const Filters = () => {
                         >
                           {firePlaceSubType.installation &&
                             // updatedValues?.installationValues?.length > 0 &&
-                            installationTypes.map(
-                              (installval) =>
-                                // updatedValues?.installationValues?.includes(
-                                //   installval?.installation_id
-                                // ) &&
-                                 (
-                                  <span
-                                    key={
-                                      "installtypes" +
-                                      installval?.installation_id
-                                    }
-                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                      installval?.installation_id ===
-                                      installationType
-                                        ? "text-black"
-                                        : "text-gray-400"
-                                    }`}
-                                    onClick={() => {
-                                      // setInstallationType(
-                                      //   installval?.installation_id
-                                      // );
-                                      updateFilter(
-                                        "installationType",
-                                        installval?.installation_name,
-                                        installval?.installation_id,
-                                        installval?.slug
-                                      );
-                                      if (window?.innerWidth <= 768) {
-                                        setIsFilter(false);
-                                      }
-                                      // updateQueryParams({
-                                      //   installationType:
-                                      //     installval?.installation_id,
-                                      // });
-                                      // setglassOrientationType(null);
-                                    }}
-                                  >
-                                    {installval?.installation_name}
-                                  </span>
-                                )
-                            )}
+                            installationTypes.map((installval) => (
+                              // updatedValues?.installationValues?.includes(
+                              //   installval?.installation_id
+                              // ) &&
+                              <span
+                                key={
+                                  "installtypes" + installval?.installation_id
+                                }
+                                className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                  installval?.installation_id ===
+                                  installationType
+                                    ? "text-black"
+                                    : "text-gray-400"
+                                }`}
+                                onClick={() => {
+                                  // setInstallationType(
+                                  //   installval?.installation_id
+                                  // );
+                                  updateFilter(
+                                    "installationType",
+                                    installval?.installation_name,
+                                    installval?.installation_id,
+                                    installval?.slug
+                                  );
+                                  if (window?.innerWidth <= 768) {
+                                    setIsFilter(false);
+                                  }
+                                  // updateQueryParams({
+                                  //   installationType:
+                                  //     installval?.installation_id,
+                                  // });
+                                  // setglassOrientationType(null);
+                                }}
+                              >
+                                {installval?.installation_name}
+                              </span>
+                            ))}
                         </div>
                       </div>
                     }
@@ -1326,52 +1316,49 @@ const Filters = () => {
                             "glassOrientationTypes",
                             glassOrientationTypes,
                             "filterStatus?.glassOrientationIdStatus",
-                            filterStatus?.glassOrientationIdStatus, 
-                            "glassOrientationType", glassOrientationType
+                            filterStatus?.glassOrientationIdStatus,
+                            "glassOrientationType",
+                            glassOrientationType
                           )}
                           {firePlaceSubType.glassOrientation &&
                             // updatedValues?.glassOrientationValues?.length > 0 &&
-                            glassOrientationTypes?.map(
-                              (glassval) =>
-                                // updatedValues?.glassOrientationValues?.includes(
-                                //   glassval?.glass_orientation_id
-                                // ) && 
-                                (
-                                  <span
-                                    key={
-                                      "glasstypes" +
-                                      glassval?.glass_orientation_id
-                                    }
-                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                      glassval?.glass_orientation_id ===
-                                      glassOrientationType
-                                        ? "text-black"
-                                        : "text-gray-400"
-                                    }`}
-                                    onClick={() => {
-                                      // setInstallationType(null);
-                                      // setglassOrientationType(
-                                      //   glassval?.glass_orientation_id
-                                      // );
-                                      // updateQueryParams({
-                                      //   glassOrientationType:
-                                      //     glassval?.glass_orientation_id,
-                                      // });
-                                      updateFilter(
-                                        "glassOrientationType",
-                                        glassval?.glass_orientation_name,
-                                        glassval?.glass_orientation_id,
-                                        glassval?.slug
-                                      );
-                                      if (window?.innerWidth <= 768) {
-                                        setIsFilter(false);
-                                      }
-                                    }}
-                                  >
-                                    {glassval?.glass_orientation_name}
-                                  </span>
-                                )
-                            )}
+                            glassOrientationTypes?.map((glassval) => (
+                              // updatedValues?.glassOrientationValues?.includes(
+                              //   glassval?.glass_orientation_id
+                              // ) &&
+                              <span
+                                key={
+                                  "glasstypes" + glassval?.glass_orientation_id
+                                }
+                                className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                  glassval?.glass_orientation_id ===
+                                  glassOrientationType
+                                    ? "text-black"
+                                    : "text-gray-400"
+                                }`}
+                                onClick={() => {
+                                  // setInstallationType(null);
+                                  // setglassOrientationType(
+                                  //   glassval?.glass_orientation_id
+                                  // );
+                                  // updateQueryParams({
+                                  //   glassOrientationType:
+                                  //     glassval?.glass_orientation_id,
+                                  // });
+                                  updateFilter(
+                                    "glassOrientationType",
+                                    glassval?.glass_orientation_name,
+                                    glassval?.glass_orientation_id,
+                                    glassval?.slug
+                                  );
+                                  if (window?.innerWidth <= 768) {
+                                    setIsFilter(false);
+                                  }
+                                }}
+                              >
+                                {glassval?.glass_orientation_name}
+                              </span>
+                            ))}
                         </div>
                       </div>
                     }
@@ -1909,86 +1896,126 @@ const Filters = () => {
                   />
                 ))
               )}
+              {!isLoading && (
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "anchor-center",
+                  }}
+                >
+                  <div className="flex justify-center gap-2 font-[publicSans] text-[22px] md:text-[26px] cursor-pointer">
+                    {pageIndex > 0 && (
+                      <>
+                        <span
+                          className="cursor-pointer"
+                          onClick={() => onPageIndexClick(0)}
+                        >
+                          &lt;&lt;
+                        </span>
+                        <span className="mx-1"> </span>
+                      </>
+                    )}
+
+                    {pageIndex > 0 && (
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => onPageIndexClick(pageIndex - 1)}
+                      >
+                        &lt;
+                      </span>
+                    )}
+
+                    {(() => {
+                      const pages = [];
+
+                      pages.push(
+                        <span
+                          key={0}
+                          className={`cursor-pointer ${
+                            pageIndex === 0 ? "font-bold text-black" : ""
+                          }`}
+                          onClick={() => onPageIndexClick(0)}
+                        >
+                          1
+                        </span>
+                      );
+
+                      const startPage = Math.max(1, pageIndex - 1);
+                      const endPage = Math.min(maxPageCount - 1, pageIndex + 1);
+
+                      if (startPage > 1) {
+                        pages.push(<span key="left-ellipsis">...</span>);
+                      }
+
+                      for (let i = startPage; i <= endPage; i++) {
+                        if (i > 0 && i < maxPageCount - 1) {
+                          pages.push(
+                            <span
+                              key={i}
+                              className={`cursor-pointer ${
+                                pageIndex === i ? "font-bold text-black" : ""
+                              }`}
+                              onClick={() => onPageIndexClick(i)}
+                            >
+                              {i + 1}
+                            </span>
+                          );
+                        }
+                      }
+
+                      if (endPage < maxPageCount - 2) {
+                        pages.push(<span key="right-ellipsis">...</span>);
+                      }
+
+                      if (maxPageCount > 1) {
+                        pages.push(
+                          <span
+                            key={maxPageCount - 1}
+                            className={`cursor-pointer ${
+                              pageIndex === maxPageCount - 1
+                                ? "font-bold text-black"
+                                : ""
+                            }`}
+                            onClick={() => onPageIndexClick(maxPageCount - 1)}
+                          >
+                            {maxPageCount}
+                          </span>
+                        );
+                      }
+
+                      return pages;
+                    })()}
+
+                    {pageIndex < maxPageCount - 1 && (
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => onPageIndexClick(pageIndex + 1)}
+                      >
+                        &gt;
+                      </span>
+                    )}
+
+                    {pageIndex < maxPageCount - 1 && (
+                      <>
+                        <span className="mx-1"> </span>
+                        <span
+                          className="cursor-pointer"
+                          onClick={() => onPageIndexClick(maxPageCount - 1)}
+                        >
+                          &gt;&gt;
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-          {/* <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
-      
-            {pageIndex > 0 && (
-              <Image
-                src={LeftArrowIcon}
-                alt="Left Arrow"
-                className="md:pt-1 cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex - 1)}
-                unoptimized
-              />
-            )}
 
-     
-            <span
-              className={`cursor-pointer ${
-                pageIndex === 0 ? "font-bold text-black" : ""
-              }`}
-              onClick={() => onPageIndexClick(0)}
-            >
-              1
-            </span>
-
-       
-            {pageIndex > 2 && <span>...</span>}
-
-       
-            {pageIndex > 1 && (
-              <span
-                className="cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex - 1)}
-              >
-                {pageIndex}
-              </span>
-            )}
-
-       
-            {pageIndex !== 0 && pageIndex !== maxPageCount - 1 && (
-              <span className="font-bold text-black">{pageIndex + 1}</span>
-            )}
-
-        
-            {pageIndex + 1 < maxPageCount - 1 && (
-              <span
-                className="cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex + 1)}
-              >
-                {pageIndex + 2}
-              </span>
-            )}
-
-       
-            {pageIndex + 2 < maxPageCount - 1 && <span>...</span>}
-
-       
-            {maxPageCount > 1 && (
-              <span
-                className={`cursor-pointer ${
-                  pageIndex === maxPageCount - 1 ? "font-bold text-black" : ""
-                }`}
-                onClick={() => onPageIndexClick(maxPageCount - 1)}
-              >
-                {maxPageCount}
-              </span>
-            )}
-
-     
-            {pageIndex < maxPageCount - 1 && (
-              <Image
-                src={RightArrowIcon}
-                alt="Right Arrow"
-                className="md:pt-1 cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex + 1)}
-                unoptimized
-              />
-            )}
-          </div> */}
-          <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
-            {/* First Page (<<) */}
+          {/* <div className="flex justify-center gap-2 font-[publicSans] text-[22px] md:text-[26px] cursor-pointer">
+   
             {pageIndex > 0 && (
               <>
                 <span
@@ -1998,11 +2025,9 @@ const Filters = () => {
                   &lt;&lt;
                 </span>
                 <span className="mx-1"> </span>
-                {/* <span className="mx-1">|</span> */}
               </>
             )}
 
-            {/* Previous Page (<) */}
             {pageIndex > 0 && (
               <span
                 className="cursor-pointer"
@@ -2012,10 +2037,8 @@ const Filters = () => {
               </span>
             )}
 
-            {/* Page Numbers */}
             {(() => {
               const pages = [];
-              // Always show first page
               filteredProducts?.length > 0 &&
                 pages.push(
                   <span
@@ -2029,7 +2052,6 @@ const Filters = () => {
                   </span>
                 );
 
-              // Show current page and adjacent pages
               const startPage = Math.max(1, pageIndex - 1);
               const endPage = Math.min(maxPageCount - 1, pageIndex + 1);
 
@@ -2057,7 +2079,6 @@ const Filters = () => {
                 pages.push(<span key="right-ellipsis">...</span>);
               }
 
-              // Always show last page if there are multiple pages
               if (maxPageCount > 1) {
                 pages.push(
                   <span
@@ -2077,7 +2098,6 @@ const Filters = () => {
               return pages;
             })()}
 
-            {/* Next Page (>) */}
             {pageIndex < maxPageCount - 1 && (
               <span
                 className="cursor-pointer"
@@ -2087,10 +2107,8 @@ const Filters = () => {
               </span>
             )}
 
-            {/* Last Page (>>) */}
             {pageIndex < maxPageCount - 1 && (
               <>
-                {/* <span className="mx-1">|</span> */}
                 <span className="mx-1"> </span>
                 <span
                   className="cursor-pointer"
@@ -2100,14 +2118,14 @@ const Filters = () => {
                 </span>
               </>
             )}
-          </div>
+          </div> */}
         </>
         {/* <OurDifference fireplaceType={fireplaceType} />
         <OurShowrooms /> */}
       </div>
-      <LowerArea />
+      {/* <LowerArea /> */}
       <Showrooms />
-    </>
+    </div>
   );
 };
 

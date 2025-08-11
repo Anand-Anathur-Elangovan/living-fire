@@ -39,11 +39,21 @@ import Showrooms from "@/src/components/custom/Showrooms/Showrooms";
 
 const filterMappingsMock = [
   { id: 1, value: "Fireplace", filterType: "type", slug: "fireplace" },
-  { id: 3, value: "Fireplace Mantels", filterType: "type", slug: "fireplace-mantels" },
+  {
+    id: 3,
+    value: "Fireplace Mantels",
+    filterType: "type",
+    slug: "fireplace-mantels",
+  },
   { id: 7, value: "Fire Tools", filterType: "type", slug: "fire-tools" },
   { id: 8, value: "Outdoor", filterType: "type", slug: "outdoor" },
   { id: 9, value: "Cast Iron", filterType: "type", slug: "cast-iron" },
-  { id: 1, value: "Hybrid - Wood/Electric", filterType: "fuelType", slug: "hybrid-wood-electric" },
+  {
+    id: 1,
+    value: "Hybrid - Wood/Electric",
+    filterType: "fuelType",
+    slug: "hybrid-wood-electric",
+  },
   { id: 2, value: "Bio-Ethanol", filterType: "fuelType", slug: "bio-ethanol" },
   { id: 3, value: "Gas", filterType: "fuelType", slug: "gas" },
   { id: 4, value: "Wood", filterType: "fuelType", slug: "wood" },
@@ -51,12 +61,42 @@ const filterMappingsMock = [
   { id: 6, value: "Cooker", filterType: "fuelType", slug: "cooker" },
   { id: 1, value: "Outdoor", filterType: "installationType", slug: "outdoor" },
   { id: 3, value: "Inbuilt", filterType: "installationType", slug: "inbuilt" },
-  { id: 4, value: "Freestanding", filterType: "installationType", slug: "freestanding" },
-  { id: 1, value: "Three Sided", filterType: "glassOrientationType", slug: "three-sided" },
-  { id: 2, value: "Two Sided", filterType: "glassOrientationType", slug: "two-sided" },
-  { id: 3, value: "Single Sided", filterType: "glassOrientationType", slug: "single-sided" },
-  { id: 4, value: "Four Sided", filterType: "glassOrientationType", slug: "four-sided" },
-  { id: 1, value: "Paul Agnew Designs", filterType: "brand", slug: "paul-agnew-designs" },
+  {
+    id: 4,
+    value: "Freestanding",
+    filterType: "installationType",
+    slug: "freestanding",
+  },
+  {
+    id: 1,
+    value: "Three Sided",
+    filterType: "glassOrientationType",
+    slug: "three-sided",
+  },
+  {
+    id: 2,
+    value: "Two Sided",
+    filterType: "glassOrientationType",
+    slug: "two-sided",
+  },
+  {
+    id: 3,
+    value: "Single Sided",
+    filterType: "glassOrientationType",
+    slug: "single-sided",
+  },
+  {
+    id: 4,
+    value: "Four Sided",
+    filterType: "glassOrientationType",
+    slug: "four-sided",
+  },
+  {
+    id: 1,
+    value: "Paul Agnew Designs",
+    filterType: "brand",
+    slug: "paul-agnew-designs",
+  },
   { id: 2, value: "Esse", filterType: "brand", slug: "esse" },
   { id: 8, value: "ADF", filterType: "brand", slug: "adf" },
   { id: 3, value: "Austroflamm", filterType: "brand", slug: "austroflamm" },
@@ -71,19 +111,49 @@ const filterMappingsMock = [
   { id: 10, value: "Regency", filterType: "brand", slug: "regency" },
   { id: 5, value: "Stovax", filterType: "brand", slug: "stovax" },
   { id: 1, value: "Firepit", filterType: "rangeType", slug: "firepit" },
-  { id: 2, value: "Heatmaster Wood", filterType: "rangeType", slug: "heatmaster-wood" },
+  {
+    id: 2,
+    value: "Heatmaster Wood",
+    filterType: "rangeType",
+    slug: "heatmaster-wood",
+  },
   { id: 3, value: "Studio 2", filterType: "rangeType", slug: "studio-2" },
   { id: 4, value: "Greenfire", filterType: "rangeType", slug: "greenfire" },
   { id: 5, value: "City Series", filterType: "rangeType", slug: "city-series" },
-  { id: 6, value: "Heatmaster Gas", filterType: "rangeType", slug: "heatmaster-gas" },
-  { id: 7, value: "ilektro Freestanding", filterType: "rangeType", slug: "ilektro-freestanding" },
+  {
+    id: 6,
+    value: "Heatmaster Gas",
+    filterType: "rangeType",
+    slug: "heatmaster-gas",
+  },
+  {
+    id: 7,
+    value: "ilektro Freestanding",
+    filterType: "rangeType",
+    slug: "ilektro-freestanding",
+  },
   { id: 8, value: "Aerion", filterType: "rangeType", slug: "aerion" },
-  { id: 9, value: "ilektro insert", filterType: "rangeType", slug: "ilektro-insert" },
+  {
+    id: 9,
+    value: "ilektro insert",
+    filterType: "rangeType",
+    slug: "ilektro-insert",
+  },
   { id: 10, value: "Hestia", filterType: "rangeType", slug: "hestia" },
   { id: 11, value: "Pyro", filterType: "rangeType", slug: "pyro" },
   { id: 12, value: "ilektro", filterType: "rangeType", slug: "ilektro" },
-  { id: 13, value: "ilektro Slimline", filterType: "rangeType", slug: "ilektro-slimline" },
-  { id: 14, value: "Ironheart Range", filterType: "rangeType", slug: "ironheart-range" },
+  {
+    id: 13,
+    value: "ilektro Slimline",
+    filterType: "rangeType",
+    slug: "ilektro-slimline",
+  },
+  {
+    id: 14,
+    value: "Ironheart Range",
+    filterType: "rangeType",
+    slug: "ironheart-range",
+  },
   { id: 15, value: "Aere", filterType: "rangeType", slug: "aere" },
   { id: 16, value: "Churchill", filterType: "rangeType", slug: "churchill" },
   { id: 17, value: "E-Series", filterType: "rangeType", slug: "e-series" },
@@ -96,21 +166,56 @@ const filterMappingsMock = [
   { id: 24, value: "Siena", filterType: "rangeType", slug: "siena" },
   { id: 25, value: "Slimline", filterType: "rangeType", slug: "slimline" },
   { id: 26, value: "zenitth", filterType: "rangeType", slug: "zenitth" },
-  { id: 27, value: "Cocoon Pedestal", filterType: "rangeType", slug: "cocoon-pedestal" },
+  {
+    id: 27,
+    value: "Cocoon Pedestal",
+    filterType: "rangeType",
+    slug: "cocoon-pedestal",
+  },
   { id: 28, value: "Vellum", filterType: "rangeType", slug: "vellum" },
   { id: 29, value: "1000", filterType: "rangeType", slug: "1000" },
-  { id: 30, value: "Regency Wood", filterType: "rangeType", slug: "regency-wood" },
-  { id: 31, value: "Regency Gas", filterType: "rangeType", slug: "regency-gas" },
-  { id: 32, value: "Regency Electric", filterType: "rangeType", slug: "regency-electric" },
+  {
+    id: 30,
+    value: "Regency Wood",
+    filterType: "rangeType",
+    slug: "regency-wood",
+  },
+  {
+    id: 31,
+    value: "Regency Gas",
+    filterType: "rangeType",
+    slug: "regency-gas",
+  },
+  {
+    id: 32,
+    value: "Regency Electric",
+    filterType: "rangeType",
+    slug: "regency-electric",
+  },
   { id: 33, value: "Forno", filterType: "rangeType", slug: "forno" },
   { id: 34, value: "Ignis", filterType: "rangeType", slug: "ignis" },
   { id: 35, value: "Kamino", filterType: "rangeType", slug: "kamino" },
   { id: 36, value: "Lanterns", filterType: "rangeType", slug: "lanterns" },
-  { id: 37, value: "Morso Grill 17", filterType: "rangeType", slug: "morso-grill-17" },
+  {
+    id: 37,
+    value: "Morso Grill 17",
+    filterType: "rangeType",
+    slug: "morso-grill-17",
+  },
   { id: 38, value: "Tuscan", filterType: "rangeType", slug: "tuscan" },
-  { id: 39, value: "Austroflamm Wood", filterType: "rangeType", slug: "austroflamm-wood" },
+  {
+    id: 39,
+    value: "Austroflamm Wood",
+    filterType: "rangeType",
+    slug: "austroflamm-wood",
+  },
   { id: 40, value: "Dexter", filterType: "rangeType", slug: "dexter" },
-  { id: 41, value: "Kalora Wood", filterType: "rangeType", slug: "kalora-wood" },
+  {
+    id: 41,
+    value: "Kalora Wood",
+    filterType: "rangeType",
+    slug: "kalora-wood",
+  },
   { id: 42, value: "Chalet", filterType: "rangeType", slug: "chalet" },
   { id: 43, value: "Urban", filterType: "rangeType", slug: "urban" },
   { id: 44, value: "Kalora Gas", filterType: "rangeType", slug: "kalora-gas" },
@@ -121,11 +226,16 @@ const filterMappingsMock = [
   { id: 49, value: "Vue", filterType: "rangeType", slug: "vue" },
   { id: 50, value: "Modica", filterType: "rangeType", slug: "modica" },
   { id: 51, value: "Petra", filterType: "rangeType", slug: "petra" },
-  { id: 52, value: "Hergom Fire Pits", filterType: "rangeType", slug: "hergom-fire-pits" },
+  {
+    id: 52,
+    value: "Hergom Fire Pits",
+    filterType: "rangeType",
+    slug: "hergom-fire-pits",
+  },
   { id: 53, value: "Pyro Cast", filterType: "rangeType", slug: "pyro-cast" },
   { id: 54, value: "Ironheart", filterType: "rangeType", slug: "ironheart" },
   { id: 55, value: "Bakeheart", filterType: "rangeType", slug: "bakeheart" },
-  { id: 56, value: "Warmheart", filterType: "rangeType", slug: "warmheart" }
+  { id: 56, value: "Warmheart", filterType: "rangeType", slug: "warmheart" },
 ];
 
 const AllProducts = () => {
@@ -154,7 +264,7 @@ const AllProducts = () => {
     glassOrientationValues: [],
   });
   const [filters, setFilters] = useState([]);
-const [filterStatus, setFilterStatus] = useState({
+  const [filterStatus, setFilterStatus] = useState({
     fireplaceFilterIdStatus: false,
     installationTypeIdStatus: false,
     glassOrientationIdStatus: false,
@@ -165,15 +275,15 @@ const [filterStatus, setFilterStatus] = useState({
   const handleFilterStatus = (key, status) => {
     setFilterStatus((prev) => ({
       ...prev,
-      [key]: status? status : !prev[key],
+      [key]: status ? status : !prev[key],
     }));
   };
-// handleFilterStatus('fireplaceFilterIdStatus')
-// handleFilterStatus('installationTypeIdStatus')
-// handleFilterStatus('glassOrientationIdStatus')
-// handleFilterStatus('rangeIdStatus')
-// handleFilterStatus('brandIdStatus')
-// style={{display: !filterStatus?.fireplaceFilterIdStatus&& 'none'}}
+  // handleFilterStatus('fireplaceFilterIdStatus')
+  // handleFilterStatus('installationTypeIdStatus')
+  // handleFilterStatus('glassOrientationIdStatus')
+  // handleFilterStatus('rangeIdStatus')
+  // handleFilterStatus('brandIdStatus')
+  // style={{display: !filterStatus?.fireplaceFilterIdStatus&& 'none'}}
 
   const { allProducts, isFetched, isStale } = useAllProducts(
     productMenuIndex,
@@ -191,7 +301,7 @@ const [filterStatus, setFilterStatus] = useState({
       .split("/")
       .filter((segment) => segment)
       ?.map((item) => generateSlug(item));
-      // ?.map((item) => item.replace(/%20|_/g, " "));
+    // ?.map((item) => item.replace(/%20|_/g, " "));
     let extractedFilters = [];
     pathSegments.forEach((segment) => {
       const matchingFilter = filterMappingsMock.find(
@@ -202,7 +312,7 @@ const [filterStatus, setFilterStatus] = useState({
           id: matchingFilter.id,
           value: matchingFilter.slug,
           filterType: matchingFilter.filterType,
-          slug:matchingFilter.slug
+          slug: matchingFilter.slug,
         });
       }
     });
@@ -231,23 +341,23 @@ const [filterStatus, setFilterStatus] = useState({
     }
     if (fuelTypeFilter) {
       setFireplaceType(fuelTypeFilter.id);
-      handleFilterStatus('fireplaceFilterIdStatus', true)
+      handleFilterStatus("fireplaceFilterIdStatus", true);
     }
     if (installationTypeFilter) {
       setInstallationType(installationTypeFilter?.id);
-      handleFilterStatus('installationTypeIdStatus', true)
+      handleFilterStatus("installationTypeIdStatus", true);
     }
     if (glassOrientationTypeFilter) {
       setGlassOrientationType(glassOrientationTypeFilter?.id);
-      handleFilterStatus('glassOrientationIdStatus', true)
+      handleFilterStatus("glassOrientationIdStatus", true);
     }
     if (brandFilter) {
       setBrandType(brandFilter?.id);
-      handleFilterStatus('brandIdStatus', true)
+      handleFilterStatus("brandIdStatus", true);
     }
     if (rangeFilter) {
       setRangeType(rangeFilter?.id);
-      handleFilterStatus('rangeIdStatus', true)
+      handleFilterStatus("rangeIdStatus", true);
     }
     let values = [];
     let newFuelValues = [];
@@ -331,7 +441,7 @@ const [filterStatus, setFilterStatus] = useState({
       setUpdatedValues((prev) => {
         return {
           ...prev,
-          fueltypeValues: fuelTypes?.map(val => val.fueltype_id) ,
+          fueltypeValues: fuelTypes?.map((val) => val.fueltype_id),
           //  newFuelValues,
           // fireplaceType ? prev.fueltypeValues : newFuelValues,
           installationValues:
@@ -361,7 +471,7 @@ const [filterStatus, setFilterStatus] = useState({
     let path = filters.map((item) => `${item.slug}`).join("/");
     router.push(`/allProducts/${path}`);
   }
- 
+
   const {
     brands,
     masterValues: {
@@ -593,9 +703,8 @@ const [filterStatus, setFilterStatus] = useState({
     setIsClient(true);
   }, []);
 
-  
   return (
-    <>
+    <div style={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
       <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
         <div className="flex flex-col items-center gap-5">
           <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
@@ -844,43 +953,46 @@ const [filterStatus, setFilterStatus] = useState({
                     //  border-b boder-solid border-[#D3C6BB]`}
                   >
                     <div
-                    className={`${
-                      !isSort ? "flex" : "hidden"
-                    } md:flex flex-row gap-3 mr-10 border-b border-solid border-[#D3C6BB] pb-3`}
-                  >
-                    <input
-                      className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
-                      type="text"
-                      ref={searchRef}
-                      defaultValue={searchText}
-                      // onChange={(e) => setSearchText(e.target.value)}
-                      // value={searchText}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
+                      className={`${
+                        !isSort ? "flex" : "hidden"
+                      } md:flex flex-row gap-3 mr-10 border-b border-solid border-[#D3C6BB] pb-3`}
+                    >
+                      <input
+                        className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
+                        type="text"
+                        ref={searchRef}
+                        defaultValue={searchText}
+                        // onChange={(e) => setSearchText(e.target.value)}
+                        // value={searchText}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            setSearchText(
+                              searchRef.current.value?.toLowerCase()
+                            );
+                            updateQueryParams({
+                              searchText:
+                                searchRef.current.value?.toLowerCase(),
+                            });
+                          }
+                        }}
+                      />
+                      <Image
+                        src={SearchIcon}
+                        alt="search"
+                        className="md:pt-1 cursor-pointer"
+                        onClick={() => {
                           setSearchText(searchRef.current.value?.toLowerCase());
                           updateQueryParams({
                             searchText: searchRef.current.value?.toLowerCase(),
                           });
-                        }
-                      }}
-                    />
-                    <Image
-                      src={SearchIcon}
-                      alt="search"
-                      className="md:pt-1 cursor-pointer"
-                      onClick={() => {
-                        setSearchText(searchRef.current.value?.toLowerCase());
-                        updateQueryParams({
-                          searchText: searchRef.current.value?.toLowerCase(),
-                        });
-                        if (window?.innerWidth <= 768) {
-                          setIsFilter(false);
-                        }
-                      }}
-                      unoptimized
-                    />
-                  </div>
-                    
+                          if (window?.innerWidth <= 768) {
+                            setIsFilter(false);
+                          }
+                        }}
+                        unoptimized
+                      />
+                    </div>
+
                     {/* FirePlace Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
@@ -896,7 +1008,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('fireplaceFilterIdStatus')
+                                  handleFilterStatus("fireplaceFilterIdStatus");
                                   document
                                     .getElementById("fireplaceFilterId")
                                     .classList.add("collapse");
@@ -913,7 +1025,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 alt="clear"
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
-                                  handleFilterStatus('fireplaceFilterIdStatus')
+                                  handleFilterStatus("fireplaceFilterIdStatus");
                                   setRefreshPage((prev) => !prev);
                                   document
                                     .getElementById("fireplaceFilterId")
@@ -926,9 +1038,12 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="fireplaceFilterId"
                           className="flex flex-col gap-3 collapse"
-                          style={{display: !filterStatus?.fireplaceFilterIdStatus&& 'none'}}
+                          style={{
+                            display:
+                              !filterStatus?.fireplaceFilterIdStatus && "none",
+                          }}
                         >
-                         {fireplaceType
+                          {fireplaceType
                             ? fuelTypes?.map(
                                 (val) =>
                                   updatedValues?.fueltypeValues?.includes(
@@ -954,7 +1069,7 @@ const [filterStatus, setFilterStatus] = useState({
                                               updateFilter(
                                                 "fuelType",
                                                 val?.fueltype_name,
-                                                val?.fueltype_id, 
+                                                val?.fueltype_id,
                                                 val?.slug
                                               );
                                               if (window?.innerWidth <= 768) {
@@ -1050,7 +1165,9 @@ const [filterStatus, setFilterStatus] = useState({
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
-                                    handleFilterStatus('installationTypeIdStatus')
+                                    handleFilterStatus(
+                                      "installationTypeIdStatus"
+                                    );
                                     document
                                       .getElementById(
                                         "installationTypeFilterId"
@@ -1072,7 +1189,9 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('installationTypeIdStatus')
+                                  handleFilterStatus(
+                                    "installationTypeIdStatus"
+                                  );
                                   document
                                     .getElementById("installationTypeFilterId")
                                     .classList.remove("collapse");
@@ -1084,7 +1203,10 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="installationTypeFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
-                          style={{display: !filterStatus?.installationTypeIdStatus&& 'none'}}
+                          style={{
+                            display:
+                              !filterStatus?.installationTypeIdStatus && "none",
+                          }}
                         >
                           {firePlaceSubType.installation &&
                             updatedValues?.installationValues?.length > 0 &&
@@ -1148,7 +1270,9 @@ const [filterStatus, setFilterStatus] = useState({
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
-                                    handleFilterStatus('glassOrientationIdStatus')
+                                    handleFilterStatus(
+                                      "glassOrientationIdStatus"
+                                    );
                                     document
                                       .getElementById(
                                         "glassOrientationTypeFilterId"
@@ -1170,7 +1294,9 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('glassOrientationIdStatus')
+                                  handleFilterStatus(
+                                    "glassOrientationIdStatus"
+                                  );
                                   document
                                     .getElementById(
                                       "glassOrientationTypeFilterId"
@@ -1184,7 +1310,10 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="glassOrientationTypeFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
-                          style={{display: !filterStatus?.glassOrientationIdStatus&& 'none'}}
+                          style={{
+                            display:
+                              !filterStatus?.glassOrientationIdStatus && "none",
+                          }}
                         >
                           {firePlaceSubType.glassOrientation &&
                             updatedValues?.glassOrientationValues?.length > 0 &&
@@ -1249,7 +1378,7 @@ const [filterStatus, setFilterStatus] = useState({
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
-                                    handleFilterStatus('rangeIdStatus')
+                                    handleFilterStatus("rangeIdStatus");
                                     document
                                       .getElementById("rangesFilterId")
                                       .classList.add("collapse");
@@ -1269,7 +1398,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('rangeIdStatus')
+                                  handleFilterStatus("rangeIdStatus");
                                   document
                                     .getElementById("rangesFilterId")
                                     .classList.remove("collapse");
@@ -1281,7 +1410,9 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="rangesFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
-                          style={{display: !filterStatus?.rangeIdStatus&& 'none'}}
+                          style={{
+                            display: !filterStatus?.rangeIdStatus && "none",
+                          }}
                         >
                           {rangeType && (
                             <span
@@ -1349,7 +1480,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('brandIdStatus')
+                                  handleFilterStatus("brandIdStatus");
                                   document
                                     .getElementById("brandsFilterId")
                                     .classList.add("collapse");
@@ -1367,7 +1498,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('brandIdStatus')
+                                  handleFilterStatus("brandIdStatus");
                                   document
                                     .getElementById("brandsFilterId")
                                     .classList.remove("collapse");
@@ -1379,7 +1510,9 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="brandsFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
-                          style={{display: !filterStatus?.brandIdStatus&& 'none'}}
+                          style={{
+                            display: !filterStatus?.brandIdStatus && "none",
+                          }}
                         >
                           {brandType && (
                             <>
@@ -1410,7 +1543,7 @@ const [filterStatus, setFilterStatus] = useState({
                                   updateFilter(
                                     "brand",
                                     val?.brand_name,
-                                    val?.brand_id, 
+                                    val?.brand_id,
                                     val?.slug
                                   );
                                   if (window?.innerWidth <= 768) {
@@ -1427,53 +1560,53 @@ const [filterStatus, setFilterStatus] = useState({
                     }
                     {
                       <div
-                    className={`${
-                      isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 md:mr-10`}
-                  >
-                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
-                      Sort By{" "}
-                      {isClient &&
-                        !document
-                          .getElementById("sortbyFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={MinusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("sortbyFilterId")
-                                .classList.add("collapse");
-                              setIsSort(false);
-                            }}
-                            unoptimized
-                          />
-                        )}
-                      {isClient &&
-                        document
-                          .getElementById("sortbyFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={PlusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("sortbyFilterId")
-                                .classList.remove("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                    </span>
-                    <div
-                      id="sortbyFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out collapse"
-                    >
-                      {/* <div
+                        className={`${
+                          isSort ? "flex" : "hidden"
+                        } md:flex flex-col gap-3 py-3 md:mr-10`}
+                      >
+                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
+                          Sort By{" "}
+                          {isClient &&
+                            !document
+                              .getElementById("sortbyFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={MinusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  document
+                                    .getElementById("sortbyFilterId")
+                                    .classList.add("collapse");
+                                  setIsSort(false);
+                                }}
+                                unoptimized
+                              />
+                            )}
+                          {isClient &&
+                            document
+                              .getElementById("sortbyFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  document
+                                    .getElementById("sortbyFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                        </span>
+                        <div
+                          id="sortbyFilterId"
+                          className="flex flex-col gap-3 transistion ease-in-out collapse"
+                        >
+                          {/* <div
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
                         onClick={() => sortProducts(SORTBY.priceLowToHigh)}
                       >
@@ -1485,19 +1618,19 @@ const [filterStatus, setFilterStatus] = useState({
                       >
                         Price: High to Low
                       </span> */}
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.A2Z)}
-                      >
-                        A-Z
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.Z2A)}
-                      >
-                        Z-A
-                      </span>
-                      {/* <span
+                          <span
+                            className="font-sans font-small leading-5 text-normal cursor-pointer"
+                            onClick={() => sortProducts(SORTBY.A2Z)}
+                          >
+                            A-Z
+                          </span>
+                          <span
+                            className="font-sans font-small leading-5 text-normal cursor-pointer"
+                            onClick={() => sortProducts(SORTBY.Z2A)}
+                          >
+                            Z-A
+                          </span>
+                          {/* <span
                         className="font-sans font-small leading-5 text-normal cursor-pointer"
                         onClick={() => sortProducts(SORTBY.oldToNew)}
                       >
@@ -1509,14 +1642,14 @@ const [filterStatus, setFilterStatus] = useState({
                       >
                         Newest to Oldest
                       </span>*/}
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.bestSelling)}
-                      >
-                        Best Selling
-                      </span> 
-                    </div>
-                  </div>
+                          <span
+                            className="font-sans font-small leading-5 text-normal cursor-pointer"
+                            onClick={() => sortProducts(SORTBY.bestSelling)}
+                          >
+                            Best Selling
+                          </span>
+                        </div>
+                      </div>
                     }
                   </div>
                   {/* <div
@@ -1693,202 +1826,232 @@ const [filterStatus, setFilterStatus] = useState({
                   // description={"Living Fire" + val}
                 />
               ))}
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "anchor-center",
+                }}
+              >
+                <div className="flex justify-center gap-2 font-[publicSans] text-[22px] md:text-[26px] cursor-pointer">
+                  {pageIndex > 0 && (
+                    <>
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => onPageIndexClick(0)}
+                      >
+                        &lt;&lt;
+                      </span>
+                      <span className="mx-1"> </span>
+                    </>
+                  )}
+
+                  {pageIndex > 0 && (
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => onPageIndexClick(pageIndex - 1)}
+                    >
+                      &lt;
+                    </span>
+                  )}
+
+                  {(() => {
+                    const pages = [];
+
+                    pages.push(
+                      <span
+                        key={0}
+                        className={`cursor-pointer ${
+                          pageIndex === 0 ? "font-bold text-black" : ""
+                        }`}
+                        onClick={() => onPageIndexClick(0)}
+                      >
+                        1
+                      </span>
+                    );
+
+                    const startPage = Math.max(1, pageIndex - 1);
+                    const endPage = Math.min(maxPageCount - 1, pageIndex + 1);
+
+                    if (startPage > 1) {
+                      pages.push(<span key="left-ellipsis">...</span>);
+                    }
+
+                    for (let i = startPage; i <= endPage; i++) {
+                      if (i > 0 && i < maxPageCount - 1) {
+                        pages.push(
+                          <span
+                            key={i}
+                            className={`cursor-pointer ${
+                              pageIndex === i ? "font-bold text-black" : ""
+                            }`}
+                            onClick={() => onPageIndexClick(i)}
+                          >
+                            {i + 1}
+                          </span>
+                        );
+                      }
+                    }
+
+                    if (endPage < maxPageCount - 2) {
+                      pages.push(<span key="right-ellipsis">...</span>);
+                    }
+
+                    if (maxPageCount > 1) {
+                      pages.push(
+                        <span
+                          key={maxPageCount - 1}
+                          className={`cursor-pointer ${
+                            pageIndex === maxPageCount - 1
+                              ? "font-bold text-black"
+                              : ""
+                          }`}
+                          onClick={() => onPageIndexClick(maxPageCount - 1)}
+                        >
+                          {maxPageCount}
+                        </span>
+                      );
+                    }
+
+                    return pages;
+                  })()}
+
+                  {pageIndex < maxPageCount - 1 && (
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => onPageIndexClick(pageIndex + 1)}
+                    >
+                      &gt;
+                    </span>
+                  )}
+
+                  {pageIndex < maxPageCount - 1 && (
+                    <>
+                      <span className="mx-1"> </span>
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => onPageIndexClick(maxPageCount - 1)}
+                      >
+                        &gt;&gt;
+                      </span>
+                    </>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-          {/* <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
-       
+          {/* <div className="flex justify-center gap-2 font-[publicSans] text-[22px] md:text-[26px] cursor-pointer">
             {pageIndex > 0 && (
-              <Image
-                src={LeftArrowIcon}
-                alt="Left Arrow"
-                className="md:pt-1 cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex - 1)}
-                unoptimized
-              />
+              <>
+                <span
+                  className="cursor-pointer"
+                  onClick={() => onPageIndexClick(0)}
+                >
+                  &lt;&lt;
+                </span>
+                <span className="mx-1"> </span>
+              </>
             )}
 
-
-            <span
-              className={`cursor-pointer ${
-                pageIndex === 0 ? "font-bold text-black" : ""
-              }`}
-              onClick={() => onPageIndexClick(0)}
-            >
-              1
-            </span>
-
-   
-            {pageIndex > 2 && <span>...</span>}
-
-  
-            {pageIndex > 1 && (
+            {pageIndex > 0 && (
               <span
                 className="cursor-pointer"
                 onClick={() => onPageIndexClick(pageIndex - 1)}
               >
-                {pageIndex}
+                &lt;
               </span>
             )}
 
+            {(() => {
+              const pages = [];
 
-            {pageIndex !== 0 && pageIndex !== maxPageCount - 1 && (
-              <span className="font-bold text-black">{pageIndex + 1}</span>
-            )}
+              pages.push(
+                <span
+                  key={0}
+                  className={`cursor-pointer ${
+                    pageIndex === 0 ? "font-bold text-black" : ""
+                  }`}
+                  onClick={() => onPageIndexClick(0)}
+                >
+                  1
+                </span>
+              );
 
-     
-            {pageIndex + 1 < maxPageCount - 1 && (
-              <span
-                className="cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex + 1)}
-              >
-                {pageIndex + 2}
-              </span>
-            )}
+              const startPage = Math.max(1, pageIndex - 1);
+              const endPage = Math.min(maxPageCount - 1, pageIndex + 1);
 
-      
-            {pageIndex + 2 < maxPageCount - 1 && <span>...</span>}
+              if (startPage > 1) {
+                pages.push(<span key="left-ellipsis">...</span>);
+              }
 
-            {maxPageCount > 1 && (
-              <span
-                className={`cursor-pointer ${
-                  pageIndex === maxPageCount - 1 ? "font-bold text-black" : ""
-                }`}
-                onClick={() => onPageIndexClick(maxPageCount - 1)}
-              >
-                {maxPageCount}
-              </span>
-            )}
+              for (let i = startPage; i <= endPage; i++) {
+                if (i > 0 && i < maxPageCount - 1) {
+                  pages.push(
+                    <span
+                      key={i}
+                      className={`cursor-pointer ${
+                        pageIndex === i ? "font-bold text-black" : ""
+                      }`}
+                      onClick={() => onPageIndexClick(i)}
+                    >
+                      {i + 1}
+                    </span>
+                  );
+                }
+              }
 
-     
+              if (endPage < maxPageCount - 2) {
+                pages.push(<span key="right-ellipsis">...</span>);
+              }
+
+              if (maxPageCount > 1) {
+                pages.push(
+                  <span
+                    key={maxPageCount - 1}
+                    className={`cursor-pointer ${
+                      pageIndex === maxPageCount - 1
+                        ? "font-bold text-black"
+                        : ""
+                    }`}
+                    onClick={() => onPageIndexClick(maxPageCount - 1)}
+                  >
+                    {maxPageCount}
+                  </span>
+                );
+              }
+
+              return pages;
+            })()}
+
             {pageIndex < maxPageCount - 1 && (
-              <Image
-                src={RightArrowIcon}
-                alt="Right Arrow"
-                className="md:pt-1 cursor-pointer"
+              <span
+                className="cursor-pointer"
                 onClick={() => onPageIndexClick(pageIndex + 1)}
-                unoptimized
-              />
+              >
+                &gt;
+              </span>
+            )}
+
+            {pageIndex < maxPageCount - 1 && (
+              <>
+                <span className="mx-1"> </span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() => onPageIndexClick(maxPageCount - 1)}
+                >
+                  &gt;&gt;
+                </span>
+              </>
             )}
           </div> */}
-          <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
-  {/* First Page (<<) */}
-  {pageIndex > 0 && (
-    <>
-      <span 
-        className="cursor-pointer"
-        onClick={() => onPageIndexClick(0)}
-      >
-        &lt;&lt;
-      </span>
-      <span className="mx-1"> </span>
-      {/* <span className="mx-1">|</span> */}
-    </>
-  )}
-
-  {/* Previous Page (<) */}
-  {pageIndex > 0 && (
-    <span 
-      className="cursor-pointer"
-      onClick={() => onPageIndexClick(pageIndex - 1)}
-    >
-      &lt;
-    </span>
-  )}
-
-  {/* Page Numbers */}
-  {(() => {
-    const pages = [];
-    // Always show first page
-    pages.push(
-      <span
-        key={0}
-        className={`cursor-pointer ${
-          pageIndex === 0 ? "font-bold text-black" : ""
-        }`}
-        onClick={() => onPageIndexClick(0)}
-      >
-        1
-      </span>
-    );
-
-    // Show current page and adjacent pages
-    const startPage = Math.max(1, pageIndex - 1);
-    const endPage = Math.min(maxPageCount - 1, pageIndex + 1);
-
-    if (startPage > 1) {
-      pages.push(<span key="left-ellipsis">...</span>);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      if (i > 0 && i < maxPageCount - 1) {
-        pages.push(
-          <span
-            key={i}
-            className={`cursor-pointer ${
-              pageIndex === i ? "font-bold text-black" : ""
-            }`}
-            onClick={() => onPageIndexClick(i)}
-          >
-            {i + 1}
-          </span>
-        );
-      }
-    }
-
-    if (endPage < maxPageCount - 2) {
-      pages.push(<span key="right-ellipsis">...</span>);
-    }
-
-    // Always show last page if there are multiple pages
-    if (maxPageCount > 1) {
-      pages.push(
-        <span
-          key={maxPageCount - 1}
-          className={`cursor-pointer ${
-            pageIndex === maxPageCount - 1 ? "font-bold text-black" : ""
-          }`}
-          onClick={() => onPageIndexClick(maxPageCount - 1)}
-        >
-          {maxPageCount}
-        </span>
-      );
-    }
-
-    return pages;
-  })()}
-
-  {/* Next Page (>) */}
-  {pageIndex < maxPageCount - 1 && (
-    <span 
-      className="cursor-pointer"
-      onClick={() => onPageIndexClick(pageIndex + 1)}
-    >
-      &gt;
-    </span>
-  )}
-
-  {/* Last Page (>>) */}
-  {pageIndex < maxPageCount - 1 && (
-    <>
-      {/* <span className="mx-1">|</span> */}
-      <span className="mx-1"> </span>
-      <span 
-        className="cursor-pointer"
-        onClick={() => onPageIndexClick(maxPageCount - 1)}
-      >
-        &gt;&gt;
-      </span>
-    </>
-  )}
-</div>
         </>
         {/* <OurDifference />
         <OurShowrooms /> */}
-        
       </div>
-      <LowerArea/>
-        <Showrooms/>
-    </>
+      {/* <LowerArea /> */}
+      <Showrooms />
+    </div>
   );
 };
 
