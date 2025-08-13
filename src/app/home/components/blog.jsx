@@ -145,7 +145,7 @@ const Blog = () => {
       style={{ padding: isDesktop ? "40px clamp(120px, 17.7vw, 240px)" : "20px 45px" }}>
       {/* Header */}
       <div className="flex w-full items-center justify-center mb-2 md:mb-4">
-        <h2 className="w-full text-center font-publicSans uppercase text-3xl font-normal text-black md:text-4xl lg:text-5xl">
+        <h2 className="w-full text-center font-publicSans text-3xl font-normal text-black md:text-4xl lg:text-5xl">
           News & Blogs
         </h2>
       </div>

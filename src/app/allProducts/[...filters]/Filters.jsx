@@ -1905,7 +1905,7 @@ const Filters = () => {
                     alignItems: "anchor-center",
                   }}
                 >
-                  <div className="flex justify-center gap-2 font-[publicSans] text-[22px] md:text-[26px] cursor-pointer">
+                  <div className="flex justify-center gap-2 font-[publicSans] text-[20px] md:text-[20px] cursor-pointer">
                     {pageIndex > 0 && (
                       <>
                         <span
