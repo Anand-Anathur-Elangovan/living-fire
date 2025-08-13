@@ -149,7 +149,7 @@
 //       </div>
 //       <div className="py-2 gap-3">
 //         <span
-//           className="font-sans md:font-medium font-normal text-sm md:text-base text-wrap cursor-pointer text-black" ///leading-5 md:leading-6
+//           className=" md:font-medium font-normal text-sm md:text-base text-wrap cursor-pointer text-black" ///leading-5 md:leading-6
 //           onClick={() => handleProductClick(fn_get_products?.name,fn_get_products?.brand_name)}
 //         >
 //           {fn_get_products.p_name ||
@@ -158,7 +158,7 @@
 //         </span>
 //         <div className="flex flex-col md:flex-row justify-between mr-5 gap-2 md:gap-0">
 //           <span
-//             className="font-sans font-normal leading-5 text-sm cursor-pointer text-[#94999F]"
+//             className=" font-normal leading-5 text-sm cursor-pointer text-[#94999F]"
 //             onClick={() => handleProductClick(fn_get_products?.name,fn_get_products?.brand_name)}
 //           >
 //             {fn_get_products?.brand_name}
@@ -175,7 +175,7 @@
 //                     rel="noopener noreferrer"
 //                     className="tooltip"
 //                   >
-//                     <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
+//                     <span className="tooltiptext  font-light leading-6 text-base text-wrap text-xs">
 //                       Download brochure
 //                     </span>
 //                     <Image
@@ -193,7 +193,7 @@
 //                     rel="noopener noreferrer"
 //                     className="tooltip"
 //                   >
-//                     <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
+//                     <span className="tooltiptext  font-light leading-6 text-base text-wrap text-xs">
 //                       Download Manual Book
 //                     </span>
 //                     <Image
@@ -211,7 +211,7 @@
 //                     rel="noopener noreferrer"
 //                     className="tooltip"
 //                   >
-//                     <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
+//                     <span className="tooltiptext  font-light leading-6 text-base text-wrap text-xs">
 //                       Download Spec Sheet
 //                     </span>
 //                     <Image
@@ -346,8 +346,8 @@ const ProductCard = ({
   }, [downloadsData]);
 
   return (
-    <div className="product-element-all-product w-40 md:w-[300px]" key="productCard">
-      <div className="relative w-40 h-48 md:w-[300px] md:h-[380px]">
+    <div className="product-element-all-product w-40 md:w-[280px]" key="productCard">
+      <div className="relative w-40 h-48 md:w-[280px] md:h-[380px]">
         {isCompare && (
           <div className="absolute z-10 right-0 mr-3 mt-5">
             <input
@@ -383,7 +383,7 @@ const ProductCard = ({
       <div className="py-2 gap-3">
         <Link href={productUrl} passHref>
           <span
-            className="font-sans md:font-medium font-normal text-sm md:text-base text-wrap cursor-pointer text-black"
+            className=" md:font-medium font-normal text-sm md:text-base text-wrap cursor-pointer text-black"
             onClick={(e) => handleProductClick(e, fn_get_products?.name, fn_get_products?.brand_name)}
           >
             {fn_get_products.p_name || fn_get_products?.name || fn_get_products?.p_sku}
@@ -392,7 +392,7 @@ const ProductCard = ({
         <div className="flex flex-col md:flex-row justify-between mr-5 gap-2 md:gap-0">
           <Link href={productUrl} passHref>
             <span
-              className="font-sans font-normal leading-5 text-sm cursor-pointer text-[#94999F]"
+              className=" font-normal leading-5 text-sm cursor-pointer text-[#94999F]"
               onClick={(e) => handleProductClick(e, fn_get_products?.name, fn_get_products?.brand_name)}
             >
               {fn_get_products?.brand_name}
@@ -410,7 +410,7 @@ const ProductCard = ({
                     rel="noopener noreferrer"
                     className="tooltip"
                   >
-                    <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
+                    <span className="tooltiptext  font-light leading-6 text-base text-wrap text-xs">
                       Download brochure
                     </span>
                     <Image
@@ -428,7 +428,7 @@ const ProductCard = ({
                     rel="noopener noreferrer"
                     className="tooltip"
                   >
-                    <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
+                    <span className="tooltiptext  font-light leading-6 text-base text-wrap text-xs">
                       Download Manual Book
                     </span>
                     <Image
@@ -446,7 +446,7 @@ const ProductCard = ({
                     rel="noopener noreferrer"
                     className="tooltip"
                   >
-                    <span className="tooltiptext font-sans font-light leading-6 text-base text-wrap text-xs">
+                    <span className="tooltiptext  font-light leading-6 text-base text-wrap text-xs">
                       Download Spec Sheet
                     </span>
                     <Image
