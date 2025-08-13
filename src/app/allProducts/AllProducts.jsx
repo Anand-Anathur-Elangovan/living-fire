@@ -1,5 +1,4 @@
 "use client";
-// import React, { useEffect, useMemo, useState } from "react";
 import OurDifference from "./components/ourDifference";
 import OurShowrooms from "./components/ourShowrooms";
 import Products from "./components/products";
@@ -7,7 +6,6 @@ import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import "./page.css";
 import Image from "next/image";
 import useMasterValues from "./hooks/useMasterValues";
-// import { useSearchParams } from "next/navigation";
 import useAllProducts from "./hooks/useAllProducts";
 import { useNavigationState } from "@/context/NavigationContext";
 import React, {
@@ -18,14 +16,12 @@ import React, {
   useState,
 } from "react";
 import RightArrowIcon from "@/public/assets/allProducts/rightArrow.svg";
-//   import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import LeftArrowDisabledIcon from "@/public/assets/allProducts/leftArrowDisabled.svg";
 import CrossIcon from "@/public/assets/allProducts/cross.svg";
 import MinusIcon from "@/public/assets/allProducts/minus.svg";
 import PlusIcon from "@/public/assets/allProducts/plus.svg";
 import SortIcon from "@/public/assets/allProducts/sortIcon.svg";
 //   import Image from "next/image";
-//   import useAllProducts from "../hooks/useAllProducts";
 import ProductCard from "./components/productCard";
 import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 import { SORTBY } from "@/src/constants/products";
@@ -278,12 +274,6 @@ const AllProducts = () => {
       [key]: status ? status : !prev[key],
     }));
   };
-  // handleFilterStatus('fireplaceFilterIdStatus')
-  // handleFilterStatus('installationTypeIdStatus')
-  // handleFilterStatus('glassOrientationIdStatus')
-  // handleFilterStatus('rangeIdStatus')
-  // handleFilterStatus('brandIdStatus')
-  // style={{display: !filterStatus?.fireplaceFilterIdStatus&& 'none'}}
 
   const { allProducts, isFetched, isStale } = useAllProducts(
     productMenuIndex,
@@ -390,22 +380,12 @@ const AllProducts = () => {
   useEffect(() => {}, [filters]);
 
   const searchParams = useSearchParams();
-  // useEffect(() => {
-  //   if (state?.typeName === "fuelType") {
-  //     setFireplaceType(state?.id);
-  //   } else if (state?.typeName === "brandType") {
-  //     setBrandType(state?.id);
-  //   }
-  // }, [state]);
+
 
   useEffect(() => {
     const setStates = () => {
       let text = searchParams.get("searchText");
       if (text) setSearchText(text);
-      // let fireplaceType = searchParams.get("fireplaceType");
-      // if (fireplaceType) setFireplaceType(parseInt(fireplaceType));
-      // let productMenu = searchParams.get("productMenu");
-      // if (productMenu) setproductMenuIndex(parseInt(productMenu));
       let brand = searchParams.get("brand");
       if (brand) setBrandType(parseInt(brand));
     };
@@ -690,13 +670,6 @@ const AllProducts = () => {
     //   setproductMenuIndex(Number(queryParams.productMenuIndex));
   }, [searchParams]);
 
-  // useEffect(() => {
-  //   productMenuIndex !== 0 &&
-  //     updateQueryParams({
-  //       productMenuIndex: productMenuIndex,
-  //     });
-  // }, [productMenuIndex]);
-  // console.log("fuelTypes", fuelTypes, "brands", brands);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -704,10 +677,11 @@ const AllProducts = () => {
   }, []);
 
   return (
-    <div style={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
-      <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
+    <div className= "mt-[10rem]" style={{ display: "flex", gap: "1rem", flexDirection: "column"  }}>
+      <div className="flex flex-col md:px-32 gap-3 bg-[#F7F7F5] md:gap-4">
+        <div className="flex flex-col items-center gap-5 md:gap-12"> 
         <div className="flex flex-col items-center gap-5">
-          <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
+          <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full  cursor-default">
             {!brandType
               ? `${
                   fireplaceType
@@ -794,6 +768,7 @@ const AllProducts = () => {
             )}
           </div>
         )}
+        </div>
         <>
           {/* Compare Products */}
           {compareProducts.length > 1 && (
@@ -846,13 +821,13 @@ const AllProducts = () => {
           <div
             className={`flex ${
               isFilter ? "" : "flex-col"
-            } px-1 md:border-t md:border-solid md:border-[#D3C6BB] w-full gap-5 transistion ease-in-out duration-300 items-start`}
+            } px-1 md:border-t md:border-solid md:border-[#D3C6BB] w-full gap-5 transistion ease-in-out duration-300 items-start md:pt-6`}
           >
             {/* Filter */}
             {!isFilter && (
               <div className="w-full flex flex-row px-4 pt-3 justify-between">
                 <span
-                  className="flex gap-4 uppercase font-sans font-normal text-base"
+                  className="flex gap-4 uppercase font-normal text-base"
                   onClick={() => setIsFilter(true)}
                 >
                   Filters{" "}
@@ -864,7 +839,7 @@ const AllProducts = () => {
                   />
                 </span>
                 <span
-                  className="flex gap-4 uppercase font-sans font-normal text-base md:hidden"
+                  className="flex gap-4 uppercase font-normal text-base md:hidden"
                   onClick={() => setIsSort(true)}
                 >
                   Sort{" "}
@@ -886,7 +861,7 @@ const AllProducts = () => {
                       !isSort ? "flex" : "hidden"
                     } md:flex flex-row py-3 mr-10 justify-between border-b border-solid border-[#D3C6BB]`}
                   >
-                    <span className="flex gap-4 uppercase font-sans font-normal text-base">
+                    <span className="flex gap-4 uppercase font-normal text-base">
                       Filters{" "}
                       <Image
                         src={MinusIcon}
@@ -897,7 +872,7 @@ const AllProducts = () => {
                       />
                     </span>
                     <span
-                      className="flex items-center gap-4 font-sans font-normal text-base cursor-pointer"
+                      className="flex items-center gap-4 font-normal text-base cursor-pointer"
                       onClick={clearFilters}
                     >
                       Clear{" "}
@@ -909,43 +884,6 @@ const AllProducts = () => {
                       />
                     </span>
                   </div>
-                  {/* <div
-                    className={`${
-                      !isSort ? "flex" : "hidden"
-                    } md:flex flex-row gap-3 mr-10 border-b border-solid border-[#D3C6BB] pb-3`}
-                  >
-                    <input
-                      className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
-                      type="text"
-                      ref={searchRef}
-                      defaultValue={searchText}
-                      // onChange={(e) => setSearchText(e.target.value)}
-                      // value={searchText}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          setSearchText(searchRef.current.value?.toLowerCase());
-                          updateQueryParams({
-                            searchText: searchRef.current.value?.toLowerCase(),
-                          });
-                        }
-                      }}
-                    />
-                    <Image
-                      src={SearchIcon}
-                      alt="search"
-                      className="md:pt-1 cursor-pointer"
-                      onClick={() => {
-                        setSearchText(searchRef.current.value?.toLowerCase());
-                        updateQueryParams({
-                          searchText: searchRef.current.value?.toLowerCase(),
-                        });
-                        if (window?.innerWidth <= 768) {
-                          setIsFilter(false);
-                        }
-                      }}
-                      unoptimized
-                    />
-                  </div> */}
                   <div
                     className={`${
                       !isSort ? "flex" : "hidden"
@@ -996,7 +934,7 @@ const AllProducts = () => {
                     {/* FirePlace Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
+                        <span className="flex flex-row justify-between uppercase font-normal text-base">
                           {"Fireplace Type"}
                           {isClient &&
                             !document
@@ -1060,7 +998,7 @@ const AllProducts = () => {
                                         <>
                                           <span
                                             key={"fueltypes" + val.fueltype_id}
-                                            className="font-sans font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
+                                            className="font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
                                             onClick={() => {
                                               setSubType(null);
                                               // setFireplaceType(
@@ -1075,11 +1013,6 @@ const AllProducts = () => {
                                               if (window?.innerWidth <= 768) {
                                                 setIsFilter(false);
                                               }
-                                              // updateQueryParams({
-                                              //   fireplaceType: val?.fueltype_id,
-                                              // });
-                                              // setInstallationType(null);
-                                              // setglassOrientationType(null);
                                             }}
                                           >
                                             {val?.fueltype_name}
@@ -1088,13 +1021,9 @@ const AllProducts = () => {
                                       ) : (
                                         <span
                                           key={"types" + val.fueltype_id}
-                                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                                          className=" font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
                                           onClick={() => {
-                                            setSubType(null);
-                                            // setFireplaceType(val?.fueltype_id);
-                                            // updateQueryParams({
-                                            //   fireplaceType: val?.fueltype_id,
-                                            // });
+                                            setSubType(null);;
                                             updateFilter(
                                               "fuelType",
                                               val?.fueltype_name,
@@ -1104,8 +1033,6 @@ const AllProducts = () => {
                                             if (window?.innerWidth <= 768) {
                                               setIsFilter(false);
                                             }
-                                            // setInstallationType(null);
-                                            // setglassOrientationType(null);
                                           }}
                                         >
                                           {val?.fueltype_name}
@@ -1121,13 +1048,9 @@ const AllProducts = () => {
                                   ) && (
                                     <span
                                       key={"types" + val.fueltype_id}
-                                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                                      className=" font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
                                       onClick={() => {
                                         setSubType(null);
-                                        // setFireplaceType(val?.fueltype_id);
-                                        // updateQueryParams({
-                                        //   fireplaceType: val?.fueltype_id,
-                                        // });
                                         updateFilter(
                                           "fuelType",
                                           val?.fueltype_name,
@@ -1137,8 +1060,7 @@ const AllProducts = () => {
                                         if (window?.innerWidth <= 768) {
                                           setIsFilter(false);
                                         }
-                                        // setInstallationType(null);
-                                        // setglassOrientationType(null);
+
                                       }}
                                     >
                                       {val?.fueltype_name}
@@ -1152,7 +1074,7 @@ const AllProducts = () => {
                     {/* Installation Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-normal text-base cursor-pointer">
                           {`Installation Type`}
                           {isClient &&
                             !document
@@ -1220,16 +1142,13 @@ const AllProducts = () => {
                                       "installtypes" +
                                       installval?.installation_id
                                     }
-                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                    className={` font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
                                       installval?.installation_id ===
                                       installationType
                                         ? "text-black"
                                         : "text-gray-400"
                                     }`}
                                     onClick={() => {
-                                      // setInstallationType(
-                                      //   installval?.installation_id
-                                      // );
                                       updateFilter(
                                         "installationType",
                                         installval?.installation_name,
@@ -1239,11 +1158,7 @@ const AllProducts = () => {
                                       if (window?.innerWidth <= 768) {
                                         setIsFilter(false);
                                       }
-                                      // updateQueryParams({
-                                      //   installationType:
-                                      //     installval?.installation_id,
-                                      // });
-                                      // setglassOrientationType(null);
+
                                     }}
                                   >
                                     {installval?.installation_name}
@@ -1257,7 +1172,7 @@ const AllProducts = () => {
                     {/* Glass Orientation Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-normal text-base cursor-pointer">
                           {`Glass Orientation Type`}
                           {isClient &&
                             !document
@@ -1327,21 +1242,14 @@ const AllProducts = () => {
                                       "glasstypes" +
                                       glassval?.glass_orientation_id
                                     }
-                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                    className={` font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
                                       glassval?.glass_orientation_id ===
                                       glassOrientationType
                                         ? "text-black"
                                         : "text-gray-400"
                                     }`}
                                     onClick={() => {
-                                      // setInstallationType(null);
-                                      // setglassOrientationType(
-                                      //   glassval?.glass_orientation_id
-                                      // );
-                                      // updateQueryParams({
-                                      //   glassOrientationType:
-                                      //     glassval?.glass_orientation_id,
-                                      // });
+                             
                                       updateFilter(
                                         "glassOrientationType",
                                         glassval?.glass_orientation_name,
@@ -1365,7 +1273,7 @@ const AllProducts = () => {
                     {
                       // brandType && (
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-normal text-base cursor-pointer">
                           {`Ranges`}
                           {isClient &&
                             !document
@@ -1417,7 +1325,7 @@ const AllProducts = () => {
                           {rangeType && (
                             <span
                               key={"ranges_selected"}
-                              className="font-sans font-normal font-small leading-5 text-base text-black"
+                              className=" font-normal font-small leading-5 text-base text-black"
                               // onClick={() => setBrandType(val?.brand_id)}
                             >
                               {
@@ -1439,12 +1347,8 @@ const AllProducts = () => {
                               return (
                                 <span
                                   key={"ranges" + val?.range_id}
-                                  className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                                  className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                                   onClick={() => {
-                                    // setRangeType(val?.range_id);
-                                    // updateQueryParams({
-                                    //   rangeType: val?.range_id,
-                                    // });
                                     updateFilter(
                                       "rangeType",
                                       val?.range_name,
@@ -1468,7 +1372,7 @@ const AllProducts = () => {
                     {/* Brands Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
+                        <span className="flex flex-row justify-between uppercase  font-normal text-base">
                           Brands{" "}
                           {isClient &&
                             !document
@@ -1518,7 +1422,7 @@ const AllProducts = () => {
                             <>
                               <span
                                 key={"brands_selected"}
-                                className="font-sans font-normal font-small leading-5 text-base text-black"
+                                className=" font-normal font-small leading-5 text-base text-black"
                                 // onClick={() => setBrandType(val?.brand_id)}
                               >
                                 {
@@ -1535,11 +1439,9 @@ const AllProducts = () => {
                             return (
                               <span
                                 key={"brands" + val?.brand_id}
-                                className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                                className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                                 onClick={() => {
                                   setRangeType(null);
-                                  // setBrandType(val?.brand_id);
-                                  // updateQueryParams({ brand: val?.brand_id });
                                   updateFilter(
                                     "brand",
                                     val?.brand_name,
@@ -1564,7 +1466,7 @@ const AllProducts = () => {
                           isSort ? "flex" : "hidden"
                         } md:flex flex-col gap-3 py-3 md:mr-10`}
                       >
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
+                        <span className="flex flex-row justify-between uppercase  font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
                           Sort By{" "}
                           {isClient &&
                             !document
@@ -1606,44 +1508,20 @@ const AllProducts = () => {
                           id="sortbyFilterId"
                           className="flex flex-col gap-3 transistion ease-in-out collapse"
                         >
-                          {/* <div
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.priceLowToHigh)}
-                      >
-                        Price: Low to High
-                      </div>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.priceHighToLow)}
-                      >
-                        Price: High to Low
-                      </span> */}
                           <span
-                            className="font-sans font-small leading-5 text-normal cursor-pointer"
+                            className=" font-small leading-5 text-normal cursor-pointer"
                             onClick={() => sortProducts(SORTBY.A2Z)}
                           >
                             A-Z
                           </span>
                           <span
-                            className="font-sans font-small leading-5 text-normal cursor-pointer"
+                            className=" font-small leading-5 text-normal cursor-pointer"
                             onClick={() => sortProducts(SORTBY.Z2A)}
                           >
                             Z-A
                           </span>
-                          {/* <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.oldToNew)}
-                      >
-                        Oldest to Newest
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.newToOld)}
-                      >
-                        Newest to Oldest
-                      </span>*/}
                           <span
-                            className="font-sans font-small leading-5 text-normal cursor-pointer"
+                            className=" font-small leading-5 text-normal cursor-pointer"
                             onClick={() => sortProducts(SORTBY.bestSelling)}
                           >
                             Best Selling
@@ -1652,161 +1530,9 @@ const AllProducts = () => {
                       </div>
                     }
                   </div>
-                  {/* <div
-                    className={`${
-                      !isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]`}
-                  >
-                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
-                      Others{" "}
-                      {isClient &&
-                        !document
-                          .getElementById("otherFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={MinusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("otherFilterId")
-                                .classList.add("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                      {isClient &&
-                        document
-                          .getElementById("otherFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={PlusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("otherFilterId")
-                                .classList.remove("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                    </span>
-                    <div
-                      id="otherFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out collapse"
-                    >
-                      <span
-                        className={`font-sans font-small leading-5 text-normal cursor-pointer ${
-                          bestSelling ? "font-semibold" : ""
-                        }`}
-                        onClick={() => {
-                          if (window?.innerWidth <= 768) {
-                            setIsFilter(false);
-                          }
-                          sortProducts(SORTBY.bestSelling);
-                        }}
-                      >
-                        Best Selling
-                      </span>
-                    </div>
-                  </div> */}
+
                 </>
-                {/* <>
-                  <div
-                    className={`${
-                      isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 md:mr-10`}
-                  >
-                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
-                      Sort By{" "}
-                      {isClient &&
-                        !document
-                          .getElementById("sortbyFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={MinusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("sortbyFilterId")
-                                .classList.add("collapse");
-                              setIsSort(false);
-                            }}
-                            unoptimized
-                          />
-                        )}
-                      {isClient &&
-                        document
-                          .getElementById("sortbyFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={PlusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("sortbyFilterId")
-                                .classList.remove("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                    </span>
-                    <div
-                      id="sortbyFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out collapse"
-                    >
-                       <div
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.priceLowToHigh)}
-                      >
-                        Price: Low to High
-                      </div>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.priceHighToLow)}
-                      >
-                        Price: High to Low
-                      </span> 
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.A2Z)}
-                      >
-                        A-Z
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.Z2A)}
-                      >
-                        Z-A
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.oldToNew)}
-                      >
-                        Oldest to Newest
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.newToOld)}
-                      >
-                        Newest to Oldest
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.bestSelling)}
-                      >
-                        Best Selling
-                      </span> 
-                    </div>
-                  </div>
-                </> */}
+
               </div>
             )}
 
@@ -1814,7 +1540,7 @@ const AllProducts = () => {
             <div
               className={`flex flex-wrap px-4 gap-6 md:gap-8 py-3 ${
                 isFilter ? "md:w-[80%]" : "w-full"
-              }`}
+              } overflow-y-auto md:min-h-[60vh] `}
             >
               {filteredProducts?.map((product, index) => (
                 <ProductCard
@@ -1941,110 +1667,6 @@ const AllProducts = () => {
               </div>
             </div>
           </div>
-          {/* <div className="flex justify-center gap-2 font-[publicSans] text-[22px] md:text-[26px] cursor-pointer">
-            {pageIndex > 0 && (
-              <>
-                <span
-                  className="cursor-pointer"
-                  onClick={() => onPageIndexClick(0)}
-                >
-                  &lt;&lt;
-                </span>
-                <span className="mx-1"> </span>
-              </>
-            )}
-
-            {pageIndex > 0 && (
-              <span
-                className="cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex - 1)}
-              >
-                &lt;
-              </span>
-            )}
-
-            {(() => {
-              const pages = [];
-
-              pages.push(
-                <span
-                  key={0}
-                  className={`cursor-pointer ${
-                    pageIndex === 0 ? "font-bold text-black" : ""
-                  }`}
-                  onClick={() => onPageIndexClick(0)}
-                >
-                  1
-                </span>
-              );
-
-              const startPage = Math.max(1, pageIndex - 1);
-              const endPage = Math.min(maxPageCount - 1, pageIndex + 1);
-
-              if (startPage > 1) {
-                pages.push(<span key="left-ellipsis">...</span>);
-              }
-
-              for (let i = startPage; i <= endPage; i++) {
-                if (i > 0 && i < maxPageCount - 1) {
-                  pages.push(
-                    <span
-                      key={i}
-                      className={`cursor-pointer ${
-                        pageIndex === i ? "font-bold text-black" : ""
-                      }`}
-                      onClick={() => onPageIndexClick(i)}
-                    >
-                      {i + 1}
-                    </span>
-                  );
-                }
-              }
-
-              if (endPage < maxPageCount - 2) {
-                pages.push(<span key="right-ellipsis">...</span>);
-              }
-
-              if (maxPageCount > 1) {
-                pages.push(
-                  <span
-                    key={maxPageCount - 1}
-                    className={`cursor-pointer ${
-                      pageIndex === maxPageCount - 1
-                        ? "font-bold text-black"
-                        : ""
-                    }`}
-                    onClick={() => onPageIndexClick(maxPageCount - 1)}
-                  >
-                    {maxPageCount}
-                  </span>
-                );
-              }
-
-              return pages;
-            })()}
-
-            {pageIndex < maxPageCount - 1 && (
-              <span
-                className="cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex + 1)}
-              >
-                &gt;
-              </span>
-            )}
-
-            {pageIndex < maxPageCount - 1 && (
-              <>
-                <span className="mx-1"> </span>
-                <span
-                  className="cursor-pointer"
-                  onClick={() => onPageIndexClick(maxPageCount - 1)}
-                >
-                  &gt;&gt;
-                </span>
-              </>
-            )}
-          </div> */}
         </>
         {/* <OurDifference />
         <OurShowrooms /> */}
