@@ -777,7 +777,7 @@ const Filters = () => {
                 //   !brandType &&
                 allProductMenu.map((productMenu, index) => (
                   <div
-                    className="flex flex-col gap-1 items-center text-center cursor-pointer text-xs md:text-base"
+                    className="flex flex-col gap-1 items-center font-semibold text-center cursor-pointer text-xs md:text-base"
                     key={"productMenu" + index}
                     onClick={() => {
                       // setProductTypeName(productMenu.ptype_name);
@@ -885,7 +885,7 @@ const Filters = () => {
             {!isFilter && (
               <div className="w-full flex flex-row px-4 pt-3 justify-between ">
                 <span
-                  className="flex gap-4 uppercase  font-normal text-base"
+                  className="flex gap-4 uppercase  font-semibold text-base"
                   onClick={() => setIsFilter(true)}
                 >
                   Filters{" "}
@@ -897,7 +897,7 @@ const Filters = () => {
                   />
                 </span>
                 <span
-                  className="flex gap-4 uppercase  font-normal text-base md:hidden"
+                  className="flex gap-4 uppercase  font-semibold text-base md:hidden"
                   onClick={() => setIsSort(true)}
                 >
                   Sort{" "}
@@ -919,7 +919,7 @@ const Filters = () => {
                       !isSort ? "flex" : "hidden"
                     } md:flex flex-row py-3 mr-10 justify-between border-b border-solid border-[#D3C6BB]`}
                   >
-                    <span className="flex gap-4 uppercase  font-normal text-base">
+                    <span className="flex gap-4 uppercase  font-semibold text-base">
                       Filters{" "}
                       <Image
                         src={MinusIcon}
@@ -930,7 +930,7 @@ const Filters = () => {
                       />
                     </span>
                     <span
-                      className="flex items-center gap-4  font-normal text-base cursor-pointer"
+                      className="flex items-center gap-4  font-semibold text-base cursor-pointer"
                       onClick={clearFilters}
                     >
                       Clear{" "}
@@ -988,7 +988,7 @@ const Filters = () => {
                     {/* FirePlace Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base">
                           {"Fireplace Type"}
                           {isClient &&
                             !document
@@ -1050,7 +1050,7 @@ const Filters = () => {
                                     <>
                                       <span
                                         key={"fueltypes" + val.fueltype_id}
-                                        className=" font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
+                                        className="font-semibold font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
                                         onClick={() => {
                                           setSubType(null);
                                           updateFilter(
@@ -1123,7 +1123,7 @@ const Filters = () => {
                     {/* Installation Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Installation Type`}
                           {isClient &&
                             !document
@@ -1192,7 +1192,7 @@ const Filters = () => {
                                 className={` font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
                                   installval?.installation_id ===
                                   installationType
-                                    ? "text-black"
+                                    ? "text-black font-semibold"
                                     : "text-gray-400"
                                 }`}
                                 onClick={() => {
@@ -1221,7 +1221,7 @@ const Filters = () => {
                     {/* Glass Orientation Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Glass Orientation Type`}
                           {isClient &&
                             !document
@@ -1293,7 +1293,7 @@ const Filters = () => {
                                 className={` font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
                                   glassval?.glass_orientation_id ===
                                   glassOrientationType
-                                    ? "text-black"
+                                    ? "text-black font-semibold"
                                     : "text-gray-400"
                                 }`}
                                 onClick={() => {
@@ -1320,7 +1320,7 @@ const Filters = () => {
                     {
                       // brandType && (
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Ranges`}
                           {isClient &&
                             !document
@@ -1374,7 +1374,7 @@ const Filters = () => {
                           {rangeType && (
                             <span
                               key={"ranges_selected"}
-                              className=" font-normal font-small leading-5 text-base text-black"
+                              className=" font-semibold font-small leading-5 text-base text-black"
                               // onClick={() => setBrandType(val?.brand_id)}
                             >
                               {
@@ -1422,7 +1422,7 @@ const Filters = () => {
                     {/* Brands Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base">
                           Brands{" "}
                           {isClient &&
                             !document
@@ -1474,7 +1474,7 @@ const Filters = () => {
                             <>
                               <span
                                 key={"brands_selected"}
-                                className=" font-normal font-small leading-5 text-base text-black"
+                                className=" font-semibold font-small leading-5 text-base text-black"
                                 // onClick={() => setBrandType(val?.brand_id)}
                               >
                                 {
@@ -1519,7 +1519,7 @@ const Filters = () => {
                           isSort ? "flex" : "hidden"
                         } md:flex flex-col gap-3 py-3 md:mr-10 `}
                       >
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
                           Sort By{" "}
                           {isClient &&
                             !document
@@ -1624,7 +1624,7 @@ const Filters = () => {
                 </Box>
               ) : allProducts?.length == 0 ? (
                 <div className="w-full flex flex-col items-center justify-center py-10 gap-6">
-                  <h3 className="text-2xl font-medium text-center">
+                  <h3 className="text-2xl font-semibold text-center">
                     We dont have products for the selected criteria
                   </h3>
                   <p className="text-lg text-center max-w-lg">
@@ -1658,7 +1658,7 @@ const Filters = () => {
                   />
                 ))
               )}
-              {!isLoading && (
+              {!isLoading && allProducts?.length > 0 && (
                 <div
                   style={{
                     width: "100%",

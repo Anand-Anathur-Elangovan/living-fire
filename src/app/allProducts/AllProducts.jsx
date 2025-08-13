@@ -32,6 +32,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { generateSlug } from "@/src/helper/slug/slug";
 import LowerArea from "@/src/components/custom/LowerArea";
 import Showrooms from "@/src/components/custom/Showrooms/Showrooms";
+import { CircularProgress, Box } from "@mui/material";
 
 const filterMappingsMock = [
   { id: 1, value: "Fireplace", filterType: "type", slug: "fireplace" },
@@ -275,7 +276,7 @@ const AllProducts = () => {
     }));
   };
 
-  const { allProducts, isFetched, isStale } = useAllProducts(
+  const { allProducts, isLoading, isFetched, isStale } = useAllProducts(
     productMenuIndex,
     fireplaceType ?? 0,
     brandType ?? 0,
@@ -717,7 +718,7 @@ const AllProducts = () => {
                 !brandType &&
                 allProductMenu.map((productMenu, index) => (
                   <h2
-                    className="flex flex-col gap-1 items-center text-center cursor-pointer text-xs md:text-base"
+                    className="font-semibold flex flex-col gap-1 items-center text-center cursor-pointer text-xs md:text-base"
                     key={"productMenu" + index}
                     onClick={() => {
                       // setProductTypeName(productMenu.ptype_name);
@@ -827,7 +828,7 @@ const AllProducts = () => {
             {!isFilter && (
               <div className="w-full flex flex-row px-4 pt-3 justify-between">
                 <span
-                  className="flex gap-4 uppercase font-normal text-base"
+                  className="flex gap-4 uppercase font-semibold text-base"
                   onClick={() => setIsFilter(true)}
                 >
                   Filters{" "}
@@ -839,7 +840,7 @@ const AllProducts = () => {
                   />
                 </span>
                 <span
-                  className="flex gap-4 uppercase font-normal text-base md:hidden"
+                  className="flex gap-4 uppercase font-semibold text-base md:hidden"
                   onClick={() => setIsSort(true)}
                 >
                   Sort{" "}
@@ -861,7 +862,7 @@ const AllProducts = () => {
                       !isSort ? "flex" : "hidden"
                     } md:flex flex-row py-3 mr-10 justify-between border-b border-solid border-[#D3C6BB]`}
                   >
-                    <span className="flex gap-4 uppercase font-normal text-base">
+                    <span className="flex gap-4 uppercase font-semibold text-base">
                       Filters{" "}
                       <Image
                         src={MinusIcon}
@@ -872,7 +873,7 @@ const AllProducts = () => {
                       />
                     </span>
                     <span
-                      className="flex items-center gap-4 font-normal text-base cursor-pointer"
+                      className="flex items-center gap-4 font-semibold text-base cursor-pointer"
                       onClick={clearFilters}
                     >
                       Clear{" "}
@@ -934,7 +935,7 @@ const AllProducts = () => {
                     {/* FirePlace Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-normal text-base">
+                        <span className="flex flex-row justify-between uppercase font-semibold text-base">
                           {"Fireplace Type"}
                           {isClient &&
                             !document
@@ -1074,7 +1075,7 @@ const AllProducts = () => {
                     {/* Installation Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Installation Type`}
                           {isClient &&
                             !document
@@ -1172,7 +1173,7 @@ const AllProducts = () => {
                     {/* Glass Orientation Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Glass Orientation Type`}
                           {isClient &&
                             !document
@@ -1273,7 +1274,7 @@ const AllProducts = () => {
                     {
                       // brandType && (
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Ranges`}
                           {isClient &&
                             !document
@@ -1325,7 +1326,7 @@ const AllProducts = () => {
                           {rangeType && (
                             <span
                               key={"ranges_selected"}
-                              className=" font-normal font-small leading-5 text-base text-black"
+                              className=" font-semibold font-small leading-5 text-base text-black"
                               // onClick={() => setBrandType(val?.brand_id)}
                             >
                               {
@@ -1372,7 +1373,7 @@ const AllProducts = () => {
                     {/* Brands Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base">
                           Brands{" "}
                           {isClient &&
                             !document
@@ -1422,7 +1423,7 @@ const AllProducts = () => {
                             <>
                               <span
                                 key={"brands_selected"}
-                                className=" font-normal font-small leading-5 text-base text-black"
+                                className=" font-semibold font-small leading-5 text-base text-black"
                                 // onClick={() => setBrandType(val?.brand_id)}
                               >
                                 {
@@ -1466,7 +1467,7 @@ const AllProducts = () => {
                           isSort ? "flex" : "hidden"
                         } md:flex flex-col gap-3 py-3 md:mr-10`}
                       >
-                        <span className="flex flex-row justify-between uppercase  font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
                           Sort By{" "}
                           {isClient &&
                             !document
@@ -1542,17 +1543,54 @@ const AllProducts = () => {
                 isFilter ? "md:w-[80%]" : "w-full"
               } overflow-y-auto md:min-h-[60vh] `}
             >
-              {filteredProducts?.map((product, index) => (
-                <ProductCard
-                  key={index}
-                  productDetails={product}
-                  addToCompare={addToCompareProducts}
-                  isCompare={isCompare}
-                  // title={"Beta Outdoor Fire Pit"}
-                  // description={"Living Fire" + val}
-                />
-              ))}
-              <div
+               {isLoading ? (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  minHeight="200px"
+                  width="100%"
+                >
+                  <CircularProgress sx={{ color: "black" }} />
+                </Box>
+              ) : allProducts?.length == 0 ? (
+                <div className="w-full flex flex-col items-center justify-center py-10 gap-6">
+                  <h3 className="text-2xl font-semibold text-center">
+                    We dont have products for the selected criteria
+                  </h3>
+                  <p className="text-lg text-center max-w-lg">
+                    We will be adding more products soon. Please check back
+                    later or contact us for more details.
+                  </p>
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <button
+                      onClick={() => router.push("/")}
+                      className="px-6 py-3 bg-black text-white hover:bg-gray-800 transition-colors"
+                    >
+                      Return to Home
+                    </button>
+                    <button
+                      onClick={clearFilters}
+                      className="px-6 py-3 border border-black hover:bg-gray-100 transition-colors"
+                    >
+                      Clear Filters
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                filteredProducts?.map((product, index) => (
+                  <ProductCard
+                    key={index}
+                    productDetails={product}
+                    addToCompare={addToCompareProducts}
+                    isCompare={isCompare}
+                    // title={"Beta Outdoor Fire Pit"}
+                    // description={"Living Fire" + val}
+                  />
+                ))
+              )}
+              {!isLoading && allProducts?.length > 0 && ( 
+                <div
                 style={{
                   width: "100%",
                   display: "flex",
@@ -1665,6 +1703,7 @@ const AllProducts = () => {
                   )}
                 </div>
               </div>
+              )}
             </div>
           </div>
         </>
