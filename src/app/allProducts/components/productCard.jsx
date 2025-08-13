@@ -149,7 +149,7 @@
 //       </div>
 //       <div className="py-2 gap-3">
 //         <span
-//           className=" md:font-medium font-normal text-sm md:text-base text-wrap cursor-pointer text-black" ///leading-5 md:leading-6
+//           className=" md:font-semibold font-normal text-sm md:text-base text-wrap cursor-pointer text-black" ///leading-5 md:leading-6
 //           onClick={() => handleProductClick(fn_get_products?.name,fn_get_products?.brand_name)}
 //         >
 //           {fn_get_products.p_name ||
@@ -383,7 +383,7 @@ const ProductCard = ({
       <div className="py-2 gap-3">
         <Link href={productUrl} passHref>
           <span
-            className=" md:font-medium font-normal text-sm md:text-base text-wrap cursor-pointer text-black"
+            className=" md:font-semibold font-normal text-sm md:text-base text-wrap cursor-pointer text-black"
             onClick={(e) => handleProductClick(e, fn_get_products?.name, fn_get_products?.brand_name)}
           >
             {fn_get_products.p_name || fn_get_products?.name || fn_get_products?.p_sku}
