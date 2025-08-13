@@ -269,7 +269,7 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
                       </div>
                     </div>
                   </div>
-                  <div className="font-sans text-left">
+                  <div className="text-left">
                     <h3 className="leading-6 text-base md:text-lg font-extralight hover:underline">
                       {item.title}
                     </h3>
@@ -350,11 +350,14 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
                       </div>
                     </div>
                   </div>
-                  <div className="font-sans text-left">
-                    <h3 className="leading-6 text-base md:text-lg font-extralight hover:underline">
+                  <div className="text-left">
+                    <h3 className="leading-6 text-base md:text-lg font-extralight hover:underline" style={{ fontFamily: '"Public Sans", sans-serif' }}
+>
                       {item.title}
                     </h3>
-                    <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F]">
+                    <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F]"
+                    style={{ fontFamily: '"Public Sans", sans-serif' }}
+>
                       {item.range}
                     </p>
                     <p className="font-normal leading-5 text-sm mt-2 text-[#333]">
@@ -446,16 +449,17 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
                       </div>
                     </div>
                   </div>
-                  <div className="font-sans text-left">
+                  <div className="text-left">
                     <h3
                       className="leading-6 text-base md:text-lg font-extralight hover:underline"
-                      style={{ fontFamily: "Satoru, sans-serif" }}
+                      style={{ fontFamily: '"Public Sans", sans-serif' }}
                     >
                       {item.title}
                     </h3>
                     <p
                       className="font-medium leading-5 text-xs md:text-sm text-[#94999F]"
-                      style={{ fontFamily: "Satoru, sans-serif" }}
+                      style={{ fontFamily: '"Public Sans", sans-serif' }}
+
                     >
                       {item.range}
                     </p>
@@ -518,7 +522,7 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
           </motion.button> */}
           <Link href="/allProducts" passHref legacyBehavior>
             <motion.a
-              className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300  flex items-center gap-2"
+              className="px-8 py-3 bg-black text-white font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300  flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onMouseEnter={() => router.prefetch("/allProducts")}
@@ -528,7 +532,7 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
           </Link>
           <Link href="/contact" passHref legacyBehavior>
             <motion.a
-              className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300  flex items-center gap-2"
+              className="px-8 py-3 bg-white text-black border border-black font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300  flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onMouseEnter={() => router.prefetch("/contact")}
