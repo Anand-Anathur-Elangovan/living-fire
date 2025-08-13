@@ -235,9 +235,9 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                   passHref
                   legacyBehavior
                 >
-                  <a className="font-sans font-medium leading-6 text-base text-wrap hover:underline">
+                  <a className="font-medium leading-6 text-base text-wrap hover:underline">
                     <h2
-                      className="uppercase font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
+                      className="uppercase font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
                       onClick={() => {
                         handleRoutePrefetch(item.route);
                         allProductsRouteHandler(
@@ -257,7 +257,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
 
                 <div className="description-container">
                   <p
-                    className="font-sans font-normal leading-5 text-sm text-gray-700"
+                    className="font-normal leading-5 text-sm text-gray-700"
                     style={{ fontFamily: '"Public Sans", sans-serif' }}
                   >
                     {item.description}
@@ -273,9 +273,9 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                 passHref
                 legacyBehavior
               >
-                <a className="font-medium font-sans text-sm hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1">
+                <a className="font-medium text-sm hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1">
                   <button
-                    className="uppercase font-medium font-sans text-sm cursor-pointer focus:outline-none hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
+                    className="uppercase font-medium text-sm cursor-pointer focus:outline-none hover:underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
                     onClick={() => {
                       handleRoutePrefetch(item.route);
                       allProductsRouteHandler(
@@ -285,7 +285,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                         item?.slug
                       );
                     }}
-                    // style={{ fontFamily: "Satoru, sans-serif" }}
+                    // style={{ fontFamily: "Satoru, sans-serif}}
                   >
                     View Collection
                     <svg
@@ -367,7 +367,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
 
             <div className="mt-4 gap-2 flex flex-col px-2">
               <h2
-                className="font-sans font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
+                className="font-medium leading-6 text-base text-wrap cursor-pointer hover:underline"
                 onClick={() => {
                   handleRoutePrefetch(item.route);
                   allProductsRouteHandler(
@@ -382,12 +382,12 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
                 {item.title}
               </h2>
               <div className="description-container">
-                <p className="font-sans font-normal leading-5 text-sm text-gray-700">
+                <p className="font-normal leading-5 text-sm text-gray-700">
                   {item.description}
                 </p>
               </div>
               <button
-                className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
+                className="uppercase font-medium  text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit mt-1"
                 onClick={() => {
                   handleRoutePrefetch(item.route);
                   allProductsRouteHandler(
@@ -419,13 +419,13 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       </div>
       {/* <div className="hidden md:flex justify-center gap-8 mt-12">
         <button
-          className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1"
+          className="uppercase font-medium  text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1"
           onClick={() => router.push("/allProducts")}
         >
           View All
         </button>  
         <button
-          className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1"
+          className="uppercase font-medium  text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1"
           onClick={() => router.push("/contact")}
         >
           Contact Us
@@ -434,7 +434,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       <div className="collection-custom-button flex flex-col md:flex-row items-center gap-4 justify-center mt-[50px]">
          <Link href="/allProducts" passHref legacyBehavior>
     <motion.a
-      className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300  flex items-center gap-2"
+      className="px-8 py-3 bg-black text-white  font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300  flex items-center gap-2"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onMouseEnter={() => router.prefetch("/allProducts")}
@@ -445,7 +445,7 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
 
         <Link href="/contact" passHref legacyBehavior>
     <motion.a
-      className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300  flex items-center gap-2"
+      className="px-8 py-3 bg-white text-black border border-black  font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300  flex items-center gap-2"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onMouseEnter={() => router.prefetch("/contact")}
@@ -457,13 +457,13 @@ const Collections = ({ fuelTypes, allProductsRouteHandler }) => {
       {/* Mobile Buttons */}
       {/* <div className="md:hidden flex flex-col sm:flex-row gap-4 justify-center mt-8 px-4">
         <button
-          className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit"
+          className="uppercase font-medium  text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit"
           onClick={() => router.push("/allProducts")}
         >
           View All
         </button>
         <button
-          className="uppercase font-medium font-sans text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit"
+          className="uppercase font-medium  text-sm underline cursor-pointer focus:outline-none hover:no-underline hover:text-primary-500 transition-colors duration-200 flex items-center gap-1 w-fit"
           onClick={() => router.push("/contact")}
         >
           Contact Us
