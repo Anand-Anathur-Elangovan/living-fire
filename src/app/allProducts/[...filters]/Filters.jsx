@@ -374,12 +374,6 @@ const Filters = () => {
       .filter((v) => v !== null && v !== undefined)
       .map((x) => parseInt(x));
 
-    console.log(
-      "newInstallValues",
-      newInstallValues,
-      "installValues",
-      installValues
-    );
     fuelTypeFilter &&
       setUpdatedValues((prev) => {
         return {
@@ -413,7 +407,6 @@ const Filters = () => {
   useEffect(() => {}, [filters]);
 
   const searchParams = useSearchParams();
-
 
   useEffect(() => {
     const setStates = () => {
@@ -493,7 +486,6 @@ const Filters = () => {
       glassOrientationTypes,
     },
   } = useMasterValues(productMenuIndex);
-
 
   const updateQueryParams = (params) => {
     const currentParams = new URLSearchParams(searchParams.toString());
@@ -708,124 +700,128 @@ const Filters = () => {
 
   // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
   return (
-    <div className= "mt-[10rem]" style={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
+    <div
+      className="mt-[10rem]"
+      style={{ display: "flex", gap: "1rem", flexDirection: "column" }}
+    >
       <div className="flex flex-col md:px-32 gap-3 bg-[#F7F7F5] md:gap-4">
         <div className="flex flex-col items-center gap-5 md:gap-12">
           <div className="flex flex-col items-center gap-5 md:gap-8">
-          <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full cursor-default">
-            {!brandType
-              ? `${
-                  fireplaceType
-                    ? fuelTypes.find((x) => x.fueltype_id === fireplaceType)
-                        ?.fueltype_name ?? "ALL"
-                    : "All"
-                } ${
-                  productMenuIndex
-                    ? allProductMenu.find(
-                        (x) => x.ptype_id === productMenuIndex
-                      )?.ptype_name ?? "Fireplaces"
-                    : "Fireplaces"
-                }`
-              : `${
-                  brands.length > 0
-                    ? brands.find((x) => x.brand_id === brandType)?.brand_name
-                    : "All Fireplaces"
-                }` ?? "Unknown Brand"}
-          </h1>
+            <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full cursor-default opacity-0 animate-fadeIn">
+              {!brandType
+                ? `${
+                    fireplaceType
+                      ? fuelTypes.find((x) => x.fueltype_id === fireplaceType)
+                          ?.fueltype_name ?? "ALL"
+                      : "All"
+                  } ${
+                    productMenuIndex
+                      ? allProductMenu.find(
+                          (x) => x.ptype_id === productMenuIndex
+                        )?.ptype_name ?? "Fireplaces"
+                      : "Fireplaces"
+                  }`
+                : `${
+                    brands.length > 0
+                      ? brands.find((x) => x.brand_id === brandType)?.brand_name
+                      : "All Fireplaces"
+                  }` ?? "Unknown Brand"}
+            </h1>
 
-          {fireplaceType &&
-            !brandType &&
-            ((fireplaceType === 4 && (
-              <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
-                Experience warmth and elegance with our indoor luxury wood
-                fireplaces, blending timeless craftsmanship with contemporary
-                modern design.
-              </h2>
-            )) ||
-              (fireplaceType === 5 && (
-                <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
-                  Discover our range of luxury indoor electric fireplaces and
-                  transform your home into a cosy haven of warmth and style.
-                  Visit our Melbourne showroom.
-                </h2>
-              )) ||
-              (fireplaceType === 3 && (
-                <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
-                  Explore our indoor gas fireplaces and turn your home into a
-                  warm and inviting retreat. Whatever your interior style, we
-                  have the perfect gas fireplace to enhance your living space.
-                </h2>
-              )) ||
-              (fireplaceType === 2 && (
-                <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg">
+            {fireplaceType &&
+              !brandType &&
+              ((fireplaceType === 4 && (
+                <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg opacity-0 animate-fadeIn [animation-delay:100ms]">
                   Experience warmth and elegance with our indoor luxury wood
                   fireplaces, blending timeless craftsmanship with contemporary
                   modern design.
                 </h2>
-              )))}
+              )) ||
+                (fireplaceType === 5 && (
+                  <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg opacity-0 animate-fadeIn [animation-delay:100ms]">
+                    Discover our range of luxury indoor electric fireplaces and
+                    transform your home into a cosy haven of warmth and style.
+                    Visit our Melbourne showroom.
+                  </h2>
+                )) ||
+                (fireplaceType === 3 && (
+                  <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg opacity-0 animate-fadeIn [animation-delay:100ms]">
+                    Explore our indoor gas fireplaces and turn your home into a
+                    warm and inviting retreat. Whatever your interior style, we
+                    have the perfect gas fireplace to enhance your living space.
+                  </h2>
+                )) ||
+                (fireplaceType === 2 && (
+                  <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg opacity-0 animate-fadeIn [animation-delay:100ms]">
+                    Experience warmth and elegance with our indoor luxury wood
+                    fireplaces, blending timeless craftsmanship with
+                    contemporary modern design.
+                  </h2>
+                )))}
 
-          <h2>
-            {brandType &&
-              brands.find((b) => b?.brand_id === brandType)?.brand_desc}
-          </h2>
-        </div>
-        {!brandType && (
-          <div className="flex flex-row justify-between bg-[#DDE6ED] md:bg-transparent">
-            <div className="flex flex-row md:justify-center items-center w-full gap-8 md:gap-14 p-3 overflow-x-auto">
-              {
-                // !fireplaceType &&
-                //   !brandType &&
-                allProductMenu.map((productMenu, index) => (
-                  <div
-                    className="flex flex-col gap-1 items-center font-semibold text-center cursor-pointer text-xs md:text-base"
-                    key={"productMenu" + index}
-                    onClick={() => {
-                      // setProductTypeName(productMenu.ptype_name);
-                      // setproductMenuIndex(productMenu.ptype_id)
-                      updateFilter(
-                        "type",
-                        productMenu.ptype_name,
-                        productMenu.ptype_id,
-                        productMenu.slug
-                      );
-                    }}
-                  >
-                    {productMenu.ptype_name === "Fire Tools"
-                      ? "Firetools & Accessories"
-                      : productMenu.ptype_name}
-                    <div
-                      className={`justify-center block border-b-[3.5px] border-solid border-black rounded transition ease-in-out duration-500`}
-                      style={{
-                        width: `${
-                          productMenu.ptype_id === productMenuIndex
-                            ? "50%"
-                            : "4px"
-                        }`,
-                      }}
-                    />
-                  </div>
-                ))
-              }
-              {fireplaceType ? <></> : brandType ? <></> : <></>}
-            </div>
-            {false && productMenuIndex !== 0 && (
-              <div className="flex flex-row gap-1 items-center text-center">
-                <span>Compare</span>
-                <div className="container">
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      id="checkbox"
-                      checked={isCompare}
-                      onChange={(e) => setIsCompare(e.target.checked)}
-                    />
-                    <div className="slider round"></div>
-                  </label>
-                </div>
-              </div>
+            {brandType && (
+              <h2 className="opacity-0 animate-fadeIn [animation-delay:200ms]">
+                {brands.find((b) => b?.brand_id === brandType)?.brand_desc}
+              </h2>
             )}
           </div>
-        )}
+          {!brandType && (
+            <div className="flex flex-row justify-between bg-[#DDE6ED] md:bg-transparent">
+              <div className="flex flex-row md:justify-center items-center w-full gap-8 md:gap-14 p-3 overflow-x-auto">
+                {
+                  // !fireplaceType &&
+                  //   !brandType &&
+                  allProductMenu.map((productMenu, index) => (
+                    <div
+                      className="flex flex-col gap-1 items-center font-semibold text-center cursor-pointer text-xs md:text-base"
+                      key={"productMenu" + index}
+                      onClick={() => {
+                        // setProductTypeName(productMenu.ptype_name);
+                        // setproductMenuIndex(productMenu.ptype_id)
+                        updateFilter(
+                          "type",
+                          productMenu.ptype_name,
+                          productMenu.ptype_id,
+                          productMenu.slug
+                        );
+                      }}
+                    >
+                      {productMenu.ptype_name === "Fire Tools"
+                        ? "Firetools & Accessories"
+                        : productMenu.ptype_name}
+                      <div
+                        className={`justify-center block border-b-[3.5px] border-solid border-black rounded transition ease-in-out duration-500`}
+                        style={{
+                          width: `${
+                            productMenu.ptype_id === productMenuIndex
+                              ? "50%"
+                              : "4px"
+                          }`,
+                        }}
+                      />
+                    </div>
+                  ))
+                }
+                {fireplaceType ? <></> : brandType ? <></> : <></>}
+              </div>
+              {false && productMenuIndex !== 0 && (
+                <div className="flex flex-row gap-1 items-center text-center">
+                  <span>Compare</span>
+                  <div className="container">
+                    <label className="switch">
+                      <input
+                        type="checkbox"
+                        id="checkbox"
+                        checked={isCompare}
+                        onChange={(e) => setIsCompare(e.target.checked)}
+                      />
+                      <div className="slider round"></div>
+                    </label>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <>
           {/* Compare Products */}
@@ -959,7 +955,6 @@ const Filters = () => {
                         type="text"
                         ref={searchRef}
                         defaultValue={searchText}
-
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
                             setSearchText(
@@ -1039,7 +1034,6 @@ const Filters = () => {
                         >
                           {fireplaceType
                             ? fuelTypes?.map((val) => (
-                            
                                 <div
                                   key={
                                     "fireplaceTypes" + val?.fueltype_id ?? ""
@@ -1099,7 +1093,7 @@ const Filters = () => {
                                       className=" font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
                                       onClick={() => {
                                         setSubType(null);
-                                      
+
                                         updateFilter(
                                           "fuelType",
                                           val?.fueltype_name,
@@ -1109,7 +1103,6 @@ const Filters = () => {
                                         if (window?.innerWidth <= 768) {
                                           setIsFilter(false);
                                         }
-                         
                                       }}
                                     >
                                       {val?.fueltype_name}
@@ -1184,7 +1177,6 @@ const Filters = () => {
                           {firePlaceSubType.installation &&
                             // updatedValues?.installationValues?.length > 0 &&
                             installationTypes.map((installval) => (
-                         
                               <span
                                 key={
                                   "installtypes" + installval?.installation_id
@@ -1208,7 +1200,6 @@ const Filters = () => {
                                   if (window?.innerWidth <= 768) {
                                     setIsFilter(false);
                                   }
-                               
                                 }}
                               >
                                 {installval?.installation_name}
@@ -1281,11 +1272,9 @@ const Filters = () => {
                               !filterStatus?.glassOrientationIdStatus && "none",
                           }}
                         >
-                         
                           {firePlaceSubType.glassOrientation &&
                             // updatedValues?.glassOrientationValues?.length > 0 &&
                             glassOrientationTypes?.map((glassval) => (
-                        
                               <span
                                 key={
                                   "glasstypes" + glassval?.glass_orientation_id
@@ -1297,7 +1286,6 @@ const Filters = () => {
                                     : "text-gray-400"
                                 }`}
                                 onClick={() => {
-                                 
                                   updateFilter(
                                     "glassOrientationType",
                                     glassval?.glass_orientation_name,
@@ -1398,7 +1386,6 @@ const Filters = () => {
                                   key={"ranges" + val?.range_id}
                                   className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                                   onClick={() => {
-                                
                                     updateFilter(
                                       "rangeType",
                                       val?.range_name,
@@ -1494,7 +1481,7 @@ const Filters = () => {
                                 className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                                 onClick={() => {
                                   setRangeType(null);
-                    
+
                                   updateFilter(
                                     "brand",
                                     val?.brand_name,
@@ -1561,7 +1548,6 @@ const Filters = () => {
                           id="sortbyFilterId"
                           className="flex flex-col gap-3 transistion ease-in-out collapse"
                         >
-                       
                           <span
                             className=" font-small leading-5 text-normal cursor-pointer"
                             onClick={() => {
@@ -1584,7 +1570,7 @@ const Filters = () => {
                           >
                             Z-A
                           </span>
-                          
+
                           <span
                             className=" font-small leading-5 text-normal cursor-pointer"
                             onClick={() => {
@@ -1600,9 +1586,7 @@ const Filters = () => {
                       </div>
                     }
                   </div>
-                
                 </>
-                
               </div>
             )}
 
@@ -1775,8 +1759,6 @@ const Filters = () => {
               )}
             </div>
           </div>
-
-      
         </>
         {/* <OurDifference fireplaceType={fireplaceType} />
         <OurShowrooms /> */}
