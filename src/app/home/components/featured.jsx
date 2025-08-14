@@ -3,6 +3,7 @@ import "./featured.css";
 import featureImg1 from "@/public/assets/homePage/feature/1.webp";
 import featureImg2 from "@/public/assets/homePage/feature/22.webp";
 import featureImg3 from "@/public/assets/homePage/feature/3.webp";
+import featureImg33 from "@/public/assets/homePage/feature/33.webp";
 import featureImg4 from "@/public/assets/homePage/feature/4.png";
 import featureImg5 from "@/public/assets/homePage/feature/5.png";
 import featureImg6 from "@/public/assets/homePage/feature/6.jpg";
@@ -66,13 +67,14 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
     },
     {
       p_id: "426",
-      image: featureImg3,
-      title: "Ilektro integra anson",
-      range: "Paul Agnew Designs",
+      image: featureImg33,
+      title: "HZO42 - Outdoor - LPG",
+      range: "Regency",
       description:
-        "Sleek integrated design with advanced heating technology, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+      "Contemporary Linear Outdoor Gas All of the sophisticated, contemporary styling and quality workmanship is mirrored in this dramatic outdoor fireplace. This fireplace delivers beautiful wide angle flames amplified by a reflective stainless steel body and picture frame faceplate. ",
+        // "Sleek integrated design with advanced heating technology, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
       name: "HZO42 - Outdoor - LPG",
-      brand_name: "Paul Agnew Designs",
+      brand_name: "Regency",
     },
     {
       p_id: "427",
