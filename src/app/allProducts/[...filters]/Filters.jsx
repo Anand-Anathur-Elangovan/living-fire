@@ -693,11 +693,31 @@ const Filters = () => {
   }, [searchParams]);
 
   const [isClient, setIsClient] = useState(false);
-
+  const h1Ref = useRef(null);
+  const [isH1Loaded, setIsH1Loaded] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
+useEffect(() => {
+  if (h1Ref.current) {
+    // This ensures all dynamic content in h1 is resolved
+    const observer = new MutationObserver(() => {
+      setIsH1Loaded(true);
+      observer.disconnect();
+    });
+    
+    observer.observe(h1Ref.current, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
 
+    // Fallback in case MutationObserver doesn't trigger
+    const timeout = setTimeout(() => setIsH1Loaded(true), 100);
+    return () => clearTimeout(timeout);
+  }
+}, []);
+console.log("isH1Loaded", isH1Loaded);
   // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
   return (
     <div
@@ -707,7 +727,7 @@ const Filters = () => {
       <div className="flex flex-col md:px-32 gap-3 bg-[#F7F7F5] md:gap-4">
         <div className="flex flex-col items-center gap-5 md:gap-12">
           <div className="flex flex-col items-center gap-5 md:gap-8">
-            <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full cursor-default opacity-0 animate-fadeIn">
+            <h1 ref={h1Ref} className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full cursor-default opacity-0 animate-fadeIn">
               {!brandType
                 ? `${
                     fireplaceType && fuelTypes.find((x) => x.fueltype_id === fireplaceType)
@@ -729,7 +749,7 @@ const Filters = () => {
                   }` ?? "Unknown Brand"}
             </h1>
 
-            {fireplaceType &&
+            {isH1Loaded && fireplaceType &&
               !brandType &&
               ((fireplaceType === 4 && (
                 <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg opacity-0 animate-fadeIn [animation-delay:100ms]">
