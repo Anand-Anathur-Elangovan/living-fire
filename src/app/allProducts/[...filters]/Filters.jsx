@@ -710,21 +710,22 @@ const Filters = () => {
             <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full cursor-default opacity-0 animate-fadeIn">
               {!brandType
                 ? `${
-                    fireplaceType
-                      ? fuelTypes.find((x) => x.fueltype_id === fireplaceType)
-                          ?.fueltype_name ?? "ALL"
-                      : "All"
+                    fireplaceType && fuelTypes.find((x) => x.fueltype_id === fireplaceType)
+                          ?.fueltype_name
+                      ? `${fuelTypes.find((x) => x.fueltype_id === fireplaceType)
+                          ?.fueltype_name} Fireplaces` ?? ""
+                      : ""
                   } ${
-                    productMenuIndex
+                    productMenuIndex && !fireplaceType
                       ? allProductMenu.find(
                           (x) => x.ptype_id === productMenuIndex
-                        )?.ptype_name ?? "Fireplaces"
-                      : "Fireplaces"
+                        )?.ptype_name ?? ""
+                      : ""
                   }`
                 : `${
                     brands.length > 0
                       ? brands.find((x) => x.brand_id === brandType)?.brand_name
-                      : "All Fireplaces"
+                      : ""
                   }` ?? "Unknown Brand"}
             </h1>
 
