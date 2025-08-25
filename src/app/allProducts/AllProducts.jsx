@@ -1024,7 +1024,7 @@ const AllProducts = () => {
                                           key={"types" + val.fueltype_id}
                                           className=" font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
                                           onClick={() => {
-                                            setSubType(null);;
+                                            setSubType(null);
                                             updateFilter(
                                               "fuelType",
                                               val?.fueltype_name,
