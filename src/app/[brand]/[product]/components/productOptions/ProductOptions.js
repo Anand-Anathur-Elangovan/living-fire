@@ -225,9 +225,10 @@ const ProductOptions = ({
                           ) : (
                             <span> {option.value}</span>
                           )}
-                          <span>
+                          {/* uncommented below line to show price */}
+                          {/* <span>
                             {option.price ? `(+$${option.price})` : ""}
-                          </span>
+                          </span> */}
                         </div>
                       </motion.label>
                     );
@@ -383,10 +384,11 @@ const ProductOptions = ({
                         onChange={() =>
                           handleOptionChange(section.name, option)
                         }
-                      />
+                      />  
                       <span className={styles.listOptions}>
                         {option.value || option.name}{" "}
-                        {option.price ? `(+$${option.price})` : ""}
+                        {/* uncommented below line to show price */}
+                        {/* {option.price ? `(+$${option.price})` : ""} */}
                       </span>
                     </motion.label>
                   ))}
@@ -398,7 +400,8 @@ const ProductOptions = ({
 
       <motion.div className={styles.priceContainer} variants={itemVariants}>
         <p className={styles.price}>
-          <PriceFormatter price={totalPrice} /> <span>(inc gst)</span>
+          {/* uncommented below line to show price */}
+          {/* <PriceFormatter price={totalPrice} /> <span>(inc gst)</span> */}
         </p>
         <span className={styles.inStock}>IN STOCK</span>
       </motion.div>
