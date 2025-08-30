@@ -38,13 +38,55 @@ const ProductOptions = ({
   p_sku,
   isAccessories,
   productOptionsHeight,
-  setProductOptionsHeight
+  setProductOptionsHeight,
+  p_id,
+  onProductUpdate
 }) => {
+  // Hardcoded admin credentials
+  
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const [editFields, setEditFields] = useState({
+    price: price || "",
+    option_price: [
+      {
+        name: "",
+        price: 0,
+      },
+      {
+        name: "",
+        price: 0,
+      },
+      {
+        name: "",
+        price: 0,
+      },
+    ],
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+// Admin check state
+  const [isAdmin, setIsAdmin] = useState(false);
 
+  useEffect(() => {
+    // Check sessionStorage for admin credentials
+    const HARDCODED_ADMIN_USERNAME = "admin";
+    const HARDCODED_ADMIN_PASSWORD = "password123";
+    const storedUsername = typeof window !== 'undefined' ? sessionStorage.getItem("adminUsername") : null;
+    const storedPassword = typeof window !== 'undefined' ? sessionStorage.getItem("adminPassword") : null;
+    if (
+      storedUsername == HARDCODED_ADMIN_USERNAME &&
+      storedPassword == HARDCODED_ADMIN_PASSWORD
+    ) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, []);
   // Ref for root element to measure height
   const containerRef = useRef(null);
 
@@ -56,11 +98,19 @@ const ProductOptions = ({
 
   // Set height to parent via setProductOptionsHeight
   useEffect(() => {
-    if (containerRef.current && typeof setProductOptionsHeight === 'function') {
-      console.log("ProductOptions height:", containerRef.current.offsetHeight);
+    if (containerRef.current && typeof setProductOptionsHeight === "function") {
       setProductOptionsHeight(containerRef.current.offsetHeight);
     }
-  }, [selectedOptions, totalPrice, short_desc, name, price, brand_name, p_sku, isAccessories]);
+  }, [
+    selectedOptions,
+    totalPrice,
+    short_desc,
+    name,
+    price,
+    brand_name,
+    p_sku,
+    isAccessories,
+  ]);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -135,6 +185,40 @@ const ProductOptions = ({
     setCurrentImages(images);
     setIsPopupOpen(!isPopupOpen);
   };
+  const populateOptionPrices = (short_desc) => {
+  return short_desc
+    .filter(
+      (section) =>
+        section.name !== "DELIVERY" &&
+        section.name !== "MATERIAL & FINISH OPTIONS"
+    )
+    .map((section) => {
+      let price = 0;
+
+      if (section.value && section.value.length > 0) {
+        const found = section.value.find((opt) => Number(opt.price) > 0);
+        price = found
+          ? Number(found.price)
+          : Number(section.value[0].price) || 0;
+      }
+
+      return {
+        name: section.name,
+        price,
+      };
+    });
+};
+
+
+  useEffect(() => {
+    if (short_desc && short_desc.length > 0) {
+      const option_price = populateOptionPrices(short_desc);
+      setEditFields((prev) => ({
+        ...prev,
+        option_price,
+      }));
+    }
+  }, [short_desc]);
 
   return (
     <motion.div
@@ -147,23 +231,57 @@ const ProductOptions = ({
       variants={containerVariants}
       className={styles.container}
     >
-      {/* <motion.div variants={itemVariants}>
-        <h1 className={styles.brand}>{brand_name}</h1>
-        <motion.h1
-          className={styles.title}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <h1 className={styles.title} style={{ marginBottom: 0 }}>
+          <span className={styles.brand}>{brand_name}</span> <br />
+          {/* {editMode ? (
+            <input
+              className={styles.input || ''}
+              style={{ fontSize: 'inherit', fontWeight: 'bold', width: '80%', marginTop: 4 }}
+              value={editFields.name}
+              onChange={e => setEditFields(f => ({ ...f, name: e.target.value }))}
+            />
+          ) : (
+            name?.toUpperCase()
+          )} */}
           {name?.toUpperCase()}
-        </motion.h1>
-      </motion.div> */}
-      <h1 className={styles.title}>
-  <span className={styles.brand}>{brand_name}</span> <br />
-  {name?.toUpperCase()}
-</h1>
+        </h1>
+        {!editMode && isAdmin&& (
+          <button
+            className={styles.editBtn || ""}
+            style={{
+              marginLeft: 12,
+              padding: "4px 12px",
+              fontSize: 14,
+              borderRadius: 4,
+              border: "1px solid #ccc",
+              background: "#f5f5f5",
+              cursor: "pointer",
+            }}
+            onClick={() => setEditMode(true)}
+          >
+            Edit
+          </button>
+        )}
+      </div>
 
       <motion.p className={styles.sku} variants={itemVariants}>
+        {/* {editMode ? (
+          <input
+            className={styles.input || ''}
+            style={{ fontSize: 'inherit', width: '60%' }}
+            value={editFields.p_sku}
+            onChange={e => setEditFields(f => ({ ...f, p_sku: e.target.value }))}
+          />
+        ) : (
+          p_sku
+        )} */}
         {p_sku}
       </motion.p>
 
@@ -229,6 +347,49 @@ const ProductOptions = ({
                           {/* <span>
                             {option.price ? `(+$${option.price})` : ""}
                           </span> */}
+
+                          {editMode
+                            ? // find the matching option by section.name
+                              (() => {
+                                const matchedOpt = editFields.option_price.find(
+                                  (opt) => opt.name === section.name
+                                );
+                                return matchedOpt ? (
+                                  <div style={{ marginBottom: "8px" }}>
+                                    <label style={{ marginRight: "8px" }}>
+                                      {matchedOpt.name}
+                                    </label>
+                                    <input
+                                      className={styles.input || ""}
+                                      style={{
+                                        fontSize: "inherit",
+                                        width: "60%",
+                                      }}
+                                      value={matchedOpt.price || ""}
+                                      onChange={(e) =>
+                                        setEditFields((prev) => {
+                                          const updated = prev.option_price.map(
+                                            (item) =>
+                                              item.name === matchedOpt.name
+                                                ? {
+                                                    ...item,
+                                                    price: e.target.value,
+                                                  } // update only matching section
+                                                : item
+                                          );
+                                          return {
+                                            ...prev,
+                                            option_price: updated,
+                                          };
+                                        })
+                                      }
+                                    />
+                                  </div>
+                                ) : null;
+                              })()
+                            : option.price
+                            ? `(+$${option.price})`
+                            : ""}
                         </div>
                       </motion.label>
                     );
@@ -384,11 +545,11 @@ const ProductOptions = ({
                         onChange={() =>
                           handleOptionChange(section.name, option)
                         }
-                      />  
+                      />
                       <span className={styles.listOptions}>
                         {option.value || option.name}{" "}
                         {/* uncommented below line to show price */}
-                        {/* {option.price ? `(+$${option.price})` : ""} */}
+                        {option.price ? `(+$${option.price})` : ""}
                       </span>
                     </motion.label>
                   ))}
@@ -400,29 +561,98 @@ const ProductOptions = ({
 
       <motion.div className={styles.priceContainer} variants={itemVariants}>
         <p className={styles.price}>
-          {/* uncommented below line to show price */}
-          {/* <PriceFormatter price={totalPrice} /> <span>(inc gst)</span> */}
+          {editMode ? (
+            <>
+              <span style={{ fontWeight: 500 }}>Price: </span>
+              <input
+                className={styles.input || ""}
+                style={{ width: 80 }}
+                type="text"
+                value={editFields.price}
+                onChange={(e) =>
+                  setEditFields((f) => ({ ...f, price: e.target.value }))
+                }
+                placeholder="Price"
+              />
+            </>
+          ) : (
+            <>
+              <PriceFormatter price={totalPrice} /> <span>(inc gst)</span>
+            </>
+          )}
         </p>
         <span className={styles.inStock}>IN STOCK</span>
       </motion.div>
 
       <motion.div className={styles.buttonContainer} variants={itemVariants}>
-        {/* <motion.button
-          className={styles.addToCart}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          ADD TO CART
-        </motion.button> */}
-        <motion.button
-          className={styles.enquiry}
-          onClick={openModal}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          SEND AN ENQUIRY
-        </motion.button>
+        {editMode ? (
+          <motion.button
+            className={styles.enquiry}
+            style={{ background: "#1741be", color: "#fff", border: "none" }}
+            onClick={async () => {
+              setLoading(true);
+              setError("");
+              setSuccess("");
+              try {
+                const res = await fetch("/api/update-product-master", {
+                  method: "PUT",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    p_id,
+                    option_price: editFields.option_price,
+                    price: editFields.price,
+                  }),
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || "Update failed");
+                setSuccess("Product updated successfully");
+                setEditMode(false);
+                if (typeof onProductUpdate === 'function') {
+                  onProductUpdate();
+                }
+              } catch (err) {
+                setError(err.message);
+              } finally {
+                setLoading(false);
+              }
+            }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            disabled={loading}
+          >
+            {loading ? "Saving..." : "Submit"}
+          </motion.button>
+        ) : (
+          <motion.button
+            className={styles.enquiry}
+            onClick={openModal}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            SEND AN ENQUIRY
+          </motion.button>
+        )}
+        {editMode && (
+          <button
+            className={styles.editBtn || ""}
+            style={{
+              marginLeft: 12,
+              padding: "4px 12px",
+              fontSize: 14,
+              borderRadius: 4,
+              border: "1px solid #ccc",
+              background: "#fff",
+              cursor: "pointer",
+            }}
+            onClick={() => setEditMode(false)}
+            disabled={loading}
+          >
+            Cancel
+          </button>
+        )}
       </motion.div>
+      {error && <div style={{ color: "red", marginTop: 8 }}>{error}</div>}
+      {success && <div style={{ color: "green", marginTop: 8 }}>{success}</div>}
     </motion.div>
   );
 };

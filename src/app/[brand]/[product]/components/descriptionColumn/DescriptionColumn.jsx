@@ -62,7 +62,6 @@ export default function DescriptionColumn({ product_desc, descriptionColumnHeigh
 
     useEffect(() => {
       if (containerRef.current && typeof setDescriptionColumn === 'function') {
-        console.log("descriptionColumn height:", containerRef.current.offsetHeight);
         setDescriptionColumn(containerRef.current.offsetHeight);
       }
     }, [product_desc, isLoading]);

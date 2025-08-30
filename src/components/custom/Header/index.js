@@ -210,8 +210,6 @@ const handleScroll = () => {
         { title: "Bioethanol", href: "/allProducts/bio-ethanol/" },
         { title: "Cookers", href: "/allProducts/cooker/" },
         { title: "All Fireplaces", href: "/allProducts/fireplace/" },
-        // { title: "Modern", href: "/modern-fireplaces/" },
-        // { title: "Traditional", href: "/traditional-fireplaces/" },
       ],
     },
     {
@@ -256,8 +254,33 @@ const handleScroll = () => {
         { title: "Warranty & Servicing", href: "/warranty/" },
       ],
     },
-    // Add more categories as needed
+    {
+      title: "Admin Login",
+      subItems: [],
+      isAdmin: true,
+    },
   ];
+  // Admin Login Modal State
+  const [showAdminModal, setShowAdminModal] = useState(false);
+  const [adminUsername, setAdminUsername] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
+  const [adminError, setAdminError] = useState("");
+
+  const handleAdminLogin = (e) => {
+    e.preventDefault();
+    if (!adminUsername || !adminPassword) {
+      setAdminError("Please enter both username and password.");
+      return;
+    }
+    // Save to sessionStorage
+    sessionStorage.setItem("adminUsername", adminUsername);
+    sessionStorage.setItem("adminPassword", adminPassword);
+    setShowAdminModal(false);
+    setAdminUsername("");
+    setAdminPassword("");
+    setAdminError("");
+    alert("Admin login successful!");
+  };
   const bottomMenuItems = [
     // { title: "About Us", href: "/our-story/" },
     { title: "News & Blogs", href: "/blogs" },
@@ -642,87 +665,168 @@ const handleScroll = () => {
             {menuItems.map((item) => (
               <React.Fragment key={item.title}>
                 <ListItem disablePadding>
-                  <ListItemButton
-                    onClick={() => handleCategoryClick(item.title)}
-                    sx={{
-                      padding: "12px 0",
-                      borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-                      "&:hover": {
-                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                      },
-                    }}
-                  >
-                    <ListItemText
-                      primary={item.title}
-                      primaryTypographyProps={{
-                        fontSize: "1.3rem",
-                        fontWeight: "medium",
-                        paddingLeft: "10px",
+                  {item.isAdmin ? (
+                    <ListItemButton
+                      onClick={() => setShowAdminModal(true)}
+                      sx={{
+                        padding: "12px 0",
+                        borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                        "&:hover": {
+                          backgroundColor: "rgba(255, 255, 255, 0.05)",
+                        },
                       }}
-                    />
-                    {openCategories[item.title] ? (
-                      <ExpandLessIcon />
-                    ) : (
-                      <ExpandMoreIcon />
-                    )}
-                  </ListItemButton>
-                </ListItem>
-                <Collapse
-                  in={openCategories[item.title]}
-                  timeout="auto"
-                  unmountOnExit
-                >
-                  <MultiColumnList>
-                    {item.subItems.map((subItem) => (
-                      // <ListItem key={subItem.title} disablePadding>
+                    >
+                      <ListItemText
+                        primary={item.title}
+                        primaryTypographyProps={{
+                          fontSize: "1.3rem",
+                          fontWeight: "medium",
+                          paddingLeft: "10px",
+                        }}
+                      />
+                    </ListItemButton>
+                  ) : (
+                    <>
                       <ListItemButton
-                        key={subItem.title}
+                        onClick={() => handleCategoryClick(item.title)}
                         sx={{
-                          padding: "8px 12px",
-                          borderRadius: "4px",
+                          padding: "12px 0",
+                          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
                           "&:hover": {
-                            backgroundColor: "rgba(255, 255, 255, 0.1)",
-                            color: "#fff",
+                            backgroundColor: "rgba(255, 255, 255, 0.05)",
                           },
                         }}
-                        onClick={() => {
-                          router.push(subItem.href);
-                          handleCloseMenu();
-                        }}
                       >
-                        <Typography variant="body1">{subItem.title}</Typography>
+                        <ListItemText
+                          primary={item.title}
+                          primaryTypographyProps={{
+                            fontSize: "1.3rem",
+                            fontWeight: "medium",
+                            paddingLeft: "10px",
+                          }}
+                        />
+                        {openCategories[item.title] ? (
+                          <ExpandLessIcon />
+                        ) : (
+                          <ExpandMoreIcon />
+                        )}
                       </ListItemButton>
-                      // </ListItem>
-                    ))}
-                  </MultiColumnList>
-                  {/* <List component="div" disablePadding>
-                    {item.subItems.map((subItem) => (
-                      <ListItem key={subItem.title} disablePadding>
+                    </>
+                  )}
+                </ListItem>
+                {!item.isAdmin && (
+                  <Collapse
+                    in={openCategories[item.title]}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <MultiColumnList>
+                      {item.subItems.map((subItem) => (
                         <ListItemButton
+                          key={subItem.title}
                           sx={{
-                            padding: "10px 0 10px 20px",
-                            borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
+                            padding: "8px 12px",
+                            borderRadius: "4px",
+                            "&:hover": {
+                              backgroundColor: "rgba(255, 255, 255, 0.1)",
+                              color: "#fff",
+                            },
                           }}
                           onClick={() => {
                             router.push(subItem.href);
                             handleCloseMenu();
                           }}
                         >
-                          <ListItemText
-                            primary={subItem.title}
-                            primaryTypographyProps={{
-                              fontSize: "1rem",
-                              color: "rgba(255, 255, 255, 0.8)",
-                            }}
-                          />
+                          <Typography variant="body1">{subItem.title}</Typography>
                         </ListItemButton>
-                      </ListItem>
-                    ))}
-                  </List> */}
-                </Collapse>
+                      ))}
+                    </MultiColumnList>
+                  </Collapse>
+                )}
               </React.Fragment>
             ))}
           </List>
+      {/* Admin Login Modal */}
+      {showAdminModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.6)",
+            zIndex: 99999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <form
+            onSubmit={handleAdminLogin}
+            style={{
+              background: "#fff",
+              padding: 32,
+              borderRadius: 8,
+              minWidth: 320,
+              boxShadow: "0 2px 16px rgba(0,0,0,0.2)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 16,
+              position: "relative",
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setShowAdminModal(false)}
+              style={{
+                position: "absolute",
+                top: 8,
+                right: 8,
+                background: "none",
+                border: "none",
+                fontSize: 20,
+                cursor: "pointer",
+              }}
+              aria-label="Close"
+            >
+              ×
+            </button>
+            <h2 style={{ margin: 0, color: "#222" }}>Admin Login</h2>
+            <input
+              type="text"
+              placeholder="Username"
+              value={adminUsername}
+              onChange={e => setAdminUsername(e.target.value)}
+              style={{ padding: 8, fontSize: 16, borderRadius: 4, border: "1px solid #ccc", color: "#000" }}
+              autoFocus
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={adminPassword}
+              onChange={e => setAdminPassword(e.target.value)}
+              style={{ padding: 8, fontSize: 16, borderRadius: 4, border: "1px solid #ccc", color: "#000" }}
+            />
+            {adminError && <div style={{ color: "red", fontSize: 14 }}>{adminError}</div>}
+            <button
+              type="submit"
+              style={{
+                background: "#222",
+                color: "#fff",
+                padding: "10px 0",
+                border: "none",
+                borderRadius: 4,
+                fontSize: 16,
+                cursor: "pointer",
+                marginTop: 8,
+              }}
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      )}
 
           {/* Bottom Navigation */}
           {/* <List>

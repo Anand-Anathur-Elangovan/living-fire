@@ -290,7 +290,6 @@ const Filters = () => {
     installationType ?? 0,
     glassOrientationType ?? 0
   );
-  console.log("pathname", pathname);
   useEffect(() => {
     const pathSegments = pathname
       .split("/")
@@ -716,8 +715,7 @@ useEffect(() => {
     const timeout = setTimeout(() => setIsH1Loaded(true), 100);
     return () => clearTimeout(timeout);
   }
-}, []);
-console.log("isH1Loaded", isH1Loaded);
+}, []);;
   // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
   return (
     <div
