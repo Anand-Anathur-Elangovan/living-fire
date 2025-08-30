@@ -58,7 +58,6 @@ const Breadcrumbs = ({
   };
 
   const handleHomeClick = (e) => {
-    console.log("Home button clicked");
     e.preventDefault();
     
     // Clear localStorage & sessionStorage

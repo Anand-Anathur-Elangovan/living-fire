@@ -66,9 +66,7 @@ const Product = ({ params }) => {
         productOptionsHeight > descriptionColumnHeight &&
         (productOptionsHeight - 450) > descriptionColumnHeight
       ) {
-        console.log("productOptionsHeight", productOptionsHeight, "descriptionColumnHeight", descriptionColumnHeight);
         const padValue = ((productOptionsHeight-450) - descriptionColumnHeight)+10;
-        console.log("padValue", padValue);
         const topContainer = document.querySelector('.top-container');
         if (topContainer) {
           topContainer.style.paddingBottom = `${padValue}px`;
@@ -104,6 +102,7 @@ const Product = ({ params }) => {
     fueltype_id,
     brand_id,
     p_sku,
+    p_id
   } = productData;
 
 
@@ -166,8 +165,16 @@ const Product = ({ params }) => {
             onViewAllAccessories={handleViewAllAccessories}
             p_sku={p_sku}
             isAccessories={isAccessories}
-            productOptionsHeight={productOptionsHeight} 
+            productOptionsHeight={productOptionsHeight}
             setProductOptionsHeight={setProductOptionsHeight}
+            p_id={p_id}
+            onProductUpdate={() => {
+              // refetch useProductPage
+              if (typeof window !== 'undefined' && window.location) {
+                // force a soft reload to trigger SWR/React Query refetch
+                window.location.reload();
+              }
+            }}
           />
         </div>
         <div className="second-container">
