@@ -1,37 +1,3 @@
-// import styles from "./DescriptionColumn.module.css";
-
-// export default function DescriptionColumn({ product_desc }) {
-//   return (
-//     <div className={styles["desc-column"]}>
-//       {product_desc
-//         .filter((section) => section.name !== "MATERIAL & FINISH OPTIONS")
-//         .map((section, index) => (
-//           <div key={index} className={styles["columndesc"]}>
-//             {section.value?.length > 0 && section.value?.[0] != "" > 0 && (
-//               <div className={styles["materialfinish"]}>{section.name}</div>
-//             )}
-//             {section.name === "DESCRIPTION" ? (
-//               <div className={styles["description"]}>
-//                 {section.value.map((item, itemIndex) => (
-//                   <span key={itemIndex}>
-//                     {item}
-//                     {itemIndex < section.value.length - 1 && <br />}
-//                   </span>
-//                 ))}
-//               </div>
-//             ) : (
-//               <div className={styles["distanceList"]}>
-//                 {section.value.map((item, itemIndex) => (
-//                   <div key={itemIndex}>{item}</div>
-//                 ))}
-//               </div>
-//             )}
-//           </div>
-//         ))}
-//     </div>
-//   );
-// }
-
 import styles from "./DescriptionColumn.module.css";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -116,7 +82,7 @@ export default function DescriptionColumn({ product_desc, descriptionColumnHeigh
           >
             {section.value?.length > 0 && section.value?.[0] != "" > 0 && (
               <motion.div
-                whileHover={{ scale: 1.02 }}
+                // whileHover={{ scale: 1.02 }}
                 className={styles["materialfinish"]}
               >
                 {section.name}
@@ -124,7 +90,7 @@ export default function DescriptionColumn({ product_desc, descriptionColumnHeigh
             )}
             {section.name === "DESCRIPTION" ? (
               <motion.div
-                whileHover={{ x: 5 }}
+                // whileHover={{ x: 5 }}
                 className={styles["description"]}
               >
                 {section.value.map((item, itemIndex) => (
@@ -136,7 +102,7 @@ export default function DescriptionColumn({ product_desc, descriptionColumnHeigh
               </motion.div>
             ) : (
               <motion.div
-                whileHover={{ x: 5 }}
+                // whileHover={{ x: 5 }}
                 className={styles["distanceList"]}
               >
                 {section.value.map((item, itemIndex) => (
