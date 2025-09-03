@@ -54,7 +54,7 @@ const Product = ({ params }) => {
     async function fetchParams() {
       if (params) {
         const resolvedParams = await params;
-        const formattedProduct = resolvedParams?.product?.replace(/_/g, " ");
+        const formattedProduct = decodeURIComponent(resolvedParams?.product?.replace(/_/g, " "));
         setUnwrappedParams(formattedProduct);
       }
     }
@@ -76,6 +76,7 @@ const Product = ({ params }) => {
   }, [productOptionsHeight, descriptionColumnHeight]);
    
   // const state = getNavigationState();
+  console.log("params in product page", unwrappedParams);
   let { data } = useProductPage(unwrappedParams);
 
   useEffect(() => {
