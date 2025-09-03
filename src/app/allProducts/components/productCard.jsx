@@ -347,8 +347,11 @@ const ProductCard = ({
   }, [downloadsData]);
 
   return (
-    <div className="product-element-all-product w-40 md:w-[280px]" key="productCard">
-      <div className="relative w-40 h-48 md:w-[280px] md:h-[380px]">
+    //  uncomment the below two divs to get 280px 
+    // <div className="product-element-all-product w-40 md:w-[280px]" key="productCard">
+    //   <div className="relative w-40 h-48 md:w-[280px] md:h-[380px]">
+        <div className="product-element-all-product w-40 md:w-[calc(33.333%-20px)] lg:w-[230px]" key="productCard">
+  <div className="relative w-40 h-48 md:w-auto md:h-[320px]">
         {isCompare && (
           <div className="absolute z-10 right-0 mr-3 mt-5">
             <input

@@ -1610,11 +1610,15 @@ useEffect(() => {
             )}
 
             {/* Products */}
-            <div
+            {/* uncomment the below div to get 280px */}
+            {/* <div
               className={`flex flex-wrap px-4 gap-6 md:gap-8 py-3 ${
                 isFilter ? "md:w-[80%]" : "w-full"
               } overflow-y-auto md:min-h-[60vh]`}
-            >
+            > */}
+              <div className={`flex flex-wrap px-4 gap-6 md:gap-6 lg:gap-8 py-3 ${
+  isFilter ? "md:w-[80%]" : "w-full"
+} overflow-y-auto md:min-h-[60vh]`}>
               {isLoading ? (
                 <Box
                   display="flex"
