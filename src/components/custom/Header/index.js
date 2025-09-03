@@ -254,11 +254,11 @@ const handleScroll = () => {
         { title: "Warranty & Servicing", href: "/warranty/" },
       ],
     },
-    {
-      title: "Admin Login",
-      subItems: [],
-      isAdmin: true,
-    },
+    // {
+    //   title: "Admin Login",
+    //   subItems: [],
+    //   isAdmin: true,
+    // },
   ];
   // Admin Login Modal State
   const [showAdminModal, setShowAdminModal] = useState(false);
