@@ -1,5 +1,4 @@
 "use client";
-// import React, { useEffect, useMemo, useState } from "react";
 import OurDifference from "./components/ourDifference";
 import OurShowrooms from "./components/ourShowrooms";
 import Products from "./components/products";
@@ -7,7 +6,6 @@ import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import "./page.css";
 import Image from "next/image";
 import useMasterValues from "./hooks/useMasterValues";
-// import { useSearchParams } from "next/navigation";
 import useAllProducts from "./hooks/useAllProducts";
 import { useNavigationState } from "@/context/NavigationContext";
 import React, {
@@ -18,14 +16,12 @@ import React, {
   useState,
 } from "react";
 import RightArrowIcon from "@/public/assets/allProducts/rightArrow.svg";
-//   import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import LeftArrowDisabledIcon from "@/public/assets/allProducts/leftArrowDisabled.svg";
 import CrossIcon from "@/public/assets/allProducts/cross.svg";
 import MinusIcon from "@/public/assets/allProducts/minus.svg";
 import PlusIcon from "@/public/assets/allProducts/plus.svg";
 import SortIcon from "@/public/assets/allProducts/sortIcon.svg";
 //   import Image from "next/image";
-//   import useAllProducts from "../hooks/useAllProducts";
 import ProductCard from "./components/productCard";
 import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 import { SORTBY } from "@/src/constants/products";
@@ -36,14 +32,25 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { generateSlug } from "@/src/helper/slug/slug";
 import LowerArea from "@/src/components/custom/LowerArea";
 import Showrooms from "@/src/components/custom/Showrooms/Showrooms";
+import { CircularProgress, Box } from "@mui/material";
 
 const filterMappingsMock = [
   { id: 1, value: "Fireplace", filterType: "type", slug: "fireplace" },
-  { id: 3, value: "Fireplace Mantels", filterType: "type", slug: "fireplace-mantels" },
+  {
+    id: 3,
+    value: "Fireplace Mantels",
+    filterType: "type",
+    slug: "fireplace-mantels",
+  },
   { id: 7, value: "Fire Tools", filterType: "type", slug: "fire-tools" },
   { id: 8, value: "Outdoor", filterType: "type", slug: "outdoor" },
   { id: 9, value: "Cast Iron", filterType: "type", slug: "cast-iron" },
-  { id: 1, value: "Hybrid - Wood/Electric", filterType: "fuelType", slug: "hybrid-wood-electric" },
+  {
+    id: 1,
+    value: "Hybrid - Wood/Electric",
+    filterType: "fuelType",
+    slug: "hybrid-wood-electric",
+  },
   { id: 2, value: "Bio-Ethanol", filterType: "fuelType", slug: "bio-ethanol" },
   { id: 3, value: "Gas", filterType: "fuelType", slug: "gas" },
   { id: 4, value: "Wood", filterType: "fuelType", slug: "wood" },
@@ -51,12 +58,42 @@ const filterMappingsMock = [
   { id: 6, value: "Cooker", filterType: "fuelType", slug: "cooker" },
   { id: 1, value: "Outdoor", filterType: "installationType", slug: "outdoor" },
   { id: 3, value: "Inbuilt", filterType: "installationType", slug: "inbuilt" },
-  { id: 4, value: "Freestanding", filterType: "installationType", slug: "freestanding" },
-  { id: 1, value: "Three Sided", filterType: "glassOrientationType", slug: "three-sided" },
-  { id: 2, value: "Two Sided", filterType: "glassOrientationType", slug: "two-sided" },
-  { id: 3, value: "Single Sided", filterType: "glassOrientationType", slug: "single-sided" },
-  { id: 4, value: "Four Sided", filterType: "glassOrientationType", slug: "four-sided" },
-  { id: 1, value: "Paul Agnew Designs", filterType: "brand", slug: "paul-agnew-designs" },
+  {
+    id: 4,
+    value: "Freestanding",
+    filterType: "installationType",
+    slug: "freestanding",
+  },
+  {
+    id: 1,
+    value: "Three Sided",
+    filterType: "glassOrientationType",
+    slug: "three-sided",
+  },
+  {
+    id: 2,
+    value: "Two Sided",
+    filterType: "glassOrientationType",
+    slug: "two-sided",
+  },
+  {
+    id: 3,
+    value: "Single Sided",
+    filterType: "glassOrientationType",
+    slug: "single-sided",
+  },
+  {
+    id: 4,
+    value: "Four Sided",
+    filterType: "glassOrientationType",
+    slug: "four-sided",
+  },
+  {
+    id: 1,
+    value: "Paul Agnew Designs",
+    filterType: "brand",
+    slug: "paul-agnew-designs",
+  },
   { id: 2, value: "Esse", filterType: "brand", slug: "esse" },
   { id: 8, value: "ADF", filterType: "brand", slug: "adf" },
   { id: 3, value: "Austroflamm", filterType: "brand", slug: "austroflamm" },
@@ -71,19 +108,49 @@ const filterMappingsMock = [
   { id: 10, value: "Regency", filterType: "brand", slug: "regency" },
   { id: 5, value: "Stovax", filterType: "brand", slug: "stovax" },
   { id: 1, value: "Firepit", filterType: "rangeType", slug: "firepit" },
-  { id: 2, value: "Heatmaster Wood", filterType: "rangeType", slug: "heatmaster-wood" },
+  {
+    id: 2,
+    value: "Heatmaster Wood",
+    filterType: "rangeType",
+    slug: "heatmaster-wood",
+  },
   { id: 3, value: "Studio 2", filterType: "rangeType", slug: "studio-2" },
   { id: 4, value: "Greenfire", filterType: "rangeType", slug: "greenfire" },
   { id: 5, value: "City Series", filterType: "rangeType", slug: "city-series" },
-  { id: 6, value: "Heatmaster Gas", filterType: "rangeType", slug: "heatmaster-gas" },
-  { id: 7, value: "ilektro Freestanding", filterType: "rangeType", slug: "ilektro-freestanding" },
+  {
+    id: 6,
+    value: "Heatmaster Gas",
+    filterType: "rangeType",
+    slug: "heatmaster-gas",
+  },
+  {
+    id: 7,
+    value: "ilektro Freestanding",
+    filterType: "rangeType",
+    slug: "ilektro-freestanding",
+  },
   { id: 8, value: "Aerion", filterType: "rangeType", slug: "aerion" },
-  { id: 9, value: "ilektro insert", filterType: "rangeType", slug: "ilektro-insert" },
+  {
+    id: 9,
+    value: "ilektro insert",
+    filterType: "rangeType",
+    slug: "ilektro-insert",
+  },
   { id: 10, value: "Hestia", filterType: "rangeType", slug: "hestia" },
   { id: 11, value: "Pyro", filterType: "rangeType", slug: "pyro" },
   { id: 12, value: "ilektro", filterType: "rangeType", slug: "ilektro" },
-  { id: 13, value: "ilektro Slimline", filterType: "rangeType", slug: "ilektro-slimline" },
-  { id: 14, value: "Ironheart Range", filterType: "rangeType", slug: "ironheart-range" },
+  {
+    id: 13,
+    value: "ilektro Slimline",
+    filterType: "rangeType",
+    slug: "ilektro-slimline",
+  },
+  {
+    id: 14,
+    value: "Ironheart Range",
+    filterType: "rangeType",
+    slug: "ironheart-range",
+  },
   { id: 15, value: "Aere", filterType: "rangeType", slug: "aere" },
   { id: 16, value: "Churchill", filterType: "rangeType", slug: "churchill" },
   { id: 17, value: "E-Series", filterType: "rangeType", slug: "e-series" },
@@ -96,21 +163,56 @@ const filterMappingsMock = [
   { id: 24, value: "Siena", filterType: "rangeType", slug: "siena" },
   { id: 25, value: "Slimline", filterType: "rangeType", slug: "slimline" },
   { id: 26, value: "zenitth", filterType: "rangeType", slug: "zenitth" },
-  { id: 27, value: "Cocoon Pedestal", filterType: "rangeType", slug: "cocoon-pedestal" },
+  {
+    id: 27,
+    value: "Cocoon Pedestal",
+    filterType: "rangeType",
+    slug: "cocoon-pedestal",
+  },
   { id: 28, value: "Vellum", filterType: "rangeType", slug: "vellum" },
   { id: 29, value: "1000", filterType: "rangeType", slug: "1000" },
-  { id: 30, value: "Regency Wood", filterType: "rangeType", slug: "regency-wood" },
-  { id: 31, value: "Regency Gas", filterType: "rangeType", slug: "regency-gas" },
-  { id: 32, value: "Regency Electric", filterType: "rangeType", slug: "regency-electric" },
+  {
+    id: 30,
+    value: "Regency Wood",
+    filterType: "rangeType",
+    slug: "regency-wood",
+  },
+  {
+    id: 31,
+    value: "Regency Gas",
+    filterType: "rangeType",
+    slug: "regency-gas",
+  },
+  {
+    id: 32,
+    value: "Regency Electric",
+    filterType: "rangeType",
+    slug: "regency-electric",
+  },
   { id: 33, value: "Forno", filterType: "rangeType", slug: "forno" },
   { id: 34, value: "Ignis", filterType: "rangeType", slug: "ignis" },
   { id: 35, value: "Kamino", filterType: "rangeType", slug: "kamino" },
   { id: 36, value: "Lanterns", filterType: "rangeType", slug: "lanterns" },
-  { id: 37, value: "Morso Grill 17", filterType: "rangeType", slug: "morso-grill-17" },
+  {
+    id: 37,
+    value: "Morso Grill 17",
+    filterType: "rangeType",
+    slug: "morso-grill-17",
+  },
   { id: 38, value: "Tuscan", filterType: "rangeType", slug: "tuscan" },
-  { id: 39, value: "Austroflamm Wood", filterType: "rangeType", slug: "austroflamm-wood" },
+  {
+    id: 39,
+    value: "Austroflamm Wood",
+    filterType: "rangeType",
+    slug: "austroflamm-wood",
+  },
   { id: 40, value: "Dexter", filterType: "rangeType", slug: "dexter" },
-  { id: 41, value: "Kalora Wood", filterType: "rangeType", slug: "kalora-wood" },
+  {
+    id: 41,
+    value: "Kalora Wood",
+    filterType: "rangeType",
+    slug: "kalora-wood",
+  },
   { id: 42, value: "Chalet", filterType: "rangeType", slug: "chalet" },
   { id: 43, value: "Urban", filterType: "rangeType", slug: "urban" },
   { id: 44, value: "Kalora Gas", filterType: "rangeType", slug: "kalora-gas" },
@@ -121,11 +223,16 @@ const filterMappingsMock = [
   { id: 49, value: "Vue", filterType: "rangeType", slug: "vue" },
   { id: 50, value: "Modica", filterType: "rangeType", slug: "modica" },
   { id: 51, value: "Petra", filterType: "rangeType", slug: "petra" },
-  { id: 52, value: "Hergom Fire Pits", filterType: "rangeType", slug: "hergom-fire-pits" },
+  {
+    id: 52,
+    value: "Hergom Fire Pits",
+    filterType: "rangeType",
+    slug: "hergom-fire-pits",
+  },
   { id: 53, value: "Pyro Cast", filterType: "rangeType", slug: "pyro-cast" },
   { id: 54, value: "Ironheart", filterType: "rangeType", slug: "ironheart" },
   { id: 55, value: "Bakeheart", filterType: "rangeType", slug: "bakeheart" },
-  { id: 56, value: "Warmheart", filterType: "rangeType", slug: "warmheart" }
+  { id: 56, value: "Warmheart", filterType: "rangeType", slug: "warmheart" },
 ];
 
 const AllProducts = () => {
@@ -154,7 +261,7 @@ const AllProducts = () => {
     glassOrientationValues: [],
   });
   const [filters, setFilters] = useState([]);
-const [filterStatus, setFilterStatus] = useState({
+  const [filterStatus, setFilterStatus] = useState({
     fireplaceFilterIdStatus: false,
     installationTypeIdStatus: false,
     glassOrientationIdStatus: false,
@@ -165,17 +272,11 @@ const [filterStatus, setFilterStatus] = useState({
   const handleFilterStatus = (key, status) => {
     setFilterStatus((prev) => ({
       ...prev,
-      [key]: status? status : !prev[key],
+      [key]: status ? status : !prev[key],
     }));
   };
-// handleFilterStatus('fireplaceFilterIdStatus')
-// handleFilterStatus('installationTypeIdStatus')
-// handleFilterStatus('glassOrientationIdStatus')
-// handleFilterStatus('rangeIdStatus')
-// handleFilterStatus('brandIdStatus')
-// style={{display: !filterStatus?.fireplaceFilterIdStatus&& 'none'}}
 
-  const { allProducts, isFetched, isStale } = useAllProducts(
+  const { allProducts, isLoading, isFetched, isStale } = useAllProducts(
     productMenuIndex,
     fireplaceType ?? 0,
     brandType ?? 0,
@@ -191,7 +292,7 @@ const [filterStatus, setFilterStatus] = useState({
       .split("/")
       .filter((segment) => segment)
       ?.map((item) => generateSlug(item));
-      // ?.map((item) => item.replace(/%20|_/g, " "));
+    // ?.map((item) => item.replace(/%20|_/g, " "));
     let extractedFilters = [];
     pathSegments.forEach((segment) => {
       const matchingFilter = filterMappingsMock.find(
@@ -202,7 +303,7 @@ const [filterStatus, setFilterStatus] = useState({
           id: matchingFilter.id,
           value: matchingFilter.slug,
           filterType: matchingFilter.filterType,
-          slug:matchingFilter.slug
+          slug: matchingFilter.slug,
         });
       }
     });
@@ -231,23 +332,23 @@ const [filterStatus, setFilterStatus] = useState({
     }
     if (fuelTypeFilter) {
       setFireplaceType(fuelTypeFilter.id);
-      handleFilterStatus('fireplaceFilterIdStatus', true)
+      handleFilterStatus("fireplaceFilterIdStatus", true);
     }
     if (installationTypeFilter) {
       setInstallationType(installationTypeFilter?.id);
-      handleFilterStatus('installationTypeIdStatus', true)
+      handleFilterStatus("installationTypeIdStatus", true);
     }
     if (glassOrientationTypeFilter) {
       setGlassOrientationType(glassOrientationTypeFilter?.id);
-      handleFilterStatus('glassOrientationIdStatus', true)
+      handleFilterStatus("glassOrientationIdStatus", true);
     }
     if (brandFilter) {
       setBrandType(brandFilter?.id);
-      handleFilterStatus('brandIdStatus', true)
+      handleFilterStatus("brandIdStatus", true);
     }
     if (rangeFilter) {
       setRangeType(rangeFilter?.id);
-      handleFilterStatus('rangeIdStatus', true)
+      handleFilterStatus("rangeIdStatus", true);
     }
     let values = [];
     let newFuelValues = [];
@@ -280,22 +381,12 @@ const [filterStatus, setFilterStatus] = useState({
   useEffect(() => {}, [filters]);
 
   const searchParams = useSearchParams();
-  // useEffect(() => {
-  //   if (state?.typeName === "fuelType") {
-  //     setFireplaceType(state?.id);
-  //   } else if (state?.typeName === "brandType") {
-  //     setBrandType(state?.id);
-  //   }
-  // }, [state]);
+
 
   useEffect(() => {
     const setStates = () => {
       let text = searchParams.get("searchText");
       if (text) setSearchText(text);
-      // let fireplaceType = searchParams.get("fireplaceType");
-      // if (fireplaceType) setFireplaceType(parseInt(fireplaceType));
-      // let productMenu = searchParams.get("productMenu");
-      // if (productMenu) setproductMenuIndex(parseInt(productMenu));
       let brand = searchParams.get("brand");
       if (brand) setBrandType(parseInt(brand));
     };
@@ -331,7 +422,7 @@ const [filterStatus, setFilterStatus] = useState({
       setUpdatedValues((prev) => {
         return {
           ...prev,
-          fueltypeValues: fuelTypes?.map(val => val.fueltype_id) ,
+          fueltypeValues: fuelTypes?.map((val) => val.fueltype_id),
           //  newFuelValues,
           // fireplaceType ? prev.fueltypeValues : newFuelValues,
           installationValues:
@@ -361,7 +452,7 @@ const [filterStatus, setFilterStatus] = useState({
     let path = filters.map((item) => `${item.slug}`).join("/");
     router.push(`/allProducts/${path}`);
   }
- 
+
   const {
     brands,
     masterValues: {
@@ -580,25 +671,18 @@ const [filterStatus, setFilterStatus] = useState({
     //   setproductMenuIndex(Number(queryParams.productMenuIndex));
   }, [searchParams]);
 
-  // useEffect(() => {
-  //   productMenuIndex !== 0 &&
-  //     updateQueryParams({
-  //       productMenuIndex: productMenuIndex,
-  //     });
-  // }, [productMenuIndex]);
-  // console.log("fuelTypes", fuelTypes, "brands", brands);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  
   return (
-    <>
-      <div className="flex flex-col md:px-16 gap-3 bg-[#F7F7F5] ">
+    <div className= "mt-[10rem]" style={{ display: "flex", gap: "1rem", flexDirection: "column"  }}>
+      <div className="flex flex-col md:px-32 gap-3 bg-[#F7F7F5] md:gap-4">
+        <div className="flex flex-col items-center gap-5 md:gap-12"> 
         <div className="flex flex-col items-center gap-5">
-          <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full mt-[5.5rem] uppercase font-[Satoru] cursor-default">
+          <h1 className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full  cursor-default">
             {!brandType
               ? `${
                   fireplaceType
@@ -634,7 +718,7 @@ const [filterStatus, setFilterStatus] = useState({
                 !brandType &&
                 allProductMenu.map((productMenu, index) => (
                   <h2
-                    className="flex flex-col gap-1 items-center text-center cursor-pointer text-xs md:text-base"
+                    className="font-semibold flex flex-col gap-1 items-center text-center cursor-pointer text-xs md:text-base"
                     key={"productMenu" + index}
                     onClick={() => {
                       // setProductTypeName(productMenu.ptype_name);
@@ -685,6 +769,7 @@ const [filterStatus, setFilterStatus] = useState({
             )}
           </div>
         )}
+        </div>
         <>
           {/* Compare Products */}
           {compareProducts.length > 1 && (
@@ -737,13 +822,13 @@ const [filterStatus, setFilterStatus] = useState({
           <div
             className={`flex ${
               isFilter ? "" : "flex-col"
-            } px-1 md:border-t md:border-solid md:border-[#D3C6BB] w-full gap-5 transistion ease-in-out duration-300 items-start`}
+            } px-1 md:border-t md:border-solid md:border-[#D3C6BB] w-full gap-5 transistion ease-in-out duration-300 items-start md:pt-6`}
           >
             {/* Filter */}
             {!isFilter && (
               <div className="w-full flex flex-row px-4 pt-3 justify-between">
                 <span
-                  className="flex gap-4 uppercase font-sans font-normal text-base"
+                  className="flex gap-4 uppercase font-semibold text-base"
                   onClick={() => setIsFilter(true)}
                 >
                   Filters{" "}
@@ -755,7 +840,7 @@ const [filterStatus, setFilterStatus] = useState({
                   />
                 </span>
                 <span
-                  className="flex gap-4 uppercase font-sans font-normal text-base md:hidden"
+                  className="flex gap-4 uppercase font-semibold text-base md:hidden"
                   onClick={() => setIsSort(true)}
                 >
                   Sort{" "}
@@ -777,7 +862,7 @@ const [filterStatus, setFilterStatus] = useState({
                       !isSort ? "flex" : "hidden"
                     } md:flex flex-row py-3 mr-10 justify-between border-b border-solid border-[#D3C6BB]`}
                   >
-                    <span className="flex gap-4 uppercase font-sans font-normal text-base">
+                    <span className="flex gap-4 uppercase font-semibold text-base">
                       Filters{" "}
                       <Image
                         src={MinusIcon}
@@ -788,7 +873,7 @@ const [filterStatus, setFilterStatus] = useState({
                       />
                     </span>
                     <span
-                      className="flex items-center gap-4 font-sans font-normal text-base cursor-pointer"
+                      className="flex items-center gap-4 font-semibold text-base cursor-pointer"
                       onClick={clearFilters}
                     >
                       Clear{" "}
@@ -800,43 +885,6 @@ const [filterStatus, setFilterStatus] = useState({
                       />
                     </span>
                   </div>
-                  {/* <div
-                    className={`${
-                      !isSort ? "flex" : "hidden"
-                    } md:flex flex-row gap-3 mr-10 border-b border-solid border-[#D3C6BB] pb-3`}
-                  >
-                    <input
-                      className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
-                      type="text"
-                      ref={searchRef}
-                      defaultValue={searchText}
-                      // onChange={(e) => setSearchText(e.target.value)}
-                      // value={searchText}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          setSearchText(searchRef.current.value?.toLowerCase());
-                          updateQueryParams({
-                            searchText: searchRef.current.value?.toLowerCase(),
-                          });
-                        }
-                      }}
-                    />
-                    <Image
-                      src={SearchIcon}
-                      alt="search"
-                      className="md:pt-1 cursor-pointer"
-                      onClick={() => {
-                        setSearchText(searchRef.current.value?.toLowerCase());
-                        updateQueryParams({
-                          searchText: searchRef.current.value?.toLowerCase(),
-                        });
-                        if (window?.innerWidth <= 768) {
-                          setIsFilter(false);
-                        }
-                      }}
-                      unoptimized
-                    />
-                  </div> */}
                   <div
                     className={`${
                       !isSort ? "flex" : "hidden"
@@ -844,47 +892,50 @@ const [filterStatus, setFilterStatus] = useState({
                     //  border-b boder-solid border-[#D3C6BB]`}
                   >
                     <div
-                    className={`${
-                      !isSort ? "flex" : "hidden"
-                    } md:flex flex-row gap-3 mr-10 border-b border-solid border-[#D3C6BB] pb-3`}
-                  >
-                    <input
-                      className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
-                      type="text"
-                      ref={searchRef}
-                      defaultValue={searchText}
-                      // onChange={(e) => setSearchText(e.target.value)}
-                      // value={searchText}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
+                      className={`${
+                        !isSort ? "flex" : "hidden"
+                      } md:flex flex-row gap-3 mr-10 border-b border-solid border-[#D3C6BB] pb-3`}
+                    >
+                      <input
+                        className="w-full h-[30px] border border-solid border-[#D3C6BB] rounded-lg p-4"
+                        type="text"
+                        ref={searchRef}
+                        defaultValue={searchText}
+                        // onChange={(e) => setSearchText(e.target.value)}
+                        // value={searchText}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            setSearchText(
+                              searchRef.current.value?.toLowerCase()
+                            );
+                            updateQueryParams({
+                              searchText:
+                                searchRef.current.value?.toLowerCase(),
+                            });
+                          }
+                        }}
+                      />
+                      <Image
+                        src={SearchIcon}
+                        alt="search"
+                        className="md:pt-1 cursor-pointer"
+                        onClick={() => {
                           setSearchText(searchRef.current.value?.toLowerCase());
                           updateQueryParams({
                             searchText: searchRef.current.value?.toLowerCase(),
                           });
-                        }
-                      }}
-                    />
-                    <Image
-                      src={SearchIcon}
-                      alt="search"
-                      className="md:pt-1 cursor-pointer"
-                      onClick={() => {
-                        setSearchText(searchRef.current.value?.toLowerCase());
-                        updateQueryParams({
-                          searchText: searchRef.current.value?.toLowerCase(),
-                        });
-                        if (window?.innerWidth <= 768) {
-                          setIsFilter(false);
-                        }
-                      }}
-                      unoptimized
-                    />
-                  </div>
-                    
+                          if (window?.innerWidth <= 768) {
+                            setIsFilter(false);
+                          }
+                        }}
+                        unoptimized
+                      />
+                    </div>
+
                     {/* FirePlace Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
+                        <span className="flex flex-row justify-between uppercase font-semibold text-base">
                           {"Fireplace Type"}
                           {isClient &&
                             !document
@@ -896,7 +947,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('fireplaceFilterIdStatus')
+                                  handleFilterStatus("fireplaceFilterIdStatus");
                                   document
                                     .getElementById("fireplaceFilterId")
                                     .classList.add("collapse");
@@ -913,7 +964,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 alt="clear"
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
-                                  handleFilterStatus('fireplaceFilterIdStatus')
+                                  handleFilterStatus("fireplaceFilterIdStatus");
                                   setRefreshPage((prev) => !prev);
                                   document
                                     .getElementById("fireplaceFilterId")
@@ -926,9 +977,12 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="fireplaceFilterId"
                           className="flex flex-col gap-3 collapse"
-                          style={{display: !filterStatus?.fireplaceFilterIdStatus&& 'none'}}
+                          style={{
+                            display:
+                              !filterStatus?.fireplaceFilterIdStatus && "none",
+                          }}
                         >
-                         {fireplaceType
+                          {fireplaceType
                             ? fuelTypes?.map(
                                 (val) =>
                                   updatedValues?.fueltypeValues?.includes(
@@ -945,7 +999,7 @@ const [filterStatus, setFilterStatus] = useState({
                                         <>
                                           <span
                                             key={"fueltypes" + val.fueltype_id}
-                                            className="font-sans font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
+                                            className="font-small leading-5 text-normal text-black hover:text-black transition ease-in-out cursor-pointer"
                                             onClick={() => {
                                               setSubType(null);
                                               // setFireplaceType(
@@ -954,17 +1008,12 @@ const [filterStatus, setFilterStatus] = useState({
                                               updateFilter(
                                                 "fuelType",
                                                 val?.fueltype_name,
-                                                val?.fueltype_id, 
+                                                val?.fueltype_id,
                                                 val?.slug
                                               );
                                               if (window?.innerWidth <= 768) {
                                                 setIsFilter(false);
                                               }
-                                              // updateQueryParams({
-                                              //   fireplaceType: val?.fueltype_id,
-                                              // });
-                                              // setInstallationType(null);
-                                              // setglassOrientationType(null);
                                             }}
                                           >
                                             {val?.fueltype_name}
@@ -973,13 +1022,9 @@ const [filterStatus, setFilterStatus] = useState({
                                       ) : (
                                         <span
                                           key={"types" + val.fueltype_id}
-                                          className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                                          className=" font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
                                           onClick={() => {
                                             setSubType(null);
-                                            // setFireplaceType(val?.fueltype_id);
-                                            // updateQueryParams({
-                                            //   fireplaceType: val?.fueltype_id,
-                                            // });
                                             updateFilter(
                                               "fuelType",
                                               val?.fueltype_name,
@@ -989,8 +1034,6 @@ const [filterStatus, setFilterStatus] = useState({
                                             if (window?.innerWidth <= 768) {
                                               setIsFilter(false);
                                             }
-                                            // setInstallationType(null);
-                                            // setglassOrientationType(null);
                                           }}
                                         >
                                           {val?.fueltype_name}
@@ -1006,13 +1049,9 @@ const [filterStatus, setFilterStatus] = useState({
                                   ) && (
                                     <span
                                       key={"types" + val.fueltype_id}
-                                      className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
+                                      className=" font-small leading-5 text-normal text-gray-400 hover:text-black transition ease-in-out cursor-pointer"
                                       onClick={() => {
                                         setSubType(null);
-                                        // setFireplaceType(val?.fueltype_id);
-                                        // updateQueryParams({
-                                        //   fireplaceType: val?.fueltype_id,
-                                        // });
                                         updateFilter(
                                           "fuelType",
                                           val?.fueltype_name,
@@ -1022,8 +1061,7 @@ const [filterStatus, setFilterStatus] = useState({
                                         if (window?.innerWidth <= 768) {
                                           setIsFilter(false);
                                         }
-                                        // setInstallationType(null);
-                                        // setglassOrientationType(null);
+
                                       }}
                                     >
                                       {val?.fueltype_name}
@@ -1037,7 +1075,7 @@ const [filterStatus, setFilterStatus] = useState({
                     {/* Installation Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Installation Type`}
                           {isClient &&
                             !document
@@ -1050,7 +1088,9 @@ const [filterStatus, setFilterStatus] = useState({
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
-                                    handleFilterStatus('installationTypeIdStatus')
+                                    handleFilterStatus(
+                                      "installationTypeIdStatus"
+                                    );
                                     document
                                       .getElementById(
                                         "installationTypeFilterId"
@@ -1072,7 +1112,9 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('installationTypeIdStatus')
+                                  handleFilterStatus(
+                                    "installationTypeIdStatus"
+                                  );
                                   document
                                     .getElementById("installationTypeFilterId")
                                     .classList.remove("collapse");
@@ -1084,7 +1126,10 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="installationTypeFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
-                          style={{display: !filterStatus?.installationTypeIdStatus&& 'none'}}
+                          style={{
+                            display:
+                              !filterStatus?.installationTypeIdStatus && "none",
+                          }}
                         >
                           {firePlaceSubType.installation &&
                             updatedValues?.installationValues?.length > 0 &&
@@ -1098,16 +1143,13 @@ const [filterStatus, setFilterStatus] = useState({
                                       "installtypes" +
                                       installval?.installation_id
                                     }
-                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                    className={` font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
                                       installval?.installation_id ===
                                       installationType
                                         ? "text-black"
                                         : "text-gray-400"
                                     }`}
                                     onClick={() => {
-                                      // setInstallationType(
-                                      //   installval?.installation_id
-                                      // );
                                       updateFilter(
                                         "installationType",
                                         installval?.installation_name,
@@ -1117,11 +1159,7 @@ const [filterStatus, setFilterStatus] = useState({
                                       if (window?.innerWidth <= 768) {
                                         setIsFilter(false);
                                       }
-                                      // updateQueryParams({
-                                      //   installationType:
-                                      //     installval?.installation_id,
-                                      // });
-                                      // setglassOrientationType(null);
+
                                     }}
                                   >
                                     {installval?.installation_name}
@@ -1135,7 +1173,7 @@ const [filterStatus, setFilterStatus] = useState({
                     {/* Glass Orientation Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Glass Orientation Type`}
                           {isClient &&
                             !document
@@ -1148,7 +1186,9 @@ const [filterStatus, setFilterStatus] = useState({
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
-                                    handleFilterStatus('glassOrientationIdStatus')
+                                    handleFilterStatus(
+                                      "glassOrientationIdStatus"
+                                    );
                                     document
                                       .getElementById(
                                         "glassOrientationTypeFilterId"
@@ -1170,7 +1210,9 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('glassOrientationIdStatus')
+                                  handleFilterStatus(
+                                    "glassOrientationIdStatus"
+                                  );
                                   document
                                     .getElementById(
                                       "glassOrientationTypeFilterId"
@@ -1184,7 +1226,10 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="glassOrientationTypeFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
-                          style={{display: !filterStatus?.glassOrientationIdStatus&& 'none'}}
+                          style={{
+                            display:
+                              !filterStatus?.glassOrientationIdStatus && "none",
+                          }}
                         >
                           {firePlaceSubType.glassOrientation &&
                             updatedValues?.glassOrientationValues?.length > 0 &&
@@ -1198,21 +1243,14 @@ const [filterStatus, setFilterStatus] = useState({
                                       "glasstypes" +
                                       glassval?.glass_orientation_id
                                     }
-                                    className={`font-sans font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
+                                    className={` font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
                                       glassval?.glass_orientation_id ===
                                       glassOrientationType
                                         ? "text-black"
                                         : "text-gray-400"
                                     }`}
                                     onClick={() => {
-                                      // setInstallationType(null);
-                                      // setglassOrientationType(
-                                      //   glassval?.glass_orientation_id
-                                      // );
-                                      // updateQueryParams({
-                                      //   glassOrientationType:
-                                      //     glassval?.glass_orientation_id,
-                                      // });
+                             
                                       updateFilter(
                                         "glassOrientationType",
                                         glassval?.glass_orientation_name,
@@ -1236,7 +1274,7 @@ const [filterStatus, setFilterStatus] = useState({
                     {
                       // brandType && (
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base cursor-pointer">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Ranges`}
                           {isClient &&
                             !document
@@ -1249,7 +1287,7 @@ const [filterStatus, setFilterStatus] = useState({
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
                                     setRefreshPage((prev) => !prev);
-                                    handleFilterStatus('rangeIdStatus')
+                                    handleFilterStatus("rangeIdStatus");
                                     document
                                       .getElementById("rangesFilterId")
                                       .classList.add("collapse");
@@ -1269,7 +1307,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('rangeIdStatus')
+                                  handleFilterStatus("rangeIdStatus");
                                   document
                                     .getElementById("rangesFilterId")
                                     .classList.remove("collapse");
@@ -1281,12 +1319,14 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="rangesFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
-                          style={{display: !filterStatus?.rangeIdStatus&& 'none'}}
+                          style={{
+                            display: !filterStatus?.rangeIdStatus && "none",
+                          }}
                         >
                           {rangeType && (
                             <span
                               key={"ranges_selected"}
-                              className="font-sans font-normal font-small leading-5 text-base text-black"
+                              className=" font-semibold font-small leading-5 text-base text-black"
                               // onClick={() => setBrandType(val?.brand_id)}
                             >
                               {
@@ -1308,12 +1348,8 @@ const [filterStatus, setFilterStatus] = useState({
                               return (
                                 <span
                                   key={"ranges" + val?.range_id}
-                                  className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                                  className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                                   onClick={() => {
-                                    // setRangeType(val?.range_id);
-                                    // updateQueryParams({
-                                    //   rangeType: val?.range_id,
-                                    // });
                                     updateFilter(
                                       "rangeType",
                                       val?.range_name,
@@ -1337,7 +1373,7 @@ const [filterStatus, setFilterStatus] = useState({
                     {/* Brands Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base">
                           Brands{" "}
                           {isClient &&
                             !document
@@ -1349,7 +1385,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('brandIdStatus')
+                                  handleFilterStatus("brandIdStatus");
                                   document
                                     .getElementById("brandsFilterId")
                                     .classList.add("collapse");
@@ -1367,7 +1403,7 @@ const [filterStatus, setFilterStatus] = useState({
                                 className="md:pt-1 cursor-pointer"
                                 onClick={() => {
                                   setRefreshPage((prev) => !prev);
-                                  handleFilterStatus('brandIdStatus')
+                                  handleFilterStatus("brandIdStatus");
                                   document
                                     .getElementById("brandsFilterId")
                                     .classList.remove("collapse");
@@ -1379,13 +1415,15 @@ const [filterStatus, setFilterStatus] = useState({
                         <div
                           id="brandsFilterId"
                           className="flex flex-col gap-3 mr-10 collapse"
-                          style={{display: !filterStatus?.brandIdStatus&& 'none'}}
+                          style={{
+                            display: !filterStatus?.brandIdStatus && "none",
+                          }}
                         >
                           {brandType && (
                             <>
                               <span
                                 key={"brands_selected"}
-                                className="font-sans font-normal font-small leading-5 text-base text-black"
+                                className=" font-semibold font-small leading-5 text-base text-black"
                                 // onClick={() => setBrandType(val?.brand_id)}
                               >
                                 {
@@ -1402,15 +1440,13 @@ const [filterStatus, setFilterStatus] = useState({
                             return (
                               <span
                                 key={"brands" + val?.brand_id}
-                                className="font-sans font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                                className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
                                 onClick={() => {
                                   setRangeType(null);
-                                  // setBrandType(val?.brand_id);
-                                  // updateQueryParams({ brand: val?.brand_id });
                                   updateFilter(
                                     "brand",
                                     val?.brand_name,
-                                    val?.brand_id, 
+                                    val?.brand_id,
                                     val?.slug
                                   );
                                   if (window?.innerWidth <= 768) {
@@ -1427,468 +1463,260 @@ const [filterStatus, setFilterStatus] = useState({
                     }
                     {
                       <div
-                    className={`${
-                      isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 md:mr-10`}
-                  >
-                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
-                      Sort By{" "}
-                      {isClient &&
-                        !document
-                          .getElementById("sortbyFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={MinusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("sortbyFilterId")
-                                .classList.add("collapse");
-                              setIsSort(false);
-                            }}
-                            unoptimized
-                          />
-                        )}
-                      {isClient &&
-                        document
-                          .getElementById("sortbyFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={PlusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("sortbyFilterId")
-                                .classList.remove("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                    </span>
-                    <div
-                      id="sortbyFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out collapse"
-                    >
-                      {/* <div
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.priceLowToHigh)}
+                        className={`${
+                          isSort ? "flex" : "hidden"
+                        } md:flex flex-col gap-3 py-3 md:mr-10`}
                       >
-                        Price: Low to High
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
+                          Sort By{" "}
+                          {isClient &&
+                            !document
+                              .getElementById("sortbyFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={MinusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  document
+                                    .getElementById("sortbyFilterId")
+                                    .classList.add("collapse");
+                                  setIsSort(false);
+                                }}
+                                unoptimized
+                              />
+                            )}
+                          {isClient &&
+                            document
+                              .getElementById("sortbyFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  document
+                                    .getElementById("sortbyFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                        </span>
+                        <div
+                          id="sortbyFilterId"
+                          className="flex flex-col gap-3 transistion ease-in-out collapse"
+                        >
+                          <span
+                            className=" font-small leading-5 text-normal cursor-pointer"
+                            onClick={() => sortProducts(SORTBY.A2Z)}
+                          >
+                            A-Z
+                          </span>
+                          <span
+                            className=" font-small leading-5 text-normal cursor-pointer"
+                            onClick={() => sortProducts(SORTBY.Z2A)}
+                          >
+                            Z-A
+                          </span>
+                          <span
+                            className=" font-small leading-5 text-normal cursor-pointer"
+                            onClick={() => sortProducts(SORTBY.bestSelling)}
+                          >
+                            Best Selling
+                          </span>
+                        </div>
                       </div>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.priceHighToLow)}
-                      >
-                        Price: High to Low
-                      </span> */}
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.A2Z)}
-                      >
-                        A-Z
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.Z2A)}
-                      >
-                        Z-A
-                      </span>
-                      {/* <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.oldToNew)}
-                      >
-                        Oldest to Newest
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.newToOld)}
-                      >
-                        Newest to Oldest
-                      </span>*/}
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.bestSelling)}
-                      >
-                        Best Selling
-                      </span> 
-                    </div>
-                  </div>
                     }
                   </div>
-                  {/* <div
-                    className={`${
-                      !isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]`}
-                  >
-                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base">
-                      Others{" "}
-                      {isClient &&
-                        !document
-                          .getElementById("otherFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={MinusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("otherFilterId")
-                                .classList.add("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                      {isClient &&
-                        document
-                          .getElementById("otherFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={PlusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("otherFilterId")
-                                .classList.remove("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                    </span>
-                    <div
-                      id="otherFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out collapse"
-                    >
-                      <span
-                        className={`font-sans font-small leading-5 text-normal cursor-pointer ${
-                          bestSelling ? "font-semibold" : ""
-                        }`}
-                        onClick={() => {
-                          if (window?.innerWidth <= 768) {
-                            setIsFilter(false);
-                          }
-                          sortProducts(SORTBY.bestSelling);
-                        }}
-                      >
-                        Best Selling
-                      </span>
-                    </div>
-                  </div> */}
+
                 </>
-                {/* <>
-                  <div
-                    className={`${
-                      isSort ? "flex" : "hidden"
-                    } md:flex flex-col gap-3 py-3 md:mr-10`}
-                  >
-                    <span className="flex flex-row justify-between uppercase font-sans font-normal text-base border-b boder-solid border-[#D3C6BB] md:border-0 pb-2 md:pb-0">
-                      Sort By{" "}
-                      {isClient &&
-                        !document
-                          .getElementById("sortbyFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={MinusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("sortbyFilterId")
-                                .classList.add("collapse");
-                              setIsSort(false);
-                            }}
-                            unoptimized
-                          />
-                        )}
-                      {isClient &&
-                        document
-                          .getElementById("sortbyFilterId")
-                          ?.classList?.contains("collapse") && (
-                          <Image
-                            src={PlusIcon}
-                            alt="clear"
-                            className="md:pt-1 cursor-pointer"
-                            onClick={() => {
-                              setRefreshPage((prev) => !prev);
-                              document
-                                .getElementById("sortbyFilterId")
-                                .classList.remove("collapse");
-                            }}
-                            unoptimized
-                          />
-                        )}
-                    </span>
-                    <div
-                      id="sortbyFilterId"
-                      className="flex flex-col gap-3 transistion ease-in-out collapse"
-                    >
-                       <div
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.priceLowToHigh)}
-                      >
-                        Price: Low to High
-                      </div>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.priceHighToLow)}
-                      >
-                        Price: High to Low
-                      </span> 
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.A2Z)}
-                      >
-                        A-Z
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.Z2A)}
-                      >
-                        Z-A
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.oldToNew)}
-                      >
-                        Oldest to Newest
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.newToOld)}
-                      >
-                        Newest to Oldest
-                      </span>
-                      <span
-                        className="font-sans font-small leading-5 text-normal cursor-pointer"
-                        onClick={() => sortProducts(SORTBY.bestSelling)}
-                      >
-                        Best Selling
-                      </span> 
-                    </div>
-                  </div>
-                </> */}
+
               </div>
             )}
 
             {/* Products */}
-            <div
+            {/* uncomment the below div to get 280px */}
+            {/* <div
               className={`flex flex-wrap px-4 gap-6 md:gap-8 py-3 ${
                 isFilter ? "md:w-[80%]" : "w-full"
-              }`}
-            >
-              {filteredProducts?.map((product, index) => (
-                <ProductCard
-                  key={index}
-                  productDetails={product}
-                  addToCompare={addToCompareProducts}
-                  isCompare={isCompare}
-                  // title={"Beta Outdoor Fire Pit"}
-                  // description={"Living Fire" + val}
-                />
-              ))}
+              } overflow-y-auto md:min-h-[60vh] `}
+            > */}
+              <div className={`flex flex-wrap px-4 gap-6 md:gap-6 lg:gap-8 py-3 ${
+  isFilter ? "md:w-[80%]" : "w-full"
+} overflow-y-auto md:min-h-[60vh]`}>
+               {isLoading ? (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  minHeight="200px"
+                  width="100%"
+                >
+                  <CircularProgress sx={{ color: "black" }} />
+                </Box>
+              ) : allProducts?.length == 0 ? (
+                <div className="w-full flex flex-col items-center justify-center py-10 gap-6">
+                  <h3 className="text-2xl font-semibold text-center">
+                    We dont have products for the selected criteria
+                  </h3>
+                  <p className="text-lg text-center max-w-lg">
+                    We will be adding more products soon. Please check back
+                    later or contact us for more details.
+                  </p>
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <button
+                      onClick={() => router.push("/")}
+                      className="px-6 py-3 bg-black text-white hover:bg-gray-800 transition-colors"
+                    >
+                      Return to Home
+                    </button>
+                    <button
+                      onClick={clearFilters}
+                      className="px-6 py-3 border border-black hover:bg-gray-100 transition-colors"
+                    >
+                      Clear Filters
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                filteredProducts?.map((product, index) => (
+                  <ProductCard
+                    key={index}
+                    productDetails={product}
+                    addToCompare={addToCompareProducts}
+                    isCompare={isCompare}
+                    // title={"Beta Outdoor Fire Pit"}
+                    // description={"Living Fire" + val}
+                  />
+                ))
+              )}
+              {!isLoading && allProducts?.length > 0 && ( 
+                <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "anchor-center",
+                }}
+              >
+                <div className="flex justify-center gap-2 font-[publicSans] text-[20px] md:text-[20px] cursor-pointer">
+                  {pageIndex > 0 && (
+                    <>
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => onPageIndexClick(0)}
+                      >
+                        &lt;&lt;
+                      </span>
+                      <span className="mx-1"> </span>
+                    </>
+                  )}
+
+                  {pageIndex > 0 && (
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => onPageIndexClick(pageIndex - 1)}
+                    >
+                      &lt;
+                    </span>
+                  )}
+
+                  {(() => {
+                    const pages = [];
+
+                    pages.push(
+                      <span
+                        key={0}
+                        className={`cursor-pointer ${
+                          pageIndex === 0 ? "font-bold text-black" : ""
+                        }`}
+                        onClick={() => onPageIndexClick(0)}
+                      >
+                        1
+                      </span>
+                    );
+
+                    const startPage = Math.max(1, pageIndex - 1);
+                    const endPage = Math.min(maxPageCount - 1, pageIndex + 1);
+
+                    if (startPage > 1) {
+                      pages.push(<span key="left-ellipsis">...</span>);
+                    }
+
+                    for (let i = startPage; i <= endPage; i++) {
+                      if (i > 0 && i < maxPageCount - 1) {
+                        pages.push(
+                          <span
+                            key={i}
+                            className={`cursor-pointer ${
+                              pageIndex === i ? "font-bold text-black" : ""
+                            }`}
+                            onClick={() => onPageIndexClick(i)}
+                          >
+                            {i + 1}
+                          </span>
+                        );
+                      }
+                    }
+
+                    if (endPage < maxPageCount - 2) {
+                      pages.push(<span key="right-ellipsis">...</span>);
+                    }
+
+                    if (maxPageCount > 1) {
+                      pages.push(
+                        <span
+                          key={maxPageCount - 1}
+                          className={`cursor-pointer ${
+                            pageIndex === maxPageCount - 1
+                              ? "font-bold text-black"
+                              : ""
+                          }`}
+                          onClick={() => onPageIndexClick(maxPageCount - 1)}
+                        >
+                          {maxPageCount}
+                        </span>
+                      );
+                    }
+
+                    return pages;
+                  })()}
+
+                  {pageIndex < maxPageCount - 1 && (
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => onPageIndexClick(pageIndex + 1)}
+                    >
+                      &gt;
+                    </span>
+                  )}
+
+                  {pageIndex < maxPageCount - 1 && (
+                    <>
+                      <span className="mx-1"> </span>
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => onPageIndexClick(maxPageCount - 1)}
+                      >
+                        &gt;&gt;
+                      </span>
+                    </>
+                  )}
+                </div>
+              </div>
+              )}
             </div>
           </div>
-          {/* <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
-       
-            {pageIndex > 0 && (
-              <Image
-                src={LeftArrowIcon}
-                alt="Left Arrow"
-                className="md:pt-1 cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex - 1)}
-                unoptimized
-              />
-            )}
-
-
-            <span
-              className={`cursor-pointer ${
-                pageIndex === 0 ? "font-bold text-black" : ""
-              }`}
-              onClick={() => onPageIndexClick(0)}
-            >
-              1
-            </span>
-
-   
-            {pageIndex > 2 && <span>...</span>}
-
-  
-            {pageIndex > 1 && (
-              <span
-                className="cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex - 1)}
-              >
-                {pageIndex}
-              </span>
-            )}
-
-
-            {pageIndex !== 0 && pageIndex !== maxPageCount - 1 && (
-              <span className="font-bold text-black">{pageIndex + 1}</span>
-            )}
-
-     
-            {pageIndex + 1 < maxPageCount - 1 && (
-              <span
-                className="cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex + 1)}
-              >
-                {pageIndex + 2}
-              </span>
-            )}
-
-      
-            {pageIndex + 2 < maxPageCount - 1 && <span>...</span>}
-
-            {maxPageCount > 1 && (
-              <span
-                className={`cursor-pointer ${
-                  pageIndex === maxPageCount - 1 ? "font-bold text-black" : ""
-                }`}
-                onClick={() => onPageIndexClick(maxPageCount - 1)}
-              >
-                {maxPageCount}
-              </span>
-            )}
-
-     
-            {pageIndex < maxPageCount - 1 && (
-              <Image
-                src={RightArrowIcon}
-                alt="Right Arrow"
-                className="md:pt-1 cursor-pointer"
-                onClick={() => onPageIndexClick(pageIndex + 1)}
-                unoptimized
-              />
-            )}
-          </div> */}
-          <div className="flex justify-center gap-2 font-[Satoru] text-[22px] md:text-[26px] cursor-pointer">
-  {/* First Page (<<) */}
-  {pageIndex > 0 && (
-    <>
-      <span 
-        className="cursor-pointer"
-        onClick={() => onPageIndexClick(0)}
-      >
-        &lt;&lt;
-      </span>
-      <span className="mx-1"> </span>
-      {/* <span className="mx-1">|</span> */}
-    </>
-  )}
-
-  {/* Previous Page (<) */}
-  {pageIndex > 0 && (
-    <span 
-      className="cursor-pointer"
-      onClick={() => onPageIndexClick(pageIndex - 1)}
-    >
-      &lt;
-    </span>
-  )}
-
-  {/* Page Numbers */}
-  {(() => {
-    const pages = [];
-    // Always show first page
-    pages.push(
-      <span
-        key={0}
-        className={`cursor-pointer ${
-          pageIndex === 0 ? "font-bold text-black" : ""
-        }`}
-        onClick={() => onPageIndexClick(0)}
-      >
-        1
-      </span>
-    );
-
-    // Show current page and adjacent pages
-    const startPage = Math.max(1, pageIndex - 1);
-    const endPage = Math.min(maxPageCount - 1, pageIndex + 1);
-
-    if (startPage > 1) {
-      pages.push(<span key="left-ellipsis">...</span>);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      if (i > 0 && i < maxPageCount - 1) {
-        pages.push(
-          <span
-            key={i}
-            className={`cursor-pointer ${
-              pageIndex === i ? "font-bold text-black" : ""
-            }`}
-            onClick={() => onPageIndexClick(i)}
-          >
-            {i + 1}
-          </span>
-        );
-      }
-    }
-
-    if (endPage < maxPageCount - 2) {
-      pages.push(<span key="right-ellipsis">...</span>);
-    }
-
-    // Always show last page if there are multiple pages
-    if (maxPageCount > 1) {
-      pages.push(
-        <span
-          key={maxPageCount - 1}
-          className={`cursor-pointer ${
-            pageIndex === maxPageCount - 1 ? "font-bold text-black" : ""
-          }`}
-          onClick={() => onPageIndexClick(maxPageCount - 1)}
-        >
-          {maxPageCount}
-        </span>
-      );
-    }
-
-    return pages;
-  })()}
-
-  {/* Next Page (>) */}
-  {pageIndex < maxPageCount - 1 && (
-    <span 
-      className="cursor-pointer"
-      onClick={() => onPageIndexClick(pageIndex + 1)}
-    >
-      &gt;
-    </span>
-  )}
-
-  {/* Last Page (>>) */}
-  {pageIndex < maxPageCount - 1 && (
-    <>
-      {/* <span className="mx-1">|</span> */}
-      <span className="mx-1"> </span>
-      <span 
-        className="cursor-pointer"
-        onClick={() => onPageIndexClick(maxPageCount - 1)}
-      >
-        &gt;&gt;
-      </span>
-    </>
-  )}
-</div>
         </>
         {/* <OurDifference />
         <OurShowrooms /> */}
-        
       </div>
-      <LowerArea/>
-        <Showrooms/>
-    </>
+      {/* <LowerArea /> */}
+      <Showrooms />
+    </div>
   );
 };
 

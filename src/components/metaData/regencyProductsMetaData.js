@@ -174,7 +174,7 @@ export const regencyProductsMetaData = [
     brand: "Regency",
     name: "Hume",
     slug: "hume",
-    title: "missing",
+    title: "Hume Wood Heater - Wood Fireplace Range - Living Fire",
     description: "",
     type: "product",
     keywords: "Hume, Regency fireplace, Living Fire"

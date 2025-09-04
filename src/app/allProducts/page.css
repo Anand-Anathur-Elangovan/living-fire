@@ -1,3 +1,7 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 .element-image {
   /* inline-size: 100%;
   aspect-ratio: 1; */
@@ -7,6 +11,7 @@
   /* position: relative; */
   height: 100%;
   width: 100%;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .product-element {

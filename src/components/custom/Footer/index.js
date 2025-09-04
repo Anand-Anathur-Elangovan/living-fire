@@ -67,9 +67,9 @@ const Footer = () => {
             xs: "2rem 1rem",
             sm: "2rem 2rem",
             md: "2rem 4rem",
-            lg: "2rem 18rem",
+            lg: "2rem 6rem",
           },
-          borderTop: "20px solid white",
+          // borderTop: "20px solid white",
         }}
       >
         <Box
@@ -221,7 +221,7 @@ const Footer = () => {
         sx={{
           py: 4,
           backgroundColor: "black",
-          borderTop: "10px solid white",
+          // borderTop: "10px solid white",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

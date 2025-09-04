@@ -145,7 +145,7 @@ const Blog = () => {
       style={{ padding: isDesktop ? "40px clamp(120px, 17.7vw, 240px)" : "20px 45px" }}>
       {/* Header */}
       <div className="flex w-full items-center justify-center mb-2 md:mb-4">
-        <h2 className="w-full text-center font-satoru text-3xl font-normal text-black md:text-4xl lg:text-5xl">
+        <h2 className="w-full text-center font-publicSans text-3xl font-normal text-black md:text-4xl lg:text-5xl">
           News & Blogs
         </h2>
       </div>
@@ -178,10 +178,10 @@ const Blog = () => {
               </div>
             </div>
             <article className="flex w-full flex-col gap-2">
-              <h3 className="line-clamp-2 cursor-pointer font-sans text-base font-extralight uppercase leading-6 hover:underline sm:text-lg">
+              <h3 className="line-clamp-2 cursor-pointer text-base font-extralight uppercase leading-6 hover:underline sm:text-lg">
                 Maximising Energy Efficiency with Your Fireplace
               </h3>
-              <p className="line-clamp-3 font-sans text-xs font-light leading-5 text-black sm:text-sm">
+              <p className="line-clamp-3 text-xs font-light leading-5 text-black sm:text-sm">
                 A well-chosen fireplace not only enhances your homes beauty
                 but can also improve its energy efficiency. Learn how to
                 select a fireplace that offers optimal heat output and
@@ -216,10 +216,10 @@ const Blog = () => {
               </div>
             </div>
             <article className="flex w-full flex-col gap-2">
-              <h3 className="line-clamp-2 cursor-pointer font-sans text-base font-extralight uppercase leading-6 hover:underline sm:text-lg">
+              <h3 className="line-clamp-2 cursor-pointer text-base font-extralight uppercase leading-6 hover:underline sm:text-lg">
                 Wood, Gas, and Electric Fireplaces: Whats Right for You?
               </h3>
-              <p className="line-clamp-3 font-sans text-xs font-light leading-5 text-black sm:text-sm">
+              <p className="line-clamp-3 text-xs font-light leading-5 text-black sm:text-sm">
                 Each type of fireplace offers its own unique advantages, from
                 the traditional charm of wood to the convenience of gas and
                 the versatility of electric. This guide helps you navigate the
@@ -242,7 +242,7 @@ const Blog = () => {
             <FiArrowRight className="text-3xl text-gray-700" />
           </Link>
           <Link href="/blogs" passHref>
-            <p className="cursor-pointer font-sans text-[1.4rem] font-normal uppercase tracking-wider hover:underline">
+            <p className="cursor-pointer text-[1.4rem] font-normal uppercase tracking-wider hover:underline">
               View All
             </p>
           </Link>

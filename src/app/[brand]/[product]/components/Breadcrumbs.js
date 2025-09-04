@@ -57,8 +57,29 @@ const Breadcrumbs = ({
     return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
   };
 
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    
+    // Clear localStorage & sessionStorage
+    if (typeof window !== "undefined") {
+      localStorage.clear();
+      sessionStorage.clear();
+    }
+
+    // Clear cookies (requires a utility function)
+    document.cookie.split(";").forEach((c) => {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+    });
+
+    // Force a hard reload
+    window.location.href = "/";
+  };
+
+
   const breadcrumbItems = [
-    { name: "Home", path: "/", type: "link" },
+    { name: "Home", path: "/", type: "button", onClick: (e) => handleHomeClick(e)  },
     fuelType && { 
       name: fuelType, 
       onClick: () => allProductsRouteHandler("fuelType", fuelType),

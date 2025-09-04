@@ -34,7 +34,7 @@ p,
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Public Sans", sans-serif;
 }
 
 @layer utilities {
@@ -44,7 +44,7 @@ body {
 }
 
 .heading1 {
-  font-family: "Public Sans";
+  font-family: "Public Sans !important";
   font-style: normal;
   font-weight: 200;
   font-size: 3rem;
@@ -53,7 +53,7 @@ body {
 }
 @media (max-width: 768px) {
   .heading1 {
-    font-family: "Public Sans";
+    font-family: "Public Sans !important";
     font-style: normal;
     font-weight: 200;
     font-size: 36px;

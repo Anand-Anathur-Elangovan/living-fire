@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import Image from "next/image";
 // import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
@@ -43,6 +44,25 @@ const ProductOptions = ({
   const [totalPrice, setTotalPrice] = useState(price);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
+// Hardcoded admin credentials
+const HARDCODED_ADMIN_USERNAME = "admin";
+const HARDCODED_ADMIN_PASSWORD = "password123";
+  // Admin check state
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    // Check sessionStorage for admin credentials
+    const storedUsername = typeof window !== 'undefined' ? sessionStorage.getItem("adminUsername") : null;
+    const storedPassword = typeof window !== 'undefined' ? sessionStorage.getItem("adminPassword") : null;
+    if (
+      storedUsername === HARDCODED_ADMIN_USERNAME &&
+      storedPassword === HARDCODED_ADMIN_PASSWORD
+    ) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, []);
 
   const handleOptionChange1 = (category, option) => {
     const isCheckbox =
@@ -393,11 +413,29 @@ const ProductOptions = ({
         <span className={styles.inStock}>IN STOCK</span>
       </div>
 
+
       <div className={styles.buttonContainer}>
         <button className={styles.addToCart}>ADD TO CART</button>
         <button className={styles.enquiry} onClick={openModal}>
           SEND AN ENQUIRY
         </button>
+        {isAdmin && (
+          <button
+            style={{
+              background: '#1741be',
+              color: '#fff',
+              marginLeft: 8,
+              padding: '10px 16px',
+              border: 'none',
+              borderRadius: 4,
+              fontWeight: 600,
+              cursor: 'pointer',
+            }}
+            onClick={() => alert('Edit mode enabled!')}
+          >
+            Edit
+          </button>
+        )}
       </div>
 
       {/* {isPopupOpen && (

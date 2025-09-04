@@ -3,6 +3,7 @@ import "./featured.css";
 import featureImg1 from "@/public/assets/homePage/feature/1.webp";
 import featureImg2 from "@/public/assets/homePage/feature/22.webp";
 import featureImg3 from "@/public/assets/homePage/feature/3.webp";
+import featureImg33 from "@/public/assets/homePage/feature/33.webp";
 import featureImg4 from "@/public/assets/homePage/feature/4.png";
 import featureImg5 from "@/public/assets/homePage/feature/5.png";
 import featureImg6 from "@/public/assets/homePage/feature/6.jpg";
@@ -66,13 +67,14 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
     },
     {
       p_id: "426",
-      image: featureImg3,
-      title: "Ilektro integra anson",
-      range: "Paul Agnew Designs",
+      image: featureImg33,
+      title: "HZO42 - Outdoor - LPG",
+      range: "Regency",
       description:
-        "Sleek integrated design with advanced heating technology, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+      "Contemporary Linear Outdoor Gas All of the sophisticated, contemporary styling and quality workmanship is mirrored in this dramatic outdoor fireplace. This fireplace delivers beautiful wide angle flames amplified by a reflective stainless steel body and picture frame faceplate. ",
+        // "Sleek integrated design with advanced heating technology, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
       name: "HZO42 - Outdoor - LPG",
-      brand_name: "Paul Agnew Designs",
+      brand_name: "Regency",
     },
     {
       p_id: "427",
@@ -269,7 +271,7 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
                       </div>
                     </div>
                   </div>
-                  <div className="font-sans text-left">
+                  <div className="text-left">
                     <h3 className="leading-6 text-base md:text-lg font-extralight hover:underline">
                       {item.title}
                     </h3>
@@ -350,11 +352,14 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
                       </div>
                     </div>
                   </div>
-                  <div className="font-sans text-left">
-                    <h3 className="leading-6 text-base md:text-lg font-extralight hover:underline">
+                  <div className="text-left">
+                    <h3 className="leading-6 text-base md:text-lg font-extralight hover:underline" style={{ fontFamily: '"Public Sans", sans-serif' }}
+>
                       {item.title}
                     </h3>
-                    <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F]">
+                    <p className="font-medium leading-5 text-xs md:text-sm text-[#94999F]"
+                    style={{ fontFamily: '"Public Sans", sans-serif' }}
+>
                       {item.range}
                     </p>
                     <p className="font-normal leading-5 text-sm mt-2 text-[#333]">
@@ -446,16 +451,17 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
                       </div>
                     </div>
                   </div>
-                  <div className="font-sans text-left">
+                  <div className="text-left">
                     <h3
                       className="leading-6 text-base md:text-lg font-extralight hover:underline"
-                      style={{ fontFamily: "Satoru, sans-serif" }}
+                      style={{ fontFamily: '"Public Sans", sans-serif' }}
                     >
                       {item.title}
                     </h3>
                     <p
                       className="font-medium leading-5 text-xs md:text-sm text-[#94999F]"
-                      style={{ fontFamily: "Satoru, sans-serif" }}
+                      style={{ fontFamily: '"Public Sans", sans-serif' }}
+
                     >
                       {item.range}
                     </p>
@@ -518,7 +524,7 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
           </motion.button> */}
           <Link href="/allProducts" passHref legacyBehavior>
             <motion.a
-              className="px-8 py-3 bg-black text-white font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300  flex items-center gap-2"
+              className="px-8 py-3 bg-black text-white font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-800 transition-colors duration-300  flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onMouseEnter={() => router.prefetch("/allProducts")}
@@ -528,7 +534,7 @@ className={`featured-container ${isDesktop ? "desktop-feature-container" : "stan
           </Link>
           <Link href="/contact" passHref legacyBehavior>
             <motion.a
-              className="px-8 py-3 bg-white text-black border border-black font-sans font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300  flex items-center gap-2"
+              className="px-8 py-3 bg-white text-black border border-black font-medium text-sm md:text-base uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300  flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onMouseEnter={() => router.prefetch("/contact")}
