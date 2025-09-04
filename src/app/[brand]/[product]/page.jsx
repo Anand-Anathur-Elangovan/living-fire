@@ -23,7 +23,7 @@
 // import Product from "./Product";
 // import { cookies } from 'next/headers';
 // // Helper function to format text for URLs and display
-// const formatName = (name) => 
+// const formatName = (name) =>
 //   name ? decodeURIComponent(name).replace(/_/g, " ").trim() : "";
 
 // // Preload critical product data (adjust based on your CMS/database)
@@ -111,7 +111,7 @@
 //     { brand: "Regency", product: "FG39" },
 //     { brand: "Paul_Agnew_Designs", product: "Ilektro_1250_Landscape_Tunnel" },
 //   ];
-  
+
 //   return topProducts.map(({ brand, product }) => ({
 //     brand: brand.toLowerCase(),
 //     product: product.toLowerCase(),
@@ -122,22 +122,21 @@
 //   return <Product params={params} />;
 // }
 
-
 import Product from "./Product";
-import { cookies } from 'next/headers';
-import { regencyProductsMetaData } from '@/src/components/metaData/regencyProductsMetaData';
-import { hergomProductsMetaData } from '@/src/components/metaData/hergomProductsMetaData';
-import { morsoProductsMetaData } from '@/src/components/metaData/morsoProductsMetaData';
-import { adfProductsMetaData } from '@/src/components/metaData/adfProductsMetaData';
-import { austroflammProductsMetaData } from '@/src/components/metaData/austroflammProductsMetaData';
-import { kaloraProductsMetaData } from '@/src/components/metaData/kaloraProductsMetaData';
-import { paulAgnewProductsMetaData } from '@/src/components/metaData/paulAgnewProductsMetaData';
-import { simpleProductLayoutMetaData } from '@/src/components/metaData/simpleProductLayoutMetaData';
-import { heatmasterProductsMetaData } from '@/src/components/metaData/heatmasterProductsMetaData';
-import { bosqProductsMetaData } from '@/src/components/metaData/bosqProductsMetaData';
-import { esseFiresProductsMetaData } from '@/src/components/metaData/esseFiresProductsMetaData';
+import { cookies } from "next/headers";
+import { regencyProductsMetaData } from "@/src/components/metaData/regencyProductsMetaData";
+import { hergomProductsMetaData } from "@/src/components/metaData/hergomProductsMetaData";
+import { morsoProductsMetaData } from "@/src/components/metaData/morsoProductsMetaData";
+import { adfProductsMetaData } from "@/src/components/metaData/adfProductsMetaData";
+import { austroflammProductsMetaData } from "@/src/components/metaData/austroflammProductsMetaData";
+import { kaloraProductsMetaData } from "@/src/components/metaData/kaloraProductsMetaData";
+import { paulAgnewProductsMetaData } from "@/src/components/metaData/paulAgnewProductsMetaData";
+import { simpleProductLayoutMetaData } from "@/src/components/metaData/simpleProductLayoutMetaData";
+import { heatmasterProductsMetaData } from "@/src/components/metaData/heatmasterProductsMetaData";
+import { bosqProductsMetaData } from "@/src/components/metaData/bosqProductsMetaData";
+import { esseFiresProductsMetaData } from "@/src/components/metaData/esseFiresProductsMetaData";
 
-import { eurostoveProductsMetaData } from '@/src/components/metaData/eurostoveProductsMetaData';
+import { eurostoveProductsMetaData } from "@/src/components/metaData/eurostoveProductsMetaData";
 // Combine all metadata arrays into one searchable collection
 const allProductsMetaData = [
   ...regencyProductsMetaData,
@@ -148,33 +147,41 @@ const allProductsMetaData = [
   ...kaloraProductsMetaData,
   ...paulAgnewProductsMetaData,
   ...simpleProductLayoutMetaData,
-  ...heatmasterProductsMetaData, 
-  ...eurostoveProductsMetaData, 
+  ...heatmasterProductsMetaData,
+  ...eurostoveProductsMetaData,
   ...bosqProductsMetaData,
-  ...esseFiresProductsMetaData
+  ...esseFiresProductsMetaData,
 ];
 
 export async function generateMetadata({ params }) {
   const { brand, product } = params;
   const slug = product.toLowerCase();
-  
+
   // Find matching product metadata
   const productMeta = allProductsMetaData.find(
-    item => item.slug === slug && item.brand.toLowerCase().replace(/ /g, '-') === brand.toLowerCase()
+    (item) =>
+      item.slug === slug &&
+      item.brand.toLowerCase().replace(/ /g, "-") === brand.toLowerCase()
   );
 
   // Fallback metadata if product not found
   if (!productMeta) {
     return {
-      title: `${product.replace(/-/g, ' ')} | ${brand.replace(/-/g, ' ')} | Living Fire Australia`,
-      description: `Explore our premium ${brand.replace(/-/g, ' ')} ${product.replace(/-/g, ' ')} fireplace at Living Fire.`,
+      title: `${product.replace(/-/g, " ")} | ${brand.replace(
+        /-/g,
+        " "
+      )} | Living Fire Australia`,
+      description: `Explore our premium ${brand.replace(
+        /-/g,
+        " "
+      )} ${product.replace(/-/g, " ")} fireplace at Living Fire.`,
       alternates: {
         canonical: `https://livingfire.com.au/${brand}/${product}`,
       },
       robots: {
         index: false, // Don't index if product not found
         follow: true,
-      }
+      },
     };
   }
 
@@ -191,6 +198,9 @@ export async function generateMetadata({ params }) {
     robots: {
       index: true,
       follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
       nocache: false,
       googleBot: {
         index: true,
@@ -248,8 +258,8 @@ export async function generateMetadata({ params }) {
 
 export async function generateStaticParams() {
   // Generate static paths for all products
-  return allProductsMetaData.map(product => ({
-    brand: product.brand.toLowerCase().replace(/ /g, '-'),
+  return allProductsMetaData.map((product) => ({
+    brand: product.brand.toLowerCase().replace(/ /g, "-"),
     product: product.slug,
   }));
 }

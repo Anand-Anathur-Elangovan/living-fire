@@ -51,7 +51,8 @@ const publicSans = localFont({
 
 export const metadata = {
   title: "Living Fire - Fire Places",
-  description: "Discover premium indoor and outdoor fireplaces at Living Fire. Stylish, efficient, and Australian-designed solutions to warm and elevate your home.",
+  description:
+    "Discover premium indoor and outdoor fireplaces at Living Fire. Stylish, efficient, and Australian-designed solutions to warm and elevate your home.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -59,14 +60,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html 
-      lang="en" 
+    <html
+      lang="en"
       style={{ backgroundColor: "#f7f7f5" }}
       className={`${geistSans.variable} ${geistMono.variable} ${satoru.variable} ${publicSans.variable}`}
     >
       <head>
         <InlineCriticalCSS />
-         <meta name="google-site-verification" content="SLUTUDd4zGYmysqN2rWQooOLlsUXLshc1n-dert7AXU" /> 
+        <meta
+          name="google-site-verification"
+          content="SLUTUDd4zGYmysqN2rWQooOLlsUXLshc1n-dert7AXU"
+        />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
         {/* Font Preloading */}
         <link
           rel="preload"
@@ -110,10 +118,10 @@ export default function RootLayout({ children }) {
           fetchPriority="high"
         />
       </head>
-      
+
       <body className="antialiased">
         {/* Optimized Google Tag Manager */}
-         <Script
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-KYR1VR1063"
           strategy="lazyOnload"
           id="gtm-script"
@@ -146,12 +154,12 @@ export default function RootLayout({ children }) {
               >
                 {children}
               </Suspense>
-              <NewsletterCard/>
+              <NewsletterCard />
               <Footer />
             </div>
           </Providers>
         </NavigationProvider>
-        
+
         <SpeedInsights />
         <Analytics />
       </body>

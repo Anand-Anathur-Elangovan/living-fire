@@ -5,7 +5,7 @@ export const metadata = {
   alternates: {
     canonical: "https://livingfire.com.au/allProducts",
   },
-  robots: "index, follow",
+  robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
   authors: [{ name: "Living Fire Team", url: "https://livingfire.com.au" }],
   publisher: "Living Fire",
 };
