@@ -224,8 +224,8 @@ const Home = () => {
             "@type": "LocalBusiness",
             name: "Living Fire",
             image: [
-              "https://livingfires.com.au/logo.webp", // Convert to WebP
-              "https://livingfires.com.au/assets/homePage/homePageMainImg.webp",
+              "https://livingfire.com.au/logo.webp", // Convert to WebP
+              "https://livingfire.com.au/assets/homePage/homePageMainImg.webp",
             ],
             address: {
               "@type": "PostalAddress",
@@ -609,11 +609,11 @@ const Home = () => {
               item: {
                 "@type": "Product",
                 name: `${brand.title} Fireplace`,
-                url: `https://livingfires.com.au/allProducts/${brand.title.replace(
+                url: `https://livingfire.com.au/allProducts/${brand.title.replace(
                   /\s+/g,
                   "_"
                 )}`,
-                image: `https://livingfires.com.au/assets/homePage/ourBrands/${
+                image: `https://livingfire.com.au/assets/homePage/ourBrands/${
                   brand.imageKey
                 }.${brand.isSvg ? "svg" : "png"}`,
                 description: `Premium ${brand.title} fireplace collection`,

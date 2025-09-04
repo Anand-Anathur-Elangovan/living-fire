@@ -11,7 +11,7 @@
 //       description: `Discover the ${product} by ${brand}, a premium fireplace designed for elegance and performance.`,
 //       keywords: `${product}, ${brand} fireplaces, modern ${product}, luxury fireplaces, ${brand} heating solutions, designer fireplaces`,
 //       alternates: {
-//           canonical: `https://livingfires.com.au/${encodeURIComponent(brand)}/${encodeURIComponent(product)}`,
+//           canonical: `https://livingfire.com.au/${encodeURIComponent(brand)}/${encodeURIComponent(product)}`,
 //       },
 //       robots: "index, follow",
 //   };
@@ -48,7 +48,7 @@
 //   // SEO-optimized strings
 //   const seoTitle = `${productName} | ${brandName} ${category} | Living Fire Australia`;
 //   const seoDescription = `Explore the ${productName} ${category.toLowerCase()} by ${brandName}. ${features.join(", ")}. Premium quality for Australian homes.`;
-//   const canonicalUrl = `https://livingfires.com.au/${encodeURIComponent(brandName.replace(/ /g, "_"))}/${encodeURIComponent(productName.replace(/ /g, "_"))}`;
+//   const canonicalUrl = `https://livingfire.com.au/${encodeURIComponent(brandName.replace(/ /g, "_"))}/${encodeURIComponent(productName.replace(/ /g, "_"))}`;
 
 //   return {
 //     title: seoTitle,
@@ -81,7 +81,7 @@
 //       siteName: "Living Fires",
 //       images: [
 //         {
-//           url: `https://livingfires.com.au/api/og?title=${encodeURIComponent(productName)}&brand=${encodeURIComponent(brandName)}`, // Dynamic OG image
+//           url: `https://livingfire.com.au/api/og?title=${encodeURIComponent(productName)}&brand=${encodeURIComponent(brandName)}`, // Dynamic OG image
 //           width: 1200,
 //           height: 630,
 //           alt: `${productName} by ${brandName}`,
@@ -96,7 +96,7 @@
 //       description: seoDescription,
 //       images: [
 //         {
-//           url: `https://livingfires.com.au/api/og?title=${encodeURIComponent(productName)}&brand=${encodeURIComponent(brandName)}`,
+//           url: `https://livingfire.com.au/api/og?title=${encodeURIComponent(productName)}&brand=${encodeURIComponent(brandName)}`,
 //           alt: `${productName} by ${brandName}`,
 //         },
 //       ],
@@ -169,7 +169,7 @@ export async function generateMetadata({ params }) {
       title: `${product.replace(/-/g, ' ')} | ${brand.replace(/-/g, ' ')} | Living Fire Australia`,
       description: `Explore our premium ${brand.replace(/-/g, ' ')} ${product.replace(/-/g, ' ')} fireplace at Living Fire.`,
       alternates: {
-        canonical: `https://livingfires.com.au/${brand}/${product}`,
+        canonical: `https://livingfire.com.au/${brand}/${product}`,
       },
       robots: {
         index: false, // Don't index if product not found
@@ -178,8 +178,8 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const canonicalUrl = `https://livingfires.com.au/${brand}/${product}`;
-  const imageUrl = `https://livingfires.com.au/image/${product}`;
+  const canonicalUrl = `https://livingfire.com.au/${brand}/${product}`;
+  const imageUrl = `https://livingfire.com.au/image/${product}`;
 
   return {
     title: productMeta.title,

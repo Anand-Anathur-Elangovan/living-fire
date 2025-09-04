@@ -3,10 +3,10 @@ export const metadata = {
   description: "Discover elegance with our luxury fireplaces across Melbourne & Australia. Elevate your home's ambience with our fireplaces. Visit our Richmond showroom today!",
   keywords: "luxury fireplaces Melbourne, European fireplaces, gas fireplaces Melbourne, wood fireplaces, modern fireplaces, custom fireplaces, designer fireplaces, indoor fireplaces, outdoor fireplaces, Living Fire",
   alternates: {
-    canonical: "https://livingfires.com.au/",
+    canonical: "https://livingfire.com.au/",
   },
   robots: "index, follow",
-  authors: [{ name: "Living Fire Team", url: "https://livingfires.com.au" }],
+  authors: [{ name: "Living Fire Team", url: "https://livingfire.com.au" }],
   publisher: "Living Fire",
 };
 import Home from "./home/Home";
@@ -16,9 +16,9 @@ export default function Page() {
     "@type": "LocalBusiness",
     "name": "Living Fire",
     "image": [
-      "https://livingfires.com.au/assets/homePage/rightSideLogo.svg",
-      "https://livingfires.com.au/assets/homePage/homePageMainImg.png", 
-      "https://livingfires.com.au/assets/homePage/collections/collectionsImg1.svg"
+      "https://livingfire.com.au/assets/homePage/rightSideLogo.svg",
+      "https://livingfire.com.au/assets/homePage/homePageMainImg.png", 
+      "https://livingfire.com.au/assets/homePage/collections/collectionsImg1.svg"
     ],
     "priceRange": "$$$",
     "address": {

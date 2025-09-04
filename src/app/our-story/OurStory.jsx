@@ -363,7 +363,7 @@ const OurStory = () => {
             <div className="card-content">
               <div className="columndesc">
                 <p className="desc ui text size-body_medium">
-                  Living Fires journey is a tale of family passion, enduring
+                  Living Fire journey is a tale of family passion, enduring
                   craftsmanship, and an unwavering commitment to quality and
                   innovation. Founded by Paul Agnew, a visionary whose roots in
                   the industry run deep, Living Fire has grown from a small,

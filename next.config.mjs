@@ -5,7 +5,7 @@
 //     domains: [
 //       "living-fire-dev--use1-az4--x-s3.s3express-use1-az4.us-east-1.amazonaws.com",
 //       "23909229.fs1.hubspotusercontent-na1.net",
-//       "www.livingfires.com.au" // Added your domain for local images
+//       "www.livingfire.com.au" // Added your domain for local images
 //     ],
 //     formats: ['image/avif', 'image/webp'], // Modern image formats
 //     minimumCacheTTL: 60 * 60 * 24 * 7, // 1 week cache
@@ -33,7 +33,7 @@
 //           // CORS headers
 //           {
 //             key: "Access-Control-Allow-Origin",
-//             value: process.env.NODE_ENV === 'development' ? "*" : "https://www.livingfires.com.au",
+//             value: process.env.NODE_ENV === 'development' ? "*" : "https://www.livingfire.com.au",
 //           },
 //           {
 //             key: "Access-Control-Allow-Methods",
@@ -145,8 +145,8 @@ const nextConfig = {
     domains: [
       "living-fire-dev--use1-az4--x-s3.s3express-use1-az4.us-east-1.amazonaws.com",
       "23909229.fs1.hubspotusercontent-na1.net",
-      "www.livingfires.com.au",
-      "livingfires.com.au", // Added root domain
+      "www.livingfire.com.au",
+      "livingfire.com.au", // Added root domain
     ],
     formats: ["image/avif", "image/webp"], // Removed avif for wider compatibility
     minimumCacheTTL: 60 * 60 * 24 * 30, // Increased to 30 days
@@ -155,7 +155,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.livingfires.com.au",
+        hostname: "**.livingfire.com.au",
       },
     ],
   },
@@ -202,7 +202,7 @@ const nextConfig = {
             value: "*",
             // process.env.NODE_ENV === 'development'
             //   ? '*'
-            //   : 'https://www.livingfires.com.au'
+            //   : 'https://www.livingfire.com.au'
           },
           {
             key: "Cache-Control",
@@ -309,7 +309,7 @@ const nextConfig = {
   env: {
     SITE_URL:
       process.env.NODE_ENV === "development"
-        ? "https://www.livingfires.com.au"
+        ? "https://www.livingfire.com.au"
         : "http://localhost:3000",
   },
 };

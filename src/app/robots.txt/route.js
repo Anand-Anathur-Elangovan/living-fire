@@ -1,7 +1,7 @@
 // import { NextResponse } from "next/server";
 
 // export function GET() {
-//     const siteUrl = "https://livingfires.com.au";
+//     const siteUrl = "https://livingfire.com.au";
 
 //     const robotsTxt = `
 // # SEO-optimized robots.txt for Living Fires
@@ -63,7 +63,7 @@
 import { NextResponse } from "next/server";
 
 export function GET() {
-    const siteUrl = "https://livingfires.com.au";
+    const siteUrl = "https://livingfire.com.au";
 
     const robotsTxt = `
 User-agent: *

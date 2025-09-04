@@ -3,10 +3,10 @@ export const metadata = {
   description: "Submit your warranty request for Living Fire products. Our team ensures a smooth process for claiming coverage on your premium fireplace.",
   keywords: "warranty request, Living Fire warranty, fireplace warranty, product warranty claim, service request, warranty support",
   alternates: {
-    canonical: "https://livingfires.com.au/warranty",
+    canonical: "https://livingfire.com.au/warranty",
   },
   robots: "index, follow",
-  authors: [{ name: "Living Fire Team", url: "https://livingfires.com.au" }],
+  authors: [{ name: "Living Fire Team", url: "https://livingfire.com.au" }],
   publisher: "Living Fire",
 };
 

@@ -866,7 +866,7 @@ async function getAllPages() {
 // Helper function to verify images with Googlebot
 
 export async function GET() {
-  const siteUrl = "https://livingfires.com.au";
+  const siteUrl = "https://livingfire.com.au";
   const lastModDate = new Date().toISOString().split("T")[0];
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>

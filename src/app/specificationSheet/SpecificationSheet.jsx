@@ -18,7 +18,7 @@
 // //   title: "Specification Sheet",
 // //   description: "Find detailed specifications for all products available at Living Fire.",
 // //   alternates: {
-// //     canonical: "https://livingfires.com.au/specificationSheet",
+// //     canonical: "https://livingfire.com.au/specificationSheet",
 // //   },
 // // };
 // // const SpecificationSheet = () => {

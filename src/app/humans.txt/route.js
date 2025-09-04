@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export function GET() {
     const humansTxt = `
 /* TEAM */
-Owner: Living Fires
+Owner: Living Fire
 Technical Director: [Name]
 Marketing Director: [Name]
 Designer: [Name]
@@ -20,13 +20,13 @@ Software: VSCode, GitHub, Figma
 Special thanks to our customers and partners who make this possible.
 
 /* CONTACT */
-Email: info@livingfires.com.au
+Email: info@livingfire.com.au
 Phone: +61 3 XXXX XXXX
 Address: [Your Business Address]
-Twitter: @LivingFiresAU
-Facebook: https://www.facebook.com/LivingFiresAU
-Instagram: https://www.instagram.com/LivingFiresAU
-LinkedIn: https://www.linkedin.com/company/LivingFiresAU
+Twitter: @livingfireAU
+Facebook: https://www.facebook.com/livingfireAU
+Instagram: https://www.instagram.com/livingfireAU
+LinkedIn: https://www.linkedin.com/company/livingfireAU
 `.trim();
 
     return new NextResponse(humansTxt, {

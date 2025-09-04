@@ -66,8 +66,7 @@ export default function RootLayout({ children }) {
     >
       <head>
         <InlineCriticalCSS />
-         <meta name="robots" content="noindex" />
-         {/* <meta name="google-site-verification" content="SLUTUDd4zGYmysqN2rWQooOLlsUXLshc1n-dert7AXU" /> */}
+         <meta name="google-site-verification" content="SLUTUDd4zGYmysqN2rWQooOLlsUXLshc1n-dert7AXU" /> 
         {/* Font Preloading */}
         <link
           rel="preload"
@@ -115,7 +114,7 @@ export default function RootLayout({ children }) {
       <body className="antialiased">
         {/* Optimized Google Tag Manager */}
          <Script
-          src="https://www.googletagmanager.com/gtag/js?id=KYR1VR1063"
+          src="https://www.googletagmanager.com/gtag/js?id=G-KYR1VR1063"
           strategy="lazyOnload"
           id="gtm-script"
         />
@@ -127,7 +126,7 @@ export default function RootLayout({ children }) {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'KYR1VR1063', {
+              gtag('config', 'G-KYR1VR1063', {
                 page_path: window.location.pathname,
               });
             `,

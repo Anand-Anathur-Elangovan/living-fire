@@ -10,7 +10,7 @@
     "optimize-images": "node scripts/optimize-images.js",
     "prebuild": "npm run optimize-images && npm run lint",
     "export": "next export",
-    "test:perf": "lighthouse https://www.livingfires.com.au --view --output=json --output-path=./lighthouse-report.json",
+    "test:perf": "lighthouse https://www.livingfire.com.au --view --output=json --output-path=./lighthouse-report.json",
     "optimize-svgs": "svgo -f public/ -r -q",
     "check-seo": "npm run build && npm run export"
   },

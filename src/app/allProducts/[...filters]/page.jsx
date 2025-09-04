@@ -15,7 +15,7 @@ const specialCombinationsMetaData = [
     keywords: [
       "three sided wood fireplace",
       "panoramic wood burner",
-      "living fires australia",
+      "living fire australia",
     ],
     ogImage: "/og/three-sided-wood.jpg",
   },
@@ -27,7 +27,7 @@ const specialCombinationsMetaData = [
     keywords: [
       "double sided wood fireplace",
       "room divider fireplace",
-      "living fires australia",
+      "living fire australia",
     ],
     ogImage: "/og/two-sided-wood.jpg",
   },
@@ -39,7 +39,7 @@ const specialCombinationsMetaData = [
     keywords: [
       "built in wood fireplace",
       "custom fireplace installation",
-      "living fires australia",
+      "living fire australia",
     ],
     ogImage: "/og/inbuilt-wood.jpg",
   },
@@ -475,10 +475,10 @@ export async function generateMetadata({ params }) {
     title: "Luxury Fireplace Collection | Living Fire Australia",
     description:
       "Australia's finest fireplace selection. Gas, wood & electric models with expert installation.",
-    alternates: { canonical: "https://livingfires.com.au/allProducts" },
+    alternates: { canonical: "https://livingfire.com.au/allProducts" },
     robots: { index: true, follow: true },
     openGraph: {
-      images: [{ url: "https://livingfires.com.au/og/default-fireplaces.jpg" }],
+      images: [{ url: "https://livingfire.com.au/og/default-fireplaces.jpg" }],
     },
     twitter: {
       card: "summary_large_image",
@@ -495,7 +495,7 @@ export async function generateMetadata({ params }) {
   if (specialCombinationsMap.has(sortedKey)) {
     const { title, description, keywords, ogImage } =
       specialCombinationsMap.get(sortedKey);
-    const canonicalUrl = `https://livingfires.com.au/allProducts/${params.filters.join(
+    const canonicalUrl = `https://livingfire.com.au/allProducts/${params.filters.join(
       "/"
     )}`;
 
@@ -508,14 +508,14 @@ export async function generateMetadata({ params }) {
         title,
         description,
         url: canonicalUrl,
-        images: [{ url: `https://livingfires.com.au${ogImage}` }],
+        images: [{ url: `https://livingfire.com.au${ogImage}` }],
         siteName: "Living Fire",
       },
       twitter: {
         card: "summary_large_image",
         title,
         description,
-        images: [`https://livingfires.com.au${ogImage}`],
+        images: [`https://livingfire.com.au${ogImage}`],
       },
     };
   }
@@ -536,7 +536,7 @@ export async function generateMetadata({ params }) {
     normalizedFilters,
     matchedMetadata
   );
-  const canonicalUrl = `https://livingfires.com.au/allProducts/${params.filters.join(
+  const canonicalUrl = `https://livingfire.com.au/allProducts/${params.filters.join(
     "/"
   )}`;
   const ogImage = matchedMetadata[0]?.ogImage || "/og/default-fireplaces.jpg";
@@ -550,14 +550,14 @@ export async function generateMetadata({ params }) {
       title,
       description,
       url: canonicalUrl,
-      images: [{ url: `https://livingfires.com.au${ogImage}` }],
+      images: [{ url: `https://livingfire.com.au${ogImage}` }],
       siteName: "Living Fire",
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [`https://livingfires.com.au${ogImage}`],
+      images: [`https://livingfire.com.au${ogImage}`],
     },
   };
 }
