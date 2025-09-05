@@ -51,7 +51,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       title: "Ilektro 1250",
       range: "Paul Agnew Designs",
       description:
-        "Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+        "Ilektro 1250 Landscape Tunnel by Paul Agnew Designs with lifelike flame effect and efficient heating. Premium electric fireplace offering realistic flame effect and reliable energy-efficient heating",
       name: "Ilektro 1250 Landscape Tunnel",
       brand_name: "Paul Agnew Designs",
     },
@@ -61,7 +61,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       title: "Ilektro 2600",
       range: "Paul Agnew Designs",
       description:
-        "Large format electric fire with stunning visual effects.Premium electric fire with realistic flame effect and efficient heating.Premium electric fire with realistic flame effect and efficient heating.Premium electric fire with realistic flame effect and efficient heating",
+        "Ilektro 2600 Landscape from Paul Agnew Designs with premium design, realistic flame effect and efficient heating. Premium electric fireplace offering realistic flame effect and reliable energy-efficient heating",
       name: "Ilektro 2600 Landscape",
       brand_name: "Paul Agnew Designs",
     },
@@ -71,7 +71,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       title: "HZO42 - Outdoor - LPG",
       range: "Regency",
       description:
-      "Contemporary Linear Outdoor Gas All of the sophisticated, contemporary styling and quality workmanship is mirrored in this dramatic outdoor fireplace. This fireplace delivers beautiful wide angle flames amplified by a reflective stainless steel body and picture frame faceplate. ",
+      "Regency HZO42 delivers stunning outdoor fire design with reflective stainless steel body and picture frame faceplate. Outdoor linear gas fire combining modern style, durability, and exceptional flame presentation",
         // "Sleek integrated design with advanced heating technology, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
       name: "HZO42 - Outdoor - LPG",
       brand_name: "Regency",
@@ -82,7 +82,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       title: "Pyro Siena 750GF Freestanding",
       range: "Paul Agnew Designs",
       description:
-        "Freestanding gas fire with elegant traditional styling, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+        "Paul Agnew Designs Siena 750GF blends classic charm with efficient, modern heating. Stylish freestanding gas fireplace offering timeless design and reliable warmth.",
       name: "siena-750-g4-freestanding",
       brand_name: "Paul Agnew Designs",
     },
@@ -92,7 +92,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       title: "Heatmaster Seamless",
       range: "Heatmaster",
       description:
-        "Modern seamless design with powerful heat output, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+        "Heatmaster Seamless combines minimalist design with exceptional heating performance. Contemporary gas fire offering clean lines, premium build quality, and efficient heating.",
       name: "seamless-body",
       brand_name: "Heatmaster",
     },
@@ -102,7 +102,7 @@ const Featured = ({ headingValue, productRouteHandler, name, brand_name }) => {
       title: "Regency FG39",
       range: "Regency",
       description:
-        "High-efficiency gas fireplace with realistic log set, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating, Premium electric fire with realistic flame effect and efficient heating",
+        "Regency FG39 delivers powerful heating performance with timeless traditional design. Premium gas fire combining efficiency, authentic log visuals, and reliable warmth.",
       name: "FG39",
       brand_name: "Regency",
     },
