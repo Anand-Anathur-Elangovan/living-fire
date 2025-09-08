@@ -176,7 +176,7 @@ export async function generateMetadata({ params }) {
         " "
       )} ${product.replace(/-/g, " ")} fireplace at Living Fire.`,
       alternates: {
-        canonical: `https://livingfire.com.au/${brand}/${product}`,
+        canonical: `https://www.livingfire.com.au/${brand}/${product}`,
       },
       robots: {
         index: false, // Don't index if product not found
@@ -185,7 +185,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const canonicalUrl = `https://livingfire.com.au/${brand}/${product}`;
+  const canonicalUrl = `https://www.livingfire.com.au/${brand}/${product}`;
   const imageUrl = `https://livingfire.com.au/image/${product}`;
 
   return {

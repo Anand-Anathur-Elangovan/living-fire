@@ -691,7 +691,7 @@ export async function generateMetadata({ params }) {
     title: "Luxury Fireplace Collection | Living Fire Australia",
     description:
       "Australia's finest fireplace selection. Gas, wood & electric models with expert installation.",
-    alternates: { canonical: "https://livingfire.com.au/allProducts" },
+    alternates: { canonical: "https://www.livingfire.com.au/allProducts" },
     robots: {
       index: true,
       follow: true,
@@ -717,7 +717,7 @@ export async function generateMetadata({ params }) {
   if (specialCombinationsMap.has(sortedKey)) {
     const { title, description, keywords, ogImage } =
       specialCombinationsMap.get(sortedKey);
-    const canonicalUrl = `https://livingfire.com.au/allProducts/${params.filters.join(
+    const canonicalUrl = `https://www.livingfire.com.au/allProducts/${params.filters.join(
       "/"
     )}`;
 
@@ -765,7 +765,7 @@ export async function generateMetadata({ params }) {
     normalizedFilters,
     matchedMetadata
   );
-  const canonicalUrl = `https://livingfire.com.au/allProducts/${params.filters.join(
+  const canonicalUrl = `https://www.livingfire.com.au/allProducts/${params.filters.join(
     "/"
   )}`;
   const ogImage = matchedMetadata[0]?.ogImage || "/og/default-fireplaces.jpg";

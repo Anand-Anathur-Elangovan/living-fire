@@ -9,7 +9,7 @@ export const metadata = {
   keywords:
     "Living Fire terms, terms and conditions, fireplace purchase policy, warranty terms, service terms, legal agreement",
   alternates: {
-    canonical: "https://livingfire.com.au/terms",
+    canonical: "https://www.livingfire.com.au/terms",
   },
   robots: "index, follow",
   authors: [
