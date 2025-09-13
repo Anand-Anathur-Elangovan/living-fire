@@ -202,6 +202,7 @@ const Product = ({ params }) => {
             }}
             setIsAdmin={setIsAdmin}
             isAdmin={isAdmin}
+            ptype_name={ptype_name}
           />
         </div>
         <div className="second-container">
@@ -215,6 +216,9 @@ const Product = ({ params }) => {
             setActiveTab={setActiveTab}
             setIsAccessories={setIsAccessories}
             ref={downloadSectionRef}
+            isAdmin={isAdmin} 
+            p_id={p_id}
+            ptype_name={ptype_name}
           />
           <Featured
             headingValue={"You May Also Like"}
