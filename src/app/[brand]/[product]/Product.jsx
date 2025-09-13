@@ -202,6 +202,7 @@ const Product = ({ params }) => {
             }}
             setIsAdmin={setIsAdmin}
             isAdmin={isAdmin}
+            ptype_name={ptype_name}
           />
         </div>
         <div className="second-container">

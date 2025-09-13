@@ -95,13 +95,22 @@
   accent-color: black;
   position: relative;
   gap: 16px;
+  cursor: pointer;
+  /* width: 100%;  */
+  width: 100%; /* Ensure full width */
+  margin-bottom: 8px;
+  padding: 8px;
 }
 
 .option input {
   cursor: pointer;
   transform: scale(1.5);
 }
-
+.materialOptionsRow .option {
+  width: auto; /* Override for material options */
+  flex-direction: column;
+  /* ... other material-specific styles ... */
+}
 .imageOptions {
   display: flex;
   gap: 15px;
