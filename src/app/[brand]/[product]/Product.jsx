@@ -215,6 +215,9 @@ const Product = ({ params }) => {
             setActiveTab={setActiveTab}
             setIsAccessories={setIsAccessories}
             ref={downloadSectionRef}
+            isAdmin={isAdmin} 
+            p_id={p_id}
+            ptype_name={ptype_name}
           />
           <Featured
             headingValue={"You May Also Like"}
