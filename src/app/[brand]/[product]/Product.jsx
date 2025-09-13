@@ -84,7 +84,23 @@ const Product = ({ params }) => {
     setProductData(data?.product?.[0]);
   }, [data]);
 
+ const [isAdmin, setIsAdmin] = useState(false);
 
+  useEffect(() => {
+    // Check sessionStorage for admin credentials
+    const HARDCODED_ADMIN_USERNAME = "admin";
+    const HARDCODED_ADMIN_PASSWORD = "password123";
+    const storedUsername = typeof window !== 'undefined' ? sessionStorage.getItem("adminUsername") : null;
+    const storedPassword = typeof window !== 'undefined' ? sessionStorage.getItem("adminPassword") : null;
+    if (
+      storedUsername == HARDCODED_ADMIN_USERNAME &&
+      storedPassword == HARDCODED_ADMIN_PASSWORD
+    ) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, []);
 
   if (!productData) return <Loader />;
   // <p>Loading...</p>;
@@ -103,7 +119,8 @@ const Product = ({ params }) => {
     fueltype_id,
     brand_id,
     p_sku,
-    p_id
+    p_id, 
+    catalogue_image
   } = productData;
 
 
@@ -130,6 +147,8 @@ const Product = ({ params }) => {
     downloadSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  
+
   return (
     <section>
       <div className="stackview">
@@ -152,9 +171,14 @@ const Product = ({ params }) => {
               brandName={brand_name}
               src={hero_image}
               alt="Product Hero Image"
+              setIsAdmin={setIsAdmin}
+            isAdmin={isAdmin} p_id={p_id}
+            ptype_name={ptype_name}
+            catalogue_image={catalogue_image}
             />
           </div>
-          {product_desc && <DescriptionColumn product_desc={product_desc} descriptionColumnHeight={descriptionColumnHeight} setDescriptionColumn={setDescriptionColumn} />}
+          {product_desc && <DescriptionColumn product_desc={product_desc} descriptionColumnHeight={descriptionColumnHeight} setDescriptionColumn={setDescriptionColumn} setIsAdmin={setIsAdmin}
+            isAdmin={isAdmin} p_id={p_id} />}
 
           <ProductOptions
             ref={productOptionsRef}
@@ -176,11 +200,14 @@ const Product = ({ params }) => {
                 window.location.reload();
               }
             }}
+            setIsAdmin={setIsAdmin}
+            isAdmin={isAdmin}
           />
         </div>
         <div className="second-container">
           {/* {short_desc && <MaterialFinishOptions short_desc={short_desc} />} */}
-          {specifications && <Specifications specifications={specifications} />}
+          {specifications && <Specifications specifications={specifications} setIsAdmin={setIsAdmin}
+            isAdmin={isAdmin} p_id={p_id}/>}
           <DownloadSection
             product_details={product_details}
             openDrawer={openDrawer}
