@@ -40,7 +40,9 @@ const ProductOptions = ({
   productOptionsHeight,
   setProductOptionsHeight,
   p_id,
-  onProductUpdate
+  onProductUpdate,
+  setIsAdmin,
+  isAdmin,
 }) => {
   // Hardcoded admin credentials
   
@@ -70,23 +72,7 @@ const ProductOptions = ({
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 // Admin check state
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    // Check sessionStorage for admin credentials
-    const HARDCODED_ADMIN_USERNAME = "admin";
-    const HARDCODED_ADMIN_PASSWORD = "password123";
-    const storedUsername = typeof window !== 'undefined' ? sessionStorage.getItem("adminUsername") : null;
-    const storedPassword = typeof window !== 'undefined' ? sessionStorage.getItem("adminPassword") : null;
-    if (
-      storedUsername == HARDCODED_ADMIN_USERNAME &&
-      storedPassword == HARDCODED_ADMIN_PASSWORD
-    ) {
-      setIsAdmin(true);
-    } else {
-      setIsAdmin(false);
-    }
-  }, []);
+ 
   // Ref for root element to measure height
   const containerRef = useRef(null);
 
