@@ -30,7 +30,7 @@ const HeroImage = ({ productName, brandName, src, alt, isAdmin, p_id, ptype_name
   const images = editMode
     ? (Array.isArray(heroImages) && heroImages.length > 0 ? heroImages : [{ value: "" }])
     : (Array.isArray(src) && src.length > 1
-      ? src
+      ? src 
       : [
           { value: src?.[0]?.value },
           { value: src?.[0]?.value },
