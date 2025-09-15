@@ -54,44 +54,53 @@ const Product = ({ params }) => {
     async function fetchParams() {
       if (params) {
         const resolvedParams = await params;
-        const formattedProduct = decodeURIComponent(resolvedParams?.product?.replace(/_/g, " "));
+        const formattedProduct = decodeURIComponent(
+          resolvedParams?.product?.replace(/_/g, " ")
+        );
         setUnwrappedParams(formattedProduct);
       }
     }
     fetchParams();
   }, [params]);
   useEffect(() => {
-    if (window?.innerWidth > 768) { 
-       if (
+    if (window?.innerWidth > 768) {
+      if (
         productOptionsHeight > descriptionColumnHeight &&
-        (productOptionsHeight - 450) > descriptionColumnHeight
+        productOptionsHeight - 450 > descriptionColumnHeight
       ) {
-        const padValue = ((productOptionsHeight-450) - descriptionColumnHeight)+10;
-        const topContainer = document.querySelector('.top-container');
+        const padValue =
+          productOptionsHeight - 450 - descriptionColumnHeight + 10;
+        const topContainer = document.querySelector(".top-container");
         if (topContainer) {
           topContainer.style.paddingBottom = `${padValue}px`;
         }
       }
     }
   }, [productOptionsHeight, descriptionColumnHeight]);
-   
+
   // const state = getNavigationState();
-  console.log("params in product page", unwrappedParams);
+  // console.log("params in product page", unwrappedParams);
   let { data } = useProductPage(unwrappedParams);
 
   useEffect(() => {
-    console.log("data?.product?.[0]",data?.product?.[0])
+    // console.log("data?.product?.[0]", data?.product?.[0]);
     setProductData(data?.product?.[0]);
   }, [data]);
 
- const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     // Check sessionStorage for admin credentials
     const HARDCODED_ADMIN_USERNAME = "admin";
     const HARDCODED_ADMIN_PASSWORD = "password123";
-    const storedUsername = typeof window !== 'undefined' ? sessionStorage.getItem("adminUsername") : null;
-    const storedPassword = typeof window !== 'undefined' ? sessionStorage.getItem("adminPassword") : null;
+    const storedUsername =
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("adminUsername")
+        : null;
+    const storedPassword =
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("adminPassword")
+        : null;
     if (
       storedUsername == HARDCODED_ADMIN_USERNAME &&
       storedPassword == HARDCODED_ADMIN_PASSWORD
@@ -119,35 +128,38 @@ const Product = ({ params }) => {
     fueltype_id,
     brand_id,
     p_sku,
-    p_id, 
-    catalogue_image
+    p_id,
+    catalogue_image,
+    range_id,
+    is_active,
+    installation_id,
+    glass_orientation_ids,
+    brand_slug,
+    product_slug,
   } = productData;
 
-
   const productRouteHandler = (productName, brandName) => {
-      const formattedProductName = productName.replace(/\s+/g, "_");
-      const formattedBrandName = brandName.replace(/\s+/g, "_");
-      // setCookie(
-      //   "selectedProduct",
-      //   productName
-        //   , {
-        //   path: "/", // Cookie available site-wide
-        //   secure: true, // Only sent over HTTPS
-        //   httpOnly: true, // Prevents client-side JS from accessing it
-        //   sameSite: "strict", // Only sent for same-site requests
-        //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
-        // }
-      // );
-      setCookie("selectedProduct", formattedProductName);
-      setCookie("selectedBrand", formattedBrandName);
-      router.push(`/${formattedBrandName}/${formattedProductName}`);
-    };
+    const formattedProductName = productName.replace(/\s+/g, "_");
+    const formattedBrandName = brandName.replace(/\s+/g, "_");
+    // setCookie(
+    //   "selectedProduct",
+    //   productName
+    //   , {
+    //   path: "/", // Cookie available site-wide
+    //   secure: true, // Only sent over HTTPS
+    //   httpOnly: true, // Prevents client-side JS from accessing it
+    //   sameSite: "strict", // Only sent for same-site requests
+    //   maxAge: 60 * 60 * 24, // Cookie expiry (1 day in seconds)
+    // }
+    // );
+    setCookie("selectedProduct", formattedProductName);
+    setCookie("selectedBrand", formattedBrandName);
+    router.push(`/${formattedBrandName}/${formattedProductName}`);
+  };
   const handleViewAllAccessories = () => {
     setActiveTab("Accessories");
     downloadSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
-  
 
   return (
     <section>
@@ -172,13 +184,22 @@ const Product = ({ params }) => {
               src={hero_image}
               alt="Product Hero Image"
               setIsAdmin={setIsAdmin}
-            isAdmin={isAdmin} p_id={p_id}
-            ptype_name={ptype_name}
-            catalogue_image={catalogue_image}
+              isAdmin={isAdmin}
+              p_id={p_id}
+              ptype_name={ptype_name}
+              catalogue_image={catalogue_image}
             />
           </div>
-          {product_desc && <DescriptionColumn product_desc={product_desc} descriptionColumnHeight={descriptionColumnHeight} setDescriptionColumn={setDescriptionColumn} setIsAdmin={setIsAdmin}
-            isAdmin={isAdmin} p_id={p_id} />}
+          {product_desc && (
+            <DescriptionColumn
+              product_desc={product_desc}
+              descriptionColumnHeight={descriptionColumnHeight}
+              setDescriptionColumn={setDescriptionColumn}
+              setIsAdmin={setIsAdmin}
+              isAdmin={isAdmin}
+              p_id={p_id}
+            />
+          )}
 
           <ProductOptions
             ref={productOptionsRef}
@@ -195,20 +216,34 @@ const Product = ({ params }) => {
             p_id={p_id}
             onProductUpdate={() => {
               // refetch useProductPage
-              if (typeof window !== 'undefined' && window.location) {
+              if (typeof window !== "undefined" && window.location) {
                 // force a soft reload to trigger SWR/React Query refetch
-                window.location.reload();
+                // window.location.reload();
               }
             }}
             setIsAdmin={setIsAdmin}
             isAdmin={isAdmin}
             ptype_name={ptype_name}
+            fueltype_id={fueltype_id}
+            brand_id={brand_id}
+            range_id={range_id}
+            is_active={is_active}
+            installation_id={installation_id}
+            glass_orientation_ids={glass_orientation_ids}
+            brand_slug={brand_slug}
+            product_slug={product_slug}
           />
         </div>
         <div className="second-container">
           {/* {short_desc && <MaterialFinishOptions short_desc={short_desc} />} */}
-          {specifications && <Specifications specifications={specifications} setIsAdmin={setIsAdmin}
-            isAdmin={isAdmin} p_id={p_id}/>}
+          {specifications && (
+            <Specifications
+              specifications={specifications}
+              setIsAdmin={setIsAdmin}
+              isAdmin={isAdmin}
+              p_id={p_id}
+            />
+          )}
           <DownloadSection
             product_details={product_details}
             openDrawer={openDrawer}
@@ -216,7 +251,7 @@ const Product = ({ params }) => {
             setActiveTab={setActiveTab}
             setIsAccessories={setIsAccessories}
             ref={downloadSectionRef}
-            isAdmin={isAdmin} 
+            isAdmin={isAdmin}
             p_id={p_id}
             ptype_name={ptype_name}
           />
@@ -229,7 +264,7 @@ const Product = ({ params }) => {
           {/* <OurDifference /> */}
           {/* <OurShowrooms /> */}
           {/* <LowerArea/> */}
-        <Showrooms/>
+          <Showrooms />
           <EnquiryFormModal
             isOpen={isModalOpen}
             onClose={closeModal}
@@ -247,7 +282,6 @@ const Product = ({ params }) => {
         </div>
       </div>
     </section>
-
   );
 };
 
