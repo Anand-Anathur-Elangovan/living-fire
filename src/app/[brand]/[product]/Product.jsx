@@ -79,11 +79,11 @@ const Product = ({ params }) => {
   }, [productOptionsHeight, descriptionColumnHeight]);
 
   // const state = getNavigationState();
-  console.log("params in product page", unwrappedParams);
+  // console.log("params in product page", unwrappedParams);
   let { data } = useProductPage(unwrappedParams);
 
   useEffect(() => {
-    console.log("data?.product?.[0]", data?.product?.[0]);
+    // console.log("data?.product?.[0]", data?.product?.[0]);
     setProductData(data?.product?.[0]);
   }, [data]);
 
@@ -218,7 +218,7 @@ const Product = ({ params }) => {
               // refetch useProductPage
               if (typeof window !== "undefined" && window.location) {
                 // force a soft reload to trigger SWR/React Query refetch
-                window.location.reload();
+                // window.location.reload();
               }
             }}
             setIsAdmin={setIsAdmin}
