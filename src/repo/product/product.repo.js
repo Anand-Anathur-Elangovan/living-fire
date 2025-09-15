@@ -35,7 +35,13 @@ export const getProductPage = async (productName) => {
         specifications,
         brand_id, 
         product_slug,
-        catalogue_image
+        catalogue_image,
+        fueltype_id, 
+        range_id,
+        is_active,
+        installation_id,
+        glass_orientation_ids,
+        brand_slug
       FROM tbl_master
        WHERE is_active = true AND product_slug = $1;`, 
       [productName] // Passing productName as a parameter

@@ -9,6 +9,7 @@ import "lightgallery/css/lg-zoom.css";
 import "lightgallery/css/lg-fullscreen.css";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { generateSlug } from "@/src/helper/slug/slug";
 
 const LightGallery = dynamic(() => import("lightgallery/react"), {
   ssr: false,
@@ -44,6 +45,14 @@ const ProductOptions = ({
   setIsAdmin,
   isAdmin,
   ptype_name,
+  brand_id,
+  fueltype_id,
+  range_id,
+  is_active,
+  installation_id,
+  glass_orientation_ids,
+  brand_slug,
+  product_slug
 }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [totalPrice, setTotalPrice] = useState(price);
