@@ -200,6 +200,19 @@ const handleScroll = () => {
     }
   }, [shouldAnimate]);
 
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+
+  // Check admin session on mount
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem("adminUsername");
+    const storedPass = sessionStorage.getItem("adminPassword");
+    if (storedUser === "admin" && storedPass === "password123") {
+      setIsAdminLoggedIn(true);
+    } else {
+      setIsAdminLoggedIn(false);
+    }
+  }, []);
+
   const menuItems = [
     {
       title: "Fireplaces",
@@ -254,11 +267,30 @@ const handleScroll = () => {
         { title: "Warranty & Servicing", href: "/warranty/" },
       ],
     },
-    {
-      title: "Admin Login",
-      subItems: [],
-      isAdmin: true,
-    },
+    ...(
+      isAdminLoggedIn
+        ? [
+            {
+              title: "Admin Logout",
+              subItems: [],
+              isAdmin: true,
+              isLogout: true,
+            },
+            {
+              title: "Add Product",
+              subItems: [],
+              isAdmin: true,
+              isAddProduct: true,
+            },
+          ]
+        : [
+            {
+              title: "Admin Login",
+              subItems: [],
+              isAdmin: true,
+            },
+          ]
+    ),
   ];
   // Admin Login Modal State
   const [showAdminModal, setShowAdminModal] = useState(false);
@@ -272,14 +304,18 @@ const handleScroll = () => {
       setAdminError("Please enter both username and password.");
       return;
     }
-    // Save to sessionStorage
-    sessionStorage.setItem("adminUsername", adminUsername);
-    sessionStorage.setItem("adminPassword", adminPassword);
-    setShowAdminModal(false);
-    setAdminUsername("");
-    setAdminPassword("");
-    setAdminError("");
-    alert("Admin login successful!");
+    if (adminUsername === "admin" && adminPassword === "password123") {
+      sessionStorage.setItem("adminUsername", adminUsername);
+      sessionStorage.setItem("adminPassword", adminPassword);
+      setShowAdminModal(false);
+      setAdminUsername("");
+      setAdminPassword("");
+      setAdminError("");
+      setIsAdminLoggedIn(true);
+      alert("Admin login successful!");
+    } else {
+      setAdminError("Wrong username or password");
+    }
   };
   const bottomMenuItems = [
     // { title: "About Us", href: "/our-story/" },
@@ -381,8 +417,25 @@ const handleScroll = () => {
 // console.log("color", color)
   return (
     <>
+      {/* Admin controls: login/logout/add product */}
+      {/* <div style={{display:'flex',flexDirection:'column',gap:8,marginTop:8,marginLeft:16,justifyContent:'flex-start',position:'absolute',zIndex:1000}}>
+        {!isAdminLoggedIn && (
+          <button style={{padding:'4px 12px', fontSize:14, borderRadius:4, border:'1px solid #ccc', background:'#f5f5f5', cursor:'pointer'}} onClick={()=>setShowAdminModal(true)}>Admin Login</button>
+        )}
+        {isAdminLoggedIn && (
+          <>
+            <button style={{padding:'4px 12px', fontSize:14, borderRadius:4, border:'1px solid #e00', background:'#fff', color:'#e00', cursor:'pointer', marginBottom:4}} onClick={()=>{
+              sessionStorage.clear();
+              localStorage.clear();
+              setIsAdminLoggedIn(false);
+              window.location.reload();
+            }}>Admin Logout</button>
+            <button style={{padding:'4px 12px', fontSize:14, borderRadius:4, border:'1px solid #1741be', background:'#1741be', color:'#fff', cursor:'pointer'}} onClick={()=>router.push('/add-product')}>Add Product</button>
+          </>
+        )}
+      </div> */}
       {!showMenu && (
-        <header className={headerClasses.join(" ")}>
+        <header className={headerClasses.join(" ")}> 
           <div className="image-container" style={{ display: "flex" }}>
             {isMobile ? (
               <Image
@@ -666,25 +719,76 @@ const handleScroll = () => {
               <React.Fragment key={item.title}>
                 <ListItem disablePadding>
                   {item.isAdmin ? (
-                    <ListItemButton
-                      onClick={() => setShowAdminModal(true)}
-                      sx={{
-                        padding: "12px 0",
-                        borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-                        "&:hover": {
-                          backgroundColor: "rgba(255, 255, 255, 0.05)",
-                        },
-                      }}
-                    >
-                      <ListItemText
-                        primary={item.title}
-                        primaryTypographyProps={{
-                          fontSize: "1.3rem",
-                          fontWeight: "medium",
-                          paddingLeft: "10px",
+                    item.isLogout ? (
+                      <ListItemButton
+                        onClick={() => {
+                          sessionStorage.clear();
+                          localStorage.clear();
+                          setIsAdminLoggedIn(false);
+                          window.location.reload();
                         }}
-                      />
-                    </ListItemButton>
+                        sx={{
+                          padding: "12px 0",
+                          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                          color: "#e00",
+                          fontWeight: "bold",
+                          "&:hover": {
+                            backgroundColor: "rgba(255, 0, 0, 0.08)",
+                          },
+                        }}
+                      >
+                        <ListItemText
+                          primary={item.title}
+                          primaryTypographyProps={{
+                            fontSize: "1.3rem",
+                            fontWeight: "medium",
+                            paddingLeft: "10px",
+                          }}
+                        />
+                      </ListItemButton>
+                    ) : item.isAddProduct ? (
+                      <ListItemButton
+                        onClick={() => router.push('/add-product')}
+                        sx={{
+                          padding: "12px 0",
+                          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                          color: "#1741be",
+                          fontWeight: "bold",
+                          "&:hover": {
+                            backgroundColor: "rgba(23, 65, 190, 0.08)",
+                          },
+                        }}
+                      >
+                        <ListItemText
+                          primary={item.title}
+                          primaryTypographyProps={{
+                            fontSize: "1.3rem",
+                            fontWeight: "medium",
+                            paddingLeft: "10px",
+                          }}
+                        />
+                      </ListItemButton>
+                    ) : (
+                      <ListItemButton
+                        onClick={() => setShowAdminModal(true)}
+                        sx={{
+                          padding: "12px 0",
+                          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                          "&:hover": {
+                            backgroundColor: "rgba(255, 255, 255, 0.05)",
+                          },
+                        }}
+                      >
+                        <ListItemText
+                          primary={item.title}
+                          primaryTypographyProps={{
+                            fontSize: "1.3rem",
+                            fontWeight: "medium",
+                            paddingLeft: "10px",
+                          }}
+                        />
+                      </ListItemButton>
+                    )
                   ) : (
                     <>
                       <ListItemButton
