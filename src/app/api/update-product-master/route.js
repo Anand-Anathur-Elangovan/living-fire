@@ -297,7 +297,7 @@ export async function PUT(req) {
 
       if (range_id !== undefined) {
         masterFields.push(`range_id = $${masterParamIndex}`);
-        masterValues.push(range_id);
+        masterValues.push(range_id === ""? null : range_id);
         masterParamIndex++;
       }
 
