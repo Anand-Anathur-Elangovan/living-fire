@@ -145,7 +145,7 @@ const ProductEditForm = forwardRef(
             fueltype_id: fueltypeId,
             glass_orientation_ids: glassOrientationIds,
             installation_id: installationId,
-            range_id: rangeId,
+            range_id: rangeId ===""? null: rangeId,
             ptype_name: ptypeName,
             product_slug: productSlug,
             brand_slug: brandSlug,
