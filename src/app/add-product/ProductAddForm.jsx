@@ -36,6 +36,7 @@ const ProductAddForm = ({ onSave, onCancel }) => {
   ]);
 
   // Add this state declaration near your other state variables
+  const [newSpecType, setNewSpecType] = useState("energy");
   const [specifications, setSpecifications] = useState([
     {
       spec_name: "",
@@ -151,13 +152,18 @@ const ProductAddForm = ({ onSave, onCancel }) => {
   };
 
   // Validate JSON fields
-  const isValidJson = (jsonString) => {
-    try {
-      JSON.parse(jsonString);
-      return true;
-    } catch (e) {
-      return false;
+  const isValidJson = (input) => {
+    if (typeof input === "string") {
+      try {
+        JSON.parse(input);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    } else if (typeof input === "object" && input !== null) {
+      return true; // already a JSON object
     }
+    return false; // anything else (e.g. number, boolean, null, undefined)
   };
 
   // Handle form submission
@@ -168,6 +174,15 @@ const ProductAddForm = ({ onSave, onCancel }) => {
     setSuccess("");
 
     // Validate JSON fields
+    console.log(
+      "Validating JSON fields...",
+      isValidJson(editShortDesc),
+      isValidJson(heroImages),
+      isValidJson(productDesc),
+      isValidJson(productDetails),
+      isValidJson(specifications),
+      isValidJson(catalogueImages)
+    );
     if (
       !isValidJson(editShortDesc) ||
       !isValidJson(heroImages) ||
@@ -205,7 +220,18 @@ const ProductAddForm = ({ onSave, onCancel }) => {
       }
 
       const p_id = productData.p_id;
-
+      const safeParse = (input) => {
+        if (typeof input === "string") {
+          try {
+            return JSON.parse(input);
+          } catch {
+            return input; // return as-is if it's not valid JSON
+          }
+        } else if (typeof input === "object" && input !== null) {
+          return input; // already an object
+        }
+        return null; // fallback for other types
+      };
       // Then add to master table
       const response = await fetch("/api/add-product-master", {
         method: "POST",
@@ -227,12 +253,12 @@ const ProductAddForm = ({ onSave, onCancel }) => {
           brand_slug: brandSlug,
           price: parseFloat(price),
           made_country: madeCountry,
-          short_desc: JSON.parse(editShortDesc),
-          hero_image: JSON.parse(heroImages),
-          product_desc: JSON.parse(productDesc),
-          product_details: JSON.parse(productDetails),
-          specifications: JSON.parse(specifications),
-          catalogue_image: JSON.parse(catalogueImages),
+          short_desc: safeParse(editShortDesc),
+          hero_image: safeParse(heroImages),
+          product_desc: safeParse(productDesc),
+          product_details: safeParse(productDetails),
+          specifications: safeParse(specifications),
+          catalogue_image: safeParse(catalogueImages),
         }),
       });
 
@@ -243,6 +269,59 @@ const ProductAddForm = ({ onSave, onCancel }) => {
       }
 
       setSuccess("Product added successfully!");
+        // Reset all form states after successful product addition
+        setName("");
+        setSku("");
+        setBrandId("");
+        setIsActive(true);
+        setFueltypeId("");
+        setGlassOrientationIds("");
+        setInstallationId("");
+        setRangeId("");
+        setPtypeName("");
+        setProductSlug("");
+        setBrandSlug("");
+        setPrice("");
+        setMadeCountry("");
+        setEditShortDesc([]);
+        setEditPrice("");
+        setHeroImages([{ name: "", value: "" }]);
+        setCatalogueImages([{ name: "", value: "" }]);
+        setNewSpecType("energy");
+        setSpecifications([
+          {
+            spec_name: "",
+            spec_value: [
+              {
+                name: "",
+                value: [
+                  {
+                    name: "",
+                    value: "",
+                  },
+                ],
+              },
+            ],
+          },
+        ]);
+        setProductDesc([
+          {
+            name: "DESCRIPTION",
+            value: [""],
+          },
+        ]);
+        setProductDetails([
+          {
+            name: "Downloads",
+            value: [
+              {
+                name: "",
+                fileurl: "",
+                filename: "",
+              },
+            ],
+          },
+        ]);
       if (onSave) onSave(data);
     } catch (err) {
       setError(err.message);
@@ -252,6 +331,7 @@ const ProductAddForm = ({ onSave, onCancel }) => {
   };
 
   const addNewSection = () => {
+    console.log("Structure Editor");
     setEditShortDesc([
       ...editShortDesc,
       {
@@ -311,24 +391,7 @@ const ProductAddForm = ({ onSave, onCancel }) => {
     setEditShortDesc(updated);
   };
 
-  // Add this useEffect to initialize the editShortDesc state
-  useEffect(() => {
-    if (editShortDesc) {
-      try {
-        // Parse the short_desc if it's a string, otherwise use it directly
-        const parsedShortDesc =
-          typeof editShortDesc === "string"
-            ? JSON.parse(editShortDesc)
-            : editShortDesc;
-
-        setEditShortDesc(JSON.parse(JSON.stringify(parsedShortDesc)));
-        setEditPrice(price || "");
-      } catch (error) {
-        console.error("Error parsing editShortDesc:", error);
-        setEditShortDesc([]);
-      }
-    }
-  }, [editShortDesc, price]);
+  // Remove problematic useEffect that causes infinite loop
 
   useEffect(() => {
     // Initialize with empty arrays for add product form
@@ -337,24 +400,49 @@ const ProductAddForm = ({ onSave, onCancel }) => {
   }, []);
 
   // Add these helper functions for specifications
+  // const addNewSpecCategory = () => {
+  //   setSpecifications([
+  //     ...specifications,
+  //     {
+  //       spec_name: "New Category",
+  //       spec_value: [
+  //         {
+  //           name: "",
+  //           value: [
+  //             {
+  //               name: "",
+  //               value: "",
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   ]);
+  // };
   const addNewSpecCategory = () => {
-    setSpecifications([
-      ...specifications,
-      {
-        spec_name: "New Category",
-        spec_value: [
-          {
-            name: "",
-            value: [
+    const newCategory = {
+      spec_name: "New Category",
+      spec_value:
+        newSpecType === "energy"
+          ? [
+              {
+                name: "",
+                value: [
+                  {
+                    name: "",
+                    value: "",
+                  },
+                ],
+              },
+            ]
+          : [
               {
                 name: "",
                 value: "",
               },
             ],
-          },
-        ],
-      },
-    ]);
+    };
+    setSpecifications([...specifications, newCategory]);
   };
 
   const deleteSpecCategory = (categoryIndex) => {
@@ -585,7 +673,7 @@ const ProductAddForm = ({ onSave, onCancel }) => {
               onChange={handleNameChange}
               required
               className={styles.input}
-              pattern="[a-zA-Z0-9\s]+"
+              pattern="[a-zA-Z0-9 ]*"
               title="Only alphanumeric characters and spaces are allowed"
             />
           </div>
@@ -601,7 +689,7 @@ const ProductAddForm = ({ onSave, onCancel }) => {
               onChange={handleSkuChange}
               required
               className={styles.input}
-              pattern="[a-zA-Z0-9-]+"
+              pattern="[a-zA-Z0-9\-]*"
               title="No spaces or special characters allowed (except hyphens)"
             />
           </div>
@@ -1786,13 +1874,30 @@ const ProductAddForm = ({ onSave, onCancel }) => {
               <div className={styles.jsonStructureEditor}>
                 <div className={styles.jsonEditorHeader}>
                   <span>Specifications</span>
-                  <button
+                  {/* <button
                     type="button"
                     className={styles.addSectionButton}
                     onClick={addNewSpecCategory}
                   >
                     + Add Category
-                  </button>
+                  </button> */}
+                  <div className={styles.specTypeSelector}>
+                    <select
+                      value={newSpecType}
+                      onChange={(e) => setNewSpecType(e.target.value)}
+                      className={styles.typeDropdown}
+                    >
+                      <option value="energy">Energy Specification</option>
+                      <option value="general">General Specification</option>
+                    </select>
+                    <button
+                      type="button"
+                      className={styles.addSectionButton}
+                      onClick={addNewSpecCategory}
+                    >
+                      + Add Category
+                    </button>
+                  </div>
                 </div>
 
                 {specifications.map((category, categoryIndex) => (
@@ -1819,7 +1924,7 @@ const ProductAddForm = ({ onSave, onCancel }) => {
                     </div>
 
                     <div className={styles.optionsContainer}>
-                      {category.spec_value.map((group, groupIndex) => (
+                      {/* {category.spec_value.map((group, groupIndex) => (
                         <div
                           key={groupIndex}
                           className={styles.optionContainer}
@@ -1907,6 +2012,125 @@ const ProductAddForm = ({ onSave, onCancel }) => {
                               </div>
                             ))}
                           </div>
+                        </div>
+                      ))} */}
+                      {category.spec_value.map((group, groupIndex) => (
+                        <div
+                          key={groupIndex}
+                          className={styles.optionContainer}
+                        >
+                          <div className={styles.optionHeader}>
+                            <input
+                              type="text"
+                              value={group.name}
+                              onChange={(e) => {
+                                const updated = [...specifications];
+                                updated[categoryIndex].spec_value[
+                                  groupIndex
+                                ].name = e.target.value;
+                                setSpecifications(updated);
+                              }}
+                              className={styles.optionNameInput}
+                              placeholder="Group Name"
+                            />
+                            <button
+                              type="button"
+                              className={styles.deleteButton}
+                              onClick={() =>
+                                deleteSpecGroup(categoryIndex, groupIndex)
+                              }
+                            >
+                              ×
+                            </button>
+                          </div>
+
+                          {/* Conditional rendering based on structure type */}
+                          {Array.isArray(group.value) ? (
+                            // Energy specification rendering (nested)
+                            <div className={styles.valuesContainer}>
+                              <div className={styles.valuesHeader}>
+                                <span>Specification Items:</span>
+                                <button
+                                  type="button"
+                                  className={styles.addValueButton}
+                                  onClick={() =>
+                                    addNewSpecItem(categoryIndex, groupIndex)
+                                  }
+                                >
+                                  + Add Item
+                                </button>
+                              </div>
+
+                              {group.value.map((item, itemIndex) => (
+                                <div
+                                  key={itemIndex}
+                                  className={styles.valueItem}
+                                >
+                                  <input
+                                    type="text"
+                                    value={item.name}
+                                    onChange={(e) => {
+                                      const updated = [...specifications];
+                                      updated[categoryIndex].spec_value[
+                                        groupIndex
+                                      ].value[itemIndex].name = e.target.value;
+                                      setSpecifications(updated);
+                                    }}
+                                    className={styles.valueInput}
+                                    placeholder="Spec Name"
+                                  />
+                                  <input
+                                    type="text"
+                                    value={item.value}
+                                    onChange={(e) => {
+                                      const updated = [...specifications];
+                                      updated[categoryIndex].spec_value[
+                                        groupIndex
+                                      ].value[itemIndex].value = e.target.value;
+                                      setSpecifications(updated);
+                                    }}
+                                    className={styles.valueInput}
+                                    placeholder="Spec Value"
+                                  />
+                                  <button
+                                    type="button"
+                                    className={styles.deleteButton}
+                                    onClick={() =>
+                                      deleteSpecItem(
+                                        categoryIndex,
+                                        groupIndex,
+                                        itemIndex
+                                      )
+                                    }
+                                  >
+                                    ×
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            // General specification rendering (flat)
+                            <div className={styles.valuesContainer}>
+                              <div className={styles.valuesHeader}>
+                                <span>Value:</span>
+                              </div>
+                              <div className={styles.valueItem}>
+                                <input
+                                  type="text"
+                                  value={group.value}
+                                  onChange={(e) => {
+                                    const updated = [...specifications];
+                                    updated[categoryIndex].spec_value[
+                                      groupIndex
+                                    ].value = e.target.value;
+                                    setSpecifications(updated);
+                                  }}
+                                  className={styles.valueInput}
+                                  placeholder="Spec Value"
+                                />
+                              </div>
+                            </div>
+                          )}
                         </div>
                       ))}
 
