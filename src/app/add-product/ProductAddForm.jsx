@@ -654,7 +654,7 @@ const ProductAddForm = ({ onSave, onCancel }) => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ marginTop: "100px" }}>
       <h2 className={styles.sectionTitle}>ADD NEW PRODUCT</h2>
 
       <form onSubmit={handleSubmit}>

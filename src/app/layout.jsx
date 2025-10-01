@@ -147,7 +147,12 @@ export default function RootLayout({ children }) {
               >
                 {children}
               </Suspense>
-              <NewsletterCard/>
+                {/* Hide NewsletterCard on manage-others and add-product routes */}
+                {typeof window !== 'undefined' &&
+                  !window.location.pathname.includes('manage-others') &&
+                  !window.location.pathname.includes('add-product') && (
+                    <NewsletterCard />
+                  )}
               <Footer />
             </div>
           </Providers>

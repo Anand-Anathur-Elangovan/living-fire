@@ -282,6 +282,12 @@ const handleScroll = () => {
               isAdmin: true,
               isAddProduct: true,
             },
+            {
+              title: "Manage Others",
+              subItems: [],
+              isAdmin: true,
+              isAddOthers: true,
+            },
           ]
         : [
             {
@@ -748,7 +754,7 @@ const handleScroll = () => {
                       </ListItemButton>
                     ) : item.isAddProduct ? (
                       <ListItemButton
-                        onClick={() => router.push('/add-product')}
+                        onClick={() => router.push('/manage-others')}
                         sx={{
                           padding: "12px 0",
                           borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
@@ -768,7 +774,30 @@ const handleScroll = () => {
                           }}
                         />
                       </ListItemButton>
-                    ) : (
+                    ) :item.isAddOthers ? (
+                      <ListItemButton
+                        onClick={() => router.push('/manage-others')}
+                        sx={{
+                          padding: "12px 0",
+                          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                          color: "#1741be",
+                          fontWeight: "bold",
+                          "&:hover": {
+                            backgroundColor: "rgba(23, 65, 190, 0.08)",
+                          },
+                        }}
+                      >
+                        <ListItemText
+                          primary={item.title}
+                          primaryTypographyProps={{
+                            fontSize: "1.3rem",
+                            fontWeight: "medium",
+                            paddingLeft: "10px",
+                          }}
+                        />
+                      </ListItemButton>
+                    ):
+                     (
                       <ListItemButton
                         onClick={() => setShowAdminModal(true)}
                         sx={{
