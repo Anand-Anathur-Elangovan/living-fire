@@ -1,12 +1,12 @@
 {
   "version": 2,
   "env": {
-    "PG_USER": "living_fire_dev_owner",
-    "PG_HOST": "ep-purple-wind-a4g9642l.us-east-1.aws.neon.tech",
-    "PG_DATABASE": "living_fire_dev",
-    "PG_PASSWORD": "OGj3NAF2JkYI",
+    "PG_USER": "neondb_owner",
+    "PG_HOST": "ep-red-pine-adbvmby8-pooler.c-2.us-east-1.aws.neon.tech",
+    "PG_DATABASE": "living_fire_prod",
+    "PG_PASSWORD": "npg_sGz4enX7aSqw",
     "PG_PORT": "5432",
-    "DATABASE_URL": "postgresql://living_fire_dev_owner:OGj3NAF2JkYI@ep-purple-wind-a4g9642l.us-east-1.aws.neon.tech/living_fire_dev?sslmode=require",
+    "DATABASE_URL": "postgresql://neondb_owner:npg_sGz4enX7aSqw@ep-red-pine-adbvmby8-pooler.c-2.us-east-1.aws.neon.tech/living_fire_prod?sslmode=require&channel_binding=require",
     "AWS_lIVING_FIRE_ACCESS_KEY_ID": "AKIA3FRRIXSVNFDOPIOW",
     "AWS_lIVING_FIRE_SECRET_ACCESS_KEY": "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",
     "NODE_ENV": "development",
