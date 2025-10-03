@@ -870,7 +870,7 @@ const ProductOptions = ({
             </>
           )}
         </p>
-        <span className={styles.inStock}>IN STOCK</span>
+        {/* <span className={styles.inStock}>IN STOCK</span> */}
       </motion.div>
 
       <motion.div className={styles.buttonContainer} variants={itemVariants}>

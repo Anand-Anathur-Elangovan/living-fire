@@ -69,7 +69,8 @@ const Product = ({ params }) => {
         productOptionsHeight - 450 > descriptionColumnHeight
       ) {
         const padValue =
-          productOptionsHeight - 450 - descriptionColumnHeight + 10;
+          productOptionsHeight - 750 - descriptionColumnHeight + 10;
+          console.log("padValue", padValue);
         const topContainer = document.querySelector(".top-container");
         if (topContainer) {
           topContainer.style.paddingBottom = `${padValue}px`;
