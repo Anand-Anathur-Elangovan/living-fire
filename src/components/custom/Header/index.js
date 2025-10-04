@@ -289,13 +289,18 @@ const handleScroll = () => {
               isAddOthers: true,
             },
           ]
-        : [
-            {
-              title: "Admin Login",
-              subItems: [],
-              isAdmin: true,
-            },
-          ]
+        : (
+            (typeof window !== 'undefined' &&
+              (window.location.href === 'https://www.livingfire.com.au/' || window.location.href === 'https://livingfire.com.au/'))
+              ? []
+              : [
+                  {
+                    title: "Admin Login",
+                    subItems: [],
+                    isAdmin: true,
+                  },
+                ]
+          )
     ),
   ];
   // Admin Login Modal State
