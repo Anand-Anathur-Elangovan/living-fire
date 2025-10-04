@@ -261,6 +261,8 @@ const Product = ({ params }) => {
             productRouteHandler={productRouteHandler}
             name={name}
             brand_name={brand_name}
+            range_id={range_id}
+            p_id={p_id}
           />
           {/* <OurDifference /> */}
           {/* <OurShowrooms /> */}
