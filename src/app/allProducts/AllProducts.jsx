@@ -1270,6 +1270,98 @@ const AllProducts = () => {
                       </div>
                     }
 
+                    {/* Brands Types */}
+                    {
+                      <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base">
+                          Brands{" "}
+                          {isClient &&
+                            !document
+                              .getElementById("brandsFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={MinusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus("brandIdStatus");
+                                  document
+                                    .getElementById("brandsFilterId")
+                                    .classList.add("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                          {isClient &&
+                            document
+                              .getElementById("brandsFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus("brandIdStatus");
+                                  document
+                                    .getElementById("brandsFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                        </span>
+                        <div
+                          id="brandsFilterId"
+                          className="flex flex-col gap-3 mr-10 collapse"
+                          style={{
+                            display: !filterStatus?.brandIdStatus && "none",
+                          }}
+                        >
+                          {brandType && (
+                            <>
+                              <span
+                                key={"brands_selected"}
+                                className=" font-semibold font-small leading-5 text-base text-black"
+                                // onClick={() => setBrandType(val?.brand_id)}
+                              >
+                                {
+                                  brands?.find((b) => b?.brand_id === brandType)
+                                    ?.brand_name
+                                }
+                              </span>
+                              <></>
+                            </>
+                          )}
+
+                          {brands.map((val, index) => {
+                            if (val?.brand_id === brandType) return;
+                            return (
+                              <span
+                                key={"brands" + val?.brand_id}
+                                className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                                onClick={() => {
+                                  setRangeType(null);
+                                  updateFilter(
+                                    "brand",
+                                    val?.brand_name,
+                                    val?.brand_id,
+                                    val?.slug
+                                  );
+                                  if (window?.innerWidth <= 768) {
+                                    setIsFilter(false);
+                                  }
+                                }}
+                              >
+                                {val?.brand_name}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    }
+
                     {/* Ranges Types */}
                     {
                       // brandType && (
@@ -1370,97 +1462,7 @@ const AllProducts = () => {
                       // )
                     }
 
-                    {/* Brands Types */}
-                    {
-                      <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-semibold text-base">
-                          Brands{" "}
-                          {isClient &&
-                            !document
-                              .getElementById("brandsFilterId")
-                              ?.classList?.contains("collapse") && (
-                              <Image
-                                src={MinusIcon}
-                                alt="clear"
-                                className="md:pt-1 cursor-pointer"
-                                onClick={() => {
-                                  setRefreshPage((prev) => !prev);
-                                  handleFilterStatus("brandIdStatus");
-                                  document
-                                    .getElementById("brandsFilterId")
-                                    .classList.add("collapse");
-                                }}
-                                unoptimized
-                              />
-                            )}
-                          {isClient &&
-                            document
-                              .getElementById("brandsFilterId")
-                              ?.classList?.contains("collapse") && (
-                              <Image
-                                src={PlusIcon}
-                                alt="clear"
-                                className="md:pt-1 cursor-pointer"
-                                onClick={() => {
-                                  setRefreshPage((prev) => !prev);
-                                  handleFilterStatus("brandIdStatus");
-                                  document
-                                    .getElementById("brandsFilterId")
-                                    .classList.remove("collapse");
-                                }}
-                                unoptimized
-                              />
-                            )}
-                        </span>
-                        <div
-                          id="brandsFilterId"
-                          className="flex flex-col gap-3 mr-10 collapse"
-                          style={{
-                            display: !filterStatus?.brandIdStatus && "none",
-                          }}
-                        >
-                          {brandType && (
-                            <>
-                              <span
-                                key={"brands_selected"}
-                                className=" font-semibold font-small leading-5 text-base text-black"
-                                // onClick={() => setBrandType(val?.brand_id)}
-                              >
-                                {
-                                  brands?.find((b) => b?.brand_id === brandType)
-                                    ?.brand_name
-                                }
-                              </span>
-                              <></>
-                            </>
-                          )}
-
-                          {brands.map((val, index) => {
-                            if (val?.brand_id === brandType) return;
-                            return (
-                              <span
-                                key={"brands" + val?.brand_id}
-                                className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                                onClick={() => {
-                                  setRangeType(null);
-                                  updateFilter(
-                                    "brand",
-                                    val?.brand_name,
-                                    val?.brand_id,
-                                    val?.slug
-                                  );
-                                  if (window?.innerWidth <= 768) {
-                                    setIsFilter(false);
-                                  }
-                                }}
-                              >
-                                {val?.brand_name}
-                              </span>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    }
+                    
                     {
                       <div
                         className={`${

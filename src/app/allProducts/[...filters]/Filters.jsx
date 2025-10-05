@@ -1,5 +1,4 @@
 "use client";
-// import React, { useEffect, useMemo, useState } from "react";
 import OurDifference from "../components/ourDifference";
 import OurShowrooms from "../components/ourShowrooms";
 import Products from "../components/products";
@@ -7,7 +6,6 @@ import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import "./page.css";
 import Image from "next/image";
 import useMasterValues from "../hooks/useMasterValues";
-// import { useSearchParams } from "next/navigation";
 import useAllProducts from "../hooks/useAllProducts";
 import { useNavigationState } from "@/context/NavigationContext";
 import React, {
@@ -18,19 +16,15 @@ import React, {
   useState,
 } from "react";
 import RightArrowIcon from "@/public/assets/allProducts/rightArrow.svg";
-//   import LeftArrowIcon from "@/public/assets/allProducts/leftArrow.svg";
 import LeftArrowDisabledIcon from "@/public/assets/allProducts/leftArrowDisabled.svg";
 import CrossIcon from "@/public/assets/allProducts/cross.svg";
 import MinusIcon from "@/public/assets/allProducts/minus.svg";
 import PlusIcon from "@/public/assets/allProducts/plus.svg";
 import SortIcon from "@/public/assets/allProducts/sortIcon.svg";
-//   import Image from "next/image";
-//   import useAllProducts from "../hooks/useAllProducts";
 import ProductCard from "../components/productCard";
 import CheckerBoardImg from "@/public/assets/allProducts/checkerboard.png";
 import { SORTBY } from "@/src/constants/products";
 import SearchIcon from "@/public/assets/allProducts/searchIcon.svg";
-//   import useMasterValues from "../hooks/useMasterValues";
 import { transformImageSrc } from "@/src/helper/utils/component/productSpecsDrawer/transformImageSrc/transformImageSrc";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { CircularProgress, Box } from "@mui/material";
@@ -697,25 +691,33 @@ const Filters = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
-useEffect(() => {
-  if (h1Ref.current) {
-    // This ensures all dynamic content in h1 is resolved
-    const observer = new MutationObserver(() => {
-      setIsH1Loaded(true);
-      observer.disconnect();
-    });
-    
-    observer.observe(h1Ref.current, {
-      childList: true,
-      subtree: true,
-      characterData: true
-    });
+  useEffect(() => {
+    if (h1Ref.current) {
+      // This ensures all dynamic content in h1 is resolved
+      const observer = new MutationObserver(() => {
+        setIsH1Loaded(true);
+        observer.disconnect();
+      });
 
-    // Fallback in case MutationObserver doesn't trigger
-    const timeout = setTimeout(() => setIsH1Loaded(true), 100);
-    return () => clearTimeout(timeout);
-  }
-}, []);;
+      observer.observe(h1Ref.current, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
+
+      // Fallback in case MutationObserver doesn't trigger
+      const timeout = setTimeout(() => setIsH1Loaded(true), 100);
+      return () => clearTimeout(timeout);
+    }
+  }, []);
+  const removeFilterFromUrl = (filterType) => {
+  let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
+  filters = filters.filter((item) => item.filterType !== filterType);
+  sessionStorage.setItem("filtersJson", JSON.stringify(filters));
+  
+  let path = filters.map((item) => `${item?.slug}`).join("/");
+  router.push(`/allProducts/${path}`);
+};
   // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
   return (
     <div
@@ -725,13 +727,19 @@ useEffect(() => {
       <div className="flex flex-col md:px-32 gap-3 bg-[#F7F7F5] md:gap-4">
         <div className="flex flex-col items-center gap-5 md:gap-12">
           <div className="flex flex-col items-center gap-5 md:gap-8">
-            <h1 ref={h1Ref} className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full cursor-default opacity-0 animate-fadeIn">
+            <h1
+              ref={h1Ref}
+              className="text-center text-3xl md:heading1 flex w-full justify-center items-center w-full cursor-default opacity-0 animate-fadeIn"
+            >
               {!brandType
                 ? `${
-                    fireplaceType && fuelTypes.find((x) => x.fueltype_id === fireplaceType)
-                          ?.fueltype_name
-                      ? `${fuelTypes.find((x) => x.fueltype_id === fireplaceType)
-                          ?.fueltype_name} Fireplaces` ?? ""
+                    fireplaceType &&
+                    fuelTypes.find((x) => x.fueltype_id === fireplaceType)
+                      ?.fueltype_name
+                      ? `${
+                          fuelTypes.find((x) => x.fueltype_id === fireplaceType)
+                            ?.fueltype_name
+                        } Fireplaces` ?? ""
                       : ""
                   } ${
                     productMenuIndex && !fireplaceType
@@ -747,7 +755,8 @@ useEffect(() => {
                   }` ?? "Unknown Brand"}
             </h1>
 
-            {isH1Loaded && fireplaceType &&
+            {isH1Loaded &&
+              fireplaceType &&
               !brandType &&
               ((fireplaceType === 4 && (
                 <h2 className="flex md:w-7/12 justify-center text-center font-light text-base md:text-lg opacity-0 animate-fadeIn [animation-delay:100ms]">
@@ -1004,6 +1013,26 @@ useEffect(() => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase  font-semibold text-base">
                           {"Fireplace Type"}
+                          <span className="flex gap-3"> 
+                          {isClient && fireplaceType && (
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
+                                Clear
+                              </span> */}
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  // Clear fireplace type logic
+                                  setFireplaceType(null);
+                                  // Remove from URL - you need to add this
+                                  removeFilterFromUrl("fuelType");
+                                }}
+                              />
+                            </div>
+                          )}
                           {isClient &&
                             !document
                               .getElementById("fireplaceFilterId")
@@ -1040,6 +1069,7 @@ useEffect(() => {
                                 unoptimized
                               />
                             )}
+                            </span>
                         </span>
                         <div
                           id="fireplaceFilterId"
@@ -1137,6 +1167,26 @@ useEffect(() => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Installation Type`}
+                          <span className="flex gap-3"> 
+                            {isClient && installationType && (
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
+                                Clear
+                              </span> */}
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  setInstallationType(null);
+                                  // Remove from URL - you need to add this
+                                  removeFilterFromUrl("installationType");
+                                }}
+                              />
+                            </div>
+                          )}
+                          
                           {isClient &&
                             !document
                               .getElementById("installationTypeFilterId")
@@ -1182,6 +1232,7 @@ useEffect(() => {
                                 unoptimized
                               />
                             )}
+                            </span>
                         </span>
                         <div
                           id="installationTypeFilterId"
@@ -1233,6 +1284,24 @@ useEffect(() => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Glass Orientation Type`}
+                          <span className="flex gap-3"> 
+                            {isClient && glassOrientationType && (
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
+                                Clear
+                              </span> */}
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  setGlassOrientationType(null);
+                                  removeFilterFromUrl("glassOrientationType");
+                                }}
+                              />
+                            </div>
+                          )}
                           {isClient &&
                             !document
                               .getElementById("glassOrientationTypeFilterId")
@@ -1280,6 +1349,7 @@ useEffect(() => {
                                 unoptimized
                               />
                             )}
+                            </span>
                         </span>
                         <div
                           id="glassOrientationTypeFilterId"
@@ -1323,113 +1393,31 @@ useEffect(() => {
                       </div>
                     }
 
-                    {/* Ranges Types */}
-                    {
-                      // brandType && (
-                      <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
-                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
-                          {`Ranges`}
-                          {isClient &&
-                            !document
-                              .getElementById("rangesFilterId")
-                              ?.classList?.contains("collapse") && (
-                              <div style={{ display: "flex", gap: "30px" }}>
-                                <Image
-                                  src={MinusIcon}
-                                  alt="clear"
-                                  className="md:pt-1 cursor-pointer"
-                                  onClick={() => {
-                                    setRefreshPage((prev) => !prev);
-                                    handleFilterStatus("rangeIdStatus");
-                                    document
-                                      .getElementById("rangesFilterId")
-                                      .classList.add("collapse");
-                                  }}
-                                  unoptimized
-                                />
-                              </div>
-                            )}
-
-                          {isClient &&
-                            document
-                              .getElementById("rangesFilterId")
-                              ?.classList?.contains("collapse") && (
-                              <Image
-                                src={PlusIcon}
-                                alt="clear"
-                                className="md:pt-1 cursor-pointer"
-                                onClick={() => {
-                                  setRefreshPage((prev) => !prev);
-                                  handleFilterStatus("rangeIdStatus");
-                                  document
-                                    .getElementById("rangesFilterId")
-                                    .classList.remove("collapse");
-                                }}
-                                unoptimized
-                              />
-                            )}
-                        </span>
-                        <div
-                          id="rangesFilterId"
-                          className={`flex flex-col gap-3 mr-10 ${
-                            !rangeType ? "collapse" : ""
-                          }`}
-                          style={{
-                            display: !filterStatus?.rangeIdStatus && "none",
-                          }}
-                        >
-                          {rangeType && (
-                            <span
-                              key={"ranges_selected"}
-                              className=" font-semibold font-small leading-5 text-base text-black"
-                              // onClick={() => setBrandType(val?.brand_id)}
-                            >
-                              {
-                                ranges?.find((b) => b?.range_id === rangeType)
-                                  ?.range_name
-                              }
-                            </span>
-                          )}
-                          {ranges
-                            .filter((range) =>
-                              allProductsTemp.some(
-                                (item) =>
-                                  item.fn_get_products?.range_id ===
-                                  range.range_id
-                              )
-                            )
-                            .map((val, index) => {
-                              if (val?.range_id === rangeType) return;
-                              return (
-                                <span
-                                  key={"ranges" + val?.range_id}
-                                  className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
-                                  onClick={() => {
-                                    updateFilter(
-                                      "rangeType",
-                                      val?.range_name,
-                                      val?.range_id,
-                                      val?.slug
-                                    );
-                                    if (window?.innerWidth <= 768) {
-                                      setIsFilter(false);
-                                    }
-                                  }}
-                                >
-                                  {val?.range_name}
-                                </span>
-                              );
-                            })}
-                        </div>
-                      </div>
-                      // )
-                    }
+                    
 
                     {/* Brands Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase  font-semibold text-base">
                           Brands{" "}
+                          <span className="flex gap-3"> 
+                            {isClient && brandType && (
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
+                                Clear
+                              </span> */}
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  setBrandType(null);
+                                  removeFilterFromUrl("brand");
+                                }}
+                              />
+                            </div>
+                          )}
                           {isClient &&
                             !document
                               .getElementById("brandsFilterId")
@@ -1466,6 +1454,7 @@ useEffect(() => {
                                 unoptimized
                               />
                             )}
+                            </span>
                         </span>
                         <div
                           id="brandsFilterId"
@@ -1518,6 +1507,126 @@ useEffect(() => {
                           })}
                         </div>
                       </div>
+                    }
+                    {/* Ranges Types */}
+                    {
+                      // brandType && (
+                      <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
+                        <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
+                          {`Ranges`}
+                          <span className="flex gap-3"> 
+                            {isClient && rangeType && (
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
+                                Clear
+                              </span> */}
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  setRangeType(null);
+                                  removeFilterFromUrl("rangeType");
+                                }}
+                              />
+                            </div>
+                          )}
+                          {isClient &&
+                            !document
+                              .getElementById("rangesFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <div style={{ display: "flex", gap: "30px" }}>
+                                <Image
+                                  src={MinusIcon}
+                                  alt="clear"
+                                  className="md:pt-1 cursor-pointer"
+                                  onClick={() => {
+                                    setRefreshPage((prev) => !prev);
+                                    handleFilterStatus("rangeIdStatus");
+                                    document
+                                      .getElementById("rangesFilterId")
+                                      .classList.add("collapse");
+                                  }}
+                                  unoptimized
+                                />
+                              </div>
+                            )}
+
+                          {isClient &&
+                            document
+                              .getElementById("rangesFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus("rangeIdStatus");
+                                  document
+                                    .getElementById("rangesFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                            </span>
+                        </span>
+                        <div
+                          id="rangesFilterId"
+                          className={`flex flex-col gap-3 mr-10 ${
+                            !rangeType ? "collapse" : ""
+                          }`}
+                          style={{
+                            display: !filterStatus?.rangeIdStatus && "none",
+                          }}
+                        >
+                          {rangeType && (
+                            <span
+                              key={"ranges_selected"}
+                              className=" font-semibold font-small leading-5 text-base text-black"
+                              // onClick={() => setBrandType(val?.brand_id)}
+                            >
+                              {
+                                ranges?.find((b) => b?.range_id === rangeType)
+                                  ?.range_name
+                              }
+                            </span>
+                          )}
+                          {ranges
+                            // .filter((range) =>
+                            //   allProductsTemp.some(
+                            //     (item) =>
+                            //       item.fn_get_products?.range_id ===
+                            //       range.range_id
+                            //   )
+                            // )
+                            .map((val, index) => {
+                              if (val?.range_id === rangeType) return;
+                              return (
+                                <span
+                                  key={"ranges" + val?.range_id}
+                                  className=" font-small leading-5 text-normal text-gray-400 hover:text-black transistion ease-in-out cursor-pointer"
+                                  onClick={() => {
+                                    updateFilter(
+                                      "rangeType",
+                                      val?.range_name,
+                                      val?.range_id,
+                                      val?.slug
+                                    );
+                                    if (window?.innerWidth <= 768) {
+                                      setIsFilter(false);
+                                    }
+                                  }}
+                                >
+                                  {val?.range_name}
+                                </span>
+                              );
+                            })}
+                        </div>
+                      </div>
+                      // )
                     }
                     {
                       <div
@@ -1616,9 +1725,11 @@ useEffect(() => {
                 isFilter ? "md:w-[80%]" : "w-full"
               } overflow-y-auto md:min-h-[60vh]`}
             > */}
-              <div className={`flex flex-wrap px-4 gap-6 md:gap-6 lg:gap-8 py-3 ${
-  isFilter ? "md:w-[80%]" : "w-full"
-} overflow-y-auto md:min-h-[60vh]`}>
+            <div
+              className={`flex flex-wrap px-4 gap-6 md:gap-6 lg:gap-8 py-3 ${
+                isFilter ? "md:w-[80%]" : "w-full"
+              } overflow-y-auto md:min-h-[60vh]`}
+            >
               {isLoading ? (
                 <Box
                   display="flex"
