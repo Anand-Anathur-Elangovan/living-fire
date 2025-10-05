@@ -27,18 +27,28 @@ const HeroImage = ({ productName, brandName, src, alt, isAdmin, p_id, ptype_name
   }, [src, catalogue_image, editMode]);
 
   // Ensure images is always an array of objects with name/value for the carousel
-  const images = editMode
-    ? (Array.isArray(heroImages) && heroImages.length > 0 ? heroImages : [{ value: "" }])
-    : (Array.isArray(src) && src.length > 1
-      ? src 
-      : [
-          { value: src?.[0]?.value },
-          { value: src?.[0]?.value },
-          { value: src?.[0]?.value },
-        ]);
+  const images = React.useMemo(() => {
+  if (editMode) {
+    return Array.isArray(heroImages) && heroImages.length > 0 
+      ? heroImages 
+      : [{ value: "" }];
+  } else {
+    // For non-edit mode, use src directly
+    if (Array.isArray(src) && src.length > 0) {
+      return src;
+    } else if (src && !Array.isArray(src)) {
+      // Handle case where src might be a single object
+      return [src];
+    } else {
+      // Fallback
+      return [{ value: "" }];
+    }
+  }
+}, [editMode, heroImages, src]);
+
   const settings = {
-    dots: true,
-    infinite: true,
+    dots: images.length > 1,
+    infinite: images.length > 1,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -61,13 +71,14 @@ const HeroImage = ({ productName, brandName, src, alt, isAdmin, p_id, ptype_name
     setIsPopupOpen(false);
   };
 
+  console.log("images", images)
   return (
     <>
       {!editMode && (<> <div className="hero-slider-container">
             <Slider className="product-hero-image" {...settings}>
               {images?.map((imageSrc, index) => (
                 <div
-                  key={index}
+                  key={`${imageSrc?.value}-${index}`}
                   className="slider-image"
                   onClick={handleImageClick}
                   style={{ cursor: "pointer" }}
@@ -155,7 +166,7 @@ const HeroImage = ({ productName, brandName, src, alt, isAdmin, p_id, ptype_name
               setHeroImages([...heroImages,{name:'',value:''}]);
             }}>Add Hero Image</button>
             
-            <h4 style={{marginTop:24}}>Catalogue Images</h4>
+            <h4 style={{marginTop:24}}>Catalogue Images – Required Size: 230px (W) × 320px (H)</h4>
             {catalogueImages.map((img, idx) => (
               <div key={idx} style={{display:'flex',alignItems:'center',marginBottom:16,gap:8, flexWrap: 'wrap'}}>
                 <div style={{display: 'flex', gap: 8, alignItems: 'center', width: '100%'}}>

@@ -535,12 +535,14 @@
   cursor: pointer;
   transition: background 0.3s ease, transform 0.3s ease;
   content: "" !important;
+  color: white !important; /* Add this */
 }
 
 .product-hero-image .slick-dots li.slick-active button:before {
   color: white;
   opacity: 1;
   transition: color 0.3s ease, opacity 0.3s ease;
+  border-color: white; 
 }
 .product-hero-image .slick-dots {
   bottom: 40px !important;
@@ -550,7 +552,10 @@
   transform: scale(1); 
   border-radius: 50%;
 }
-
+.product-hero-image .slick-dots li:not(.slick-active) button:before {
+  background: transparent;
+  border-color: white;
+}
 .top-container {
   display: flex;
   flex-direction: column;
