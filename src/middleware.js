@@ -189,9 +189,14 @@ import { NextResponse } from "next/server";
   "/fireplace-range/fireplace-mantels": "/allProducts/fireplace-mantels",
   "/fireplace-range/cast-iron-fireplaces": "/allProducts/cast-iron",
   "/fireplace-range/fireplace-accessories": "/allProducts/fire-tools",
-  "/our-story": "/our-story",
+  // "/our-story": "/our-story",
   "/contact-us": "/contact",
-  "/warranty-servicing": "/maintenance-service"
+  "/warranty-servicing": "/maintenance-service",
+  "/allProducts/undefined": "/allProducts",
+  "/fire-tools": "/allProducts/fire-tools",
+  "/outdoor": "/allProducts/outdoor",
+  "/cast-iron": "/allProducts/cast-iron",
+  "/services": "/maintenance-service",
 };
 export const config = {
   matcher: [
@@ -223,7 +228,7 @@ export function middleware(req) {
   if (urlAliases[url.pathname]) {
     url.pathname = urlAliases[url.pathname];
     // return NextResponse.rewrite(url);  
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(url, 301); // Permanent redirect
   }
 
   return response;
