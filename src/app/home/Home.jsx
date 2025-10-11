@@ -16,6 +16,7 @@ import { generateSlug } from "@/src/helper/slug/slug";
 import LowerArea from "@/src/components/custom/LowerArea";
 import Showrooms from "@/src/components/custom/Showrooms/Showrooms";
 import Link from "next/link";
+import { Edit, Save, X, Plus, Trash2 } from "react-feather";
 
 const brandLogos = {
   cocoon: () => import("@/public/assets/homePage/ourBrands/cocoon.svg"),
@@ -63,8 +64,39 @@ const Home = () => {
   const [animatePanels, setAnimatePanels] = useAnimationState(false);
   const [zoomImage, setZoomImage] = useAnimationState(false);
   const [showButtons, setShowButtons] = useAnimationState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
   const { setNavigationState } = useNavigationState();
+  const [heroImages, setHeroImages] = useState([]);
+
+  const [editing, setEditing] = useState(false);
+const [editData, setEditData] = useState([]);
+const [newRow, setNewRow] = useState({ image_src: '', image_name: '' });
+const [loading, setLoading] = useState(false);
+
+
+  // Check admin status
+  useEffect(() => {
+    const HARDCODED_ADMIN_USERNAME = "admin";
+    const HARDCODED_ADMIN_PASSWORD = "password123";
+    const storedUsername =
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("adminUsername")
+        : null;
+    const storedPassword =
+      typeof window !== "undefined"
+        ? sessionStorage.getItem("adminPassword")
+        : null;
+
+    if (
+      storedUsername === HARDCODED_ADMIN_USERNAME &&
+      storedPassword === HARDCODED_ADMIN_PASSWORD
+    ) {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (!hover) {
@@ -78,22 +110,19 @@ const Home = () => {
     const timeline = [
       { time: 500, action: () => setShowPanels(true) }, // Show panels after hero fades out
       { time: 1800, action: () => setAnimatePanels(true) }, // Animate panels
-      // { time: 1800, action: () => setZoomImage(true) }, // Zoom image
       {
         time: 2000,
         action: () => {
-          // First fade in "Living Fire" (company-name)
           document.getElementById("company-name").style.opacity = 1;
         },
       },
       {
         time: 2500,
         action: () => {
-          // Then fade in "Architectural Fireplace Design" (text-group-subheading)
           document.getElementById("subheading").style.opacity = 1;
         },
       },
-      { time: 2500, action: () => setShowButtons(true) }, // Show buttons
+      { time: 2500, action: () => setShowButtons(true) },
     ];
 
     const startTime = performance.now();
@@ -159,6 +188,20 @@ const Home = () => {
     return () => cancelAnimationFrame(frameId);
   }, []);
 
+  useEffect(() => {
+    const fetchHeroImages = async () => {
+      try {
+        const res = await fetch("/api/hero-image");
+        const data = await res.json();
+        setHeroImages(data);
+      } catch (err) {
+        console.error("Error fetching hero images:", err);
+      }
+    };
+    console.log("Fetching hero images...");
+    fetchHeroImages();
+  }, []);
+
   const brandsList = [
     {
       brand_id: 1,
@@ -206,6 +249,299 @@ const Home = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  console.log("Hero Images:", heroImages);
+
+  useEffect(() => {
+  if (editing) {
+    document.body.classList.add('modal-open');
+  } else {
+    document.body.classList.remove('modal-open');
+  }
+
+  return () => {
+    document.body.classList.remove('modal-open');
+  };
+}, [editing]);
+
+ const HeroImageEditor = () => {
+  const [localEditData, setLocalEditData] = useState([]);
+  const [localNewRows, setLocalNewRows] = useState([]);
+
+  // Initialize local state when component mounts
+  useEffect(() => {
+    setLocalEditData(editData.filter(item => !item.isNew));
+    setLocalNewRows(editData.filter(item => item.isNew));
+  }, [editData]);
+
+  const handleSave = async () => {
+    setLoading(true);
+    try {
+      // Update existing images (only those with numeric IDs)
+      const updatePromises = localEditData
+        .filter(item => item.id && !isNaN(parseInt(item.id)))
+        .map(async (item) => {
+          const updateData = {
+            id: parseInt(item.id),
+            image_src: item.image_src,
+            image_name: item.image_name,
+            is_active: item.is_active
+          };
+          
+          return fetch('/api/update-hero-image', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateData),
+          });
+        });
+
+      // Add new rows
+      const createPromises = localNewRows
+        .filter(item => item.image_src && item.image_name)
+        .map(async (item) => {
+          return fetch('/api/update-hero-image', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              image_src: item.image_src,
+              image_name: item.image_name,
+              created_by: 'admin'
+            }),
+          });
+        });
+
+      await Promise.all([...updatePromises, ...createPromises]);
+
+      // Refresh hero images
+      const res = await fetch("/api/hero-image");
+      const data = await res.json();
+      setHeroImages(data);
+      
+      setEditing(false);
+      alert('Hero images updated successfully!');
+    } catch (error) {
+      console.error('Error saving hero images:', error);
+      alert('Error saving changes');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id, isNew = false) => {
+    if (!confirm('Are you sure you want to delete this image?')) return;
+
+    try {
+      if (!isNew) {
+        // Delete from database
+        await fetch(`/api/update-hero-image?id=${id}`, {
+          method: 'DELETE',
+        });
+      }
+      
+      // Update local state
+      if (isNew) {
+        setLocalNewRows(localNewRows.filter(item => item.id !== id));
+      } else {
+        setLocalEditData(localEditData.filter(item => item.id !== id));
+      }
+      
+      // Refresh hero images if it was a database item
+      if (!isNew) {
+        const res = await fetch("/api/hero-image");
+        const data = await res.json();
+        setHeroImages(data);
+      }
+      
+      alert('Image deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting hero image:', error);
+      alert('Error deleting image');
+    }
+  };
+
+  const handleCancel = () => {
+    setEditing(false);
+    setLocalEditData([]);
+    setLocalNewRows([]);
+  };
+
+  const addNewRow = () => {
+    const newRow = { 
+      id: `new-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`, 
+      image_src: '', 
+      image_name: '', 
+      is_active: true,
+      isNew: true 
+    };
+    setLocalNewRows(prev => [...prev, newRow]);
+  };
+
+  const updateExistingData = (index, field, value) => {
+    const newData = [...localEditData];
+    newData[index] = {
+      ...newData[index],
+      [field]: value
+    };
+    setLocalEditData(newData);
+  };
+
+  const updateNewRow = (index, field, value) => {
+    const newData = [...localNewRows];
+    newData[index] = {
+      ...newData[index],
+      [field]: value
+    };
+    setLocalNewRows(newData);
+  };
+
+  return (
+    <div className="hero-editor-modal">
+      <div className="hero-editor-content">
+        <div className="hero-editor-header">
+          <h3>Edit Hero Images</h3>
+          <button 
+            onClick={handleCancel} 
+            className="close-btn"
+            type="button"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="hero-editor-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Image URL</th>
+                <th>Image Name</th>
+                <th>Active</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Existing Rows */}
+              {localEditData.map((item, index) => (
+                <tr key={item.id}>
+                  <td>
+                    <textarea
+                      value={item.image_src || ''}
+                      onChange={(e) => updateExistingData(index, 'image_src', e.target.value)}
+                      placeholder="Enter image URL"
+                      rows={2}
+                      className="edit-textarea"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={item.image_name || ''}
+                      onChange={(e) => updateExistingData(index, 'image_name', e.target.value)}
+                      placeholder="Enter image name"
+                      className="edit-input"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={item.is_active !== false}
+                      onChange={(e) => updateExistingData(index, 'is_active', e.target.checked)}
+                    />
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(item.id, false)}
+                      className="delete-btn"
+                      title="Delete"
+                      type="button"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              
+              {/* New Rows */}
+              {localNewRows.map((item, index) => (
+                <tr key={item.id} className="new-row">
+                  <td>
+                    <textarea
+                      value={item.image_src || ''}
+                      onChange={(e) => updateNewRow(index, 'image_src', e.target.value)}
+                      placeholder="Enter new image URL"
+                      rows={2}
+                      className="edit-textarea"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      value={item.image_name || ''}
+                      onChange={(e) => updateNewRow(index, 'image_name', e.target.value)}
+                      placeholder="Enter new image name"
+                      className="edit-input"
+                    />
+                  </td>
+                  <td>
+                    <input 
+                      type="checkbox" 
+                      checked={true} 
+                      disabled 
+                    />
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(item.id, true)}
+                      className="delete-btn"
+                      title="Delete"
+                      type="button"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                    <span className="new-label">New</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="hero-editor-actions">
+          <button 
+            onClick={addNewRow} 
+            className="add-btn"
+            type="button"
+          >
+            <Plus size={16} />
+            Add New Row
+          </button>
+          <div className="action-buttons">
+            <button 
+              onClick={handleCancel} 
+              className="cancel-btn"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button 
+              onClick={handleSave} 
+              className="save-btn"
+              disabled={loading}
+              type="button"
+            >
+              {loading ? 'Saving...' : 'Save Changes'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+console.log("Rendering Home with editData:", editData);
   return (
     <div
       style={{
@@ -215,7 +551,6 @@ const Home = () => {
         gap: "75px",
       }}
     >
-      {/* LocalBusiness Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -263,45 +598,7 @@ const Home = () => {
 
       {/* Hero Section */}
       <div className="home-page">
-        {/* <AnimatePresence>
-          {!hover && (
-            <motion.div
-              className="base-container"
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              // transition={{ duration: 0.8 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-            >
-              <section className="hero" aria-label="Premium Fireplace Showroom">
-                <motion.div
-                  className="hero-content"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                  <div
-                    id="hero-heading"
-                    className="text-4xl font-bold leading-tight"
-                  >
-                    STUNNING FIREPLACES FOR ANY HOME.
-                  </div>
-                  <p>
-                    At Living Fire, we believe our work is complete only when
-                    our clients are enjoying the warmth of their new fireplace
-                    with a glass of wine in hand. To ensure every customer
-                    across Melbourne and Australia finds their match, we have
-                    curated an exceptional selection of luxury fireplace brands.
-                    Visit our showrooms in Richmond and Moorabbin to experience
-                    our products firsthand.
-                  </p>
-                </motion.div>
-              </section>
-            </motion.div>
-          )}
-        </AnimatePresence> */}
         <motion.div
-          // className={`overlay-container ${showPanels  ? "show-panels" : ""}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: showPanels ? 1 : 0 }}
           transition={{ duration: 0.3, delay: showPanels ? 0 : 0.3 }}
@@ -310,9 +607,6 @@ const Home = () => {
           <motion.div
             className={`panel-left ${showPanels ? "show-panelsLeft" : ""}`}
             initial={{ x: "-100%" }}
-            // animate={{
-            //   x: showPanels ? (animatePanels ? "-100%" : "-70%") : "-10%",
-            // }}
             animate={{
               x: showPanels ? (animatePanels ? "-100%" : "-100%") : "-10%",
             }}
@@ -323,44 +617,64 @@ const Home = () => {
           <motion.div
             className={`panel-right ${showPanels ? "show-panelsRight" : ""}`}
             initial={{ x: "100%" }}
-            // animate={{
-            //   x: showPanels ? (animatePanels ? "100%" : "70%") : "10%",
-            // }}
             animate={{
               x: showPanels ? (animatePanels ? "100%" : "100%") : "10%",
             }}
             transition={{ duration: 1, ease: "easeInOut" }}
             aria-hidden="true"
           />
-
-          {/* Optimized Hero Image */}
           <div
             className={`overlay-container ${zoomImage ? "show-panels" : ""}`}
           >
             <Slider {...carouselSettings} className="hero-carousel">
-              {[1, 2, 3].map((item) => (
-                <div key={item} className="carousel-slide">
-                  <Image
-                    src={homePageMainImg}
-                    title="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
-                    alt="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
-                    className={`overlay-image ${zoomImage ? "zoom" : ""}`}
-                    priority
-                    fetchPriority="high"
-                    quality={95}
-                    width={1920}
-                    height={1080}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    placeholder="blur"
-                    loading="eager"
-                    decoding="async"
-                    style={{
-                      contentVisibility: "auto",
-                      containIntrinsicSize: "1200px 800px",
-                    }}
-                  />
-                </div>
-              ))}
+              {heroImages?.length > 0
+                ? heroImages?.map((item, index) => (
+                    <div key={index} className="carousel-slide">
+                      <Image
+                        src={item.image_src || homePageMainImg}
+                        title={item.image_name || "Hero Image"}
+                        alt={item.image_name || "Hero Image"}
+                        className={`overlay-image ${zoomImage ? "zoom" : ""}`}
+                        priority
+                        fetchPriority="high"
+                        quality={95}
+                        width={1920}
+                        height={1080}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        // placeholder="blur"
+                        loading="eager"
+                        decoding="async"
+                        style={{
+                          contentVisibility: "auto",
+                          containIntrinsicSize: "1200px 800px",
+                        }}
+                      />
+                    </div>
+                  ))
+                : // Fallback if no images in DB
+                  [1, 2, 3].map((item) => (
+                    <div key={item} className="carousel-slide">
+                      <Image
+                        src={homePageMainImg}
+                        title="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
+                        alt="Luxury European Fireplace Display at Living Fire Melbourne Showroom"
+                        className={`overlay-image ${zoomImage ? "zoom" : ""}`}
+                        priority
+                        fetchPriority="high"
+                        quality={95}
+                        width={1920}
+                        height={1080}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        // placeholder="blur"
+                        loading="eager"
+                        decoding="async"
+                        style={{
+                          contentVisibility: "auto",
+                          containIntrinsicSize: "1200px 800px",
+                        }}
+                      />
+                    </div>
+                  ))}
             </Slider>
 
             <motion.div
@@ -369,13 +683,6 @@ const Home = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              {/* <h1
-                className="blur-text"
-                onClick={() => router.push(`/allProducts`)}
-                style={{ cursor: "pointer" }}
-              >
-                LIVING FIRE
-              </h1> */}
               <div
                 id="company-name"
                 className="blur-text text-4xl font-bold"
@@ -458,11 +765,6 @@ const Home = () => {
                             {fuelType.fueltype_name === "Cooker"
                               ? "Cookers"
                               : fuelType.fueltype_name}
-                            {/* {index < fuelTypes.length - 1 && (
-                        <span className="hidden md:flex items-center text-white">
-                          |
-                        </span>
-                      )} */}
                           </button>
                         </a>
                       </Link>
@@ -499,6 +801,35 @@ const Home = () => {
           </div>
         </motion.div>
       </div>
+
+      
+{/* Add Edit Button for Admin */}
+{isAdmin && (
+  <div className="admin-edit-hero">
+    <button
+      onClick={async () => {
+        try {
+          const res = await fetch("/api/hero-image");
+          const data = await res.json();
+          setEditData(data);
+          setEditing(true);
+        } catch (error) {
+          console.error('Error fetching hero images:', error);
+          alert('Error loading hero images');
+        }
+      }}
+      className="edit-hero-btn"
+      type="button"
+    >
+      <Edit size={16} />
+      Edit Hero Images
+    </button>
+  </div>
+)}
+
+{/* Hero Image Editor Modal */}
+{editing && <HeroImageEditor />}
+
 
       {/* Dynamically Loaded Sections */}
       <Suspense
@@ -575,23 +906,6 @@ const Home = () => {
             />
           </>
         )}
-        {/* <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "40px",
-            backgroundColor: "white",
-          }}
-        >
-          <OurBrands
-            brandList={brandsList}
-            allProductsRouteHandler={allProductsRouteHandler}
-          />
-          <Featured
-            headingValue="Featured"
-            productRouteHandler={productRouteHandler}
-          />
-        </div> */}
         {/* <Testimonials /> */}
         {/* <Blog /> */}
       </Suspense>

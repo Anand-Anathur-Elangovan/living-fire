@@ -485,7 +485,6 @@ const Featured = ({
   
   return '';
 };
-  console.log("router.carouselItems", carouselItems);
   return (
     <motion.div
       className={`featured-container ${
