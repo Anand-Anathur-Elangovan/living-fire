@@ -452,6 +452,303 @@
 .scroll-indicator svg {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
+
+/* Admin Edit Hero Button */
+.admin-edit-hero {
+display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 100;
+}
+
+.edit-hero-btn {
+  background: #2c5530;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.edit-hero-btn:hover {
+  background: #1e3a23;
+  transform: translateY(-1px);
+}
+
+/* Hero Editor Modal */
+.hero-editor-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.hero-editor-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.hero-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #f8f9fa;
+}
+
+.hero-editor-header h3 {
+  margin: 0;
+  color: #2c5530;
+  font-size: 1.25rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.close-btn:hover {
+  background: #e5e5e5;
+  color: #333;
+}
+
+.hero-editor-table {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+.hero-editor-table table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.hero-editor-table th,
+.hero-editor-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.hero-editor-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  position: sticky;
+  top: 0;
+}
+
+.hero-editor-table textarea,
+.hero-editor-table input[type="text"] {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+.hero-editor-table textarea:focus,
+.hero-editor-table input[type="text"]:focus {
+  outline: none;
+  border-color: #2c5530;
+  box-shadow: 0 0 0 2px rgba(44, 85, 48, 0.1);
+}
+
+
+.hero-editor-table textarea {
+  min-height: 60px;
+  font-family: inherit;
+   line-height: 1.4;
+}
+
+.hero-editor-table input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+.new-label {
+  background: #28a745;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.hero-editor-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-top: 1px solid #e5e5e5;
+  background: #f8f9fa;
+}
+
+.add-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.add-btn:hover {
+  background: #5a6268;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.cancel-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: #5a6268;
+}
+
+.save-btn {
+  background: #2c5530;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.save-btn:hover:not(:disabled) {
+  background: #1e3a23;
+}
+
+.save-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-editor-content {
+    width: 95%;
+    height: 95vh;
+  }
+  
+  .hero-editor-table {
+    padding: 10px;
+  }
+  
+  .hero-editor-table table {
+    font-size: 14px;
+  }
+  
+  .hero-editor-actions {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .action-buttons {
+    justify-content: space-between;
+  }
+  
+  .admin-edit-hero {
+       padding: 15px;
+    justify-content: center;
+  }
+  .hero-editor-content {
+    width: 95%;
+    height: 95vh;
+  }
+  
+  .hero-editor-table {
+    padding: 10px;
+  }
+  
+  .hero-editor-table table {
+    font-size: 14px;
+  }
+  .hero-editor-actions {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+   .action-buttons {
+    justify-content: space-between;
+  }
+
+  .edit-hero-btn {
+  width: 100%;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 768px) {
   .custom-dots-container {
     bottom: 20px;
@@ -879,5 +1176,66 @@
 
   .hero p {
     font-size: 0.9rem;
+  }
+}
+
+/* Fix for input and textarea focus */
+.edit-textarea,
+.edit-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+.edit-textarea:focus,
+.edit-input:focus {
+  outline: none;
+  border-color: #2c5530;
+  box-shadow: 0 0 0 2px rgba(44, 85, 48, 0.1);
+}
+
+.edit-textarea {
+  min-height: 60px;
+  line-height: 1.4;
+}
+
+/* Ensure textareas don't lose focus */
+.edit-textarea:focus {
+  border-color: #2c5530;
+}
+
+/* Style for new rows */
+.new-row {
+  background-color: #f8fff9;
+}
+
+.new-row td {
+  border-bottom: 2px dashed #2c5530;
+}
+
+/* Better button styles */
+.add-btn, .cancel-btn, .save-btn, .delete-btn {
+  transition: all 0.2s ease;
+}
+
+.add-btn:active, .cancel-btn:active, .save-btn:active, .delete-btn:active {
+  transform: scale(0.98);
+}
+
+/* Prevent flash on focus */
+.edit-textarea, .edit-input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile improvements */
+@media (max-width: 768px) {
+  .edit-textarea,
+  .edit-input {
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 }

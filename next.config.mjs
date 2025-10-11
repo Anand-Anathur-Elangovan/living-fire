@@ -157,6 +157,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.livingfires.com.au",
       },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+      }
     ],
   },
 
