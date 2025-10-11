@@ -451,36 +451,41 @@ const Featured = ({
     );
   }
   const getImageSource = (item) => {
-    // First try product_image
-    if (item.product_image) {
-      if (typeof item.product_image === "string") {
-        // Check if it's a stringified JSON object
-        if (
-          item.product_image.startsWith("{") &&
-          item.product_image.endsWith("}")
-        ) {
-          try {
-            const parsed = JSON.parse(item.product_image);
-            return parsed.src || parsed.url || "";
-          } catch (e) {
-            return item.product_image;
-          }
+  // First try product_image
+  if (item.product_image) {
+    if (typeof item.product_image === 'string') {
+      // Check if it's a stringified JSON object
+      if (item.product_image.startsWith('{') && item.product_image.endsWith('}')) {
+        try {
+          const parsed = JSON.parse(item.product_image);
+          return parsed.src || parsed.url || '';
+        } catch (e) {
+          return item.product_image;
         }
-        return item.product_image;
-      } else if (item.product_image.src) {
-        return item.product_image.src;
       }
+      return item.product_image && item.product_image.length > 14 
+        ? transformImageSrc(item.product_image) 
+        : item.product_image;
+    } else if (item.product_image.src) {
+      return item.product_image.src;
     }
-
-    // Fallback to image field
-    if (item.image) {
-      if (typeof item.image === "string") return item.image;
-      if (item.image.src) return item.image.src;
+  }
+  
+  // Fallback to image field
+  if (item.image) {
+    if (typeof item.image === 'string') {
+      return item.image && item.image.length > 14 
+        ? transformImageSrc(item.image) 
+        : item.image;
     }
-
-    return "";
-  };
-  console.log("router.pathname", router.pathname, range_id, pathname);
+    if (item.image.src) {
+      return item.image.src;
+    }
+  }
+  
+  return '';
+};
+  console.log("router.carouselItems", carouselItems);
   return (
     <motion.div
       className={`featured-container ${
