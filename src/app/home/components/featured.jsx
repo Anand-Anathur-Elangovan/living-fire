@@ -141,7 +141,7 @@ const Featured = ({
           if (brand_name) params.append("brand_name", brand_name);
           if (p_id) params.append("p_id", p_id);
 
-          const response = await fetch(`/api/get-feature?${params.toString()}`);
+          const response = await fetch(`/api/get-features?${params.toString()}`);
           const data = await response.json();
 
           if (data.success) {
