@@ -922,10 +922,7 @@ if (filterType === "installationType" && slug === "outdoor") {
     setInstallationType(null);
     setGlassOrientationType(null);
     // Update URL without navigating so client state persists and UI updates immediately
-    if (typeof window !== "undefined") {
-      // window.history.replaceState(null, "", "/allProducts");
-      router.push("/allProducts");
-    }
+    
     if (searchRef.current) {
       searchRef.current.value = "";
     }
@@ -937,6 +934,10 @@ if (filterType === "installationType" && slug === "outdoor") {
       rangeIdStatus: false,
       brandIdStatus: false,
     });
+    if (typeof window !== "undefined") {
+      // window.history.replaceState(null, "", "/allProducts");
+      router.push("/allProducts");
+    }
   };
 
   useEffect(() => {
