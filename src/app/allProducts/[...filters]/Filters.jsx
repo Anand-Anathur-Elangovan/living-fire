@@ -560,7 +560,7 @@ const Filters = () => {
 
 
   const updateFilter = (filterType, value, id, slug) => {
-  // Update local state immediately
+  // Update local state immediately for instant UI response
   switch(filterType) {
     case 'fuelType':
       setFireplaceType(id);
@@ -585,37 +585,72 @@ const Filters = () => {
   let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
   
   // Handle outdoor logic BEFORE updating the current filter
-  if (filterType === "installationType" && slug === "outdoor") {
-    const outdoorType = filterMappingsMock.find(
-      item => item.filterType === "type" && item.slug === "outdoor"
-    );
-    if (outdoorType) {
-      setproductMenuIndex(outdoorType.id);
-      // Update type filter to outdoor
-      const typeIndex = filters.findIndex(f => f.filterType === "type");
-      if (typeIndex !== -1) {
-        filters[typeIndex] = { 
-          value: outdoorType.value, 
-          id: outdoorType.id, 
-          filterType: "type", 
-          slug: outdoorType.slug 
-        };
-      } else {
-        filters.unshift({ 
-          value: outdoorType.value, 
-          id: outdoorType.id, 
-          filterType: "type", 
-          slug: outdoorType.slug 
-        });
-      }
-    }
-  } else if (filterType === "type" && slug === "outdoor") {
+  // Handle outdoor logic BEFORE updating the current filter
+if (filterType === "installationType" && slug === "outdoor") {
+  const outdoorType = filterMappingsMock.find(
+    item => item.filterType === "type" && item.slug === "outdoor"
+  );
+  const outdoorInstallationType = filterMappingsMock.find(
+    item => item.filterType === "installationType" && item.slug === "outdoor"
+  );
+  
+  if (outdoorType && outdoorInstallationType) {
+    // Clear all filters first to ensure clean state
+    const newFilters = [];
+    
+    // Add outdoor TYPE (product type)
+    newFilters.push({ 
+      value: outdoorType.value, 
+      id: outdoorType.id, 
+      filterType: "type", 
+      slug: outdoorType.slug 
+    });
+    
+    // Add outdoor INSTALLATION TYPE (installation type)
+    newFilters.push({ 
+      value: outdoorInstallationType.value, 
+      id: outdoorInstallationType.id, 
+      filterType: "installationType", 
+      slug: outdoorInstallationType.slug 
+    });
+    
+    // Update all states
+    setproductMenuIndex(outdoorType.id);
+    setInstallationType(outdoorInstallationType.id);
+    setFireplaceType(null);
+    setBrandType(null);
+    setRangeType(null);
+    setGlassOrientationType(null);
+    
+    // Update filter status
+    setFilterStatus({
+      fireplaceFilterIdStatus: false,
+      installationTypeIdStatus: true,
+      glassOrientationIdStatus: false,
+      rangeIdStatus: false,
+      brandIdStatus: false,
+    });
+    
+    filters = newFilters;
+    
+    // Force refresh
+    setRefreshPage(prev => !prev);
+  }
+} else if (filterType === "type" && slug === "outdoor") {
     // Remove outdoor installation type when outdoor product type is selected
     filters = filters.filter(
       f => !(f.filterType === "installationType" && f.slug === "outdoor")
     );
     setInstallationType(null);
     handleFilterStatus("installationTypeIdStatus", false);
+    
+    // Normal filter update for type
+    const index = filters.findIndex((item) => item.filterType === filterType);
+    if (index !== -1) {
+      filters[index] = { value, id, filterType, slug };
+    } else {
+      filters.push({ value, id, filterType, slug });
+    }
   } else {
     // Normal filter update for non-outdoor cases
     const index = filters.findIndex((item) => item.filterType === filterType);
@@ -651,25 +686,31 @@ const Filters = () => {
     // ignore if setFilters not available
   }
 
-  // Update filter status
-  switch (filterType) {
-    case "fuelType":
-      handleFilterStatus("fireplaceFilterIdStatus", true);
-      break;
-    case "installationType":
-      handleFilterStatus("installationTypeIdStatus", true);
-      break;
-    case "glassOrientationType":
-      handleFilterStatus("glassOrientationIdStatus", true);
-      break;
-    case "rangeType":
-      handleFilterStatus("rangeIdStatus", true);
-      break;
-    case "brand":
-      handleFilterStatus("brandIdStatus", true);
-      break;
-    default:
-      break;
+  // Update filter status for non-outdoor installation cases
+  if (!(filterType === "installationType" && slug === "outdoor")) {
+    switch (filterType) {
+      case "fuelType":
+        handleFilterStatus("fireplaceFilterIdStatus", true);
+        break;
+      case "installationType":
+        handleFilterStatus("installationTypeIdStatus", true);
+        break;
+      case "glassOrientationType":
+        handleFilterStatus("glassOrientationIdStatus", true);
+        break;
+      case "rangeType":
+        handleFilterStatus("rangeIdStatus", true);
+        break;
+      case "brand":
+        handleFilterStatus("brandIdStatus", true);
+        break;
+      default:
+        break;
+    }
+  }
+
+  if (window?.innerWidth <= 768) {
+    setIsFilter(false);
   }
 };
   const {
@@ -882,7 +923,8 @@ const Filters = () => {
     setGlassOrientationType(null);
     // Update URL without navigating so client state persists and UI updates immediately
     if (typeof window !== "undefined") {
-      window.history.replaceState(null, "", "/allProducts");
+      // window.history.replaceState(null, "", "/allProducts");
+      router.push("/allProducts");
     }
     if (searchRef.current) {
       searchRef.current.value = "";
@@ -1003,6 +1045,14 @@ const Filters = () => {
 
     return () => clearTimeout(timer);
   }, [filters]);
+
+
+  useEffect(() => {
+  console.log("productMenuIndex changed:", productMenuIndex);
+  console.log("installationType changed:", installationType);
+  console.log("filters:", filters);
+}, [productMenuIndex, installationType, filters]);
+
 
   return (
     <div
