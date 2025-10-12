@@ -875,6 +875,7 @@ console.log("Rendering Home with editData:", editData);
         <Collections
           fuelTypes={fuelTypes}
           allProductsRouteHandler={allProductsRouteHandler}
+          isAdmin={isAdmin} 
         />
         {isDesktop ? (
           <div
@@ -888,6 +889,7 @@ console.log("Rendering Home with editData:", editData);
             <OurBrands
               brandList={brandsList}
               allProductsRouteHandler={allProductsRouteHandler}
+              isAdmin={isAdmin} 
             />
             <Featured
               headingValue="Featured"
