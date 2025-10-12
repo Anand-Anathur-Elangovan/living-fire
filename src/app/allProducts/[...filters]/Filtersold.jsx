@@ -237,7 +237,6 @@ const Filters = () => {
   const router = useRouter();
   const pathname = usePathname();
   const {
-    // masterValues: { productTypes: allProductMenu = [] },
     // brands,
     masterValues: { fuelTypes: any = [], productTypes: allProductMenu = [] },
   } = useMasterValues();
@@ -267,7 +266,6 @@ const Filters = () => {
     rangeIdStatus: false,
     brandIdStatus: false,
   });
-  const [debouncedFilters, setDebouncedFilters] = useState(filters);
 
   const handleFilterStatus = (key, status) => {
     setFilterStatus((prev) => ({
@@ -443,6 +441,8 @@ const Filters = () => {
         return {
           ...prev,
           fueltypeValues: fuelTypes?.map((val) => val.fueltype_id),
+          //  newFuelValues,
+          // fireplaceType ? prev.fueltypeValues : newFuelValues,
           installationValues: installationType
             ? prev.installationValues
             : newInstallValues,
@@ -456,222 +456,19 @@ const Filters = () => {
     if (allProducts.length > 0) updateFuelTypeValues();
   }, [isFetched, allProducts]);
 
-  // const updateFilter = (filterType, value, id, slug) => {
-  //   // Update local state immediately for instant UI response
-  //   switch (filterType) {
-  //     case "fuelType":
-  //       setFireplaceType(id);
-  //       break;
-  //     case "brand":
-  //       setBrandType(id);
-  //       break;
-  //     case "installationType":
-  //       setInstallationType(id);
-  //       break;
-  //     case "glassOrientationType":
-  //       setGlassOrientationType(id);
-  //       break;
-  //     case "rangeType":
-  //       setRangeType(id);
-  //       break;
-  //     case "type":
-  //       setproductMenuIndex(id);
-  //       break;
-  //   }
-
-  //   // Handle outdoor type logic
-  //   let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
-
-  //   // If user selects outdoor installation type, automatically set product type to outdoor
-  //   if (filterType === "installationType" && slug === "outdoor") {
-  //     const outdoorType = filterMappingsMock.find(
-  //       (item) => item.filterType === "type" && item.slug === "outdoor"
-  //     );
-  //     if (outdoorType) {
-  //       setproductMenuIndex(outdoorType.id);
-  //       // Remove any existing type filter and add outdoor type
-  //       filters = filters.filter((f) => f.filterType !== "type");
-  //       filters.unshift({
-  //         value: outdoorType.value,
-  //         id: outdoorType.id,
-  //         filterType: "type",
-  //         slug: outdoorType.slug,
-  //       });
-  //     }
-  //   }
-
-  //   // If user selects outdoor product type, remove outdoor installation type
-  //   if (filterType === "type" && slug === "outdoor") {
-  //     // Remove installationType 'outdoor' from filters
-  //     filters = filters.filter(
-  //       (f) => !(f.filterType === "installationType" && f.slug === "outdoor")
-  //     );
-  //     // Clear local installation selection
-  //     setInstallationType(null);
-  //     handleFilterStatus("installationTypeIdStatus", false);
-  //   }
-
-  //   // Update the current filter
-  //   let index = filters.findIndex((item) => item.filterType === filterType);
-  //   if (index !== -1) {
-  //     filters[index] = { value, id, filterType, slug };
-  //   } else {
-  //     filters.push({ value, id, filterType, slug });
-  //   }
-
-  //   sessionStorage.setItem("filtersJson", JSON.stringify(filters));
-  //   let path = filters.map((item) => `${item?.slug}`).join("/");
-
-  //   // Update URL
-  //   if (typeof window !== "undefined") {
-  //     const newPath = `/allProducts/${path}`.replace(/\/+$/, "");
-  //     const finalPath = newPath === "/allProducts/" ? "/allProducts" : newPath;
-  //     window.history.replaceState(null, "", finalPath);
-  //   }
-
-  //   // Update React state
-  //   try {
-  //     setFilters(filters);
-  //   } catch (e) {
-  //     // ignore if setFilters not available
-  //   }
-
-  //   // Update filter status
-  //   switch (filterType) {
-  //     case "fuelType":
-  //       handleFilterStatus("fireplaceFilterIdStatus", true);
-  //       break;
-  //     case "installationType":
-  //       handleFilterStatus("installationTypeIdStatus", true);
-  //       break;
-  //     case "glassOrientationType":
-  //       handleFilterStatus("glassOrientationIdStatus", true);
-  //       break;
-  //     case "rangeType":
-  //       handleFilterStatus("rangeIdStatus", true);
-  //       break;
-  //     case "brand":
-  //       handleFilterStatus("brandIdStatus", true);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-
-  const updateFilter = (filterType, value, id, slug) => {
-  // Update local state immediately
-  switch(filterType) {
-    case 'fuelType':
-      setFireplaceType(id);
-      break;
-    case 'brand':
-      setBrandType(id);
-      break;
-    case 'installationType':
-      setInstallationType(id);
-      break;
-    case 'glassOrientationType':
-      setGlassOrientationType(id);
-      break;
-    case 'rangeType':
-      setRangeType(id);
-      break;
-    case 'type':
-      setproductMenuIndex(id);
-      break;
-  }
-
-  let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
-  
-  // Handle outdoor logic BEFORE updating the current filter
-  if (filterType === "installationType" && slug === "outdoor") {
-    const outdoorType = filterMappingsMock.find(
-      item => item.filterType === "type" && item.slug === "outdoor"
-    );
-    if (outdoorType) {
-      setproductMenuIndex(outdoorType.id);
-      // Update type filter to outdoor
-      const typeIndex = filters.findIndex(f => f.filterType === "type");
-      if (typeIndex !== -1) {
-        filters[typeIndex] = { 
-          value: outdoorType.value, 
-          id: outdoorType.id, 
-          filterType: "type", 
-          slug: outdoorType.slug 
-        };
-      } else {
-        filters.unshift({ 
-          value: outdoorType.value, 
-          id: outdoorType.id, 
-          filterType: "type", 
-          slug: outdoorType.slug 
-        });
-      }
-    }
-  } else if (filterType === "type" && slug === "outdoor") {
-    // Remove outdoor installation type when outdoor product type is selected
-    filters = filters.filter(
-      f => !(f.filterType === "installationType" && f.slug === "outdoor")
-    );
-    setInstallationType(null);
-    handleFilterStatus("installationTypeIdStatus", false);
-  } else {
-    // Normal filter update for non-outdoor cases
-    const index = filters.findIndex((item) => item.filterType === filterType);
+  function updateFilter(filterType, value, id, slug) {
+    let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
+    let index = filters.findIndex((item) => item.filterType === filterType);
     if (index !== -1) {
       filters[index] = { value, id, filterType, slug };
     } else {
       filters.push({ value, id, filterType, slug });
     }
-  }
-  
-  sessionStorage.setItem("filtersJson", JSON.stringify(filters));
-  
-  // Remove any potential duplicates (safety check)
-  const uniqueFilters = filters.filter((filter, index, self) =>
-    index === self.findIndex(f => 
-      f.filterType === filter.filterType && f.slug === filter.slug
-    )
-  );
-  
-  let path = uniqueFilters.map((item) => `${item?.slug}`).join("/");
-
-  // Update URL
-  if (typeof window !== "undefined") {
-    const newPath = `/allProducts/${path}`.replace(/\/+$/, "");
-    const finalPath = newPath === "/allProducts/" ? "/allProducts" : newPath;
-    window.history.replaceState(null, "", finalPath);
+    sessionStorage.setItem("filtersJson", JSON.stringify(filters));
+    let path = filters.map((item) => `${item?.slug}`).join("/");
+    router.push(`/allProducts/${path}`);
   }
 
-  // Update React state
-  try {
-    setFilters(uniqueFilters);
-  } catch (e) {
-    // ignore if setFilters not available
-  }
-
-  // Update filter status
-  switch (filterType) {
-    case "fuelType":
-      handleFilterStatus("fireplaceFilterIdStatus", true);
-      break;
-    case "installationType":
-      handleFilterStatus("installationTypeIdStatus", true);
-      break;
-    case "glassOrientationType":
-      handleFilterStatus("glassOrientationIdStatus", true);
-      break;
-    case "rangeType":
-      handleFilterStatus("rangeIdStatus", true);
-      break;
-    case "brand":
-      handleFilterStatus("brandIdStatus", true);
-      break;
-    default:
-      break;
-  }
-};
   const {
     brands,
     masterValues: {
@@ -683,19 +480,6 @@ const Filters = () => {
     },
   } = useMasterValues(productMenuIndex);
 
-  // const updateQueryParams = (params) => {
-  //   const currentParams = new URLSearchParams(searchParams.toString());
-  //   Object.keys(params).forEach((key) => {
-  //     if (params[key] !== null && params[key] !== undefined) {
-  //       currentParams.set(key, params[key]);
-  //     } else {
-  //       currentParams.delete(key);
-  //     }
-  //   });
-
-  //   router.push(`?${currentParams.toString()}`, { shallow: true });
-  // };
-
   const updateQueryParams = (params) => {
     const currentParams = new URLSearchParams(searchParams.toString());
     Object.keys(params).forEach((key) => {
@@ -705,14 +489,8 @@ const Filters = () => {
         currentParams.delete(key);
       }
     });
-    // Update query params in the URL without performing a navigation
-    if (typeof window !== "undefined") {
-      const qs = currentParams.toString();
-      const newUrl = qs
-        ? `${window.location.pathname}?${qs}`
-        : window.location.pathname;
-      window.history.replaceState(null, "", newUrl);
-    }
+
+    router.push(`?${currentParams.toString()}`, { shallow: true });
   };
 
   const [refreshPage, setRefreshPage] = useState(false);
@@ -880,21 +658,7 @@ const Filters = () => {
     // }));
     setInstallationType(null);
     setGlassOrientationType(null);
-    // Update URL without navigating so client state persists and UI updates immediately
-    if (typeof window !== "undefined") {
-      window.history.replaceState(null, "", "/allProducts");
-    }
-    if (searchRef.current) {
-      searchRef.current.value = "";
-    }
-
-    setFilterStatus({
-      fireplaceFilterIdStatus: false,
-      installationTypeIdStatus: false,
-      glassOrientationIdStatus: false,
-      rangeIdStatus: false,
-      brandIdStatus: false,
-    });
+    router.push("/allProducts");
   };
 
   useEffect(() => {
@@ -909,12 +673,16 @@ const Filters = () => {
     };
 
     if (queryParams.searchText) setSearchText(queryParams.searchText);
+    // if (queryParams.fireplaceType)
+    //   setFireplaceType(Number(queryParams.fireplaceType));
     if (queryParams.brand) setBrandType(Number(queryParams.brand));
     if (queryParams.glassOrientationType)
-      setGlassOrientationType(Number(queryParams.glassOrientationType));
+      setglassOrientationType(Number(queryParams.glassOrientationType));
     if (queryParams.installationType)
       setInstallationType(Number(queryParams.installationType));
     if (queryParams.rangeType) setRangeType(Number(queryParams.rangeType));
+    // if (queryParams.productMenuIndex)
+    //   setproductMenuIndex(Number(queryParams.productMenuIndex));
   }, [searchParams]);
 
   const [isClient, setIsClient] = useState(false);
@@ -942,68 +710,15 @@ const Filters = () => {
       return () => clearTimeout(timeout);
     }
   }, []);
-  //   const removeFilterFromUrl = (filterType) => {
-  //   let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
-  //   filters = filters.filter((item) => item.filterType !== filterType);
-  //   sessionStorage.setItem("filtersJson", JSON.stringify(filters));
-
-  //   let path = filters.map((item) => `${item?.slug}`).join("/");
-  //   router.push(`/allProducts/${path}`);
-  // };
   const removeFilterFromUrl = (filterType) => {
-    let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
-    filters = filters.filter((item) => item.filterType !== filterType);
-    sessionStorage.setItem("filtersJson", JSON.stringify(filters));
-
-    let path = filters.map((item) => `${item?.slug}`).join("/");
-    // Update URL without triggering a navigation
-    if (typeof window !== "undefined") {
-      const newPath = `/allProducts/${path}`.replace(/\/+$/, "");
-      const finalPath = newPath === "/allProducts/" ? "/allProducts" : newPath;
-      window.history.replaceState(null, "", finalPath);
-    }
-    // Update React state and clear the related local filter so UI updates instantly
-    try {
-      setFilters(filters);
-    } catch (e) {}
-
-    switch (filterType) {
-      case "fuelType":
-        setFireplaceType(null);
-        handleFilterStatus("fireplaceFilterIdStatus", false);
-        break;
-      case "installationType":
-        setInstallationType(null);
-        handleFilterStatus("installationTypeIdStatus", false);
-        break;
-      case "glassOrientationType":
-        setGlassOrientationType(null);
-        handleFilterStatus("glassOrientationIdStatus", false);
-        break;
-      case "brand":
-        setBrandType(null);
-        handleFilterStatus("brandIdStatus", false);
-        break;
-      case "rangeType":
-        setRangeType(null);
-        handleFilterStatus("rangeIdStatus", false);
-        break;
-      case "type":
-        setproductMenuIndex(0);
-        break;
-      default:
-        break;
-    }
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedFilters(filters);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [filters]);
-
+  let filters = JSON.parse(sessionStorage.getItem("filtersJson")) || [];
+  filters = filters.filter((item) => item.filterType !== filterType);
+  sessionStorage.setItem("filtersJson", JSON.stringify(filters));
+  
+  let path = filters.map((item) => `${item?.slug}`).join("/");
+  router.push(`/allProducts/${path}`);
+};
+  // console.log("filteredProducts in filters Page", filteredProducts, "allProducts", allProducts);
   return (
     <div
       className="mt-[10rem]"
@@ -1298,67 +1013,63 @@ const Filters = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase  font-semibold text-base">
                           {"Fireplace Type"}
-                          <span className="flex gap-3">
-                            {isClient && fireplaceType && (
-                              <div className="flex items-center gap-2">
-                                {/* <span className="text-sm font-normal normal-case">
+                          <span className="flex gap-3"> 
+                          {isClient && fireplaceType && (
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
                                 Clear
                               </span> */}
-                                <Image
-                                  src={CrossIcon}
-                                  alt="clear"
-                                  className="cursor-pointer"
-                                  unoptimized
-                                  onClick={() => {
-                                    // Clear fireplace type logic
-                                    setFireplaceType(null);
-                                    // Remove from URL - you need to add this
-                                    removeFilterFromUrl("fuelType");
-                                  }}
-                                />
-                              </div>
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  // Clear fireplace type logic
+                                  setFireplaceType(null);
+                                  // Remove from URL - you need to add this
+                                  removeFilterFromUrl("fuelType");
+                                }}
+                              />
+                            </div>
+                          )}
+                          {isClient &&
+                            !document
+                              .getElementById("fireplaceFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={MinusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus("fireplaceFilterIdStatus");
+                                  document
+                                    .getElementById("fireplaceFilterId")
+                                    .classList.add("collapse");
+                                }}
+                                unoptimized
+                              />
                             )}
-                            {isClient &&
-                              !document
-                                .getElementById("fireplaceFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <Image
-                                  src={MinusIcon}
-                                  alt="clear"
-                                  className="md:pt-1 cursor-pointer"
-                                  onClick={() => {
-                                    setRefreshPage((prev) => !prev);
-                                    handleFilterStatus(
-                                      "fireplaceFilterIdStatus"
-                                    );
-                                    document
-                                      .getElementById("fireplaceFilterId")
-                                      .classList.add("collapse");
-                                  }}
-                                  unoptimized
-                                />
-                              )}
-                            {isClient &&
-                              document
-                                .getElementById("fireplaceFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <Image
-                                  src={PlusIcon}
-                                  alt="clear"
-                                  className="md:pt-1 cursor-pointer"
-                                  onClick={() => {
-                                    setRefreshPage((prev) => !prev);
-                                    handleFilterStatus(
-                                      "fireplaceFilterIdStatus"
-                                    );
-                                    document
-                                      .getElementById("fireplaceFilterId")
-                                      .classList.remove("collapse");
-                                  }}
-                                  unoptimized
-                                />
-                              )}
-                          </span>
+                          {isClient &&
+                            document
+                              .getElementById("fireplaceFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus("fireplaceFilterIdStatus");
+                                  document
+                                    .getElementById("fireplaceFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                            </span>
                         </span>
                         <div
                           id="fireplaceFilterId"
@@ -1456,57 +1167,33 @@ const Filters = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Installation Type`}
-                          <span className="flex gap-3">
+                          <span className="flex gap-3"> 
                             {isClient && installationType && (
-                              <div className="flex items-center gap-2">
-                                {/* <span className="text-sm font-normal normal-case">
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
                                 Clear
                               </span> */}
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  setInstallationType(null);
+                                  // Remove from URL - you need to add this
+                                  removeFilterFromUrl("installationType");
+                                }}
+                              />
+                            </div>
+                          )}
+                          
+                          {isClient &&
+                            !document
+                              .getElementById("installationTypeFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <div style={{ display: "flex", gap: "30px" }}>
                                 <Image
-                                  src={CrossIcon}
-                                  alt="clear"
-                                  className="cursor-pointer"
-                                  unoptimized
-                                  onClick={() => {
-                                    setInstallationType(null);
-                                    // Remove from URL - you need to add this
-                                    removeFilterFromUrl("installationType");
-                                  }}
-                                />
-                              </div>
-                            )}
-
-                            {isClient &&
-                              !document
-                                .getElementById("installationTypeFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <div style={{ display: "flex", gap: "30px" }}>
-                                  <Image
-                                    src={MinusIcon}
-                                    alt="clear"
-                                    className="md:pt-1 cursor-pointer"
-                                    onClick={() => {
-                                      setRefreshPage((prev) => !prev);
-                                      handleFilterStatus(
-                                        "installationTypeIdStatus"
-                                      );
-                                      document
-                                        .getElementById(
-                                          "installationTypeFilterId"
-                                        )
-                                        .classList.add("collapse");
-                                    }}
-                                    unoptimized
-                                  />
-                                </div>
-                              )}
-
-                            {isClient &&
-                              document
-                                .getElementById("installationTypeFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <Image
-                                  src={PlusIcon}
+                                  src={MinusIcon}
                                   alt="clear"
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
@@ -1518,12 +1205,34 @@ const Filters = () => {
                                       .getElementById(
                                         "installationTypeFilterId"
                                       )
-                                      .classList.remove("collapse");
+                                      .classList.add("collapse");
                                   }}
                                   unoptimized
                                 />
-                              )}
-                          </span>
+                              </div>
+                            )}
+
+                          {isClient &&
+                            document
+                              .getElementById("installationTypeFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus(
+                                    "installationTypeIdStatus"
+                                  );
+                                  document
+                                    .getElementById("installationTypeFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                            </span>
                         </span>
                         <div
                           id="installationTypeFilterId"
@@ -1535,7 +1244,7 @@ const Filters = () => {
                               !filterStatus?.installationTypeIdStatus && "none",
                           }}
                         >
-                          {/* {firePlaceSubType.installation &&
+                          {firePlaceSubType.installation &&
                             // updatedValues?.installationValues?.length > 0 &&
                             installationTypes.map((installval) => (
                               <span
@@ -1565,53 +1274,7 @@ const Filters = () => {
                               >
                                 {installval?.installation_name}
                               </span>
-                            ))} */}
-                          {firePlaceSubType.installation &&
-                            installationTypes
-                              .filter((installval) => {
-                                // If product type is outdoor, hide outdoor installation option
-                                const isOutdoorProductType =
-                                  productMenuIndex ===
-                                  filterMappingsMock.find(
-                                    (item) =>
-                                      item.filterType === "type" &&
-                                      item.slug === "outdoor"
-                                  )?.id;
-
-                                if (
-                                  isOutdoorProductType &&
-                                  installval.slug === "outdoor"
-                                ) {
-                                  return false;
-                                }
-                                return true;
-                              })
-                              .map((installval) => (
-                                <span
-                                  key={
-                                    "installtypes" + installval?.installation_id
-                                  }
-                                  className={`font-small leading-5 text-normal hover:text-black transition ease-in-out cursor-pointer ${
-                                    installval?.installation_id ===
-                                    installationType
-                                      ? "text-black font-semibold"
-                                      : "text-gray-400"
-                                  }`}
-                                  onClick={() => {
-                                    updateFilter(
-                                      "installationType",
-                                      installval?.installation_name,
-                                      installval?.installation_id,
-                                      installval?.slug
-                                    );
-                                    if (window?.innerWidth <= 768) {
-                                      setIsFilter(false);
-                                    }
-                                  }}
-                                >
-                                  {installval?.installation_name}
-                                </span>
-                              ))}
+                            ))}
                         </div>
                       </div>
                     }
@@ -1621,55 +1284,31 @@ const Filters = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Glass Orientation Type`}
-                          <span className="flex gap-3">
+                          <span className="flex gap-3"> 
                             {isClient && glassOrientationType && (
-                              <div className="flex items-center gap-2">
-                                {/* <span className="text-sm font-normal normal-case">
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
                                 Clear
                               </span> */}
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  setGlassOrientationType(null);
+                                  removeFilterFromUrl("glassOrientationType");
+                                }}
+                              />
+                            </div>
+                          )}
+                          {isClient &&
+                            !document
+                              .getElementById("glassOrientationTypeFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <div style={{ display: "flex", gap: "30px" }}>
                                 <Image
-                                  src={CrossIcon}
-                                  alt="clear"
-                                  className="cursor-pointer"
-                                  unoptimized
-                                  onClick={() => {
-                                    setGlassOrientationType(null);
-                                    removeFilterFromUrl("glassOrientationType");
-                                  }}
-                                />
-                              </div>
-                            )}
-                            {isClient &&
-                              !document
-                                .getElementById("glassOrientationTypeFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <div style={{ display: "flex", gap: "30px" }}>
-                                  <Image
-                                    src={MinusIcon}
-                                    alt="clear"
-                                    className="md:pt-1 cursor-pointer"
-                                    onClick={() => {
-                                      setRefreshPage((prev) => !prev);
-                                      handleFilterStatus(
-                                        "glassOrientationIdStatus"
-                                      );
-                                      document
-                                        .getElementById(
-                                          "glassOrientationTypeFilterId"
-                                        )
-                                        .classList.add("collapse");
-                                    }}
-                                    unoptimized
-                                  />
-                                </div>
-                              )}
-
-                            {isClient &&
-                              document
-                                .getElementById("glassOrientationTypeFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <Image
-                                  src={PlusIcon}
+                                  src={MinusIcon}
                                   alt="clear"
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
@@ -1681,12 +1320,36 @@ const Filters = () => {
                                       .getElementById(
                                         "glassOrientationTypeFilterId"
                                       )
-                                      .classList.remove("collapse");
+                                      .classList.add("collapse");
                                   }}
                                   unoptimized
                                 />
-                              )}
-                          </span>
+                              </div>
+                            )}
+
+                          {isClient &&
+                            document
+                              .getElementById("glassOrientationTypeFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus(
+                                    "glassOrientationIdStatus"
+                                  );
+                                  document
+                                    .getElementById(
+                                      "glassOrientationTypeFilterId"
+                                    )
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                            </span>
                         </span>
                         <div
                           id="glassOrientationTypeFilterId"
@@ -1730,66 +1393,68 @@ const Filters = () => {
                       </div>
                     }
 
+                    
+
                     {/* Brands Types */}
                     {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase  font-semibold text-base">
                           Brands{" "}
-                          <span className="flex gap-3">
+                          <span className="flex gap-3"> 
                             {isClient && brandType && (
-                              <div className="flex items-center gap-2">
-                                {/* <span className="text-sm font-normal normal-case">
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
                                 Clear
                               </span> */}
-                                <Image
-                                  src={CrossIcon}
-                                  alt="clear"
-                                  className="cursor-pointer"
-                                  unoptimized
-                                  onClick={() => {
-                                    setBrandType(null);
-                                    removeFilterFromUrl("brand");
-                                  }}
-                                />
-                              </div>
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  setBrandType(null);
+                                  removeFilterFromUrl("brand");
+                                }}
+                              />
+                            </div>
+                          )}
+                          {isClient &&
+                            !document
+                              .getElementById("brandsFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={MinusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus("brandIdStatus");
+                                  document
+                                    .getElementById("brandsFilterId")
+                                    .classList.add("collapse");
+                                }}
+                                unoptimized
+                              />
                             )}
-                            {isClient &&
-                              !document
-                                .getElementById("brandsFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <Image
-                                  src={MinusIcon}
-                                  alt="clear"
-                                  className="md:pt-1 cursor-pointer"
-                                  onClick={() => {
-                                    setRefreshPage((prev) => !prev);
-                                    handleFilterStatus("brandIdStatus");
-                                    document
-                                      .getElementById("brandsFilterId")
-                                      .classList.add("collapse");
-                                  }}
-                                  unoptimized
-                                />
-                              )}
-                            {isClient &&
-                              document
-                                .getElementById("brandsFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <Image
-                                  src={PlusIcon}
-                                  alt="clear"
-                                  className="md:pt-1 cursor-pointer"
-                                  onClick={() => {
-                                    setRefreshPage((prev) => !prev);
-                                    handleFilterStatus("brandIdStatus");
-                                    document
-                                      .getElementById("brandsFilterId")
-                                      .classList.remove("collapse");
-                                  }}
-                                  unoptimized
-                                />
-                              )}
-                          </span>
+                          {isClient &&
+                            document
+                              .getElementById("brandsFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus("brandIdStatus");
+                                  document
+                                    .getElementById("brandsFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                            </span>
                         </span>
                         <div
                           id="brandsFilterId"
@@ -1849,51 +1514,31 @@ const Filters = () => {
                       <div className="flex flex-col gap-3 py-3 mr-10 border-b boder-solid border-[#D3C6BB]">
                         <span className="flex flex-row justify-between uppercase  font-semibold text-base cursor-pointer">
                           {`Ranges`}
-                          <span className="flex gap-3">
+                          <span className="flex gap-3"> 
                             {isClient && rangeType && (
-                              <div className="flex items-center gap-2">
-                                {/* <span className="text-sm font-normal normal-case">
+                            <div className="flex items-center gap-2">
+                              {/* <span className="text-sm font-normal normal-case">
                                 Clear
                               </span> */}
+                              <Image
+                                src={CrossIcon}
+                                alt="clear"
+                                className="cursor-pointer"
+                                unoptimized
+                                onClick={() => {
+                                  setRangeType(null);
+                                  removeFilterFromUrl("rangeType");
+                                }}
+                              />
+                            </div>
+                          )}
+                          {isClient &&
+                            !document
+                              .getElementById("rangesFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <div style={{ display: "flex", gap: "30px" }}>
                                 <Image
-                                  src={CrossIcon}
-                                  alt="clear"
-                                  className="cursor-pointer"
-                                  unoptimized
-                                  onClick={() => {
-                                    setRangeType(null);
-                                    removeFilterFromUrl("rangeType");
-                                  }}
-                                />
-                              </div>
-                            )}
-                            {isClient &&
-                              !document
-                                .getElementById("rangesFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <div style={{ display: "flex", gap: "30px" }}>
-                                  <Image
-                                    src={MinusIcon}
-                                    alt="clear"
-                                    className="md:pt-1 cursor-pointer"
-                                    onClick={() => {
-                                      setRefreshPage((prev) => !prev);
-                                      handleFilterStatus("rangeIdStatus");
-                                      document
-                                        .getElementById("rangesFilterId")
-                                        .classList.add("collapse");
-                                    }}
-                                    unoptimized
-                                  />
-                                </div>
-                              )}
-
-                            {isClient &&
-                              document
-                                .getElementById("rangesFilterId")
-                                ?.classList?.contains("collapse") && (
-                                <Image
-                                  src={PlusIcon}
+                                  src={MinusIcon}
                                   alt="clear"
                                   className="md:pt-1 cursor-pointer"
                                   onClick={() => {
@@ -1901,12 +1546,32 @@ const Filters = () => {
                                     handleFilterStatus("rangeIdStatus");
                                     document
                                       .getElementById("rangesFilterId")
-                                      .classList.remove("collapse");
+                                      .classList.add("collapse");
                                   }}
                                   unoptimized
                                 />
-                              )}
-                          </span>
+                              </div>
+                            )}
+
+                          {isClient &&
+                            document
+                              .getElementById("rangesFilterId")
+                              ?.classList?.contains("collapse") && (
+                              <Image
+                                src={PlusIcon}
+                                alt="clear"
+                                className="md:pt-1 cursor-pointer"
+                                onClick={() => {
+                                  setRefreshPage((prev) => !prev);
+                                  handleFilterStatus("rangeIdStatus");
+                                  document
+                                    .getElementById("rangesFilterId")
+                                    .classList.remove("collapse");
+                                }}
+                                unoptimized
+                              />
+                            )}
+                            </span>
                         </span>
                         <div
                           id="rangesFilterId"
