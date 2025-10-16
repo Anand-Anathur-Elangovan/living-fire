@@ -759,7 +759,7 @@ const handleScroll = () => {
                       </ListItemButton>
                     ) : item.isAddProduct ? (
                       <ListItemButton
-                        onClick={() => router.push('/manage-others')}
+                        onClick={() => router.push('/add-product')}
                         sx={{
                           padding: "12px 0",
                           borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
@@ -778,6 +778,7 @@ const handleScroll = () => {
                             paddingLeft: "10px",
                           }}
                         />
+                      
                       </ListItemButton>
                     ) :item.isAddOthers ? (
                       <ListItemButton
