@@ -655,6 +655,15 @@ const ProductAddForm = ({ onSave, onCancel }) => {
 
   return (
     <div className={styles.container} style={{ marginTop: "100px" }}>
+       <div className={styles.buttonGroup} style={{ marginBottom: "20px" }}>
+      <button
+        type="button"
+        onClick={() => window.location.href = '/admin'}
+        className={styles.secondaryButton}
+      >
+        Back to Admin Page
+      </button>
+    </div>
       <h2 className={styles.sectionTitle}>ADD NEW PRODUCT</h2>
 
       <form onSubmit={handleSubmit}>

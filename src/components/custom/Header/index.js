@@ -159,7 +159,19 @@ const handleScroll = () => {
 
     // Clear all client-side storage
     localStorage.clear();
-    sessionStorage.clear();
+    // Clear session storage except for admin credentials
+    const adminPassword = sessionStorage.getItem('adminPassword');
+    const adminUsername = sessionStorage.getItem('adminUsername');
+    
+    sessionStorage.clear(); // Clear everything first
+    
+    // Restore admin credentials if they exist
+    if (adminUsername) {
+        sessionStorage.setItem('adminUsername', adminUsername);
+    }
+    if (adminPassword) {
+        sessionStorage.setItem('adminPassword', adminPassword);
+    }
 
     // Clear all cookies
     document.cookie.split(";").forEach((cookie) => {
@@ -778,7 +790,6 @@ const handleScroll = () => {
                             paddingLeft: "10px",
                           }}
                         />
-                      
                       </ListItemButton>
                     ) :item.isAddOthers ? (
                       <ListItemButton
